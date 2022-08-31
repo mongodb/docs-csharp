@@ -1,0 +1,36 @@
+.. _csharp-connect-to-mongodb:
+
+================
+Connection Guide
+================
+
+.. default-domain:: mongodb
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+This guide shows you how to connect to a MongoDB instance or replica set
+deployment using the {+driver-short+}.
+
+Connection URI
+--------------
+
+A **connection URI**, also known as a *connection string*, tells the driver how to connect to a MongoDB deployment and how to behave while connected. A standard connection string includes the connection protocol, hostname of the server, and port where MongoDB is listening for connections. It may also include user credentials and other connection options.
+
+The following code uses a sample connection URI to connect to a MongoDB instance on port ``27017`` of ``sample.host``:
+
+.. literalinclude:: /includes/fundamentals/code-snippets/Connection.cs
+   :language: csharp
+
+.. tip::
+
+    See :manual:`the MongoDB Manual</reference/connection-string>`: for more information about creating a connection string.
+
+
+
+
+
+

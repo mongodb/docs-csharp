@@ -1,130 +1,26 @@
-.. _csharp-connection-guide:
+.. _csharp-connection:
 
-================
-Connection Guide
-================
+==========
+Connection
+==========
 
 .. default-domain:: mongodb
+
+.. toctree::
+
+   /fundamentals/connection/connect
+   /fundamentals/connection/connection-options
 
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 2
+   :depth: 1
    :class: singlecol
 
-This guide shows you how to connect to a MongoDB instance or replica set
-deployment using the {+driver-short+}.
+Overview
+--------
 
-Connection URI
---------------
+In this section, you'll learn how to use the {+driver-short+} to connect your application to a MongoDB deployment. Click a link in the following list to jump to a topic: 
 
-A **connection URI**, also known as a *connection string*, tells the driver how to connect to a MongoDB deployment and how to behave while connected. A standard connection string includes the connection protocol, hostname of the server, and port where MongoDB is listening for connections. It may also include user credentials and other connection options.
-
-The following code uses a sample connection URI to connect to a MongoDB instance on port ``27017`` of ``sample.host``:
-
-.. literalinclude:: /includes/fundamentals/code-snippets/Connection.cs
-   :language: csharp
-
-.. tip::
-
-    See :manual:`the MongoDB Manual</reference/connection-string>`: for more information about creating a connection string.
-
-.. _csharp-connection-options:
-
-Connection Options
-------------------
-
-The preceding example uses two connection options: ``maxPoolSize=20`` and ``w=majority``. This section explains some common MongoDB connection and authentication
-options. To use these options, include them as parameters at the end of the connection string.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 34 10 12 44
-
-   * - Option Name
-     - Type
-     - Default Value
-     - Description
-
-   * - **connectTimeoutMS**
-     - integer
-     - ``30000``
-     - Specifies the number of milliseconds to wait before timeout on a TCP
-       connection.
-
-   * - **maxPoolSize**
-     - integer
-     - ``100``
-     - Specifies the maximum number of connections that a connection pool may
-       have at a given time.
-
-   * - **replicaSet**
-     - string
-     - ``null``
-     - Specifies the replica set name for the cluster. All nodes in the
-       replica set must have the same replica set name, or the Client will not
-       consider them as part of the set.
-
-   * - **maxIdleTimeMS**
-     - integer
-     - ``0``
-     - Specifies the maximum amount of time a connection can remain idle
-       in the connection pool before being removed and closed. The
-       default is ``0``, meaning a connection can remain unused
-       indefinitely.
-
-   * - **minPoolSize**
-     - integer
-     - ``0``
-     - Specifies the minimum number of connections that the driver maintains
-       in a single connection pool.
-
-   * - **socketTimeoutMS**
-     - integer
-     - ``0``
-     - Specifies the number of milliseconds to wait for a socket read or
-       write to return before returning a network error. The ``0``
-       default value indicates that there is no timeout.
-
-   * - **serverSelectionTimeoutMS**
-     - integer
-     - ``30000``
-     - Specifies the number of milliseconds to wait to find an available,
-       suitable server to execute an operation.
-
-   * - **heartbeatFrequencyMS**
-     - integer
-     - ``10000``
-     - Specifies the number of milliseconds to wait between periodic
-       background server checks.
-
-   * - **tls**
-     - boolean
-     - ``false``
-     - Specifies whether to establish a Transport Layer Security (TLS)
-       connection with the instance. This is automatically set to ``true``
-       when using a DNS seedlist (SRV) in the connection string. You can
-       override this behavior by setting the value to ``false``.
-
-   * - **w**
-     - string or integer
-     - ``null``
-     - Specifies the write concern. To learn more about values, see the
-       server documentation on
-       :manual:`Write Concern options </reference/write-concern>`.
-
-   * - **directConnection**
-     - boolean
-     - ``false``
-     - Specifies whether to force dispatch **all** operations to the host
-       specified in the connection URI.
-
-For a full list of connection options, see the :manual:`MongoDB Manual</reference/connection-string/#connection-string-options>`:.
-
-.. tip::
-
-    You can also set and retrieve certain connection options at runtime using the `ClientSettings` class. See the  `ClientSettingsAPI documentation <{+api-root+}/T_MongoDB_Driver_MongoClientSettings.htm>`__ for a list of options. 
-
-
-
-
+- :ref:`How to Connect to MongoDB <csharp-connect-to-mongodb>`
+- :ref:`Available Connection Options <csharp-connection-options>`

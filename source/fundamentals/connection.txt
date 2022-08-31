@@ -18,113 +18,24 @@ deployment using the {+driver-short+}.
 Connection URI
 --------------
 
-A **connection URI**, also known as a *connection string*, describes how the driver should connect to MongoDB and how it should behave while connected. The following diagram shows the structure of a sample connection string that uses the :manual:`standard connection string format
-</reference/connection-string/#std-label-connections-standard-connection-string-format>`:
+A **connection URI**, also known as a *connection string*, tells the driver how to connect to a MongoDB deployment and how to behave while connected. A standard connection string includes the connection protocol, hostname of the server, and port where MongoDB is listening for connections. It may also include user credentials and other connection options.
 
-.. figure:: /includes/figures/connection_uri_parts.png
-   :alt: Connection URI explanation
-
-The first piece of the connection string is the protocol. If you're using the standard format, the protocol is ``mongodb``. 
-
-The next piece of the connection string contains your username and, if
-you're using password-based authentication, your password. If you're using an
-authentication mechanism that doesn't require a username and password, omit
-this part of the string.
-
-The next piece of the connection string specifies the hostname (or IP address) and
-port of your MongoDB instance. The preceding example uses ``sample.host``
-as the hostname and ``27017`` as the port. 
-
-The last piece of the connection string specifies connection and authentication
-options. Use the format ``optionName=optionValue`` for each option, and separate options with an ampersand (``&``). The example string uses two connection options: ``maxPoolSize=20`` and ``w=majority``. To learn more about connection
-options, see the :ref:`csharp-connection-options` section of this guide.
-
-.. note::
-
-   To learn how to retrieve your connection string in Atlas, see the :ref:`Quick Start guide <csharp-connect-to-your-cluster>`.
-
-The following code uses the sample connection URI to connect a client to MongoDB:
+The following code uses a sample connection URI to connect to a MongoDB instance on port ``27017`` of ``sample.host``:
 
 .. literalinclude:: /includes/fundamentals/code-snippets/Connection.cs
    :language: csharp
 
-.. note::
-
-   To learn about connecting to Atlas Serverless, see the
-   :ref:`Serverless Instance Limitations page
-   <atlas-serverless-drivers>` to identify the minimum driver version
-   you need.
-
 .. tip::
 
-    You can also use the :manual:`DNS Seed List Connection Format
-    </reference/connection-string/#dns-seed-list-connection-format>` if you
-    want more flexibility of deployment and the ability to change the
-    servers in rotation without reconfiguring clients.
-
-Other Ways to Connect to MongoDB
---------------------------------
-
-If you are connecting to a single MongoDB server instance or replica set
-that is not hosted on Atlas, see the following sections to find out how to
-connect.
-
-Connect to a MongoDB Server on Your Local Machine
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/localhost-connection.rst
-
-To test whether you can connect to your server, replace the connection
-string with your localhost connection string in the preceding code example.
-
-Connect to a Replica Set
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-A MongoDB replica set deployment is a group of connected instances that
-store the same set of data. This configuration provides data
-redundancy and high data availability.
-
-To connect to a replica set deployment, specify the hostname and port numbers
-of each instance, separated by commas, and the replica set name as the value
-of the ``replicaSet`` parameter in the connection string. In the following
-example, the hostnames are ``host1``, ``host2``, and ``host3``, and the
-port numbers are all ``27017``. The replica set name is ``myRS``.
-
-.. code-block:: none
-
-   mongodb://host1:27017,host2:27017,host3:27017/?replicaSet=myRS
-
-When connecting to a replica set, the driver takes the following actions by default:
-
-- Discovers all replica set members when given the address of any one member.
-- Dispatches operations to the appropriate member, such as instructions
-  to write against the **primary**.
-
-.. tip::
-
-   You only need to specify one host to connect to a replica set.
-   However, to ensure connectivity when the specified host
-   is unavailable, you should provide the full list of hosts.
-
-Direct Connection
-`````````````````
-
-To force operations on the host designated in the connection URI, specify the ``directConnection`` option. Direct
-connections:
-
-- Don't support SRV strings.
-- Fail on writes when the specified host is not the **primary**.
-- Require you to :manual:`specify a secondary read preference </core/read-preference/#mongodb-readmode-secondary>`
-  when the specified host isn't the **primary**.
+    See :manual:`the MongoDB Manual</reference/connection-string>`: for more information about creating a connection string.
 
 .. _csharp-connection-options:
 
 Connection Options
 ------------------
 
-This section explains several common MongoDB connection and authentication
-options. You can pass the connection options as parameters of the connection
-URI to specify the behavior of the client.
+The preceding example uses two connection options: ``maxPoolSize=20`` and ``w=majority``. This section explains some common MongoDB connection and authentication
+options. To use these options, include them as parameters at the end of the connection string.
 
 .. list-table::
    :header-rows: 1
@@ -208,6 +119,12 @@ URI to specify the behavior of the client.
      - Specifies whether to force dispatch **all** operations to the host
        specified in the connection URI.
 
-For a full list of connection options, see the `ClientOptions API
-documentation
-<{+api+}/mongo/options#ClientOptions>`__.
+For a full list of connection options, see the :manual:`MongoDB Manual</reference/connection-string/#connection-string-options>`:.
+
+.. tip::
+
+    You can also set and retrieve certain connection options at runtime using the `ClientSettings` class. See the  `ClientSettingsAPI documentation <{+api-root+}/T_MongoDB_Driver_MongoClientSettings.htm>`__ for a list of options. 
+
+
+
+

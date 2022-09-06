@@ -31,7 +31,7 @@ Find a Document Using Builders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following example uses builders to find a document in the ``restaurants``
-collection with the ``name``, "Bagels N Buns".
+collection with the ``name`` "Bagels N Buns".
 
 .. literalinclude:: ../includes/code-examples/Find.cs
    :start-after: start-find-builders
@@ -44,7 +44,7 @@ Find a Document Using LINQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following example uses LINQ to find a document in the ``restaurants``
-collection with the ``name``, "Bagels N Buns".
+collection with the ``name`` "Bagels N Buns".
 
 .. literalinclude:: ../includes/code-examples/Find.cs
    :start-after: start-find-linq
@@ -56,7 +56,7 @@ collection with the ``name``, "Bagels N Buns".
 Expected Result
 ~~~~~~~~~~~~~~~
 
-After running the :ref:`full example <find-runnable-example>`, each find method
+After running the :ref:`full example <find-runnable-example>`, each ``Find()`` method
 returns a result containing the following document:
 
 .. code-block:: none
@@ -84,7 +84,7 @@ For a fully runnable example of the ``Find`` operations on this page, see the
 
 To learn more about builders, see <builders page>.
 
-To learn more about LINQ, see <LINQ page>
+To learn more about LINQ, see <LINQ page>.
 
 API Documentation
 ~~~~~~~~~~~~~~~~~

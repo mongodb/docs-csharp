@@ -3,16 +3,16 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
-namespace CsharpExamples.UsageExamples;
+namespace CSharpExamples.UsageExamples;
 
 public class FindOne
 {
-    static IMongoCollection<Restaurant> _restaurantsCollection;
-    static string mongoConnectionString = "<Your Mongodb URI>";
+    private static IMongoCollection<Restaurant> _restaurantsCollection;
+    private static string _mongoConnectionString = "<Your MongoDB URI>";
 
     public static void Main(string[] args)
     {
-        setup();
+        Setup();
 
         // Find one document using builders
         FindOneRestaurantBuilder();
@@ -24,38 +24,38 @@ public class FindOne
         FindOneRestaurantLINQ();
     }
 
-    static void FindOneRestaurantBuilder()
+    public static void FindOneRestaurantBuilder()
     {
         // start-find-builders
         var filter = Builders<Restaurant>.Filter
             .Eq("name", "Bagels N Buns");
 
         var restaurant = _restaurantsCollection.Find(filter).First();
+        // end-find-builders
 
         Console.WriteLine(restaurant.ToBsonDocument());
-        // end-find-builders
+
     }
 
-    static void FindOneRestaurantLINQ()
+    public static void FindOneRestaurantLINQ()
     {
         // start-find-linq
         var query = _restaurantsCollection.AsQueryable()
             .Where(r => r.Name == "Bagels N Buns");
+        // end-find-linq
 
         Console.WriteLine(query.ToBsonDocument());
-        // end-find-linq
+
     }
 
-    static void setup()
+    public static void Setup()
     {
-        // Because our data is stored in the database with their names in camelCase
-        // we use these lines to convert the names to TitleCase
+        // This allows automapping of the camelCase database fields to our models. 
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
         // Establish the connection to MongoDB and get the restaurants database
-        var mongoUri = mongoConnectionString;
-        var mongoClient = new MongoClient(mongoUri);
+        var mongoClient = new MongoClient(_mongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     }

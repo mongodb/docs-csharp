@@ -9,7 +9,7 @@ available in the {+driver-short+}. To use these options, include them as paramet
 
 .. note::
   
-  You can set any of the following options (and some others not on this list) with a ``MongoClientSettings`` object instead. See :ref:`csharp-mongo-client-settings` for more information.
+  You can set any of the following options, as well as some others not on this list, with a ``MongoClientSettings`` object instead. See :ref:`csharp-mongo-client-settings` for more information.
 
 .. list-table::
    :header-rows: 1

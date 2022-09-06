@@ -221,5 +221,5 @@ available in the {+driver-short+}. To use these options, include them as paramet
        - ``9`` signifies the greatest compression.
        - An integer between ``2`` and ``8`` (inclusive) signifies a compromise between speed and compression.
      
-     See :ref:`csharp-network-compression` for more information.
+       See :ref:`csharp-network-compression` for more information.
 

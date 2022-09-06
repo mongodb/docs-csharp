@@ -33,28 +33,12 @@ Find a Document Using Builders
 The following example uses builders to find a document in the ``restaurants``
 collection with the ``name``, "Bagels N Buns".
 
-.. io-code-block::
-   :copyable: true
-
-   .. input:: ../includes/code-examples/Find.cs
-      :start-after: start-find-builders
-      :end-before: end-find-builders
-      :language:  csharp
-
-   .. output::
-      :language:  none
-      :visible: false
-
-      // results truncated
-      { 
-         "_id" : ObjectId("5eb3d668b31de5d588f42950"), 
-         "name" : "Bagels N Buns", 
-         "restaurant_id" : "40363427", 
-         "cuisine" : "Delicatessen", 
-         "address" : {...}, 
-         "borough" : "Staten Island", 
-         "grades" : [...] 
-      }
+.. literalinclude:: ../includes/code-examples/Find.cs
+   :start-after: start-find-builders
+   :end-before: end-find-builders
+   :language:  csharp
+   :copyable:
+   :dedent:
 
 Find a Document Using LINQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -62,33 +46,36 @@ Find a Document Using LINQ
 The following example uses LINQ to find a document in the ``restaurants``
 collection with the ``name``, "Bagels N Buns".
 
-.. io-code-block::
-   :copyable: true
+.. literalinclude:: ../includes/code-examples/Find.cs
+   :start-after: start-find-linq
+   :end-before: end-find-linq
+   :language:  csharp
+   :copyable:
+   :dedent:
 
-   .. input:: ../includes/code-examples/Find.cs
-      :start-after: start-find-linq
-      :end-before: end-find-linq
-      :language:  csharp
+Expected Result
+~~~~~~~~~~~~~~~
 
-   .. output::
-      :language:  none
-      :visible: false
+After running the :ref:`full example <find-runnable-example>`, each find method
+returns a result containing the following document:
 
-      // results truncated
-      { "_t" : "MongoQueryableImpl``2", "_v" : [{
-           "_id" : ObjectId("5eb3d668b31de5d588f42950"),
-           "name" : "Bagels N Buns",
-           "restaurant_id" : "40363427", 
-           "cuisine" : "Delicatessen", 
-           "address" : {...}, 
-           "borough" : "Staten Island", 
-           "grades" : [...] 
-         }]
-      }
+.. code-block:: none
 
+   // results truncated
+   { 
+      "_id" : ObjectId("5eb3d668b31de5d588f42950"), 
+      "name" : "Bagels N Buns", 
+      "restaurant_id" : "40363427", 
+      "cuisine" : "Delicatessen", 
+      "address" : {...}, 
+      "borough" : "Staten Island", 
+      "grades" : [...] 
+   }
 
 Additional Information
 ----------------------
+
+.. _find-runnable-example:
 
 For a fully runnable example of the ``Find`` operations on this page, see the
 `Find Example <{+example+}/Find.cs>`__

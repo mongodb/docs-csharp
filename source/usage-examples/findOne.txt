@@ -15,56 +15,83 @@ Find a Document
 You can retrieve a single document from a collection by using the ``Find()``
 method.
 
-Find a Document Using Builders
-------------------------------
+Examples
+--------
 
-The following example uses builders to find a document in the ``movies``
-collection with the ``title``, "The Great Train Robbery".
+These examples use the following ``Restaurant`` class as a model:
 
-.. literalinclude:: ../includes/generated/FindOne.snippet.find-one-builders.cs
+.. literalinclude:: ../includes/code-examples/Find.cs
+   :start-after: start-model
+   :end-before: end-model
    :language: csharp
-   :copyable: true
+   :copyable:
+   :dedent:
+
+Find a Document Using Builders
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following example uses builders to find a document in the ``restaurants``
+collection with the ``name``, "Bagels N Buns".
 
 .. io-code-block::
    :copyable: true
 
-   .. input:: ../includes/generated/FindOne.snippet.find-one-builders.cs
+   .. input:: ../includes/code-examples/Find.cs
+      :start-after: start-find-builders
+      :end-before: end-find-builders
       :language:  csharp
 
    .. output::
-      :language:  json
+      :language:  none
       :visible: false
 
-      { "title" : "The Great Train Robbery", "year" : 1903, "cast" : ["A.C. Abadie", "Gilbert M. 'Broncho Billy' Anderson", "George Barnes", "Justus D. Barnes"], "genres" : ["Short", "Western"] }
+      // results truncated
+      { 
+         "_id" : ObjectId("5eb3d668b31de5d588f42950"), 
+         "name" : "Bagels N Buns", 
+         "restaurant_id" : "40363427", 
+         "cuisine" : "Delicatessen", 
+         "address" : {...}, 
+         "borough" : "Staten Island", 
+         "grades" : [...] 
+      }
 
 Find a Document Using LINQ
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example uses LINQ to find a document in the ``movies``
-collection with the ``title``, "The Great Train Robbery".
-
-.. literalinclude:: ../includes/generated/FindOne.snippet.find-one-linq.cs
-   :language: csharp
-   :copyable: true
+The following example uses LINQ to find a document in the ``restaurants``
+collection with the ``name``, "Bagels N Buns".
 
 .. io-code-block::
    :copyable: true
 
-   .. input:: ../includes/generated/FindOne.snippet.find-one-linq.cs
+   .. input:: ../includes/code-examples/Find.cs
+      :start-after: start-find-linq
+      :end-before: end-find-linq
       :language:  csharp
 
    .. output::
-      :language:  json
+      :language:  none
       :visible: false
 
-      { "_t" : "MongoQueryableImpl``2", "_v" : [{ "title" : "The Great Train Robbery", "year" : 1903, "cast" : ["A.C. Abadie", "Gilbert M. 'Broncho Billy' Anderson", "George Barnes", "Justus D. Barnes"], "genres" : ["Short", "Western"] }, { "title" : "The Great Train Robbery", "year" : 1978, "cast" : ["Sean Connery", "Donald Sutherland", "Lesley-Anne Down", "Alan Webb"], "genres" : ["Adventure", "Crime", "Drama"] }] }
+      // results truncated
+      { "_t" : "MongoQueryableImpl``2", "_v" : [{
+           "_id" : ObjectId("5eb3d668b31de5d588f42950"),
+           "name" : "Bagels N Buns",
+           "restaurant_id" : "40363427", 
+           "cuisine" : "Delicatessen", 
+           "address" : {...}, 
+           "borough" : "Staten Island", 
+           "grades" : [...] 
+         }]
+      }
 
 
 Additional Information
 ----------------------
 
 For a fully runnable example of the ``Find`` operations on this page, see the
-`Find Example <{+example+}/FindOne.snippet.find-one-full-example.cs>`__
+`Find Example <{+example+}/Find.cs>`__
 
 .. TODO: Add links to references once pages are done
 
@@ -73,6 +100,6 @@ To learn more about builders, see <builders page>.
 To learn more about LINQ, see <LINQ page>
 
 API Documentation
------------------
+~~~~~~~~~~~~~~~~~
 
 `Find() <{+api+}/html/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__

@@ -20,14 +20,14 @@ available in the {+driver-short+}. To use these options, include them as paramet
      - Default Value
      - Description
 
-   * - **appname**
-     - string
+   * - **appName**
+     - String
      - ``null``
      - The app name the driver passes to the server in the client
        metadata as part of the connection handshake. The server prints this value to the MongoDB logs once the connection is established. The value is also recorded in the slow query logs and profile collections.
 
    * - **authMechanism**
-     - string
+     - String
      - ``null``
      - The authentication mechanism the driver uses when connecting to the
        server. If you don't include this option, the driver uses either ``SCRAM-SHA-1`` or ``SCRAM-SHA-256``, depending on the server version. 
@@ -37,17 +37,17 @@ available in the {+driver-short+}. To use these options, include them as paramet
        authentication mechanisms.
 
    * - **authMechanismProperties**
-     - comma-separated ``key:value`` pairs (for example, ``opt1:val1,opt2:val2``)
+     - Comma-separated ``key:value`` pairs (for example, ``opt1:val1,opt2:val2``)
      - ``null``
      - Other authentication options, such as enabling hostname canonicalization for  GSSAPI.
 
    * - **authSource**
-     - string
+     - String
      - ``null``
      - The database that connections should authenticate against.
 
    * - **compressors**
-     - comma-separated list of strings (for example, ``snappy,zlib,zstd``)
+     - Comma-separated list of strings (for example, ``snappy,zlib,zstd``)
      - ``null``
      - The preferred compression types, in order, for wire-protocol messages
        sent to or received from the server. The driver uses the first of these compression types that the server supports.
@@ -55,7 +55,7 @@ available in the {+driver-short+}. To use these options, include them as paramet
        See :ref:`csharp-network-compression` for more information.
 
    * - **connectTimeoutMS**
-     - nonnegative integer
+     - Nonnegative integer
      - ``30000``
      - The length of time the driver tries to establish a single TCP
        socket connection to the server before timing out. Specifying ``0`` disables the connection timeout.
@@ -67,7 +67,7 @@ available in the {+driver-short+}. To use these options, include them as paramet
        specified in the connection URI.
 
    * - **heartbeatFrequencyMS**
-     - integer greater than or equal to 500
+     - Integer greater than or equal to 500
      - ``10000``
      - The interval between regular server-monitoring checks.
 
@@ -83,56 +83,56 @@ available in the {+driver-short+}. To use these options, include them as paramet
      - Specifies whether the driver is connecting to a load balancer.
 
    * - **localThresholdMS**
-     - nonnegative integer
+     - Nonnegative integer
      - ``15``
      - The latency window for server eligibility. If a server's round trip takes longer than the fastest server's round-trip time plus this value, the server isn't eligible for selection. Specifying ``0`` selects the fastest eligible server.
 
    * - **maxIdleTimeMS**
-     - nonnegative integer
+     - Nonnegative integer
      - ``10000``
      - The length of time a connection can be idle before the driver closes it.
        Specifying ``0`` means no minimum.
 
    * - **maxPoolSize**
-     - nonnegative integer
+     - Nonnegative integer
      - ``100``
      - The greatest number of clients or connections the driver
        can create in its connection pool. This count includes connections
        in use.
 
    * - **maxConnecting**
-     - nonnegative integer
+     - Nonnegative integer
      - ``2``
      - The greatest number of connections a driver's connection
        pool may be establishing concurrently.
 
    * - **maxStalenessSeconds**
-     - -1, or an integer greater than or equal 90
+     - Integer equal to -1 or greater than or equal to 90
      - ``-1``
      - The longest replication lag, in wall-clock time, that
        a secondary can experience and still be eligible for server selection.
        Specifying ``-1`` means no maximum.
 
    * - **minPoolSize**
-     - nonnegative integer
+     - Nonnegative integer
      - ``0``
      - The number of connections the driver should create and
        keep in the connection pool even when no operations are occurring.
        This count includes connections in use.
 
    * - **readConcernLevel**
-     - string
+     - String
      - ``null``
      - The client's default read concern. See :ref:`read concern
        <read-concern>` for more information.
 
    * - **readPreference**
-     - string
+     - String
      - ``"primary"``
      - The client's default read preference (excluding tags). See :ref:`read preference <read-preference>` for more information.
 
    * - **readPreferenceTags**
-     - comma-separated ``key:value`` pairs (for example, ``opt1:val1,opt2:val2``)
+     - Comma-separated ``key:value`` pairs (for example, ``opt1:val1,opt2:val2``)
      - ``null``
      - The default read-preference tags for the client. This option is
        valid only if the read-preference mode is not ``primary``.
@@ -140,7 +140,7 @@ available in the {+driver-short+}. To use these options, include them as paramet
        You can include this parameter in the connection URI more than once. If you do, the client treats each instance as a separate tag set. The order of the tags in the URI determines the order for read preference.
 
    * - **replicaSet**
-     - string
+     - String
      - ``null``
      - The name of the replica set to connect to.
 
@@ -155,18 +155,18 @@ available in the {+driver-short+}. To use these options, include them as paramet
      - Enables retryable writes.
 
    * - **serverSelectionTimeoutMS**
-     - nonnegative integer
+     - Nonnegative integer
      - ``30000``
      - The length of time the driver tries to select a server before timing out.
 
    * - **socketTimeoutMS**
-     - nonnegative integer
+     - Nonnegative integer
      - ``0``
      - The length of time the driver tries to send or receive on a
        socket before timing out. Specifying ``0`` means no timeout.
 
    * - **srvMaxHosts**
-     - nonnegative integer
+     - Nonnegative integer
      - ``0``
      - The greatest number of SRV results to randomly select when initially
        populating the seedlist or, during SRV polling, adding new hosts to the
@@ -193,25 +193,25 @@ available in the {+driver-short+}. To use these options, include them as paramet
      - Specifies whether to relax TLS constraints as much as possible. This can include allowing invalid certificates or hostname mismatches.
 
    * - **w**
-     - string or nonnegative integer 
+     - String or nonnegative integer 
      - ``null``
      - The default write concern ``"w"`` field for the client. See
        :ref:`write concern <wc-j>` for more information.
 
    * - **wTimeoutMS**
-     - nonnegative integer
+     - Nonnegative integer
      - ``0``
      - The default write concern ``"wtimeout"`` field for the client. Specifying ``0`` means no timeout. See
        :ref:`write concern <wc-j>` for more information.
 
    * - **waitQueueTimeoutMS**
-     - nonnegative integer
+     - Nonnegative integer
      - ``0``
      - The length of time the driver tries to check out a connection
        from a server's connection pool before timing out. Specifying ``0`` means no timeout.
 
    * - **zlibCompressionLevel**
-     - integer between ``-1`` and ``9`` (inclusive)
+     - Integer between ``-1`` and ``9`` (inclusive)
      - ``-1``
      - When using the zlib compressor, the level of compression for wire-protocol messages. 
      

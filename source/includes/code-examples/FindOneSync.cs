@@ -22,7 +22,7 @@ public class FindOne
         Console.WriteLine();
 
         // Find one document using LINQ
-        Console.WriteLine("Finding a document with builders...");
+        Console.WriteLine("Finding a document with LINQ...");
         FindOneRestaurantLINQ();
     }
 

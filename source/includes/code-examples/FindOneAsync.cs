@@ -2,10 +2,11 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace CSharpExamples.UsageExamples;
 
-public class FindOne
+public class FindOneAsync
 {
     private static IMongoCollection<Restaurant> _restaurantsCollection;
     private static string _mongoConnectionString = "<Your MongoDB URI>";
@@ -15,36 +16,36 @@ public class FindOne
         Setup();
 
         // Find one document using builders
-        FindOneRestaurantBuilder();
+        var buildersDocument = FindOneRestaurantBuilderAsync().Result.ToBsonDocument();
+        Console.WriteLine("Finding a document with builders...");
+        Console.WriteLine(buildersDocument);
 
-        // Extra space for console readability 
+        // Extra space for console readability
         Console.WriteLine();
 
         // Find one document using LINQ
-        FindOneRestaurantLINQ();
+        var linqDocument = FindOneRestaurantBuilderAsync().Result.ToBsonDocument();
+        Console.WriteLine("Finding a document with LINQ...");
+        Console.WriteLine(linqDocument);
     }
 
-    public static void FindOneRestaurantBuilder()
+    public static async Task<Restaurant> FindOneRestaurantBuilderAsync()
     {
         // start-find-builders
         var filter = Builders<Restaurant>.Filter
             .Eq("name", "Bagels N Buns");
 
-        var restaurant = _restaurantsCollection.Find(filter).First();
+        return await _restaurantsCollection.Find(filter).FirstAsync();
         // end-find-builders
-
-        Console.WriteLine(restaurant.ToBsonDocument());
 
     }
 
-    public static void FindOneRestaurantLINQ()
+    public static async Task<Restaurant> FindOneRestaurantLINQAsync()
     {
         // start-find-linq
-        var query = _restaurantsCollection.AsQueryable()
-            .Where(r => r.Name == "Bagels N Buns");
+        return await _restaurantsCollection.AsQueryable()
+            .Where(r => r.Name == "Bagels N Buns").FirstAsync();
         // end-find-linq
-
-        Console.WriteLine(query.ToBsonDocument());
 
     }
 
@@ -55,13 +56,14 @@ public class FindOne
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
         // Establish the connection to MongoDB and get the restaurants database
-        var mongoClient = new MongoClient(_mongoConnectionString);
+        var uri = _mongoConnectionString;
+        var mongoClient = new MongoClient(uri);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     }
 }
 
-// start-model
+// // start-model
 public class Restaurant
 {
     public ObjectId Id { get; set; }
@@ -79,4 +81,4 @@ public class Restaurant
 
     public List<object> Grades { get; set; }
 }
-// end-model
+// // end-model

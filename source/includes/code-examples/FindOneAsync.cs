@@ -24,7 +24,7 @@ public class FindOneAsync
         Console.WriteLine();
 
         // Find one document using LINQ
-        var linqDocument = FindOneRestaurantBuilderAsync().Result.ToBsonDocument();
+        var linqDocument = FindOneRestaurantLINQAsync().Result.ToBsonDocument();
         Console.WriteLine("Finding a document with LINQ...");
         Console.WriteLine(linqDocument);
     }
@@ -63,7 +63,7 @@ public class FindOneAsync
     }
 }
 
-// // start-model
+// start-model
 public class Restaurant
 {
     public ObjectId Id { get; set; }
@@ -81,4 +81,4 @@ public class Restaurant
 
     public List<object> Grades { get; set; }
 }
-// // end-model
+// end-model

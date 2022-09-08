@@ -129,4 +129,4 @@ To learn more about LINQ, see <LINQ page>.
 API Documentation
 ~~~~~~~~~~~~~~~~~
 
-`Find() <{+api+}/html/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__
+`Find() <{+api-root+}/html/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__

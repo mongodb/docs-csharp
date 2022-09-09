@@ -1,8 +1,8 @@
 .. _csharp-find-multiple:
 
-======================
-Find Multiple Document
-======================
+=======================
+Find Multiple Documents
+=======================
 
 .. default-domain:: mongodb
 
@@ -12,8 +12,9 @@ Find Multiple Document
    :depth: 2
    :class: singlecol
 
-You can retrieve multiple documents from a collection by using the ``Find()``
-method and passing in a query filter.
+You can retrieve multiple documents from a ``MongoCollection`` by using the 
+`Find() <{+api-root+}/html/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__
+method, and passing in a **query filter** to specify your search criteria.
 
 Examples
 --------
@@ -129,7 +130,6 @@ Expected Result
 
 Running the :ref:`full example <find-runnable-example>` returns 
 the following results:
-
 
 .. code-block:: none
 

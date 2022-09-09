@@ -17,12 +17,12 @@ a ``MongoCollection`` object. This method requires a **query filter**, which spe
 
 .. note::
 
-   The ``UpdateOne()`` method updates only the first document that matches the filter. To update more than one document, consider using the ``UpdateMany()`` method instead.
+   The ``UpdateOne()`` method updates only the first document that matches the filter. To update more than one document, use the ``UpdateMany()`` method.
    TODO: Link to UpdateMany usage example page.
 
 .. tip::
 
-   You can also pass an instance of `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__ to the ``UpdateOne()`` method in
+   You can pass an instance of `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__ to the ``UpdateOne()`` method in
    order to customize its behavior.
 
 Examples
@@ -87,7 +87,7 @@ More Information
 
 .. _find-runnable-example:
 
-For a fully runnable example of the ``UpdateOne()`` operations on this page, see the
+For fully runnable examples of the ``UpdateOne()`` operations on this page, see the
 `UpdateOne Example <{+example+}/UpdateOne.cs>`__ and `UpdateOneAsync Example <{+example+}/UpdateOneAsync.cs>`__
 
 .. TODO: Add links to references once pages are done

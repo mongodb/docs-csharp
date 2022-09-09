@@ -13,7 +13,7 @@ Find a Document
    :class: singlecol
 
 You can retrieve a single document from a ``MongoCollection`` by using the
-`Find() <{+api-root+}/html/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__
+`Find() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__
 method, and passing in a **query filter** to specify your search criteria.
 
 .. note::

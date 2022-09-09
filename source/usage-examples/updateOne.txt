@@ -1,0 +1,87 @@
+.. _csharp-update-one:
+
+=================
+Update a Document
+=================
+
+.. default-domain:: mongodb
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+You can update a single document using the `UpdateOne() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOne.htm>`__ method on
+a ``MongoCollection`` object. This method requires a **query filter**, which specifies which document to update, and an **update** statement, which specifies the changes the driver should make to the matching document. 
+
+.. note::
+
+   The ``UpdateOne()`` method updates only the first document that matches the filter. To update more than one document, consider using the ``UpdateMany()`` method instead.
+   TODO: Link to UpdateMany usage example page.
+
+.. tip::
+
+   You can also pass an instance of `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__ to the ``UpdateOne()`` method in
+   order to customize its behavior. For example, if you set the ``upsert`` option to ``true``, the method creates a new document if no document matches the query filter.
+
+Examples
+--------
+
+These examples use the following ``Restaurant`` class as a model:
+
+.. literalinclude:: ../includes/code-examples/UpdateOne.cs
+   :start-after: start-model
+   :end-before: end-model
+   :language: csharp
+   :copyable:
+   :dedent:
+
+.. tabs::
+
+   .. tab:: Async
+      :tabid: update-async
+
+      Update a Document Asynchronously
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      The following example uses builders to asynchronously change the name of the first document in the ``restaurants`` collection named "Bagels N Buns" to "2 Bagels 2 Buns".
+
+      .. literalinclude:: ../includes/code-examples/UpdateOneAsync.cs
+         :start-after: start-update-one-async
+         :end-before: end-update-one-async
+         :language:  csharp
+         :copyable:
+         :dedent:
+
+   .. tab:: Synchronous
+      :tabid: update-sync
+
+      Update a Document Synchronously
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      The following example uses builders to synchronously change the name of the first document in the ``restaurants`` collection named "Bagels N Buns" to "2 Bagels 2 Buns".
+
+      .. literalinclude:: ../includes/code-examples/UpdateOne.cs
+         :start-after: start-update-one
+         :end-before: end-update-one
+         :language:  csharp
+         :copyable:
+         :dedent:
+
+Expected Result
+~~~~~~~~~~~~~~~
+
+After running the :ref:`full example <find-runnable-example>`, each call to ``UpdateOne()`` returns an `UpdateResult.Acknowledged <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__. object containing the number of matching documents, the number of updated documents, and other information.
+
+More Information
+----------------
+
+.. _find-runnable-example:
+
+For a fully runnable example of the ``UpdateOne()`` operations on this page, see the
+`UpdateOne Example <{+example+}/UpdateOne.cs>`__ and `UpdateOneAsync Example <{+example+}/UpdateOneAsync.cs>`__
+
+.. TODO: Add links to references once pages are done
+
+To learn more about builders, see <builders page>.

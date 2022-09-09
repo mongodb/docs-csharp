@@ -45,7 +45,7 @@ These examples use the following ``Restaurant`` class as a model:
       Update a Document Asynchronously
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      The following example uses builders to asynchronously update the ``Name`` of the first document in the ``restaurants`` collection named "Bagels N Buns" to "2 Bagels 2 Buns".
+      The following example uses builders to asynchronously update the ``name`` of the first document named "Bagels N Buns" in the ``restaurants`` collection  to "2 Bagels 2 Buns":
 
       .. literalinclude:: ../includes/code-examples/UpdateOneAsync.cs
          :start-after: start-update-one-async
@@ -60,7 +60,7 @@ These examples use the following ``Restaurant`` class as a model:
       Update a Document Synchronously
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      The following example uses builders to synchronously update the ``Name`` of the first document in the ``restaurants`` collection named "Bagels N Buns" to "2 Bagels 2 Buns".
+      The following example uses builders to synchronously update the ``name`` of the first document named "Bagels N Buns" in the ``restaurants`` collection  to "2 Bagels 2 Buns":
 
       .. literalinclude:: ../includes/code-examples/UpdateOne.cs
          :start-after: start-update-one
@@ -72,15 +72,15 @@ These examples use the following ``Restaurant`` class as a model:
 Expected Result
 ~~~~~~~~~~~~~~~
 
-After running the :ref:`full example <find-runnable-example>`, each call to ``UpdateOne()`` returns an `UpdateResult.Acknowledged <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__ object with the following information:
+After running the :ref:`full example <find-runnable-example>`, each call to ``UpdateOne()`` writes the following to the console:
 
 .. code-block:: none
 
-   // results truncated
-   IsAcknowledged = true
-   IsModifiedCountAvailable = true
-   MatchedCount = 1 
-   ModifiedCount = 1
+   Updated documents: 1
+
+ .. tip::
+   
+   ``UpdateOne()`` returns an `UpdateResult <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__ object.
 
 More Information
 ----------------

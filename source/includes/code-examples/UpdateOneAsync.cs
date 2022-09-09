@@ -21,7 +21,7 @@ public class UpdateOneAsync
 
         //Update one document asynchronously
         var asyncResult = UpdateOneRestaurantAsync();
-        WriteLine($"Modified documents: {asyncResult.Result.ModifiedCount}");
+        WriteLine($"Updated documents: {asyncResult.Result.ModifiedCount}");
         ResetSampleData();
     }
 

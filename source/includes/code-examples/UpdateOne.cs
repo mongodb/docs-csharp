@@ -21,7 +21,7 @@ public class UpdateOne
 
         // Update one document synchronously
         var syncResult = UpdateOneRestaurant();
-        WriteLine($"Modified documents: {syncResult.ModifiedCount}");
+        WriteLine($"Updated documents: {syncResult.ModifiedCount}");
         ResetSampleData();
     }
 

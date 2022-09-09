@@ -2,6 +2,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
+using static System.Console;
 
 namespace CSharpExamples.UsageExamples;
 
@@ -15,24 +16,24 @@ public class FindMany
         Setup();
 
         // Find multiple documents using builders
-        Console.WriteLine("Finding documents with builders...:");
+        WriteLine("Finding documents with builders...:");
         FindMultipleRestaurantsBuilderSync();
 
         // Extra space for console readability 
-        Console.WriteLine();
+        WriteLine();
 
         // Find multiple documents using LINQ
-        Console.WriteLine("Finding documents with LINQ...:");
+        WriteLine("Finding documents with LINQ...:");
         FindMultipleRestaurantsLINQSync();
 
-        Console.WriteLine();
+        WriteLine();
 
         // Find All restaurants
-        Console.WriteLine("Finding all documents...:");
+        WriteLine("Finding all documents...:");
         FindAllRestaurantsSync();
     }
 
-    public static void FindMultipleRestaurantsBuilderSync()
+    private static void FindMultipleRestaurantsBuilderSync()
     {
         // start-find-builders-sync
         var filter = Builders<Restaurant>.Filter
@@ -41,36 +42,35 @@ public class FindMany
         var restaurants = _restaurantsCollection.Find(filter).ToList();
         // end-find-builders-sync
 
-        Console.WriteLine("Number of documents found: " + restaurants.Count);
+        WriteLine("Number of documents found: " + restaurants.Count);
     }
 
-    public static void FindMultipleRestaurantsLINQSync()
+    private static void FindMultipleRestaurantsLINQSync()
     {
         // start-find-linq-sync
         var query = _restaurantsCollection.AsQueryable()
             .Where(r => r.Cuisine == "Pizza").ToList();
         // end-find-linq-sync
 
-        Console.WriteLine("Number of documents found: " + query.Count);
+        WriteLine("Number of documents found: " + query.Count);
     }
 
-    public static void FindAllRestaurantsSync()
+    private static void FindAllRestaurantsSync()
     {
         // start-find-all-sync
         var restaurants = _restaurantsCollection.Find(new BsonDocument()).ToList();
         // end-find-all-sync
-        Console.WriteLine("Number of documents found: " + restaurants.Count);
+        WriteLine("Number of documents found: " + restaurants.Count);
     }
 
-    public static void Setup()
+    private static void Setup()
     {
         // This allows automapping of the camelCase database fields to our models. 
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
         // Establish the connection to MongoDB and get the restaurants database
-        var uri = _mongoConnectionString;
-        var mongoClient = new MongoClient(uri);
+        var mongoClient = new MongoClient(_mongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     }

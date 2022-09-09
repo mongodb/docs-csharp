@@ -2,6 +2,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
+using static System.Console;
 
 namespace CSharpExamples.UsageExamples;
 
@@ -15,18 +16,18 @@ public class FindOne
         Setup();
 
         // Find one document using builders
-        Console.WriteLine("Finding a document with builders...");
+        WriteLine("Finding a document with builders...");
         FindOneRestaurantBuilder();
 
         // Extra space for console readability 
-        Console.WriteLine();
+        WriteLine();
 
         // Find one document using LINQ
-        Console.WriteLine("Finding a document with LINQ...");
+        WriteLine("Finding a document with LINQ...");
         FindOneRestaurantLINQ();
     }
 
-    public static void FindOneRestaurantBuilder()
+    private static void FindOneRestaurantBuilder()
     {
         // start-find-builders
         var filter = Builders<Restaurant>.Filter
@@ -35,22 +36,22 @@ public class FindOne
         var restaurant = _restaurantsCollection.Find(filter).First();
         // end-find-builders
 
-        Console.WriteLine(restaurant.ToBsonDocument());
+        WriteLine(restaurant.ToBsonDocument());
 
     }
 
-    public static void FindOneRestaurantLINQ()
+    private static void FindOneRestaurantLINQ()
     {
         // start-find-linq
         var query = _restaurantsCollection.AsQueryable()
             .Where(r => r.Name == "Bagels N Buns");
         // end-find-linq
 
-        Console.WriteLine(query.ToBsonDocument());
+        WriteLine(query.ToBsonDocument());
 
     }
 
-    public static void Setup()
+    private static void Setup()
     {
         // This allows automapping of the camelCase database fields to our models. 
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };

@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
+using static System.Console;
 
 namespace CSharpExamples.UsageExamples;
 
@@ -17,19 +18,19 @@ public class FindOneAsync
 
         // Find one document using builders
         var buildersDocument = FindOneRestaurantBuilderAsync().Result.ToBsonDocument();
-        Console.WriteLine("Finding a document with builders...");
-        Console.WriteLine(buildersDocument);
+        WriteLine("Finding a document with builders...");
+        WriteLine(buildersDocument);
 
         // Extra space for console readability
-        Console.WriteLine();
+        WriteLine();
 
         // Find one document using LINQ
         var linqDocument = FindOneRestaurantLINQAsync().Result.ToBsonDocument();
-        Console.WriteLine("Finding a document with LINQ...");
-        Console.WriteLine(linqDocument);
+        WriteLine("Finding a document with LINQ...");
+        WriteLine(linqDocument);
     }
 
-    public static async Task<Restaurant> FindOneRestaurantBuilderAsync()
+    private static async Task<Restaurant> FindOneRestaurantBuilderAsync()
     {
         // start-find-builders
         var filter = Builders<Restaurant>.Filter
@@ -40,7 +41,7 @@ public class FindOneAsync
 
     }
 
-    public static async Task<Restaurant> FindOneRestaurantLINQAsync()
+    private static async Task<Restaurant> FindOneRestaurantLINQAsync()
     {
         // start-find-linq
         return await _restaurantsCollection.AsQueryable()
@@ -49,15 +50,14 @@ public class FindOneAsync
 
     }
 
-    public static void Setup()
+    private static void Setup()
     {
         // This allows automapping of the camelCase database fields to our models. 
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
         // Establish the connection to MongoDB and get the restaurants database
-        var uri = _mongoConnectionString;
-        var mongoClient = new MongoClient(uri);
+        var mongoClient = new MongoClient(_mongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     }

@@ -127,7 +127,7 @@ Find All Documents
 Expected Result
 ~~~~~~~~~~~~~~~
 
-After running the :ref:`full example <find-runnable-example>`, it returns 
+Running the :ref:`full example <find-runnable-example>` returns 
 the following results:
 
 

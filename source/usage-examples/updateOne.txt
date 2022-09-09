@@ -23,7 +23,7 @@ a ``MongoCollection`` object. This method requires a **query filter**, which spe
 .. tip::
 
    You can also pass an instance of `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__ to the ``UpdateOne()`` method in
-   order to customize its behavior. For example, if you set the ``upsert`` option to ``true``, the method creates a new document if no document matches the query filter.
+   order to customize its behavior.
 
 Examples
 --------
@@ -72,7 +72,15 @@ These examples use the following ``Restaurant`` class as a model:
 Expected Result
 ~~~~~~~~~~~~~~~
 
-After running the :ref:`full example <find-runnable-example>`, each call to ``UpdateOne()`` returns an `UpdateResult.Acknowledged <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__ object containing the number of matching documents, the number of updated documents, and other information.
+After running the :ref:`full example <find-runnable-example>`, each call to ``UpdateOne()`` returns an `UpdateResult.Acknowledged <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__ object with the following information:
+
+.. code-block:: none
+
+   // results truncated
+   IsAcknowledged = true
+   IsModifiedCountAvailable = true
+   MatchedCount = 1 
+   ModifiedCount = 1
 
 More Information
 ----------------
@@ -85,3 +93,10 @@ For a fully runnable example of the ``UpdateOne()`` operations on this page, see
 .. TODO: Add links to references once pages are done
 
 To learn more about builders, see <builders page>.
+
+API Documentation
+-----------------
+
+* `UpdateOne() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOne.htm>`__
+* `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__
+* `UpdateResult <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__

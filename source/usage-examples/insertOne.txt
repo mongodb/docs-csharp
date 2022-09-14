@@ -1,0 +1,90 @@
+.. _csharp-insert-one:
+
+=================
+Insert a Document
+=================
+
+.. default-domain:: mongodb
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+You can insert a single document into a ``MongoCollection`` by using the
+`InsertOne() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm>`__.
+
+Examples
+--------
+
+These examples use the following ``Restaurant`` class as a model:
+
+.. literalinclude:: ../includes/code-examples/FindOne.cs
+   :start-after: start-model
+   :end-before: end-model
+   :language: csharp
+   :copyable:
+   :dedent:
+
+.. tabs::
+
+   .. tab:: Insert Async
+      :tabid: insert-async
+
+      Insert a Document Asynchronously
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      The following example asynchronously inserts a document into 
+      the ``restaurants`` collection.
+
+      .. literalinclude:: ../includes/code-examples/InsertOneAsync.cs
+         :start-after: start-insert-one-async
+         :end-before: end-insert-one-async
+         :language:  csharp
+         :copyable:
+         :dedent:
+
+   .. tab:: Insert Synchronous
+      :tabid: insert-sync
+
+      Insert a Document Synchronously
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      The following example synchronously inserts a document into 
+      the ``restaurants`` collection.
+
+      .. literalinclude:: ../includes/code-examples/InsertOne.cs
+         :start-after: start-insert-one
+         :end-before: end-insert-one
+         :language:  csharp
+         :copyable:
+         :dedent:
+
+Expected Result
+~~~~~~~~~~~~~~~
+
+After running the :ref:`full example <find-runnable-example>`, the ``InsertOne()``
+method inserts the document, and the :ref:`Find <csharp-find-one>` method returns
+the newly inserted document. The output is as follows:
+
+.. code-block:: none
+
+   Inserting a document...
+   Document Inserted: { "_id" : ObjectId("631fa292c44ae48b23d88eba"), "name" : "Mongo's Pizza", "restaurant_id" : "12345", "cuisine" : "Pizza", "address" : { "_t" : "MongoDB.Bson.BsonDocument, MongoDB.Bson", "_v" : { "street" : "Pizza St", "zipcode" : "10003" } }, "borough" : "Manhatten", "grades" : [{ "_t" : "MongoDB.Bson.BsonDocument, MongoDB.Bson", "_v" : { } }] }
+
+
+Additional Information
+----------------------
+
+.. _insert-runnable-example:
+
+For fully runnable examples of the ``InsertOne`` operations on this page, see the following:
+
+- `Async Find One Example <{+example+}/InsertOneAsync.cs>`__
+- `Synchronous Find One Example <{+example+}/InsertOne.cs>`__
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+- `InsertOne() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm>`__

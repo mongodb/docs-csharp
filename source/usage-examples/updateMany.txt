@@ -67,7 +67,7 @@ These examples use the following ``Restaurant`` class as a model:
 Expected Result
 ~~~~~~~~~~~~~~~
 
-Running the :ref:`full example <update-many-runnable-example>` prints the following results:
+Running either of the :ref:`full examples <update-many-runnable-example>` prints the following results:
 
 .. code-block:: none
 

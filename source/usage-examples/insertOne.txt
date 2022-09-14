@@ -13,7 +13,8 @@ Insert a Document
    :class: singlecol
 
 You can insert a single document into a ``MongoCollection`` by using the
-`InsertOne() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm>`__.
+`InsertOne() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm>`__
+method.
 
 Examples
 --------
@@ -57,7 +58,7 @@ Expected Result
 ~~~~~~~~~~~~~~~
 
 After running the :ref:`full example <insert-runnable-example>`, the ``InsertOne()``
-method inserts the document, and the :ref:`Find <csharp-find-one>` method returns
+method inserts the document, and the :ref:`Find() <csharp-find-one>` method returns
 the newly inserted document. The output is as follows:
 
 .. code-block:: none

@@ -1,0 +1,101 @@
+.. _csharp-update-many:
+
+=====================
+Update Many Documents
+=====================
+
+.. default-domain:: mongodb
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+You can update more than one document at once using the `UpdateMany() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm>`__ method on
+a ``MongoCollection`` object. This method requires a **query filter**, which specifies which documents to update, and an **update** statement, which specifies the changes the driver should make to all documents matching the query filter.
+
+.. tip::
+
+   You can pass an instance of `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__ to the ``UpdateMany()`` method in
+   order to customize its behavior.
+
+Examples
+--------
+
+These examples use the following ``Restaurant`` class as a model:
+
+.. literalinclude:: ../includes/code-examples/update-many/Restaurant.cs
+   :start-after: start-model
+   :end-before: end-model
+   :language: csharp
+   :copyable:
+   :dedent:
+
+.. tabs::
+
+   .. tab:: Async
+      :tabid: update-many-async
+
+      Update Many Documents Asynchronously
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      The following example asynchronously updates the ``cuisine`` of all "Pizza" restaurants in the ``restaurants`` collection to "Pasta and breadsticks": 
+
+      .. literalinclude:: ../includes/code-examples/update-many/UpdateManyAsync.cs
+         :start-after: start-update-many-async
+         :end-before: end-update-many-async
+         :language:  csharp
+         :copyable:
+         :dedent:
+
+   .. tab:: Synchronous
+      :tabid: update-many-sync
+
+      Update Many Documents Synchronously
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      The following example synchronously updates the ``cuisine`` of all "Pizza" restaurants in the ``restaurants`` collection to "Pasta and breadsticks":
+
+      .. literalinclude:: ../includes/code-examples/update-many/UpdateMany.cs
+         :start-after: start-update-many
+         :end-before: end-update-many
+         :language:  csharp
+         :copyable:
+         :dedent:
+
+Expected Result
+~~~~~~~~~~~~~~~
+
+Running the :ref:`full example <update-many-runnable-example>` prints the following results:
+
+.. code-block:: none
+
+   Restaurants with cuisine "Pizza" found: 1163
+   Restaurants modified by update: 1163
+   Restaurants with cuisine "Pasta and breadsticks" found after update: 1163
+   Resetting sample data...done.
+
+
+ .. tip::
+   
+   ``UpdateMany()`` returns an `UpdateResult <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__ object.
+
+More Information
+----------------
+
+.. _update-many-runnable-example:
+
+For fully runnable examples of the ``UpdateMany()`` operations on this page, see the
+`UpdateMany example <{+example+}/UpdateOne.cs>`__ and `UpdateManyAsync example <{+example+}/UpdateOneAsync.cs>`__
+
+.. TODO: Add links to references once pages are done
+
+To learn more about builders, see <builders page>.
+
+API Documentation
+-----------------
+
+* `UpdateMany() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm>`__
+* `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__
+* `UpdateResult <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__

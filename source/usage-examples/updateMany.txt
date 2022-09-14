@@ -34,7 +34,7 @@ These examples use the following ``Restaurant`` class as a model:
 
 .. tabs::
 
-   .. tab:: Async
+   .. tab:: Asynchronous
       :tabid: update-many-async
 
       Update Many Documents Asynchronously

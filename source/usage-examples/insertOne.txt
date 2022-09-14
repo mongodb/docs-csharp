@@ -56,7 +56,7 @@ collection.
 Expected Result
 ~~~~~~~~~~~~~~~
 
-After running the :ref:`full example <find-runnable-example>`, the ``InsertOne()``
+After running the :ref:`full example <insert-runnable-example>`, the ``InsertOne()``
 method inserts the document, and the :ref:`Find <csharp-find-one>` method returns
 the newly inserted document. The output is as follows:
 
@@ -74,10 +74,11 @@ Additional Information
 For fully runnable examples of the ``InsertOne`` operations on this page, see 
 the following:
 
-- `Async Find One Example <{+example+}/InsertOneAsync.cs>`__
-- `Synchronous Find One Example <{+example+}/InsertOne.cs>`__
+- `Async Insert One Example <{+example+}/InsertOneAsync.cs>`__
+- `Synchronous Insert One Example <{+example+}/InsertOne.cs>`__
 
 API Documentation
 ~~~~~~~~~~~~~~~~~
 
 - `InsertOne() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm>`__
+- `Find() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__

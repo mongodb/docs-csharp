@@ -33,7 +33,7 @@ Find Documents Using Builders
 
 .. tabs::
 
-   .. tab:: Asyncronous
+   .. tab:: Asynchronous
       :tabid: builders-async
 
       The following example uses builders to asynchronously find documents in 

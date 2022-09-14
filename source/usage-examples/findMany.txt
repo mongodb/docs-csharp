@@ -28,13 +28,13 @@ These examples use the following ``Restaurant`` class as a model:
    :copyable:
    :dedent:
 
+Find Documents Using Builders
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    
+
 .. tabs::
 
-   .. tab:: Builders Async
+   .. tab:: Asyncronous
       :tabid: builders-async
-
-      Find Documents Using Builders
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
       The following example uses builders to asynchronously find documents in 
       the ``restaurants`` collection with the ``cuisine`` "Pizza".
@@ -46,11 +46,8 @@ These examples use the following ``Restaurant`` class as a model:
          :copyable:
          :dedent:
 
-   .. tab:: Builders Synchronous
+   .. tab:: Synchronous
       :tabid: builders-sync
-
-      Find Documents Using Builders
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
       The following example uses builders to synchronously find documents in 
       the ``restaurants`` collection with the ``cuisine`` "Pizza".
@@ -62,11 +59,13 @@ These examples use the following ``Restaurant`` class as a model:
          :copyable:
          :dedent:
 
-   .. tab:: LINQ Async
-      :tabid: linq-async
+Find Documents Using LINQ
+~~~~~~~~~~~~~~~~~~~~~~~~~   
 
-      Find Documents Using LINQ
-      ~~~~~~~~~~~~~~~~~~~~~~~~~
+.. tabs::
+
+   .. tab:: Asynchronous
+      :tabid: linq-async
 
       The following example uses LINQ to asynchronously find documents in the
       ``restaurants`` collection with the ``cuisine`` "Pizza".
@@ -78,11 +77,8 @@ These examples use the following ``Restaurant`` class as a model:
          :copyable:
          :dedent:
 
-   .. tab:: LINQ Synchronous
+   .. tab:: Synchronous
       :tabid: linq-sync
-
-      Find a Document Using LINQ
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
       The following example uses LINQ to synchronously find documents in the
       ``restaurants`` collection with the ``cuisine`` "Pizza".
@@ -99,7 +95,7 @@ Find All Documents
 
 .. tabs::
 
-   .. tab:: Async
+   .. tab:: Asynchronous
       :tabid: find-all-async
 
       The following example asynchronously finds all documents in the 

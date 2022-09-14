@@ -27,39 +27,31 @@ These examples use the following ``Restaurant`` class as a model:
    :copyable:
    :dedent:
 
-.. tabs::
+Insert a Document Asynchronously
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   .. tab:: Insert Async
-      :tabid: insert-async
+The following example asynchronously inserts a document into 
+the ``restaurants`` collection.
 
-      Insert a Document Asynchronously
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. literalinclude:: ../includes/code-examples/InsertOneAsync.cs
+   :start-after: start-insert-one-async
+   :end-before: end-insert-one-async
+   :language:  csharp
+   :copyable:
+   :dedent:
 
-      The following example asynchronously inserts a document into 
-      the ``restaurants`` collection.
+Insert a Document Synchronously
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      .. literalinclude:: ../includes/code-examples/InsertOneAsync.cs
-         :start-after: start-insert-one-async
-         :end-before: end-insert-one-async
-         :language:  csharp
-         :copyable:
-         :dedent:
+The following example asynchronously inserts a document into the ``restaurants``
+collection.
 
-   .. tab:: Insert Synchronous
-      :tabid: insert-sync
-
-      Insert a Document Synchronously
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-      The following example synchronously inserts a document into 
-      the ``restaurants`` collection.
-
-      .. literalinclude:: ../includes/code-examples/InsertOne.cs
-         :start-after: start-insert-one
-         :end-before: end-insert-one
-         :language:  csharp
-         :copyable:
-         :dedent:
+.. literalinclude:: ../includes/code-examples/InsertOneAsync.cs
+   :start-after: start-insert-one-async
+   :end-before: end-insert-one-async
+   :language:  csharp
+   :copyable:
+   :dedent:
 
 Expected Result
 ~~~~~~~~~~~~~~~
@@ -79,7 +71,8 @@ Additional Information
 
 .. _insert-runnable-example:
 
-For fully runnable examples of the ``InsertOne`` operations on this page, see the following:
+For fully runnable examples of the ``InsertOne`` operations on this page, see 
+the following:
 
 - `Async Find One Example <{+example+}/InsertOneAsync.cs>`__
 - `Synchronous Find One Example <{+example+}/InsertOne.cs>`__

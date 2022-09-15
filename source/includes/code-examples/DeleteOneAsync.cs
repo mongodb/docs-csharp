@@ -9,7 +9,7 @@ namespace CSharpExamples.UsageExamples;
 public class DeleteOneAsync
 {
     private static IMongoCollection<Restaurant> _restaurantsCollection;
-    private static string _mongoConnectionString = "mongodb+srv://m001-student:m001-mongodb-basics@sandbox.lvj8g98.mongodb.net/?retryWrites=true&w=majority";
+    private static string _mongoConnectionString = "<Your MongoDB URI>";
 
     public static void Main(string[] args)
     {

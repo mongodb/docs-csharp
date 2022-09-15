@@ -20,7 +20,7 @@ public class InsertOne
 
         // find and print newly inserted document
         var document = _restaurantsCollection.Find(Builders<Restaurant>.Filter
-            .Eq("name", "Mongo's Pizza")).First();
+            .Eq("name", "Mongo's Pizza")).FirstOrDefault();
 
         WriteLine("Document Inserted: " + document.ToBsonDocument());
 
@@ -45,10 +45,6 @@ public class InsertOne
                 {"zipcode", "10003"},
             },
             Borough = "Manhattan",
-            Grades = new List<object>
-            {
-                new BsonDocument()
-            }
         };
 
         _restaurantsCollection.InsertOne(newRestaurant);
@@ -89,7 +85,5 @@ public class Restaurant
     public object Address { get; set; }
 
     public string Borough { get; set; }
-
-    public List<object> Grades { get; set; }
 }
 // end-model

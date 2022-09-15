@@ -1,18 +1,6 @@
 ref: usage-examples-template
 content: |
 
-=====================
-Update Many Documents
-=====================
-
-.. default-domain:: mongodb
-
-.. contents:: On this page
-   :local:
-   :backlinks: none
-   :depth: 2
-   :class: singlecol
-
 You can {{youCanDoWhat}} using the `{{methodName}}() <{+api-root+}{{apiLink}}>`__ method on a ``MongoCollection`` object.
 
   .. literalinclude:: ../includes/code-examples/{{examplesDirectory}}/{{methodName}}.cs
@@ -27,3 +15,4 @@ replacement:
   youCanDoWhat: "update more than one document at once"
   apiLink: "/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm"
   examplesDirectory: "update-many"
+  

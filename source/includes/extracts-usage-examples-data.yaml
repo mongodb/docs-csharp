@@ -1,4 +1,4 @@
-ref: update-many
+ref: updateMany
 inherit:
   ref: usage-examples-template
   file: extracts-usage-examples-template.yaml

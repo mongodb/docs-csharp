@@ -1,8 +1,6 @@
 ref: usage-examples-template
 content: |
 
-.. _csharp-update-many:
-
 =====================
 Update Many Documents
 =====================

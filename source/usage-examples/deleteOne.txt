@@ -15,7 +15,7 @@ Delete a Document
 You can delete a document from a ``MongoCollection`` by using the synchronous
 `DeleteOne() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteOne.htm>`__
 method, or the asynchronous `DeleteOneAsync() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteOneAsync.htm>`__ method.
-Both methods use a **query filter** to specify the search criteria.
+Both methods use a **query filter** which specifies the search criteria.
 
 Examples
 --------

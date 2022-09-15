@@ -34,7 +34,7 @@ public class InsertOne
         Cleanup();
 
         // start-insert-one
-        Restaurant newRestaurant = new Restaurant
+        Restaurant newRestaurant = new()
         {
             Name = "Mongo's Pizza",
             RestaurantId = "12345",
@@ -44,7 +44,7 @@ public class InsertOne
                 {"street", "Pizza St"},
                 {"zipcode", "10003"},
             },
-            Borough = "Manhatten",
+            Borough = "Manhattan",
             Grades = new List<object>
             {
                 new BsonDocument()

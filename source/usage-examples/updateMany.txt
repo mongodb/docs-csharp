@@ -13,12 +13,11 @@ Update Many Documents
    :class: singlecol
 
 You can update more than one document at once using the `UpdateMany() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm>`__ method on
-a ``MongoCollection`` object. This method requires a **query filter**, which specifies which documents to update, and an **update** statement, which specifies the changes the driver should make to all documents matching the query filter.
+a ``MongoCollection`` object.
 
-.. tip::
+.. tip:: Customize Behavior
 
-   You can pass an instance of `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__ to the ``UpdateMany()`` method in
-   order to customize its behavior.
+   You can pass an instance of `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__ to the ``UpdateMany()`` method to customize its behavior.
 
 Examples
 --------
@@ -77,7 +76,7 @@ Running either of the :ref:`full examples <update-many-runnable-example>` prints
    Resetting sample data...done.
 
 
-.. tip::
+.. tip:: Return Type
    
    ``UpdateMany()`` returns an `UpdateResult <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__ object.
 
@@ -87,7 +86,7 @@ More Information
 .. _update-many-runnable-example:
 
 For fully runnable examples of the ``UpdateMany()`` operations on this page, see the
-`UpdateMany example <{+example+}/update-many/UpdateMany.cs>`__ and `UpdateManyAsync example <{+example+}/update-many/UpdateManyAsync.cs>`__
+`UpdateMany example <{+example+}/update-many/UpdateMany.cs>`__ and `UpdateManyAsync example <{+example+}/update-many/UpdateManyAsync.cs>`__.
 
 .. TODO: Add links to references once pages are done
 

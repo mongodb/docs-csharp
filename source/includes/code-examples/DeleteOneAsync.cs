@@ -16,7 +16,7 @@ public class DeleteOneAsync
         Setup();
 
         // Delete a document using builders
-        WriteLine("Deleting a document with builders...:");
+        WriteLine("Deleting a document with builders...");
         var result = DeleteARestaurantBuilderAsync();
         
         WriteLine($"Deleted documents: {result.Result.DeletedCount}");

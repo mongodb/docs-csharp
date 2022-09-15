@@ -16,7 +16,7 @@ public class DeleteOneSync
         Setup();
 
         // Delete a document using builders
-        WriteLine("Deleting a document with builders...:");
+        WriteLine("Deleting a document with builders...");
         var result = DeleteARestaurantBuilderSync();
 
         WriteLine($"Deleted documents: {result.DeletedCount}");

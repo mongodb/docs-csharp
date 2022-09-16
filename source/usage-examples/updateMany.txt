@@ -12,7 +12,7 @@ Update Many Documents
    :depth: 2
    :class: singlecol
 
-You can update more than one document using the `UpdateMany() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm>`__ method on
+You can update more than one document using the ``UpdateMany()`` method on
 a collection object.
 
 Example
@@ -27,7 +27,12 @@ This example uses the following ``Restaurant`` class as a model:
    :copyable:
    :dedent:
 
-The following code updates all documents in the ``restaurants`` collection that have a ``cuisine`` field with the value of "Pizza". After the update, these documents will have a ``cuisine`` field with a value of "Pasta and breadsticks":
+The following code updates all documents in the ``restaurants`` collection that have a 
+``cuisine`` field with the value of "Pizza". After the update, these documents will 
+have a ``cuisine`` field with a value of "Pasta and breadsticks".
+
+Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the corresponding 
+code.
 
 .. tabs::
 

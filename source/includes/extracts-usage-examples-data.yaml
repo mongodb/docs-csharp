@@ -1,0 +1,9 @@
+ref: update-many-data
+inherit:
+  ref: usage-examples-source
+  file: extracts-usage-examples-source.yaml
+replacement:
+  methodName: "UpdateMany"
+  youCanDoWhat: "update more than one document at once"
+  apiLink: "/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm"
+  examplesDirectory: "update-many"

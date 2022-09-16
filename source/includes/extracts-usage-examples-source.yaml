@@ -1,0 +1,17 @@
+ref: usage-examples-source
+content: |
+
+  You can {{youCanDoWhat}} using the ``{{methodName}}()``.
+
+  .. literalinclude:: ../includes/code-examples/{{examplesDirectory}}/{{methodName}}.cs
+         :start-after: start-update-many
+         :end-before: end-update-many
+         :language:  csharp
+         :copyable:
+         :dedent:
+
+replacement:
+  methodName: "generic-method"
+  youCanDoWhat: "update more than one document at once"
+  apiLink: "/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm"
+  examplesDirectory: "update-many"

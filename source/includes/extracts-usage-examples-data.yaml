@@ -1,7 +1,7 @@
 ref: updateMany
 inherit:
-  ref: usage-examples-template
-  file: extracts-usage-examples-template.yaml
+  ref: usage-examples-source
+  file: extracts-usage-examples-source.yaml
 replacement:
   methodName: "UpdateMany"
   youCanDoWhat: "update more than one document at once"

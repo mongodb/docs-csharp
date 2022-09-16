@@ -2,4 +2,4 @@
 Page Title
 ==========
 
-.. include:: /includes/extracts/updateMany.rst
+.. include:: /includes/extracts/update-many-data.rst

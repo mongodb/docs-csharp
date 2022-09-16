@@ -1,4 +1,4 @@
-ref: updateMany
+ref: update-many-data
 inherit:
   ref: usage-examples-source
   file: extracts-usage-examples-source.yaml

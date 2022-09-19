@@ -18,7 +18,7 @@ method, or the asynchronous `DeleteOneAsync() <{+api-root+}/Overload_MongoDB_Dri
 
 .. note::
 
-   The ``DeleteOne()`` method updates only the first document that matches the filter. To update more than one document, use the ``DeleteMany()`` method.
+   The ``DeleteOne()`` method deletes only the first document that matches the filter. To delete more than one document, use the ``DeleteMany()`` method.
    TODO: Link to DeleteMany usage example page.
 
 Examples

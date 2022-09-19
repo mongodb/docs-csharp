@@ -1,0 +1,97 @@
+.. _csharp-delete-multiple:
+
+=========================
+Delete Multiple Documents
+=========================
+
+.. default-domain:: mongodb
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+You can delete multiple documents from a collection by using the synchronous
+`DeleteMany() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteMany.htm>`__
+method, or the asynchronous `DeleteManyAsync() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteManyAsync.htm>`__ method. Both methods use a **query filter** which specifies the search criteria.
+
+Examples
+--------
+
+These examples use the following ``Restaurant`` class as a model:
+
+.. literalinclude:: ../includes/code-examples/DeleteMany.cs
+   :start-after: start-model
+   :end-before: end-model
+   :language: csharp
+   :copyable:
+   :dedent:
+
+Delete Multiple Document Using Builders
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: Asynchronous
+      :tabid: builders-async
+
+      The following example uses builders to asynchronously delete multiple documents in 
+      the ``restaurants`` collection with the ``address.zipcode`` "10006".
+
+      .. literalinclude:: ../includes/code-examples/DeleteManyAsync.cs
+         :start-after: start-delete-many-builders-async
+         :end-before: end-delete-many-builders-async
+         :language:  csharp
+         :copyable:
+         :dedent:
+
+   .. tab:: Synchronous
+      :tabid: builders-sync
+
+      The following example uses builders to synchronously delete multiple documents in 
+      the ``restaurants`` collection with the ``address.zipcode`` "10006".
+
+      .. literalinclude:: ../includes/code-examples/DeleteMany.cs
+         :start-after: start-delete-many-builders
+         :end-before: end-delete-many-builders
+         :language:  csharp
+         :copyable:
+         :dedent:
+
+Expected Result
+~~~~~~~~~~~~~~~
+
+Running the :ref:`full example <delete-many-runnable-example>` returns 
+the following results:
+
+.. code-block:: none
+
+    Deleting documents with builders...
+    Deleted documents: 47
+
+.. tip:: Sample Datasets
+   
+   These examples use the :atlas:`sample datasets </sample-data>` provided by Atlas.
+   The number of documents deleted may differ depending on the data in your
+   collection.
+
+Additional Information
+----------------------
+
+.. _delete-many-runnable-example:
+
+For a fully runnable example of the ``DeleteMany`` operations on this page, see the following:
+
+- `Asynchronous Delete Many Example <{+example+}/DeleteManyAsync.cs>`__
+- `Synchronous Delete Many Example <{+example+}/DeleteMany.cs>`__
+
+.. TODO: Add links to references once pages are done
+
+To learn more about builders, see <builders page>.
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+- `DeleteMany() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteMany.htm>`__
+- `DeleteManyAsync() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteManyAsync.htm>`__

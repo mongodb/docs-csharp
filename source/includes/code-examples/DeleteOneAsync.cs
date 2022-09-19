@@ -15,27 +15,33 @@ public class DeleteOneAsync
     {
         Setup();
 
+        var doc = _restaurantsCollection.Find(Builders<Restaurant>.Filter
+            .Eq("name", "Ready Penny Inn")).First();
+        
         // Delete a document using builders
         WriteLine("Deleting a document with builders...");
         var result = DeleteARestaurantBuilderAsync();
         
         WriteLine($"Deleted documents: {result.Result.DeletedCount}");
-
-        // Extra space for console readability 
-        WriteLine();
+        
+        Restore(doc);
     }
 
     private static async Task<DeleteResult> DeleteARestaurantBuilderAsync()
     {
         // start-delete-one-builders-async
         var filter = Builders<Restaurant>.Filter
-            .Eq("cuisine", "Continental");
+            .Eq("name", "Ready Penny Inn");
 
         var result = await _restaurantsCollection.DeleteOneAsync(filter);
         return result;
         // end-delete-one-builders-async
     }
 
+    private static void Restore(Restaurant doc)
+    {
+        _restaurantsCollection.InsertOne(doc);
+    }
     private static void Setup()
     {
         // This allows automapping of the camelCase database fields to our models. 

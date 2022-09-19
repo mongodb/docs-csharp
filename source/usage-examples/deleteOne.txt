@@ -1,4 +1,4 @@
-.. _csharp-find-multiple:
+.. _csharp-delete-one:
 
 =================
 Delete a Document
@@ -12,9 +12,14 @@ Delete a Document
    :depth: 2
    :class: singlecol
 
-You can delete a document from a ``MongoCollection`` by using the synchronous
+You can delete a document from a collection by using the synchronous
 `DeleteOne() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteOne.htm>`__
 method, or the asynchronous `DeleteOneAsync() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteOneAsync.htm>`__ method. Both methods use a **query filter** which specifies the search criteria.
+
+.. note::
+
+   The ``DeleteOne()`` method updates only the first document that matches the filter. To update more than one document, use the ``DeleteMany()`` method.
+   TODO: Link to DeleteMany usage example page.
 
 Examples
 --------
@@ -37,7 +42,7 @@ Delete a Document Using Builders
       :tabid: builders-async
 
       The following example uses builders to asynchronously delete a document in 
-      the ``restaurants`` collection with the ``cuisine`` "Continental".
+      the ``restaurants`` collection with the ``name`` "Ready Penny Inn".
 
       .. literalinclude:: ../includes/code-examples/DeleteOneAsync.cs
          :start-after: start-delete-one-builders-async
@@ -50,11 +55,11 @@ Delete a Document Using Builders
       :tabid: builders-sync
 
       The following example uses builders to synchronously delete a document in 
-      the ``restaurants`` collection with the ``cuisine`` "Continental".
+      the ``restaurants`` collection with the ``name`` "Ready Penny Inn".
 
-      .. literalinclude:: ../includes/code-examples/DeleteOneSync.cs
-         :start-after: start-delete-one-builders-sync
-         :end-before: end-delete-one-builders-sync
+      .. literalinclude:: ../includes/code-examples/DeleteOne.cs
+         :start-after: start-delete-one-builders
+         :end-before: end-delete-one-builders
          :language:  csharp
          :copyable:
          :dedent:
@@ -73,8 +78,6 @@ the following results:
 .. tip:: Sample Datasets
    
    These examples use the :atlas:`sample datasets </sample-data>` provided by Atlas.
-   The number of documents returned may differ depending on the data in your
-   collection.
 
 Additional Information
 ----------------------

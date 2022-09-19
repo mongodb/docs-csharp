@@ -6,7 +6,7 @@ using static System.Console;
 
 namespace CSharpExamples.UsageExamples;
 
-public class DeleteOneSync
+public class DeleteOne
 {
     private static IMongoCollection<Restaurant> _restaurantsCollection;
     private static string _mongoConnectionString = "<Your MongoDB URI>";
@@ -14,26 +14,33 @@ public class DeleteOneSync
     public static void Main(string[] args)
     {
         Setup();
+        
+        var doc = _restaurantsCollection.Find(Builders<Restaurant>.Filter
+            .Eq("name", "Ready Penny Inn")).First();
 
         // Delete a document using builders
         WriteLine("Deleting a document with builders...");
-        var result = DeleteARestaurantBuilderSync();
+        var result = DeleteARestaurantBuilder();
 
         WriteLine($"Deleted documents: {result.DeletedCount}");
-        // Extra space for console readability 
-        WriteLine();
         
+        Restore(doc);
     }
 
-    private static DeleteResult DeleteARestaurantBuilderSync()
+    private static DeleteResult DeleteARestaurantBuilder()
     {
-        // start-delete-one-builders-sync
+        // start-delete-one-builders
         var filter = Builders<Restaurant>.Filter
-            .Eq("cuisine", "Continental");
+            .Eq("name", "Ready Penny Inn");
 
         var result = _restaurantsCollection.DeleteOne(filter);
         return result;
-        // end-delete-one-builders-sync
+        // end-delete-one-builders
+    }
+
+    private static void Restore(Restaurant doc)
+    {
+        _restaurantsCollection.InsertOne(doc);
     }
 
     private static void Setup()

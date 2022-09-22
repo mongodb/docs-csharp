@@ -1,6 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-namespace UsageExamples.UpdateMany;
+namespace UsageExamples.DeleteMany;
 
 // start-model
 public class Restaurant

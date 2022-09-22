@@ -29,13 +29,13 @@ public class DeleteManyAsync
 
     private static async Task<DeleteResult> DeleteMultipleRestaurantsBuilderAsync()
     {
-        // start-delete-many-builders-async
+        // start-delete-many-async
         var filter = Builders<Restaurant>.Filter
             .Regex("name", "Green");
 
         var result = await _restaurantsCollection.DeleteManyAsync(filter);
         return result;
-        // end-delete-many-builders-async
+        // end-delete-many-async
     }
 
     private static void Restore(IEnumerable<Restaurant> docs)

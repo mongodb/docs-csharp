@@ -16,10 +16,10 @@ public class DeleteMany
         Setup();
         
         var docs = _restaurantsCollection.Find(Builders<Restaurant>.Filter
-            .Eq("address.zipcode", "10006")).ToList();
+            .Regex("name", "Green")).ToList();
 
         // Deleting documents using builders
-        WriteLine("Deleting documents with builders...");
+        WriteLine("Deleting documents...");
         var result = DeleteMultipleRestaurantsBuilder();
 
         WriteLine($"Deleted documents: {result.DeletedCount}");
@@ -31,7 +31,7 @@ public class DeleteMany
     {
         // start-delete-many-builders
         var filter = Builders<Restaurant>.Filter
-            .Eq("address.zipcode", "10006");
+            .Regex("name", "Green");
 
         var result = _restaurantsCollection.DeleteMany(filter);
         return result;
@@ -41,6 +41,7 @@ public class DeleteMany
     private static void Restore(IEnumerable<Restaurant> docs)
     {
         _restaurantsCollection.InsertMany(docs);
+        WriteLine("Resetting sample data...done.");
     }
 
     private static void Setup()
@@ -65,13 +66,13 @@ public class Restaurant
 
     [BsonElement("restaurant_id")]
     public string RestaurantId { get; set; }
-
+    
     public string Cuisine { get; set; }
-
+    
     public object Address { get; set; }
-
+    
     public string Borough { get; set; }
-
+    
     public List<object> Grades { get; set; }
 }
 // end-model

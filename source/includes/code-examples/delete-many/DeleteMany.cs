@@ -6,7 +6,7 @@ using static System.Console;
 
 namespace CSharpExamples.UsageExamples;
 
-public class DeleteManyAsync
+public class DeleteMany
 {
     private static IMongoCollection<Restaurant> _restaurantsCollection;
     private static string _mongoConnectionString = "<Your MongoDB URI>";
@@ -20,22 +20,22 @@ public class DeleteManyAsync
 
         // Deleting documents using builders
         WriteLine("Deleting documents...");
-        var result = DeleteMultipleRestaurantsBuilderAsync();
+        var result = DeleteMultipleRestaurantsBuilder();
 
-        WriteLine($"Deleted documents: {result.Result.DeletedCount}");
+        WriteLine($"Deleted documents: {result.DeletedCount}");
         
         Restore(docs);
     }
 
-    private static async Task<DeleteResult> DeleteMultipleRestaurantsBuilderAsync()
+    private static DeleteResult DeleteMultipleRestaurantsBuilder()
     {
-        // start-delete-many-async
+        // start-delete-many-builders
         var filter = Builders<Restaurant>.Filter
             .Regex("name", "Green");
 
-        var result = await _restaurantsCollection.DeleteManyAsync(filter);
+        var result = _restaurantsCollection.DeleteMany(filter);
         return result;
-        // end-delete-many-async
+        // end-delete-many-builders
     }
 
     private static void Restore(IEnumerable<Restaurant> docs)
@@ -56,23 +56,3 @@ public class DeleteManyAsync
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     }
 }
-
-// start-model
-public class Restaurant
-{
-    public ObjectId Id { get; set; }
-
-    public string Name { get; set; }
-
-    [BsonElement("restaurant_id")]
-    public string RestaurantId { get; set; }
-    
-    public string Cuisine { get; set; }
-    
-    public object Address { get; set; }
-    
-    public string Borough { get; set; }
-    
-    public List<object> Grades { get; set; }
-}
-// end-model

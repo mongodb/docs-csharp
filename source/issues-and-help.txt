@@ -17,9 +17,8 @@ Bugs / Feature Requests
 To report a bug or to request a new feature in the C#/.NET driver,
 please open a case in our issue management tool, JIRA:
 
-
 * `Create an account and login <https://jira.mongodb.org>`_.
-* Navigate to `the NODE project <https://jira.mongodb.org/browse/CSHARP>`_.
+* Navigate to `the .NET Driver project <https://jira.mongodb.org/browse/CSHARP>`_.
 * Click **Create Issue**. Please provide as much information as possible about the
   issue and the steps to reproduce it.
 
@@ -32,9 +31,7 @@ the :manual:`Create a Vulnerability Report </tutorial/create-a-vulnerability-rep
 Pull Requests
 -------------
 
-We are happy to accept contributions to help improve the driver. We will guide
-user contributions to ensure they meet the standards of the codebase. Please
-ensure that any pull requests include documentation and tests.
+We are happy to accept contributions to help improve the driver. We will guide user contributions to ensure they meet the standards of the codebase. Please ensure that any pull requests include documentation, tests, and pass the existing test suite.
 
 To get started check out the source and work on a branch:
 

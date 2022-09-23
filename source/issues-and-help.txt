@@ -4,12 +4,9 @@ Issues & Help
 
 .. default-domain:: mongodb
 
-Our developer community is vibrant and highly engaged, with extensive experience using C#/.NET with MongoDB.
+We are lucky to have a vibrant MongoDB C#/.NET community that includes users with varying levels of experience using the driver. We find the quickest way to get support for general questions is through the `MongoDB Community Forums <https://www.mongodb.com/community/forums>`__.
 
-Often, the quickest way to get support for general questions is through the
-`MongoDB Community Forums <https://www.mongodb.com/community/forums>`__.
-
-Refer to our :manual:`support channels </support>` documentation for more information.
+To learn more, refer to our :manual:`support channels </support>`.
 
 Bugs / Feature Requests
 -----------------------

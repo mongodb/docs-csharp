@@ -1,0 +1,91 @@
+ref: usage-examples-template
+content: |
+
+  .. default-domain:: mongodb
+
+  .. contents:: On this page
+     :local:
+     :backlinks: none
+     :depth: 2
+     :class: singlecol
+
+  You can {{youCanDoWhat}} using the ``{{methodName}}()`` method on
+  a collection object.
+
+  Example
+  -------
+
+  This example uses the following ``Restaurant`` class as a model:
+
+  .. literalinclude:: /code-examples/{{examples-directory}}/Restaurant.cs
+     :start-after: start-model
+     :end-before: end-model
+     :language: csharp
+     :copyable:
+     :dedent:
+
+  The following code {{codeDoesWhat}}. 
+
+  Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the 
+  corresponding code.
+
+  .. tabs::
+
+     .. tab:: Asynchronous
+        :tabid: {{codeLabel}}-async
+
+        .. literalinclude:: code-examples/{{examplesDirectory}}/{{methodNameAsync}}.cs
+           :start-after: start-{{codeLabel}}-async
+           :end-before: end-{{codeLabel}}-async
+           :language:  csharp
+           :copyable:
+           :dedent:
+
+        For a fully runnable example of the ``{{methodNameAsync}}()`` operation, see the
+        `{{methodNameAsync}} code sample <{+example+}/{{examplesDirectory}}/{{methodNameAsync}}.cs>`__.
+
+     .. tab:: Synchronous
+        :tabid: {{codeLabel}}-sync
+
+        .. literalinclude:: code-examples/{{codeLabel}}/{{methodName}}.cs
+           :start-after: start-{{codeLabel}}
+           :end-before: end-{{codeLabel}}
+           :language:  csharp
+           :copyable:
+           :dedent:
+      
+        For a fully runnable example of the ``{{methodName}}()`` operation, see the
+        `{{methodName}} code sample <{+example+}/{{examplesDirectory}}/{{methodName}}.cs>`__.
+
+  Expected Result
+  ~~~~~~~~~~~~~~~
+
+  Running either of the preceding full examples prints the following results:
+
+  .. code-block:: none
+
+     {{codeResults}
+
+  More Information
+  ----------------
+
+  .. TODO: Add links to references once pages are done
+
+  .. TODO: To learn more about builders, see <builders page>.
+
+  API Documentation
+  -----------------
+
+  * `{{methodName}}() {{methodDocs}}
+  * `{{methodNameAsync}}() {{methodAsyncDocs}}
+  {{optionalThirdApi}}
+  {{optionalFourthApi}}
+
+replacement:
+  methodName: "generic-method"
+  doWhat: "generic description"
+  apiLink: "/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm"
+  examplesDirectory: "update-many"
+  youCanDoWhat: ""
+  optionalThirdApi: ""
+  optionalFourthApi: ""

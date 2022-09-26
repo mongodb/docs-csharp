@@ -1,0 +1,22 @@
+ref: update-many-data
+inherit:
+  ref: usage-examples-template
+  file: extracts-usage-examples-template.yaml
+replacement:
+  methodName: "UpdateMany"
+  methodNameAsync: "UpdateManyAsync"
+  codeLabel: "update-many"
+  youCanDoWhat: "update more than one document at once"
+  apiLink: "/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm"
+  examplesDirectory: "update-many"
+  doesWhat: updates all documents in the ``restaurants`` collection that have a ``cuisine`` 
+field with the value of "Pizza". After the update, these documents will 
+have a ``cuisine`` field with a value of "Pasta and breadsticks".
+  codeResults: Restaurants with cuisine "Pizza" found: 1163
+     Restaurants modified by update: 1163
+     Restaurants with cuisine "Pasta and breadsticks" found after update: 1163
+     Resetting sample data...done.
+  methodDocs: <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm>`__
+  methodAsyncDocs: <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateManyAsync.htm>`__
+  optionalThirdApi: * `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__
+  optionalFourthApi: * `UpdateResult <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__

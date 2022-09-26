@@ -4,7 +4,7 @@ Issues & Help
 
 .. default-domain:: mongodb
 
-We are lucky to have a vibrant community of MongoDB .NET/C# Driver
+We are lucky to have a vibrant community of {+driver-long+}
 users. We recommend seeking support for general
 questions through the `MongoDB Community Forums
 <https://www.mongodb.com/community/forums>`__.
@@ -12,7 +12,7 @@ questions through the `MongoDB Community Forums
 Bugs / Feature Requests
 -----------------------
 
-To report a bug or to request a new feature in the .NET/C# driver,
+To report a bug or to request a new feature in the {+driver-short+},
 please open an issue in JIRA, our issue management tool, using the
 following steps:
 
@@ -32,8 +32,8 @@ Pull Requests
 
 We are happy to accept contributions to help improve the driver. We will
 guide user contributions to ensure they meet the standards of the
-codebase. Please ensure that any pull requests include documentation and
-tests.
+codebase. Please ensure that any pull requests include documentation,
+test new features or bug fixes, and pass the existing test suite.
 
 To get started check out the source and work on a branch:
 

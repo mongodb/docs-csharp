@@ -19,7 +19,7 @@ following steps:
 1. `Create a JIRA account <https://jira.mongodb.org>`_.
 #. Navigate to `the .NET Driver project <https://jira.mongodb.org/browse/CSHARP>`_.
 #. Click :guilabel:`Create Issue`. Please provide as much information as possible about the
-  issue and the steps to reproduce it.
+   issue and the steps to reproduce it.
 
 Bug reports in JIRA for the .NET Driver project can be viewed by everyone.
 

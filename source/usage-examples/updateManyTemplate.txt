@@ -1,0 +1,7 @@
+.. _csharp-update-many-template:
+
+====================
+Update Many Template
+====================
+
+.. include:: /includes/extracts/update-many-data.rst

@@ -1,0 +1,92 @@
+.. _csharp-insert-many:
+
+=========================
+Insert Multiple Documents
+=========================
+
+.. default-domain:: mongodb
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+You can insert multiple documents into a collection by using the synchronous
+``InsertMany()`` method, or the asynchronous ``InsertManyAsync()`` method.
+
+Examples
+--------
+
+These examples use the following ``Restaurant`` class as a model:
+
+.. literalinclude:: ../includes/code-examples/insert-many/InsertMany.cs
+   :start-after: start-model
+   :end-before: end-model
+   :language: csharp
+   :copyable:
+   :dedent:
+
+Insert a Document
+~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: Asynchronous
+      :tabid: insert-many-async
+      
+      The following example asynchronously inserts documents into 
+      the ``restaurants`` collection.
+
+      .. literalinclude:: ../includes/code-examples/insert-many/InsertManyAsync.cs
+         :start-after: start-insert-many
+         :end-before: end-insert-many
+         :language:  csharp
+         :copyable:
+         :dedent:
+
+   .. tab:: Synchronous
+      :tabid: insert-many-sync
+
+      The following example synchronously inserts documents into the ``restaurants``
+      collection.
+
+      .. literalinclude:: ../includes/code-examples/insert-many/InsertMany.cs
+         :start-after: start-insert-many
+         :end-before: end-insert-many
+         :language:  csharp
+         :copyable:
+         :dedent:
+
+Expected Result
+~~~~~~~~~~~~~~~
+
+After running the :ref:`full example <insert-runnable-example>`, the ``InsertMany()``
+method inserts the documents, and the :ref:`Find() <csharp-find-one>` method returns
+the number of inserted documents. The output is as follows:
+
+.. code-block:: none
+    
+   Number of restaurants found before insert: 0
+
+   Inserting documents...
+   Number of restaurants inserted: 5
+
+
+Additional Information
+----------------------
+
+.. _insert-runnable-example:
+
+For fully runnable examples of the ``InsertMany`` operations on this page, see 
+the following:
+
+- `Async Insert Many Example <{+example+}/InsertManyAsync.cs>`__
+- `Synchronous Insert Many Example <{+example+}/InsertMany.cs>`__
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+- `InsertMany() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertMany.htm>`__
+- `InsertManyAsync() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertManyAsync.htm>`__
+- `Find() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__

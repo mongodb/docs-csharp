@@ -6,8 +6,6 @@ FAQ
 
 .. default-domain:: mongodb
 
-Frequently Asked Questions
-
 .. contents:: On this page
    :local:
    :backlinks: none
@@ -26,11 +24,7 @@ following:
 
 .. code-block:: csharp
 
-   A timeout occurred after 30000ms selecting a server using
-   CompositeServerSelector{ Selectors =
-   MongoDB.Driver.MongoClient+AreSessionsSupportedServerSelector,
-   LatencyLimitingServerSelector{ AllowedLatencyRange = 00:00:00.0150000 },
-   OperationsCountServerSelector }.
+   A timeout occurred after 30000ms selecting a server using CompositeServerSelector{ Selectors = MongoDB.Driver.MongoClient+AreSessionsSupportedServerSelector, LatencyLimitingServerSelector{ AllowedLatencyRange = 00:00:00.0150000 }, OperationsCountServerSelector }.
    Client view of cluster state is 
    { 
        ClusterId : "1", 
@@ -67,23 +61,23 @@ The error message consists of multiple parts:
    The following heartbeat exceptions are common:
    
    * ``No connection could be made because the target machine actively
-   refused it``: The driver cannot see this cluster node. This can be
-   because the cluster node has crashed, a firewall is preventing
-   network traffic from reaching the cluster node or port, or some other
-   network error is preventing traffic from being successfully routed to
-   the cluster node.
+     refused it``: The driver cannot see this cluster node. This can be
+     because the cluster node has crashed, a firewall is preventing
+     network traffic from reaching the cluster node or port, or some other
+     network error is preventing traffic from being successfully routed to
+     the cluster node.
    * ``Attempted to read past the end of the stream``: This error
-   happens when the driver cannot connect to the cluster nodes due to a
-   network error, misconfigured firewall, or other network issue. To
-   address this exception, ensure that all cluster nodes are reachable.
-   This error commonly occurs when the client machine’s IP address is
-   not configured in the Atlas IPs Access List, which can be found under
-   the Network Access tab for your Atlas Project.
+     happens when the driver cannot connect to the cluster nodes due to a
+     network error, misconfigured firewall, or other network issue. To
+     address this exception, ensure that all cluster nodes are reachable.
+     This error commonly occurs when the client machine’s IP address is
+     not configured in the Atlas IPs Access List, which can be found under
+     the Network Access tab for your Atlas Project.
    * ``The remote certificate is invalid according to the validation
-   procedure``: This error typically indicates a TLS/SSL-related problem
-   such as an expired/invalid certificate or an untrusted root CA. You
-   can use tools like ``openssl s_client`` to debug TLS/SSL-related
-   certificate problems.
+     procedure``: This error typically indicates a TLS/SSL-related problem
+     such as an expired/invalid certificate or an untrusted root CA. You
+     can use tools like ``openssl s_client`` to debug TLS/SSL-related
+     certificate problems.
 
 Why is the Wait Queue for Acquiring a Connection to the Server Full?
 --------------------------------------------------------------------
@@ -121,8 +115,8 @@ Each LINQ or Builder expression must be translated into MongoDB Query
 Language (MQL), which is executed by the server. This is not
 always possible for the following reasons:
 
-1. You are attempting to use a .NET feature that does not have an
-   equivalent MongoDB representation. For example, .NET and MongoDB have
+1. You are attempting to use a {+lang-framework+} feature that does not have an
+   equivalent MongoDB representation. For example, {+lang-framework+} and MongoDB have
    different semantics around collations.
 #. The driver does not support a particular transformation from LINQ or
    Builder expression into a server query. This may happen because the

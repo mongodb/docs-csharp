@@ -9,8 +9,8 @@ content: |
      :depth: 2
      :class: singlecol
 
-  You can {{youCanDoWhat}} using the ``{{methodName}}()`` method on
-  a collection object.
+  You can {{youCanDoWhat}} using the ``{{methodName}}()`` method{{optionalAsyncMethod}} on
+  a collection object.  
 
   Example
   -------
@@ -60,32 +60,33 @@ content: |
   Expected Result
   ~~~~~~~~~~~~~~~
 
-  Running either of the preceding full examples prints the following results:
+  Running any of the preceding full examples prints the following results:
 
   .. code-block:: none
 
-     {{codeResults}
+     {{codeResults}}
 
   More Information
   ----------------
 
-  .. TODO: Add links to references once pages are done
+  .. TODO: Add links to Fundamentals once pages are done
 
-  .. TODO: To learn more about builders, see <builders page>.
+  {{buildersLink}}
+
+  {{linqLink}}
 
   API Documentation
   -----------------
 
-  * `{{methodName}}() {{methodDocs}}
-  * `{{methodNameAsync}}() {{methodAsyncDocs}}
+  {{firstApi}}
+  {{optionalSecondApi}}
   {{optionalThirdApi}}
   {{optionalFourthApi}}
 
 replacement:
-  methodName: "generic-method"
-  doWhat: "generic description"
-  apiLink: "/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm"
-  examplesDirectory: "update-many"
-  youCanDoWhat: ""
+  optionalAsyncMethod: ""
+  optionalSecondApi: ""
   optionalThirdApi: ""
   optionalFourthApi: ""
+  buildersLink: ""
+  linqLink: ""

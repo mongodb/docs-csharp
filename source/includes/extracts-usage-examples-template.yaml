@@ -17,7 +17,7 @@ content: |
 
   This example uses the following ``Restaurant`` class as a model:
 
-  .. literalinclude:: /code-examples/{{examplesDirectory}}/Restaurant.cs
+  .. literalinclude:: includes/code-examples/{{examplesDirectory}}/Restaurant.cs
      :start-after: start-model
      :end-before: end-model
      :language: csharp
@@ -34,7 +34,7 @@ content: |
      .. tab:: Asynchronous
         :tabid: {{codeLabel}}-async
 
-        .. literalinclude:: code-examples/{{examplesDirectory}}/{{methodNameAsync}}.cs
+        .. literalinclude:: includes/code-examples/{{examplesDirectory}}/{{methodNameAsync}}.cs
            :start-after: start-{{codeLabel}}-async
            :end-before: end-{{codeLabel}}-async
            :language:  csharp
@@ -47,7 +47,7 @@ content: |
      .. tab:: Synchronous
         :tabid: {{codeLabel}}-sync
 
-        .. literalinclude:: code-examples/{{codeLabel}}/{{methodName}}.cs
+        .. literalinclude:: includes/code-examples/{{codeLabel}}/{{methodName}}.cs
            :start-after: start-{{codeLabel}}
            :end-before: end-{{codeLabel}}
            :language:  csharp

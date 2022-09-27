@@ -84,6 +84,7 @@ content: |
   {{optionalFourthApi}}
 
 replacement:
+  methodNameAsync: "UpdateManyAsync"
   optionalAsyncMethod: ""
   optionalSecondApi: ""
   optionalThirdApi: ""

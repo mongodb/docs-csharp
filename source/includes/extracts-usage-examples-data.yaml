@@ -10,7 +10,7 @@ replacement:
   youCanDoWhat: "update more than one document at once"
   apiLink: "/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm"
   examplesDirectory: "update-many"
-  doesWhat: 'updates all documents in the ``restaurants`` collection that have a ``cuisine`` 
+  codeDoesWhat: 'updates all documents in the ``restaurants`` collection that have a ``cuisine`` 
 field with the value of "Pizza". After the update, these documents will 
 have a ``cuisine`` field with a value of "Pasta and breadsticks".'
   codeResults: Restaurants with cuisine "Pizza" found: 1163

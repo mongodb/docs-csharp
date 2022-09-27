@@ -9,7 +9,7 @@ content: |
      :depth: 2
      :class: singlecol
 
-  You can {{youCanDoWhat}} using the ``{{methodName}}()`` method{{optionalAsyncMethod}} on
+  You can {{youCanDoWhat}} using the ``{{methodName}}()`` method {{optionalAsyncMethod}} on
   a collection object.  
 
   Example

@@ -17,7 +17,7 @@ please open an issue in JIRA, our issue management tool, using the
 following steps:
 
 1. `Create a JIRA account <https://jira.mongodb.org>`__.
-#. Navigate to `the CSHARP Driver project <https://jira.mongodb.org/browse/CSHARP>`_.
+#. Navigate to `the CSHARP Driver project <https://jira.mongodb.org/browse/CSHARP>`__.
 #. Click :guilabel:`Create Issue`. Please provide as much information as possible about the
    issue and the steps to reproduce it.
 
@@ -30,10 +30,8 @@ MongoDB project, please report it according to the instructions found in
 Pull Requests
 -------------
 
-We are happy to accept contributions to help improve the driver. We will
-guide user contributions to ensure they meet the standards of the 
-codebase.
-
-To contribute to the official driver, follow the `development and testing guidelines
-<https://github.com/mongodb/mongo-csharp-driver/blob/master/CONTRIBUTING.md>`__
-to ensure your code meets the quality standards.
+We are happy to accept contributions to help improve the driver. To
+contribute to the official driver, follow the `development and testing
+guidelines
+<https://github.com/mongodb/mongo-csharp-driver/blob/master/CONTRIBUTING.md>`__.
+We will guide user contributions to ensure they meet the standards of the codebase.

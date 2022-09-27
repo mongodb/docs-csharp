@@ -84,6 +84,7 @@ content: |
   {{optionalFourthApi}}
 
 replacement:
+  codeDoesWhat: "test value"
   methodNameAsync: "UpdateManyAsync"
   optionalAsyncMethod: ""
   optionalSecondApi: ""

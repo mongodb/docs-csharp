@@ -17,7 +17,7 @@ content: |
 
   This example uses the following ``Restaurant`` class as a model:
 
-  .. literalinclude:: /code-examples/{{examples-directory}}/Restaurant.cs
+  .. literalinclude:: /code-examples/{{examplesDirectory}}/Restaurant.cs
      :start-after: start-model
      :end-before: end-model
      :language: csharp

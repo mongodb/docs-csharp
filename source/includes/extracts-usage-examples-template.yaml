@@ -47,7 +47,7 @@ content: |
      .. tab:: Synchronous
         :tabid: {{codeLabel}}-sync
 
-        .. literalinclude:: includes/code-examples/{{codeLabel}}/{{methodName}}.cs
+        .. literalinclude:: ../includes/code-examples/{{codeLabel}}/{{methodName}}.cs
            :start-after: start-{{codeLabel}}
            :end-before: end-{{codeLabel}}
            :language:  csharp

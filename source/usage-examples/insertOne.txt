@@ -30,8 +30,8 @@ These examples use the following ``Restaurant`` class as a model:
    :copyable:
    :dedent:
 
-Insert Documents
-~~~~~~~~~~~~~~~~
+Insert a Document
+~~~~~~~~~~~~~~~~~
 
 .. tabs::
 

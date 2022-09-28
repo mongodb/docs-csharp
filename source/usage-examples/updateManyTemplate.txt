@@ -4,4 +4,4 @@
 Test Page
 =========
 
-.. include:: /includes/extracts/test.rst
+.. include:: /includes/extracts/update-many-data.rst

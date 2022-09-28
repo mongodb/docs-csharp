@@ -64,8 +64,10 @@ content: |
 
   .. code-block:: none
 
-     {{codeLineOne}}
-     {{codeLineTwo}}
+     {{codeResultLineOne}}
+     {{optionalCodeResultLineTwo}}
+     {{optionalCodeResultLineThree}}
+     {{optionalCodeResultLineFour}}
 
   More Information
   ----------------
@@ -84,12 +86,12 @@ content: |
   {{optionalThirdApi}}
   {{optionalFourthApi}}
 
-replacement:
-  codeDoesWhat: "test value"
-  methodNameAsync: "UpdateManyAsync"
-  optionalAsyncMethod: ""
-  optionalSecondApi: ""
-  optionalThirdApi: ""
-  optionalFourthApi: ""
-  buildersLink: ""
-  linqLink: ""
+# replacement:
+#   codeDoesWhat: "test value"
+#   methodNameAsync: "UpdateManyAsync"
+#   optionalAsyncMethod: ""
+#   optionalSecondApi: ""
+#   optionalThirdApi: ""
+#   optionalFourthApi: ""
+#   buildersLink: ""
+#   linqLink: ""

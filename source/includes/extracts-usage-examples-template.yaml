@@ -64,7 +64,7 @@ content: |
 
   .. code-block:: none
 
-  {{codeResults}}
+    {{codeResults}}
 
   More Information
   ----------------

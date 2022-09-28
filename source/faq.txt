@@ -22,7 +22,7 @@ server within the `server selection timeout <{+api-root+}/P_MongoDB_Driver_Mongo
 server selection timeout exception. The exception will look similar to the
 following:
 
-.. code-block:: csharp
+.. code-block:: none
 
    A timeout occurred after 30000ms selecting a server using CompositeServerSelector{ Selectors = MongoDB.Driver.MongoClient+AreSessionsSupportedServerSelector, LatencyLimitingServerSelector{ AllowedLatencyRange = 00:00:00.0150000 }, OperationsCountServerSelector }.
    Client view of cluster state is 

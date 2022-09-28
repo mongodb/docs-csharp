@@ -4,3 +4,9 @@ inherit:
   file: extracts-usage-examples-template.yaml
 replacement:
   methodName: "UpdateMany"
+  methodNameAsync: "UpdateManyAsync"
+  optionalAsyncMethod: " or the ``UpdateManyAsync()`` method"
+  codeLabel: "update-many"
+  youCanDoWhat: "update more than one document at once"
+  apiLink: "/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm"
+  examplesDirectory: "update-many"

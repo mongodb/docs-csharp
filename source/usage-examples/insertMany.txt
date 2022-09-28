@@ -13,14 +13,14 @@ Insert Multiple Documents
    :class: singlecol
 
 You can insert multiple documents into a collection by using the synchronous
-``InsertMany()`` method, or the asynchronous ``InsertManyAsync()`` method.
+``InsertMany()`` method or the asynchronous ``InsertManyAsync()`` method.
 
 Examples
 --------
 
 These examples use the following ``Restaurant`` class as a model:
 
-.. literalinclude:: ../includes/code-examples/insert-many/InsertMany.cs
+.. literalinclude:: ../includes/code-examples/insert-many/Restaurant.cs
    :start-after: start-model
    :end-before: end-model
    :language: csharp
@@ -45,6 +45,9 @@ Insert Documents
          :copyable:
          :dedent:
 
+      For a fully runnable example of the ``InsertManyAsync()`` operation, see the
+      `InsertManyAsync code sample <{+example+}/InsertMany.cs>__.
+
    .. tab:: Synchronous
       :tabid: insert-many-sync
 
@@ -57,6 +60,9 @@ Insert Documents
          :language:  csharp
          :copyable:
          :dedent:
+
+      For a fully runnable example of the ``InsertMany()`` operation, see the
+      `InsertMany code sample <{+example+}/InsertManyAsync.cs>`__.
 
 Expected Result
 ~~~~~~~~~~~~~~~
@@ -78,15 +84,10 @@ Additional Information
 
 .. _insert-runnable-example:
 
-For fully runnable examples of the ``InsertMany`` operations on this page, see 
-the following:
-
-- `Async Insert Many Example <{+example+}/InsertManyAsync.cs>`__
-- `Synchronous Insert Many Example <{+example+}/InsertMany.cs>`__
+.. TODO: Add links to fundamentals pages
 
 API Documentation
 ~~~~~~~~~~~~~~~~~
 
 - `InsertMany() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertMany.htm>`__
 - `InsertManyAsync() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertManyAsync.htm>`__
-- `Find() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__

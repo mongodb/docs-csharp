@@ -4,12 +4,12 @@ using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using static System.Console;
 
-namespace CsharpExamples.UsageExamples;
+namespace CsharpExamples.UsageExamples.InsertMany;
 
 public class InsertMany
 {
     private static IMongoCollection<Restaurant> _restaurantsCollection;
-    private static string _mongoConnectionString = "<Your MongoDB URI>";
+    private const string _mongoConnectionString = "<Your MongoDB URI>";
 
     public static void Main(string[] args)
     {
@@ -28,7 +28,7 @@ public class InsertMany
         WriteLine("Inserting documents...");
         InsertManyRestaurants();
 
-        // find and print newly inserted document
+        // Find and print newly inserted document
         foundRestaurants = _restaurantsCollection.Find(filter).ToList();
 
         WriteLine($"Number of restaurants inserted: {foundRestaurants.Count}");
@@ -38,7 +38,7 @@ public class InsertMany
 
     private static void InsertManyRestaurants()
     {
-        // delete sample document if already exists
+        // Delete sample document if already exists
         Cleanup();
 
         // start-insert-many
@@ -93,21 +93,3 @@ public class InsertMany
         _restaurantsCollection.DeleteMany(filter);
     }
 }
-
-// start-model
-public class Restaurant
-{
-    public ObjectId Id { get; set; }
-
-    public string Name { get; set; }
-
-    [BsonElement("restaurant_id")]
-    public string RestaurantId { get; set; }
-
-    public string Cuisine { get; set; }
-
-    public object Address { get; set; }
-
-    public string Borough { get; set; }
-}
-// end-model

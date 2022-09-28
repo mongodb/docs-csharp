@@ -11,12 +11,12 @@ replacement:
   apiLink: "/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm"
   examplesDirectory: "update-many"
   codeDoesWhat: 'updates all documents in the ``restaurants`` collection that have a ``cuisine`` field with the value of "Pizza". After the update, these documents will have a ``cuisine`` field with a value of "Pasta and breadsticks"'
-  codeResults: |3
-     Restaurants with cuisine "Pizza" found: 1163
-     Restaurants modified by update: 1163
-     Restaurants with cuisine "Pasta and breadsticks" found after update: 1163
-     Resetting sample data...done.
+  codeLineOne: 'Restaurants with cuisine "Pizza" found: 1163'
+  codeLineTwo: "Restaurants modified by update: 1163"
   methodDocs: "<{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm>`__"
   methodAsyncDocs: "<{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateManyAsync.htm>`__"
   optionalThirdApi: "* `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__"
-  optionalFourthApi: "* `UpdateResult <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__"
+  optionalFourthApi:
+    "* `UpdateResult <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__"
+    #  Restaurants with cuisine "Pasta and breadsticks" found after update: 1163
+    #  Resetting sample data...done.

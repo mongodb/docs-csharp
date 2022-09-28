@@ -5,7 +5,7 @@ using static System.Console;
 
 namespace CSharpExamples.UsageExamples.ReplaceOne;
 
-public class ReplaceOne
+public class ReplaceOneAsync
 {
     private static IMongoCollection<Restaurant> _restaurantsCollection;
     private const string MongoConnectionString = "<Your MongoDB URI>";
@@ -22,8 +22,8 @@ public class ReplaceOne
         WriteLine($"First pizza restaurant before replacement: {oldPizzaRestaurant.Name}");
 
         // Replace one document synchronously
-        var syncResult = ReplaceOneRestaurant();
-        WriteLine($"Restaurants modified by replacement: {syncResult.ModifiedCount}");
+        var asyncResult = ReplaceOneRestaurant();
+        WriteLine($"Restaurants modified by replacement: {asyncResult.Result.ModifiedCount}");
 
         var firstPizzaRestaurant = _restaurantsCollection.Find(filter).First();
         WriteLine($"First pizza restaurant after replacement: {firstPizzaRestaurant.Name}");
@@ -33,9 +33,9 @@ public class ReplaceOne
         WriteLine("done.");
     }
 
-    private static ReplaceOneResult ReplaceOneRestaurant()
+    private static async Task<ReplaceOneResult> ReplaceOneRestaurant()
     {
-        // start-replace-one
+        // start-replace-one-async
         var filter = Builders<Restaurant>.Filter.Eq("cuisine", "Pizza");
 
         // Find ID of first pizza restaurant
@@ -55,8 +55,8 @@ public class ReplaceOne
             Borough = "Manhattan",
         };
 
-        return _restaurantsCollection.ReplaceOne(filter, newPizzaRestaurant);
-        // end-replace-one
+        return await _restaurantsCollection.ReplaceOneAsync(filter, newPizzaRestaurant);
+        // end-replace-one-async
     }
 
     private static void Setup()

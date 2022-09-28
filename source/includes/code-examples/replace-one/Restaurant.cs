@@ -3,11 +3,11 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace CSharpExamples.UsageExamples.ReplaceOne;
 
+//start-model
 public class Restaurant
 {
     public ObjectId Id { get; set; }
 
-    [BsonElement("name")]
     public string Name { get; set; }
 
     [BsonElement("restaurant_id")]
@@ -21,3 +21,4 @@ public class Restaurant
 
     public List<object> Grades { get; set; }
 }
+//end-model

@@ -18,8 +18,8 @@ Why Does the Driver Throw a Timeout During Server Selection?
 Each driver operation requires that you choose a healthy server
 satisfying the :manual:`server selection criteria
 </core/read-preference-mechanics>`. If you do not select an appropriate
-server within the `server selection timeout <{+api-root+}/P_MongoDB_Driver_MongoServerSettings_ServerSelectionTimeout.htm>`__, the driver will throw a
-server selection timeout exception. The exception will look similar to the
+server within the `server selection timeout <{+api-root+}/P_MongoDB_Driver_MongoServerSettings_ServerSelectionTimeout.htm>`__, the driver throws a
+server selection timeout exception. The exception looks similar to the
 following:
 
 .. code-block:: none
@@ -55,7 +55,7 @@ The error message consists of multiple parts:
    server description contains an exhaustive description of its current
    state including information about an endpoint, a server version, a
    server type, and its current health state. If the server is not
-   heathy, ``HeartbeatException`` will contain the exception from the
+   heathy, ``HeartbeatException`` contains the exception from the
    last failed heartbeat. Analyzing the ``HeartbeatException`` on each
    cluster node can assist in diagnosing most server selection issues.
    The following heartbeat exceptions are common:
@@ -72,7 +72,7 @@ The error message consists of multiple parts:
      address this exception, ensure that all cluster nodes are reachable.
      This error commonly occurs when the client machine’s IP address is
      not configured in the Atlas IPs Access List, which can be found under
-     the Network Access tab for your Atlas Project.
+     the :guilabel:`Network Access` tab for your Atlas Project.
    * ``The remote certificate is invalid according to the validation
      procedure``: This error typically indicates a TLS/SSL-related problem
      such as an expired/invalid certificate or an untrusted root CA. You
@@ -83,20 +83,27 @@ Why is the Wait Queue for Acquiring a Connection to the Server Full?
 --------------------------------------------------------------------
 
 This exception usually indicates a threading or concurrency problem in
-your application. When the driver executes a read or write, it will
-check out a connection from the selected server’s connection pool. If
-that pool is already at ``maxPoolSize``, which is by default 100, then the requesting
-thread will block in a wait queue, which has a default size of ``5 x
-maxPoolSize`` or 500. If the wait queue is also full, then the driver
-throws a ``MongoWaitQueueFullException``. To resolve this issue, try the
-following steps:
+your application. The driver checks out a connection from the selected
+server’s connection pool for every read or write operation. If
+the connection pool is already at ``maxPoolSize`` - 100 by default - then the
+requesting thread blocks in a wait queue. The wait queue's default size
+is 5 times ``maxPoolSize``, or 500. If the wait queue is also full, the driver
+throws a ``MongoWaitQueueFullException``. The exception looks
+similar to the following:
+
+.. code-block:: none
+   
+   MongoDB.Driver.MongoWaitQueueFullException: The wait queue for
+   acquiring a connection to server myServer is full.
+
+To resolve this issue, try the following steps:
 
 1. Tune your indexes. By improving the performance of your queries,
    you can reduce the time that operations take and reduce the number of
    concurrent connections needed for your workload.
-#. If you have long-running, analytical queries, you may wish to isolate
-   them to dedicated analytics nodes using ``readPreferenceTags`` or a hidden
-   secondary.
+#. If you have long-running analytical queries, you may wish to isolate
+   them to dedicated analytics nodes using :manual:`read preference tags
+   </core/read-preference/>` or a hidden secondary.
 #. Increase ``maxPoolSize`` to allow more simultaneous operations to a
    given cluster node. If your MongoDB cluster does not have sufficient
    resources to handle the additional connections and simultaneous
@@ -104,15 +111,15 @@ following steps:
    on the cluster nodes. Adjust this setting only with careful
    consideration and testing.
 #. Increase ``waitQueueMultiple`` to allow more threads/tasks to block
-   waiting for a connection. This is rarely the right solution, and it is
-   more effective to address the concurrency problems in your
-   application.
+   waiting for a connection. This is rarely the appropriate solution and
+   can severely affect your application performance. Before
+   considering changes to this setting, address the concurrency problems
+   in your application.
    
 Why are Certain LINQ or Builder Expressions Unsupported?
 --------------------------------------------------------
 
-Each LINQ or Builder expression must be translated into MongoDB Query
-Language (MQL), which is executed by the server. This is not
+Each LINQ or Builder expression must be available in the Query API. This is not
 always possible for the following reasons:
 
 1. You are attempting to use a {+lang-framework+} feature that does not have an
@@ -136,7 +143,7 @@ steps:
    definition classes such as ``FilterDefinition``,
    ``ProjectionDefinition``, and ``PipelineDefinition`` support implicit
    conversion from ``BsonDocument`` or JSON string. For example, the
-   following filters will render to the same MQL when used in a query or
+   following filters are equivalent when used in a query or
    aggregation:
 
 .. code-block:: csharp
@@ -149,8 +156,8 @@ steps:
 
    If you use ``BsonDocument`` or JSON string, then `BsonClassMap
    <https://mongodb.github.io/mongo-csharp-driver/2.17/reference/bson/mapping/>`__,
-   BSON serialization attributes, and serialization conventions will not be
-   taken into account when rendering the MQL. Field names must match the
+   BSON serialization attributes, and serialization conventions are not
+   taken into account in the Query API. Field names must match the
    names and casing as stored by the server. For example, when referencing
    the ``_id`` field, you must refer to it using ``_id`` in
    ``BsonDocument`` or JSON string definitions. Similarly, if a document
@@ -158,8 +165,8 @@ steps:
    must refer to it as ``first_name`` in ``BsonDocument`` or JSON string
    definitions.
    
-You can combine the raw and typed forms in the same query,
-as the following code demonstrates:
+You can combine the raw and typed forms in the same query, as the
+following code demonstrates:
 
 .. code-block:: csharp
 

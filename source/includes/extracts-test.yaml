@@ -1,0 +1,6 @@
+ref: test
+inherit:
+  ref: usage-examples-template
+  file: extracts-usage-examples-template.yaml
+replacement:
+  methodName: "UpdateMany"

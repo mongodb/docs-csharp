@@ -1,7 +1,7 @@
-.. _csharp-update-many-template:
+.. _csharp-test:
 
-====================
-Update Many Template
-====================
+=========
+Test Page
+=========
 
-.. include:: /includes/extracts/update-many-data.rst
+.. include:: /includes/extracts/test.rst

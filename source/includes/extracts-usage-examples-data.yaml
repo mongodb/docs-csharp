@@ -15,7 +15,7 @@ replacement:
   optionalCodeResultLineTwo: "Restaurants modified by update: 1163"
   optionalCodeResultLineThree: 'Restaurants with cuisine "Pasta and breadsticks" found after update: 1163'
   optionalCodeResultLineFour: "Resetting sample data...done."
-  firstApi: "* <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm>`__"
-  optionalSecondApi: "* <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateManyAsync.htm>`__"
+  firstApi: "* `UpdateMany <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm>`__"
+  optionalSecondApi: "* `UpdateManyAsync <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateManyAsync.htm>`__"
   optionalThirdApi: "* `UpdateOptions <{+api-root+}/T_MongoDB_Driver_UpdateOptions.htm>`__"
   optionalFourthApi: "* `UpdateResult <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__"

@@ -67,9 +67,7 @@ Insert Documents
 Expected Result
 ~~~~~~~~~~~~~~~
 
-After running the :ref:`full example <insert-runnable-example>`, the ``InsertMany()``
-method inserts the documents, and the :ref:`Find() <csharp-find-one>` method returns
-the number of inserted documents. The output is as follows:
+After running either of the preceding full examples, the output is as follows:
 
 .. code-block:: none
     

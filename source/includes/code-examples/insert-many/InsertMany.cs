@@ -9,7 +9,7 @@ namespace CsharpExamples.UsageExamples.InsertMany;
 public class InsertMany
 {
     private static IMongoCollection<Restaurant> _restaurantsCollection;
-    private const string _mongoConnectionString = "<Your MongoDB URI>";
+    private const string MongoConnectionString = "<Your MongoDB URI>";
 
     public static void Main(string[] args)
     {
@@ -56,7 +56,7 @@ public class InsertMany
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
         // Establish the connection to MongoDB and get the restaurants database
-        var mongoClient = new MongoClient(_mongoConnectionString);
+        var mongoClient = new MongoClient(MongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     }

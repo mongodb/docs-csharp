@@ -28,7 +28,7 @@ collection are modeled by the following ``Restaurant`` class:
 .. literalinclude:: /includes/fundamentals/code-examples/crud/delete.cs
    :language: csharp
    :dedent:
-   :start-after: begin-model
+   :start-after: start-model
    :end-before: end-model
 
 .. TODO explain how to download sample data
@@ -37,15 +37,15 @@ Delete Operations
 -----------------
 
 Use **delete operations** to remove data from MongoDB. Delete operations
-consist of the following methods:
+use the following methods:
 
 - ``DeleteOne()``, which deletes *the first document* that matches the
   query filter
-- ``DeleteMany()``, which deletes *all* documents that match the query
+- ``DeleteMany()``, which deletes *all documents* that match the query
   filter
 
 If you are using asynchronous programming in your application, you can
-use the ``DeleteOneAsync()`` and ``DeleteManyAsync()`` methods in your
+use the ``DeleteOneAsync()`` and ``DeleteManyAsync()`` methods for your
 delete operations. Find examples using these methods under :ref:`additional information <additional-info>`.
 
 .. tip::

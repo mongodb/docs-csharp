@@ -1,0 +1,123 @@
+.. _csharp-delete-guide:
+
+=================
+Delete a Document
+=================
+
+.. default-domain:: mongodb
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn how to remove documents from your MongoDB
+collections using delete operations.
+
+Sample Data
+~~~~~~~~~~~
+
+The example in this guide use the ``restaurants`` collection
+from the ``sample_restaurants`` database. The documents in this
+collection are modeled by the following ``Restaurant`` class:
+
+.. literalinclude:: /includes/fundamentals/code-examples/crud/delete.cs
+   :language: csharp
+   :dedent:
+   :start-after: begin-model
+   :end-before: end-model
+
+.. TODO explain how to download sample data
+
+Delete Operations
+-----------------
+
+Use **delete operations** to remove data from MongoDB. Delete operations
+consist of the following methods:
+
+- ``DeleteOne()``, which deletes *the first document* that matches the
+  query filter
+- ``DeleteMany()``, which deletes *all* documents that match the query
+  filter
+
+If you are using asynchronous programming in your application, you can
+use the ``DeleteOneAsync()`` and ``DeleteManyAsync()`` methods in your
+delete operations. Find examples using these methods under :ref:`additional information <additional-info>`.
+
+.. tip::
+
+   If only one document matches your filter when using the ``DeleteMany()``
+   method, the operation is equivalent to using the ``DeleteOne()`` method.
+
+Parameters
+~~~~~~~~~~
+
+The ``DeleteOne()`` and ``DeleteMany()`` methods expect you to pass a query filter specifying which
+documents to match.
+
+Return Value
+~~~~~~~~~~~~
+
+The ``DeleteOne()`` and ``DeleteMany()`` methods return a
+``DeleteResult`` type. This type contains the ``DeletedCount`` property,
+which describes the number of documents deleted. If your filter does not
+match any documents, no documents are deleted and ``DeletedCount`` is
+``0``.
+
+Example
+```````
+The following code uses the ``DeleteMany()`` method to delete all
+documents whose ``address.street`` field value includes the phrase
+"Pearl Street":
+
+.. io-code-block::
+   :copyable: true
+
+   .. input::
+      :language: csharp
+
+      var filter = Builders<Restaurant>.Filter
+          .Regex("address.street", "Pearl Street");
+
+      WriteLine("Deleting documents...");
+      var result = _restaurantsCollection.DeleteMany(filter);
+      
+      WriteLine($"Deleted documents: {result.DeletedCount}");
+
+   .. output::
+      :language: none
+      :visible: false
+      
+      Deleting documents...
+      Deleted documents: 26
+
+.. tip::
+
+   If the preceding example used the ``DeleteOne()`` method instead of
+   ``DeleteMany()``, the driver would delete the first of the 26
+   matched documents.
+
+.. _additional-info:
+
+Additional Information
+----------------------
+
+For runnable examples of the delete operations, see the following usage
+examples:
+
+- :ref:`csharp-delete-one`
+- :ref:`csharp-delete-many`
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+To learn more about any of the methods or types discussed in this
+guide, see the following API Documentation:
+
+- `DeleteOne() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteOne.htm>`__
+- `DeleteMany() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteMany.htm>`__
+- `DeleteResult <{+api-root+}/Properties_T_MongoDB_Driver_DeleteResult.htm>`__

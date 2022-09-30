@@ -103,7 +103,7 @@ are deleted and ``DeletedCount`` is ``0``.
 Example
 ```````
 The following code uses the ``DeleteMany()`` method to search on the
-``borough_1`` index and delete all documents whose ``address.street``
+"borough_1" index and delete all documents whose ``address.street``
 field value includes the phrase "Pearl Street":
 
 .. io-code-block::
@@ -121,6 +121,7 @@ field value includes the phrase "Pearl Street":
       var result = _restaurantsCollection.DeleteMany(filter, opts);
       
       WriteLine($"Deleted documents: {result.DeletedCount}");
+      WriteLine($"Result acknowledged? {result.IsAcknowledged}");
 
    .. output::
       :language: none
@@ -128,6 +129,7 @@ field value includes the phrase "Pearl Street":
       
       Deleting documents...
       Deleted documents: 26
+      Result acknowledged? True
 
 .. tip::
 

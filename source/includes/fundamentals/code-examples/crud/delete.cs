@@ -16,10 +16,13 @@ public class Delete
         var filter = Builders<Restaurant>.Filter
             .Regex("address.street", "Pearl Street");
 
+        DeleteOptions opts = new DeleteOptions { Hint = "borough_1" };
+
         WriteLine("Deleting documents...");
-        var result = _restaurantsCollection.DeleteMany(filter);
-        
+        var result = _restaurantsCollection.DeleteMany(filter, opts);
+
         WriteLine($"Deleted documents: {result.DeletedCount}");
+        WriteLine($"Result acknowledged? {result.IsAcknowledged}");
     }
     private static void Setup()
     {

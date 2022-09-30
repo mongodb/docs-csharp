@@ -61,7 +61,7 @@ Parameters
 The ``DeleteOne()`` and ``DeleteMany()`` methods expect you to pass a
 *query filter* specifying which documents to match. The query filter
 determines which records are selected for deletion based on the criteria
-in :manual:`the query filter document<core/document/#query-filter-documents>`.
+in :manual:`the query filter document</core/document/#query-filter-documents>`.
 
 Both methods optionally take a ``DeleteOptions`` type as an additional parameter,
 which represents options you can use to configure the delete operation.
@@ -90,18 +90,9 @@ following properties:
    * - ``Let``
      - | Gets or sets the let document.
 
-Return Value
-~~~~~~~~~~~~
-
-The ``DeleteOne()`` and ``DeleteMany()`` methods return a
-``DeleteResult`` type. This type contains the ``DeletedCount`` property,
-which indicates the number of documents deleted, and the
-``IsAcknowledged`` property, which indicates if the result is
-acknowledged. If the query filter does not match any documents, no documents
-are deleted and ``DeletedCount`` is ``0``.
-
 Example
-```````
+~~~~~~~
+
 The following code uses the ``DeleteMany()`` method to search on the
 "borough_1" index and delete all documents whose ``address.street``
 field value includes the phrase "Pearl Street":
@@ -136,6 +127,16 @@ field value includes the phrase "Pearl Street":
    If the preceding example used the ``DeleteOne()`` method instead of
    ``DeleteMany()``, the driver would delete the first of the 26
    matched documents.
+
+Return Value
+~~~~~~~~~~~~
+
+The ``DeleteOne()`` and ``DeleteMany()`` methods return a
+``DeleteResult`` type. This type contains the ``DeletedCount`` property,
+which indicates the number of documents deleted, and the
+``IsAcknowledged`` property, which indicates if the result is
+acknowledged. If the query filter does not match any documents, no documents
+are deleted and ``DeletedCount`` is ``0``.
 
 .. _additional-info:
 

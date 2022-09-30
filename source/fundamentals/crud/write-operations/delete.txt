@@ -31,7 +31,9 @@ collection are modeled by the following ``Restaurant`` class:
    :start-after: start-model
    :end-before: end-model
 
-.. TODO explain how to download sample data
+This data is from the :atlas:`sample datasets </sample-data>` provided
+by Atlas. See the :ref:`<csharp-quickstart>` to learn how to create a free MongoDB cluster
+and load this sample data.
 
 Delete Operations
 -----------------
@@ -56,23 +58,53 @@ delete operations. Find examples using these methods under :ref:`additional info
 Parameters
 ~~~~~~~~~~
 
-The ``DeleteOne()`` and ``DeleteMany()`` methods expect you to pass a query filter specifying which
-documents to match.
+The ``DeleteOne()`` and ``DeleteMany()`` methods expect you to pass a
+*query filter* specifying which documents to match. The query filter
+determines which records are selected for deletion based on the criteria
+in :manual:`the query filter document<core/document/#std-label-document-query-filter>`.
+
+Both methods optionally take a ``DeleteOptions`` type as an additional parameter,
+which represents options you can use to configure the delete operation.
+If you don't specify any ``DeleteOptions`` properties, the driver does
+not customize the delete operation.
+
+The ``DeleteOptions`` type allows you to configure options with the
+following properties:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Property
+     - Description
+
+   * - ``Collation``
+     - | Gets or sets the type of language collation to use when sorting results.
+
+   * - ``Comment``
+     - | Gets or sets the comment for the operation.
+
+   * - ``Hint``
+     - | Gets or sets the index to use to scan for documents.
+
+   * - ``Let``
+     - | Gets or sets the let document.
 
 Return Value
 ~~~~~~~~~~~~
 
 The ``DeleteOne()`` and ``DeleteMany()`` methods return a
 ``DeleteResult`` type. This type contains the ``DeletedCount`` property,
-which describes the number of documents deleted. If your filter does not
-match any documents, no documents are deleted and ``DeletedCount`` is
-``0``.
+which describes the number of documents deleted, and the
+``IsAcknowledged`` property, which indicates if the result is
+acknowledged. If your filter does not match any documents, no documents
+are deleted and ``DeletedCount`` is ``0``.
 
 Example
 ```````
-The following code uses the ``DeleteMany()`` method to delete all
-documents whose ``address.street`` field value includes the phrase
-"Pearl Street":
+The following code uses the ``DeleteMany()`` method to search on the
+``borough_1`` index and delete all documents whose ``address.street``
+field value includes the phrase "Pearl Street":
 
 .. io-code-block::
    :copyable: true
@@ -83,8 +115,10 @@ documents whose ``address.street`` field value includes the phrase
       var filter = Builders<Restaurant>.Filter
           .Regex("address.street", "Pearl Street");
 
+      DeleteOptions opts = new DeleteOptions { Hint = "borough_1" };
+
       WriteLine("Deleting documents...");
-      var result = _restaurantsCollection.DeleteMany(filter);
+      var result = _restaurantsCollection.DeleteMany(filter, opts);
       
       WriteLine($"Deleted documents: {result.DeletedCount}");
 
@@ -120,4 +154,5 @@ guide, see the following API Documentation:
 
 - `DeleteOne() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteOne.htm>`__
 - `DeleteMany() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteMany.htm>`__
+- `DeleteOptions <{+api-root+}/T_MongoDB_Driver_DeleteOptions.htm>`__
 - `DeleteResult <{+api-root+}/Properties_T_MongoDB_Driver_DeleteResult.htm>`__

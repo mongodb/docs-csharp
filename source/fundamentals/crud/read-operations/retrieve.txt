@@ -16,12 +16,7 @@ Overview
 --------
 
 In this guide, you can learn how to retrieve data from your MongoDB
-collections using **read operations**.
-
-Read operations allow you to do the following:
-
-- Retrieve documents from your collections by using :ref:`find operations <csharp-retrieve-find>`
-- Perform transformations on documents in your collections by using :ref:`aggregation operations <csharp-retrieve-aggregation>`
+collections using the ``Find()`` method.
 
 Sample Data
 ~~~~~~~~~~~
@@ -30,6 +25,11 @@ The examples in this guide use the ``sample_restaurants.restaurants`` collection
 from the :atlas:`sample datasets </sample-data>` provided by Atlas. See the 
 :ref:`<csharp-quickstart>` to learn how to create a free MongoDB cluster and 
 load this sample data.
+
+.. literalinclude:: ../../../includes/code-examples/Restaurant.cs
+   :language: csharp
+   :copyable:
+   :dedent:
 
 .. _csharp-retrieve-find:
 
@@ -45,10 +45,28 @@ Find One Document
 
 To find a single document in a collection, pass a query filter that specifies the
 criteria of the document you want to find, and use the ``FirstOrDefault`` or 
-``FirstOrDefaultAsync`` methods. If multiple documents match the query
+``FirstOrDefaultAsync`` methods. If more than one document match the query
 filter these methods return the *first* matching document.
 
-To see an example of using ``Find()`` to find a single document, see
+.. tabs::
+
+   .. tab:: Asynchronous
+      :tabid: find-one-async
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var restaurants = await _restaurantsCollection.Find(filter).FirstOrDefaultAsync();
+
+   .. tab:: Synchronous
+      :tabid: find-one-sync
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var restaurants = _restaurantsCollection.Find(filter).FirstOrDefault();
+
+To see a full example of using ``Find()`` to find a single document, see
 :ref:`csharp-find-one`.
 
 Find Multiple Documents
@@ -58,13 +76,12 @@ Find Documents Using A ``Cursor``
 `````````````````````````````````
 
 A cursor is a mechanism that allows an application to iterate over database 
-results while holding only a subset of them in memory at a given time. 
-Read operations that match multiple documents use a cursor to return those 
-documents in batches as opposed to all at once.
+results while holding only a subset of them in memory at a given time. Cursors
+are useful when your ``Find()`` command returns a large amount of documents.
 
 To find multiple documents in a collection and put them in a ``Cursor``, pass a 
 query filter to the ``Find()`` method that specifies the criteria of the documents 
-you want to find, then append the ``ToCursor`` or ``ToCursorAsync`` methods as follows:
+you want to find, then append the ``ToCursor`` or ``ToCursorAsync`` method as follows:
 
 .. tabs::
 
@@ -72,15 +89,17 @@ you want to find, then append the ``ToCursor`` or ``ToCursorAsync`` methods as f
       :tabid: find-cursor-async
 
       .. code-block:: csharp
+         :copyable: true
 
-      var restaurants = _restaurantsCollection.Find(filter).ToCursor();
+         var restaurants = await _restaurantsCollection.Find(filter).ToCursorAsync();
 
    .. tab:: Synchronous
       :tabid: find-cursor-sync
 
       .. code-block:: csharp
+         :copyable: true
 
-      var restaurants = await _restaurantsCollection.Find(filter).ToCursorAsync();
+         var restaurants = _restaurantsCollection.Find(filter).ToCursor();
 
 Find Documents Using A ``List``
 ```````````````````````````````
@@ -90,7 +109,7 @@ as a ``List`` object, use the ``ToList`` or ``ToListAsync`` methods.
 
 To find multiple documents in a collection using a list, pass a query filter 
 to the ``Find()`` method that specifies the criteria of the documents you want 
-to find, then append the ``ToList`` or ``ToListAsync`` methods as follows:
+to find, then append the ``ToList`` or ``ToListAsync`` method as follows:
 
 .. tabs::
 
@@ -99,24 +118,25 @@ to find, then append the ``ToList`` or ``ToListAsync`` methods as follows:
 
       .. code-block:: csharp
 
-      var restaurants = _restaurantsCollection.Find(filter).ToList();
+         var restaurants = await _restaurantsCollection.Find(filter).ToList();
 
    .. tab:: Synchronous
       :tabid: find-list-sync
 
       .. code-block:: csharp
 
-      var restaurants = await _restaurantsCollection.Find(filter).ToListAsync();
+         var restaurants = _restaurantsCollection.Find(filter).ToListAsync();
 
-To see an example of using ``Find()`` to find multiple documents, see
+To see a full example of using ``Find()`` to find multiple documents, see
 :ref:`csharp-find-multiple`.
 
 Find All Documents
 ~~~~~~~~~~~~~~~~~~
 
 To find all documents in a collection, pass an empty
-``BsonDocument`` as a query filter, and use the ``ToList`` or ``ToListAsync`` methods
-to return the documents in a ``List`` object.
+``BsonDocument`` as a query filter. Then append the ``ToList`` or ``ToListAsync``
+method to return the documents as a ``List`` object, or the ``ToCursor`` or ``ToCursorAsync``
+method to return the documents as a ``Cursor``.
 
 To see an example of using ``Find()`` to find all documents, see :ref:`csharp_find_all`.
 
@@ -156,6 +176,39 @@ You can configure the commonly used options with the following methods:
 
 To see a full list of available options, see 
 `FindOptions Properties <{+api-root+}/html/Properties_T_MongoDB_Driver_FindOptions.htm>`__.
+
+Example
+```````
+The following example passes a query filter and ``FindOptions`` to the ``Find()``
+method which performs the following actions:
+
+- Finds all documents with "Pizza" in the ``cuisine`` field
+- Sets the ``BatchSize`` to ``3``
+- Stores the results in a ``Cursor`` object
+- Prints the number of documents currently held in the ``Cursor``
+
+.. io-code-block::
+   :copyable: true
+
+   .. input::
+      :language: csharp
+
+      var filter = Builders<Restaurant>.Filter.Eq("cuisine", "Pizza");
+
+      var findOptions = new FindOptions
+      {
+         BatchSize = 3
+      };
+
+      using (var cursor = _restaurantsCollection.Find(filter, findOptions).ToCursor())
+      {
+         cursor.MoveNext();
+         WriteLine($"Number of documents in cursor {cursor.Current.Count()}");
+      }
+
+   .. output::
+      
+      Number of documents in cursor 3
 
 .. Aggregation Operations
 .. ----------------------

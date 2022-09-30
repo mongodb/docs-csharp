@@ -1,0 +1,9 @@
+.. _csharp-fundamentals:
+
+============
+Fundamentals
+============
+
+.. toctree::
+
+   /fundamentals/crud/read-operations/retrieve

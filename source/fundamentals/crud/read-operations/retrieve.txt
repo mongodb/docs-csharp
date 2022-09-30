@@ -67,7 +67,7 @@ filter these methods return the *first* matching document.
          var restaurants = _restaurantsCollection.Find(filter).FirstOrDefault();
 
 To see a full example of using ``Find()`` to find a single document, see
-:ref:`csharp-find-one`.
+:ref:`retrieve-runnable-examples`.
 
 Find Multiple Documents
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -128,7 +128,7 @@ to find, then append the ``ToList`` or ``ToListAsync`` method as follows:
          var restaurants = _restaurantsCollection.Find(filter).ToListAsync();
 
 To see a full example of using ``Find()`` to find multiple documents, see
-:ref:`csharp-find-multiple`.
+:ref:`retrieve-runnable-examples`.
 
 Find All Documents
 ~~~~~~~~~~~~~~~~~~
@@ -138,12 +138,11 @@ To find all documents in a collection, pass an empty
 method to return the documents as a ``List`` object, or the ``ToCursor`` or ``ToCursorAsync``
 method to return the documents as a ``Cursor``.
 
-To see an example of using ``Find()`` to find all documents, see :ref:`csharp_find_all`.
-
-.. _csharp-retrieve-options:
+To see a fully runnable example of using ``Find()`` to find all documents, see 
+:ref:`retrieve-runnable-examples`.
 
 Modify Find Behavior
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 You can modify the behavior of ``Find()`` by passing
 in ``FindOptions``. If you don't specify any options, the driver uses the 
@@ -178,7 +177,7 @@ To see a full list of available options, see
 `FindOptions Properties <{+api-root+}/html/Properties_T_MongoDB_Driver_FindOptions.htm>`__.
 
 Example
-```````
+-------
 The following example passes a query filter and ``FindOptions`` to the ``Find()``
 method which performs the following actions:
 
@@ -203,168 +202,44 @@ method which performs the following actions:
       using (var cursor = _restaurantsCollection.Find(filter, findOptions).ToCursor())
       {
          cursor.MoveNext();
-         WriteLine($"Number of documents in cursor {cursor.Current.Count()}");
+         WriteLine($"Number of documents in cursor: {cursor.Current.Count()}");
       }
 
    .. output::
       
-      Number of documents in cursor 3
+      Number of documents in cursor: 3
 
-.. Aggregation Operations
-.. ----------------------
+.. tip::
 
-.. Use **aggregation operations** to retrieve and transform data from
-.. MongoDB. Perform aggregation operations using the ``Aggregate()``
-.. method.
+   Create a ``Cursor`` with a `using statement <https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement>`__ to
+   ensure the proper disposal of resources.
 
-.. Aggregation
-.. ~~~~~~~~~~~
+Additional Information
+----------------------
 
-.. The ``Aggregate()`` method expects you to pass a ``Context`` type and
-.. an **aggregation pipeline**. An aggregation pipeline defines how to
-.. transform data through stages. Some of the stages are matching
-.. documents, renaming fields, and grouping values.
+.. TODO: Links to creating filter with Builders and LINQ
 
-.. The method returns the resulting documents in a ``Cursor`` type. If
-.. you omit the :manual:`$match </reference/operator/aggregation/match/#mongodb-pipeline-pipe.-match>`
-.. stage, the pipeline proceeds using all documents in the collection.
+.. _retrieve-runnable-examples:
 
-.. To learn how to access data in a cursor, see :ref:`csharp-cursor`.
+Fully Runnable Examples
+~~~~~~~~~~~~~~~~~~~~~~~
 
-.. Modify Behavior
-.. ~~~~~~~~~~~~~~~
+For runnable examples of the find operations, see the following usage
+examples:
 
-.. The ``Aggregate()`` method optionally takes an ``AggregateOptions``
-.. type, which represents options you can use to modify its behavior. If
-.. you don't specify any options, the driver uses the default values for
-.. each option.
+- :ref:`csharp-find-one`
 
-.. The ``AggregateOptions`` type allows you to configure options with the
-.. following methods:
+API Documentation
+~~~~~~~~~~~~~~~~~
 
-.. .. list-table::
-..    :widths: 30 70
-..    :header-rows: 1
+To learn more about any of the methods or types discussed in this
+guide, see the following API Documentation:
 
-..    * - Method
-..      - Description
-
-..    * - ``SetAllowDiskUse()`` 
-..      - | Whether to write to temporary files.
-..        | Default: ``false``
-
-..    * - ``SetBatchSize()`` 
-..      - | The number of documents to return in each batch.  
-..        | Default: none
-
-..    * - ``SetBypassDocumentValidation()`` 
-..      - | Whether to allow the write to opt-out of document level validation.
-..        | Default: ``false``
-
-..    * - ``SetCollation()`` 
-..      - | The type of language collation to use when sorting results.  
-..        | Default: ``nil``
-
-..    * - ``SetMaxTime()`` 
-..      - | The maximum amount of time that the query can run on the server.
-..        | Default: ``nil``
-
-..    * - ``SetMaxAwaitTime()`` 
-..      - | The maximum amount of time for the server to wait on new documents to satisfy a tailable cursor query.
-..        | Default: ``nil``
-
-..    * - ``SetComment()`` 
-..      - | An arbitrary string to help trace the operation through the database profiler, currentOp and logs.
-..        | Default: ``""``
-
-..    * - ``SetHint()`` 
-..      - | The index to use to scan for documents to retrieve.
-..        | Default: ``nil``
-
-..    * - ``SetLet()`` 
-..      - | Specifies parameters for the aggregate expression, which improves command readability by separating the variables from the query text.
-..        | Default: none
-
-.. Example
-.. ```````
-
-.. The following example passes a context and an aggregation pipeline that
-.. performs the following actions:
-
-.. - Groups reviews by types
-.. - Calculates the average rating of each type
-
-.. .. io-code-block::
-..    :copyable: true
-
-..    .. input::
-..       :language: go
-
-..       groupStage := bson.D{
-..          {"$group", bson.D{
-..             {"_id", "$type"},
-..             {"average", bson.D{
-..                {"$avg", "$rating"},
-..             }},
-..       }}}
-
-..       cursor, err := coll.Aggregate(context.TODO(), mongo.Pipeline{groupStage})
-..       if err != nil {
-..          panic(err)
-..       }
-
-..       var results []bson.M
-..       if err = cursor.All(context.TODO(), &results); err != nil {
-..          panic(err)
-..       }
-..       for _, result := range results {
-..          fmt.Printf("%v has an average rating of %v \n", result["_id"], result["average"])
-..       }
-
-..    .. output::
-..       :language: none
-..       :visible: false
-
-..       Masala has an average rating of 8.5
-..       Earl Grey has an average rating of 7
-
-.. To learn more about how to construct an aggregation pipeline, see
-.. the MongoDB server manual page on :manual:`Aggregation
-.. </core/aggregation-pipeline/>`.
-
-.. Additional Information
-.. ----------------------
-
-.. For runnable examples of the find operations, see the following usage
-.. examples:
-
-.. - :ref:`golang-find-one`
-.. - :ref:`golang-find-one`
-
-.. To learn more about the operations mentioned, see the following
-.. guides:
-
-.. - :ref:`golang-query-document`
-.. - :ref:`golang-cursor`
-.. - :ref:`golang-skip`
-.. - :ref:`golang-sort-results`
-.. - :ref:`golang-limit`
-.. - :ref:`golang-project`
-.. - :ref:`golang-aggregation`
-
-.. .. - :doc:`Collations </fundamentals/collations>`
-
-.. API Documentation
-.. ~~~~~~~~~~~~~~~~~
-
-.. To learn more about any of the methods or types discussed in this
-.. guide, see the following API Documentation:
-
-.. - `Find() <{+api+}/mongo#Collection.Find>`__
-.. - `FindOptions <{+api+}/mongo/options#FindOptions>`__
-.. - `FindOneOptions <{+api+}/mongo/options#FindOneOptions>`__
-.. - `Cursor <{+api+}/mongo#Cursor>`__
-.. - `FindOne() <{+api+}/mongo#Collection.FindOne>`__
-.. - `SingleResult <{+api+}/mongo#SingleResult>`__
-.. - `Aggregate() <{+api+}/mongo#Collection.Aggregate>`__
-.. - `AggregateOptions <{+api+}/mongo/options#AggregateOptions>`__
+- `Find() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__
+- `FirstOrDefault() <{+api-root+}/M_MongoDB_Driver_IFindFluentExtensions_FirstOrDefault__2.htm>`__
+- `FirstOrDefaultAsync() <{+api-root+}/M_MongoDB_Driver_IAsyncCursorSourceExtensions_FirstOrDefaultAsync__1.htm>`__
+- `FindOptions <{+api-root+}/T_MongoDB_Driver_FindOptions.htm>`__
+- `ToList() <{+api-root+}/M_MongoDB_Driver_IAsyncCursorSourceExtensions_ToList__1.htm>`__
+- `ToListAsync() <{+api-root+}/M_MongoDB_Driver_IAsyncCursorSourceExtensions_ToListAsync__1.htm>`__
+- `ToCursor() <{+api-root+}/M_MongoDB_Driver_IAsyncCursorSource_1_ToCursor.htm>`__
+- `ToCursorAsync() <{+api-root+}/M_MongoDB_Driver_IAsyncCursorSource_1_ToCursorAsync.htm>`__

@@ -61,7 +61,7 @@ Parameters
 The ``DeleteOne()`` and ``DeleteMany()`` methods expect you to pass a
 *query filter* specifying which documents to match. The query filter
 determines which records are selected for deletion based on the criteria
-in :manual:`the query filter document<core/document/#std-label-document-query-filter>`.
+in :manual:`the query filter document<core/document/#query-filter-documents>`.
 
 Both methods optionally take a ``DeleteOptions`` type as an additional parameter,
 which represents options you can use to configure the delete operation.
@@ -95,9 +95,9 @@ Return Value
 
 The ``DeleteOne()`` and ``DeleteMany()`` methods return a
 ``DeleteResult`` type. This type contains the ``DeletedCount`` property,
-which describes the number of documents deleted, and the
+which indicates the number of documents deleted, and the
 ``IsAcknowledged`` property, which indicates if the result is
-acknowledged. If your filter does not match any documents, no documents
+acknowledged. If the query filter does not match any documents, no documents
 are deleted and ``DeletedCount`` is ``0``.
 
 Example
@@ -147,6 +147,12 @@ examples:
 
 - :ref:`csharp-delete-one`
 - :ref:`csharp-delete-many`
+
+.. To learn more about performing the operations mentioned, see the
+.. following guides:
+
+.. TODO create specify a query 
+.. - :ref:`csharp-query-document`
 
 API Documentation
 ~~~~~~~~~~~~~~~~~

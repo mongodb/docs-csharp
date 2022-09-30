@@ -10,7 +10,10 @@ TODO: Write usage examples page
 
    /usage-examples/findOne
    /usage-examples/findMany
+   /usage-examples/insertOne
+   /usage-examples/insertMany
    /usage-examples/updateOne
    /usage-examples/updateMany
+   /usage-examples/replaceOne
    /usage-examples/deleteOne
    /usage-examples/deleteMany

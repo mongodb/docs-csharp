@@ -11,3 +11,4 @@ MongoDB C# Driver
    /compatibility
    /issues-and-help
    /fundamentals
+   /faq

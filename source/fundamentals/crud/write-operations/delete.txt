@@ -31,29 +31,62 @@ collection are modeled by the following ``Restaurant`` class:
    :start-after: start-model
    :end-before: end-model
 
-This data is from the :atlas:`sample datasets </sample-data>` provided
+This collection is from the :atlas:`sample datasets </sample-data>` provided
 by Atlas. See the :ref:`<csharp-quickstart>` to learn how to create a free MongoDB cluster
 and load this sample data.
 
 Delete Operations
 -----------------
 
-Use **delete operations** to remove data from MongoDB. Delete operations
-use the following methods:
+Use **delete operations** to remove data from MongoDB. Delete methods
+include ``DeleteOne()`` and ``DeleteMany()``. 
 
-- ``DeleteOne()``, which deletes *the first document* that matches the
-  query filter
-- ``DeleteMany()``, which deletes *all documents* that match the query
-  filter
+To delete *the first document* that matches the query filter, you can
+use the ``DeleteOne()`` method or the asynchronous ``DeleteOneAsync()``
+method:
 
-If you are using asynchronous programming in your application, you can
-use the ``DeleteOneAsync()`` and ``DeleteManyAsync()`` methods for your
-delete operations. Find examples using these methods under :ref:`additional information <additional-info>`.
+.. tabs::
 
-.. tip::
+   .. tab:: Asynchronous
+      :tabid: delete-one-async
 
-   If only one document matches your filter when using the ``DeleteMany()``
-   method, the operation is equivalent to using the ``DeleteOne()`` method.
+      .. code-block:: csharp
+         :copyable: true
+
+         var result = await _restaurantsCollection.DeleteOneAsync(filter);
+
+   .. tab:: Synchronous
+      :tabid: delete-one-sync
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var result = _restaurantsCollection.DeleteOne(filter);
+
+To delete *all documents* that match the query filter, you can
+use the ``DeleteMany()`` method or the asynchronous ``DeleteManyAsync()``
+method:
+
+.. tabs::
+
+   .. tab:: Asynchronous
+      :tabid: delete-many-async
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var result = await _restaurantsCollection.DeleteManyAsync(filter);
+
+   .. tab:: Synchronous
+      :tabid: delete-many-sync
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var result = _restaurantsCollection.DeleteMany(filter);
+
+Find runnable examples using these methods under :ref:`additional
+information <additional-info>`.
 
 Parameters
 ~~~~~~~~~~
@@ -136,7 +169,7 @@ The ``DeleteOne()`` and ``DeleteMany()`` methods return a
 which indicates the number of documents deleted, and the
 ``IsAcknowledged`` property, which indicates if the result is
 acknowledged. If the query filter does not match any documents, no documents
-are deleted and ``DeletedCount`` is ``0``.
+are deleted and ``DeletedCount`` is 0.
 
 .. _additional-info:
 
@@ -162,6 +195,8 @@ To learn more about any of the methods or types discussed in this
 guide, see the following API Documentation:
 
 - `DeleteOne() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteOne.htm>`__
+- `DeleteOneAsync() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteOneAsync.htm>`__
 - `DeleteMany() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteMany.htm>`__
+- `DeleteManyAsync() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteManyAsync.htm>`__
 - `DeleteOptions <{+api-root+}/T_MongoDB_Driver_DeleteOptions.htm>`__
 - `DeleteResult <{+api-root+}/Properties_T_MongoDB_Driver_DeleteResult.htm>`__

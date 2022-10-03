@@ -14,4 +14,3 @@ TODO: Write usage examples page
    /usage-examples/updateMany
    /usage-examples/deleteOne
    /usage-examples/deleteMany
-   /usage-examples/updateManyTemplate

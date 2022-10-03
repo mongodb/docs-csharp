@@ -44,10 +44,9 @@ use the following methods:
 - ``DeleteOne()``, which deletes *the first document* that matches the filter
 - ``DeleteMany()``, which deletes *all documents* that match the filter
 
-Delete One Document
-```````````````````
-Use the asynchronous ``DeleteOneAsync()`` method or the synchronous
-``DeleteOne()`` method.
+The following code shows how you can use the asynchronous
+``DeleteOneAsync()`` method or the synchronous ``DeleteOne()`` method to
+delete one document.
 
 .. tabs::
 
@@ -67,10 +66,9 @@ Use the asynchronous ``DeleteOneAsync()`` method or the synchronous
 
          var result = _restaurantsCollection.DeleteOne(filter);
 
-Delete Multiple Documents
-`````````````````````````
-Use the asynchronous ``DeleteManyAsync()`` method or the synchronous
-``DeleteMany()`` method.
+The following code shows how you can use the asynchronous
+``DeleteManyAsync()`` method or the synchronous ``DeleteMany()`` method to
+delete all matched documents.
 
 .. tabs::
 

@@ -1,7 +1,0 @@
-.. _csharp-test:
-
-=========
-Test Page
-=========
-
-.. include:: /includes/extracts/update-many-data.rst

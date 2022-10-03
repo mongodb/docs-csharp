@@ -72,8 +72,8 @@ To see a full example of using ``Find()`` to find a single document, see
 Find Multiple Documents
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Find Documents Using A ``Cursor``
-`````````````````````````````````
+Find Documents Using A Cursor
+`````````````````````````````
 
 A cursor is a mechanism that allows an application to iterate over database 
 results while holding only a subset of them in memory at a given time. Cursors
@@ -101,8 +101,8 @@ you want to find, then append the ``ToCursor`` or ``ToCursorAsync`` method as fo
 
          var restaurants = _restaurantsCollection.Find(filter).ToCursor();
 
-Find Documents Using A ``List``
-```````````````````````````````
+Find Documents Using A List
+```````````````````````````
 
 If you are returning a small number of documents, or need your results returned
 as a ``List`` object, use the ``ToList`` or ``ToListAsync`` methods.

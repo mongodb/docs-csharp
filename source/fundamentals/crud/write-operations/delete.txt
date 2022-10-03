@@ -41,6 +41,9 @@ Delete Operations
 Use **delete operations** to remove data from MongoDB. Delete methods
 include ``DeleteOne()`` and ``DeleteMany()``. 
 
+Delete One Document
+```````````````````
+
 To delete *the first document* that matches the query filter, you can
 use the ``DeleteOne()`` method or the asynchronous ``DeleteOneAsync()``
 method:
@@ -62,6 +65,9 @@ method:
          :copyable: true
 
          var result = _restaurantsCollection.DeleteOne(filter);
+
+Delete Multiple Documents
+`````````````````````````
 
 To delete *all documents* that match the query filter, you can
 use the ``DeleteMany()`` method or the asynchronous ``DeleteManyAsync()``

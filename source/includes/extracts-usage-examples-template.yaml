@@ -17,7 +17,7 @@ content: |
 
   This example uses the following ``Restaurant`` class as a model:
 
-  .. literalinclude:: ../includes/code-examples/{{examplesDirectory}}/Restaurant.cs
+  .. literalinclude:: ../includes/code-examples/{{codeLabel}}/Restaurant.cs
      :start-after: start-model
      :end-before: end-model
      :language: csharp
@@ -34,7 +34,7 @@ content: |
      .. tab:: Asynchronous
         :tabid: {{codeLabel}}-async
 
-        .. literalinclude:: ../includes/code-examples/{{examplesDirectory}}/{{methodNameAsync}}.cs
+        .. literalinclude:: ../includes/code-examples/{{codeLabel}}/{{methodNameAsync}}.cs
            :start-after: start-{{codeLabel}}-async
            :end-before: end-{{codeLabel}}-async
            :language:  csharp
@@ -42,7 +42,7 @@ content: |
            :dedent:
 
         For a fully runnable example of the ``{{methodNameAsync}}()`` operation, see the
-        `{{methodNameAsync}} code sample <{+example+}/{{examplesDirectory}}/{{methodNameAsync}}.cs>`__.
+        `{{methodNameAsync}} code sample <{+example+}/{{codeLabel}}/{{methodNameAsync}}.cs>`__.
 
      .. tab:: Synchronous
         :tabid: {{codeLabel}}-sync
@@ -55,7 +55,7 @@ content: |
            :dedent:
       
         For a fully runnable example of the ``{{methodName}}()`` operation, see the
-        `{{methodName}} code sample <{+example+}/{{examplesDirectory}}/{{methodName}}.cs>`__.
+        `{{methodName}} code sample <{+example+}/{{codeLabel}}/{{methodName}}.cs>`__.
 
   Expected Result
   ~~~~~~~~~~~~~~~

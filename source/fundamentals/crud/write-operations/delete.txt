@@ -38,15 +38,16 @@ and load this sample data.
 Delete Operations
 -----------------
 
-Use **delete operations** to remove data from MongoDB. Delete methods
-include ``DeleteOne()`` and ``DeleteMany()``. 
+Use **delete operations** to remove data from MongoDB. Delete operations
+use the following methods:
+
+- ``DeleteOne()``, which deletes *the first document* that matches the filter
+- ``DeleteMany()``, which deletes *all documents* that match the filter
 
 Delete One Document
 ```````````````````
-
-To delete *the first document* that matches the query filter, you can
-use the ``DeleteOne()`` method or the asynchronous ``DeleteOneAsync()``
-method:
+Use the asynchronous ``DeleteOneAsync()`` method or the synchronous
+``DeleteOne()`` method.
 
 .. tabs::
 
@@ -68,10 +69,8 @@ method:
 
 Delete Multiple Documents
 `````````````````````````
-
-To delete *all documents* that match the query filter, you can
-use the ``DeleteMany()`` method or the asynchronous ``DeleteManyAsync()``
-method:
+Use the asynchronous ``DeleteManyAsync()`` method or the synchronous
+``DeleteMany()`` method.
 
 .. tabs::
 

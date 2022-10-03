@@ -1,1 +1,190 @@
 .. _csharp-mongo-client-settings:
+
+================================
+Configure the Connection in Code 
+================================
+
+You can use a ``MongoClientSettings`` object to configure connection settings in code
+rather than in a connection URI. Configuring the connection this way makes it easier to 
+change settings at runtime, helps you catch errors during compilation, and provides 
+more configuration options than the connection URI.
+
+To use a ``MongoClientSettings`` object, create an instance of the class and pass it as
+an argument to the ``MongoClient`` constructor:
+
+.. literalinclude:: /includes/fundamentals/code-examples/MongoClientSettings.cs
+   :language: csharp
+   :dedent:
+
+MongoClientSettings Options
+---------------------------
+
+This section describes the configuration options exposed as properties of the 
+``MongoClientSettings`` class. To use these options, set the property on your 
+``MongoClientSettings`` object before you pass it to the ``MongoClient`` constructor.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 1 1 
+
+   * - Property
+     - Default Value
+     - Description
+
+   * - **AllowInsecureTls**
+     - ``false``
+     - {+allow-insecure-tls+}
+
+   * - **ApplicationName**
+     - ``null``
+     - {+app-name+}
+
+   * - **AutoEncryptionOptions**
+     - ``null``
+     - Settings for automatic client-side encryption.
+
+   * - **ClusterConfigurator**
+     - ``null``
+     - 
+
+   * - **Compressors**
+     - Empty ``CompressorConfiguration``
+     - {+compressors+}
+
+   * - **ConnectTimeout**
+     - 30 seconds
+     - {+connect-timeout+}
+
+   * - **Credential**
+     - Empty ``MongoCredentialStore``
+     - 
+
+   * - **DirectConnection**
+     - ``null``
+     - {+direct-connection+}
+
+   * - **HeartbeatInterval**
+     - 10 seconds
+     - {+heartbeat-interval+}
+
+   * - **HeartbeatTimeout**
+     - No timeout
+     - 
+
+   * - **IPv6**
+     - ``false``
+
+   * - **IsFrozen**
+     - ``false``
+     - Indicates whether the settings have been frozen to prevent further changes.
+
+   * - **LinqProvider**
+     - ``LinqProvider.V2``
+     - The LINQ provider to use.
+
+   * - **LoadBalanced**
+     - ``false``
+     - {+load-balanced}+
+
+   * - **LocalThreshold**
+     - 15 milliseconds
+     - {+local-threshold+}
+
+   * - **MaxConnecting**
+     - ``2``
+     - {+max-connecting+}
+
+   * - **MaxConnectionIdleTime**
+     - 10 minutes
+     - {+max-connection-idle-time+}
+
+   * - **MaxConnectionLifeTime**
+     - 30 minutes
+     - 
+
+   * - **MaxConnectionPoolSize**
+     - ``100``
+     - {+max-connection-pool-size+}
+
+   * - **MinConnectionPoolSize**
+     - ``0``
+     - {+min-connection-pool-size+}
+
+   * - **ReadConcern**
+     - ``ReadConcern.Default``
+     - {+read-concern+}
+
+   * - **ReadEncoding**
+     - ``null``
+     - 
+
+   * - **ReadPreference**
+     - ``ReadPreference.Primary``
+     - {+read-preference+}
+
+   * - **ReplicaSetName**
+     - ``null``
+     - {+replica-set-name+}
+
+   * - **RetryReads**
+     - ``true``
+     - {+retry-reads+}
+
+   * - **RetryWrites**
+     - ``true``
+     - {+retry-writes+}
+
+   * - **Scheme**
+     - ``ConnectionStringScheme.MongoDB``
+     - The format of the 
+
+   * - **SdamLogFilename**
+     - ``null``
+     - 
+
+   * - **Server**
+     - ``"localhost"``
+     - The host where MongoDB is running.
+
+   * - **ServerApi**
+     - ``null``
+     - 
+
+   * - **Servers**
+     - ``List<MongoServerAddress>`` containing "localhost"
+     - 
+
+   * - **ServerSelectionTimeout**
+     - 30 seconds
+     - {+server-selection-timeout+}
+
+   * - **SocketTimeout**
+     - OS default
+     - {+socket-timeout+}
+
+   * - **SrvMaxHosts**
+     - ``0``
+     - {+srv-max-hosts+}
+
+   * - **SslSettings**
+     - 
+
+   * - **UseTls**
+     - ``false``
+     - {+use-tls+}
+
+   * - **WaitQueueTimeout**
+     - 2 minutes
+     - {+wait-queue-timeout+}
+
+   * - **WriteConcern**
+     - ``WriteConcern.Acknowledged``
+     - {+write-concern+}
+
+   * - **WriteEncoding**
+     - ``null``
+     - 
+
+
+
+

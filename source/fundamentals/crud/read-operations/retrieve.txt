@@ -44,8 +44,8 @@ Find One Document
 ~~~~~~~~~~~~~~~~~
 
 To find a single document in a collection, pass a query filter that specifies the
-criteria of the document you want to find, and use the ``FirstOrDefault`` or 
-``FirstOrDefaultAsync`` methods. If more than one document match the query
+criteria of the document you want to find, then append the ``FirstOrDefault`` or 
+``FirstOrDefaultAsync`` method. If more than one document match the query
 filter these methods return the *first* matching document.
 
 .. tabs::

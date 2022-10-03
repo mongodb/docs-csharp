@@ -1,0 +1,157 @@
+ref: usage-examples-builders-linq-template
+content: |
+
+  .. default-domain:: mongodb
+
+  .. contents:: On this page
+     :local:
+     :backlinks: none
+     :depth: 2
+     :class: singlecol
+
+  You can {{youCanDoWhat}} using the ``{{methodName}}()`` method{{optionalAsyncMethod}} on
+  a collection object.  
+
+  Examples
+  --------
+
+  These examples use the following ``Restaurant`` class as a model:
+
+  .. literalinclude:: /code-examples/{{examples-directory}}/Restaurant.cs
+     :start-after: start-model
+     :end-before: end-model
+     :language: csharp
+     :copyable:
+     :dedent:
+
+  {{doWhatHeader}} Using Builders
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   
+
+  The following code uses builders to {{usesBuildersToDoWhat}}. 
+
+  Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the 
+  corresponding code. 
+
+  .. tabs::
+
+      .. tab:: Asynchronous
+         :tabid: {{codeLabel}}-builders-async
+
+         .. literalinclude:: code-examples/{{examplesDirectory}}/{{methodNameAsync}}.cs
+            :start-after: start-{{codeLabel}}-builders-async
+            :end-before: end-{{codeLabel}}-builders-async
+            :language:  csharp
+            :copyable:
+            :dedent:
+
+         For a fully runnable example of the ``{{methodNameAsync}}()`` operation, see the
+        `{{methodNameAsync}} code sample <{+example+}/{{examplesDirectory}}/{{methodNameAsync}}.cs>`__.
+
+      .. tab:: Synchronous
+         :tabid: {{codeLabel}}-builders-sync
+
+         .. literalinclude:: code-examples/{{codeLabel}}/{{methodName}}.cs
+            :start-after: start-{{codeLabel}}-builders-sync
+            :end-before: end-{{codeLabel}}-builders-sync
+            :language:  csharp
+            :copyable:
+            :dedent:
+
+         For a fully runnable example of the ``{{methodName}}()`` operation, see the
+        `{{methodName}} code sample <{+example+}/{{examplesDirectory}}/{{methodName}}.cs>`__.
+
+  {{doWhatHeader}} Using LINQ
+  ~~~~~~~~~~~~~~~~~~~~~~~~~   
+
+  The following code uses LINQ to {{usesLinqToDoWhat}}. 
+
+  Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the 
+  corresponding code. 
+
+  .. tabs::
+
+     .. tab:: Asynchronous
+        :tabid: linq-async
+
+        .. literalinclude:: code-examples/{{examplesDirectory}}/{{methodNameAsync}}.cs
+           :start-after: start-{{codeLabel}}-linq-async
+           :end-before: end-{{codeLabel}}-linq-async
+           :language:  csharp
+           :copyable:
+           :dedent:
+
+     .. tab:: Synchronous
+        :tabid: linq-sync
+
+        .. literalinclude:: ../includes/code-examples/FindMany.cs
+           :start-after: start-{{codeLabel}}-linq-sync
+           :end-before: end-{{codeLabel}}-linq-sync
+           :language:  csharp
+           :copyable:
+           :dedent:
+
+   Find All Documents
+   ~~~~~~~~~~~~~~~~~~
+
+   .. tabs::
+
+      .. tab:: Asynchronous
+         :tabid: find-all-async
+
+         The following example asynchronously finds all documents in the 
+         ``restaurants`` collection.
+
+         .. literalinclude:: ../includes/code-examples/FindManyAsync.cs
+            :start-after: start-find-all-async
+            :end-before: end-find-all-async
+            :language:  csharp
+            :copyable:
+            :dedent:
+
+      .. tab:: Synchronous
+         :tabid: find-all-sync
+
+         The following example synchronously finds all documents in the 
+         ``restaurants`` collection.
+
+         .. literalinclude:: ../includes/code-examples/FindMany.cs
+            :start-after: start-find-all-sync
+            :end-before: end-find-all-sync
+            :language:  csharp
+            :copyable:
+            :dedent:
+
+  Expected Result
+  ~~~~~~~~~~~~~~~
+
+  Running any of the preceding full examples prints the following results:
+
+  .. code-block:: none
+
+     {{codeResults}}
+
+  More Information
+  ----------------
+
+  .. TODO: Add links to Fundamentals once pages are done
+
+  {{buildersLink}}
+
+  {{linqLink}}
+
+  API Documentation
+  -----------------
+
+  {{firstApi}}
+  {{optionalSecondApi}}
+  {{optionalThirdApi}}
+  {{optionalFourthApi}}
+
+replacement:
+  methodName: "generic-method"
+  doWhat: "generic description"
+  apiLink: "/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm"
+  examplesDirectory: "update-many"
+  youCanDoWhat: ""
+  optionalThirdApi: ""
+  optionalFourthApi: ""

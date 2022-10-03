@@ -67,7 +67,7 @@ filter these methods return the *first* matching document.
          var restaurants = _restaurantsCollection.Find(filter).FirstOrDefault();
 
 To see a full example of using ``Find()`` to find a single document, see
-:ref:`retrieve-runnable-examples`.
+:ref:`csharp-retrieve-additional-information`.
 
 Find Multiple Documents
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -128,7 +128,7 @@ to find, then append the ``ToList`` or ``ToListAsync`` method as follows:
          var restaurants = _restaurantsCollection.Find(filter).ToListAsync();
 
 To see a full example of using ``Find()`` to find multiple documents, see
-:ref:`retrieve-runnable-examples`.
+:ref:`csharp-retrieve-additional-information`.
 
 Find All Documents
 ~~~~~~~~~~~~~~~~~~
@@ -139,10 +139,10 @@ method to return the documents as a ``List`` object, or the ``ToCursor`` or ``To
 method to return the documents as a ``Cursor``.
 
 To see a fully runnable example of using ``Find()`` to find all documents, see 
-:ref:`retrieve-runnable-examples`.
+:ref:`csharp-retrieve-additional-information`.
 
 Modify Find Behavior
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 You can modify the behavior of ``Find()`` by passing
 in ``FindOptions``. If you don't specify any options, the driver uses the 
@@ -177,7 +177,8 @@ To see a full list of available options, see
 `FindOptions Properties <{+api-root+}/html/Properties_T_MongoDB_Driver_FindOptions.htm>`__.
 
 Example
--------
+~~~~~~~
+
 The following example passes a query filter and ``FindOptions`` to the ``Find()``
 method which performs the following actions:
 
@@ -214,20 +215,16 @@ method which performs the following actions:
    Create a ``Cursor`` with a `using statement <https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement>`__ to
    ensure the proper disposal of resources.
 
+
+.. _csharp-retrieve-additional-information:
+
 Additional Information
 ----------------------
 
 .. TODO: Links to creating filter with Builders and LINQ
 
-.. _retrieve-runnable-examples:
-
-Fully Runnable Examples
-~~~~~~~~~~~~~~~~~~~~~~~
-
-For runnable examples of the find operations, see the following usage
-examples:
-
-- :ref:`csharp-find-one`
+For fully runnable examples of the find operations used in this guide, see the 
+:ref:`csharp-find-one`.
 
 API Documentation
 ~~~~~~~~~~~~~~~~~

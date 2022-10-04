@@ -1,8 +1,8 @@
 .. _csharp-delete-guide:
 
-=================
-Delete a Document
-=================
+================
+Delete Documents
+================
 
 .. default-domain:: mongodb
 
@@ -38,15 +38,19 @@ and load this sample data.
 Delete Operations
 -----------------
 
-Use **delete operations** to remove data from MongoDB. Delete operations
-use the ``DeleteOne()`` method, which deletes *the first document* that
-matches your query filter, and the ``DeleteMany()`` method, which
-deletes *all documents* that match the filter.
+Use delete operations to remove documents that match a **query filter**.
+The query filter determines which records are selected for deletion
+based on the criteria in :manual:`the query filter
+document</core/document/#query-filter-documents>`. You can perform
+delete operations in MongoDB with the following methods:
 
-Delete a Document
-~~~~~~~~~~~~~~~~~
+- ``DeleteOne()``, which deletes *the first document* that matches the query filter
+- ``DeleteMany()``, which deletes *all documents* that match the query filter
 
-The following code shows how you can use the asynchronous
+Delete One Document
+~~~~~~~~~~~~~~~~~~~
+
+The following code shows how to use the asynchronous
 ``DeleteOneAsync()`` method or the synchronous ``DeleteOne()`` method to
 delete one document.
 
@@ -71,7 +75,7 @@ delete one document.
 Delete Multiple Documents
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following code shows how you can use the asynchronous
+The following code shows how to use the asynchronous
 ``DeleteManyAsync()`` method or the synchronous ``DeleteMany()`` method to
 delete all matched documents.
 
@@ -93,16 +97,18 @@ delete all matched documents.
 
          var result = _restaurantsCollection.DeleteMany(filter);
 
-Find runnable examples using these methods under :ref:`additional
-information <additional-info>`.
+.. tip::
+
+   Find runnable examples using these methods under :ref:`additional
+   information <additional-info>`.
 
 Parameters
 ~~~~~~~~~~
 
-The ``DeleteOne()`` and ``DeleteMany()`` methods expect you to pass a
-*query filter* specifying which documents to match. The query filter
-determines which records are selected for deletion based on the criteria
-in :manual:`the query filter document</core/document/#query-filter-documents>`.
+The ``DeleteOne()`` and ``DeleteMany()`` methods require you to pass a
+query filter specifying which documents to match. More information
+on how to construct a query filter is available in :manual:`the Query Documents
+tutorial</tutorial/query-documents/>`.
 
 Both methods optionally take a ``DeleteOptions`` type as an additional parameter,
 which represents options you can use to configure the delete operation.
@@ -120,22 +126,31 @@ following properties:
      - Description
 
    * - ``Collation``
-     - | Gets or sets the type of language collation to use when sorting results.
+     - | Gets or sets the type of language collation to use when sorting
+         results. See :manual:`the delete
+         statements</reference/command/delete/#std-label-deletes-array-collation>`
+         for more information.
 
    * - ``Comment``
-     - | Gets or sets the comment for the operation.
+     - | Gets or sets the comment for the operation. See :manual:`the delete command
+         fields</reference/command/delete/#command-fields>`
+         for more information.
 
    * - ``Hint``
-     - | Gets or sets the index to use to scan for documents.
+     - | Gets or sets the index to use to scan for documents. See :manual:`the delete
+         statements<reference/command/delete/#std-label-deletes-array-hint>`
+         for more information.
 
    * - ``Let``
-     - | Gets or sets the let document.
+     - | Gets or sets the let document. See :manual:`the delete command
+         fields</reference/command/delete/#command-fields>`
+         for more information.
 
 Example
 ~~~~~~~
 
 The following code uses the ``DeleteMany()`` method to search on the
-"borough_1" index and delete all documents whose ``address.street``
+"borough_1" index and delete all documents where the ``address.street``
 field value includes the phrase "Pearl Street":
 
 .. io-code-block::

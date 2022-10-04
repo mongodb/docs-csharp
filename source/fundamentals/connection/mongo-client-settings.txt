@@ -20,12 +20,12 @@ MongoClientSettings Options
 ---------------------------
 
 This section describes the configuration options exposed as properties of the 
-``MongoClientSettings`` class. To use these options, set the property on your 
+``MongoClientSettings`` class. To use these options, set the properties on your 
 ``MongoClientSettings`` object before you pass it to the ``MongoClient`` constructor.
 
 .. list-table::
    :header-rows: 1
-   :widths: 1 1 
+   :widths: 1 1 1
 
    * - Property
      - Default Value
@@ -45,7 +45,8 @@ This section describes the configuration options exposed as properties of the
 
    * - **ClusterConfigurator**
      - ``null``
-     - 
+     - Low-level configuration options for sockets, TLS/SSL, 
+       cluster, and more. Typically not required.
 
    * - **Compressors**
      - Empty ``CompressorConfiguration``
@@ -57,7 +58,8 @@ This section describes the configuration options exposed as properties of the
 
    * - **Credential**
      - Empty ``MongoCredentialStore``
-     - 
+     - Specifies authentication credentials. Use the static factory methods on 
+       ``MongoCredential`` to construct credentials.
 
    * - **DirectConnection**
      - ``null``
@@ -68,15 +70,16 @@ This section describes the configuration options exposed as properties of the
      - {+heartbeat-interval+}
 
    * - **HeartbeatTimeout**
-     - No timeout
-     - 
+     - ``ConnectTimeout`` (if specified) or 30 seconds
+     - The length of time a monitoring socket can be idle before timing out.
 
    * - **IPv6**
      - ``false``
+     - Specifies whether the host address is in IPv6 format.
 
    * - **IsFrozen**
      - ``false``
-     - Indicates whether the settings have been frozen to prevent further changes.
+     - Indicates whether the settings have been frozen. Frozen settings can't be changed.
 
    * - **LinqProvider**
      - ``LinqProvider.V2``
@@ -100,7 +103,7 @@ This section describes the configuration options exposed as properties of the
 
    * - **MaxConnectionLifeTime**
      - 30 minutes
-     - 
+     - The length of time a connection can be pooled before expiring.
 
    * - **MaxConnectionPoolSize**
      - ``100``
@@ -115,8 +118,10 @@ This section describes the configuration options exposed as properties of the
      - {+read-concern+}
 
    * - **ReadEncoding**
-     - ``null``
-     - 
+     - Strict encoding
+     - Specifies whether UTF-8 string deserialization is strict or lenient. 
+       Strict encoding will throw an exception when an invalid UTF-8 byte sequence 
+       is encountered. 
 
    * - **ReadPreference**
      - ``ReadPreference.Primary``
@@ -136,11 +141,18 @@ This section describes the configuration options exposed as properties of the
 
    * - **Scheme**
      - ``ConnectionStringScheme.MongoDB``
-     - The format of the 
+     - Specifies whether to use the standard connection string format (``MongoDB``) 
+       or the DNS seed list format (``MongoDBPlusSrv``). 
+
+       See :manual:`the MongoDB Manual</reference/connection-string/>` for more 
+       information about connection string formats. 
 
    * - **SdamLogFilename**
      - ``null``
-     - 
+     - The name of the SDAM (Server Discovery and Monitoring) log file.
+
+       See :manual:`the MongoDB Manual</reference/monitoring/>` for more 
+       information about server monitoring.
 
    * - **Server**
      - ``"localhost"``
@@ -148,11 +160,14 @@ This section describes the configuration options exposed as properties of the
 
    * - **ServerApi**
      - ``null``
-     - 
+     - Allows opting into Stable API versioning. 
+     
+       See :manual:`the MongoDB Manual</reference/stable-api>` for more information about
+       Stable API versioning.
 
    * - **Servers**
      - ``List<MongoServerAddress>`` containing "localhost"
-     - 
+     - The cluster members where MongoDB is running. 
 
    * - **ServerSelectionTimeout**
      - 30 seconds
@@ -167,7 +182,9 @@ This section describes the configuration options exposed as properties of the
      - {+srv-max-hosts+}
 
    * - **SslSettings**
-     - 
+     - ``null``
+     - TLS/SSL options, including client certificates, revocation handling, and 
+       enabled and disabled TLS/SSL protocols.
 
    * - **UseTls**
      - ``false``
@@ -182,8 +199,10 @@ This section describes the configuration options exposed as properties of the
      - {+write-concern+}
 
    * - **WriteEncoding**
-     - ``null``
-     - 
+     - Strict encoding
+     - Specifies whether UTF-8 string serialization is strict or lenient. 
+       Strict encoding will throw an exception when an invalid UTF-8 byte sequence 
+       is encountered. 
 
 
 

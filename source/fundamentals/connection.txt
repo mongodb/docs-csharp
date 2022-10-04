@@ -10,6 +10,7 @@ Connection
 
    /fundamentals/connection/connect
    /fundamentals/connection/connection-options
+   /fundamentals/connection/mongo-client-settings
 
 .. contents:: On this page
    :local:
@@ -24,3 +25,4 @@ In this section, you'll learn how to use the {+driver-short+} to connect your ap
 
 - :ref:`How to Connect to MongoDB <csharp-connect-to-mongodb>`
 - :ref:`Connection URI Options <csharp-connection-options>`
+- :ref:`Configure the Connection in Code <csharp-mongo-client-settings>`

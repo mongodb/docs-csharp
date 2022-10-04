@@ -138,7 +138,7 @@ following properties:
 
    * - ``Hint``
      - | Gets or sets the index to use to scan for documents. See :manual:`the delete
-         statements<reference/command/delete/#std-label-deletes-array-hint>`
+         statements</reference/command/delete/#std-label-deletes-array-hint>`
          for more information.
 
    * - ``Let``

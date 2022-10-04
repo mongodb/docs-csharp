@@ -87,7 +87,7 @@ This section describes the configuration options exposed as properties of the
 
    * - **LoadBalanced**
      - ``false``
-     - {+load-balanced}+
+     - {+load-balanced+}
 
    * - **LocalThreshold**
      - 15 milliseconds
@@ -143,7 +143,6 @@ This section describes the configuration options exposed as properties of the
      - ``ConnectionStringScheme.MongoDB``
      - Specifies whether to use the standard connection string format (``MongoDB``) 
        or the DNS seed list format (``MongoDBPlusSrv``). 
-
        See :manual:`the MongoDB Manual</reference/connection-string/>` for more 
        information about connection string formats. 
 
@@ -151,8 +150,7 @@ This section describes the configuration options exposed as properties of the
      - ``null``
      - The name of the SDAM (Server Discovery and Monitoring) log file.
 
-       See :manual:`the MongoDB Manual</reference/monitoring/>` for more 
-       information about server monitoring.
+       TODO: Link to Monitoring page when finished
 
    * - **Server**
      - ``"localhost"``
@@ -160,9 +158,8 @@ This section describes the configuration options exposed as properties of the
 
    * - **ServerApi**
      - ``null``
-     - Allows opting into Stable API versioning. 
-     
-       See :manual:`the MongoDB Manual</reference/stable-api>` for more information about
+     - Allows opting into Stable API versioning. See 
+       :manual:`the MongoDB Manual</reference/stable-api>` for more information about
        Stable API versioning.
 
    * - **Servers**

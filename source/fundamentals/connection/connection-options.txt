@@ -23,8 +23,7 @@ available in the {+driver-short+}. To use these options, include them as paramet
    * - **appName**
      - String
      - ``null``
-     - The app name the driver passes to the server in the client
-       metadata as part of the connection handshake. The server prints this value to the MongoDB logs once the connection is established. The value is also recorded in the slow query logs and profile collections.
+     - {+app-name+}
 
    * - **authMechanism**
      - String
@@ -49,27 +48,22 @@ available in the {+driver-short+}. To use these options, include them as paramet
    * - **compressors**
      - Comma-separated list of strings (for example, ``snappy,zlib,zstd``)
      - ``null``
-     - The preferred compression types, in order, for wire-protocol messages
-       sent to or received from the server. The driver uses the first of these compression types that the server supports.
-       
-       See :ref:`csharp-network-compression` for more information.
+     - {+compressors+}
 
    * - **connectTimeoutMS**
      - Nonnegative integer
      - ``30000``
-     - The length of time the driver tries to establish a single TCP
-       socket connection to the server before timing out. Specifying ``0`` disables the connection timeout.
+     - {+connect-timeout+}
 
    * - **directConnection**
      - Boolean
      - ``false``
-     - Specifies whether to force dispatch **all** operations to the host
-       specified in the connection URI.
+     - {+direct-connection+}
 
    * - **heartbeatFrequencyMS**
      - Integer greater than or equal to 500
      - ``10000``
-     - The interval between regular server-monitoring checks.
+     - {+heartbeat-interval+}
 
    * - **journal**
      - Boolean
@@ -80,31 +74,27 @@ available in the {+driver-short+}. To use these options, include them as paramet
    * - **loadBalanced**
      - Boolean
      - ``false``
-     - Specifies whether the driver is connecting to a load balancer.
+     - {+load-balanced+}
 
    * - **localThresholdMS**
      - Nonnegative integer
      - ``15``
-     - The latency window for server eligibility. If a server's round trip takes longer than the fastest server's round-trip time plus this value, the server isn't eligible for selection. Specifying ``0`` selects the fastest eligible server.
-
-   * - **maxIdleTimeMS**
-     - Nonnegative integer
-     - ``10000``
-     - The length of time a connection can be idle before the driver closes it.
-       Specifying ``0`` means no minimum.
-
-   * - **maxPoolSize**
-     - Nonnegative integer
-     - ``100``
-     - The greatest number of clients or connections the driver
-       can create in its connection pool. This count includes connections
-       in use.
+     - {+local-threshold+}
 
    * - **maxConnecting**
      - Nonnegative integer
      - ``2``
-     - The greatest number of connections a driver's connection
-       pool may be establishing concurrently.
+     - {+max-connecting+}
+
+   * - **maxIdleTimeMS**
+     - Nonnegative integer
+     - ``10000``
+     - {+max-connection-idle-time+}
+
+   * - **maxPoolSize**
+     - Nonnegative integer
+     - ``100``
+     - {+max-connection-pool-size+}
 
    * - **maxStalenessSeconds**
      - Integer equal to -1 or greater than or equal to 90
@@ -116,20 +106,17 @@ available in the {+driver-short+}. To use these options, include them as paramet
    * - **minPoolSize**
      - Nonnegative integer
      - ``0``
-     - The number of connections the driver should create and
-       keep in the connection pool even when no operations are occurring.
-       This count includes connections in use.
+     - {+min-connection-pool-size+}
 
    * - **readConcernLevel**
      - String
      - ``null``
-     - The client's default read concern. See :ref:`read concern
-       <read-concern>` for more information.
+     - {+read-concern+}
 
    * - **readPreference**
      - String
      - ``"primary"``
-     - The client's default read preference (excluding tags). See :ref:`read preference <read-preference>` for more information.
+     - {+read-preference+}
 
    * - **readPreferenceTags**
      - Comma-separated ``key:value`` pairs (for example, ``opt1:val1,opt2:val2``)
@@ -142,35 +129,32 @@ available in the {+driver-short+}. To use these options, include them as paramet
    * - **replicaSet**
      - String
      - ``null``
-     - The name of the replica set to connect to.
+     - {+replica-set-name+}
 
    * - **retryReads**
      - Boolean
      - ``true``
-     - Enables retryable reads.
+     - {+retry-reads+}
 
    * - **retryWrites**
      - Boolean
      - ``true``
-     - Enables retryable writes.
+     - {+retry-writes+}
 
    * - **serverSelectionTimeoutMS**
      - Nonnegative integer
      - ``30000``
-     - The length of time the driver tries to select a server before timing out.
+     - {+server-selection-timeout+}
 
    * - **socketTimeoutMS**
      - Nonnegative integer
      - ``0``
-     - The length of time the driver tries to send or receive on a
-       socket before timing out. Specifying ``0`` means no timeout.
+     - {+socket-timeout+}
 
    * - **srvMaxHosts**
      - Nonnegative integer
      - ``0``
-     - The greatest number of SRV results to randomly select when initially
-       populating the seedlist or, during SRV polling, adding new hosts to the
-       topology. Specifying ``0`` means no maximum.
+     - {+srv-max-hosts+}
 
    * - **ssl**
      - Boolean
@@ -180,7 +164,7 @@ available in the {+driver-short+}. To use these options, include them as paramet
    * - **tls**
      - Boolean
      - ``false``
-     - Specifies whether to require TLS for connections to the server. If you use a scheme of ``"mongodb+srv"``, or specify other ``tls``-prefixed options, this option defaults to ``true``.
+     - {+use-tls+}
 
    * - **tlsDisableCertificateRevocationCheck**
      - Boolean
@@ -190,25 +174,22 @@ available in the {+driver-short+}. To use these options, include them as paramet
    * - **tlsInsecure**
      - Boolean
      - ``false``
-     - Specifies whether to relax TLS constraints as much as possible. This can include allowing invalid certificates or hostname mismatches.
+     - {+allow-insecure-tls+}
 
    * - **w**
      - String or nonnegative integer 
      - ``null``
-     - The default write concern ``"w"`` field for the client. See
-       :ref:`write concern <wc-j>` for more information.
+     - {+write-concern+}
 
    * - **wTimeoutMS**
      - Nonnegative integer
      - ``0``
-     - The default write concern ``"wtimeout"`` field for the client. Specifying ``0`` means no timeout. See
-       :ref:`write concern <wc-j>` for more information.
+     - "The default write concern ``"wtimeout"`` field for the client. Specifying ``0`` means no timeout. See :ref:`write concern <wc-j>` for more information."
 
    * - **waitQueueTimeoutMS**
      - Nonnegative integer
      - ``0``
-     - The length of time the driver tries to check out a connection
-       from a server's connection pool before timing out. Specifying ``0`` means no timeout.
+     - {+wait-queue-timeout+}
 
    * - **zlibCompressionLevel**
      - Integer between ``-1`` and ``9`` (inclusive)

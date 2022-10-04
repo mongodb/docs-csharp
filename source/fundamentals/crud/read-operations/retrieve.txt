@@ -49,7 +49,7 @@ Find One Document
 
 To find a single document in a collection, pass a query filter that specifies the
 criteria of the document you want to find, then chain the ``FirstOrDefault`` or 
-``FirstOrDefaultAsync`` method. If more than one document match the query
+``FirstOrDefaultAsync`` method. If more than one document matches the query
 filter, these methods return the *first* matching document from the retrieved
 results. If no documents match the query filter the methods return null.
 
@@ -81,13 +81,13 @@ To find multiple documents in a collection, pass a query filter to the ``Find()`
 method that specifies the criteria of the documents you want to find.
 
 You can use a **Cursor** to iterate over the documents returned by the ``Find()``
-method. A cursor is a mechanism that allows an application to iterate over database 
+method. A ``Cursor`` is a mechanism that allows an application to iterate over database 
 results while holding only a subset of them in memory at a given time. Cursors
 are useful when your ``Find()`` command returns a large amount of documents.
 
 To use a ``Cursor`` to iterate over the documents, pass a 
 query filter to the ``Find()`` method that specifies the criteria of the documents 
-you want to find, then append the ``ToCursor`` or ``ToCursorAsync`` method as follows:
+you want to find, then chain the ``ToCursor`` or ``ToCursorAsync`` method as follows:
 
 .. tabs::
 

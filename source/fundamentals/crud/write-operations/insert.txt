@@ -70,8 +70,9 @@ Insert Operations
 Use insert operations to add documents to a collection. You can perform
 inserts in MongoDB with the following methods:
 
-- ``InsertOne()``, which deletes *the first document* that matches the query filter
-- ``InsertMany()``, which deletes *all documents* that match the query filter
+- ``InsertOne()``, which inserts a single document
+- ``InsertMany()``, which inserts multiple documents stored in an
+  ``IEnumerable`` interface
 
 Insert One Document
 ~~~~~~~~~~~~~~~~~~~

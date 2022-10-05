@@ -15,10 +15,10 @@ public class Insert
         
         // start-insert
         List<Restaurant> restaurantsList = new List<Restaurant>();
-        var r1 = new Restaurant() { Id = "2", Name = "Été Bleu", Cuisine = "French" };
-        var r2 = new Restaurant() { Id = "4", Name = "Lucky Bird", Cuisine = "Café/Coffee/Tea" };
-        var r3 = new Restaurant() { Id = "6", Name = "Wildflower Café", Cuisine = "Vegetarian" };
-        var r4 = new Restaurant() { Id = "8", Name = "Blue Moon Grill", Cuisine = "American" };
+        var r1 = new Restaurant() { Name = "Été Bleu", Cuisine = "French" };
+        var r2 = new Restaurant() { Name = "Lucky Bird", Cuisine = "Café/Coffee/Tea" };
+        var r3 = new Restaurant() { Name = "Wildflower Café", Cuisine = "Vegetarian" };
+        var r4 = new Restaurant() { Name = "Blue Moon Grill", Cuisine = "American" };
         restaurantsList.AddRange(new List<Restaurant>() {r1, r2, r3, r4});
 
         InsertManyOptions opts = new InsertManyOptions() { BypassDocumentValidation = true };

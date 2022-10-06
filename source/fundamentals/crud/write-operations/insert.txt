@@ -56,7 +56,9 @@ you let the driver automatically generate ``_id`` values.
 .. note::
 
    Duplicate ``_id`` values violate unique index constraints, which
-   causes the driver to return a ``MongoBulkWriteException``.
+   causes the driver to return a ``MongoWriteException`` from
+   ``InsertOne()`` or a ``MongoBulkWriteException`` from
+   ``InsertMany()``.
 
 To learn more about the ``_id`` field, see the Server Manual Entry on
 :manual:`Unique Indexes </core/index-unique/>`.

@@ -1,15 +1,15 @@
 .. _csharp-connection-options:
 
-========================
-Configure the Connection
-========================
+==================
+Connection Options
+==================
 
 This section describes the MongoDB connection and authentication options
 available in the {+driver-short+}. You can configure your connection using either 
 the connection URI or a ``MongoClientSettings`` object.
 
 ----------------------------------
-Send Options in the Connection URI
+Using the Connection URI
 ----------------------------------
 
 If you pass a connection URI to the ``MongoClient`` constructor, you can include
@@ -21,9 +21,9 @@ and the ``tls`` option with a value of ``true``:
    :language: csharp
    :dedent:
 
---------------------------------
-Configure the Connection in Code 
---------------------------------
+-----------------------------
+Using ``MongoClientSettings`` 
+-----------------------------
 
 You can use a ``MongoClientSettings`` object to configure connection settings in code
 rather than in a connection URI. Configuring the connection this way makes it easier to 

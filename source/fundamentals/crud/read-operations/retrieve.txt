@@ -221,7 +221,7 @@ The following example configures the behavior of the ``Find()`` method with a
 
    Create a cursor with a `using statement <https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement>`__ to
    automatically invoke the 
-   `Dispose <https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose?view=net-7.0>`__
+   `Dispose() <https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose?view=net-7.0>`__
    method once the cursor is no longer in use.
 
 

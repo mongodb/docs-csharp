@@ -74,7 +74,7 @@ results. If no documents match the query filter the methods return ``null``.
 .. tip:: First Document
 
    The ``FirstOrDefault()`` method returns the first document in 
-   :manual:`natural order <reference/glossary/#std-term-natural-order>`
+   :manual:`natural order </reference/glossary/#std-term-natural-order>`
    on disk if no sort criteria is specified.
 
 To see a full example of using the ``Find()`` method to find a single document, see
@@ -147,7 +147,7 @@ To find all documents in a collection, pass an empty
 method to return the documents as a ``List`` object, or the ``ToCursor()`` or ``ToCursorAsync()``
 method to return the documents as a cursor.
 
-To see a fully runnable example of using ``Find()`` to find all documents, see 
+To see a fully runnable example of using the ``Find()`` method to find all documents, see 
 :ref:`csharp-retrieve-additional-information`.
 
 Modify Find Behavior

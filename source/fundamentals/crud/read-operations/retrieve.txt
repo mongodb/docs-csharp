@@ -27,7 +27,7 @@ free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<csharp-q
 
 The following ``Restaurants`` class models the documents in this collection:
 
-.. literalinclude:: ../../../includes/code-examples/Restaurant.cs
+.. literalinclude:: ../../../includes/fundamentals/code-examples/crud/Retrieve.cs
    :language: csharp
    :copyable:
    :dedent:
@@ -48,10 +48,10 @@ Find One Document
 ~~~~~~~~~~~~~~~~~
 
 To find a single document in a collection, pass a query filter that specifies the
-criteria of the document you want to find, then chain the ``FirstOrDefault`` or 
-``FirstOrDefaultAsync`` method. If more than one document matches the query
+criteria of the document you want to find, then chain the ``FirstOrDefault()`` or 
+``FirstOrDefaultAsync()`` method. If more than one document matches the query
 filter, these methods return the *first* matching document from the retrieved
-results. If no documents match the query filter the methods return null.
+results. If no documents match the query filter the methods return ``null``.
 
 .. tabs::
 
@@ -71,6 +71,12 @@ results. If no documents match the query filter the methods return null.
 
          var restaurants = _restaurantsCollection.Find(filter).FirstOrDefault();
 
+.. tip:: First Document
+
+   The ``FirstOrDefault()`` method returns the first document in 
+   :manual:`natural order <reference/glossary/#std-term-natural-order>`
+   on disk if no sort criteria is specified.
+
 To see a full example of using the ``Find()`` method to find a single document, see
 :ref:`csharp-retrieve-additional-information`.
 
@@ -78,16 +84,16 @@ Find Multiple Documents
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 To find multiple documents in a collection, pass a query filter to the ``Find()``
-method that specifies the criteria of the documents you want to find.
+method that specifies the criteria of the documents you want to retrieve.
 
-You can use a **Cursor** to iterate over the documents returned by the ``Find()``
-method. A ``Cursor`` is a mechanism that allows an application to iterate over database 
+You can use a **cursor** to iterate over the documents returned by the ``Find()``
+method. A cursor is a mechanism that allows an application to iterate over database 
 results while holding only a subset of them in memory at a given time. Cursors
-are useful when your ``Find()`` command returns a large amount of documents.
+are useful when your ``Find()`` method returns a large amount of documents.
 
-To use a ``Cursor`` to iterate over the documents, pass a 
+To use a cursor to iterate over the documents, pass a 
 query filter to the ``Find()`` method that specifies the criteria of the documents 
-you want to find, then chain the ``ToCursor`` or ``ToCursorAsync`` method as follows:
+you want to find, then chain the ``ToCursor()`` or ``ToCursorAsync()`` method as follows:
 
 .. tabs::
 
@@ -108,11 +114,11 @@ you want to find, then chain the ``ToCursor`` or ``ToCursorAsync`` method as fol
          var restaurants = _restaurantsCollection.Find(filter).ToCursor();
 
 If you are returning a small number of documents, or need your results returned
-as a ``List`` object, use the ``ToList`` or ``ToListAsync`` methods.
+as a ``List`` object, use the ``ToList()`` or ``ToListAsync()`` methods.
 
-To find multiple documents in a collection using a list, pass a query filter 
+To find multiple documents in a collection and hold them in memory as a list, pass a query filter 
 to the ``Find()`` method that specifies the criteria of the documents you want 
-to find, then chain the ``ToList`` or ``ToListAsync`` method as follows:
+to find, then chain the ``ToList()`` or ``ToListAsync()`` method as follows:
 
 .. tabs::
 
@@ -130,16 +136,16 @@ to find, then chain the ``ToList`` or ``ToListAsync`` method as follows:
 
          var restaurants = _restaurantsCollection.Find(filter).ToListAsync();
 
-To see a full example of using ``Find()`` to find multiple documents, see
-:ref:`csharp-retrieve-additional-information`.
+To see a full example of using the ``Find()`` method to find multiple documents,
+see :ref:`csharp-retrieve-additional-information`.
 
 Find All Documents
 ~~~~~~~~~~~~~~~~~~
 
 To find all documents in a collection, pass an empty
-``BsonDocument`` as a query filter. Then chain the ``ToList`` or ``ToListAsync``
-method to return the documents as a ``List`` object, or the ``ToCursor`` or ``ToCursorAsync``
-method to return the documents as a ``Cursor``.
+``BsonDocument`` as a query filter. Then chain the ``ToList()`` or ``ToListAsync()``
+method to return the documents as a ``List`` object, or the ``ToCursor()`` or ``ToCursorAsync()``
+method to return the documents as a cursor.
 
 To see a fully runnable example of using ``Find()`` to find all documents, see 
 :ref:`csharp-retrieve-additional-information`.
@@ -185,8 +191,8 @@ The following example configures the behavior of the ``Find()`` method with a
 
 - Finds all documents with "Pizza" in the ``cuisine`` field
 - Sets the ``BatchSize`` to ``3``
-- Stores the results in a ``Cursor`` object
-- Prints the number of documents currently held in the ``Cursor``
+- Stores the results in a cursor
+- Prints the number of documents currently held in the cursor
 
 .. io-code-block::
    :copyable: true
@@ -213,9 +219,10 @@ The following example configures the behavior of the ``Find()`` method with a
 
 .. tip:: Clean Up
 
-   Create a ``Cursor`` with a `using statement <https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement>`__ to
-   automatically invoke the ``Dispose`` method once the ``Cursor`` is no longer
-   in use.
+   Create a cursor with a `using statement <https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement>`__ to
+   automatically invoke the 
+   `Dispose <https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose?view=net-7.0>`__
+   method once the cursor is no longer in use.
 
 
 .. _csharp-retrieve-additional-information:
@@ -227,7 +234,7 @@ Additional Information
 
 To learn more about query filters, see :ref:`csharp-specify-query`
 
-For fully runnable examples of the find operations used in this guide, see the 
+For fully runnable examples of the ``Find()`` method, see the 
 :ref:`Usage Examples <csharp-find-one>`.
 
 API Documentation

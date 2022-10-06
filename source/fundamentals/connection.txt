@@ -10,7 +10,6 @@ Connection
 
    /fundamentals/connection/connect
    /fundamentals/connection/connection-options
-   /fundamentals/connection/mongo-client-settings
 
 .. contents:: On this page
    :local:

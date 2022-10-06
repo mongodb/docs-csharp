@@ -34,7 +34,7 @@ The following ``Restaurants`` class models the documents in this collection:
 
 .. _csharp-retrieve-find:
 
-Find Operation
+Find Documents
 --------------
 
 Use the ``Find()`` method to retrieve documents from a collection. 

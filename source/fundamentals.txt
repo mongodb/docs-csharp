@@ -6,4 +6,4 @@ Fundamentals
 
 .. toctree::
 
-   /fundamentals/crud/read-operations/retrieve
+   /fundamentals/crud

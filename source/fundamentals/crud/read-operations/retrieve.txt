@@ -77,6 +77,8 @@ results. If no documents match the query filter the methods return ``null``.
    :manual:`natural order </reference/glossary/#std-term-natural-order>`
    on disk if no sort criteria is specified.
 
+   To learn more about sorting, see the TODO: sorting page.
+
 To see a full example of using the ``Find()`` method to find a single document, see
 :ref:`csharp-retrieve-additional-information`.
 
@@ -93,7 +95,8 @@ are useful when your ``Find()`` method returns a large amount of documents.
 
 To use a cursor to iterate over the documents, pass a 
 query filter to the ``Find()`` method that specifies the criteria of the documents 
-you want to find, then chain the ``ToCursor()`` or ``ToCursorAsync()`` method as follows:
+you want to find, then chain the ``ToCursor()`` or ``ToCursorAsync()`` method.
+To view a synchronous or asynchronous example, select the corresponding tab. 
 
 .. tabs::
 
@@ -118,7 +121,8 @@ as a ``List`` object, use the ``ToList()`` or ``ToListAsync()`` methods.
 
 To find multiple documents in a collection and hold them in memory as a list, pass a query filter 
 to the ``Find()`` method that specifies the criteria of the documents you want 
-to find, then chain the ``ToList()`` or ``ToListAsync()`` method as follows:
+to find, then chain the ``ToList()`` or ``ToListAsync()`` method.To view a
+synchronous or asynchronous example, select the corresponding tab.
 
 .. tabs::
 
@@ -139,16 +143,13 @@ to find, then chain the ``ToList()`` or ``ToListAsync()`` method as follows:
 To see a full example of using the ``Find()`` method to find multiple documents,
 see :ref:`csharp-retrieve-additional-information`.
 
-Find All Documents
-~~~~~~~~~~~~~~~~~~
+.. note:: Find All Documents
 
-To find all documents in a collection, pass an empty
-``BsonDocument`` as a query filter. Then chain the ``ToList()`` or ``ToListAsync()``
-method to return the documents as a ``List`` object, or the ``ToCursor()`` or ``ToCursorAsync()``
-method to return the documents as a cursor.
+   To find all documents in a collection, pass an empty ``BsonDocument`` as a 
+   query filter to the ``Find()`` method.
 
-To see a fully runnable example of using the ``Find()`` method to find all documents, see 
-:ref:`csharp-retrieve-additional-information`.
+   To see a fully runnable example of using the ``Find()`` method to find all documents, see 
+   :ref:`csharp-retrieve-additional-information`.   
 
 Modify Find Behavior
 ~~~~~~~~~~~~~~~~~~~~
@@ -166,13 +167,14 @@ You can configure the commonly used options with the following methods:
      - Description
 
    * - ``BatchSize`` 
-     - | Gets or sets the number of documents to return per batch.
+     - | Gets or sets the number of documents to hold in a cursor at a given time.
 
    * - ``Collation`` 
      - | Sets the collation options. 
 
    * - ``Comment`` 
-     - | Sets the comment to the query.
+     - | Sets the comment to the query. To learn more about query comments, 
+         see :manual:`/reference/operator/query/comment/`.
 
    * - ``Hint`` 
      - | Sets the hint for which index to use.
@@ -186,8 +188,7 @@ To see a full list of available options, see
 Example
 ~~~~~~~
 
-The following example configures the behavior of the ``Find()`` method with a 
-``FindOptions`` object. The example performs the following actions:
+The following example performs these actions:
 
 - Finds all documents with "Pizza" in the ``cuisine`` field
 - Sets the ``BatchSize`` to ``3``
@@ -234,8 +235,8 @@ Additional Information
 
 To learn more about query filters, see :ref:`csharp-specify-query`
 
-For fully runnable examples of the ``Find()`` method, see the 
-:ref:`Usage Examples <csharp-find-one>`.
+To view a runnable examples of the ``Find()`` method, see the 
+:ref:`csharp-find-one` page.
 
 API Documentation
 ~~~~~~~~~~~~~~~~~

@@ -4,6 +4,12 @@
 Connection Options
 ==================
 
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
 This section describes the MongoDB connection and authentication options
 available in the {+driver-short+}. You can configure your connection using either 
 the connection URI or a ``MongoClientSettings`` object.
@@ -111,7 +117,9 @@ relevant options.
        authentication mechanisms.
      - ``MongoCredentialStore``
      - ``null``
-     - ``mongodb://user1:password1@sample.host:27017/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:other,CANONICALIZE_HOST_NAME:true&authSource=$external``
+     - ``mongodb://user1:password1@sample.host:27017/?authMechanism=GSSAPI
+       &authMechanismProperties=SERVICE_NAME:other,CANONICALIZE_HOST_NAME:true
+       &authSource=$external``
 
    * - **DirectConnection**
      - Specifies whether to force dispatch **all** operations to the host.
@@ -221,7 +229,9 @@ relevant options.
        See :ref:`read preference <read-preference>` for more information.
      - ``ReadPreference``
      - ``ReadPreference.Primary``
-     - ``readPreference=primaryPreferred&maxStalenessSeconds=90&readPreferenceTags=dc:ny,rack:1``
+     - ``readPreference=primaryPreferred
+       &maxStalenessSeconds=90
+       &readPreferenceTags=dc:ny,rack:1``
 
        You can include the ``readPreferenceTags`` parameter in the connection URI more 
        than once. If you do, the client treats each instance as a separate tag set. 
@@ -332,7 +342,9 @@ relevant options.
        See :ref:`write concern <wc-j>` for more information.
      - ``WriteConcern``
      - ``WriteConcern.Acknowledged``
-     - ``w=majority&wTimeoutMS=0&journal=true``
+     - ``w=majority
+       &wTimeoutMS=0
+       &journal=true``
 
    * - **WriteEncoding**
      - Specifies whether UTF-8 string serialization is strict or lenient. With strict

@@ -55,7 +55,7 @@ relevant options.
 
 .. list-table::
    :header-rows: 1
-   :widths: 1 1 1
+   :widths: 40 30 30
 
    * - **MongoClientSettings** Property
      - Connection URI Example
@@ -324,6 +324,7 @@ relevant options.
 
    * - **Servers**
      - .. code-block:: none
+        :copyable: false
      
         mongodb://sample.host1:27017,
         sample.host2:27017,

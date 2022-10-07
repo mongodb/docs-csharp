@@ -4,11 +4,11 @@
 Connection Options
 ==================
 
-.. .. contents:: On this page
-..    :local:
-..    :backlinks: none
-..    :depth: 2
-..    :class: singlecol
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
 
 This section describes the MongoDB connection and authentication options
 available in the {+driver-short+}. You can configure your connection using either 
@@ -141,7 +141,7 @@ relevant options.
    * - **HeartbeatTimeout**
      - The length of time a monitoring socket can be idle before timing out.
      - ``TimeSpan``
-     - Same value as ``ConnectTimeout``
+     - Same as ``ConnectTimeout``
      - {+not-available+}
      
    * - **IPv6**
@@ -215,7 +215,7 @@ relevant options.
      - The client's default read concern. 
        See :ref:`read concern <read-concern>` for more information.
      - ``ReadConcern``
-     - ``ReadConcern.Default``
+     - ``Default``
      - ``readConcernLevel=local``
 
    * - **ReadEncoding**
@@ -232,10 +232,12 @@ relevant options.
        still be eligible for server selection. Specifying ``-1`` means no maximum.
        See :ref:`read preference <read-preference>` for more information.
      - ``ReadPreference``
-     - ``ReadPreference.Primary``
-     - ``readPreference=primaryPreferred
-       &maxStalenessSeconds=90
-       &readPreferenceTags=dc:ny,rack:1``
+     - ``Primary``
+     - .. code-block:: language
+     
+        readPreference=primaryPreferred
+        &maxStalenessSeconds=90
+        &readPreferenceTags=dc:ny,rack:1
 
        You can include the ``readPreferenceTags`` parameter in the connection URI more 
        than once. If you do, the client treats each instance as a separate tag set. 
@@ -266,7 +268,7 @@ relevant options.
        See :manual:`the MongoDB Manual</reference/connection-string/>` for more 
        information about connection string formats. 
      - ``ConnectionStringScheme``
-     - ``ConnectionStringScheme.MongoDB``
+     - ``MongoDB``
      - ``mongodb+srv://``
 
    * - **SdamLogFilename**
@@ -345,10 +347,12 @@ relevant options.
        journaling, for the client. Specifying ``0`` for the timeout means no timeout. 
        See :ref:`write concern <wc-j>` for more information.
      - ``WriteConcern``
-     - ``WriteConcern.Acknowledged``
-     - ``w=majority
-       &wTimeoutMS=0
-       &journal=true``
+     - ``Acknowledged``
+     - .. code-block:: none
+     
+        w=majority
+        &wTimeoutMS=0
+        &journal=true
 
    * - **WriteEncoding**
      - Specifies whether UTF-8 string serialization is strict or lenient. With strict

@@ -9,3 +9,4 @@ Fundamentals
    :maxdepth: 1
 
    /fundamentals/crud
+   /fundamentals/builders

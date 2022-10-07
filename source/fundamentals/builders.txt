@@ -1,0 +1,206 @@
+.. _csharp-builders:
+
+========================
+Operations with Builders
+========================
+
+.. default-domain:: mongodb
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn about the helper classes, or **builders**, that
+the {+driver-short+} provides to construct various types used in the
+driver. The driver includes types related to the
+specification of filters, updates, projections, sorts, and index keys,
+and you can use builders to aid in the creation of these definitions.
+Using the builder classes, you leverage the power of the
+{+lang-framework+} compiler and your IDE to find errors during
+development and your IDE for discovery and code completion.
+
+When using builders, the compiler and the IDE catch errors such as
+misspelled operators early on. Using builders helps you avoid pushing
+errors to runtime instead of compile time.
+
+You should read this guide if you want to learn more about how to
+construct definitions and build up syntax using builders.
+
+Sample Class
+------------
+
+The code examples in this guide demonstrate how you can use builders to
+create types to interact with documents in the sample collection ``plants.flowers``.
+Documents in this collection are modeled by the following ``Flower`` class:
+
+.. literalinclude:: /includes/fundamentals/code-examples/builders.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-model
+   :end-before: end-model
+
+Each builder class takes a generic type parameter
+``TDocument`` which represents the type of document that you are working
+with. In this guide, the ``Flower`` class is the document type used in
+each builder example.
+
+Construct a Filter
+------------------
+
+The ``FilterDefinitionBuilder`` class provides a type-safe interface for
+building up queries. Suppose you want to query your collection for
+documents matching the following criteria:
+
+- ``Price`` field value less than 20
+- ``Category`` field value is "Perennial"
+
+Use builders to create the filter definition using string-based field names:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Filter;
+   var filter = builder.Lt("Price", 20) & builder.Eq("Category", "Perennial");
+
+Alternatively, you can use the typed variant to contruct the filter:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Filter;
+   var filter = builder.Lt(flower => flower.price, 20) & builder.Eq(flower => flower.category, "Perennial");
+   
+Using the typed variant form provides compile-time safety. Additionally,
+your IDE can provide refactoring support.
+
+Array Operators
+~~~~~~~~~~~~~~~
+
+If your document has properties or fields that serialize to arrays,
+you can use the methods beginning with “Any” to compare the entire array
+against a single item.
+
+Use builders to check which documents in the collection have a
+``Season`` array that includes `"winter":
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Filter;
+   var filter = builder.AnyEq(flower => flower.Season, "winter");
+
+.. TODO for a complete list of expressions, see the Query page?
+
+Create a Projection
+-------------------
+
+.. TODO
+
+Define a Sort
+-------------
+
+The ``SortDefinitionBuilder`` class provides a type-safe interface for
+building up sort syntax. Suppose you want to define a sort with the
+following order:
+
+- Ascending on ``Price``
+- Descending on ``Category``
+
+Use builders to create the sort definition using string-based field names:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Sort;
+   var sort = builder..Ascending("Price").Descending("Category");
+
+Alternatively, you can use the typed variant to define the sort:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Sort;
+   var sort = builder.Ascending(flower => flower.Price).Descending(flower => flower.Category);
+   
+Define an Update
+----------------
+
+The ``UpdateDefinitionBuilder`` class provides a type-safe interface for
+building up an update specification. Suppose you want to create an
+update specification with the following criteria:
+
+- Create a new field ``SunRequirement``
+- Multiply the ``Price`` field value by 0.9
+
+Use builders to create the update specification using string-based field names:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Update;
+   var update = builder.Set("SunRequirement", "Full sun").Mul("Price", 0.9);
+
+Alternatively, you can use the typed variant to define the update:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Update;
+   var update = builder.Set(flower => flower.SunRequirement, "Full sun").Mul(flower => flower.Price, 0.9);
+
+Define Index Keys
+-----------------
+
+The ``IndexKeysDefinitionBuilder`` class provides a type-safe interface for
+defining index keys. Suppose you want to select ``Category`` as an
+ascending index key.
+
+Use builders to select the index key using string-based field names:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<BsonDocument>.IndexKeys;
+   var keys = builder.Ascending("Category");
+
+Alternatively, you can use the typed variant to define the update:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.IndexKeys;
+   var keys = builder.Ascending(flower => flower.Category);
+
+The ``IndexKeysDefinitionBuilder`` class also provides methods to build
+a wildcard index. You can create a wildcard index using ``All field paths`` or ``A
+single field path``, in this case using ``Category``:
+
+.. tabs::
+
+   .. tab:: ``All field paths``
+      :tabid: all-wildcard-index
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var builder = Builders<Flower>.IndexKeys;
+         var keys = builder.Wildcard();
+
+   .. tab:: ``A single field path``
+      :tabid: single-wildcard-index
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var builder = Builders<Flower>.IndexKeys;
+
+         // Using string-based field names
+         var keys = builder.Wildcard("Category");
+
+         // Using a typed variant
+         var keys = builder.Wildcard(flower => flower.Category);

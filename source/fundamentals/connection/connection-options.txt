@@ -57,7 +57,7 @@ relevant options.
    :header-rows: 1
    :widths: 1 1 1
 
-   * - ``MongoClientSettings`` Property
+   * - **MongoClientSettings** Property
      - Connection URI Example
      - Description
 
@@ -70,25 +70,28 @@ relevant options.
        | **Default**: ``false``
 
    * - **ApplicationName**
-     - The app name the driver passes to the server in the client metadata as part of 
-       the connection handshake. The server prints this value to the MongoDB logs once 
-       the connection is established. The value is also recorded in the slow query logs 
-       and profile collections.
-     - {+string-data-type+}
-     - ``null``
      - ``appName=yourApp``
+     - | The app name the driver passes to the server in the client metadata as part of 
+         the connection handshake. The server prints this value to the MongoDB logs once 
+         the connection is established. The value is also recorded in the slow query logs 
+         and profile collections.
+       |
+       | **Data Type**: {+string-data-type+}
+       | **Default**: ``null``
 
    * - **AutoEncryptionOptions**
-     - Settings for automatic client-side encryption.
-     - ``AutoEncryptionOptions``
-     - ``null``
      - {+not-available+}
+     - | Settings for automatic client-side encryption.
+       |
+       | **Data Type**: ``AutoEncryptionOptions``
+       | **Default**: ``null``
 
    * - **ClusterConfigurator**
-     - Low-level configuration options for sockets, TLS, cluster, and others. 
-     - ``Action<ClusterBuilder>``
-     - ``null``
      - {+not-available+}
+     - | Low-level configuration options for sockets, TLS, cluster, and others. 
+       | 
+       | **Data Type**: ``Action<ClusterBuilder>``
+       | **Default**: ``null``
 
    * - **Compressors**
      - The preferred compression types, in order, for wire-protocol messages sent to 

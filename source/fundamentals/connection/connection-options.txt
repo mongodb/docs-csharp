@@ -55,11 +55,11 @@ relevant options.
 
 .. list-table::
    :header-rows: 1
-   :widths: 1 1 1 1 1
+   :widths: 20 30 5 5 40
 
    * - ``MongoClientSettings`` Property
      - Description
-     - Accepted Values
+     - Data Type
      - Default Value
      - Connection URI Example
 

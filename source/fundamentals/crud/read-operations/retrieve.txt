@@ -174,7 +174,7 @@ You can configure the commonly used options with the following methods:
 
    * - ``Comment`` 
      - | Sets the comment to the query. To learn more about query comments, 
-         see :manual:`/reference/operator/query/comment/`.
+         see :manual:`</reference/operator/query/comment/>`.
 
    * - ``Hint`` 
      - | Sets the hint for which index to use.
@@ -235,7 +235,7 @@ Additional Information
 
 To learn more about query filters, see :ref:`csharp-specify-query`
 
-To view a runnable examples of the ``Find()`` method, see the 
+To view runnable examples of the ``Find()`` method, see the 
 :ref:`csharp-find-one` page.
 
 API Documentation

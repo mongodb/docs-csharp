@@ -117,8 +117,9 @@ relevant options.
         :copyable: false
         :source: none
      
-        mongodb://user1:password1@sample.host:27017/?authMechanism=GSSAPI
-        &authMechanismProperties=SERVICE_NAME:other,CANONICALIZE_HOST_NAME:true
+        mongodb://user1:password1
+        &authMechanism=GSSAPI
+        &authMechanismProperties=SERVICE_NAME:other,REALM:otherrealm
         &authSource=$external
      - | Settings for how the driver authenticates to the server. This includes 
          authentication credentials, mechanism, source, and other settings.
@@ -248,6 +249,7 @@ relevant options.
 
    * - **ReadPreference**
      - .. code-block:: language
+        :copyable: false
      
         readPreference=primaryPreferred
         &maxStalenessSeconds=90
@@ -321,7 +323,11 @@ relevant options.
        | **Default**: ``null``
 
    * - **Servers**
-     - ``mongodb://sample.host1:27017,sample.host2:27017,sample.host3:27017``
+     - .. code-block:: none
+     
+        mongodb://sample.host1:27017,
+        sample.host2:27017,
+        sample.host3:27017
      - | The cluster members where MongoDB is running. 
        |
        | **Data Type**: ``List<MongoServerAddress>``
@@ -378,6 +384,7 @@ relevant options.
 
    * - **WriteConcern**
      - .. code-block:: none
+        :copyable: false
      
         w=majority
         &wTimeoutMS=0

@@ -121,7 +121,9 @@ relevant options.
         :copyable: false
         :source: none
      
-        mongodb://user1:password1@sample.host:27017/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:other,CANONICALIZE_HOST_NAME:true&authSource=$external
+        mongodb://user1:password1@sample.host:27017/?authMechanism=GSSAPI
+        &authMechanismProperties=SERVICE_NAME:other,CANONICALIZE_HOST_NAME:true
+        &authSource=$external
 
    * - **DirectConnection**
      - Specifies whether to force dispatch **all** operations to the host.

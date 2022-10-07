@@ -174,7 +174,7 @@ You can configure the commonly used options with the following methods:
 
    * - ``Comment`` 
      - | Sets the comment to the query. To learn more about query comments, 
-         see :manual:`</reference/operator/query/comment/>`.
+         see the :manual:`$comment </reference/operator/query/comment/>` page.
 
    * - ``Hint`` 
      - | Sets the hint for which index to use.

@@ -63,12 +63,11 @@ relevant options.
 
    * - **AllowInsecureTls**
      - ``tlsInsecure=true``
-     - Specifies whether to relax TLS constraints as much as possible. This can include 
-       allowing invalid certificates or hostname mismatches.
-
-       **Data Type**: {+bool-data-type+}
-
-       **Default**: ``false``
+     - | Specifies whether to relax TLS constraints as much as possible. This can include 
+         allowing invalid certificates or hostname mismatches.
+       |
+       | **Data Type**: {+bool-data-type+}
+       | **Default**: ``false``
 
    * - **ApplicationName**
      - The app name the driver passes to the server in the client metadata as part of 

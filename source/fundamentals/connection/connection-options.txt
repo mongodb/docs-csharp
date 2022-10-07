@@ -255,10 +255,11 @@ relevant options.
         &maxStalenessSeconds=90
         &readPreferenceTags=dc:ny,rack:1
 
-       You can include the ``readPreferenceTags`` parameter in the connection URI more 
-       than once. If you do, the client treats each instance as a separate tag set. 
-       The order of the tags in the URI determines the order for read preference. You can
-       use this parameter only if the read-preference mode is not ``primary``.
+       .. tip::
+        You can include the ``readPreferenceTags`` parameter in the connection URI more 
+        than once. If you do, the client treats each instance as a separate tag set. 
+        The order of the tags in the URI determines the order for read preference. You can
+        use this parameter only if the read-preference mode is not ``primary``.
      - | The client's default read-preference settings. ``MaxStaleness`` represents the 
          longest replication lag, in wall-clock time, that a secondary can experience and 
          still be eligible for server selection. Specifying ``-1`` means no maximum.

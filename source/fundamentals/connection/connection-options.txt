@@ -4,11 +4,11 @@
 Connection Options
 ==================
 
-.. contents:: On this page
-   :local:
-   :backlinks: none
-   :depth: 2
-   :class: singlecol
+.. .. contents:: On this page
+..    :local:
+..    :backlinks: none
+..    :depth: 2
+..    :class: singlecol
 
 This section describes the MongoDB connection and authentication options
 available in the {+driver-short+}. You can configure your connection using either 
@@ -55,7 +55,7 @@ relevant options.
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 30 5 5 40
+   :widths: 1 1 1 1 1
 
    * - ``MongoClientSettings`` Property
      - Description

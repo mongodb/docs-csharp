@@ -52,6 +52,13 @@ the connection string. If a ``MongoClientSettings`` property maps to more than o
 option in the connection string, the **Connection URI Example** column shows all 
 relevant options. 
 
+.. note::
+
+  If you're using a query parameter for a time duration, the value must be in 
+  milliseconds. For example, to specify 60 seconds, use the value ``60000``. If you're 
+  using a ``MongoClientSettings`` object for a time duration, use the appropriate 
+  ``TimeSpan`` value.
+
 .. list-table::
    :header-rows: 1
    :widths: 40 30 30

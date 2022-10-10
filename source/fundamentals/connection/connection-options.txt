@@ -37,8 +37,7 @@ change settings at runtime, helps you catch errors during compilation, and provi
 more configuration options than the connection URI.
 
 To use a ``MongoClientSettings`` object, create an instance of the class, set 
-its properties, and pass it as an argument to the ``MongoClient`` constructor. 
-In the following example, 
+its properties, and pass it as an argument to the ``MongoClient`` constructor:
 
 .. literalinclude:: /includes/fundamentals/code-examples/connection/MongoClientSettingsConfig.cs
    :language: csharp

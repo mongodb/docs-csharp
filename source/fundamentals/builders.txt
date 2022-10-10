@@ -28,10 +28,10 @@ When you use builders, the compiler and the IDE catch errors such as
 misspelled operators early on. Using builders helps you avoid pushing
 errors to runtime instead of compile time.
 
-.. tip:: MDB Analyzer
+.. tip:: MongoDB Analyzer
 
-   The **MongoDB Analyzer** is a tool that helps you analyze your
-   builders expressions and understand how your {+lang-framework+} code
+   The MongoDB Analyzer is a tool that helps you analyze your
+   builders definitions and understand how your {+lang-framework+} code
    translates into the MongoDB Query API. For more information and
    installation instructions, see the `MongoDB Analyzer reference page <https://www.mongodb.com/docs/mongodb-analyzer/current/>`__.
 
@@ -80,7 +80,7 @@ Alternatively, you can use the typed variant to contruct the filter:
    :copyable: true
 
    var builder = Builders<Flower>.Filter;
-   var filter = builder.Lt(flower => flower.Price, 20) & builder.Eq(flower => flower.Category, "Perennial");
+   var filter = builder.Lt(f => f.Price, 20) & builder.Eq(f => f.Category, "Perennial");
    
 Using the typed variant form provides compile-time safety. Additionally,
 your IDE can provide refactoring support.
@@ -90,7 +90,7 @@ Array Operators
 
 If your document has properties or fields that serialize to arrays,
 you can use the methods beginning with ``Any``, such as ``AnyEq()`` or
-``AnyLt()`` to compare the entire array against a single item.
+``AnyLt()``, to compare the entire array against a single item.
 
 Use builders to check which documents in the collection have a
 ``Season`` array that includes `"winter":
@@ -99,7 +99,7 @@ Use builders to check which documents in the collection have a
    :copyable: true
 
    var builder = Builders<Flower>.Filter;
-   var filter = builder.AnyEq(flower => flower.Season, "winter");
+   var filter = builder.AnyEq(f => f.Season, "winter");
 
 .. TODO for a complete list of expressions, see the Query page?
 
@@ -124,7 +124,7 @@ You can also use the typed variant to define the projection:
    :copyable: true
 
    var builder = Builders<Flower>.Projection;
-   var projection = builder.Include(flower => flower.Name).Include(flower => flower.Price).Exclude(flower => flower.Id);
+   var projection = builder.Include(f => f.Name).Include(f => f.Price).Exclude(f => f.Id);
    
 Finally, you can use the ``Expression()`` method to define the
 projection:
@@ -133,10 +133,10 @@ projection:
    :copyable: true
 
    var builder = Builders<Flower>.Projection;
-   var projection = builder.Expression(flower => new { Name = flower.Name, Price = flower.Price });
+   var projection = builder.Expression(f => new { Name = f.Name, Price = f.Price });
 
 This definition has a return type of ``ProjectionDefinition<TDocument,
-TProjection>`` as opposed to the others which return a
+TProjection>`` whereas the others return a
 ``ProjectionDefinition<TDocument>``.
 
 Lambda Expressions
@@ -147,7 +147,7 @@ lambda expression contains all the information necessary to form both
 the projection on the server as well as the client-side result and
 requires no further information.
 
-When you define a ``Find()`` projection using the ``Expression()``
+When you define a ``Find()`` projection with the ``Expression()``
 method to create a lambda expression, the
 projection is run client-side. The driver inspects the lambda expression
 to determine which fields are referenced and automatically constructs a
@@ -162,7 +162,7 @@ using the ``Price`` and ``Stock`` fields:
    :copyable: true
 
    var builder = Builders<Flower>.Projection;
-   var projection = builder.Expression(flower => new { Profit = flower.Price * flower.Stock });
+   var projection = builder.Expression(f => new { Profit = f.Price * f.Stock });
 
 The result includes only the ``Profit`` field and automatically excludes
 the``Id`` field. This occurs because the driver inspects the expression
@@ -195,7 +195,7 @@ Alternatively, you can use the typed variant to define the sort:
    :copyable: true
 
    var builder = Builders<Flower>.Sort;
-   var sort = builder.Ascending(flower => flower.Price).Descending(flower => flower.Category);
+   var sort = builder.Ascending(f => f.Price).Descending(f => f.Category);
    
 Define an Update
 ----------------
@@ -204,7 +204,7 @@ The ``UpdateDefinitionBuilder`` class provides a type-safe interface for
 building up an update specification. Suppose you want to create an
 update specification with the following criteria:
 
-- Create a new field ``SunRequirement``
+- Create the new field ``SunRequirement``
 - Multiply the ``Price`` field value by 0.9
 
 Use builders to create the update specification using string-based field names:
@@ -221,7 +221,7 @@ Alternatively, you can use the typed variant to define the update:
    :copyable: true
 
    var builder = Builders<Flower>.Update;
-   var update = builder.Set(flower => flower.SunRequirement, "Full sun").Mul(flower => flower.Price, 0.9);
+   var update = builder.Set(f => f.SunRequirement, "Full sun").Mul(f => f.Price, 0.9);
 
 Define Index Keys
 -----------------
@@ -244,7 +244,7 @@ Alternatively, you can use the typed variant to select the index key:
    :copyable: true
 
    var builder = Builders<Flower>.IndexKeys;
-   var keys = builder.Ascending(flower => flower.Category);
+   var keys = builder.Ascending(f => f.Category);
 
 The ``IndexKeysDefinitionBuilder`` class also provides methods to build
 a wildcard index. You can create a wildcard index using ``All field paths`` or ``A
@@ -273,7 +273,7 @@ single field path``, in this case using ``Category``:
          var keys = builder.Wildcard("Category");
 
          // Using a typed variant
-         var keys = builder.Wildcard(flower => flower.Category);
+         var keys = builder.Wildcard(f => f.Category);
 
 API Documentation
 -----------------

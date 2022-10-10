@@ -24,9 +24,16 @@ Using the builder classes, you leverage the power of the
 {+lang-framework+} compiler and your IDE to find errors during
 development and your IDE for discovery and code completion.
 
-When using builders, the compiler and the IDE catch errors such as
+When you use builders, the compiler and the IDE catch errors such as
 misspelled operators early on. Using builders helps you avoid pushing
 errors to runtime instead of compile time.
+
+.. tip:: MDB Analyzer
+
+   The **MongoDB Analyzer** is a tool that helps you analyze your
+   builders expressions and understand how your {+lang-framework+} code
+   translates into the MongoDB Query API. For more information and
+   installation instructions, see the `MongoDB Analyzer reference page <https://www.mongodb.com/docs/mongodb-analyzer/current/>`__.
 
 You should read this guide if you want to learn more about how to
 construct definitions and build up syntax using builders.
@@ -47,7 +54,7 @@ Documents in this collection are modeled by the following ``Flower`` class:
 Each builder class takes a generic type parameter
 ``TDocument`` which represents the type of document that you are working
 with. In this guide, the ``Flower`` class is the document type used in
-each builder example.
+each builder class example.
 
 Construct a Filter
 ------------------
@@ -73,7 +80,7 @@ Alternatively, you can use the typed variant to contruct the filter:
    :copyable: true
 
    var builder = Builders<Flower>.Filter;
-   var filter = builder.Lt(flower => flower.price, 20) & builder.Eq(flower => flower.category, "Perennial");
+   var filter = builder.Lt(flower => flower.Price, 20) & builder.Eq(flower => flower.Category, "Perennial");
    
 Using the typed variant form provides compile-time safety. Additionally,
 your IDE can provide refactoring support.
@@ -82,8 +89,8 @@ Array Operators
 ~~~~~~~~~~~~~~~
 
 If your document has properties or fields that serialize to arrays,
-you can use the methods beginning with “Any” to compare the entire array
-against a single item.
+you can use the methods beginning with ``Any``, such as ``AnyEq()`` or
+``AnyLt()`` to compare the entire array against a single item.
 
 Use builders to check which documents in the collection have a
 ``Season`` array that includes `"winter":
@@ -99,7 +106,70 @@ Use builders to check which documents in the collection have a
 Create a Projection
 -------------------
 
-.. TODO
+The ``ProjectionDefinitionBuilder`` class provides a type-safe interface for
+defining a projection. Suppose you want to create a projection on the
+``Name`` and ``Price`` fields, but exclude the ``Id`` field.
+
+Use builders to create the projection definition using string-based field names:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Projection;
+   var projection = builder.Include("Name").Include("Price").Exclude("Id");
+
+You can also use the typed variant to define the projection:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Projection;
+   var projection = builder.Include(flower => flower.Name).Include(flower => flower.Price).Exclude(flower => flower.Id);
+   
+Finally, you can use the ``Expression()`` method to define the
+projection:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Projection;
+   var projection = builder.Expression(flower => new { Name = flower.Name, Price = flower.Price });
+
+This definition has a return type of ``ProjectionDefinition<TDocument,
+TProjection>`` as opposed to the others which return a
+``ProjectionDefinition<TDocument>``.
+
+Lambda Expressions
+~~~~~~~~~~~~~~~~~~
+
+The driver supports using expression trees to render projections. A
+lambda expression contains all the information necessary to form both
+the projection on the server as well as the client-side result and
+requires no further information.
+
+When you define a ``Find()`` projection using the ``Expression()``
+method to create a lambda expression, the
+projection is run client-side. The driver inspects the lambda expression
+to determine which fields are referenced and automatically constructs a
+server-side projection to return only those fields.
+
+You can use lambda expressions to create new fields by performing
+operations on values in your documents. The following example shows how
+you can use a lambda expression to project a new ``Profit`` field
+using the ``Price`` and ``Stock`` fields:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Projection;
+   var projection = builder.Expression(flower => new { Profit = flower.Price * flower.Stock });
+
+The result includes only the ``Profit`` field and automatically excludes
+the``Id`` field. This occurs because the driver inspects the expression
+tree to discover all the fields that are used and tells the server to
+include them. The driver runs the lambda expression client-side. As
+such, ``Find()`` projections support virtually the entire breadth of the
+{+language+} language.
 
 Define a Sort
 -------------
@@ -117,7 +187,7 @@ Use builders to create the sort definition using string-based field names:
    :copyable: true
 
    var builder = Builders<Flower>.Sort;
-   var sort = builder..Ascending("Price").Descending("Category");
+   var sort = builder.Ascending("Price").Descending("Category");
 
 Alternatively, you can use the typed variant to define the sort:
 
@@ -168,7 +238,7 @@ Use builders to select the index key using string-based field names:
    var builder = Builders<BsonDocument>.IndexKeys;
    var keys = builder.Ascending("Category");
 
-Alternatively, you can use the typed variant to define the update:
+Alternatively, you can use the typed variant to select the index key:
 
 .. code-block:: csharp
    :copyable: true
@@ -204,3 +274,15 @@ single field path``, in this case using ``Category``:
 
          // Using a typed variant
          var keys = builder.Wildcard(flower => flower.Category);
+
+API Documentation
+-----------------
+
+To learn more about any of the methods or types discussed in this
+guide, see the following API Documentation:
+
+- `FilterDefinitionBuilder <{+api-root+}/T_MongoDB_Driver_FilterDefinitionBuilder_1.htm>`__
+- `ProjectionDefinitionBuilder <{+api-root+}/T_MongoDB_Driver_ProjectionDefinitionBuilder_1.htm>`__
+- `SortDefinitionBuilder <{+api-root+}/T_MongoDB_Driver_SortDefinitionBuilder_1.htm>`__
+- `UpdateDefinitionBuilder <{+api-root+}/T_MongoDB_Driver_UpdateDefinitionBuilder_1.htm>`__
+- `IndexKeysDefinitionBuilder <{+api-root+}/T_MongoDB_Driver_IndexKeysDefinitionBuilder_1.htm>`__

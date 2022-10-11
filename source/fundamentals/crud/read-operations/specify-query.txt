@@ -118,12 +118,12 @@ field is greater than ``1985``.
       { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
 
 The following example creates a query filter using builders that matches all 
-documents where the ``make`` field equals "Fender".
+documents where the ``establishedYear`` field is greater than ``1985``.
 
 .. io-code-block::
    :copyable:
 
-   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindEqBuilder.cs
+   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindGTBuilder.cs
       :language:  csharp
 
    .. output:: 
@@ -179,6 +179,8 @@ and the ``make`` field is not equal to "Kiesel".
 
       { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
 
+To learn more about using builders, see :ref:`csharp-builders`.
+
 Array Operators
 ---------------
 
@@ -210,6 +212,8 @@ documents that have 3 elements in the ``models`` field.
       { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
       { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
 
+To learn more about using builders, see :ref:`csharp-builders`.
+
 Element Operators
 -----------------
 
@@ -236,6 +240,8 @@ documents that have contain a ``rating`` field.
       { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
       { "_id" : 5, "make" : "Ibanez", "models" : ["RG", "AZ"], "establishedYear" : 1957, "rating" : 7 }
 
+To learn more about using builders, see :ref:`csharp-builders`.
+
 Evaluation Operators
 --------------------
 
@@ -259,6 +265,8 @@ documents that have a value in the ``make`` field that starts with the letter
       :visible:
 
       { "_id" : 2, "make" : "Gibson", "models" : ["Les Paul", "SG", "Explorer"], "establishedYear" : 1902, "rating" : 8 }
+
+To learn more about using builders, see :ref:`csharp-builders`.
 
 Additional Information
 ----------------------

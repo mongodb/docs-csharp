@@ -1,3 +1,5 @@
+.. _csharp-fundamentals:
+
 ============
 Fundamentals
 ============
@@ -8,5 +10,6 @@ Fundamentals
    :titlesonly:
    :maxdepth: 1
 
+   /fundamentals/connection
    /fundamentals/crud
    /fundamentals/builders

@@ -8,5 +8,5 @@ public class Guitar
 
     public int EstablishedYear { get; set; }
 
-    public int? rating { get; set; }
+    public int? Rating { get; set; }
 }

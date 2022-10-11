@@ -1,4 +1,4 @@
-var results = _guitarsCollection.Find(r => r.Make == "Fender").ToList();
+var results = _guitarsCollection.Find(g => g.Make == "Fender").ToList();
 
 foreach (var doc in results)
 {

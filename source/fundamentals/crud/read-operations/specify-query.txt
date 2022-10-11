@@ -123,7 +123,7 @@ documents where the ``establishedYear`` field is greater than ``1985``.
 .. io-code-block::
    :copyable:
 
-   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindGTBuilder.cs
+   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindGtBuilder.cs
       :language:  csharp
 
    .. output:: 

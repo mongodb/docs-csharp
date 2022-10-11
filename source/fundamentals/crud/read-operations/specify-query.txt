@@ -1,0 +1,278 @@
+.. _csharp-specify-query:
+
+===============
+Specify a Query
+===============
+
+.. default-domain:: mongodb
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 1
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn how to specify a query to match a subset
+of documents using the {+driver-long+}.
+
+Most CRUD operations allow you to narrow the set of matched documents
+by passing an expression as an argument to the method, or by specifying
+matching criteria in a **query filter**. Query filters contain one or more query
+operators to determine which documents to include in the resulting set.
+
+.. tip:: Find All Documents
+
+   Passing an empty query filter matches all documents in the collection.
+
+.. tip:: Using LINQ
+
+   You can also specify queries using LINQ. To learn more about using LINQ, see
+   :ref:`csharp-linq`.
+
+The examples in this guide use the following documents in a collection called
+``guitars``.
+
+.. code-block:: json
+ 
+   { "_id": 1, "make": "Fender", "models": ["Stratocaster", "Telecaster"], "establishedYear": 1946, "rating": 9 }
+   { "_id": 2, "make": "Gibson", "models": ["Les Paul", "SG", "Explorer"], "establishedYear": 1902, "rating": 8 }
+   { "_id": 3, "make": "PRS", "models": ["Silver Sky", "SE", "Custom"], "establishedYear": 1985, "rating": 9 }
+   { "_id": 4, "make": "Kiesel", "models": ["Ares", "Vader", "Solo"], "establishedYear": 2015 }
+   { "_id": 5, "make": "Ibanez", "models": ["RG", "AZ"], "establishedYear": 1957, "rating": 7 }
+   { "_id": 6, "make": "Strandberg", "models": ["Boden", "Salen"], "establishedYear": 1982 }
+
+The following ``Guitar`` class models the documents in this collection:
+
+.. literalinclude:: ../../../includes/fundamentals/code-examples/crud/Guitar.cs
+   :language: csharp
+   :copyable:
+   :dedent:
+
+Literal Values
+--------------
+
+Literal value queries return documents with an exact match to your search criteria.
+
+The following example specifies a query as a parameter to the ``Find()`` method,
+using the ``Guitar`` class. The query matches all documents where the ``make`` 
+field equals "Fender".
+
+.. io-code-block::
+   :copyable:
+
+   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindEqPOCO.cs
+      :language:  csharp
+
+   .. output:: 
+      :language: none
+      :visible:
+
+      { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
+
+The following example creates a query filter using builders that matches all 
+documents where the ``make`` field equals "Fender".
+
+.. io-code-block::
+   :copyable:
+
+   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindEqBuilder.cs
+      :language:  csharp
+
+   .. output:: 
+      :language: none
+      :visible:
+
+      { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
+
+
+To learn more about using builders, see :ref:`csharp-builders`.
+
+Comparison
+----------
+
+Comparison operators analyze the value in a document against the specified value
+in your match criteria. Common comparison operators include: ``>`` or ``Gt()`` 
+for "greater than", ``<=`` or ``Lte()`` for "less than or equal to", and ``!=``
+or ``Ne()`` for "not equal to".
+
+For a full list of comparison operators, see the :manual:`Comparison
+Query Operators </reference/operator/query-comparison/>` page.
+
+The following example specifies a query as a parameter to the ``Find()`` method,
+using the ``Guitar`` class. The query matches all documents where the ``establishedYear`` 
+field is greater than ``1985``.
+
+.. io-code-block::
+   :copyable:
+
+   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindGtPOCO.cs
+      :language:  csharp
+
+   .. output::
+      :language: none
+      :visible:
+
+      { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
+
+The following example creates a query filter using builders that matches all 
+documents where the ``make`` field equals "Fender".
+
+.. io-code-block::
+   :copyable:
+
+   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindEqBuilder.cs
+      :language:  csharp
+
+   .. output:: 
+      :language: none
+      :visible:
+
+      { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
+
+
+To learn more about using builders, see :ref:`csharp-builders`.
+
+Logical Operators
+-----------------
+
+Logical operators query data using logic applied to the results of field-level
+operators. Common logical operators include ``&&`` or ``And()`` where all operators must be true, 
+and ``||`` or ``Or()`` where at least one of the operators must be true.
+
+For a full list of logical operators, see the :manual:`Logical
+Query Operators </reference/operator/query-logical/>` page. 
+
+The following example specifies a query as a parameter to the ``Find()`` method,
+using the ``Guitar`` class. The query matches all documents where the ``establishedYear`` 
+field is greater than or equal to ``1985``, and the ``make`` field is not equal 
+to "Kiesel".
+
+.. io-code-block::
+   :copyable:
+
+   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindAndPOCO.cs
+      :language:  csharp
+
+   .. output::
+      :language: none
+      :visible:
+
+      { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
+
+
+The following example creates a query filter using builders that matches all 
+documents where the ``establishedYear`` field is greater than or equal to ``1985``,
+and the ``make`` field is not equal to "Kiesel".
+
+.. io-code-block::
+   :copyable:
+
+   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindAndBuilder.cs
+      :language:  csharp
+
+   .. output:: 
+      :language: none
+      :visible:
+
+      { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
+
+Array Operators
+---------------
+
+Array operators query data based on the value or quantity of elements in an array
+field. Array operators include ``All()``, ``Any()``, and ``Size()``.
+
+.. note:: 
+
+   The {+driver-long+} translates the ``Any()`` operator to the MongoDB ``$elemMatch``
+   query selector.
+
+For more information on the array operators, see the :manual:`Array
+Query Operators </reference/operator/query-array/>` page.
+
+The following example creates a query filter using builders that matches all
+documents that have 3 elements in the ``models`` field.
+
+.. io-code-block::
+   :copyable:
+
+   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindSizeBuilder.cs
+      :language:  csharp
+
+   .. output::
+      :language: none
+      :visible:
+
+      { "_id" : 2, "make" : "Gibson", "models" : ["Les Paul", "SG", "Explorer"], "establishedYear" : 1902, "rating" : 8 }
+      { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
+      { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
+
+Element Operators
+-----------------
+
+Element operators query data based on the presence or type of a field.
+
+For a full list of element operators, see the :manual:`Element
+Query Operators </reference/operator/query-element/>` page.
+
+The following example creates a query filter using builders that matches all
+documents that have contain a ``rating`` field.
+
+.. io-code-block::
+   :copyable:
+
+   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindExistsBuilder.cs
+      :language:  csharp
+
+   .. output::
+      :language: none
+      :visible:
+
+      { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
+      { "_id" : 2, "make" : "Gibson", "models" : ["Les Paul", "SG", "Explorer"], "establishedYear" : 1902, "rating" : 8 }
+      { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
+      { "_id" : 5, "make" : "Ibanez", "models" : ["RG", "AZ"], "establishedYear" : 1957, "rating" : 7 }
+
+Evaluation Operators
+--------------------
+
+Evaluation operators query data on higher level logic, like regex and text searches.
+
+For a full list of evaluation operators, see the :manual:`Evaluation
+Query Operators </reference/operator/query-evaluation/>` page.
+
+The following example creates a query filter using builders that matches all
+documents that have a value in the ``make`` field that starts with the letter 
+``"G"``.
+
+.. io-code-block::
+   :copyable:
+
+   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindRegexBuilder.cs
+      :language:  csharp
+
+   .. output::
+      :language: none
+      :visible:
+
+      { "_id" : 2, "make" : "Gibson", "models" : ["Les Paul", "SG", "Explorer"], "establishedYear" : 1902, "rating" : 8 }
+
+Additional Information
+----------------------
+
+For more information about the operators mentioned in this guide, see the 
+following Server Manual Entries:
+
+- :manual:`Comparison Query Operators </reference/operator/query-comparison/>`
+- :manual:`Logical Query Operators </reference/operator/query-logical/>`
+- :manual:`Array Query Operators </reference/operator/query-array/>`
+- :manual:`Element Query Operators </reference/operator/query-element/>`
+- :manual:`Evaluation Query Operators </reference/operator/query-evaluation/>`
+
+To learn more about using Builders, see :ref:`csharp-builders`.
+
+.. TODO: Add LINQ fundamentals page
+To learn how to specify queries using LINQ, see :ref:`csharp-linq`.

@@ -16,17 +16,16 @@ Overview
 --------
 
 In this guide, you can learn about the helper classes, or **builders**, that
-the {+driver-short+} provides to construct various types used in the
-driver. The driver includes types related to the
-specification of filters, updates, projections, sorts, and index keys,
-and you can use builders to aid in the creation of these definitions.
-Using the builder classes, you leverage the power of the
-{+lang-framework+} compiler and your IDE to find errors during
-development and your IDE for discovery and code completion.
+the {+driver-short+} provides to create types used in your operations.
+Using builders helps you identify errors at compile time and avoid them
+at runtime. This guide provides information on builder classes that you
+can use for the following tasks:
 
-When you use builders, the compiler and the IDE catch errors such as
-misspelled operators early on. Using builders helps you avoid pushing
-errors to runtime instead of compile time.
+- Creating a filter definition
+- Creating a projection
+- Defining a sort order
+- Defining an update operation
+- Selecting index keys
 
 .. tip:: MongoDB Analyzer
 
@@ -66,15 +65,7 @@ documents matching the following criteria:
 - ``Price`` field value less than 20
 - ``Category`` field value is "Perennial"
 
-Use builders to create the filter definition using string-based field names:
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<Flower>.Filter;
-   var filter = builder.Lt("Price", 20) & builder.Eq("Category", "Perennial");
-
-Alternatively, you can use the typed variant to contruct the filter:
+Use builders to create the filter definition with the typed variant:
 
 .. code-block:: csharp
    :copyable: true
@@ -85,6 +76,14 @@ Alternatively, you can use the typed variant to contruct the filter:
 Using the typed variant form provides compile-time safety. Additionally,
 your IDE can provide refactoring support.
 
+Alternatively, you can use string-based field names to contruct the filter:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Filter;
+   var filter = builder.Lt("Price", 20) & builder.Eq("Category", "Perennial");
+
 Array Operators
 ~~~~~~~~~~~~~~~
 
@@ -93,7 +92,7 @@ you can use the methods beginning with ``Any``, such as ``AnyEq()`` or
 ``AnyLt()``, to compare the entire array against a single item.
 
 Use builders to check which documents in the collection have a
-``Season`` array that includes `"winter":
+``Season`` array that includes "winter":
 
 .. code-block:: csharp
    :copyable: true
@@ -110,7 +109,15 @@ The ``ProjectionDefinitionBuilder`` class provides a type-safe interface for
 defining a projection. Suppose you want to create a projection on the
 ``Name`` and ``Price`` fields, but exclude the ``Id`` field.
 
-Use builders to create the projection definition using string-based field names:
+Use builders to create the projection definition with the typed variant:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Projection;
+   var projection = builder.Include(f => f.Name).Include(f => f.Price).Exclude(f => f.Id);
+
+You can also use string-based field names to define the projection:
 
 .. code-block:: csharp
    :copyable: true
@@ -118,14 +125,6 @@ Use builders to create the projection definition using string-based field names:
    var builder = Builders<Flower>.Projection;
    var projection = builder.Include("Name").Include("Price").Exclude("Id");
 
-You can also use the typed variant to define the projection:
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<Flower>.Projection;
-   var projection = builder.Include(f => f.Name).Include(f => f.Price).Exclude(f => f.Id);
-   
 Finally, you can use the ``Expression()`` method to define the
 projection:
 
@@ -142,18 +141,13 @@ TProjection>`` whereas the others return a
 Lambda Expressions
 ~~~~~~~~~~~~~~~~~~
 
-The driver supports using expression trees to render projections. A
-lambda expression contains all the information necessary to form both
-the projection on the server as well as the client-side result and
-requires no further information.
-
-When you define a ``Find()`` projection with the ``Expression()``
-method to create a lambda expression, the
-projection is run client-side. The driver inspects the lambda expression
+The driver supports using lambda expressions to render projections. When
+you define a ``Find()`` projection with the ``Expression()`` method to
+create a lambda expression, the driver inspects the expression
 to determine which fields are referenced and automatically constructs a
 server-side projection to return only those fields.
 
-You can use lambda expressions to create new fields by performing
+You can also use lambda expressions to create new fields by performing
 operations on values in your documents. The following example shows how
 you can use a lambda expression to project a new ``Profit`` field
 using the ``Price`` and ``Stock`` fields:
@@ -164,12 +158,11 @@ using the ``Price`` and ``Stock`` fields:
    var builder = Builders<Flower>.Projection;
    var projection = builder.Expression(f => new { Profit = f.Price * f.Stock });
 
-The result includes only the ``Profit`` field and automatically excludes
-the``Id`` field. This occurs because the driver inspects the expression
-tree to discover all the fields that are used and tells the server to
-include them. The driver runs the lambda expression client-side. As
-such, ``Find()`` projections support virtually the entire breadth of the
-{+language+} language.
+.. note:: ``Id`` Field Exclusion
+
+   When you create a projection using a lambda expression, the output
+   automatically excludes the ``Id`` field unless you explicitly include
+   is as a projection field.
 
 Define a Sort
 -------------
@@ -181,7 +174,15 @@ following order:
 - Ascending on ``Price``
 - Descending on ``Category``
 
-Use builders to create the sort definition using string-based field names:
+Use builders to create the sort definition with the typed variant:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Sort;
+   var sort = builder.Ascending(f => f.Price).Descending(f => f.Category);
+
+Alternatively, you can use string-based field names to define the sort:
 
 .. code-block:: csharp
    :copyable: true
@@ -189,14 +190,6 @@ Use builders to create the sort definition using string-based field names:
    var builder = Builders<Flower>.Sort;
    var sort = builder.Ascending("Price").Descending("Category");
 
-Alternatively, you can use the typed variant to define the sort:
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<Flower>.Sort;
-   var sort = builder.Ascending(f => f.Price).Descending(f => f.Category);
-   
 Define an Update
 ----------------
 
@@ -207,21 +200,21 @@ update specification with the following criteria:
 - Create the new field ``SunRequirement``
 - Multiply the ``Price`` field value by 0.9
 
-Use builders to create the update specification using string-based field names:
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<Flower>.Update;
-   var update = builder.Set("SunRequirement", "Full sun").Mul("Price", 0.9);
-
-Alternatively, you can use the typed variant to define the update:
+Use builders to create the update specification with the typed variant:
 
 .. code-block:: csharp
    :copyable: true
 
    var builder = Builders<Flower>.Update;
    var update = builder.Set(f => f.SunRequirement, "Full sun").Mul(f => f.Price, 0.9);
+
+Alternatively, you can use string-based field names to define the update:
+   
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Update;
+   var update = builder.Set("SunRequirement", "Full sun").Mul("Price", 0.9);
 
 Define Index Keys
 -----------------
@@ -230,21 +223,21 @@ The ``IndexKeysDefinitionBuilder`` class provides a type-safe interface for
 defining index keys. Suppose you want to select ``Category`` as an
 ascending index key.
 
-Use builders to select the index key using string-based field names:
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<BsonDocument>.IndexKeys;
-   var keys = builder.Ascending("Category");
-
-Alternatively, you can use the typed variant to select the index key:
+Use builders to select the index key with the typed variant:
 
 .. code-block:: csharp
    :copyable: true
 
    var builder = Builders<Flower>.IndexKeys;
    var keys = builder.Ascending(f => f.Category);
+
+Alternatively, you can use string-based field names to select the index key:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<BsonDocument>.IndexKeys;
+   var keys = builder.Ascending("Category");
 
 The ``IndexKeysDefinitionBuilder`` class also provides methods to build
 a wildcard index. You can create a wildcard index using ``All field paths`` or ``A
@@ -269,14 +262,20 @@ single field path``, in this case using ``Category``:
 
          var builder = Builders<Flower>.IndexKeys;
 
+         // Using the typed variant
+         var keys = builder.Wildcard(f => f.Category);
+
          // Using string-based field names
          var keys = builder.Wildcard("Category");
 
-         // Using a typed variant
-         var keys = builder.Wildcard(f => f.Category);
+Additional Information
+----------------------
+
+Find runnable examples using builders for various operations under
+:ref:`Usage Examples <csharp-usage-examples>`.
 
 API Documentation
------------------
+~~~~~~~~~~~~~~~~~
 
 To learn more about any of the methods or types discussed in this
 guide, see the following API Documentation:

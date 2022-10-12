@@ -39,8 +39,10 @@ public class Clothing
 {
     public ObjectId _id { get; set; }
     public string name { get; set; }
+
     [BsonElement("in_stock")]
     public bool instock { get; set; }
+    
     [BsonRepresentation(BsonType.Double)]
     public decimal price { get; set; }
     public List<string> color { get; set; }

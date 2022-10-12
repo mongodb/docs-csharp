@@ -26,16 +26,16 @@ You should read this guide if you want to learn more about how to use
 POCOs with the {+driver-short+} or need to adjust the driver's default
 field mapping behavior.
 
-Define a POCO
+Create a POCO
 -------------
 
-You can define a POCO by instantiating any simple class that does not
+You can create a POCO by instantiating any simple class that does not
 implement interfaces or extend classes from a framework. When you
 execute an operation such as a read or write using a POCO, the driver
 interally *serializes*, or converts, the POCO to BSON.
 
 Select the :guilabel:`POCO` or :guilabel:`BSON` tab to see how the
-driver serializes an sample POCO to BSON:
+driver serializes a sample POCO to BSON:
 
 .. tabs::
 
@@ -64,7 +64,7 @@ driver serializes an sample POCO to BSON:
            "_id": ObjectId("..."),
            "name": "Long Sleeve Shirt",
            "instock": true,
-           "price": 18,
+           "price": 17.99,
            "color": [ "black", "navy", "red" ]
          }
 
@@ -109,7 +109,7 @@ For some {+language+} primitive types you can control the BSON type used
 to represent the value of your POCO property using the
 ``BsonRepresentationAttribute``. The following code shows how you can
 specify that the ``YearBuilt`` property, defined as a ``char`` in
-{+language+} is serialized as a BSON ``Int32`` type:
+{+language+}, is serialized as a BSON ``Int32`` type:
 
 .. code-block:: csharp
    :copyable: true
@@ -125,12 +125,11 @@ specify that the ``YearBuilt`` property, defined as a ``char`` in
 Set Field Order
 ~~~~~~~~~~~~~~~
 
-The driver serializes POCO properties to BSON fields in the order they
+The driver serializes properties to BSON fields in the order they
 are specified in the POCO. To store properties in a custom order, you
 can specify the ``Order`` named parameter in the ``BsonElement``
 attribute. The following code shows how you can direct the driver to
-store the ``YearBuilt`` property of the ``House`` object after the
-``Style`` property:
+store the ``YearBuilt`` property after the ``Style`` property:
 
 .. code-block:: csharp
    :copyable: true
@@ -153,10 +152,9 @@ Identify Id Property
 ~~~~~~~~~~~~~~~~~~~~
 
 By default, the driver uses any public property named ``Id``, ``id``, or ``_id`` as the
-identifier to map to the ``_id`` field. You can explicitly select the
+identifier to map to the BSON ``_id`` field. You can explicitly select the
 identifier using the ``BsonIdAttribute``. The following code shows how
-you can direct the driver to map the ``Identifier`` property of the
-``House`` object to the ``_id`` field:
+you can direct the driver to map the ``Identifier`` property to the ``_id`` field:
 
 .. code-block:: csharp
    :copyable: true
@@ -170,7 +168,7 @@ you can direct the driver to map the ``Identifier`` property of the
 Omit Empty Fields
 ~~~~~~~~~~~~~~~~~
 
-By default, the driver serializes undefined properties to field with ``null``
+By default, the driver serializes undefined properties to fields with ``null``
 values. You can direct the driver to ignore empty properties using the
 ``BsonIgnoreAttribute``. The following code shows how you can prevent
 the driver from serializing the ``YearBuilt`` property if it is empty:
@@ -194,7 +192,7 @@ The following example shows how the {+driver-short+} inserts a document
 instantiated as a POCO with the following custom field mapping specifications:
 
 - Sets a custom field name ``in_stock`` for the ``instock`` property
-- Serializes the ``price`` field as a BSON ``Double``
+- Serializes the ``price`` field as a BSON ``Double`` type
 
 Define the ``Clothing`` class with the relevant serialization
 attributes:

@@ -40,7 +40,11 @@ The examples in this guide use the following documents in a collection called
    { "_id": 5, "make": "Ibanez", "models": ["RG", "AZ"], "establishedYear": 1957, "rating": 7 }
    { "_id": 6, "make": "Strandberg", "models": ["Boden", "Salen"], "establishedYear": 1982 }
 
-The following ``Guitar`` class models the documents in this collection:
+The following ``Guitar`` class models the documents in this collection. The 
+{+driver-short+} uses this class to automatically map these documents to and 
+from BSON.
+
+.. TODO: Add link to Automapping page.
 
 .. literalinclude:: /includes/fundamentals/code-examples/specify-query/Guitar.cs
    :language: csharp

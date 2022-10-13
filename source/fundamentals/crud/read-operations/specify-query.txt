@@ -15,21 +15,20 @@ Specify a Query
 Overview
 --------
 
-In this guide, you can learn how to specify a query to match a subset
-of documents using the {+driver-long+}.
+In this guide, you can learn how to specify a query using the {+driver-long+}.
 
-Most CRUD (Create, Read, Update, Delete) operations allow you to narrow the set
-of matched documents by passing a **query filter** as an argument to the driver
-method. A query filter is an expression that specifies the documents you want to
-retrieve in your query. 
+You can narrow the set of matched documents returned by your query by creating a
+**query filter**. A query filter is an expression that specifies the documents you 
+want to match in a read, update, or delete operation.
 
 .. note:: Using LINQ
 
-   You can also specify queries using LINQ. To learn more about using LINQ, see
+   This guide shows how to specify queries using query filters. You can also
+   specify queries using LINQ. To learn more about using LINQ, see
    :ref:`csharp-linq`.
 
 The examples in this guide use the following documents in a collection called
-``guitars``.
+``guitars``:
 
 .. code-block:: json
  
@@ -57,7 +56,7 @@ Literal Values
 Literal value queries return documents with an exact match to your query filter.
 
 The following example specifies a query filter as a parameter to the ``Find()`` 
-method, using the ``Guitar`` class. The query matches all documents where the
+method. The query matches all documents where the
 ``make`` field equals "Fender".
 
 .. io-code-block::
@@ -72,8 +71,8 @@ method, using the ``Guitar`` class. The query matches all documents where the
 
       { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
 
-The following example creates a query filter using builders that matches all 
-documents where the ``make`` field equals "Fender".
+The following example uses builders to create a query filter that matches the
+same documents as the preceding example:
 
 .. io-code-block::
    :copyable:
@@ -89,7 +88,7 @@ documents where the ``make`` field equals "Fender".
 
 .. tip:: Find All Documents
 
-   Using an empty query filter matches all documents in the collection. Create
+   Use an empty query filter to match all documents in the collection. Create
    an empty query filter with builders as follows:
 
    .. code-block:: csharp
@@ -128,8 +127,8 @@ For a full list of comparison operators, see the :manual:`Comparison
 Query Operators </reference/operator/query-comparison/>` page.
 
 The following example specifies a query filter as a parameter to the ``Find()``
-method, using the ``Guitar`` class. The query matches all documents where the
-``establishedYear`` field is greater than ``1985``.
+method. The query matches all documents where the ``establishedYear`` field is
+greater than ``1985``.
 
 .. io-code-block::
    :copyable:
@@ -143,8 +142,8 @@ method, using the ``Guitar`` class. The query matches all documents where the
 
       { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
 
-The following example uses builders to create a query filter that matches all 
-documents where the ``establishedYear`` field is greater than ``1985``.
+The following example uses builders to create a query filter that matches the
+same documents as the preceding example:
 
 .. io-code-block::
    :copyable:
@@ -156,7 +155,7 @@ documents where the ``establishedYear`` field is greater than ``1985``.
       :language: json
       :visible:
 
-      { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
+      { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
 
 
 To learn more about using builders, see :ref:`csharp-builders`.
@@ -164,8 +163,8 @@ To learn more about using builders, see :ref:`csharp-builders`.
 Logical Operators
 -----------------
 
-Logical operators query data using logic applied to the results of two or more
-sets of search criteria. Common logical operators include:
+Logical operators match documents using logic applied to the results of two or more
+sets of expressions. The following is a list of some logical operators:
 
 .. list-table::
    :widths: 30 30 40
@@ -177,17 +176,17 @@ sets of search criteria. Common logical operators include:
 
    * - ``&&``
      - ``And()``
-     - All sets of search criteria must be true.
+     - All expressions must evaluate to true.
 
    * - ``||``
      - ``Or()``
-     - At least one of set of search criteria must be true.
+     - At least one expression must evaluate to true.
 
 For a full list of logical operators, see the :manual:`Logical
 Query Operators </reference/operator/query-logical/>` page. 
 
 The following example specifies a query filter as a parameter to the ``Find()`` 
-method, using the ``Guitar`` class. The query matches all documents where the
+method. The query matches all documents where the
 ``establishedYear`` field is greater than or equal to ``1985``, and the ``make``
 field is not equal to "Kiesel".
 
@@ -204,9 +203,8 @@ field is not equal to "Kiesel".
       { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
 
 
-The following example uses builders to creates a query filter that matches all 
-documents where the ``establishedYear`` field is greater than or equal to ``1985``,
-and the ``make`` field is not equal to "Kiesel".
+The following example uses builders to create a query filter that matches the
+same documents as the preceding example:
 
 .. io-code-block::
    :copyable:
@@ -225,13 +223,30 @@ To learn more about using builders, see :ref:`csharp-builders`.
 Array Operators
 ---------------
 
-Array operators query data based on the value or quantity of elements in an array
-field. Array operators include ``All()``, ``Any()``, and ``Size()``.
+Array operators match documents based on the value or quantity of elements in an array
+field. The following is a list of builder methods that use array operators:
+
+.. list-table::
+   :widths: 40 60
+   :header-rows: 1
+
+   * - Builder
+     - Description
+
+   * - ``All()``
+     - Matches documents if the array field contains all elements specified in
+       the query.
+
+   * - ``Any()``
+     - Matches documents if any element in the array field matches the specified
+       query filter.
+
+   * - ``Size()``
+     - Matches documents if the array field is a specified size.
 
 .. note:: 
 
-   The {+driver-long+} translates the ``Any()`` operator to the MongoDB ``$elemMatch``
-   query selector.
+   The ``Any()`` builder uses the ``$elemMatch`` query operator.
 
    To learn more about the ``$elemMatch`` query selector, see
    :manual:`$elemMatch </reference/operator/query/elemMatch/#mongodb-query-op.-elemMatch>`.
@@ -240,7 +255,7 @@ For more information on the array operators, see the :manual:`Array
 Query Operators </reference/operator/query-array/>` page.
 
 The following example uses builders to create a query filter that matches all
-documents that have 3 elements in the ``models`` field.
+documents that have 3 elements in the ``models`` field:
 
 .. io-code-block::
    :copyable:
@@ -267,7 +282,7 @@ For a full list of element operators, see the :manual:`Element
 Query Operators </reference/operator/query-element/>` page.
 
 The following example uses builders to create a query filter that matches all
-documents that have a ``rating`` field.
+documents that have a ``rating`` field:
 
 .. io-code-block::
    :copyable:
@@ -290,14 +305,15 @@ Evaluation Operators
 --------------------
 
 Evaluation operators analyze data on individual fields, or on the entire collection's
-documents. Common evaluation operators include ``Regex()`` and ``Text()``.
+documents. Some builder methods that use evaluation operators include ``Regex()``
+and ``Text()``.
 
 For a full list of evaluation operators, see the :manual:`Evaluation
 Query Operators </reference/operator/query-evaluation/>` page.
 
 The following example uses builders to create a query filter that matches all
 documents that have a value in the ``make`` field that starts with the letter 
-"G".
+"G":
 
 .. io-code-block::
    :copyable:

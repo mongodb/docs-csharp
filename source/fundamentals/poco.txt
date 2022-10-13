@@ -15,24 +15,24 @@ Work with POCOs
 Overview
 --------
 
-In this guide, you can learn about how you can use "Plain Old CLR/Class
-Objects", or **POCOs**, with the {+driver-short+} for your operations
-and queries. POCOs are simple class objects which do not inherit
+In this guide, you can learn about how you can use ":wikipedia:`Plain Old CLR/Class
+Objects </Plain_old_CLR_object>`", or **POCOs**, with the {+driver-short+} for your operations
+and queries. POCOs are simple class objects that do not inherit
 features from any framework-specific base class and do not return any
 special types. We recommend using POCOs in your {+language+} code to
 adhere to idiomatic driver usage and achieve the best performance.
 
 You should read this guide if you want to learn more about how to use
-POCOs with the {+driver-short+} or need to adjust the driver's default
+POCOs with the {+driver-short+} or if you need to adjust the driver's default
 field mapping behavior.
 
 Create a POCO
 -------------
 
-You can create a POCO by instantiating any simple class that does not
+You can create a POCO by defining a simple class that does not
 implement interfaces or extend classes from a framework. When you
 execute an operation such as a read or write using a POCO, the driver
-interally *serializes*, or converts, the POCO to BSON.
+internally *serializes*, or converts, the POCO to BSON.
 
 Select the :guilabel:`POCO` or :guilabel:`BSON` tab to see how the
 driver serializes a sample POCO to BSON:
@@ -47,11 +47,11 @@ driver serializes a sample POCO to BSON:
 
          public class Clothing
          {
-             public ObjectId _id { get; set; }
-             public string name { get; set; }
-             public bool instock { get; set; }
-             public double price { get; set; }
-             public List<string> color { get; set; }
+             public ObjectId Id { get; set; }
+             public string Name { get; set; }
+             public bool InStock { get; set; }
+             public double Price { get; set; }
+             public List<string> Color { get; set; }
          }
 
    .. tab:: BSON
@@ -62,10 +62,10 @@ driver serializes a sample POCO to BSON:
 
          {
            "_id": ObjectId("..."),
-           "name": "Long Sleeve Shirt",
-           "instock": true,
-           "price": 17.99,
-           "color": [ "black", "navy", "red" ]
+           "Name": "Long Sleeve Shirt",
+           "InStock": true,
+           "Price": 17.99,
+           "Color": [ "black", "navy", "red" ]
          }
 
 You can define a POCO with any object structure that suits your
@@ -77,19 +77,19 @@ Custom Serialization
 --------------------
 
 If the default field mapping behavior does not meet your needs, you can
-specify custom behavior using serialization related attributes. There
-are various attributes which you can specify to modify the way that the
-driver serializes each property of your POCO. This section describes
-some of the common serialization related attributes.
+specify custom behavior using serialization-related attributes. These
+attributes change the way that the driver serializes each property of
+your POCO. This section describes some of the common
+serialization-related attributes.
 
 Set Field Names
 ~~~~~~~~~~~~~~~
 
-The driver serializes POCO properties to BSON fields with same field
-name and capitalization. To store a property under a different name, you
-can use the ``BsonElementAttribute``. The following code shows how you
-can direct the driver to store the ``YearBuilt`` property of the
-``House`` object as ``year_built`` in the serialized BSON document:
+The driver serializes POCO properties to BSON fields with the same field
+name and capitalization. To store a property under a different name, use
+the ``[BsonElement()]`` attribute. The following code maps the
+``YearBuilt`` property of the ``House`` class to the ``year_built``
+field in the serialized BSON document:
 
 .. code-block:: csharp
    :copyable: true
@@ -102,14 +102,29 @@ can direct the driver to store the ``YearBuilt`` property of the
        public int YearBuilt { get; set; }
    }
 
+.. tip:: Set Custom Field Names for All Properties
+   
+   If you want to serialize every property with a custom field name, you
+   can define a ``ConventionPack`` instead of using the
+   ``[BsonElement()]`` attribute. For example, if your define your POCO
+   using the PascalCase naming convention, you can use the following
+   code to use camelCase field names in the serialized document:
+
+   .. literalinclude:: ../includes/fundamentals/code-examples/poco.cs
+      :start-after: start-conventionpack
+      :end-before: end-conventionpack
+      :language:  csharp
+      :copyable:
+      :dedent:
+
 Select Type Representation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For some {+language+} primitive types you can control the BSON type used
-to represent the value of your POCO property using the
-``BsonRepresentationAttribute``. The following code shows how you can
-specify that the ``YearBuilt`` property, defined as a ``char`` in
-{+language+}, is serialized as a BSON ``Int32`` type:
+You can control the BSON type that the driver serializes a property to using the
+``[BsonRepresentation()]`` attribute if the {+language+} primitive type
+is convertible to the BSON type. In the following code sample, the
+``YearBuilt`` property, defined as a ``char`` in {+language+}, is
+serialized as a BSON ``Int32`` type:
 
 .. code-block:: csharp
    :copyable: true
@@ -126,10 +141,11 @@ Set Field Order
 ~~~~~~~~~~~~~~~
 
 The driver serializes properties to BSON fields in the order they
-are specified in the POCO. To store properties in a custom order, you
-can specify the ``Order`` named parameter in the ``BsonElement``
-attribute. The following code shows how you can direct the driver to
-store the ``YearBuilt`` property after the ``Style`` property:
+are specified in the POCO. To store properties in a custom order to
+match an existing schema, you can specify the ``Order`` named
+parameter in the ``[BsonElement()]`` attribute. In the following code
+sample, the driver stores the ``YearBuilt`` property after the
+``Style`` property:
 
 .. code-block:: csharp
    :copyable: true
@@ -145,16 +161,17 @@ store the ``YearBuilt`` property after the ``Style`` property:
        public string Style { get; set; }
    }
 
-Any properties that do not have an explicit ``Order`` will occur after
-those that do.
+If any properties don't have an explicit ``Order``, the driver will
+serialize them in the default order after those that do.
 
-Identify Id Property
-~~~~~~~~~~~~~~~~~~~~
+Identify ``Id`` Property
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, the driver uses any public property named ``Id``, ``id``, or ``_id`` as the
-identifier to map to the BSON ``_id`` field. You can explicitly select the
-identifier using the ``BsonIdAttribute``. The following code shows how
-you can direct the driver to map the ``Identifier`` property to the ``_id`` field:
+By default, the driver maps any public property named ``Id``, ``id``, or
+``_id`` to the BSON ``_id`` field. To explicitly select the
+property to map to the ``_id`` field, use the ``[BsonId()]`` attribute.
+The following code sample maps the ``Identifier`` property to the
+``_id`` field:
 
 .. code-block:: csharp
    :copyable: true
@@ -165,13 +182,18 @@ you can direct the driver to map the ``Identifier`` property to the ``_id`` fiel
        public string Identifier { get; set; }
    }
 
+.. warning:: Multiple Id Fields
+
+   If you identify more than one property as the ``_id`` field, the
+   driver throws a ``BsonSerializationException``.
+
 Omit Empty Fields
 ~~~~~~~~~~~~~~~~~
 
 By default, the driver serializes undefined properties to fields with ``null``
-values. You can direct the driver to ignore empty properties using the
-``BsonIgnoreAttribute``. The following code shows how you can prevent
-the driver from serializing the ``YearBuilt`` property if it is empty:
+values. To ignore undefined properties during serialization, use the ``[BsonIgnore()]``
+attribute. The following code shows how you can prevent the driver from
+serializing the ``YearBuilt`` property if it is undefined:
 
 .. code-block:: csharp
    :copyable: true
@@ -188,13 +210,15 @@ the driver from serializing the ``YearBuilt`` property if it is empty:
 Example
 -------
 
-The following example shows how the {+driver-short+} inserts a document
-instantiated as a POCO with the following custom field mapping specifications:
+The following example shows how to define a {+language+} class with custom field
+mapping specifications, create a POCO to represent a document, then
+insert the document into MongoDB. The ``Clothing`` class uses
+serialization attributes to perform the following:
 
-- Sets a custom field name ``in_stock`` for the ``instock`` property
-- Serializes the ``price`` field as a BSON ``Double`` type
+- Sets a custom field name ``StyleName`` for the ``Name`` property
+- Serializes the ``Price`` field as a BSON ``Double`` type
 
-Define the ``Clothing`` class with the relevant serialization
+Define the ``Clothing`` class with the relevant serialization-related
 attributes:
 
 .. literalinclude:: ../includes/fundamentals/code-examples/poco.cs
@@ -213,24 +237,23 @@ Instantiate a ``Clothing`` object and insert the document into a collection:
    :copyable:
    :dedent:
 
-The BSON representation of the inserted document should resemble the
-following:
+The BSON representation of the inserted document looks like this:
 
 .. code-block:: json
    :copyable: false
 
    {
      "_id": ObjectId("..."),
-     "name": "Denim Jacket",
-     "in_stock": false,
-     "price": 32.99,
-     "color": [ "dark wash", "light wash" ]
+     "StyleName": "Denim Jacket",
+     "InStock": false,
+     "Price": 32.99,
+     "Color": [ "dark wash", "light wash" ]
    }
 
 Additional Information
 ----------------------
 
-For a full list of serialization related attributes, see the
+For a full list of serialization-related attributes, see the
 `Serialization.Attributes API documentation <{+api-root+}/N_MongoDB_Bson_Serialization_Attributes.htm>`__.
 
 For additional read and write operation examples using POCOs, see the :ref:`Usage Examples
@@ -240,10 +263,11 @@ API Documentation
 ~~~~~~~~~~~~~~~~~
 
 To learn more about any of the methods or types discussed in this
-guide, see the following API Documentation:
+guide, see the following API documentation:
 
-- `BsonElementAttribute <{+api-root+}/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm>`__
-- `BsonRepresentationAttribute <{+api-root+}/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm>`__
-- `BsonIdAttribute <{+api-root+}/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm>`__
-- `BsonIgnoreAttribute <{+api-root+}/T_MongoDB_Bson_Serialization_Attributes_BsonIgnoreAttribute.htm>`__
+- `[BsonElement()] <{+api-root+}/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm>`__
+- `[BsonRepresentation()] <{+api-root+}/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm>`__
+- `[BsonId()] <{+api-root+}/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm>`__
+- `[BsonIgnore()] <{+api-root+}/T_MongoDB_Bson_Serialization_Attributes_BsonIgnoreAttribute.htm>`__
+- `ConventionPack <{+api-root+}/T_MongoDB_Bson_Serialization_Conventions_ConventionPack.htm>`__
 - `InsertOne() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm>`__

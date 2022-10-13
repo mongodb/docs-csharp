@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace TestRun.Fundamentals;
 
-public class Builders
+public class Poco
 {
     private static IMongoCollection<Clothing> _myColl;
     private static string _mongoConnectionString = "<Your MongoDB URI>";
@@ -27,6 +27,11 @@ public class Builders
     }
     private static void Setup()
     {
+        // start-conventionpack
+        var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
+        ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
+        // end-conventionpack
+        
         // Establish the connection to MongoDB and get the restaurants database
         var mongoClient = new MongoClient(_mongoConnectionString);
         var myDatabase = mongoClient.GetDatabase("sample_db");
@@ -37,14 +42,14 @@ public class Builders
 // start-model
 public class Clothing
 {
-    public ObjectId _id { get; set; }
-    public string name { get; set; }
+    public ObjectId Id { get; set; }
 
-    [BsonElement("in_stock")]
-    public bool instock { get; set; }
+    [BsonElement("StyleName")]
+    public string Name { get; set; }
+    public bool InStock { get; set; }
     
     [BsonRepresentation(BsonType.Double)]
-    public decimal price { get; set; }
-    public List<string> color { get; set; }
+    public decimal Price { get; set; }
+    public List<string> Color { get; set; }
 }
 // end-model

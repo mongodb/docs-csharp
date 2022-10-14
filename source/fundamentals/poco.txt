@@ -16,7 +16,7 @@ Overview
 --------
 
 In this guide, you can learn about how you can use ":wikipedia:`Plain Old CLR/Class
-Objects </Plain_old_CLR_object>`", or **POCOs**, with the {+driver-short+} for your operations
+Objects <Plain_old_CLR_object>`", or **POCOs**, with the {+driver-short+} for your operations
 and queries. POCOs are simple class objects that do not inherit
 features from any framework-specific base class and do not return any
 special types. We recommend using POCOs in your {+language+} code to
@@ -102,7 +102,7 @@ field in the serialized BSON document:
        public int YearBuilt { get; set; }
    }
 
-.. tip:: Set Custom Field Names for All Properties
+.. tip:: Set Custom Field Name Convention
    
    If you want to serialize every property with a custom field name, you
    can define a ``ConventionPack`` instead of using the
@@ -122,7 +122,7 @@ Select Type Representation
 
 You can control the BSON type that the driver serializes a property to using the
 ``[BsonRepresentation()]`` attribute if the {+language+} primitive type
-is convertible to the BSON type. In the following code sample, the
+is convertible to the BSON type you specify. In the following code sample, the
 ``YearBuilt`` property, defined as a ``char`` in {+language+}, is
 serialized as a BSON ``Int32`` type:
 

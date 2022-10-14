@@ -16,10 +16,10 @@ public class Poco
         // start-insert
         var doc = new Clothing() 
         { 
-            name = "Denim Jacket", 
-            instock = false, 
-            price = 32.99m, 
-            color = new List<string>() {"dark wash", "light wash"}
+            Name = "Denim Jacket", 
+            InStock = false, 
+            Price = 32.99m, 
+            Color = new List<string>() {"dark wash", "light wash"}
         };
         
         _myColl.InsertOne(doc);

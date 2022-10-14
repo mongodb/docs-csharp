@@ -39,16 +39,22 @@ The examples in this guide use the following documents in a collection called
    { "_id": 5, "make": "Ibanez", "models": ["RG", "AZ"], "establishedYear": 1957, "rating": 7 }
    { "_id": 6, "make": "Strandberg", "models": ["Boden", "Salen"], "establishedYear": 1982 }
 
-The following ``Guitar`` class models the documents in this collection. The 
-{+driver-short+} uses this class to automatically map these documents to and 
-from BSON.
+The following ``Guitar`` class models the documents in this collection.
 
-.. TODO: Add link to Automapping page.
+.. TODO: Add link to mapping page.
 
 .. literalinclude:: /includes/fundamentals/code-examples/specify-query/Guitar.cs
    :language: csharp
    :copyable:
    :dedent:
+
+The following code instantiates the ``guitars`` collection with this class. The 
+{+driver-short+} uses the class to automatically map the documents in the 
+collection to and from BSON. 
+
+.. code-block:: csharp
+
+   private static IMongoCollection<Guitar> _guitarsCollection;
 
 Literal Values
 --------------
@@ -107,7 +113,7 @@ in your query filter. Common comparison operators include:
    :widths: 30 30 40
    :header-rows: 1
 
-   * - Expression
+   * - Operator
      - Builder
      - Description
 
@@ -170,7 +176,7 @@ sets of expressions. The following is a list of some logical operators:
    :widths: 30 30 40
    :header-rows: 1
 
-   * - Expression
+   * - Operator
      - Builder
      - Description
 
@@ -230,7 +236,7 @@ field. The following is a list of builder methods that use array operators:
    :widths: 40 60
    :header-rows: 1
 
-   * - Builder
+   * - Operator
      - Description
 
    * - ``All()``

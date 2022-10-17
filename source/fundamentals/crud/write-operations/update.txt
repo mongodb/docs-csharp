@@ -223,7 +223,8 @@ Example
 
 The following code uses the ``UpdateMany()`` method to find all documents where the 
 ``borough`` field has the value "Manhattan", then updates the ``borough``
-value in these documents to "Manhattan (north)":
+value in these documents to "Manhattan (north)". Because the ``IsUpsert`` option is 
+``true``, the driver will insert a new document if it can't find a matching one.
 
 .. io-code-block::
    :copyable: true

@@ -48,9 +48,10 @@ The following ``Guitar`` class models the documents in this collection.
    :copyable:
    :dedent:
 
-The following code instantiates the ``guitars`` collection with this class. The 
-{+driver-short+} uses the class to automatically map the documents in the 
-collection to and from BSON. 
+The following code instantiates the ``_guitarsCollection`` object using the 
+``Guitars`` class as a type parameter. This type parameter causes the object to 
+automatically serialize and deserialize the documents it sends to and receives
+from MongoDB to instances of the ``Guitars`` class:
 
 .. code-block:: csharp
 

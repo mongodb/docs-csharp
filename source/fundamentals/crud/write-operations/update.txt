@@ -132,9 +132,13 @@ update all matched documents.
 Customize the Update Operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you need to customize your update operation, create an ``UpdateOptions`` object 
-and pass it to ``UpdateOne()`` or ``UpdateMany()``. The ``UpdateOptions`` type lets 
-you configure the following properties:
+Both methods optionally take an ``UpdateOptions`` type as an additional parameter,
+which represents options you can use to configure the delete operation.
+If you don't specify any ``UpdateOptions`` properties, the driver does
+not customize the update operation.
+
+The ``UpdateOptions`` type allows you to configure options with the
+following properties:
 
 .. list-table::
    :widths: 30 70
@@ -231,7 +235,7 @@ value in these documents to "Manhattan (north)":
       :language: csharp
 
         var filter = Builders<Restaurant>.Filter
-            .Eq("borough", "Manhattan");
+            .Eq(restaurant => restaurant.Borough, "Manhattan");
             
         var update = Builders<Restaurant>.Update
             .Set(restaurant => restaurant.Borough, "Manhattan (north)");

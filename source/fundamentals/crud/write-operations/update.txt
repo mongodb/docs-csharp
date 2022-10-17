@@ -46,7 +46,7 @@ You can perform update operations in MongoDB with the following methods:
 Required Parameters
 ~~~~~~~~~~~~~~~~~~~
 
-Update operations require two parameters: 
+Each update method requires the following parameters:
 
 - A **query filter** document, which determines which records to update. See the 
   :manual:`MongoDB server manual </core/document/#query-filter-documents>` for 

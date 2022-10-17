@@ -51,7 +51,7 @@ driver serializes a sample POCO to BSON:
              public string Name { get; set; }
              public bool InStock { get; set; }
              public double Price { get; set; }
-             public List<string> Color { get; set; }
+             public List<string> ColorSelection { get; set; }
          }
 
    .. tab:: BSON
@@ -65,7 +65,7 @@ driver serializes a sample POCO to BSON:
            "Name": "Long Sleeve Shirt",
            "InStock": true,
            "Price": 17.99,
-           "Color": [ "black", "navy", "red" ]
+           "ColorSelection": [ "black", "navy", "red" ]
          }
 
 You can define a POCO with any object structure that suits your
@@ -106,9 +106,9 @@ field in the serialized BSON document:
    
    If you want to serialize every property with a custom field name, you
    can define a ``ConventionPack`` instead of using the
-   ``[BsonElement()]`` attribute. For example, if your define your POCO
-   using the PascalCase naming convention, you can use the following
-   code to use camelCase field names in the serialized document:
+   ``[BsonElement()]`` attribute. For example, if you define your POCO
+   using the Pascal case naming convention, you can use the following
+   code to use camel case field names in the serialized document:
 
    .. literalinclude:: ../includes/fundamentals/code-examples/poco.cs
       :start-after: start-conventionpack
@@ -120,11 +120,11 @@ field in the serialized BSON document:
 Select Type Representation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can control the BSON type that the driver serializes a property to using the
-``[BsonRepresentation()]`` attribute if the {+language+} primitive type
-is convertible to the BSON type you specify. In the following code sample, the
-``YearBuilt`` property, defined as a ``char`` in {+language+}, is
-serialized as a BSON ``Int32`` type:
+To serialize a {+language+} property to a specific BSON type, use the
+``[BsonRepresentation()]`` attribute. This works only if the
+{+language+} primitive type is convertible to the BSON type you specify.
+In the following code sample, the ``YearBuilt`` property, defined as a
+``char`` in {+language+}, is serialized as a BSON ``Int32`` type:
 
 .. code-block:: csharp
    :copyable: true
@@ -136,6 +136,10 @@ serialized as a BSON ``Int32`` type:
        [BsonRepresentation(BsonType.Int32)]
        public char YearBuilt { get; set; }
    }
+
+For more information on valid type conversions, see the `{+language+}
+Conversions Specification
+<https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions>`__.
 
 Set Field Order
 ~~~~~~~~~~~~~~~
@@ -184,8 +188,12 @@ The following code sample maps the ``Identifier`` property to the
 
 .. warning:: Multiple Id Fields
 
-   If you identify more than one property as the ``_id`` field, the
-   driver throws a ``BsonSerializationException``.
+   If you identify more than one property as the ``_id`` field using the
+   ``[BsonId()]`` attribute, the driver throws a
+   ``DuplicateBsonMemberMapAttributeException``. If your POCO
+   properties use more than one of the three recognized field
+   names (``Id``, ``id``, and ``_id``), the driver throws a
+   ``BsonSerializationException``.
 
 Omit Empty Fields
 ~~~~~~~~~~~~~~~~~
@@ -210,16 +218,14 @@ serializing the ``YearBuilt`` property if it is undefined:
 Example
 -------
 
-The following example shows how to define a {+language+} class with custom field
-mapping specifications, create a POCO to represent a document, then
-insert the document into MongoDB. The ``Clothing`` class uses
-serialization attributes to perform the following:
+The following example shows how to insert a ``Clothing`` document with custom field
+mapping specifications into MongoDB.
 
-- Sets a custom field name ``StyleName`` for the ``Name`` property
+The following code defines the ``Clothing`` class with serialization-related
+attributes so that the driver:
+
+- Sets custom field names for each field to use the camel case naming convention
 - Serializes the ``Price`` field as a BSON ``Double`` type
-
-Define the ``Clothing`` class with the relevant serialization-related
-attributes:
 
 .. literalinclude:: ../includes/fundamentals/code-examples/poco.cs
    :start-after: start-model
@@ -228,7 +234,7 @@ attributes:
    :copyable:
    :dedent:
 
-Instantiate a ``Clothing`` object and insert the document into a collection:
+The following code instantiates a ``Clothing`` object and inserts the document into a collection:
 
 .. literalinclude:: ../includes/fundamentals/code-examples/poco.cs
    :start-after: start-insert
@@ -244,10 +250,10 @@ The BSON representation of the inserted document looks like this:
 
    {
      "_id": ObjectId("..."),
-     "StyleName": "Denim Jacket",
-     "InStock": false,
-     "Price": 32.99,
-     "Color": [ "dark wash", "light wash" ]
+     "name": "Denim Jacket",
+     "inStock": false,
+     "price": 32.99,
+     "colorSelection": [ "dark wash", "light wash" ]
    }
 
 Additional Information

@@ -16,10 +16,10 @@ public class Poco
         // start-insert
         var doc = new Clothing() 
         { 
-            Name = "Denim Jacket", 
-            InStock = false, 
-            Price = 32.99m, 
-            Color = new List<string>() {"dark wash", "light wash"}
+            Name = "Denim Jacket",
+            InStock = false,
+            Price = 32.99m,
+            ColorSelection = new List<string>() {"dark wash", "light wash"}
         };
         
         _myColl.InsertOne(doc);
@@ -44,12 +44,17 @@ public class Clothing
 {
     public ObjectId Id { get; set; }
 
-    [BsonElement("StyleName")]
+    [BsonElement("name")]
     public string Name { get; set; }
+
+    [BsonElement("inStock")]
     public bool InStock { get; set; }
     
+    [BsonElement("price")]
     [BsonRepresentation(BsonType.Double)]
     public decimal Price { get; set; }
-    public List<string> Color { get; set; }
+
+    [BsonElement("colorSelection")]
+    public List<string> ColorSelection { get; set; }
 }
 // end-model

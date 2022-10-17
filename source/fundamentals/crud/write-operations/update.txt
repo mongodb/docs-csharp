@@ -53,7 +53,7 @@ Each update method requires the following parameters:
   more information about query filters.
 - An **update** document, which specifies the **update operator** (the kind of update to
   perform) and the fields and values that should change. See the 
-  :manual:`MongoDB server manual</reference/operator/update-field/>` for a complete 
+  :manual:`Field Update Operators Manual page</reference/operator/update-field/>` for a complete 
   list of update operators and their usage. 
 
 The {+driver-short+} includes a ``Builders`` class that simplifies the creation of both

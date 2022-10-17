@@ -80,7 +80,7 @@ Additional Information
 To learn more about using builders, see :ref:`csharp-builders`.
 
 API Documentation
-~~~~~~~~~~~~~~~~~
+-----------------
 
 - `InsertMany() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertMany.htm>`__
 - `InsertManyAsync() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertManyAsync.htm>`__

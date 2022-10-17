@@ -81,7 +81,7 @@ Additional Information
 To learn more about using builders, see :ref:`csharp-builders`.
 
 API Documentation
-~~~~~~~~~~~~~~~~~
+-----------------
 
 - `InsertOne() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm>`__
 - `InsertOneAsync() <{+api-root+}/Overload_MongoDB_Driver_IMongoCollection_1_InsertOneAsync.htm>`__

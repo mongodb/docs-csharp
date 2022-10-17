@@ -69,9 +69,7 @@ driver serializes a sample POCO to BSON:
          }
 
 You can define a POCO with any object structure that suits your
-needs, including nested objects, arrays, lists, and any data types. The
-driver serializes POCOs using default mapping rules to generate the
-appropriate BSON representation of the document.
+needs, including nested objects, arrays, lists, and any data types.
 
 Custom Serialization
 --------------------
@@ -102,11 +100,16 @@ field in the serialized BSON document:
        public int YearBuilt { get; set; }
    }
 
+Though it is common to use the Pascal case naming convention when
+defining {+language+} classes, using the ``[BsonElement()]`` attribute
+allows you to select a different or custom naming convention in your
+MongoDB collection.
+
 .. tip:: Set Custom Field Name Convention
    
    If you want to serialize every property with a custom field name, you
    can define a ``ConventionPack`` instead of using the
-   ``[BsonElement()]`` attribute. For example, if you define your POCO
+   ``[BsonElement()]`` attribute. For example, if you define your class
    using the Pascal case naming convention, you can use the following
    code to use camel case field names in the serialized document:
 

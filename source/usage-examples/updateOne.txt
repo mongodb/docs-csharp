@@ -37,7 +37,7 @@ These examples use the following ``Restaurant`` class as a model:
    :copyable:
    :dedent:
 
-The following example uses builders to update the ``name`` of the
+The following example uses ``Builders`` to update the ``name`` of the
 first document named "Bagels N Buns" in the ``restaurants`` collection  to 
 "2 Bagels 2 Buns".
 
@@ -83,7 +83,7 @@ writes the following to the console:
 
    Updated documents: 1
 
- .. tip::
+.. tip::
    
    ``UpdateOne()`` returns an `UpdateResult <{+api-root+}/T_MongoDB_Driver_UpdateResult.htm>`__ object.
 

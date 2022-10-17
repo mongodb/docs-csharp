@@ -27,7 +27,7 @@ These examples use the following ``Restaurant`` class as a model:
    :copyable:
    :dedent:
 
-The following example asynchronously inserts a document into 
+The following example inserts a document into 
 the ``restaurants`` collection.
 
 Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the 
@@ -46,7 +46,7 @@ corresponding code.
          :dedent:
 
       For a fully runnable example of the ``InsertOneAsync()`` operation, see the
-      `Async Insert One Example <{+example+}/InsertOneAsync.cs>`__.
+      `Asynchronous Insert One Example <{+example+}/InsertOneAsync.cs>`__.
 
    .. tab:: Synchronous
       :tabid: insert-one-sync

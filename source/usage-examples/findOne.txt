@@ -29,7 +29,7 @@ These examples use the following ``Restaurant`` class as a model:
 Find a Document Using Builders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example uses builders to find a document in the ``restaurants``
+The following example uses ``Builders`` to find a document in the ``restaurants``
 collection that has a ``name`` field with a value of "Bagels N Buns".
 
 Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the 
@@ -48,7 +48,7 @@ corresponding code.
          :dedent:
 
       For a fully runnable example of using the ``Find()`` method
-      to asynchronously find one document, see the `Async Find One Example <{+example+}/FindOneAsync.cs>`__.
+      to asynchronously find one document, see the `Asynchronous Find One Example <{+example+}/FindOneAsync.cs>`__.
 
    .. tab:: Synchronous
       :tabid: builders-sync
@@ -66,7 +66,7 @@ corresponding code.
 Find a Document Using LINQ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example uses builders to find a document in the ``restaurants``
+The following example uses LINQ to find a document in the ``restaurants``
 collection that has a ``name`` field with a value of "Bagels N Buns".
 
 Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the 
@@ -85,7 +85,7 @@ corresponding code.
          :dedent:
 
       For a fully runnable example of using the ``Find()`` method
-      to asynchronously find one document, see the `Async Find One Example <{+example+}/FindOneAsync.cs>`__.
+      to asynchronously find one document, see the `Asynchronous Find One Example <{+example+}/FindOneAsync.cs>`__.
 
    .. tab:: Synchronous
       :tabid: linq-sync

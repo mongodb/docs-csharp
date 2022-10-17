@@ -50,7 +50,7 @@ corresponding code.
 
       For a fully runnable example of using the ``Find()`` method to asynchronously 
       find multiple documents, see
-      `Async Find Multiple Example <{+example+}/FindManyAsync.cs>`__.
+      `Asynchronous Find Multiple Example <{+example+}/FindManyAsync.cs>`__.
 
    .. tab:: Synchronous
       :tabid: builders-sync
@@ -89,7 +89,7 @@ corresponding code.
 
       For a fully runnable example of using the ``Find()`` method to asynchronously 
       find multiple documents, see
-      `Async Find Multiple Example <{+example+}/FindManyAsync.cs>`__.
+      `Asynchronous Find Multiple Example <{+example+}/FindManyAsync.cs>`__.
 
    .. tab:: Synchronous
       :tabid: linq-sync
@@ -110,8 +110,7 @@ corresponding code.
 Find All Documents
 ~~~~~~~~~~~~~~~~~~
 
-The following example asynchronously finds all documents in the 
-``restaurants`` collection.
+The following example finds all documents in the ``restaurants`` collection.
 
 Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the 
 corresponding code.
@@ -130,7 +129,7 @@ corresponding code.
 
       For a fully runnable example of using the ``Find()`` method to asynchronously 
       find multiple documents, see
-      `Async Find Multiple Example <{+example+}/FindManyAsync.cs>`__.
+      `Asynchronous Find Multiple Example <{+example+}/FindManyAsync.cs>`__.
 
    .. tab:: Synchronous
       :tabid: find-all-sync

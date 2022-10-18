@@ -224,11 +224,11 @@ Example
 The following example shows how to insert a ``Clothing`` document with custom field
 mapping specifications into MongoDB.
 
-The following code defines the ``Clothing`` class with serialization-related
-attributes so that the driver:
+The following code defines the ``Clothing`` class with these
+serialization-related attributes:
 
-- Sets custom field names for each field to use the camel case naming convention
-- Serializes the ``Price`` field as a BSON ``Double`` type
+- ``[BsonElement()]``, which specifies custom field names in the camel case naming convention
+- ``[BsonRepresentation()]``, which specifies serialization of the ``Price`` field as a BSON ``Double`` type
 
 .. literalinclude:: ../includes/fundamentals/code-examples/poco.cs
    :start-after: start-model

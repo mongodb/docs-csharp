@@ -12,8 +12,6 @@ namespace Fundamentals
 
         private const string OldValue = "Manhattan";
         private const string NewValue = "Manhattan (north)";
-        private const string BoroughField = "borough";
-
         public static void Main(string[] args)
         {
             Setup();
@@ -22,7 +20,7 @@ namespace Fundamentals
 
             // start-builders
             var filter = Builders<Restaurant>.Filter
-                .Eq("borough", "Manhattan");
+                .Eq(restaurant => restaurant.Borough, "Manhattan");
 
             var update = Builders<Restaurant>.Update
                 .Set(restaurant => restaurant.Borough, "Manhattan (north)");
@@ -44,7 +42,8 @@ namespace Fundamentals
 
         private static long FindCountOfRestaurantsWithBorough(string borough)
         {
-            var filter = Builders<Restaurant>.Filter.Eq(BoroughField, borough);
+            var filter = Builders<Restaurant>.Filter
+                .Eq(restaurant => restaurant.Borough, borough);
             return _restaurantsCollection.Find(filter).CountDocuments();
         }
 
@@ -63,7 +62,7 @@ namespace Fundamentals
         private static void ResetSampleData()
         {
             var filter = Builders<Restaurant>.Filter
-                .Eq(BoroughField, NewValue);
+                .Eq(restaurant => restaurant.Borough, NewValue);
 
             var update = Builders<Restaurant>.Update
                 .Set(restaurant => restaurant.Borough, OldValue);

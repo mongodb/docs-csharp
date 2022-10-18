@@ -224,8 +224,8 @@ Example
 The following code uses the ``UpdateMany()`` method to find all documents where the 
 ``borough`` field has the value "Manhattan", then updates the ``borough``
 value in these documents to "Manhattan (north)". Because the ``IsUpsert`` option is 
-``true``, the driver will insert a new document if the query filter doesn't match any 
-existing documents.
+set to ``true``, the driver inserts a new document if the query filter doesn't 
+match any existing documents.
 
 .. io-code-block::
    :copyable: true

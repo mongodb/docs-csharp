@@ -40,8 +40,8 @@ Update Operations
 
 You can perform update operations in MongoDB with the following methods:
 
-- ``UpdateOne()``, which updates *the first document* that matches the query filter.
-- ``UpdateMany()``, which updates *all documents* that match the query filter.
+- ``UpdateOne()``, which updates *the first document* that matches the search criteria
+- ``UpdateMany()``, which updates *all documents* that match the search criteria
 
 Required Parameters
 ~~~~~~~~~~~~~~~~~~~
@@ -56,9 +56,9 @@ Each update method requires the following parameters:
   :manual:`Field Update Operators Manual page</reference/operator/update-field/>` for a complete 
   list of update operators and their usage. 
 
-The {+driver-short+} includes a ``Builders`` class that simplifies the creation of both
+The {+driver-short+} provides a ``Builders`` class that simplifies the creation of both
 query filters and update documents. The following code sample uses ``Builders`` to create
-two documents:
+two documents for use as parameters in an update operation:
 - A query filter that searches for restaurants with a ``borough`` field value of "Manhattan" 
 - An update document that sets the value of the ``borough`` field of these restaurants 
 to "Manhattan (north)"
@@ -224,7 +224,8 @@ Example
 The following code uses the ``UpdateMany()`` method to find all documents where the 
 ``borough`` field has the value "Manhattan", then updates the ``borough``
 value in these documents to "Manhattan (north)". Because the ``IsUpsert`` option is 
-``true``, the driver will insert a new document if it can't find a matching one.
+``true``, the driver will insert a new document if the query filter doesn't match any 
+existing documents.
 
 .. io-code-block::
    :copyable: true

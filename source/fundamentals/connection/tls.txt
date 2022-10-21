@@ -1,0 +1,222 @@
+.. _csharp-tls:
+
+==========================
+Enable TLS on a Connection
+==========================
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn how to connect to MongoDB instances with the
+`TLS/SSL <https://en.wikipedia.org/wiki/Transport_Layer_Security>`__
+security protocol using the underlying TLS/SSL support in the {+framework+}. To
+configure your connection to use TLS/SSL, enable the TLS/SSL settings in either
+the :ref:`connection string <csharp-connection-uri>` or 
+:ref:`MongoClientSettings <csharp-mongo-client-settings>`.
+
+.. _csharp-tls-enable:
+
+Enable TLS/SSL
+--------------
+
+You can enable TLS/SSL for the connection to your MongoDB instance
+in two different ways: through a parameter in your connection string, or
+using a property on a ``MongoClientSettings`` object.
+
+.. tabs::
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      To enable TLS/SSL with a connection string, assign the connection 
+      string parameter ``tls`` a value of ``true`` in the connection string passed to the
+      ``MongoClient`` constructor:
+
+      .. code-block:: csharp
+
+         var mongoClient = new MongoClient("mongodb://user1:password1@sample.host:27017?tls=true");
+      
+      To turn off automatic certificate verification, assign the connection string
+      parameter ``sslVerifyCertificate`` a value of ``false``. The default value is
+      ``true``.
+
+      .. code-block:: csharp:
+
+         var mongoClient = new MongoClient("mongodb://user1:password1@sample.host:27017?tls=true&sslVerifyCertificate=false");
+      
+      .. warning::
+
+         This option should not be set to false in production. It is important that 
+         the server certificate is properly validated.
+
+   .. tab:: MongoClientSettings
+      :tabid: mongoclientsettings
+
+      To enable TLS/SSL with a ``MongoClientSettings`` object, set the ``UseTls`` property
+      on the object to ``true``:
+
+      .. code-block:: csharp
+
+         var settings = new MongoClientSettings() { UseTls = true };
+
+.. _tls_configure-certificates:
+
+Configure Certificates
+----------------------
+
+MongoClientSettings
+~~~~~~~~~~~~~~~~~~~
+
+You can use MCS to configure your certificate:
+
+.. code-block:: csharp
+
+   var cert = new X509Certificate2("client.pfx", "mySuperSecretPassword");
+
+   var settings = new MongoClientSettings
+   {
+      SslSettings = new SslSettings
+      {
+         ClientCertificates = new[] { cert }
+      },
+      UseTls = true
+   };
+
+.. note:: 
+
+   It is imperative that when loading a certificate with a password, the PrivateKey 
+   property not be null. If the property is null, it means that your certificate does 
+   not contain the private key and will not be passed to the server.
+
+Checking Revocation
+~~~~~~~~~~~~~~~~~~~
+
+During the TSL handshake, the server presents a certificate to the client in order to 
+prove its identity and provide its public key. A certificate authority can add an X.509 
+certificate to the Certificate Revocation List (CRL) prior to the expiry time to invalidate
+the certificate.
+
+The .NET Driver now disables certificate revocation checking by default, setting 
+CheckCertificateRevocation in SslSettings to false by default. This correlates to 
+.NET’s defaults for SslStream (see .NET Framework documentation here and .NET Standard 
+documentation here). Applications relying on the intermediate default of true (introduced 
+in beta driver releases 2.11.0-beta1 and 2.11.0-beta2) must explicitly set 
+CheckCertificateRevocation to true in SslSettings to enable certificate revocation 
+checking. 
+
+In the connection URI, revocation checking is controlled by the 
+``tlsDisableCertificateRevocationCheck`` option. This option is set to ``true``
+by default (certificate revocation is not checked). To enable certificate revocation
+checks, set this option to ``false``.
+
+Certificate revocation is handled by OCSP.
+
+Online Certificate Status Protocol (OCSP)
+-----------------------------------------
+
+OCSP is a standard used to check whether X.509 certificates have been
+revoked.  When a client sends an X.509 certificate during the TLS
+handshake, the CA's revocation server checks the CRL and returns a status
+of "good", "revoked", or "unknown".
+
+The driver supports the following variations of OCSP:
+
+- **Client-Driven OCSP**
+- **OCSP Stapling**
+
+The following sections describe the differences between them and how to enable
+them for your application.
+
+Client-Driven OCSP
+~~~~~~~~~~~~~~~~~~
+
+In client-driven OCSP, the client sends the certificate in an OCSP request to
+an OCSP responder after receiving the certificate from the server. The OCSP
+responder checks the status of the certificate with a certificate
+authority (CA) and reports whether it's valid in a response sent to the
+client.
+
+To enable client-driven OCSP for your application, set the following JVM
+system properties:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 65
+
+   * - Property
+     - Value
+
+   * - ``com.sun.net.ssl.checkRevocation``
+     - Set this property to ``true`` to enable revocation checking.
+
+   * - ``ocsp.enable``
+     - Set this property to ``true`` to enable client-driven OCSP.
+
+.. warning::
+
+   If the OCSP responder is unavailable, the TLS support provided by the
+   JDK reports a "hard fail". This differs from the "soft fail" behavior of
+   the MongoDB Shell and some other drivers.
+
+OCSP Stapling
+~~~~~~~~~~~~~
+
+OCSP stapling is a mechanism in which the server must obtain the signed
+certificate from the certificate authority (CA) and include it in a
+time-stamped OCSP response to the client.
+
+To enable OCSP stapling for your application, set the following JVM system
+properties:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 50 50
+
+   * - Property
+     - Description
+
+   * - ``com.sun.net.ssl.checkRevocation``
+     - Set this property to ``true`` to enable revocation checking.
+
+   * - ``jdk.tls.client.enableStatusRequestExtension``
+     - | Set this property to ``true`` to enable OCSP stapling.
+       |
+       | If unset or set to ``false``, the connection can proceed regardless of the presence or status of the certificate revocation response.
+
+For additional information about OCSP, check out the following resources:
+
+- Oracle JDK 8 Documentation on `how to enable OCSP for an application <https://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/ocsp.html>`__
+- :rfc:`Official IETF specification for OCSP (RFC 6960) <6960>`
+
+
+Disable Hostname Verification
+-----------------------------
+
+By default, the driver ensures that the hostname included in the server's
+TLS/SSL certificates matches the hostnames provided when constructing
+a ``MongoClient``. If you need to disable hostname verification for your
+application, you can explicitly disable this by setting the
+``invalidHostNameAllowed`` property of the builder to ``true`` in the
+``applytoSslSettings()`` builder lambda:
+
+.. code-block:: java
+
+   MongoClientSettings settings = MongoClientSettings.builder()
+        .applyToSslSettings(builder -> {
+                    builder.enabled(true);
+                    builder.invalidHostNameAllowed(true);
+                })
+        .build();
+
+.. warning::
+
+   Disabling hostname verification can make your configuration
+   `insecure <https://tlseminar.github.io/docs/mostdangerous.pdf>`__.
+   You should only disable hostname verification for testing purposes or
+   when there is no other alternative.

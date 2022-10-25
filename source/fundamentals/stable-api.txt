@@ -12,7 +12,7 @@
    :depth: 2
    :class: singlecol
 
-   .. note::
+.. note::
 
    The {+stable-api+} feature requires MongoDB Server 5.0 or later.
 

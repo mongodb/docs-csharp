@@ -22,11 +22,11 @@
 Overview
 --------
 
-In this guide, you can learn how to specify Stable API compatibility when connecting to a 
-MongoDB instance or replica set.
+In this guide, you can learn how to specify {+stable-api+} compatibility when connecting 
+to a MongoDB instance or replica set.
 
-The **{+stable-api+}** feature forces the server to run operations with behaviors compatible 
-with the *API version* you specify. When you update either your driver or server, 
+The {+stable-api+} feature forces the server to run operations with behaviors compatible 
+with the API version you specify. When you update either your driver or server, 
 the API version changes, which can change the way these operations behave.
 Using the {+stable-api+} ensures consistent responses from the server and 
 provides long-term API stability for your application.
@@ -127,6 +127,6 @@ following API documentation:
 
 - `MongoClient <{+api-root+}/T_MongoDB_Driver_MongoClient.htm>`__
 - `MongoClientSettings <{+api-root+}/T_MongoDB_Driver_MongoClientSettings.htm>`__
-- `ServerApiVersion <{+api-root+}/T_MongoDB_Driver_ServerApiVersion.htm>
+- `ServerApiVersion <{+api-root+}/T_MongoDB_Driver_ServerApiVersion.htm>`__
 - `ServerApi <{+api-root+}/T_MongoDB_Driver_ServerApi.htm>`__
 

@@ -54,8 +54,7 @@ version of the {+stable-api+}.
    "strict" option is disabled. See the section on
    :ref:`{+stable-api+} Options <stable-api-options>` for more information.
 
-The following example shows how you can instantiate a ``MongoClient`` that
-sets the {+stable-api+} version and connects to a server by performing the
+The following example shows how you can instantiate a ``MongoClient`` with a {+stable-api+} version and connect to a server through the following steps:
 following operations:
 
 - Construct a ``ServerApi`` instance and specify a {+stable-api+} version 

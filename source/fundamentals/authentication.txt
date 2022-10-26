@@ -148,7 +148,7 @@ string as follow:
 X.509
 ~~~~~
 
-The ``X.509`` authentication mechanism uses :wikipedia:`TLS </Transport_Layer_Security>`
+The ``X.509`` authentication mechanism uses :wikipedia:`TLS <Transport_Layer_Security>`
 with ``X.509`` certificates to authenticate your user, identified by the
 distinguished names of your client certificate. When you specify the 
 ``X.509`` authentication mechanism, the server authenticates the connection using 

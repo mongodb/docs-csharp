@@ -32,7 +32,7 @@ Using the {+stable-api+} ensures consistent responses from the server and
 provides long-term API stability for your application.
 
 The following sections describe how you can enable and customize {+stable-api+} for
-your MongoDB client. For more information about the +stable-api+}, including a list of 
+your MongoDB client. For more information about the {+stable-api+}, including a list of 
 the commands it covers, see the :manual:`MongoDB reference page. </reference/stable-api/>`
 
 Enable the {+stable-api+} on a MongoDB Client
@@ -53,8 +53,7 @@ version of the {+stable-api+}.
    "strict" option is disabled. See the section on
    :ref:`{+stable-api+} Options <stable-api-options>` for more information.
 
-The following example shows how you can instantiate a ``MongoClient`` with a {+stable-api+} version and connect to a server through the following steps:
-following operations:
+The following example shows how you can instantiate a ``MongoClient`` with a {+stable-api+} version and connect to a server through the following operations:
 
 1. Construct a ``ServerApi`` instance and specify a {+stable-api+} version.
 #. Construct a ``MongoClientSettings`` object and set the ``ServerApi`` property.

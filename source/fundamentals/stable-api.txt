@@ -16,18 +16,19 @@
 
    The {+stable-api+} feature requires MongoDB Server 5.0 or later.
 
-   You should use the {+stable-api+} feature only if all the MongoDB
+   You should use the {+stable-api+} feature only if all of the MongoDB
    servers you're connecting to support this feature.
 
 Overview
 --------
 
-When a MongoDB server runs an operation, it uses the version of the operation defined by
-the current *API version*. When you update either your driver or server, it changes 
-the API version, which can change the way these operations behave.
+In this guide, you can learn how to specify Stable API compatibility when connecting to a 
+MongoDB instance or replica set.
 
-The **{+stable-api+}** feature forces the server to run operations according to the
-API version you specify. This ensures consistent responses from the server and 
+The **{+stable-api+}** feature forces the server to run operations with behaviors compatible 
+with the *API version* you specify. When you update either your driver or server, 
+the API version changes, which can change the way these operations behave.
+Using the {+stable-api+} ensures consistent responses from the server and 
 provides long-term API stability for your application.
 
 The following sections describe how you can enable and customize {+stable-api+} for
@@ -57,10 +58,9 @@ version of the {+stable-api+}.
 The following example shows how you can instantiate a ``MongoClient`` with a {+stable-api+} version and connect to a server through the following steps:
 following operations:
 
-- Construct a ``ServerApi`` instance and specify a {+stable-api+} version 
-  using a static property of the ``ServerApiVersion`` class.
-- Construct a ``MongoClientSettings`` instance and set the ``ServerApi`` property.
-- Create a ``MongoClient`` and pass the ``MongoClientSettings`` object as an argument.
+1. Construct a ``ServerApi`` instance and specify a {+stable-api+} version.
+#. Construct a ``MongoClientSettings`` object and set the ``ServerApi`` property.
+#.  Create a ``MongoClient`` with the ``MongoClientSettings`` object.
 
 .. literalinclude:: /includes/fundamentals/code-examples/StableApi.cs
    :start-after: start-stable-api
@@ -71,9 +71,9 @@ following operations:
 .. warning::
 
    If you specify an API version and connect to a MongoDB server that does
-   not support the {+stable-api+}, your app might raise an exception when
+   not support the {+stable-api+}, your code might raise an exception when
    executing a command on your MongoDB server. If you use a ``MongoClient``
-   that specifies the API version to query a server that doesn't support it,
+   that specifies the API version to query a server that doesn't support that version,
    your query could fail with an exception message that includes the
    following text:
 
@@ -125,5 +125,8 @@ API Documentation
 For more information on using the {+stable-api+} with the {+driver-long+}, see the 
 following API documentation: 
 
+- `MongoClient <{+api-root+}/T_MongoDB_Driver_MongoClient.htm>`__
+- `MongoClientSettings <{+api-root+}/T_MongoDB_Driver_MongoClientSettings.htm>`__
+- `ServerApiVersion <{+api-root+}/T_MongoDB_Driver_ServerApiVersion.htm>
 - `ServerApi <{+api-root+}/T_MongoDB_Driver_ServerApi.htm>`__
 

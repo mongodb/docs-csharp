@@ -173,7 +173,7 @@ see the corresponding syntax for specifying the ``X.509`` authentication mechani
 
       .. code-block:: csharp
 
-         var credentials = MongoCredential.CreateMongoX509Credential("<username>")
+         var credentials = MongoCredential.CreateMongoX509Credential("<X.509 certificate username>")
          var settings = new MongoClientSettings 
          {
              Credential =  credentials
@@ -181,7 +181,7 @@ see the corresponding syntax for specifying the ``X.509`` authentication mechani
              {
                  ClientCertificates = new List<X509Certificate>()
                  {
-                     new X509Certificate2("client-certificate.pfx", "password")
+                     new X509Certificate2("<path to X.509 certificate>", "<X.509 certificate password>")
                  },
              },
              UseTls = true,

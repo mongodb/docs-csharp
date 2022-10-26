@@ -32,10 +32,8 @@ Using the {+stable-api+} ensures consistent responses from the server and
 provides long-term API stability for your application.
 
 The following sections describe how you can enable and customize {+stable-api+} for
-your MongoDB client.
-    
-For more information about {+stable-api+}, including a list of the commands it covers,
-see the :manual:`MongoDB reference page. </reference/stable-api/>`
+your MongoDB client. For more information about the +stable-api+}, including a list of 
+the commands it covers, see the :manual:`MongoDB reference page. </reference/stable-api/>`
 
 Enable the {+stable-api+} on a MongoDB Client
 ---------------------------------------------

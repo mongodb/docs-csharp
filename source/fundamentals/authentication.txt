@@ -78,7 +78,7 @@ authentication mechanisms, depending on what MongoDB versions your server suppor
 
    MongoDB version 4.0 uses SCRAM as the default mechanism, and no longer
    supports ``MONGODB-CR``. These versions automatically determine which
-   version of SCRAM should to use.
+   version of SCRAM to use.
 
 
 Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
@@ -89,14 +89,14 @@ see the corresponding syntax for specifying the default authentication mechanism
    .. tab:: Connection String
       :tabid: default-connection-string
 
-      .. code-block: csharp
+      .. code-block:: csharp
 
          var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>:<port>/?authSource=<authenticationDb>");
 
    .. tab:: MongoCredential
       :tabid: default-mongo-credential
 
-      .. code-block: csharp
+      .. code-block:: csharp
 
          var credentials = MongoCredential.CreateCredential("<authenticationDb>", "<username>", "<password>");
          var settings = MongoClientSettings.FromConnectionString("<host>");
@@ -144,7 +144,7 @@ the subject name of the client certificate.
 
 To learn more about using TLS/SSL, see our :ref:`TLS/SSL guide <csharp-tls>`.
 
-To learn more about ``X.509`` certificates, see :ref:`x509-client-authentication`.
+To learn more about ``X.509`` certificates, see the :ref:`X.509 guide <x509-client-authentication>`.
 
 Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
 see the corresponding syntax for specifying the ``X.509`` authentication mechanism:
@@ -154,7 +154,7 @@ see the corresponding syntax for specifying the ``X.509`` authentication mechani
    .. tab:: Connection String
       :tabid: default-connection-string
 
-      .. code-block: csharp
+      .. code-block:: csharp
 
          var connectionString = "mongodb://"<hostname>"/?authMechanism=MONGODB-X509";
          var settings = MongoClientSettings.FromConnectionString(connectionString);
@@ -171,7 +171,7 @@ see the corresponding syntax for specifying the ``X.509`` authentication mechani
    .. tab:: MongoCredential
       :tabid: default-mongo-credential
 
-      .. code-block: csharp
+      .. code-block:: csharp
 
          var credentials = MongoCredential.CreateMongoX509Credential("<username>")
          var settings = new MongoClientSettings 

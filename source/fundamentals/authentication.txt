@@ -201,7 +201,7 @@ API Documentation
 To learn more about any of the methods or types discussed in this
 guide, see the following API Documentation:
 
-- `MongoCredential() <{+api-root+}/__T_MongoDB_Driver_MongoCredential.htm>`__
+- `MongoCredential() <{+api-root+}/T_MongoDB_Driver_MongoCredential.htm>`__
 - `MongoClient() <{+api-root+}/T_MongoDB_Driver_MongoClient.htm>`__
 - `MongoClientSettings <{+api-root+}/T_MongoDB_Driver_MongoClientSettings.htm>`__
 - `CreateCredential() <{+api-root+}/M_MongoDB_Driver_MongoCredential_CreateCredential_1.htm>`__

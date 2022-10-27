@@ -222,14 +222,14 @@ mechanism:
 .. tabs::
 
    .. tab:: Connection String
-      :tabid: kerberos-connection-string
+      :tabid: ldap-connection-string
 
       .. code-block:: csharp
 
          var mongoClient = new MongoClient(mongodb://<username>:<password>@<hostname>/?authSource=$external&authMechanism=PLAIN
 
    .. tab:: MongoCredential
-      :tabid: kerberos-mongo-credential
+      :tabid: ldap-mongo-credential
 
       .. code-block:: csharp
 
@@ -238,11 +238,11 @@ mechanism:
          settings.Credential = credentials;
          var mongoClient = new MongoClient(settings);
 
-    .. tip::
+      .. tip::
 
-       The method refers to ``PLAIN`` instead of ``LDAP`` since it
-       authenticates using the `PLAIN Simple Authentication and Security Layer
-       (SASL) defined in RFC-4616 <https://tools.ietf.org/html/rfc4616>`_.
+         The method refers to ``PLAIN`` instead of ``LDAP`` since it
+         authenticates using the `PLAIN Simple Authentication and Security Layer
+         (SASL) defined in RFC-4616 <https://tools.ietf.org/html/rfc4616>`_.
 
 API Documentation
 -----------------

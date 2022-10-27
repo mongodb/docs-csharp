@@ -28,7 +28,7 @@ of {+mongo-community+}:
 To authenticate using ``Kerberos`` or ``LDAP``, see the
 :ref:`csharp-enterprise-authentication-mechanisms` guide. For more information
 on establishing a connection to your MongoDB cluster, see the
-:ref:`csharp-connection` guide.
+:ref:`csharp-connect-to-mongodb` guide.
 
 Specify an Authentication Mechanism
 -----------------------------------
@@ -49,11 +49,11 @@ Mechanisms
 The following examples specify authentication mechanisms using the following
 placeholders:
 
-- ``username`` - Your MongoDB username
-- ``password`` - Your MongoDB user's password
-- ``hostname`` - The network address of your MongoDB server, accessible by your client
-- ``port`` - The port number of your MongoDB server
-- ``authenticationDb`` - The MongoDB database that contains your user's authentication
+- ``<username>``: Your MongoDB username.
+- ``<password>``: Your MongoDB user's password.
+- ``<hostname>``: The network address of your MongoDB server, accessible by your client.
+- ``<port>``: The port number of your MongoDB server.
+- ``<authenticationDb>``: The MongoDB database that contains your user's authentication
   data. If you omit this parameter, the driver uses the default value ``admin``.
 
 .. _csharp-authentication-default:
@@ -62,7 +62,7 @@ Default
 ~~~~~~~
 
 The default authentication mechanism setting uses one of the following
-authentication mechanisms, depending on what MongoDB versions your server supports:
+authentication mechanisms, depending on which MongoDB versions your server supports:
 
 - ``SCRAM-SHA-256``
 - ``SCRAM-SHA-1``
@@ -156,7 +156,7 @@ the subject name of the client certificate.
 
 To learn more about using TLS/SSL, see our :ref:`TLS/SSL guide <csharp-tls>`.
 
-To learn more about ``X.509`` certificates, see the :ref:`X.509 guide <x509-client-authentication>`.
+To learn more about ``X.509`` certificates, see the :ref:`X.509 Server Manual Entry <x509-client-authentication>`.
 
 Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
 see the corresponding syntax for specifying the ``X.509`` authentication mechanism:

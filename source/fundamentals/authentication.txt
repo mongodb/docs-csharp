@@ -25,10 +25,10 @@ of {+mongo-community+}:
 - :ref:`csharp-scram-sha-1`
 - :ref:`csharp-x509`
 
-To authenticate using ``Kerberos`` or ``LDAP``, see the
+To authenticate using ``GSSAPI/Kerberos`` or ``LDAP``, see the
 :ref:`csharp-enterprise-authentication-mechanisms` guide. For more information
 on establishing a connection to your MongoDB cluster, see the
-:ref:`csharp-connect-to-mongodb` guide.
+:ref:`csharp-connect-to-mongodb`.
 
 Specify an Authentication Mechanism
 -----------------------------------
@@ -93,7 +93,7 @@ see the corresponding syntax for specifying the default authentication mechanism
       .. code-block:: csharp
 
          var credentials = MongoCredential.CreateCredential("<authenticationDb>", "<username>", "<password>");
-         var settings = MongoClientSettings.FromConnectionString("<host>");
+         var settings = MongoClientSettings.FromConnectionString("<connection string>");
          settings.Credential = credentials;
          var mongoClient = new MongoClient(settings);
 
@@ -208,7 +208,7 @@ see the corresponding syntax for specifying the ``X.509`` authentication mechani
          server to infer the username based on your ``X.509`` certificate.
 
 API Documentation
-~~~~~~~~~~~~~~~~~
+-----------------
 
 To learn more about any of the methods or types discussed in this
 guide, see the following API Documentation:

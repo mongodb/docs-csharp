@@ -63,23 +63,24 @@ mechanism:
 .. tabs::
 
    .. tab:: Connection String
-      :tabid: kerberos-connection-string
+      :tabid: connection-string
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient(mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI)
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI");
 
    .. tab:: MongoCredential
-      :tabid: kerberos-mongo-credential
+      :tabid: mongo-credential
 
       .. code-block:: csharp
+         :emphasize-lines: 1
 
-         var credential = MongoCredential.CreateGssapiCredential(username, password);
+         var credential = MongoCredential.CreateGssapiCredential("<username>", "<password>");
          var settings = MongoClientSettings.FromConnectionString("<connection string>");
          settings.Credential = credentials;
          var mongoClient = new MongoClient(settings);
 
-.. tip:: Omitting password
+.. tip:: Omit Password
 
    You can omit the password if one of the following are true:
 
@@ -102,18 +103,19 @@ connection string, or a factory method in the ``MongoCredential`` class.
   .. tabs::
   
      .. tab:: Connection String
-        :tabid: dns-connection-string
+        :tabid: connection-string
   
         .. code-block:: csharp
   
-           var mongoClient = new MongoClient(mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=CANONICALIZE_HOSTNAME:true)
+           var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=CANONICALIZE_HOSTNAME:true");
   
      .. tab:: MongoCredential
-        :tabid: dns-mongo-credential
+        :tabid: mongo-credential
   
         .. code-block:: csharp
+           :emphasize-lines: 1, 2
   
-           var credential = MongoCredential.CreateGssapiCredential(username, password);
+           var credential = MongoCredential.CreateGssapiCredential("<username>", "<password>");
            credential = credential.WithMechanismProperty("CANONICALIZE_HOST_NAME", "true");
            
            var settings = MongoClientSettings.FromConnectionString("<connection string>");
@@ -128,18 +130,19 @@ connection string, or a factory method in the ``MongoCredential`` class.
   .. tabs::
   
      .. tab:: Connection String
-        :tabid: realm-connection-string
+        :tabid: connection-string
   
         .. code-block:: csharp
   
-           var mongoClient = new MongoClient(mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=REALM:<user's realm>)
+           var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=REALM:<user's realm>");
   
      .. tab:: MongoCredential
-        :tabid: realm-mongo-credential
+        :tabid: mongo-credential
   
         .. code-block:: csharp
+           :emphasize-lines: 1, 2
   
-           var credential = MongoCredential.CreateGssapiCredential(username, password);
+           var credential = MongoCredential.CreateGssapiCredential("<username>", "<password>");
            credential = credential.WithMechanismProperty("REALM", "<user's realm>");
            
            var settings = MongoClientSettings.FromConnectionString("<connection string>");
@@ -154,18 +157,19 @@ connection string, or a factory method in the ``MongoCredential`` class.
   .. tabs::
   
      .. tab:: Connection String
-        :tabid: service-name-connection-string
+        :tabid: connection-string
   
         .. code-block:: csharp
   
-           var mongoClient = new MongoClient(mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:<service name>)
+           var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:<service name>");
   
      .. tab:: MongoCredential
-        :tabid: service-name-mongo-credential
+        :tabid: mongo-credential
   
         .. code-block:: csharp
+           :emphasize-lines: 1, 2
   
-           var credential = MongoCredential.CreateGssapiCredential(username, password);
+           var credential = MongoCredential.CreateGssapiCredential("<username>", "<password>");
            credential = credential.WithMechanismProperty("SERVICE_NAME", "<service name>");
            
            var settings = MongoClientSettings.FromConnectionString("<connection string>");
@@ -180,19 +184,19 @@ connection string, or a factory method in the ``MongoCredential`` class.
   .. tabs::
   
      .. tab:: Connection String
-        :tabid: multiple-properties-connection-string
+        :tabid: connection-string
   
         .. code-block:: csharp
   
-           var mongoClient = new MongoClient(mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:<service name>,REALM:<user's realm>)
+           var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:<service name>,REALM:<user's realm>");
   
      .. tab:: MongoCredential
-        :tabid: multiple-properties-mongo-credential
+        :tabid: mongo-credential
   
         .. code-block:: csharp
            :emphasize-lines: 2, 3
   
-           var credential = MongoCredential.CreateGssapiCredential(username, password);
+           var credential = MongoCredential.CreateGssapiCredential("<username>", "<password>");
            credential = credential.WithMechanismProperty("REALM", "<user's realm>")
                .WithMechanismProperty("SERVICE_NAME", "<service name>");
            
@@ -222,16 +226,17 @@ mechanism:
 .. tabs::
 
    .. tab:: Connection String
-      :tabid: ldap-connection-string
+      :tabid: connection-string
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient(mongodb://<username>:<password>@<hostname>/?authSource=$external&authMechanism=PLAIN
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authSource=$external&authMechanism=PLAIN");
 
    .. tab:: MongoCredential
-      :tabid: ldap-mongo-credential
+      :tabid: mongo-credential
 
       .. code-block:: csharp
+         :emphasize-lines: 1
 
          var credential = MongoCredential.CreatePlainCredential("$external", "<username>", "<password>");
          var settings = MongoClientSettings.FromConnectionString("<connection string>");

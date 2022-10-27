@@ -22,106 +22,141 @@ the :ref:`connection string <csharp-connection-uri>` or
 
 .. _csharp-tls-enable:
 
-Enable TLS/SSL
---------------
+Enable TLS
+----------
 
-You can enable TLS/SSL for the connection to your MongoDB instance
-in two different ways: through a parameter in your connection string, or
-using a property on a ``MongoClientSettings`` object.
+You can enable TLS for the connection to your MongoDB instance
+in two different ways: using a property on a ``MongoClientSettings`` object or
+through a parameter in your connection string.
 
 .. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongoclientsettings
+
+      To enable TLS with a ``MongoClientSettings`` object, set the ``UseTls`` property
+      to ``true``:
+
+      .. code-block:: csharp
+
+         var settings = new MongoClientSettings() { UseTls = true };
+         var client = new MongoClient(settings);
 
    .. tab:: Connection String
       :tabid: connectionstring
 
-      To enable TLS/SSL with a connection string, assign the connection 
-      string parameter ``tls`` a value of ``true`` in the connection string passed to the
+      To enable TLS with a connection string, assign the 
+      parameter ``tls`` a value of ``true`` in the connection string passed to the
       ``MongoClient`` constructor:
 
       .. code-block:: csharp
 
          var mongoClient = new MongoClient("mongodb://user1:password1@sample.host:27017?tls=true");
-      
-      To turn off automatic certificate verification, assign the connection string
-      parameter ``sslVerifyCertificate`` a value of ``false``. The default value is
-      ``true``.
 
-      .. code-block:: csharp:
+Allow Insecure TLS
+------------------
 
-         var mongoClient = new MongoClient("mongodb://user1:password1@sample.host:27017?tls=true&sslVerifyCertificate=false");
-      
-      .. warning::
+When TLS is enabled, the {+driver-short+} automatically verifies the certificate
+the server presents. When testing your code, you can disable certificate verification;
+this is known as "insecure mode." In insecure mode, the only requirement is that the 
+server present an X.509 certificate. The driver will accept a certificate even if any of the 
+following are true: 
 
-         This option should not be set to false in production. It is important that 
-         the server certificate is properly validated.
+- The hostname of the server and the subject name (or subject alternative name) 
+  on the certificate don't match.
+- The certificate is expired or not yet valid. 
+- The certificate doesn't have a trusted root certificate in the chain. 
+- The certificate purpose isn't valid for server identification.
+
+You can allow insecure TLS in two different ways: using a property on a 
+``MongoClientSettings`` object or through a parameter in your connection string.
+
+.. tabs::
 
    .. tab:: MongoClientSettings
       :tabid: mongoclientsettings
 
-      To enable TLS/SSL with a ``MongoClientSettings`` object, set the ``UseTls`` property
-      on the object to ``true``:
+      To turn off automatic certificate verification with a ``MongoClientSettings`` 
+      object, set the ``AllowInsecureTls`` property to ``true``:
+
+      .. code-block:: csharp
+         :emphasize-lines: 4
+
+         var settings = new MongoClientSettings 
+         { 
+            UseTls = true,
+            AllowInsecureTls = true 
+         };
+         var client = new MongoClient(settings);
+      
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      To turn off automatic certificate verification using a connection string, 
+      assign the connection string parameter ``tlsInsecure`` a value of ``true``:
 
       .. code-block:: csharp
 
-         var settings = new MongoClientSettings() { UseTls = true };
+         var mongoClient = new MongoClient("mongodb://user1:password1@sample.host:27017?tls=true&tlsInsecure=true");
+      
+.. warning::
+
+   Always set this option to ``false`` in production. For security reasons, it's 
+   important that the server certificate is properly validated.
 
 .. _tls_configure-certificates:
 
-Configure Certificates
-----------------------
+Checking Certificate Revocation
+-------------------------------
 
-MongoClientSettings
-~~~~~~~~~~~~~~~~~~~
+A certificate authority can add an X.509 certificate to its :wikipedia:`Certificate 
+Revocation List (CRL) <Certificate_revocation_list>` to invalidate the certificate. 
+By default, the {+driver-short+} doesn't check certificate revocation, but you can 
+enable revocation checking using either ``MongoClientSettings`` or the connection string.
 
-You can use MCS to configure your certificate:
+.. tabs::
 
-.. code-block:: csharp
+   .. tab::
+      :tabid: mongoclientsettings
 
-   var cert = new X509Certificate2("client.pfx", "mySuperSecretPassword");
+      To enable revocation checking using ``MongoClientSettings``, set 
+      ``SslSettings.CheckCertificateRevocation`` to ``true``:
 
-   var settings = new MongoClientSettings
-   {
-      SslSettings = new SslSettings
-      {
-         ClientCertificates = new[] { cert }
-      },
-      UseTls = true
-   };
+      .. code-block:: csharp
+         :emphasize-lines: 5
 
-.. note:: 
+         var settings = new MongoClientSettings
+         {
+            SslSettings = new SslSettings
+            {
+               CheckCertificateRevocation = true
+            },
+            UseTls = true
+         };
 
-   It is imperative that when loading a certificate with a password, the PrivateKey 
-   property not be null. If the property is null, it means that your certificate does 
-   not contain the private key and will not be passed to the server.
+   .. tab::
+      :tabid: connectionstring
 
-Checking Revocation
-~~~~~~~~~~~~~~~~~~~
+      To enable revocation checking using a connection string, 
+      assign the connection string parameter ``tlsDisableCertificateRevocationCheck`` 
+      a value of ``false``:
 
-During the TSL handshake, the server presents a certificate to the client in order to 
-prove its identity and provide its public key. A certificate authority can add an X.509 
-certificate to the Certificate Revocation List (CRL) prior to the expiry time to invalidate
-the certificate.
+      .. code-block:: csharp
 
-The .NET Driver now disables certificate revocation checking by default, setting 
-CheckCertificateRevocation in SslSettings to false by default. This correlates to 
-.NET’s defaults for SslStream (see .NET Framework documentation here and .NET Standard 
-documentation here). Applications relying on the intermediate default of true (introduced 
-in beta driver releases 2.11.0-beta1 and 2.11.0-beta2) must explicitly set 
-CheckCertificateRevocation to true in SslSettings to enable certificate revocation 
-checking. 
+         var mongoClient = new MongoClient("mongodb://user1:password1@sample.host:27017?tls=true&tlsDisableCertificateRevocationCheck=false");
 
-In the connection URI, revocation checking is controlled by the 
-``tlsDisableCertificateRevocationCheck`` option. This option is set to ``true``
-by default (certificate revocation is not checked). To enable certificate revocation
-checks, set this option to ``false``.
+.. note::
 
-Certificate revocation is handled by OCSP.
+   The {+driver-short+} doesn't check revocation by default because this is the default
+   behavior of the ``SslStream`` class in both the 
+   `{+framework+} <https://learn.microsoft.com/en-us/dotnet/api/system.net.security.sslstream.authenticateasclient?view=netframework-{+framework-version+}#System_Net_Security_SslStream_AuthenticateAsClient_System_String_>`__ 
+   and the `.NET standard. <https://learn.microsoft.com/en-us/dotnet/api/system.net.security.sslstream.authenticateasclient?view=netstandard-{+standard-version+}#System_Net_Security_SslStream_AuthenticateAsClient_System_String_>`__
 
 Online Certificate Status Protocol (OCSP)
 -----------------------------------------
 
-OCSP is a standard used to check whether X.509 certificates have been
-revoked.  When a client sends an X.509 certificate during the TLS
+Certificate revocation is handled by OCSP, a standard used to check whether 
+X.509 certificates have been revoked.  When a client sends an X.509 certificate during the TLS
 handshake, the CA's revocation server checks the CRL and returns a status
 of "good", "revoked", or "unknown".
 
@@ -195,28 +230,29 @@ For additional information about OCSP, check out the following resources:
 - :rfc:`Official IETF specification for OCSP (RFC 6960) <6960>`
 
 
-Disable Hostname Verification
------------------------------
+Configure the Client Certificate
+--------------------------------
 
-By default, the driver ensures that the hostname included in the server's
-TLS/SSL certificates matches the hostnames provided when constructing
-a ``MongoClient``. If you need to disable hostname verification for your
-application, you can explicitly disable this by setting the
-``invalidHostNameAllowed`` property of the builder to ``true`` in the
-``applytoSslSettings()`` builder lambda:
+You can configure your X.509 certificate using ``MongoClientSettings``. The following
+code sample creates a new X.509 certificate object using the certificate file named 
+``"client.pfx``, which is protected by the password ``mySuperSecretPassword``. The code
+then adds this certificate to the ``SslSettings.ClientCertificates`` array in 
+``MongoClientSettings``.
 
-.. code-block:: java
+.. code-block:: csharp
 
-   MongoClientSettings settings = MongoClientSettings.builder()
-        .applyToSslSettings(builder -> {
-                    builder.enabled(true);
-                    builder.invalidHostNameAllowed(true);
-                })
-        .build();
+   var cert = new X509Certificate2("client.pfx", "mySuperSecretPassword");
 
-.. warning::
+   var settings = new MongoClientSettings
+   {
+      SslSettings = new SslSettings
+      {
+         ClientCertificates = new[] { cert }
+      },
+      UseTls = true
+   };
 
-   Disabling hostname verification can make your configuration
-   `insecure <https://tlseminar.github.io/docs/mostdangerous.pdf>`__.
-   You should only disable hostname verification for testing purposes or
-   when there is no other alternative.
+.. note:: 
+
+   When loading a certificate with a password, the certificate object must contain a private 
+   key. If it doesn't, your certificate will not be passed to the server.

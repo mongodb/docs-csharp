@@ -26,8 +26,8 @@ of {+mongo-community+}:
 - :ref:`csharp-x509`
 
 To authenticate using ``GSSAPI/Kerberos`` or ``LDAP``, see the
-:ref:`csharp-enterprise-authentication-mechanisms` guide. For more information
-on establishing a connection to your MongoDB cluster, see the
+:ref:`csharp-enterprise-authentication-mechanisms` fundamentals page. For more 
+information on establishing a connection to your MongoDB cluster, see the
 :ref:`csharp-connect-to-mongodb`.
 
 Specify an Authentication Mechanism

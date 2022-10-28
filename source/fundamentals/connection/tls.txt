@@ -182,159 +182,41 @@ or the connection string.
    `{+framework+} <https://learn.microsoft.com/en-us/dotnet/api/system.net.security.sslstream.authenticateasclient?view=netframework-{+framework-version+}#System_Net_Security_SslStream_AuthenticateAsClient_System_String_>`__ 
    and the `.NET standard. <https://learn.microsoft.com/en-us/dotnet/api/system.net.security.sslstream.authenticateasclient?view=netstandard-{+standard-version+}#System_Net_Security_SslStream_AuthenticateAsClient_System_String_>`__
 
-Feature Support by Operating System
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Revocation Checking by Operating System
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The {+driver-short+} handles revocation checking differently on different 
-operating systems. The following tables show the {+driver-short+}'s support for 
-revocation-checking mechanisms for recent versions of .NET on Windows, macOS, and Linux:
+The {+driver-short+} supports the following revocation-checking mechanisms differently on 
+Windows, macOS, and Linux:
 
-- Support for the **:wikipedia:`Online Certificate Status Protocol (OCSP) <Online_certificate_status_protocol>`**,
+- :wikipedia:`Online Certificate Status Protocol (OCSP) <Online_certificate_status_protocol>`,
   a common mechanism for checking revocation 
-- Support for **OCSP stapling**, a mechanism in which the server includes a time-stamped OCSP response
-  to the client along with the certificate
-- Support for **:wikipedia:`certificate revocation lists (CRLs), <Certificate_revocation_list>`**,
+- :wikipedia:`OCSP stapling <OCSP_stapling>`, a mechanism in which the server 
+  includes a time-stamped OCSP response to the client along with the certificate
+- :wikipedia:`Certificate revocation lists (CRLs), <Certificate_revocation_list>`,
   an alternative to OCSP
-
 
 Windows
 ```````
 
-.. list-table::
-   :widths: 25 25 25 25
-   :header-rows: 1
+On Windows, the {+driver-short+} supports OCSP, OCSP stapling, and CRLs without OCSP,
+in both the .NET Framework and .NET Core. 
 
-   * - .NET version
-     - OCSP
-     - OCSP Stapling
-     - CRLs Without OCSP
-
-   * - .NET Framework 4.8
-     - ✓
-     - ✓
-     - ✓
-
-   * - .NET Framework 4.7
-     - ✓
-     - ✓
-     - ✓
-
-   * - .NET Framework 4.6
-     - ✓
-     - ✓
-     - ✓
+.. warning:: 
    
-   * - .NET Framework 4.5
-     - ✓
-     - ✓
-     - ✓
-   
-   * - .NET Core 3.1
-     - ✓
-     - ✓
-     - ✓
-
-   * - .NET Core 3.0
-     - ✓
-     - ✓
-     - ✓
-
-   * - .NET Core 2.2
-     - ✓
-     - ✓
-     - ✓
-
-   * - .NET Core 2.1
-     - ✓
-     - ✓
-     - ✓
-   
-   * - .NET Core 2.0
-     - ✓
-     - ✓
-     - ✓
-
-.. warning:: Hard Fail on Windows
-
-   On Windows, if the OCSP responder is unavailable, the driver reports a "hard fail" and
-   fails to connect to the server. This differs from the "soft fail" behavior of other 
-   operating systems and drivers, which will allow the connection to continue.
+   On Windows, the {+driver-short+} will report a "hard fail" and cancel the TLS 
+   handshake if the OCSP responder is unavailable. Other operating systems and drivers 
+   will report a "soft fail" and continue connecting.
 
 macOS
 `````
 
-.. list-table::
-   :widths: 25 25 25 25
-   :header-rows: 1
+On macOS, the {+driver-short+} supports OCSP and OCSP stapling. 
 
-   * - .NET version
-     - OCSP
-     - OCSP Stapling
-     - CRLs Without OCSP
-   
-   * - .NET Core 3.1
-     - ✓
-     - ✓
-     - 
-
-   * - .NET Core 3.0
-     - ✓
-     - ✓
-     - 
-
-   * - .NET Core 2.2
-     - ✓
-     - ✓
-     - 
-
-   * - .NET Core 2.1
-     - ✓
-     - ✓
-     - 
-   
-   * - .NET Core 2.0
-     - ✓
-     - ✓
-     - 
+Beginning with .NET Core 2.0, the driver does **not** support CRLs without OCSP.
 
 Linux
 `````
 
-.. list-table::
-   :widths: 25 25 25 25
-   :header-rows: 1
+On Linux, the {+driver-short+} supports OCSP, OCSP stapling, and CRLs without OCSP.
 
-   * - .NET version
-     - OCSP
-     - OCSP Stapling
-     - CRLs Without OCSP
-   
-   * - .NET Core 3.1
-     - ✓
-     - ✓
-     - ✓
-
-   * - .NET Core 3.0
-     - ✓
-     - ✓
-     - ✓
-
-   * - .NET Core 2.2
-     - ✓
-     - ✓
-     - ✓
-
-   * - .NET Core 2.1
-     - ✓
-     - ✓
-     - ✓
-   
-   * - .NET Core 2.0
-     - ✓
-     - ✓
-     - ✓
-
-
-For more information about OCSP, see the 
-:rfc:`Official IETF specification for OCSP (RFC 6960). <6960>`
 

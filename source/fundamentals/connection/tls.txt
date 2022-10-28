@@ -53,14 +53,42 @@ through a parameter in your connection string.
 
          var mongoClient = new MongoClient("mongodb://user1:password1@sample.host:27017?tls=true");
 
+Configure a Client Certificate
+------------------------------
+
+You can configure your X.509 certificate using ``MongoClientSettings``. The following
+code sample creates a new X.509 certificate object using the certificate file named 
+``"client.pfx``, which is protected by the password ``mySuperSecretPassword``. The code
+then adds this certificate to the ``SslSettings.ClientCertificates`` array in 
+``MongoClientSettings``.
+
+.. code-block:: csharp
+
+   var cert = new X509Certificate2("client.pfx", "mySuperSecretPassword");
+
+   var settings = new MongoClientSettings
+   {
+      SslSettings = new SslSettings
+      {
+         ClientCertificates = new[] { cert }
+      },
+      UseTls = true
+   };
+
+.. note:: 
+
+   When loading a certificate with a password, the certificate object must contain a private 
+   key. If it doesn't, your certificate will not be passed to the server.
+
 Allow Insecure TLS
 ------------------
 
 When TLS is enabled, the {+driver-short+} automatically verifies the certificate
 the server presents. When testing your code, you can disable certificate verification;
-this is known as "insecure mode." In insecure mode, the only requirement is that the 
-server present an X.509 certificate. The driver will accept a certificate even if any of the 
-following are true: 
+this is known as *insecure TLS.* 
+
+When using insecure TLS, the only requirement is that the server present an X.509 
+certificate. The driver will accept a certificate even if any of the following are true: 
 
 - The hostname of the server and the subject name (or subject alternative name) 
   on the certificate don't match.
@@ -68,7 +96,7 @@ following are true:
 - The certificate doesn't have a trusted root certificate in the chain. 
 - The certificate purpose isn't valid for server identification.
 
-You can allow insecure TLS in two different ways: using a property on a 
+You can disable certificate verification in two different ways: using a property on a 
 ``MongoClientSettings`` object or through a parameter in your connection string.
 
 .. tabs::
@@ -109,10 +137,12 @@ You can allow insecure TLS in two different ways: using a property on a
 Checking Certificate Revocation
 -------------------------------
 
-A certificate authority can add an X.509 certificate to its :wikipedia:`Certificate 
-Revocation List (CRL) <Certificate_revocation_list>` to invalidate the certificate. 
-By default, the {+driver-short+} doesn't check certificate revocation, but you can 
-enable revocation checking using either ``MongoClientSettings`` or the connection string.
+When an X.509 certificate should no longer be trusted--for example, if its private key
+has been compromised--the certificate authority will revoke the certificate. 
+
+By default, the {+driver-short+} doesn't check certificate revocation when it connects
+to a server. You can enable revocation checking using either ``MongoClientSettings`` 
+or the connection string.
 
 .. tabs::
 
@@ -152,107 +182,159 @@ enable revocation checking using either ``MongoClientSettings`` or the connectio
    `{+framework+} <https://learn.microsoft.com/en-us/dotnet/api/system.net.security.sslstream.authenticateasclient?view=netframework-{+framework-version+}#System_Net_Security_SslStream_AuthenticateAsClient_System_String_>`__ 
    and the `.NET standard. <https://learn.microsoft.com/en-us/dotnet/api/system.net.security.sslstream.authenticateasclient?view=netstandard-{+standard-version+}#System_Net_Security_SslStream_AuthenticateAsClient_System_String_>`__
 
-Online Certificate Status Protocol (OCSP)
------------------------------------------
+Feature Support by Operating System
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Certificate revocation is handled by OCSP, a standard used to check whether 
-X.509 certificates have been revoked.  When a client sends an X.509 certificate during the TLS
-handshake, the CA's revocation server checks the CRL and returns a status
-of "good", "revoked", or "unknown".
+The {+driver-short+} handles revocation checking differently on different 
+operating systems. The following tables show the {+driver-short+}'s support for 
+revocation-checking mechanisms for recent versions of .NET on Windows, macOS, and Linux:
 
-The driver supports the following variations of OCSP:
+- Support for the **:wikipedia:`Online Certificate Status Protocol (OCSP) <Online_certificate_status_protocol>`**,
+  a common mechanism for checking revocation 
+- Support for **OCSP stapling**, a mechanism in which the server includes a time-stamped OCSP response
+  to the client along with the certificate
+- Support for **:wikipedia:`certificate revocation lists (CRLs), <Certificate_revocation_list>`**,
+  an alternative to OCSP
 
-- **Client-Driven OCSP**
-- **OCSP Stapling**
 
-The following sections describe the differences between them and how to enable
-them for your application.
-
-Client-Driven OCSP
-~~~~~~~~~~~~~~~~~~
-
-In client-driven OCSP, the client sends the certificate in an OCSP request to
-an OCSP responder after receiving the certificate from the server. The OCSP
-responder checks the status of the certificate with a certificate
-authority (CA) and reports whether it's valid in a response sent to the
-client.
-
-To enable client-driven OCSP for your application, set the following JVM
-system properties:
+Windows
+```````
 
 .. list-table::
+   :widths: 25 25 25 25
    :header-rows: 1
-   :widths: 35 65
 
-   * - Property
-     - Value
+   * - .NET version
+     - OCSP
+     - OCSP Stapling
+     - CRLs Without OCSP
 
-   * - ``com.sun.net.ssl.checkRevocation``
-     - Set this property to ``true`` to enable revocation checking.
+   * - .NET Framework 4.8
+     - ✓
+     - ✓
+     - ✓
 
-   * - ``ocsp.enable``
-     - Set this property to ``true`` to enable client-driven OCSP.
+   * - .NET Framework 4.7
+     - ✓
+     - ✓
+     - ✓
 
-.. warning::
+   * - .NET Framework 4.6
+     - ✓
+     - ✓
+     - ✓
+   
+   * - .NET Framework 4.5
+     - ✓
+     - ✓
+     - ✓
+   
+   * - .NET Core 3.1
+     - ✓
+     - ✓
+     - ✓
 
-   If the OCSP responder is unavailable, the TLS support provided by the
-   JDK reports a "hard fail". This differs from the "soft fail" behavior of
-   the MongoDB Shell and some other drivers.
+   * - .NET Core 3.0
+     - ✓
+     - ✓
+     - ✓
 
-OCSP Stapling
-~~~~~~~~~~~~~
+   * - .NET Core 2.2
+     - ✓
+     - ✓
+     - ✓
 
-OCSP stapling is a mechanism in which the server must obtain the signed
-certificate from the certificate authority (CA) and include it in a
-time-stamped OCSP response to the client.
+   * - .NET Core 2.1
+     - ✓
+     - ✓
+     - ✓
+   
+   * - .NET Core 2.0
+     - ✓
+     - ✓
+     - ✓
 
-To enable OCSP stapling for your application, set the following JVM system
-properties:
+.. warning:: Hard Fail on Windows
+
+   On Windows, if the OCSP responder is unavailable, the driver reports a "hard fail" and
+   fails to connect to the server. This differs from the "soft fail" behavior of other 
+   operating systems and drivers, which will allow the connection to continue.
+
+macOS
+`````
 
 .. list-table::
+   :widths: 25 25 25 25
    :header-rows: 1
-   :widths: 50 50
 
-   * - Property
-     - Description
+   * - .NET version
+     - OCSP
+     - OCSP Stapling
+     - CRLs Without OCSP
+   
+   * - .NET Core 3.1
+     - ✓
+     - ✓
+     - 
 
-   * - ``com.sun.net.ssl.checkRevocation``
-     - Set this property to ``true`` to enable revocation checking.
+   * - .NET Core 3.0
+     - ✓
+     - ✓
+     - 
 
-   * - ``jdk.tls.client.enableStatusRequestExtension``
-     - | Set this property to ``true`` to enable OCSP stapling.
-       |
-       | If unset or set to ``false``, the connection can proceed regardless of the presence or status of the certificate revocation response.
+   * - .NET Core 2.2
+     - ✓
+     - ✓
+     - 
 
-For additional information about OCSP, check out the following resources:
+   * - .NET Core 2.1
+     - ✓
+     - ✓
+     - 
+   
+   * - .NET Core 2.0
+     - ✓
+     - ✓
+     - 
 
-- Oracle JDK 8 Documentation on `how to enable OCSP for an application <https://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/ocsp.html>`__
-- :rfc:`Official IETF specification for OCSP (RFC 6960) <6960>`
+Linux
+`````
+
+.. list-table::
+   :widths: 25 25 25 25
+   :header-rows: 1
+
+   * - .NET version
+     - OCSP
+     - OCSP Stapling
+     - CRLs Without OCSP
+   
+   * - .NET Core 3.1
+     - ✓
+     - ✓
+     - ✓
+
+   * - .NET Core 3.0
+     - ✓
+     - ✓
+     - ✓
+
+   * - .NET Core 2.2
+     - ✓
+     - ✓
+     - ✓
+
+   * - .NET Core 2.1
+     - ✓
+     - ✓
+     - ✓
+   
+   * - .NET Core 2.0
+     - ✓
+     - ✓
+     - ✓
 
 
-Configure the Client Certificate
---------------------------------
+For more information about OCSP, see the 
+:rfc:`Official IETF specification for OCSP (RFC 6960). <6960>`
 
-You can configure your X.509 certificate using ``MongoClientSettings``. The following
-code sample creates a new X.509 certificate object using the certificate file named 
-``"client.pfx``, which is protected by the password ``mySuperSecretPassword``. The code
-then adds this certificate to the ``SslSettings.ClientCertificates`` array in 
-``MongoClientSettings``.
-
-.. code-block:: csharp
-
-   var cert = new X509Certificate2("client.pfx", "mySuperSecretPassword");
-
-   var settings = new MongoClientSettings
-   {
-      SslSettings = new SslSettings
-      {
-         ClientCertificates = new[] { cert }
-      },
-      UseTls = true
-   };
-
-.. note:: 
-
-   When loading a certificate with a password, the certificate object must contain a private 
-   key. If it doesn't, your certificate will not be passed to the server.

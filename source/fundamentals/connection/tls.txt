@@ -58,7 +58,7 @@ Configure a Client Certificate
 
 You can configure your X.509 certificate using ``MongoClientSettings``. The following
 code sample creates a new X.509 certificate object using the certificate file named 
-``"client.pfx``, which is protected by the password ``mySuperSecretPassword``. The code
+``client.pfx``, which is protected by the password ``mySuperSecretPassword``. The code
 then adds this certificate to the ``SslSettings.ClientCertificates`` array in 
 ``MongoClientSettings``.
 
@@ -134,19 +134,19 @@ You can disable certificate verification in two different ways: using a property
 
 .. _tls_configure-certificates:
 
-Checking Certificate Revocation
--------------------------------
+Check Certificate Revocation
+----------------------------
 
 When an X.509 certificate should no longer be trusted--for example, if its private key
 has been compromised--the certificate authority will revoke the certificate. 
 
-By default, the {+driver-short+} doesn't check certificate revocation when it connects
-to a server. You can enable revocation checking using either ``MongoClientSettings`` 
-or the connection string.
+By default, the {+driver-short+} doesn't check whether a server's certificate has been
+revoked before it connects. You can enable revocation checking using either 
+``MongoClientSettings`` or the connection string.
 
 .. tabs::
 
-   .. tab::
+   .. tab:: MongoClientSettings
       :tabid: mongoclientsettings
 
       To enable revocation checking using ``MongoClientSettings``, set 
@@ -164,7 +164,7 @@ or the connection string.
             UseTls = true
          };
 
-   .. tab::
+   .. tab:: Connection String
       :tabid: connectionstring
 
       To enable revocation checking using a connection string, 

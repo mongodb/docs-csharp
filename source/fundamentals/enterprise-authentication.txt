@@ -209,8 +209,8 @@ properties:
 
 .. _csharp-LDAP:
 
-LDAP (PLAIN)
-------------
+Authenticate with LDAP (PLAIN)
+------------------------------
 
 You can authenticate to a Lightweight Directory Access Protocol (LDAP) server 
 using your directory-server username and password.

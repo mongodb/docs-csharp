@@ -188,7 +188,7 @@ Revocation Checking by Operating System
 The {+driver-short+} supports the following revocation-checking mechanisms differently on 
 Windows, macOS, and Linux:
 
-- :wikipedia:`Online Certificate Status Protocol (OCSP) <Online_certificate_status_protocol>`,
+- :wikipedia:`Online Certificate Status Protocol (OCSP) <Online_Certificate_Status_Protocol>`,
   a common mechanism for checking revocation 
 - :wikipedia:`OCSP stapling <OCSP_stapling>`, a mechanism in which the server 
   includes a time-stamped OCSP response to the client along with the certificate

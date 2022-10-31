@@ -21,8 +21,8 @@ the identity of a client to ensure security before connecting.
 You can use the following authentication mechanisms with the latest version of
 {+mongo-enterprise+}.
 
-- :ref:`csharp-kerberos`
-- :ref:`csharp-LDAP`
+- :ref:`GSSAPI/Kerberos <csharp-kerberos>`
+- :ref:`LDAP (Plain) <csharp-LDAP>`
 
 To authenticate using another mechanism, see the
 :ref:`<csharp-authentication-mechanisms>` fundamentals page. For
@@ -85,13 +85,13 @@ mechanism:
    - On Windows, the process owner running the application is the same as the
      user needing authentication.
 
-   - ON Linux, the user has initialized their keytab via ``kinit username@REALM.COM``.
+   - On Linux, the user has initialized their keytab via ``kinit username@REALM.COM``.
   
 Additional Properties
 ~~~~~~~~~~~~~~~~~~~~~
 
-You can specify additional properties when specifying your authentication
-mechanism, using the connection string or a factory method in the ``MongoCredential``
+You can specify additional properties with your authentication
+mechanism using the connection string or a factory method in the ``MongoCredential``
 class.
 
 Fully Qualified Domain Name

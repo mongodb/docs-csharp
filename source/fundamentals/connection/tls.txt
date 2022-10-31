@@ -13,8 +13,8 @@ Enable TLS on a Connection
 Overview
 --------
 
-In this guide, you can learn how to connect to MongoDB instances with the
-`TLS/SSL <https://en.wikipedia.org/wiki/Transport_Layer_Security>`__
+In this guide, you can learn how to connect to MongoDB instances with the 
+:wikipedia:`TLS/SSL <Transport_Layer_Security>`
 security protocol using the underlying TLS/SSL support in the {+framework+}. To
 configure your connection to use TLS/SSL, enable the TLS/SSL settings in either
 the :ref:`connection string <csharp-connection-uri>` or 
@@ -51,7 +51,7 @@ through a parameter in your connection string.
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://user1:password1@sample.host:27017?tls=true");
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>:<port>?tls=true");
 
 Configure a Client Certificate
 ------------------------------
@@ -75,7 +75,7 @@ then adds this certificate to the ``SslSettings.ClientCertificates`` array in
       UseTls = true
    };
 
-.. note:: 
+.. important:: 
 
    When loading a certificate with a password, the certificate object must contain a private 
    key. If it doesn't, your certificate will not be passed to the server.
@@ -83,9 +83,9 @@ then adds this certificate to the ``SslSettings.ClientCertificates`` array in
 Allow Insecure TLS
 ------------------
 
-When TLS is enabled, the {+driver-short+} automatically verifies the certificate
-the server presents. When testing your code, you can disable certificate verification;
-this is known as *insecure TLS.* 
+When TLS is enabled, the {+driver-short+} automatically verifies the certificate that
+the server presents. When testing your code, you can disable certificate verification.
+This is known as *insecure TLS.* 
 
 When using insecure TLS, the only requirement is that the server present an X.509 
 certificate. The driver will accept a certificate even if any of the following are true: 
@@ -96,7 +96,7 @@ certificate. The driver will accept a certificate even if any of the following a
 - The certificate doesn't have a trusted root certificate in the chain. 
 - The certificate purpose isn't valid for server identification.
 
-You can disable certificate verification in two different ways: using a property on a 
+You can allow insecure TLS in two different ways: using a property on a 
 ``MongoClientSettings`` object or through a parameter in your connection string.
 
 .. tabs::
@@ -104,7 +104,7 @@ You can disable certificate verification in two different ways: using a property
    .. tab:: MongoClientSettings
       :tabid: mongoclientsettings
 
-      To turn off automatic certificate verification with a ``MongoClientSettings`` 
+      To allow insecure TLS with a ``MongoClientSettings`` 
       object, set the ``AllowInsecureTls`` property to ``true``:
 
       .. code-block:: csharp
@@ -120,12 +120,12 @@ You can disable certificate verification in two different ways: using a property
    .. tab:: Connection String
       :tabid: connectionstring
 
-      To turn off automatic certificate verification using a connection string, 
+      To allow insecure TLS using a connection string, 
       assign the connection string parameter ``tlsInsecure`` a value of ``true``:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://user1:password1@sample.host:27017?tls=true&tlsInsecure=true");
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>:<port>?tls=true&tlsInsecure=true");
       
 .. warning::
 
@@ -173,7 +173,7 @@ revoked before it connects. You can enable revocation checking using either
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://user1:password1@sample.host:27017?tls=true&tlsDisableCertificateRevocationCheck=false");
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>:<port>?tls=true&tlsDisableCertificateRevocationCheck=false");
 
 .. note::
 
@@ -219,4 +219,10 @@ Linux
 
 On Linux, the {+driver-short+} supports OCSP, OCSP stapling, and CRLs without OCSP.
 
+API Documentation
+-----------------
 
+To learn more about any of the connection options discussed in this
+guide, see the following API documentation:
+
+- `MongoClientSettings <{+api-root+}/T_MongoDB_Driver_MongoClientSettings.htm>`__

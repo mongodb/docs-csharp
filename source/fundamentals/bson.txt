@@ -1,0 +1,123 @@
+.. _csharp-bson:
+
+=================
+Working with BSON
+=================
+
+.. default-domain:: mongodb
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+In this guide, you can learn how to create BSON documents,
+read BSON from a file, and write BSON to a file using the {+driver-short+}.
+
+The code samples in this guide use the following BSON document as an example:
+
+.. code-block:: none
+
+   {
+       "address" : {
+           "street" : "Pizza St", 
+           "zipcode" : "10003" 
+       },
+       "coord" : [-73.982419, 41.579505]
+       "cuisine" : "Pizza",
+       "name" : "Mongo's Pizza"
+   }
+
+Create a BSON Document
+----------------------
+
+To build a BSON document in {+lang+}, create an instance of the ``BsonDocument`` class.
+The ``BsonDocument`` constructor accepts ``BsonElement`` arguments that map to the fields
+and values in the document. You can either construct individual ``BsonElement`` objects 
+and pass them to the ``BsonDocument`` constructor or pass field-value pairs inside curly 
+braces ( `{}` ). 
+
+.. literalinclude:: ../includes/fundamentals/code-examples/Bson.cs
+   :start-after: start-create
+   :end-before: end-create
+   :language: csharp
+   :copyable:
+   :dedent:
+
+.. tip::
+   
+   Each pair of curly braces in the BSON object requires a new ``BsonDocument`` object
+   in {+lang}+.
+
+Change a BSON Document
+----------------------
+
+The ``BsonDocument`` class includes methods that let you change the contents of the
+BSON document. The following code sample makes three changes to the previous
+``BsonDocument`` object:
+
+1. Adds a new field, ``"restaurant_id"``, with the value ``"12345"``
+#. Removes the ``"cuisine"`` field
+#. Sets the value of the ``"name"`` field to "``Mongo's Pizza Palace"``
+
+.. literalinclude:: ../includes/fundamentals/code-examples/Bson.cs
+   :start-after: start-change
+   :end-before: end-change
+   :language: csharp
+   :copyable:
+   :dedent:
+   :emphasize-lines: 15-17
+
+Read BSON from a File
+---------------------
+
+You can read a BSON file using the methods in the ``BsonBinaryReader`` class. 
+The following code sample shows how to read the following BSON document from a file:
+
+.. literalinclude:: ../includes/fundamentals/code-examples/Bson.cs
+   :start-after: start-create
+   :end-before: end-create
+   :language: csharp
+   :copyable:
+   :dedent:
+
+.. code-block:: csharp
+
+   string inputFileName = "myFile.bson";
+
+   using (var stream = File.OpenRead(inputFileName))
+   using (var reader = new BsonBinaryReader(stream))
+   {
+       reader.ReadStartDocument();
+       string fieldName1 = reader.ReadName();
+       int value = reader.ReadInt32();
+       reader.ReadEndDocument();
+   }
+
+.. warning:: 
+
+   If you try to call ``ReadName()`` twice in a row without reading a value,
+   the driver will throw an ``InvalidOperationException``.
+
+Write BSON to a File
+--------------------
+
+You can write BSON to a file using the methods in the ``BsonBinaryWriter`` class.
+The following code sample shows how to write the previous BSON document to a file:
+
+.. code-block:: csharp
+
+   string outputFileName = "myFile.bson";
+
+   using (var stream = File.OpenWrite(outputFileName))
+   using (var writer = new BsonBinaryWriter(stream))
+   {
+       writer.WriteStartDocument();
+       writer.WriteName("a");
+       writer.WriteInt32(1);
+       writer.WriteEndDocument();
+}
+
+serialization
+

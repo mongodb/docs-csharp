@@ -1,0 +1,455 @@
+.. _csharp-linq:
+
+====
+LINQ
+====
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+
+Overview
+--------
+
+In this guide you can learn how to use
+`LINQ <https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/?redirectedfrom=MSDN>`__
+with the {+driver-long+}. The {+driver-short+} automatically translates LINQ
+queries into :manual:`aggregation operations <aggregation>`.
+
+The examples in this guide use the ``restaurants`` collection
+in the ``sample_restaurants`` database provided in the :atlas:`Atlas sample datasets </sample-data>`.
+To learn how to create a free MongoDB Atlas cluster and load the sample datasets
+see the :ref:`<csharp-quickstart>`.
+
+The following ``Restaurants`` class models the documents in this collection:
+
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-restaurant-model
+   :end-before: end-restaurant-model
+
+.. _csharp-linq-queryable:
+
+Make A Collection Queryable
+---------------------------
+
+To use LINQ with to query your collection you must first make the collection
+queryable. To make your collection queryable, use the ``AsQueryable`` method
+as follows:
+
+.. code-block:: csharp
+   :emphasize-lines: 2
+
+    _restaurantsCollection = db.GetCollection<Restaurant>("restaurants");
+    var queryableCollection = _restaurantsCollection.AsQueryable();
+
+Once the collection is queryable, you can compose a query using 
+**query comprehension syntax** or **method syntax**.
+
+Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
+how to compose a query using LINQ:
+
+.. tabs::
+
+   .. tab:: Query Syntax
+      :tabid: query-syntax
+
+      .. code-block:: csharp
+
+         var query = from r in queryableCollection
+             where r.Name == "The Movable Feast"
+             select new { r.Name, r.Address };
+
+   .. tab:: Method Syntax
+      :tabid: method-syntax
+
+      .. code-block:: csharp
+
+         var query = queryableCollection
+             .Where(r => r.Name == "The Movable Feast")
+             .Select(r => new { r.Name, r.Address });
+
+The documents found in the query are returned as an object that implements the
+`IQueryable <https://learn.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?redirectedfrom=MSDN&view=net-6.0>`__
+interface. You can print the results of the preceding example as follows: 
+
+.. io-code-block::
+
+   .. input::
+      :language: csharp
+
+      foreach (var restaurant in query)
+      {
+          Console.WriteLine(restaurant.ToJson());
+      }
+
+   .. output::
+      
+      { "name" : "The Movable Feast", "address" : { "building" : "284", "coord" : [-73.982923900000003, 40.6580753], "street" : "Prospect Park West", "zipcode" : "11215" } }
+
+Supported Aggregation Stages
+----------------------------
+
+You can create an aggregation pipeline by using LINQ with supported aggregation
+operations. To learn more about each aggregation pipeline stage, see the server
+manual :ref:`aggregation-pipeline-operator-reference` page.
+
+$project
+~~~~~~~~
+
+The ``$project`` aggregation stage returns a document using only the specified
+fields.
+
+Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
+how to generate a ``$project`` stage using LINQ:
+
+.. tabs::
+
+   .. tab:: Query Syntax
+      :tabid: query-syntax
+
+      .. code-block:: csharp
+         :emphasize-lines: 2
+
+         var query = from r in queryableCollection
+             select new { r.Name, r.Address };
+
+   .. tab:: Method Syntax
+      :tabid: method-syntax
+
+      .. code-block:: csharp
+         :emphasize-lines: 2
+
+         var query = queryableCollection
+             .Select(r => new { r.Name, r.Address });
+
+The preceding example returns the following document:
+
+.. code-block:: json
+
+   { "name" : "The Movable Feast", "address" : { "building" : "284", "coord" : [-73.982923900000003, 40.6580753], "street" : "Prospect Park West", "zipcode" : "11215" } }
+
+.. note:: Excluding the ``_id`` Field
+
+   MongoDB includes the ``_id`` field in all projections unless explicitly excluded. 
+   The {+driver-short+} automatically adds this exclusion when using LINQ to 
+   create a projection without ``_id``.
+
+$match
+~~~~~~
+
+The ``$match`` aggregation stage returns the documents that match a specified
+criteria. 
+
+Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
+how to generate a ``$match`` stage using LINQ:
+
+.. tabs::
+
+   .. tab:: Query Syntax
+      :tabid: query-syntax
+
+      .. code-block:: csharp
+         :emphasize-lines: 2
+
+         var query = from r in queryableCollection
+             where r.Name == "The Movable Feast"
+             select r;
+
+   .. tab:: Method Syntax
+      :tabid: method-syntax
+
+      .. code-block:: csharp
+         :emphasize-lines: 2
+
+         var query = queryableCollection
+             .Where(r => r.Name == "The Movable Feast");
+
+The preceding example returns the following document:
+
+.. code-block:: json
+
+    // Results truncated
+
+    { "_id" : ObjectId("5eb3d668b31de5d588f4293c"), "name" : "The Movable Feast", "restaurant_id" : "40361606", "cuisine" : "American", "address" : {...}, "borough" : "Brooklyn", "grades" : [...] }
+
+$limit
+~~~~~~
+
+The ``$limit`` aggregation stage limits the number of documents returned by the
+query. The following example shows how to generate a ``$limit`` stage using LINQ:
+
+.. code-block:: csharp
+   :emphasize-lines: 4
+
+   var query = queryableCollection
+       .Where(r => r.Cuisine == "Italian")
+       .Select(r => new {r.Name, r.Cuisine})
+       .Take(5);
+
+The preceding example returns the following documents:
+
+.. code-block:: json
+
+    { "name" : "Philadelhia Grille Express", "cuisine" : "Italian" }
+    { "name" : "Isle Of Capri Resturant", "cuisine" : "Italian" }
+    { "name" : "Marchis Restaurant", "cuisine" : "Italian" }
+    { "name" : "Crystal Room", "cuisine" : "Italian" }
+    { "name" : "Forlinis Restaurant", "cuisine" : "Italian" }
+
+$skip
+~~~~~
+
+The ``$skip`` aggregation stage skips over a specified number of documents returned
+by a query, then returns the rest of the results. The following example shows how to generate
+a ``$skip`` stage using LINQ:
+
+.. code-block:: csharp
+   :emphasize-lines: 4
+
+   var query = queryableCollection
+       .Where(r => r.Cuisine == "Italian")
+       .Select(r => new {r.Name, r.Cuisine})
+       .Skip(2)
+
+The preceding example skips the first two restaurants that match the criteria, and
+returns the rest as follows:
+
+.. code-block:: json
+
+   // Results truncated
+
+   { "name" : "Marchis Restaurant", "cuisine" : "Italian" }
+   { "name" : "Crystal Room", "cuisine" : "Italian" }
+   { "name" : "Forlinis Restaurant", "cuisine" : "Italian" }
+   ...
+
+$unwind
+~~~~~~~
+
+The ``$unwind`` aggregation stage deconstructs a specified array field and returns
+a document for each element in that array.
+
+Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
+how to generate an ``$unwind`` stage using LINQ:
+
+.. tabs::
+
+   .. tab:: Query Syntax
+      :tabid: query-syntax
+
+      .. code-block:: csharp
+         :emphasize-lines: 2
+
+         var query = from r in queryableCollection
+             where r.Name == "The Movable Feast"
+             from grade in r.Grades
+             select grade;
+
+   .. tab:: Method Syntax
+      :tabid: method-syntax
+
+      .. code-block:: csharp
+         :emphasize-lines: 2
+
+         var query = queryableCollection
+             .Where(r => r.Name == "The Movable Feast")
+             .SelectMany(r => r.Grades);
+
+The preceding example returns a document for each element in the ``Grades`` array
+for the document in which the ``Name`` field is "The Movable Feast". The results
+are as follows:
+
+.. code-block:: json
+
+   { "date" : ISODate("2014-11-19T00:00:00Z"), "grade" : "A", "score" : 11 }
+   { "date" : ISODate("2013-11-14T00:00:00Z"), "grade" : "A", "score" : 2 }
+   { "date" : ISODate("2012-12-05T00:00:00Z"), "grade" : "A", "score" : 13 }
+   { "date" : ISODate("2012-05-17T00:00:00Z"), "grade" : "A", "score" : 11 }
+
+$group
+~~~~~~
+
+The ``$group`` aggregation stage separates documents into groups according to
+your specified criteria.
+
+Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
+how to generate an ``$group`` stage using LINQ:
+
+.. tabs::
+
+   .. tab:: Query Syntax
+      :tabid: query-syntax
+
+      .. code-block:: csharp
+         :emphasize-lines: 2
+
+         var query = from r in queryableCollection
+             group r by r.Cuisine into g
+             select new {Cuisine = g.Key, Count = g.Count()};
+
+   .. tab:: Method Syntax
+      :tabid: method-syntax
+
+      .. code-block:: csharp
+         :emphasize-lines: 2
+
+         var query = queryableCollection
+             .GroupBy(r => r.Cuisine)
+             .Select(g => new { Cuisine = g.Key, Count = g.Count() });
+
+The preceding example groups all documents in the ``queryableCollection`` by the
+value in their ``Cuisine`` field, and counts how many documents have that value.
+The results are similar to the following:
+
+.. code-block:: json
+
+   // Results truncated
+
+   { "cuisine" : "Caribbean", "count" : 657 }
+   { "cuisine" : "Café/Coffee/Tea", "count" : 1214 }
+   { "cuisine" : "Iranian", "count" : 2 }
+   { "cuisine" : "Nuts/Confectionary", "count" : 6 }
+   { "cuisine" : "Middle Eastern", "count" : 168 }  
+   ...
+
+.. tip:: Result Order
+   
+   The preceding queries don't always return results in the same order. Running
+   this example may return the results in a different order than shown above.
+
+$sort
+~~~~~
+
+The ``$sort`` aggregation stage returns the results of your query in the specified
+order.
+
+Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
+how to generate an ``$sort`` stage using LINQ:
+
+.. tabs::
+
+   .. tab:: Query Syntax
+      :tabid: query-syntax
+
+      .. code-block:: csharp
+         :emphasize-lines: 2
+
+         var query = from r in queryableCollection
+             orderby r.Name, r.RestaurantId descending
+             select r;
+
+   .. tab:: Method Syntax
+      :tabid: method-syntax
+
+      .. code-block:: csharp
+
+         var query = queryableCollection
+             .OrderBy(r => r.Name)
+             .ThenByDescending(r => r.RestaurantId);
+
+The preceding example returns the query results sorted alphabetically by their
+``Name`` field, with a secondary descending sort on their ``RestaurantId`` field.
+The following is a subset of the returned results:
+
+.. code-block:: json
+
+   // Results Truncated
+
+   ...
+   { "_id" : ObjectId(...), "name" : "Aba Turkish Restaurant", "restaurant_id" : "41548686", "cuisine" : "Turkish", "address" : { "building" : "325", "coord" : [-73.984044699999998, 40.767440899999997], "street" : "West   57 Street", "zipcode" : "10019" }, "borough" : "Manhattan", "grades" : [{ "date" : ISODate("2015-01-06T00:00:00Z"), "grade" : "A", "score" : 9 }, { "date" : ISODate("2014-08-07T00:00:00Z"), "grade" : "B", "score" : 16 }, { "date" : ISODate("2014-02-18T00:00:00Z"), "grade" : "A", "score" : 9 }, { "date" : ISODate("2013-01-24T00:00:00Z"), "grade" : "A", "score" : 10 }, { "date" : ISODate("2012-07-25T00:00:00Z"), "grade" : "B", "score" : 19 }] }
+   { "_id" : ObjectId(...), "name" : "Abace Sushi", "restaurant_id" : "50006214", "cuisine" : "Japanese", "address" : { ... }, "borough" : "Manhattan", "grades" : [...] }
+   { "_id" : ObjectId(...), "name" : "Abacky Potluck", "restaurant_id" : "50011222", "cuisine" : "Asian", "address" : { ... }, "borough" : "Manhattan", "grades" : [...] }
+   { "_id" : ObjectId(...), "name" : "Abaleh", "restaurant_id" : "50009096", "cuisine" : "Mediterranean", "address" : { ... }, "borough" : "Manhattan", "grades" : [...] }
+   ...
+
+$lookup
+~~~~~~~
+
+The ``$lookup`` aggregation stage performs a left outer join to a collection in
+the same database to filter in documents from the "joined" collection for processing.
+The $lookup stage adds a new array field to each input document. The new array
+field contains the matching documents from the "joined" collection.
+
+.. note:: 
+
+   To perform a lookup you must make both collections queryable using the
+   ``AsQueryable`` method.
+
+   To learn how to make a collection queryable, see :ref:`csharp-linq-queryable`.
+
+Consider a second collection in the ``sample_restaurants`` database called
+``reviews`` that has restaurant reviews. The following ``Reviews`` class
+models the documents in that collection:
+
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-restaurant-model
+   :end-before: end-restaurant-model
+
+Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
+how to generate an ``$lookup`` stage using LINQ:
+
+.. tabs::
+
+   .. tab:: Query Syntax
+      :tabid: query-syntax
+
+      .. code-block:: csharp
+
+         var query = from restaurant in queryableCollection
+             join rv in reviewCollection on restaurant.Name equals rv.RestaurantName into reviews
+             select new { restaurant, reviews };
+
+   .. tab:: Method Syntax
+      :tabid: method-syntax
+
+      .. code-block:: csharp
+
+         var query = queryableCollection
+             .GroupJoin(reviewCollection,
+                 restaurant => restaurant.Name,
+                 review => review.RestaurantName,
+                 (restaurant, reviews) =>
+                     new {restaurant, reviews}
+             );
+
+The preceding example returns documents from the ``restaurants`` collection, each
+with an added field called ``reviews``. The added field contains all documents from the
+``reviews`` collection with a ``name`` field that matches the ``name`` of the 
+document from the ``restaurants`` collection. 
+
+The following is a subset of the returned results:
+
+.. code-block:: json
+
+   // Results truncated
+
+   { "restaurant" : {
+      "_id" : ObjectId("..."),
+      "name" : "The Movable Feast", 
+      "restaurant_id" : "40361606", 
+      "cuisine" : "American", 
+      "address" : {...}, 
+      "borough" : "Brooklyn", 
+      "grades" : [...] }, 
+      "reviews" : [
+        { "_id" : ObjectId(...), "restaurant_name" : "The Movable Feast", "reviewer" : "Lazlo Cravensworth", "review" : "Great restaurant! 12/10 stars!" },
+        { "_id" : ObjectId("..."), "restaurant_name" : "The Movable Feast", "reviewer" : "Michael Scarn", "review" : "It really was a feast" }
+       ]
+    }
+
+Unsupported Aggregation Stages
+------------------------------
+
+The {+driver-long+} implementation of LINQ does not support the following
+aggregation stages:
+
+- ``$redact``
+- ``$geoNear``
+- ``$out``

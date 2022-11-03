@@ -69,11 +69,49 @@ BSON document. The following code sample makes three changes to the previous
    :dedent:
    :emphasize-lines: 15-17
 
-Read BSON from a File
----------------------
+Write BSON to a File
+--------------------
 
-You can read a BSON file using the methods in the ``BsonBinaryReader`` class. 
-The following code sample shows how to read the following BSON document from a file:
+You can write BSON to a file using the methods in the ``BsonBinaryWriter`` class.
+The following code sample shows how to write a BSON document to ``myFile.bson``:
+
+.. code-block:: csharp
+
+   string outputFileName = "myFile.bson";
+
+   using (var stream = File.OpenWrite(inputFileName))
+   using (var writer = new BsonBinaryWriter(stream))
+   {
+       writer.WriteStartDocument();
+
+       //address
+       writer.WriteName("address");
+       writer.WriteStartDocument();
+       writer.WriteName("street");
+       writer.WriteString("Pizza St");
+       writer.WriteName("zipcode");
+       writer.WriteString("10003");
+       writer.WriteEndDocument();
+
+       //coord
+       writer.WriteName("coord");
+       writer.WriteStartArray();
+       writer.WriteDouble(-73.982419);
+       writer.WriteDouble(41.579505);
+       writer.WriteEndArray();
+
+       //cuisine
+       writer.WriteName("cuisine");
+       writer.WriteString("Pizza");
+
+       //name
+       writer.WriteName("name");
+       writer.WriteString("Mongo's Pizza");
+
+       writer.WriteEndDocument();
+   }
+
+The resulting BSON document will look like the following:
 
 .. literalinclude:: ../includes/fundamentals/code-examples/Bson.cs
    :start-after: start-create
@@ -81,6 +119,12 @@ The following code sample shows how to read the following BSON document from a f
    :language: csharp
    :copyable:
    :dedent:
+
+Read BSON from a File
+---------------------
+
+You can read a BSON file using the methods in the ``BsonBinaryReader`` class. 
+The following code sample shows how to read a BSON document from ``myFile.bson``:
 
 .. code-block:: csharp
 
@@ -90,34 +134,55 @@ The following code sample shows how to read the following BSON document from a f
    using (var reader = new BsonBinaryReader(stream))
    {
        reader.ReadStartDocument();
-       string fieldName1 = reader.ReadName();
-       int value = reader.ReadInt32();
+
+       //address
+       string addressFieldName = reader.ReadName();
+       reader.ReadStartDocument();
+       string streetFieldName = reader.ReadName();
+       string streetValue = reader.ReadString();
+       string zipFieldName = reader.ReadName();
+       string zipValue = reader.ReadString();
+       reader.ReadEndDocument();
+
+       //coord
+       string coordFieldName = reader.ReadName();
+       reader.ReadStartArray();
+       double coord1 = reader.ReadDouble();
+       double coord2 = reader.ReadDouble();
+       reader.ReadEndArray();
+
+       //cuisine
+       string cuisineFieldName = reader.ReadName();
+       string cuisineValue = reader.ReadString();
+
+       //name
+       string nameFieldName = reader.ReadName();
+       string nameValue = reader.ReadString();
+
        reader.ReadEndDocument();
    }
 
+The resulting BSON document looks like this:
+
+.. literalinclude:: ../includes/fundamentals/code-examples/Bson.cs
+   :start-after: start-create
+   :end-before: end-create
+   :language: csharp
+   :copyable:
+   :dedent:
+
 .. warning:: 
 
-   If you try to call ``ReadName()`` twice in a row without reading a value,
+   If you call ``ReadName()`` twice in a row without reading a value,
    the driver will throw an ``InvalidOperationException``.
 
-Write BSON to a File
---------------------
+API Documentation
+-----------------
 
-You can write BSON to a file using the methods in the ``BsonBinaryWriter`` class.
-The following code sample shows how to write the previous BSON document to a file:
+To learn more about any of the methods or types discussed in this
+guide, see the following API documentation:
 
-.. code-block:: csharp
-
-   string outputFileName = "myFile.bson";
-
-   using (var stream = File.OpenWrite(outputFileName))
-   using (var writer = new BsonBinaryWriter(stream))
-   {
-       writer.WriteStartDocument();
-       writer.WriteName("a");
-       writer.WriteInt32(1);
-       writer.WriteEndDocument();
-}
-
-serialization
-
+- `BsonDocument <{+api-root+}/T_MongoDB_Bson_BsonDocument.htm>`__
+- `BsonElement <{+api-root+}/T_MongoDB_Bson_BsonElement.htm>`__
+- `BsonBinaryReader <{+api-root+}/T_MongoDB_Bson_IO_BsonBinaryReader.htm>`__
+- `BsonBinaryWriter <{+api-root+}/T_MongoDB_Bson_IO_BsonBinaryWriter.htm>`__

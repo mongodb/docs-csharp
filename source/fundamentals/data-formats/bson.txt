@@ -58,7 +58,7 @@ braces ( ``{}`` ).
 The following code sample constructs a ``BsonDocument`` object to represent the previous
 BSON document:
 
-.. literalinclude:: ../includes/fundamentals/code-examples/Bson.cs
+.. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
    :start-after: start-create
    :end-before: end-create
    :language: csharp
@@ -81,7 +81,7 @@ BSON document. The following code sample makes three changes to the previous
 #. Removes the ``"cuisine"`` field
 #. Sets the value of the ``"name"`` field to ``"Mongo's Pizza Palace"``
 
-.. literalinclude:: ../includes/fundamentals/code-examples/Bson.cs
+.. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
    :start-after: start-change
    :end-before: end-change
    :language: csharp

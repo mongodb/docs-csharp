@@ -1,8 +1,8 @@
 .. _csharp-bson:
 
-=================
-Working with BSON
-=================
+==============
+Work with BSON
+==============
 
 .. default-domain:: mongodb
 
@@ -12,8 +12,25 @@ Working with BSON
    :depth: 2
    :class: singlecol
 
-In this guide, you can learn how to create BSON documents,
-read BSON from a file, and write BSON to a file using the {+driver-short+}.
+Overview
+--------
+
+In this guide, you can learn how to create BSON documents, read BSON from a file, 
+and write BSON to a file using the {+driver-short+}.
+
+BSON Data Format
+----------------
+
+**BSON**, or Binary JSON, is the data format that MongoDB uses to organize
+and store data. This data format includes all JSON data structure types and
+adds support for types including dates, different size integers, ObjectIds, and
+binary data. For a complete list of supported types, see the
+:manual:`BSON Types </reference/bson-types>` server manual page.
+
+The binary format is not human-readable, but you can use the
+:ref:`Java BSON library <install-bson-library>` to convert it to a JSON
+representation. You can read more about the relationship between these
+formats in our article about :website:`JSON and BSON </json-and-bson>`.
 
 The code samples in this guide use the following BSON document as an example:
 
@@ -32,11 +49,14 @@ The code samples in this guide use the following BSON document as an example:
 Create a BSON Document
 ----------------------
 
-To build a BSON document in {+lang+}, create an instance of the ``BsonDocument`` class.
+To build a BSON document in {+language+}, create an instance of the ``BsonDocument`` class.
 The ``BsonDocument`` constructor accepts ``BsonElement`` arguments that map to the fields
 and values in the document. You can either construct individual ``BsonElement`` objects 
 and pass them to the ``BsonDocument`` constructor or pass field-value pairs inside curly 
-braces ( `{}` ). 
+braces ( ``{}`` ). 
+
+The following code sample constructs a ``BsonDocument`` object to represent the previous
+BSON document:
 
 .. literalinclude:: ../includes/fundamentals/code-examples/Bson.cs
    :start-after: start-create
@@ -47,8 +67,8 @@ braces ( `{}` ).
 
 .. tip::
    
-   Each pair of curly braces in the BSON object requires a new ``BsonDocument`` object
-   in {+lang}+.
+   Each pair of curly braces in the BSON object requires one new ``BsonDocument`` object
+   in {+language}+.
 
 Change a BSON Document
 ----------------------
@@ -72,8 +92,20 @@ BSON document. The following code sample makes three changes to the previous
 Write BSON to a File
 --------------------
 
-You can write BSON to a file using the methods in the ``BsonBinaryWriter`` class.
-The following code sample shows how to write a BSON document to ``myFile.bson``:
+You can write BSON to a file using the methods in the ``BsonBinaryWriter`` class. To
+write to a file, perform the following steps:
+
+1. Open a file stream for the file containing BSON data.
+#. Create a ``BsonBinaryWriter`` using the file stream.
+#. For each BSON document and subdocument you want to create, call 
+   ``WriteStartDocument()``.
+#. Within each BSON document and subdocument, call ``WriteName()`` to set the field
+   name and the appropriate ``Write*`` method to set its value. Each data type has a 
+   dedicated ``Write`` method that you should use.
+#. To start and end arrays, use ``WriteStartArray()`` and ``WriteEndArray()``.
+#. At the end of each document and subdocument, call ``WriteEndDocument()``. 
+
+The following code sample shows how to write the sample BSON document to ``myFile.bson``:
 
 .. code-block:: csharp
 
@@ -111,20 +143,36 @@ The following code sample shows how to write a BSON document to ``myFile.bson``:
        writer.WriteEndDocument();
    }
 
-The resulting BSON document will look like the following:
+The resulting BSON document looks like the following:
 
-.. literalinclude:: ../includes/fundamentals/code-examples/Bson.cs
-   :start-after: start-create
-   :end-before: end-create
-   :language: csharp
-   :copyable:
-   :dedent:
+.. code-block:: none
+
+   {
+       "address" : {
+           "street" : "Pizza St", 
+           "zipcode" : "10003" 
+       },
+       "coord" : [-73.982419, 41.579505]
+       "cuisine" : "Pizza",
+       "name" : "Mongo's Pizza"
+   }
+
+.. tip:: TODO
+
+   The framework lets you read/write from memory and other places too
 
 Read BSON from a File
 ---------------------
 
-You can read a BSON file using the methods in the ``BsonBinaryReader`` class. 
-The following code sample shows how to read a BSON document from ``myFile.bson``:
+To read a BSON document from a file, follow the same steps used for writing a BSON 
+document to a file, with two differences:
+
+- Use ``BsonBinaryReader`` instead of ``BsonBinaryWriter``.
+- Use ``Read*`` methods instead of ``Write*`` methods. These methods return field names
+  and values from the BSON document.
+
+The following code sample shows how to read the fields and values from the sample 
+BSON document stored in ``myFile.bson``:
 
 .. code-block:: csharp
 
@@ -161,15 +209,6 @@ The following code sample shows how to read a BSON document from ``myFile.bson``
 
        reader.ReadEndDocument();
    }
-
-The resulting BSON document looks like this:
-
-.. literalinclude:: ../includes/fundamentals/code-examples/Bson.cs
-   :start-after: start-create
-   :end-before: end-create
-   :language: csharp
-   :copyable:
-   :dedent:
 
 .. warning:: 
 

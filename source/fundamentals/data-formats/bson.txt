@@ -77,8 +77,7 @@ BSON document. The following code sample makes three changes to the previous
 #. Sets the value of the ``"name"`` field to ``"Mongo's Pizza Palace"``
 
 .. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
-   :start-after: start-change
-   :end-before: end-change
+   :lines: 17,20
    :language: csharp
    :copyable:
    :dedent:

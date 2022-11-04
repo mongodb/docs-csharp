@@ -21,7 +21,10 @@ public class Bson
             new BsonElement("cuisine", "Pizza"),
             new BsonElement("name", "Mongo's Pizza")
         };
-        //end-create
+        newRestaurant.Add(new BsonElement("restaurant_id", "12345"));
+        newRestaurant.Remove("cuisine");
+        newRestaurant.Set("name", "Mongo's Pizza Palace");
+        //end-change
     }
 
     public static void ChangeDocument()

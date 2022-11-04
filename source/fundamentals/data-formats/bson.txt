@@ -55,7 +55,7 @@ BSON document. The code uses both field-value pairs and ``BsonElement`` objects.
 
 .. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
    :start-after: start-create
-   :end-before: end-create
+   :end-before: newRestaurant.Add
    :language: csharp
    :copyable:
    :dedent:
@@ -77,7 +77,7 @@ BSON document. The following code sample makes three changes to the previous
 #. Sets the value of the ``"name"`` field to ``"Mongo's Pizza Palace"``
 
 .. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
-   :start-after: start-change
+   :start-after: start-create
    :end-before: end-change
    :language: csharp
    :copyable:

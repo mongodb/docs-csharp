@@ -27,6 +27,7 @@ public class Reviews
 
     [BsonElement("restaurant_name")]
     public string RestaurantName { get; set; }
+
     public string Reviewer { get; set; }
 
     public string ReviewText { get; set; }

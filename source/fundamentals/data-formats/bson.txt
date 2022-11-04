@@ -111,7 +111,7 @@ The following code sample shows how to write the sample BSON document to ``myFil
 
    string outputFileName = "myFile.bson";
 
-   using (var stream = File.OpenWrite(inputFileName))
+   using (var stream = File.OpenWrite(outputFileName))
    using (var writer = new BsonBinaryWriter(stream))
    {
        writer.WriteStartDocument();

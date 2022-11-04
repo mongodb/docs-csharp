@@ -51,7 +51,7 @@ and pass them to the ``BsonDocument`` constructor or pass field-value pairs insi
 braces ( ``{}`` ). 
 
 The following code sample constructs a ``BsonDocument`` object to represent the previous
-BSON document:
+BSON document. The code uses both field-value pairs and ``BsonElement`` objects.
 
 .. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
    :start-after: start-create
@@ -62,7 +62,7 @@ BSON document:
 
 .. tip::
    
-   Each pair of curly braces in the BSON object requires one new ``BsonDocument`` object
+   Each pair of curly braces in a BSON document requires one new ``BsonDocument`` object
    in {+language+}.
 
 Change a BSON Document
@@ -82,7 +82,12 @@ BSON document. The following code sample makes three changes to the previous
    :language: csharp
    :copyable:
    :dedent:
-   :emphasize-lines: 15-17
+   :emphasize-lines: 17-19
+
+.. note::
+
+   For a full list of methods in the ``BsonDocument`` class, see the 
+   :ref:`csharp-bson-api`.
 
 Write BSON to a File
 --------------------
@@ -211,6 +216,8 @@ BSON document stored in ``myFile.bson``:
    The ``BsonBinaryReader`` and ``BsonBinaryWriter`` constructors accept any 
    ``System.IO.Stream`` object. This means that you can read or write any location 
    that can be accessed by a stream.
+
+.. _csharp-bson-api:
 
 API Documentation
 -----------------

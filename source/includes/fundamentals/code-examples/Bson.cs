@@ -19,8 +19,8 @@ public class Bson
             { "coord", new BsonArray
                 {-73.982419, 41.579505 }
             },
-            { "cuisine", "Pizza" },
-            { "name", "Mongo's Pizza" }
+            new BsonElement("cuisine", "Pizza"),
+            new BsonElement("name", "Mongo's Pizza")
         };
         //end-create
         newRestaurant.Add(new BsonElement("restaurant_id", "12345"));

@@ -29,8 +29,8 @@ The following ``Restaurants`` class models the documents in this collection:
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
    :language: csharp
    :dedent:
-   :start-after: start-restaurant-model
-   :end-before: end-restaurant-model
+   :start-after: start-review-model
+   :end-before: end-review-model
 
 .. _csharp-linq-queryable:
 
@@ -453,3 +453,78 @@ aggregation stages:
 - ``$redact``
 - ``$geoNear``
 - ``$out``
+
+Supported Methods
+-----------------
+
+The {+driver-long+} implementation of LINQ supports the following methods:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Method Name
+     - Description
+   
+   * - ``Any``
+     - Determines if any documents match the specified criteria
+
+   * - ``Average``
+     - Calculates the average of the specified fields
+
+   * - ``Count``
+     - Returns the number of documents that match the specified criteria
+
+   * - ``LongCount``
+     - Returns an ``Int64`` that represents the number of documents that match the specified criteria
+
+   * - ``Distinct``
+     - Returns distinct documents that match the specified criteria
+
+   * - ``First``
+     - Returns the first matching document
+
+   * - ``FirstOrDefault``
+     - Returns the first matching document, or ``null`` if none are found
+
+   * - ``GroupBy``
+     - Groups documents based on specified criteria
+
+   * - ``GroupJoin``
+     - Performs a left outer join to another collection in the same database
+
+   * - ``Max``
+     - Returns the document with the maximum specified value
+
+   * - ``OfType``
+     - Returns documents that match the specified of type
+
+   * - ``OrderBy``, ``OrderByDescending``
+     - Returns results in a specified sort order
+
+   * - ``ThenBy``, ``ThenByDescending``
+     - Allows a secondary sort to be specified
+
+   * - ``Select``
+     - Selects documents based on specified criteria
+
+   * - ``SelectMany``
+     - Projects each element of a sequence and combines the resulting sequences into one document.
+
+   * - ``Single``
+     - Returns a single matching document
+   
+   * - ``SingleOrDefault``
+     - Returns a single matching document or ``null`` if no documents match
+
+   * - ``Skip``
+     - Skips over a specified number of documents and returns the rest of the results
+
+   * - ``Sum``
+     - Returns the sum of the values in specified fields
+
+   * - ``Take``
+     - Limits the amount of results returned to a specified amount
+
+   * - ``Where``
+     - Returns documents that match your specified criteria

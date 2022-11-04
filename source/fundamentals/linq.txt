@@ -362,7 +362,7 @@ The following is a subset of the returned results:
    // Results Truncated
 
    ...
-   { "_id" : ObjectId(...), "name" : "Aba Turkish Restaurant", "restaurant_id" : "41548686", "cuisine" : "Turkish", "address" : { "building" : "325", "coord" : [-73.984044699999998, 40.767440899999997], "street" : "West   57 Street", "zipcode" : "10019" }, "borough" : "Manhattan", "grades" : [{ "date" : ISODate("2015-01-06T00:00:00Z"), "grade" : "A", "score" : 9 }, { "date" : ISODate("2014-08-07T00:00:00Z"), "grade" : "B", "score" : 16 }, { "date" : ISODate("2014-02-18T00:00:00Z"), "grade" : "A", "score" : 9 }, { "date" : ISODate("2013-01-24T00:00:00Z"), "grade" : "A", "score" : 10 }, { "date" : ISODate("2012-07-25T00:00:00Z"), "grade" : "B", "score" : 19 }] }
+   { "_id" : ObjectId(...), "name" : "Aba Turkish Restaurant", "restaurant_id" : "41548686", "cuisine" : "Turkish", "address" : {...}, "borough" : "Manhattan", "grades" : [...] }
    { "_id" : ObjectId(...), "name" : "Abace Sushi", "restaurant_id" : "50006214", "cuisine" : "Japanese", "address" : { ... }, "borough" : "Manhattan", "grades" : [...] }
    { "_id" : ObjectId(...), "name" : "Abacky Potluck", "restaurant_id" : "50011222", "cuisine" : "Asian", "address" : { ... }, "borough" : "Manhattan", "grades" : [...] }
    { "_id" : ObjectId(...), "name" : "Abaleh", "restaurant_id" : "50009096", "cuisine" : "Mediterranean", "address" : { ... }, "borough" : "Manhattan", "grades" : [...] }

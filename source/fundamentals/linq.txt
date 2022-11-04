@@ -17,7 +17,7 @@ Overview
 In this guide you can learn how to use
 `LINQ <https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/?redirectedfrom=MSDN>`__
 with the {+driver-long+}. The {+driver-short+} automatically translates LINQ
-queries into :manual:`aggregation operations <aggregation>`.
+queries into :manual:`aggregation operations </aggregation>`.
 
 The examples in this guide use the ``restaurants`` collection
 in the ``sample_restaurants`` database provided in the :atlas:`Atlas sample datasets </sample-data>`.
@@ -29,8 +29,8 @@ The following ``Restaurants`` class models the documents in this collection:
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
    :language: csharp
    :dedent:
-   :start-after: start-review-model
-   :end-before: end-review-model
+   :start-after: start-restaurant-model
+   :end-before: end-restaurant-model
 
 .. _csharp-linq-queryable:
 
@@ -173,9 +173,9 @@ The preceding example returns the following document:
 
 .. code-block:: json
 
-    // Results truncated
+    // Results Truncated
 
-    { "_id" : ObjectId("5eb3d668b31de5d588f4293c"), "name" : "The Movable Feast", "restaurant_id" : "40361606", "cuisine" : "American", "address" : {...}, "borough" : "Brooklyn", "grades" : [...] }
+    { "_id" : ObjectId(...), "name" : "The Movable Feast", "restaurant_id" : "40361606", "cuisine" : "American", "address" : {...}, "borough" : "Brooklyn", "grades" : [...] }
 
 $limit
 ~~~~~~
@@ -221,7 +221,7 @@ returns the rest as follows:
 
 .. code-block:: json
 
-   // Results truncated
+   // Results Truncated
 
    { "name" : "Marchis Restaurant", "cuisine" : "Italian" }
    { "name" : "Crystal Room", "cuisine" : "Italian" }
@@ -243,7 +243,7 @@ how to generate an ``$unwind`` stage using LINQ:
       :tabid: query-syntax
 
       .. code-block:: csharp
-         :emphasize-lines: 2
+         :emphasize-lines: 3
 
          var query = from r in queryableCollection
              where r.Name == "The Movable Feast"
@@ -254,7 +254,7 @@ how to generate an ``$unwind`` stage using LINQ:
       :tabid: method-syntax
 
       .. code-block:: csharp
-         :emphasize-lines: 2
+         :emphasize-lines: 3
 
          var query = queryableCollection
              .Where(r => r.Name == "The Movable Feast")
@@ -308,7 +308,7 @@ The results are similar to the following:
 
 .. code-block:: json
 
-   // Results truncated
+   // Results Truncated
 
    { "cuisine" : "Caribbean", "count" : 657 }
    { "cuisine" : "Café/Coffee/Tea", "count" : 1214 }
@@ -347,6 +347,7 @@ how to generate an ``$sort`` stage using LINQ:
       :tabid: method-syntax
 
       .. code-block:: csharp
+         :emphasize-lines: 2
 
          var query = queryableCollection
              .OrderBy(r => r.Name)
@@ -389,8 +390,8 @@ models the documents in that collection:
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
    :language: csharp
    :dedent:
-   :start-after: start-restaurant-model
-   :end-before: end-restaurant-model
+   :start-after: start-review-model
+   :end-before: end-review-model
 
 Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
 how to generate an ``$lookup`` stage using LINQ:
@@ -428,7 +429,7 @@ The following is a subset of the returned results:
 
 .. code-block:: json
 
-   // Results truncated
+   // Results Truncated
 
    { "restaurant" : {
       "_id" : ObjectId("..."),

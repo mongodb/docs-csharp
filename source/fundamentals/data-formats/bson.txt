@@ -46,17 +46,27 @@ Create a BSON Document
 
 To build a BSON document in {+language+}, create an instance of the ``BsonDocument`` class.
 The ``BsonDocument`` constructor accepts ``BsonElement`` arguments that map to the fields
-and values in the document. You can either construct individual ``BsonElement`` objects 
-and pass them to the ``BsonDocument`` constructor or pass field-value pairs inside curly 
-braces ( ``{}`` ). 
+and values in the document. Each ``BsonElement`` can be either an instance of the 
+``BsonElement`` class or a field-value pair inside curly braces ( ``{}`` ).
 
-The following code sample constructs a ``BsonDocument`` object to represent the previous
-BSON document. The code uses both field-value pairs and ``BsonElement`` objects.
+The following code sample shows how to create a ``BsonDocument`` object to represent the 
+example BSON document. Each ``BsonElement`` is an instance of the ``BsonElement``
+class.
+
+.. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
+   :start-after: start-bson-elements
+   :end-before: end-bson-elements
+   :language: csharp 
+   :copyable:
+   :dedent:
+
+The following code sample creates the same ``BsonDocument``, but each ``BsonElement``
+is a field-value pair: 
 
 .. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
    :start-after: start-create
    :end-before: newRestaurant.Add
-   :language: csharp
+   :language: csharp 
    :copyable:
    :dedent:
 

@@ -18,8 +18,8 @@ public class Bson
             { "coord", new BsonArray
                 {-73.982419, 41.579505 }
             },
-            new BsonElement("cuisine", "Pizza"),
-            new BsonElement("name", "Mongo's Pizza")
+            { "cuisine", "Pizza" },
+            { "name", "Mongo's Pizza"}
         };
         newRestaurant.Add(new BsonElement("restaurant_id", "12345"));
         newRestaurant.Remove("cuisine");
@@ -27,26 +27,25 @@ public class Bson
         //end-change
     }
 
-    public static void ChangeDocument()
+    public static void BsonElements()
     {
-        //start-change
+        //start-bson-elements
         var newRestaurant = new BsonDocument
         {
-            { "address", new BsonDocument
-                {
-                    { "street", "Pizza St" },
-                    { "zipcode", "10003" }
-                }
-            },
-            { "coord", new BsonArray
+            new BsonElement("address", new BsonDocument
+            {
+                new BsonElement("street", "Pizza St"),
+                new BsonElement("zipcode", "10003")
+            }),
+            new BsonElement("coord", new BsonArray
+            {
                 {-73.982419, 41.579505 }
-            },
+            }),
             new BsonElement("cuisine", "Pizza"),
             new BsonElement("name", "Mongo's Pizza")
         };
-        newRestaurant.Add(new BsonElement("restaurant_id", "12345"));
-        newRestaurant.Remove("cuisine");
-        newRestaurant.Set("name", "Mongo's Pizza Palace");
-        //end-change
+        //end-bson-elements
     }
 }
+
+

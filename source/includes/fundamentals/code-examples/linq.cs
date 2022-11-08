@@ -21,7 +21,7 @@ public class Restaurant
 
 // start-review-model
 
-public class Reviews
+public class Review
 {
     public ObjectId Id { get; set; }
 

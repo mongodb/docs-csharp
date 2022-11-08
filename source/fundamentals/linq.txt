@@ -16,15 +16,17 @@ Overview
 
 In this guide you can learn how to use
 `LINQ <https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/?redirectedfrom=MSDN>`__
-with the {+driver-long+}. The {+driver-short+} automatically translates LINQ
-queries into :manual:`aggregation operations </aggregation>`.
+with the {+driver-long+}. LINQ allows you to construct queries against
+strongly typed collections of objects by using language keywords and operators.
+The {+driver-short+} automatically translates LINQ queries into
+:manual:`aggregation operations </aggregation>`.
 
 The examples in this guide use the ``restaurants`` collection
 in the ``sample_restaurants`` database provided in the :atlas:`Atlas sample datasets </sample-data>`.
-To learn how to create a free MongoDB Atlas cluster and load the sample datasets
+To learn how to create a free MongoDB Atlas cluster and load the sample datasets,
 see the :ref:`<csharp-quickstart>`.
 
-The following ``Restaurants`` class models the documents in this collection:
+The following ``Restaurant`` class models the documents in this collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
    :language: csharp
@@ -37,7 +39,7 @@ The following ``Restaurants`` class models the documents in this collection:
 Make A Collection Queryable
 ---------------------------
 
-To use LINQ with to query your collection you must first make the collection
+To use LINQ to query your collection you must first make the collection
 queryable. To make your collection queryable, use the ``AsQueryable`` method
 as follows:
 
@@ -50,7 +52,7 @@ as follows:
 Once the collection is queryable, you can compose a query using 
 **query comprehension syntax** or **method syntax**.
 
-Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
+Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see 
 how to compose a query using LINQ:
 
 .. tabs::
@@ -94,9 +96,13 @@ interface. You can print the results of the preceding example as follows:
 Supported Aggregation Stages
 ----------------------------
 
-You can create an aggregation pipeline by using LINQ with supported aggregation
-operations. To learn more about each aggregation pipeline stage, see the server
-manual :ref:`aggregation-pipeline-operator-reference` page.
+You can use LINQ to create an :ref:`aggregation pipeline <aggregation-pipeline-intro>`.
+The {+driver-short+} automatically translates the LINQ statements into supported
+stages of an aggregation pipeline. In this section you can learn which
+aggregation pipeline stages are supported.
+
+To learn more about the aggregation pipeline stages, see the 
+server manual :ref:`aggregation-pipeline-operator-reference` page.
 
 $project
 ~~~~~~~~
@@ -105,7 +111,7 @@ The ``$project`` aggregation stage returns a document using only the specified
 fields.
 
 Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
-how to generate a ``$project`` stage using LINQ:
+to generate a ``$project`` stage using LINQ:
 
 .. tabs::
 
@@ -135,9 +141,9 @@ The preceding example returns the following document:
 
 .. note:: Excluding the ``_id`` Field
 
-   MongoDB includes the ``_id`` field in all projections unless explicitly excluded. 
-   The {+driver-short+} automatically adds this exclusion when using LINQ to 
-   create a projection without ``_id``.
+   MongoDB includes the ``_id`` field in all projections unless you explicitly 
+   exclude it. When translating a LINQ projection that doesn't include ``_id``, 
+   the {+driver-short+} automatically adds this exclusion.
 
 $match
 ~~~~~~
@@ -146,7 +152,7 @@ The ``$match`` aggregation stage returns the documents that match a specified
 criteria. 
 
 Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
-how to generate a ``$match`` stage using LINQ:
+to generate a ``$match`` stage using LINQ:
 
 .. tabs::
 
@@ -214,7 +220,7 @@ a ``$skip`` stage using LINQ:
    var query = queryableCollection
        .Where(r => r.Cuisine == "Italian")
        .Select(r => new {r.Name, r.Cuisine})
-       .Skip(2)
+       .Skip(2);
 
 The preceding example skips the first two restaurants that match the criteria, and
 returns the rest as follows:
@@ -235,7 +241,7 @@ The ``$unwind`` aggregation stage deconstructs a specified array field and retur
 a document for each element in that array.
 
 Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
-how to generate an ``$unwind`` stage using LINQ:
+to generate an ``$unwind`` stage using LINQ:
 
 .. tabs::
 
@@ -260,9 +266,9 @@ how to generate an ``$unwind`` stage using LINQ:
              .Where(r => r.Name == "The Movable Feast")
              .SelectMany(r => r.Grades);
 
-The preceding example returns a document for each element in the ``Grades`` array
-for the document in which the ``Name`` field is "The Movable Feast". The results
-are as follows:
+The query in the preceding example finds the document where the ``Name`` field 
+has the value "The Movable Feast." Then, for each element in this document's 
+``Grades`` array, the query returns a new document. The results are as follows:
 
 .. code-block:: json
 
@@ -275,10 +281,10 @@ $group
 ~~~~~~
 
 The ``$group`` aggregation stage separates documents into groups according to
-your specified criteria.
+the criteria you specify.
 
 Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
-how to generate an ``$group`` stage using LINQ:
+to generate an ``$group`` stage using LINQ:
 
 .. tabs::
 
@@ -302,9 +308,9 @@ how to generate an ``$group`` stage using LINQ:
              .GroupBy(r => r.Cuisine)
              .Select(g => new { Cuisine = g.Key, Count = g.Count() });
 
-The preceding example groups all documents in the ``queryableCollection`` by the
-value in their ``Cuisine`` field, and counts how many documents have that value.
-The results are similar to the following:
+The preceding example groups each document by the value in its ``Cuisine`` field,
+then counts how many documents have each ``Cuisine`` value. The results are 
+similar to the following:
 
 .. code-block:: json
 
@@ -317,7 +323,7 @@ The results are similar to the following:
    { "cuisine" : "Middle Eastern", "count" : 168 }  
    ...
 
-.. tip:: Result Order
+.. note:: Result Order
    
    The preceding queries don't always return results in the same order. Running
    this example may return the results in a different order than shown above.
@@ -325,11 +331,11 @@ The results are similar to the following:
 $sort
 ~~~~~
 
-The ``$sort`` aggregation stage returns the results of your query in the specified
-order.
+The ``$sort`` aggregation stage returns the results of your query in the order
+that you specify.
 
 Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
-how to generate an ``$sort`` stage using LINQ:
+to generate an ``$sort`` stage using LINQ:
 
 .. tabs::
 
@@ -353,8 +359,8 @@ how to generate an ``$sort`` stage using LINQ:
              .OrderBy(r => r.Name)
              .ThenByDescending(r => r.RestaurantId);
 
-The preceding example returns the query results sorted alphabetically by their
-``Name`` field, with a secondary descending sort on their ``RestaurantId`` field.
+The preceding example returns the query results sorted alphabetically by the
+``Name`` field, with a secondary descending sort on the ``RestaurantId`` field.
 The following is a subset of the returned results:
 
 .. code-block:: json
@@ -371,10 +377,10 @@ The following is a subset of the returned results:
 $lookup
 ~~~~~~~
 
-The ``$lookup`` aggregation stage performs a left outer join to a collection in
-the same database to filter in documents from the "joined" collection for processing.
-The $lookup stage adds a new array field to each input document. The new array
-field contains the matching documents from the "joined" collection.
+The ``$lookup`` aggregation stage joins documents from one collection to documents
+from another in the same database. The ``$lookup`` stage adds a new array field to 
+each input document. The new array field contains the matching documents from 
+the "joined" collection.
 
 .. note:: 
 
@@ -384,8 +390,11 @@ field contains the matching documents from the "joined" collection.
    To learn how to make a collection queryable, see :ref:`csharp-linq-queryable`.
 
 Consider a second collection in the ``sample_restaurants`` database called
-``reviews`` that has restaurant reviews. The following ``Reviews`` class
-models the documents in that collection:
+``reviews`` that has restaurant reviews. You can join documents from that collection
+to documents with the same ``name`` value in the ``restaurants`` collection using
+the ``$lookup`` stage.
+
+The following ``Review`` class models the documents in the ``reviews`` collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
    :language: csharp
@@ -394,7 +403,7 @@ models the documents in that collection:
    :end-before: end-review-model
 
 Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
-how to generate an ``$lookup`` stage using LINQ:
+to generate a ``$lookup`` stage using LINQ:
 
 .. tabs::
 
@@ -420,10 +429,11 @@ how to generate an ``$lookup`` stage using LINQ:
                      new {restaurant, reviews}
              );
 
-The preceding example returns documents from the ``restaurants`` collection, each
-with an added field called ``reviews``. The added field contains all documents from the
-``reviews`` collection with a ``name`` field that matches the ``name`` of the 
-document from the ``restaurants`` collection. 
+The preceding example returns all documents from the ``restaurants`` collection. Each
+restaurant document has an added field called ``reviews``, which contains all 
+reviews for that restaurant. A review matches a restaurant if the value of the
+``name`` field in the review document matches the ``name`` field of the restaurant
+document.
 
 The following is a subset of the returned results:
 
@@ -474,7 +484,7 @@ The {+driver-long+} implementation of LINQ supports the following methods:
      - Calculates the average of the specified fields
 
    * - ``Count``
-     - Returns the number of documents that match the specified criteria
+     - Returns an ``Int32`` that represents the number of documents that match the specified criteria
 
    * - ``LongCount``
      - Returns an ``Int64`` that represents the number of documents that match the specified criteria
@@ -483,7 +493,7 @@ The {+driver-long+} implementation of LINQ supports the following methods:
      - Returns distinct documents that match the specified criteria
 
    * - ``First``
-     - Returns the first matching document
+     - Returns the first matching document, and throws an exception if none are found
 
    * - ``FirstOrDefault``
      - Returns the first matching document, or ``null`` if none are found
@@ -510,10 +520,10 @@ The {+driver-long+} implementation of LINQ supports the following methods:
      - Selects documents based on specified criteria
 
    * - ``SelectMany``
-     - Projects each element of a sequence and combines the resulting sequences into one document.
+     - Projects each element of a sequence and combines the resulting sequences into one document
 
    * - ``Single``
-     - Returns a single matching document
+     - Returns the only matching document, and throws an exception if there is not exactly one document
    
    * - ``SingleOrDefault``
      - Returns a single matching document or ``null`` if no documents match
@@ -522,10 +532,10 @@ The {+driver-long+} implementation of LINQ supports the following methods:
      - Skips over a specified number of documents and returns the rest of the results
 
    * - ``Sum``
-     - Returns the sum of the values in specified fields
+     - Returns the sum of the values in a specified field
 
    * - ``Take``
-     - Limits the amount of results returned to a specified amount
+     - Limits the number of results returned to a specified amount
 
    * - ``Where``
-     - Returns documents that match your specified criteria
+     - Returns all documents that match your specified criteria

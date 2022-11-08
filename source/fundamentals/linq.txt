@@ -450,8 +450,8 @@ The following is a subset of the returned results:
       "borough" : "Brooklyn", 
       "grades" : [...] }, 
       "reviews" : [
-        { "_id" : ObjectId(...), "restaurant_name" : "The Movable Feast", "reviewer" : "Lazlo Cravensworth", "review" : "Great restaurant! 12/10 stars!" },
-        { "_id" : ObjectId("..."), "restaurant_name" : "The Movable Feast", "reviewer" : "Michael Scarn", "review" : "It really was a feast" }
+        { "_id" : ObjectId(...), "restaurant_name" : "The Movable Feast", "reviewer" : "Lazlo Cravensworth", "review_text" : "Great restaurant! 12/10 stars!" },
+        { "_id" : ObjectId("..."), "restaurant_name" : "The Movable Feast", "reviewer" : "Michael Scarn", "review_text" : "It really was a feast" }
        ]
     }
 

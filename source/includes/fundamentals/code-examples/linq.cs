@@ -30,6 +30,7 @@ public class Review
 
     public string Reviewer { get; set; }
 
+    [BsonElement("review_text")]
     public string ReviewText { get; set; }
 }
 

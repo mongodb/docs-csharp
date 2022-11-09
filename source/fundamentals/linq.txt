@@ -39,7 +39,7 @@ The following ``Restaurant`` class models the documents in this collection:
 Make A Collection Queryable
 ---------------------------
 
-To use LINQ to query your collection you must first make the collection
+To use LINQ to query your collection, you must first make the collection
 queryable. To make your collection queryable, use the ``AsQueryable`` method
 as follows:
 
@@ -50,7 +50,8 @@ as follows:
     var queryableCollection = _restaurantsCollection.AsQueryable();
 
 Once the collection is queryable, you can compose a query using 
-**query comprehension syntax** or **method syntax**.
+**method syntax**. Some pipeline stages also support **query comprehension syntax**,
+which resembles SQL query syntax.
 
 Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see 
 how to compose a query using LINQ:
@@ -97,17 +98,17 @@ Supported Aggregation Stages
 ----------------------------
 
 You can use LINQ to create an :ref:`aggregation pipeline <aggregation-pipeline-intro>`.
-The {+driver-short+} automatically translates the LINQ statements into supported
-stages of an aggregation pipeline. In this section you can learn which
+The {+driver-short+} automatically translates each LINQ statement into the corresponding
+aggregation pipeline stages. In this section you can learn which
 aggregation pipeline stages are supported.
 
 To learn more about the aggregation pipeline stages, see the 
-server manual :ref:`aggregation-pipeline-operator-reference` page.
+:ref:`aggregation-pipeline-operator-reference` page in the server manual.
 
 $project
 ~~~~~~~~
 
-The ``$project`` aggregation stage returns a document using only the specified
+The ``$project`` aggregation stage returns a document containing only the specified
 fields.
 
 Select the :guilabel:`Query Syntax` or :guilabel:`Method Syntax` tab to see how 
@@ -141,9 +142,8 @@ The preceding example returns the following document:
 
 .. note:: Excluding the ``_id`` Field
 
-   MongoDB includes the ``_id`` field in all projections unless you explicitly 
-   exclude it. When translating a LINQ projection that doesn't include ``_id``, 
-   the {+driver-short+} automatically adds this exclusion.
+   If you don't include the ``_id`` field in your LINQ projection, the {+driver-short+}
+   automatically excludes it from the results.
 
 $match
 ~~~~~~
@@ -378,13 +378,13 @@ $lookup
 ~~~~~~~
 
 The ``$lookup`` aggregation stage joins documents from one collection to documents
-from another in the same database. The ``$lookup`` stage adds a new array field to 
-each input document. The new array field contains the matching documents from 
-the "joined" collection.
+from another collection in the same database. The ``$lookup`` stage adds a new 
+array field to each input document. The new array field contains the matching
+documents from the "joined" collection.
 
 .. note:: 
 
-   To perform a lookup you must make both collections queryable using the
+   To perform a lookup, you must make both collections queryable using the
    ``AsQueryable`` method.
 
    To learn how to make a collection queryable, see :ref:`csharp-linq-queryable`.
@@ -535,7 +535,7 @@ The {+driver-long+} implementation of LINQ supports the following methods:
      - Returns the sum of the values in a specified field
 
    * - ``Take``
-     - Limits the number of results returned to a specified amount
+     - Specifies the number of results to return
 
    * - ``Where``
      - Returns all documents that match your specified criteria

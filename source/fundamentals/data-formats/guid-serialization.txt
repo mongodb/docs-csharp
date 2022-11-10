@@ -15,249 +15,137 @@ GUID Serialization
 Overview
 --------
 
-In this guide, you can learn how to serialize **globally unique identifiers** (GUIDs).
-A GUID is a unique ID you can assign to a document in MongoDB.
+In this guide, you can learn how to serialize **globally unique identifiers** (GUIDs),
+also known as **universally unique identifiers** (UUIDs).
+
+A GUID is a unique ID you can assign to a document. In MongoDB,
+GUIDs were originally represented as ``BsonBinaryData`` values of subtype 3. 
+Because different drivers used different byte orders when representing GUIDs, we created
+subtype 4 to standardize byte orders across drivers. 
 
 GuidRepresentationMode
 ----------------------
 
 In the {+driver-short+}, serializers have a property called ``GuidRepresentationMode``.
-This property has two possible values.
+This property controls the way that the {+driver-short+} handles GUIDs in a collection.
 
-- ``V2`` - All GUIDs in a collection must be represented the same way. The way GUIDs are
-represented is controlled at the level of the reader or writer, not the level of the 
-serializer.
+The ``GuidRepresentationMode`` property has two possible values: ``V2`` and ``V3``. 
 
-- ``V3`` - GUID representation is controlled at the property level by configuring the 
-serializer for that property. We recommend that all GUIDs in a collection are represented
-uniformly using the standard BsonBinaryData subtype 4, but when working with historical
-data, it's acceptable for different GUID fields in the same document to be represented
-differently.
+V2
+~~
 
-You cannot use both modes in a single application. V2 is the default but 
-will be removed when the V3 driver comes out. If you want to 
-use V3, run the following line of code as early in your application as possible:
+``GuidRepresentationMode.V2`` assumes that all GUIDs in a collection use the same 
+``BsonBinaryData`` sub type and byte order. In this mode, GUID representation is 
+controlled by the reader or writer, not the serializer.
+
+``V2`` is the default ``GuidRepresentationMode``.
+
+V3
+~~
+
+``GuidRepresentationMode.V3`` allows documents in the same collection to use different 
+GUID formats. This may happen, for example, when working with historical data that uses 
+an older format.  
+In this mode, GUID representation is controlled at the property level by configuring the 
+serializer for each property.
+
+To use ``GuidRepresentationMode.V3``, run the following line of code as early in your 
+application as possible:
 
 .. code-block:: csharp
 
    BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V3;
 
+Running in ``V3`` mode changes the behavior of the driver in the following ways:
 
-**BSON**, or Binary JSON, is the data format that MongoDB uses to organize
-and store data. This data format includes all JSON data structure types and
-adds support for types including dates, different size integers, ObjectIds, and
-binary data. For a complete list of supported types, see the
-:manual:`BSON Types </reference/bson-types>` server manual page.
+- The ``BsonBinaryReader.ReadBinaryData()`` method ignores ``readerSettings.GuidRepresentation``
+- The ``BsonBinaryWriter.WriteBinaryData()`` method ignores ``writerSettings.GuidRepresentation``
+- The ``JsonReader.ReadBinaryData()`` method ignores ``readerSettings.GuidRepresentation``
+- ``JsonWriter`` ignores ``writerSettings.GuidRepresentation``
+- If you call the ``BsonBinaryData.ToGuid()`` method without the ``GuidRepresentation``
+  parameter, it's valid only for subtype 4.
 
-The code samples in this guide use the following BSON document as an example:
-
-.. code-block:: none
-
-   {
-       "address" : {
-           "street" : "Pizza St", 
-           "zipcode" : "10003" 
-       },
-       "coord" : [-73.982419, 41.579505]
-       "cuisine" : "Pizza",
-       "name" : "Mongo's Pizza"
-   }
-
-Create a BSON Document
-----------------------
-
-To build a BSON document in {+language+}, create an instance of the ``BsonDocument`` class.
-The ``BsonDocument`` constructor accepts ``BsonElement`` arguments that map to the fields
-and values in the document. Each ``BsonElement`` can be either an instance of the 
-``BsonElement`` class or a field-value pair inside curly braces ( ``{}`` ).
-
-The following code sample shows how to create a ``BsonDocument`` object to represent the 
-example BSON document. Each ``BsonElement`` is an instance of the ``BsonElement``
-class.
-
-.. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
-   :start-after: start-bson-elements
-   :end-before: end-bson-elements
-   :language: csharp 
-   :copyable:
-   :dedent:
-
-The following code sample creates the same ``BsonDocument``, but each ``BsonElement``
-is a field-value pair: 
-
-.. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
-   :start-after: start-create
-   :end-before: newRestaurant.Add
-   :language: csharp 
-   :copyable:
-   :dedent:
-
-.. tip::
-   
-   Each pair of curly braces in a BSON document requires one new ``BsonDocument`` object
-   in {+language+}.
-
-Change a BSON Document
-----------------------
-
-The ``BsonDocument`` class includes methods that let you change the contents of the
-BSON document. The following code sample makes three changes to the previous
-``BsonDocument`` object:
-
-1. Adds a new field, ``"restaurant_id"``, with the value ``"12345"``
-#. Removes the ``"cuisine"`` field
-#. Sets the value of the ``"name"`` field to ``"Mongo's Pizza Palace"``
-
-.. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
-   :start-after: start-create
-   :end-before: end-change
-   :language: csharp
-   :copyable:
-   :dedent:
-   :emphasize-lines: 15-17
+When version 3 of the {+driver-short+} is released, support for ``GuidRepresentation.V2``
+will be removed from the driver and ``V3`` will become the default. 
 
 .. note::
 
-   For a full list of methods in the ``BsonDocument`` class, see the 
-   :ref:`csharp-bson-api`.
+   You can't use both ``V2`` and ``V3`` in a single application.
 
-Write BSON to a File
---------------------
+.. tip::
+   
+   Although ``GuideRepresentationMode.V3`` allows for multiple GUID formats,
+   we recommend representing GUIDs uniformly using the 
+   standard ``BsonBinaryData`` subtype 4.
 
-You can write BSON to a file using the methods in the ``BsonBinaryWriter`` class. To
-write to a file, perform the following steps:
+Guid Serializer
+---------------
 
-1. Open a file stream for the file containing BSON data.
-#. Create a ``BsonBinaryWriter`` using the file stream.
-#. For each BSON document and subdocument you want to create, call 
-   ``WriteStartDocument()``.
-#. Within each BSON document and subdocument, call ``WriteName()`` to set the field
-   name and the appropriate ``Write*`` method to set its value. Each data type has a 
-   dedicated ``Write*`` method that you should use.
-#. To start and end arrays, use ``WriteStartArray()`` and ``WriteEndArray()``.
-#. At the end of each document and subdocument, call ``WriteEndDocument()``. 
+To allow multiple GUID representations to be used, the ``GuidSerializer`` class contains
+a constructor that allows you to select the GUID representation. The following code sample
+creates a ``GuidSerializer`` for a GUID representation of subtype 4:
 
-The following code sample shows how to write the sample BSON document to ``myFile.bson``:
+.. code-block::
 
-.. code-block:: csharp
+   var guidSerializer = new GuidSerializer(GuidRepresentation.Standard);
 
-   string outputFileName = "myFile.bson";
-
-   using (var stream = File.OpenWrite(outputFileName))
-   using (var writer = new BsonBinaryWriter(stream))
-   {
-       writer.WriteStartDocument();
-
-       //address
-       writer.WriteName("address");
-       writer.WriteStartDocument();
-       writer.WriteName("street");
-       writer.WriteString("Pizza St");
-       writer.WriteName("zipcode");
-       writer.WriteString("10003");
-       writer.WriteEndDocument();
-
-       //coord
-       writer.WriteName("coord");
-       writer.WriteStartArray();
-       writer.WriteDouble(-73.982419);
-       writer.WriteDouble(41.579505);
-       writer.WriteEndArray();
-
-       //cuisine
-       writer.WriteName("cuisine");
-       writer.WriteString("Pizza");
-
-       //name
-       writer.WriteName("name");
-       writer.WriteString("Mongo's Pizza");
-
-       writer.WriteEndDocument();
-   }
-
-The resulting BSON document looks like the following:
-
-.. code-block:: none
-
-   {
-       "address" : {
-           "street" : "Pizza St", 
-           "zipcode" : "10003" 
-       },
-       "coord" : [-73.982419, 41.579505]
-       "cuisine" : "Pizza",
-       "name" : "Mongo's Pizza"
-   }
-
-Read BSON from a File
----------------------
-
-To read a BSON document from a file, follow the same steps used for writing a BSON 
-document to a file, with two differences:
-
-- Use ``BsonBinaryReader`` instead of ``BsonBinaryWriter``.
-- Use ``Read*`` methods instead of ``Write*`` methods. These methods return field names
-  and values from the BSON document.
-
-The following code sample shows how to read the fields and values from the sample 
-BSON document stored in ``myFile.bson``:
+To use the ``Standard`` GUID representation globally, run the following code early in 
+your application to register a ``GuidSerializer``:
 
 .. code-block:: csharp
 
-   string inputFileName = "myFile.bson";
+   BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
 
-   using (var stream = File.OpenRead(inputFileName))
-   using (var reader = new BsonBinaryReader(stream))
+Because ``V3`` handles serialization at level of individual properties, when using it,
+you must specify the ``GuidRepresentation`` you want to use for every GUID property. 
+If you're using the driver to auto-map your {+language+} classes to document schemas,
+you can use the ``BsonGuidRepresentation`` attribute to specify the representation.
+
+.. code-block:: csharp
+
+   public class C
    {
-       reader.ReadStartDocument();
+       public int Id { get; set; }
 
-       //address
-       string addressFieldName = reader.ReadName();
-       reader.ReadStartDocument();
-       string streetFieldName = reader.ReadName();
-       string streetValue = reader.ReadString();
-       string zipFieldName = reader.ReadName();
-       string zipValue = reader.ReadString();
-       reader.ReadEndDocument();
-
-       //coord
-       string coordFieldName = reader.ReadName();
-       reader.ReadStartArray();
-       double coord1 = reader.ReadDouble();
-       double coord2 = reader.ReadDouble();
-       reader.ReadEndArray();
-
-       //cuisine
-       string cuisineFieldName = reader.ReadName();
-       string cuisineValue = reader.ReadString();
-
-       //name
-       string nameFieldName = reader.ReadName();
-       string nameValue = reader.ReadString();
-
-       reader.ReadEndDocument();
-   }
-
-.. warning:: 
-
-   If you call ``ReadName()`` twice in a row without reading a value,
-   the driver will throw an ``InvalidOperationException``.
+      [BsonGuidRepresentation(GuidRepresentation.Standard)]
+      public Guid G { get; set; }
+}
 
 .. tip::
 
-   The ``BsonBinaryReader`` and ``BsonBinaryWriter`` constructors accept any 
-   ``System.IO.Stream`` object. This means that you can read or write any location 
-   that can be accessed by a stream.
+   If most of your GUIDs use the same representation, you can register a global 
+   ``GuidSerializer`` for this representation, then use the ``BsonGuidRepresentation`` 
+   for the rest.
 
-.. _csharp-bson-api:
-
-API Documentation
+Object Serializer
 -----------------
 
-To learn more about any of the methods or types discussed in this
-guide, see the following API documentation:
+To allow multiple GUID representations to be used, the ``ObjectSerializer`` class contains
+a constructor that allows you to select the GUID representation. The following code sample
+creates an ``ObjectSerializer`` for a GUID representation of subtype 4:
 
-- `BsonDocument <{+api-root+}/T_MongoDB_Bson_BsonDocument.htm>`__
-- `BsonElement <{+api-root+}/T_MongoDB_Bson_BsonElement.htm>`__
-- `BsonBinaryReader <{+api-root+}/T_MongoDB_Bson_IO_BsonBinaryReader.htm>`__
-- `BsonBinaryWriter <{+api-root+}/T_MongoDB_Bson_IO_BsonBinaryWriter.htm>`__
+.. code-block::
+
+   var guidSerializer = new GuidSerializer(GuidRepresentation.Standard);
+
+To use the ``Standard`` GUID representation globally, run the following code early in 
+your application to register a ``GuidSerializer``:
+
+.. code-block:: csharp
+
+   var objectDiscriminatorConvention = BsonSerializer.LookupDiscriminatorConvention(typeof(object));
+   var objectSerializer = new ObjectSerializer(objectDiscriminatorConvention, GuidRepresentation.Standard);
+
+If your application relies on an ``ObjectSerializer`` to serialize any GUIDs, you 
+must also register the serializer early in your application. The serializer that you 
+register will be used globally whenever an object serializer is needed and has not 
+been otherwise specified.
+
+.. code-block:: csharp
+   :emphasize-lines: 3
+
+   var objectDiscriminatorConvention = BsonSerializer.LookupDiscriminatorConvention(typeof(object));
+   var objectSerializer = new ObjectSerializer(objectDiscriminatorConvention, GuidRepresentation.Standard);
+   BsonSerializer.RegisterSerializer(objectSerializer);
+
+

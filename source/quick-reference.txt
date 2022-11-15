@@ -167,192 +167,263 @@ their related reference and API documentation.
 
    * - | **Update a Document**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#updateOne(org.bson.conversions.Bson,org.bson.conversions.Bson)>`__
-       | :ref:`Usage Example <java-usage-updateone>`
-       | :ref:`Fundamentals <java-fundamentals-update>`
+       | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOne.htm>`__
+       | :ref:`Usage Example <csharp-update-one>`
+       | :ref:`Fundamentals <csharp-update-guide>`
 
-     - .. io-code-block::
+     - .. code-block::
           :copyable: true
 
           .. input::
-             :language: java
+             :language: csharp 
 
-             coll.updateOne(
-                     Filters.eq("title", "Amadeus"),
-                     Updates.set("imdb.rating", 9.5));
-                
-          .. output::
-             :language: json
+             var filter = Builders<Restaurant>.Filter
+             .Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
-             { title: 'Amadeus', imdb: { rating: 9.5, ... } }
+             var update = Builders<Restaurant>.Update
+             .Set(restaurant => restaurant.Name, "2 Bagels 2 Buns");
+
+             var result = _restaurantsCollection.UpdateOne(filter, update);
+
+   * - | **Update a Document (Async)**
+       |
+       | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOneAsync.htm>`__
+       | :ref:`Usage Example <csharp-update-one>`
+       | :ref:`Fundamentals <csharp-update-guide>`
+
+     - .. code-block::
+          :copyable: true
+
+          .. input::
+             :language: csharp 
+
+             var filter = Builders<Restaurant>.Filter
+             .Eq(restaurant => restaurant.Name, "Bagels N Buns");
+
+             var update = Builders<Restaurant>.Update
+             .Set(restaurant => restaurant.Name, "2 Bagels 2 Buns");
+
+             return await _restaurantsCollection.UpdateOneAsync(filter, update);
 
    * - | **Update Multiple Documents**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#updateMany(org.bson.conversions.Bson,org.bson.conversions.Bson)>`__
-       | :ref:`Usage Example <java-usage-updatemany>`
-       | :ref:`Fundamentals <java-fundamentals-update>`
+       | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm>`__
+       | :ref:`Usage Example <csharp-update-many>`
+       | :ref:`Fundamentals <csharp-update-guide>`
 
-     - .. io-code-block::
+     - .. code-block::
           :copyable: true
 
           .. input::
-             :language: java
+             :language: csharp
 
-             coll.updateMany(
-                     Filters.eq("year", 2001),
-                     Updates.inc("imdb.votes", 100));
+             var filter = Builders<Restaurant>.Filter
+             .Eq(restaurant => restaurant.Cuisine, "Pizza");
 
-          .. output::
-             :language: json
+             var update = Builders<Restaurant>.Update
+             .Set(restaurant => restaurant.Cuisine, "Pasta and breadsticks");
 
-             [
-               { title: 'A Beautiful Mind', year: 2001, imdb: { votes: 826257, ... },
-               { title: 'Shaolin Soccer', year: 2001, imdb: { votes: 65442, ... },
-               ...
-             ]
+            var result = _restaurantsCollection.UpdateMany(filter, update);
+
+   * - | **Update Multiple Documents (Async)**
+       |
+       | `API Documentation {+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateManyAsync.htm>`__ 
+       | :ref:`Usage Example <csharp-update-many>`
+       | :ref:`Fundamentals <csharp-update-guide>`
+
+     - .. code-block::
+          :copyable: true
+
+          .. input::
+             :language: csharp
+
+             var filter = Builders<Restaurant>.Filter
+             .Eq(restaurant => restaurant.Cuisine, "Pizza");
+
+             var update = Builders<Restaurant>.Update
+             .Set(restaurant => restaurant.Cuisine, "Pasta and breadsticks");
+
+            return await = _restaurantsCollection.UpdateManyAsync(filter, update);
 
    * - | **Update an Array in a Document**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#updateOne(org.bson.conversions.Bson,org.bson.conversions.Bson)>`__
-       | :ref:`Fundamentals <java-fundamentals-update-array>`
+       | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOne.htm>`__
+       | :ref:`Usage Example <csharp-update-one>`
+       | :ref:`Fundamentals <csharp-update-guide>`
 
-     - .. io-code-block::
+     - .. code-block::
           :copyable: true
 
           .. input::
-             :language: java
+             :language: csharp
 
-             coll.updateOne(
-                     Filters.eq("title", "Cosmos"),
-                     Updates.push("genres", "Educational"));
-                
-          .. output::
-             :language: json
+             var filter = Builders<Restaurant>.Filter
+             .Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
-             { title: 'Cosmos', genres: [ 'Documentary', 'Educational' ], ...}
+            var update = Builders<Restaurant>.Update
+            .Push(restaurant => restaurant.Grades, new BsonDocument()
+            {
+                { "date" , DateTime.Now.ToUniversalTime()},
+                { "grade" , "A"}, 
+                { "score", 10}
+            });
 
+            var result = _restaurantsCollection.UpdateOne(filter, update);
+             
    * - | **Replace a Document**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#replaceOne(org.bson.conversions.Bson,TDocument)>`__
-       | :ref:`Usage Example <java-usage-replaceone>`
-       | :ref:`Fundamentals <replace-operation>`
+       | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm>`__
+       | :ref:`Usage Example <csharp-replace-one>`
+       | TODO: :ref:`Fundamentals`  
 
-     - .. io-code-block::
+     - .. code-block::
           :copyable: true
 
           .. input::
-             :language: java
+             :language: csharp
 
-             coll.replaceOne(
-                     Filters.and(Filters.eq("name", "Deli Llama"), Filters.eq("address", "2 Nassau St")),
-                     new Document("name", "Lord of the Wings").append("zipcode", 10001));
+             var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Pizza");
 
-          .. output::
-             :language: json
+             // Find ID of first pizza restaurant
+             var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
+             var oldId = oldPizzaRestaurant.Id;
 
-             { name: 'Lord of the Wings', zipcode: 10001 }
+            Restaurant newPizzaRestaurant = new()
+            {
+                Id = oldId,
+                Name = "Mongo's Pizza",
+                Cuisine = "Pizza",
+                Address = new BsonDocument
+                {
+                    {"street", "Pizza St"},
+                    {"zipcode", "10003"},
+                },
+                Borough = "Manhattan",
+            };
+
+            return _restaurantsCollection.ReplaceOne(filter, newPizzaRestaurant);
+
+ * - | **Replace a Document (Async)**
+       |
+       | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_ReplaceOneAsync.htm>`__
+       | :ref:`Usage Example <csharp-replace-one>`
+       | TODO: :ref:`Fundamentals`  
+
+     - .. code-block::
+          :copyable: true
+
+          .. input::
+             :language: csharp
+
+             var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Pizza");
+
+             // Find ID of first pizza restaurant
+             var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
+             var oldId = oldPizzaRestaurant.Id;
+
+            Restaurant newPizzaRestaurant = new()
+            {
+                Id = oldId,
+                Name = "Mongo's Pizza",
+                Cuisine = "Pizza",
+                Address = new BsonDocument
+                {
+                    {"street", "Pizza St"},
+                    {"zipcode", "10003"},
+                },
+                Borough = "Manhattan",
+            };
+
+            return await _restaurantsCollection.ReplaceOneAsync(filter, newPizzaRestaurant);
 
    * - | **Delete a Document**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#deleteOne(org.bson.conversions.Bson)>`__
-       | :ref:`Usage Example <java-usage-deleteone>`
-       | :ref:`Fundamentals <java-fundamentals-delete>`
+       | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteOne.htm>`__
+       | :ref:`Usage Example <csharp-delete-one>`
+       | :ref:`Fundamentals <csharp-delete-guide>`
 
-     - .. code-block:: java
+     - .. code-block:: csharp
           :copyable: true
 
-          coll.deleteOne(Filters.eq("title", "Congo"));
+          var filter = Builders<Restaurant>.Filter
+          .Eq(r => r.Name, "Ready Penny Inn");
 
+          return _restaurantsCollection.DeleteOne(filter);
+          
+   * - | **Delete a Document (Async)**
+       |
+       | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteOneAsync.htm>`__
+       | :ref:`Usage Example <csharp-delete-one>`
+       | :ref:`Fundamentals <csharp-delete-guide>`
+
+     - .. code-block:: csharp
+          :copyable: true
+
+          var filter = Builders<Restaurant>.Filter
+          .Eq(r => r.Name, "Ready Penny Inn");
+
+          return await _restaurantsCollection.DeleteOneAsync(filter);
+          
    * - | **Delete Multiple Documents**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#deleteMany(org.bson.conversions.Bson)>`__ 
-       | :ref:`Usage Example <java-usage-deletemany>`
-       | :ref:`Fundamentals <java-fundamentals-delete>`
+       | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteMany.htm>`__ 
+       | :ref:`Usage Example <csharp-delete-many>`
+       | :ref:`Fundamentals <csharp-delete-guide>`
 
-     - .. code-block:: java
+     - .. code-block:: csharp
           :copyable: true
  
-          coll.deleteMany(Filters.regex("title", "^Shark.*"));
+          var filter = Builders<Restaurant>.Filter
+          .Regex(r => r.Name, "Green");
 
-   * - | **Bulk Write**
+          return _restaurantsCollection.DeleteMany(filter);
+
+   * - | **Delete Multiple Documents (Async)**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#bulkWrite(java.util.List)>`__
-       | :ref:`Usage Example <java-usage-bulkwrite>`
-       | :ref:`Fundamentals <java-fundamentals-bulkwrite>`
+       | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteMany.htm>`__ 
+       | :ref:`Usage Example <csharp-delete-many>`
+       | :ref:`Fundamentals <csharp-delete-guide>`
 
-     - .. code-block:: java
+     - .. code-block:: csharp
           :copyable: true
+ 
+          var filter = Builders<Restaurant>.Filter
+          .Regex(r => r.Name, "Green");
 
-          coll.bulkWrite(
-                  Arrays.asList(
-                         new InsertOneModel<Document>(
-                                 new Document().append("title", "A New Movie").append("year", 2022)),
-                         new DeleteManyModel<Document>(
-                                 Filters.lt("year", 1970))));
-
-   * - | **Watch for Changes**
-       |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#watch(java.util.List)>`__
-       | :ref:`Usage Example <java-usage-watch>`
-       | :ref:`Fundamentals <retrieve-watch>`
-
-     - .. code-block:: java
-          :copyable: true
-
-          coll.watch(Arrays.asList(
-                  Aggregates.match(Filters.gte("year", 2022))));
+          return await _restaurantsCollection.DeleteManyAsync(filter);
 
    * - | **Access Data from a Cursor Iteratively**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCursor.html>`__
-       | :ref:`Fundamentals <java-fundamentals-cursor-conditional-iteration>`
+       | `API Documentation <{+api-root+}/T_MongoDB_Driver_IAsyncCursor_1.htm>`__
 
      - .. io-code-block::
           :copyable: true
 
           .. input::
-             :language: java
+             :language: csharp
 
-             MongoCursor<Document> cursor = coll.find().cursor();
-             while (cursor.hasNext()) {
-                 System.out.println(cursor.next().toJson());
-             }
+             var filter = Builders<Restaurant>.Filter
+               .Eq(restaurant => restaurant.Cuisine, "Afghan";
+
+             var cursor = _restaurantsCollection.Find(filter).ToCursor(); 
+             cursor.MoveNext();
+             foreach (Restaurant r in cursor.Current)
+             {
+                 WriteLine(r.ToJson());
+             }   
 
           .. output::
              :language: json
 
              [
-               { title: '2001: A Space Odyssey', ... },
-               { title: 'The Sound of Music', ... },
-               ...
-             ]
-
-   * - | **Access Results from a Query as an Array**
-       |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoIterable.html#into(A)>`__
-
-     - .. io-code-block::
-          :copyable: true
-
-          .. input::
-             :language: java
-
-             List<Document> resultList = new ArrayList<Document>();
-             coll.find().into(resultList);
-        
-          .. output::
-             :language: json
-
-             [
-               { title: '2001: A Space Odyssey', ... },
-               { title: 'The Sound of Music', ... },
+               { name: "Afghan Kebab House", ... },
+               { name: "Khyber Pass", ... },
                ...
              ]
 
    * - | **Count Documents**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#countDocuments(org.bson.conversions.Bson)>`__
-       | :ref:`Usage Example <java-usage-count>`
+       | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoCollection_1_CountDocuments.htm>`__
 
      - .. io-code-block::
           :copyable: true
@@ -360,34 +431,36 @@ their related reference and API documentation.
           .. input::
              :language: java
              
-             coll.countDocuments(Filters.eq("year", 2000));
+             var filter = Builders<Restaurant>.Filter
+             .Eq(restaurant => restaurant.Cuisine, "Pizza");
+
+             return _restaurantsCollection.Find(filter).CountDocuments();
 
           .. output::
              :language: none
 
-             618
+             1163
 
    * - | **List the Distinct Documents or Field Values**
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#distinct(java.lang.String,java.lang.Class)>`__
-       | :ref:`Usage Example <java-usage-distinct>`
+       | `API Documentation <+api-root+}/Overload_MongoDB_Driver_MongoCollection_Distinct.htm>`__
 
      - .. io-code-block::
           :copyable: true
 
           .. input::
-             :language: java
-             
-             coll.distinct("year", Integer.class);
-             
+             :language: csharp
+            
+             var filter = Builders<Restaurant>.Filter.Empty;
+             return _restaurantsCollection.Distinct(new StringFieldDefinition<Restaurant, String>("cuisine"), filter);
+ 
           .. output::
-             :language: none
+             :language: json
 
-             [ 1891, 1893, 1894, 1896, 1903, ... ]
+             [ Afghan, African, American, Armenian, Asian, ... ]
 
    * - | **Limit the Number of Documents Retrieved**
        |
        | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/FindIterable.html#limit(int)>`__
-       | :ref:`Fundamentals <java-fundamentals-limit>`
 
      - .. io-code-block::
           :copyable: true

@@ -71,7 +71,6 @@ their related reference and API documentation.
           .. input::
              :language: csharp
 
-
              var filter = Builders<Restaurant>.Filter
              .Eq(r => r.Cuisine, "Pizza");
 
@@ -429,7 +428,7 @@ their related reference and API documentation.
           :copyable: true
 
           .. input::
-             :language: java
+             :language: csharp
              
              var filter = Builders<Restaurant>.Filter
              .Eq(restaurant => restaurant.Cuisine, "Pizza");
@@ -460,22 +459,24 @@ their related reference and API documentation.
 
    * - | **Limit the Number of Documents Retrieved**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/FindIterable.html#limit(int)>`__
+       | `API Documentation <+api-root+}/P_MongoDB_Driver_Core_Operations_FindOperation_1_Limit.htm>`__
 
      - .. io-code-block::
           :copyable: true
 
           .. input::
-             :language: java
+             :language: csharp
 
-             coll.find().limit(2);
+             var filter = Builders<Restaurant>.Filter
+               .Eq(restaurant => restaurant.Cuisine, "Asian");
+             return _restaurantsCollection.Find(filter).Limit(2).ToList();
 
           .. output::
              :language: json
 
              [
-               { title: 'My Neighbor Totoro', ... },
-               { title: 'Amélie', ... }
+               { name: "China Grill", ... },
+               { name: "Indo Chine", ... }
              ]
 
    * - | **Skip Retrieved Documents**

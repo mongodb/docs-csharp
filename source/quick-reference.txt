@@ -21,8 +21,8 @@ TODO: LINQ link
    * - | **Find a Document**
        |
        | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__
-       | :ref:`Usage Example <csharp-findone>`
-       | :ref:`Fundamentals <csharp-fundamentals-retrieve-data>`
+       | :ref:`Usage Example <csharp-find-one>`
+       | :ref:`Fundamentals <csharp-retrieve-find-one>`
 
      - .. io-code-block::
           :copyable: true
@@ -42,8 +42,8 @@ TODO: LINQ link
    * - | **Find a Document (Async)**
        |
        | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__
-       | :ref:`Usage Example <csharp-findone>`
-       | :ref:`Fundamentals <csharp-fundamentals-retrieve-data>`
+       | :ref:`Usage Example <csharp-find-one>`
+       | :ref:`Fundamentals <csharp-retrieve-find-one>`
 
      - .. io-code-block::
           :copyable: true
@@ -64,8 +64,8 @@ TODO: LINQ link
    * - | **Find Multiple Documents**
        |
        | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__
-       | :ref:`Usage Example <csharp-findmultiple>`
-       | :ref:`Fundamentals <csharp-fundamentals-retrieve>`
+       | :ref:`Usage Example <csharp-find-multiple>`
+       | :ref:`Fundamentals <csharp-retrieve-find-multiple>`
 
      - .. io-code-block::
           :copyable: true
@@ -91,8 +91,8 @@ TODO: LINQ link
    * - | **Find Multiple Documents (Async)**
        |
        | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_Find.htm>`__
-       | :ref:`Usage Example <csharp-findmultiple>`
-       | :ref:`Fundamentals <csharp-fundamentals-retrieve>`
+       | :ref:`Usage Example <csharp-find-multiple>`
+       | :ref:`Fundamentals <csharp-retrieve-find-multiple>`
 
      - .. io-code-block::
           :copyable: true
@@ -151,7 +151,7 @@ TODO: LINQ link
               new BsonDocument("name", "Mongo's Pizza 2")
           });
 
-  * - | **Insert Multiple Documents (Async)**
+   * - | **Insert Multiple Documents (Async)**
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_InsertManyAsync.htm>`__
        | :ref:`Usage Example <csharp-insert-many>`
@@ -228,7 +228,7 @@ TODO: LINQ link
 
    * - | **Update Multiple Documents (Async)**
        |
-       | `API Documentation {+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateManyAsync.htm>`__ 
+       | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateManyAsync.htm>`__ 
        | :ref:`Usage Example <csharp-update-many>`
        | :ref:`Fundamentals <csharp-update-guide>`
 
@@ -304,7 +304,7 @@ TODO: LINQ link
 
             return _restaurantsCollection.ReplaceOne(filter, newPizzaRestaurant);
 
- * - | **Replace a Document (Async)**
+   * - | **Replace a Document (Async)**
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_ReplaceOneAsync.htm>`__
        | :ref:`Usage Example <csharp-replace-one>`
@@ -443,6 +443,7 @@ TODO: LINQ link
              1163
 
    * - | **List the Distinct Documents or Field Values**
+       |
        | `API Documentation <+api-root+}/Overload_MongoDB_Driver_MongoCollection_Distinct.htm>`__
 
      - .. io-code-block::
@@ -471,119 +472,98 @@ TODO: LINQ link
 
              var filter = Builders<Restaurant>.Filter
                .Eq(restaurant => restaurant.Cuisine, "Asian");
-             return _restaurantsCollection.Find(filter).Limit(2).ToList();
+             return _restaurantsCollection.Find(filter).Limit(3).ToList();
 
           .. output::
              :language: json
 
              [
                { name: "China Grill", ... },
-               { name: "Indo Chine", ... }
+               { name: "Indo Chine", ... },
+               { name: "Le Colonial", ... }
              ]
 
    * - | **Skip Retrieved Documents**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/FindIterable.html#skip(int)>`__
-       | :ref:`Fundamentals <java-fundamentals-skip>`
+       | `API Documentation <{+api-root+}P_MongoDB_Driver_Core_Operations_FindOperation_1_Skip.htm>`__
 
      - .. io-code-block::
           :copyable: true
 
           .. input::
-             :language: java
+             :language: csharp
 
-             coll.find(Filters.regex("title", "^Rocky")).skip(2);
+             var filter = Builders<Restaurant>.Filter
+               .Eq(restaurant => restaurant.Cuisine, "Asian");
+             return _restaurantsCollection.Find(filter).Skip(2).ToList();
 
           .. output::
              :language: json
 
              [
-               { title: 'Rocky III', ... },
-               { title: 'Rocky IV', ... },
-               { title: 'Rocky V', ... }
+               { name: "Le Colonial", ... },
+               { name: "Citrus Bar & Grill", ... },
+               { name: "Mangez Avec Moi", ... },
+               ...
              ]
 
    * - | **Sort the Documents When Retrieving Them**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/FindIterable.html#sort(org.bson.conversions.Bson)>`__
-       | :ref:`Fundamentals <java-fundamentals-sort>`
+       | `API Documentation <{+api-root+}/M_MongoDB_Driver_IFindFluentExtensions_SortBy__2.htm>`__
 
      - .. io-code-block::
           :copyable: true
 
           .. input::
-             :language: java
+             :language: csharp
 
-             coll.find().sort(Sorts.ascending("year"));
+             var filter = Builders<Restaurant>.Filter
+               .Eq(restaurant => restaurant.Cuisine, "Brazilian");
+             return _restaurantsCollection.Find(filter).SortBy(r => r.Name).ToList();
 
           .. output::
              :language: json
 
              [
-               { title: 'Newark Athlete', year: 1891, ... },
-               { title: 'Blacksmith Scene', year: 1893, ...},
-               { title: 'Dickson Experimental Sound Film', year: 1894},
+               { name: "Barzinho", ... },
+               { name: "Beco", ... },
+               { name: "Beija-Flor", ... },
                ...
              ]
 
    * - | **Project Document Fields When Retrieving Them**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/FindIterable.html#projection(org.bson.conversions.Bson)>`__
-       | :ref:`Usage Example <java-usage-find>`
-       | :ref:`Fundamentals <java-fundamentals-project>`
+       | `API Documentation <{+api-root+}/T_MongoDB_Driver_ProjectionDefinitionBuilder_1.htm>`__
+       | :ref:`Fundamentals <csharp-builders-projection>`
 
      - .. io-code-block::
           :copyable: true
 
           .. input::
-             :language: java
+             :language: csharp
 
-             coll.find().projection(Projections.fields(
-                    Projections.excludeId(),
-                    Projections.include("year", "imdb")));
+             var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Italian");
+             var projection = Builders<Restaurant>.Projection.Include(r => r.Name)
+               .Include(r => r.Borough).Exclude(r => r.Id);
+             return _restaurantsCollection.Find(filter).Project(projection).ToList(); 
 
           .. output::
              :language: json
 
              [
-               { year: 2012, imdb: { rating: 5.8, votes: 230, id: 8256 }},
-               { year: 1985, imdb: { rating: 7.0, votes: 447, id: 1654 }},
+               { borough : "Brooklyn", name : "Philadelphia Grille Express" }
+               { borough : "Manhattan", name : "Isle Of Capri Restaurant" }
+               { borough : "Manhattan", name : "Marchis Restaurant" }
                ...
              ]
 
    * - | **Create an Index**
        |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#createIndex(org.bson.conversions.Bson)>`__
-       | :ref:`Fundamentals <java-fundamentals-indexes>`
+       | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoIndexManager_1_CreateOne.htm>`__
+       | :ref:`Fundamentals <csharp-builders-indexes>`
 
-     - .. code-block:: java
+     - .. code-block:: csharp
           :copyable: true
 
-          coll.createIndex(
-                  Indexes.compoundIndex(
-                          Indexes.ascending("title"),
-                          Indexes.descending("year")));
-
-   * - | **Search Text**
-       |
-       | `API Documentation <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoCollection.html#find()>`__
-       | :ref:`Fundamentals <java-fundamentals-search-text>`
-
-     - .. io-code-block::
-          :copyable: true
-
-          .. input::
-             :language: java
-
-             // only searches fields with text indexes
-             coll.find(Filters.text("zissou"));
-
-          .. output::
-             :language: json
-
-             [
-               { title: 'The Life Aquatic with Steve Zissou', ... }
-             ]
-
-
-
+          var index = Builders<Restaurant>.IndexKeys.Ascending(r => r.Cuisine);
+          _restaurantsCollection.Indexes.CreateOne(new CreateIndexModel<Restaurant>(index));

@@ -26,7 +26,7 @@ inconsistent serialization across MongoDB drivers.
 To standardize the byte order and ensure consistent serialization across drivers, we 
 created ``BsonBinaryData`` subtype 4.
 
-.. tip::
+.. note::
    
    Use ``BsonBinaryData`` subtype 4 for all new GUIDs. 
 
@@ -37,19 +37,22 @@ In many MongoDB collections, all GUID fields use the same subtype of ``BsonBinar
 Some older collections, however, may contain some GUID fields that 
 use subtype 3 and others that use subtype 4. 
 To ensure that the driver serializes and deserializes all GUIDs correctly,  
-you should set the ``BsonDefaults.GuidRepresentationMode`` property to the appropriate
-``GuidRepresentationMode``. 
-
-The ``GuidRepresentationMode`` property has two possible values: ``V2`` and ``V3``.
+you should set the ``BsonDefaults.GuidRepresentationMode`` property to one of the 
+following ``GuidRepresentationMode`` values: 
 
 V2
 ~~
 
 ``GuidRepresentationMode.V2`` assumes that all GUIDs in a collection use the same 
-``BsonBinaryData`` subtype (either 3 or 4). In this mode, GUID representation is 
+``BsonBinaryData`` subtype. In this mode, GUID representation is 
 controlled by the reader or writer, not the serializer.
 
 ``V2`` is the default ``GuidRepresentationMode``.
+
+.. note::
+   
+   When version 3 of the {+driver-short+} is released, support for ``GuidRepresentationMode.V2``
+   will be removed from the driver and ``V3`` will become the default. 
 
 V3
 ~~
@@ -72,13 +75,8 @@ Running in ``V3`` mode changes the behavior of the driver in the following ways:
 - The ``BsonBinaryWriter.WriteBinaryData()`` method ignores ``writerSettings.GuidRepresentation``
 - The ``JsonReader.ReadBinaryData()`` method ignores ``readerSettings.GuidRepresentation``
 - ``JsonWriter`` ignores ``writerSettings.GuidRepresentation``
-- If you call the ``BsonBinaryData.ToGuid()`` method without the ``GuidRepresentation``
-  parameter, it will work only on GUIDs of subtype 4.
-
-.. note::
-   
-   When version 3 of the {+driver-short+} is released, support for ``GuidRepresentationMode.V2``
-   will be removed from the driver and ``V3`` will become the default. 
+- Calling the ``BsonBinaryData.ToGuid()`` method without the ``GuidRepresentation``
+  parameter works only on GUIDs of subtype 4.
 
 .. note::
 
@@ -104,7 +102,7 @@ to specify the representation:
 
       [BsonGuidRepresentation(GuidRepresentation.Standard)]
       public Guid G { get; set; }
-}
+   }
 
 .. note::
 
@@ -122,14 +120,20 @@ for serializing GUID representations of subtype 4:
 
    var guidSerializer = new GuidSerializer(GuidRepresentation.Standard);
 
-If most of your GUIDs use the same representation, you can register a global 
-``GuidSerializer`` for this representation, then use the ``BsonGuidRepresentation``
-attribute for the other GUIDs. To create and register a ``GuidSerializer``, run the 
-following code early in your application:
+If most of your GUIDs use the same representation, you can register a ``GuidSerializer``
+globally. To create and register a ``GuidSerializer``, run the following code early
+in your application:
 
 .. code-block:: csharp
 
    BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
+
+.. tip::
+
+   When you're working with two subtypes, you can combine a global serializer with the 
+   ``BsonGuidRepresentation`` property attribute. For example, you can register a global
+   serializer for the most commonly used GUID subtype, then use the ``BsonGuidRepresentation``
+   attribute to denote GUID properties of another subtype.  
 
 Serializing Objects in V3
 -------------------------

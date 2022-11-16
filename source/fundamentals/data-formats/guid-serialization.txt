@@ -62,8 +62,9 @@ GUID formats.
 In this mode, GUID representation is controlled at the property level by configuring the 
 serializer for each property.
 
-To use ``GuidRepresentationMode.V3``, run the following line of code as early in your 
-application as possible:
+To use ``GuidRepresentationMode.V3``, run the following line of code. You should run this 
+code during the bootstrapping phase of your application, before creating 
+a ``MongoClient`` object. 
 
 .. code-block:: csharp
 
@@ -107,11 +108,14 @@ to specify the representation:
 .. note::
 
    ``GuidRepresentation.Standard`` is equivalent to ``BsonBinaryData`` subtype 4.
+   Other GUID representations in the {+driver-short+}, such as ``CSharpLegacy``,
+   ``JavaLegacy``, and ``PythonLegacy``, are equivalent to subtype 3 but use 
+   different byte orders.
 
-If you're writing your own serialization and deserialization code, you can use the 
-``GuidSerializer`` class to ensure that the driver handles GUIDs correctly.
-When you construct a ``GuidSerializer``, use the ``GuidRepresentation`` parameter
-to specify the GUID representation. 
+If you're writing your own serialization code, you can use the 
+``GuidSerializer`` class to serialize and deserialize individual GUID values to and 
+from BSON fields. To ensure that the driver handles GUIDs correctly, use the 
+``GuidRepresentation`` parameter when you construct a ``GuidSerializer``.
 
 The following code sample creates an instance of ``GuidSerializer`` 
 for serializing GUID representations of subtype 4: 
@@ -122,7 +126,7 @@ for serializing GUID representations of subtype 4:
 
 If most of your GUIDs use the same representation, you can register a ``GuidSerializer``
 globally. To create and register a ``GuidSerializer``, run the following code early
-in your application:
+in your application, such as during the bootstrapping phase:
 
 .. code-block:: csharp
 
@@ -133,14 +137,17 @@ in your application:
    When you're working with two subtypes, you can combine a global serializer with the 
    ``BsonGuidRepresentation`` property attribute. For example, you can register a global
    serializer for the most commonly used GUID subtype, then use the ``BsonGuidRepresentation``
-   attribute to denote GUID properties of another subtype.  
+   attribute to denote any GUID properties of another subtype.  
 
 Serializing Objects in V3
 -------------------------
 
-To ensure that GUIDs in objects are serialized and deserialized correctly when using 
+You can use an ``ObjectSerializer`` to serialize hierarchical objects to subdocuments. 
+To ensure that GUIDs in these objects are serialized and deserialized correctly when using 
 ``V3``, you should select the correct GUID representation when constructing your 
-``ObjectSerializer``. The following code sample shows how to 
+``ObjectSerializer``. 
+
+The following code sample shows how to 
 create an ``ObjectSerializer`` for a GUID representation of subtype 4:
 
 .. code-block:: csharp
@@ -149,7 +156,8 @@ create an ``ObjectSerializer`` for a GUID representation of subtype 4:
    var objectSerializer = new ObjectSerializer(objectDiscriminatorConvention, GuidRepresentation.Standard);
 
 If your application relies on an ``ObjectSerializer`` to serialize any GUIDs, you 
-must also register the serializer early in your application. The serializer that you 
+must also register the serializer early in your application, such as during the 
+bootstrapping phase. The serializer that you 
 register will be used globally whenever an object serializer is needed and has not 
 been otherwise specified.
 

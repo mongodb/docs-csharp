@@ -51,12 +51,19 @@ public class ReplaceOne
         };
         // end-parameters
 
-        // Find ID of first pizza restaurant
-        var oldRestaurant = _restaurantsCollection.Find(filter).First();
-        var oldId = oldRestaurant.Id;
+        ReplaceOptions opts = new ReplaceOptions()
+        {
+            Comment = new BsonString("Restaurant replaced for {+driver-short+} Fundamentals"),
+            IsUpsert = true
+        };
+
+        WriteLine("Replacing document...");
+        var result = _restaurantsCollection.ReplaceOne(filter, newRestaurant, opts);
+
+        WriteLine($"Replaced documents: {result.ModifiedCount}");
+        WriteLine($"Result acknowledged? {result.IsAcknowledged}");
 
         return _restaurantsCollection.ReplaceOne(filter, newRestaurant);
-        // end-method-body
     }
 
     private static void Setup()

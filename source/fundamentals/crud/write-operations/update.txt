@@ -140,7 +140,7 @@ update all matched documents.
 Customize the Update Operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Both methods optionally take an ``UpdateOptions`` object as an additional parameter,
+Both methods optionally accept an ``UpdateOptions`` object as an additional parameter,
 which represents options you can use to configure the update operation.
 If you don't specify any ``UpdateOptions`` properties, the driver does
 not customize the update operation.
@@ -339,9 +339,9 @@ or the synchronous ``ReplaceOne()`` method to replace one document.
 Customize the Replace Operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``ReplaceOne()`` method optionally takes a ``ReplaceOptions`` type as an additional 
-parameter, which represents options you can use to configure the replace operation.
-If you don't specify any ``ReplaceOptions`` properties, the driver does
+The ``ReplaceOne()`` method optionally accepts a ``ReplaceOptions`` object as an 
+additional parameter, which represents options you can use to configure the replace 
+operation. If you don't specify any ``ReplaceOptions`` properties, the driver does
 not customize the replace operation.
 
 The ``ReplaceOptions`` type allows you to configure options with the

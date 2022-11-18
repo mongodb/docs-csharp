@@ -91,7 +91,7 @@ Serializing GUIDs in V3
 properties. This mode is more flexible than ``V2``, but it also means you must ensure that 
 each GUID field is serialized and deserialized correctly.
 
-If you're using the {+driver-short+} to :ref:`automap your {+language+} classes to document schemas <csharp-automapping>`,
+If you're using the {+driver-short+} to :ref:`automap your {+language+} classes to document schemas <csharp-class-mapping>`,
 you can use the ``BsonGuidRepresentation`` attribute on a GUID property 
 to specify the representation:
 

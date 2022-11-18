@@ -35,7 +35,7 @@ public class ReplaceOne
 
     private static ReplaceOneResult ReplaceOneRestaurant()
     {
-        // start-method-body
+        // start-parameters
         var filter = Builders<Restaurant>.Filter.Eq(r => r.Name, "Pizza Town");
 
         Restaurant newRestaurant = new()
@@ -49,6 +49,7 @@ public class ReplaceOne
             },
             Borough = "Manhattan",
         };
+        // end-parameters
 
         // Find ID of first pizza restaurant
         var oldRestaurant = _restaurantsCollection.Find(filter).First();

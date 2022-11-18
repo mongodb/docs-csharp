@@ -16,7 +16,7 @@ Overview
 --------
 
 In this guide, you can learn how to change documents in a MongoDB
-collection using two different operations: 
+collection using two different kinds of operations: 
 
 - :ref:`Update <csharp-update-operation>`
 - :ref:`Replace <csharp-replace-operation>`
@@ -64,9 +64,10 @@ Each update method requires the following parameters:
 The {+driver-short+} provides a ``Builders`` class that simplifies the creation of both
 query filters and update documents. The following code sample uses ``Builders`` to create
 two documents for use as parameters in an update operation:
+
 - A query filter that searches for restaurants with a ``borough`` field value of "Manhattan" 
 - An update document that sets the value of the ``borough`` field of these restaurants 
-to "Manhattan (north)"
+  to "Manhattan (north)"
 
 .. literalinclude:: /includes/fundamentals/code-examples/crud/change/Update.cs
    :language: csharp
@@ -134,7 +135,7 @@ update all matched documents.
 .. tip::
 
    Find runnable examples that use these methods under :ref:`Additional
-   Information <csharp-update-info>`.
+   Information <csharp-change-info>`.
 
 Customize the Update Operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -301,8 +302,8 @@ for restaurants with a ``name`` field value of "Pizza Town". The code also creat
 .. literalinclude:: /includes/fundamentals/code-examples/crud/change/Replace.cs
    :language: csharp
    :dedent:
-   :start-after: // start-method-body
-   :end-before: // Find ID of first pizza restaurant
+   :start-after: // start-parameters 
+   :end-before: // end-parameters 
 
 .. important::
 
@@ -425,11 +426,45 @@ with a new ``Restaurant`` document named "Food World". Because the ``IsUpsert`` 
 set to ``true``, the driver inserts a new document if the query filter doesn't 
 match any existing documents.
 
-.. literalinclude:: /includes/fundamentals/code-examples/crud/change/Replace.cs
-   :language: csharp
-   :dedent:
-   :start-after: // start-method-body
-   :end-before: // end-method-body
+.. io-code-block::
+   :copyable: true
+
+   .. input::
+      :language: csharp
+
+      var filter = Builders<Restaurant>.Filter.Eq(r => r.Name, "Pizza Town");
+
+      Restaurant newRestaurant = new()
+      {
+          Name = "Food World",
+          Cuisine = "American",
+          Address = new BsonDocument
+          {
+              {"street", "Food St"},
+              {"zipcode", "10003"},
+          },
+          Borough = "Manhattan",
+      };
+
+      ReplaceOptions opts = new ReplaceOptions()
+      {
+          Comment = new BsonString("Restaurant replaced for {+driver-short+} Fundamentals"),
+          IsUpsert = true
+      };
+
+      WriteLine("Replacing document...");
+      var result = _restaurantsCollection.ReplaceOne(filter, newRestaurant, opts);
+      
+      WriteLine($"Replaced documents: {result.ModifiedCount}");
+      WriteLine($"Result acknowledged? {result.IsAcknowledged}"); 
+
+   .. output::
+      :language: none
+      :visible: false
+      
+      Replacing document...
+      Replaced documents: 1
+      Result acknowledged? True
 
 .. _csharp-change-info:
 
@@ -443,7 +478,7 @@ examples:
 - :ref:`csharp-update-many`
 - :ref:`csharp-replace-one`
 
-To learn more about specifying a query, see the :ref:`csharp-specify-query` guide.
+To learn more about creating query filters, see the :ref:`csharp-specify-query` guide.
 
 API Documentation
 ~~~~~~~~~~~~~~~~~

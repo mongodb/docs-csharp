@@ -275,8 +275,8 @@ match any existing documents.
 
 .. _csharp-replace-operation:
 
-Replace Operations
-------------------
+Replace Operation
+-----------------
 
 You can perform a replace operation in MongoDB with the ``ReplaceOne()`` method. 
 This method removes all fields (except the ``_id`` field) from the first document that

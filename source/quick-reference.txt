@@ -30,7 +30,7 @@ TODO: LINQ link
           .. input::
              :language: csharp
 
-             var filter = Builders<Restaurant>.Filter.Eq(r => r.Name, "Bagels N Buns");
+             var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
              var restaurant = _restaurantsCollection.Find(filter).FirstOrDefault();
 
@@ -51,7 +51,7 @@ TODO: LINQ link
           .. input::
              :language: csharp
 
-             var filter = Builders<Restaurant>.Filter.Eq(r => r.Name, "Bagels N Buns");
+             var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
              return await _restaurantsCollection.Find(filter).FirstOrDefaultAsync();
 
@@ -74,7 +74,7 @@ TODO: LINQ link
              :language: csharp
 
              var filter = Builders<Restaurant>.Filter
-             .Eq(r => r.Cuisine, "Pizza");
+             .Eq(r => restaurant.Cuisine, "Pizza");
 
              var restaurants = _restaurantsCollection.Find(filter).ToList();
 
@@ -101,7 +101,7 @@ TODO: LINQ link
              :language: csharp
 
              var filter = Builders<Restaurant>.Filter
-             .Eq(r => r.Cuisine, "Pizza");
+             .Eq(r => restaurant.Cuisine, "Pizza");
 
              return await _restaurantsCollection.Find(filter).ToListAsync();
 
@@ -170,7 +170,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOne.htm>`__
        | :ref:`Usage Example <csharp-update-one>`
-       | :ref:`Fundamentals <csharp-update-guide>`
+       | :ref:`Fundamentals <csharp-change-guide>`
 
      - .. code-block::
           :copyable: true
@@ -190,7 +190,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOneAsync.htm>`__
        | :ref:`Usage Example <csharp-update-one>`
-       | :ref:`Fundamentals <csharp-update-guide>`
+       | :ref:`Fundamentals <csharp-change-guide>`
 
      - .. code-block::
           :copyable: true
@@ -210,7 +210,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm>`__
        | :ref:`Usage Example <csharp-update-many>`
-       | :ref:`Fundamentals <csharp-update-guide>`
+       | :ref:`Fundamentals <csharp-change-guide>`
 
      - .. code-block::
           :copyable: true
@@ -230,7 +230,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateManyAsync.htm>`__ 
        | :ref:`Usage Example <csharp-update-many>`
-       | :ref:`Fundamentals <csharp-update-guide>`
+       | :ref:`Fundamentals <csharp-change-guide>`
 
      - .. code-block::
           :copyable: true
@@ -250,7 +250,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOne.htm>`__
        | :ref:`Usage Example <csharp-update-one>`
-       | :ref:`Fundamentals <csharp-update-guide>`
+       | :ref:`Fundamentals <csharp-change-guide>`
 
      - .. code-block::
           :copyable: true
@@ -275,7 +275,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm>`__
        | :ref:`Usage Example <csharp-replace-one>`
-       | TODO: :ref:`Fundamentals`  
+       | :ref:`Fundamentals <csharp-change-guide>`  
 
      - .. code-block::
           :copyable: true
@@ -283,7 +283,7 @@ TODO: LINQ link
           .. input::
              :language: csharp
 
-             var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Pizza");
+             var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Cuisine, "Pizza");
 
              // Find ID of first pizza restaurant
              var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
@@ -308,7 +308,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_ReplaceOneAsync.htm>`__
        | :ref:`Usage Example <csharp-replace-one>`
-       | TODO: :ref:`Fundamentals`  
+       | :ref:`Fundamentals <csharp-update-guide>` 
 
      - .. code-block::
           :copyable: true
@@ -316,7 +316,7 @@ TODO: LINQ link
           .. input::
              :language: csharp
 
-             var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Pizza");
+             var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Cuisine, "Pizza");
 
              // Find ID of first pizza restaurant
              var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
@@ -347,7 +347,7 @@ TODO: LINQ link
           :copyable: true
 
           var filter = Builders<Restaurant>.Filter
-          .Eq(r => r.Name, "Ready Penny Inn");
+          .Eq(restaurant => restaurant.Name, "Ready Penny Inn");
 
           return _restaurantsCollection.DeleteOne(filter);
           
@@ -361,7 +361,7 @@ TODO: LINQ link
           :copyable: true
 
           var filter = Builders<Restaurant>.Filter
-          .Eq(r => r.Name, "Ready Penny Inn");
+          .Eq(restaurant => restaurant.Name, "Ready Penny Inn");
 
           return await _restaurantsCollection.DeleteOneAsync(filter);
           
@@ -375,7 +375,7 @@ TODO: LINQ link
           :copyable: true
  
           var filter = Builders<Restaurant>.Filter
-          .Regex(r => r.Name, "Green");
+          .Regex(restaurant => restaurant.Name, "Green");
 
           return _restaurantsCollection.DeleteMany(filter);
 
@@ -389,7 +389,7 @@ TODO: LINQ link
           :copyable: true
  
           var filter = Builders<Restaurant>.Filter
-          .Regex(r => r.Name, "Green");
+          .Regex(restaurant => restaurant.Name, "Green");
 
           return await _restaurantsCollection.DeleteManyAsync(filter);
 
@@ -542,9 +542,9 @@ TODO: LINQ link
           .. input::
              :language: csharp
 
-             var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Italian");
-             var projection = Builders<Restaurant>.Projection.Include(r => r.Name)
-               .Include(r => r.Borough).Exclude(r => r.Id);
+             var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Cuisine, "Italian");
+             var projection = Builders<Restaurant>.Projection.Include(restaurant => restaurant.Name)
+               .Include(restaurant => restaurant.Borough).Exclude(restaurant => restaurant.Id);
              return _restaurantsCollection.Find(filter).Project(projection).ToList(); 
 
           .. output::
@@ -565,5 +565,5 @@ TODO: LINQ link
      - .. code-block:: csharp
           :copyable: true
 
-          var index = Builders<Restaurant>.IndexKeys.Ascending(r => r.Cuisine);
+          var index = Builders<Restaurant>.IndexKeys.Ascending(restaurant => restaurant.Cuisine);
           _restaurantsCollection.Indexes.CreateOne(new CreateIndexModel<Restaurant>(index));

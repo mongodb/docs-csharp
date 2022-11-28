@@ -170,7 +170,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOne.htm>`__
        | :ref:`Usage Example <csharp-update-one>`
-       | :ref:`Fundamentals <csharp-change-guide>`
+       | :ref:`Fundamentals <csharp-update-operation>`
 
      - .. code-block::
           :copyable: true
@@ -190,7 +190,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOneAsync.htm>`__
        | :ref:`Usage Example <csharp-update-one>`
-       | :ref:`Fundamentals <csharp-change-guide>`
+       | :ref:`Fundamentals <csharp-update-operation>`
 
      - .. code-block::
           :copyable: true
@@ -210,7 +210,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateMany.htm>`__
        | :ref:`Usage Example <csharp-update-many>`
-       | :ref:`Fundamentals <csharp-change-guide>`
+       | :ref:`Fundamentals <csharp-update-operation>`
 
      - .. code-block::
           :copyable: true
@@ -230,7 +230,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateManyAsync.htm>`__ 
        | :ref:`Usage Example <csharp-update-many>`
-       | :ref:`Fundamentals <csharp-change-guide>`
+       | :ref:`Fundamentals <csharp-update-operation>`
 
      - .. code-block::
           :copyable: true
@@ -250,7 +250,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOne.htm>`__
        | :ref:`Usage Example <csharp-update-one>`
-       | :ref:`Fundamentals <csharp-change-guide>`
+       | :ref:`Fundamentals <csharp-update-operation>`
 
      - .. code-block::
           :copyable: true
@@ -275,7 +275,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm>`__
        | :ref:`Usage Example <csharp-replace-one>`
-       | :ref:`Fundamentals <csharp-change-guide>`  
+       | :ref:`Fundamentals <csharp-replace-operation>`  
 
      - .. code-block::
           :copyable: true
@@ -308,7 +308,7 @@ TODO: LINQ link
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_ReplaceOneAsync.htm>`__
        | :ref:`Usage Example <csharp-replace-one>`
-       | :ref:`Fundamentals <csharp-update-guide>` 
+       | :ref:`Fundamentals <csharp-replace-operation>` 
 
      - .. code-block::
           :copyable: true

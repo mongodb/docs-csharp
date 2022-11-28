@@ -189,7 +189,7 @@ following properties:
 
    * - ``Let``
      - | Gets or sets the let document. 
-         See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
+         See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-let-syntax>`
          for more information.
 
 Return Value
@@ -270,8 +270,6 @@ match any existing documents.
    If the preceding example used the ``UpdateOne()`` method instead of
    ``UpdateMany()``, the driver would update only the first of the
    matched documents.
-
-==================
 
 .. _csharp-replace-operation:
 
@@ -432,7 +430,7 @@ match any existing documents.
    .. input::
       :language: csharp
 
-      var filter = Builders<Restaurant>.Filter.Eq(r => r.Name, "Pizza Town");
+      var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Name, "Pizza Town");
 
       Restaurant newRestaurant = new()
       {

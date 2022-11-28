@@ -30,7 +30,8 @@ TODO: LINQ link
           .. input::
              :language: csharp
 
-             var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Name, "Bagels N Buns");
+             var filter = Builders<Restaurant>.Filter
+               .Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
              var restaurant = _restaurantsCollection.Find(filter).FirstOrDefault();
 
@@ -51,7 +52,8 @@ TODO: LINQ link
           .. input::
              :language: csharp
 
-             var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Name, "Bagels N Buns");
+             var filter = Builders<Restaurant>.Filter
+               .Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
              return await _restaurantsCollection.Find(filter).FirstOrDefaultAsync();
 
@@ -74,7 +76,7 @@ TODO: LINQ link
              :language: csharp
 
              var filter = Builders<Restaurant>.Filter
-             .Eq(r => restaurant.Cuisine, "Pizza");
+               .Eq(r => restaurant.Cuisine, "Pizza");
 
              var restaurants = _restaurantsCollection.Find(filter).ToList();
 
@@ -85,7 +87,6 @@ TODO: LINQ link
                { name: "Como Pizza", cuisine: "Pizza", ... },
                { name: "New York Pizza Suprema", cuisine: "Pizza", ... },
                ...
-             
              ]
 
    * - | **Find Multiple Documents (Async)**
@@ -101,7 +102,7 @@ TODO: LINQ link
              :language: csharp
 
              var filter = Builders<Restaurant>.Filter
-             .Eq(r => restaurant.Cuisine, "Pizza");
+               .Eq(r => restaurant.Cuisine, "Pizza");
 
              return await _restaurantsCollection.Find(filter).ToListAsync();
 
@@ -179,10 +180,10 @@ TODO: LINQ link
              :language: csharp 
 
              var filter = Builders<Restaurant>.Filter
-             .Eq(restaurant => restaurant.Name, "Bagels N Buns");
+               .Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
              var update = Builders<Restaurant>.Update
-             .Set(restaurant => restaurant.Name, "2 Bagels 2 Buns");
+               .Set(restaurant => restaurant.Name, "2 Bagels 2 Buns");
 
              var result = _restaurantsCollection.UpdateOne(filter, update);
 
@@ -199,10 +200,10 @@ TODO: LINQ link
              :language: csharp 
 
              var filter = Builders<Restaurant>.Filter
-             .Eq(restaurant => restaurant.Name, "Bagels N Buns");
+               .Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
              var update = Builders<Restaurant>.Update
-             .Set(restaurant => restaurant.Name, "2 Bagels 2 Buns");
+               .Set(restaurant => restaurant.Name, "2 Bagels 2 Buns");
 
              return await _restaurantsCollection.UpdateOneAsync(filter, update);
 
@@ -219,10 +220,10 @@ TODO: LINQ link
              :language: csharp
 
              var filter = Builders<Restaurant>.Filter
-             .Eq(restaurant => restaurant.Cuisine, "Pizza");
+               .Eq(restaurant => restaurant.Cuisine, "Pizza");
 
              var update = Builders<Restaurant>.Update
-             .Set(restaurant => restaurant.Cuisine, "Pasta and breadsticks");
+               .Set(restaurant => restaurant.Cuisine, "Pasta and breadsticks");
 
             var result = _restaurantsCollection.UpdateMany(filter, update);
 
@@ -239,10 +240,10 @@ TODO: LINQ link
              :language: csharp
 
              var filter = Builders<Restaurant>.Filter
-             .Eq(restaurant => restaurant.Cuisine, "Pizza");
+               .Eq(restaurant => restaurant.Cuisine, "Pizza");
 
              var update = Builders<Restaurant>.Update
-             .Set(restaurant => restaurant.Cuisine, "Pasta and breadsticks");
+               .Set(restaurant => restaurant.Cuisine, "Pasta and breadsticks");
 
             return await = _restaurantsCollection.UpdateManyAsync(filter, update);
 
@@ -259,17 +260,17 @@ TODO: LINQ link
              :language: csharp
 
              var filter = Builders<Restaurant>.Filter
-             .Eq(restaurant => restaurant.Name, "Bagels N Buns");
+               .Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
-            var update = Builders<Restaurant>.Update
-            .Push(restaurant => restaurant.Grades, new BsonDocument()
-            {
-                { "date" , DateTime.Now.ToUniversalTime()},
-                { "grade" , "A"}, 
-                { "score", 10}
-            });
+             var update = Builders<Restaurant>.Update
+               .Push(restaurant => restaurant.Grades, new BsonDocument()
+               {
+                 { "date" , DateTime.Now.ToUniversalTime()},
+                 { "grade" , "A"}, 
+                 { "score", 10}
+               });
 
-            var result = _restaurantsCollection.UpdateOne(filter, update);
+             var result = _restaurantsCollection.UpdateOne(filter, update);
              
    * - | **Replace a Document**
        |
@@ -283,26 +284,27 @@ TODO: LINQ link
           .. input::
              :language: csharp
 
-             var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Cuisine, "Pizza");
+             var filter = Builders<Restaurant>.Filter
+               .Eq(restaurant => restaurant.Cuisine, "Pizza");
 
              // Find ID of first pizza restaurant
              var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
              var oldId = oldPizzaRestaurant.Id;
 
-            Restaurant newPizzaRestaurant = new()
-            {
-                Id = oldId,
-                Name = "Mongo's Pizza",
-                Cuisine = "Pizza",
-                Address = new BsonDocument
-                {
-                    {"street", "Pizza St"},
-                    {"zipcode", "10003"},
-                },
-                Borough = "Manhattan",
-            };
+             Restaurant newPizzaRestaurant = new()
+             {
+                 Id = oldId,
+                 Name = "Mongo's Pizza",
+                 Cuisine = "Pizza",
+                 Address = new BsonDocument
+                 {
+                     {"street", "Pizza St"},
+                     {"zipcode", "10003"},
+                 },
+                 Borough = "Manhattan",
+             };
 
-            return _restaurantsCollection.ReplaceOne(filter, newPizzaRestaurant);
+             return _restaurantsCollection.ReplaceOne(filter, newPizzaRestaurant);
 
    * - | **Replace a Document (Async)**
        |
@@ -316,26 +318,27 @@ TODO: LINQ link
           .. input::
              :language: csharp
 
-             var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Cuisine, "Pizza");
+             var filter = Builders<Restaurant>.Filter
+               .Eq(restaurant => restaurant.Cuisine, "Pizza");
 
              // Find ID of first pizza restaurant
              var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
              var oldId = oldPizzaRestaurant.Id;
 
-            Restaurant newPizzaRestaurant = new()
-            {
-                Id = oldId,
-                Name = "Mongo's Pizza",
-                Cuisine = "Pizza",
-                Address = new BsonDocument
-                {
-                    {"street", "Pizza St"},
-                    {"zipcode", "10003"},
-                },
-                Borough = "Manhattan",
-            };
+             Restaurant newPizzaRestaurant = new()
+             {
+                 Id = oldId,
+                 Name = "Mongo's Pizza",
+                 Cuisine = "Pizza",
+                 Address = new BsonDocument
+                 {
+                     {"street", "Pizza St"},
+                     {"zipcode", "10003"},
+                 },
+                 Borough = "Manhattan",
+             };
 
-            return await _restaurantsCollection.ReplaceOneAsync(filter, newPizzaRestaurant);
+             return await _restaurantsCollection.ReplaceOneAsync(filter, newPizzaRestaurant);
 
    * - | **Delete a Document**
        |
@@ -347,7 +350,7 @@ TODO: LINQ link
           :copyable: true
 
           var filter = Builders<Restaurant>.Filter
-          .Eq(restaurant => restaurant.Name, "Ready Penny Inn");
+            .Eq(restaurant => restaurant.Name, "Ready Penny Inn");
 
           return _restaurantsCollection.DeleteOne(filter);
           
@@ -361,7 +364,7 @@ TODO: LINQ link
           :copyable: true
 
           var filter = Builders<Restaurant>.Filter
-          .Eq(restaurant => restaurant.Name, "Ready Penny Inn");
+            .Eq(restaurant => restaurant.Name, "Ready Penny Inn");
 
           return await _restaurantsCollection.DeleteOneAsync(filter);
           
@@ -375,7 +378,7 @@ TODO: LINQ link
           :copyable: true
  
           var filter = Builders<Restaurant>.Filter
-          .Regex(restaurant => restaurant.Name, "Green");
+            .Regex(restaurant => restaurant.Name, "Green");
 
           return _restaurantsCollection.DeleteMany(filter);
 
@@ -389,7 +392,7 @@ TODO: LINQ link
           :copyable: true
  
           var filter = Builders<Restaurant>.Filter
-          .Regex(restaurant => restaurant.Name, "Green");
+            .Regex(restaurant => restaurant.Name, "Green");
 
           return await _restaurantsCollection.DeleteManyAsync(filter);
 
@@ -433,7 +436,7 @@ TODO: LINQ link
              :language: csharp
              
              var filter = Builders<Restaurant>.Filter
-             .Eq(restaurant => restaurant.Cuisine, "Pizza");
+               .Eq(restaurant => restaurant.Cuisine, "Pizza");
 
              return _restaurantsCollection.Find(filter).CountDocuments();
 
@@ -453,7 +456,8 @@ TODO: LINQ link
              :language: csharp
             
              var filter = Builders<Restaurant>.Filter.Empty;
-             return _restaurantsCollection.Distinct(new StringFieldDefinition<Restaurant, String>("cuisine"), filter);
+             return _restaurantsCollection
+               .Distinct(new StringFieldDefinition<Restaurant, String>("cuisine"), filter);
  
           .. output::
              :language: json
@@ -519,7 +523,8 @@ TODO: LINQ link
 
              var filter = Builders<Restaurant>.Filter
                .Eq(restaurant => restaurant.Cuisine, "Brazilian");
-             return _restaurantsCollection.Find(filter).SortBy(r => r.Name).ToList();
+             return _restaurantsCollection.Find(filter)
+               .SortBy(r => r.Name).ToList();
 
           .. output::
              :language: json
@@ -542,8 +547,10 @@ TODO: LINQ link
           .. input::
              :language: csharp
 
-             var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Cuisine, "Italian");
-             var projection = Builders<Restaurant>.Projection.Include(restaurant => restaurant.Name)
+             var filter = Builders<Restaurant>.Filter
+               .Eq(restaurant => restaurant.Cuisine, "Italian");
+             var projection = Builders<Restaurant>.Projection
+               .Include(restaurant => restaurant.Name)
                .Include(restaurant => restaurant.Borough).Exclude(restaurant => restaurant.Id);
              return _restaurantsCollection.Find(filter).Project(projection).ToList(); 
 
@@ -565,5 +572,7 @@ TODO: LINQ link
      - .. code-block:: csharp
           :copyable: true
 
-          var index = Builders<Restaurant>.IndexKeys.Ascending(restaurant => restaurant.Cuisine);
-          _restaurantsCollection.Indexes.CreateOne(new CreateIndexModel<Restaurant>(index));
+          var index = Builders<Restaurant>.IndexKeys
+            .Ascending(restaurant => restaurant.Cuisine);
+          _restaurantsCollection.Indexes
+            .CreateOne(new CreateIndexModel<Restaurant>(index));

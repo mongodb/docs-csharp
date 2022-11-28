@@ -10,3 +10,4 @@ CRUD Operations
    :caption: CRUD Operations
 
    /fundamentals/crud/write-operations
+   /fundamentals/crud/read-operations

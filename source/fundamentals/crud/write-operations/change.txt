@@ -381,7 +381,7 @@ following properties:
 
    * - ``Let``
      - | Gets or sets the let document. 
-         See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
+         See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-let-syntax>`
          for more information.
 
 Return Value

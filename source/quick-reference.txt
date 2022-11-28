@@ -9,7 +9,11 @@ Quick Reference
 This page shows the driver syntax for several MongoDB commands and links to
 their related reference and API documentation.
 
-TODO: LINQ link
+.. tip:: Using LINQ
+
+  You can perform many of the operations on this page using LINQ. For more 
+  information on using LINQ with the {+driver-short+}, see the 
+  :ref:`LINQ Fundamentals page. <csharp-linq>` 
 
 .. list-table::
    :header-rows: 1
@@ -173,19 +177,16 @@ TODO: LINQ link
        | :ref:`Usage Example <csharp-update-one>`
        | :ref:`Fundamentals <csharp-update-operation>`
 
-     - .. code-block::
+     - .. code-block:: csharp
           :copyable: true
 
-          .. input::
-             :language: csharp 
+          var filter = Builders<Restaurant>.Filter
+            .Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
-             var filter = Builders<Restaurant>.Filter
-               .Eq(restaurant => restaurant.Name, "Bagels N Buns");
+          var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Name, "2 Bagels 2 Buns");
 
-             var update = Builders<Restaurant>.Update
-               .Set(restaurant => restaurant.Name, "2 Bagels 2 Buns");
-
-             var result = _restaurantsCollection.UpdateOne(filter, update);
+          var result = _restaurantsCollection.UpdateOne(filter, update);
 
    * - | **Update a Document (Async)**
        |
@@ -196,16 +197,13 @@ TODO: LINQ link
      - .. code-block::
           :copyable: true
 
-          .. input::
-             :language: csharp 
+          var filter = Builders<Restaurant>.Filter
+            .Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
-             var filter = Builders<Restaurant>.Filter
-               .Eq(restaurant => restaurant.Name, "Bagels N Buns");
+          var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Name, "2 Bagels 2 Buns");
 
-             var update = Builders<Restaurant>.Update
-               .Set(restaurant => restaurant.Name, "2 Bagels 2 Buns");
-
-             return await _restaurantsCollection.UpdateOneAsync(filter, update);
+          return await _restaurantsCollection.UpdateOneAsync(filter, update);
 
    * - | **Update Multiple Documents**
        |
@@ -216,16 +214,13 @@ TODO: LINQ link
      - .. code-block::
           :copyable: true
 
-          .. input::
-             :language: csharp
+          var filter = Builders<Restaurant>.Filter
+            .Eq(restaurant => restaurant.Cuisine, "Pizza");
 
-             var filter = Builders<Restaurant>.Filter
-               .Eq(restaurant => restaurant.Cuisine, "Pizza");
+          var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Cuisine, "Pasta and breadsticks");
 
-             var update = Builders<Restaurant>.Update
-               .Set(restaurant => restaurant.Cuisine, "Pasta and breadsticks");
-
-            var result = _restaurantsCollection.UpdateMany(filter, update);
+          var result = _restaurantsCollection.UpdateMany(filter, update);
 
    * - | **Update Multiple Documents (Async)**
        |
@@ -236,16 +231,13 @@ TODO: LINQ link
      - .. code-block::
           :copyable: true
 
-          .. input::
-             :language: csharp
+          var filter = Builders<Restaurant>.Filter
+            .Eq(restaurant => restaurant.Cuisine, "Pizza");
 
-             var filter = Builders<Restaurant>.Filter
-               .Eq(restaurant => restaurant.Cuisine, "Pizza");
+          var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Cuisine, "Pasta and breadsticks");
 
-             var update = Builders<Restaurant>.Update
-               .Set(restaurant => restaurant.Cuisine, "Pasta and breadsticks");
-
-            return await = _restaurantsCollection.UpdateManyAsync(filter, update);
+          return await = _restaurantsCollection.UpdateManyAsync(filter, update);
 
    * - | **Update an Array in a Document**
        |
@@ -256,21 +248,18 @@ TODO: LINQ link
      - .. code-block::
           :copyable: true
 
-          .. input::
-             :language: csharp
+          var filter = Builders<Restaurant>.Filter
+            .Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
-             var filter = Builders<Restaurant>.Filter
-               .Eq(restaurant => restaurant.Name, "Bagels N Buns");
+          var update = Builders<Restaurant>.Update
+            .Push(restaurant => restaurant.Grades, new BsonDocument()
+            {
+              { "date" , DateTime.Now.ToUniversalTime()},
+              { "grade" , "A"}, 
+              { "score", 10}
+            });
 
-             var update = Builders<Restaurant>.Update
-               .Push(restaurant => restaurant.Grades, new BsonDocument()
-               {
-                 { "date" , DateTime.Now.ToUniversalTime()},
-                 { "grade" , "A"}, 
-                 { "score", 10}
-               });
-
-             var result = _restaurantsCollection.UpdateOne(filter, update);
+          var result = _restaurantsCollection.UpdateOne(filter, update);
              
    * - | **Replace a Document**
        |
@@ -281,30 +270,27 @@ TODO: LINQ link
      - .. code-block::
           :copyable: true
 
-          .. input::
-             :language: csharp
+          var filter = Builders<Restaurant>.Filter
+            .Eq(restaurant => restaurant.Cuisine, "Pizza");
 
-             var filter = Builders<Restaurant>.Filter
-               .Eq(restaurant => restaurant.Cuisine, "Pizza");
+          // Find ID of first pizza restaurant
+          var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
+          var oldId = oldPizzaRestaurant.Id;
 
-             // Find ID of first pizza restaurant
-             var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
-             var oldId = oldPizzaRestaurant.Id;
+          Restaurant newPizzaRestaurant = new()
+          {
+              Id = oldId,
+              Name = "Mongo's Pizza",
+              Cuisine = "Pizza",
+              Address = new BsonDocument
+              {
+                  {"street", "Pizza St"},
+                  {"zipcode", "10003"},
+              },
+              Borough = "Manhattan",
+          };
 
-             Restaurant newPizzaRestaurant = new()
-             {
-                 Id = oldId,
-                 Name = "Mongo's Pizza",
-                 Cuisine = "Pizza",
-                 Address = new BsonDocument
-                 {
-                     {"street", "Pizza St"},
-                     {"zipcode", "10003"},
-                 },
-                 Borough = "Manhattan",
-             };
-
-             return _restaurantsCollection.ReplaceOne(filter, newPizzaRestaurant);
+          return _restaurantsCollection.ReplaceOne(filter, newPizzaRestaurant);
 
    * - | **Replace a Document (Async)**
        |
@@ -315,30 +301,27 @@ TODO: LINQ link
      - .. code-block::
           :copyable: true
 
-          .. input::
-             :language: csharp
+          var filter = Builders<Restaurant>.Filter
+            .Eq(restaurant => restaurant.Cuisine, "Pizza");
 
-             var filter = Builders<Restaurant>.Filter
-               .Eq(restaurant => restaurant.Cuisine, "Pizza");
+          // Find ID of first pizza restaurant
+          var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
+          var oldId = oldPizzaRestaurant.Id;
 
-             // Find ID of first pizza restaurant
-             var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
-             var oldId = oldPizzaRestaurant.Id;
+          Restaurant newPizzaRestaurant = new()
+          {
+              Id = oldId,
+              Name = "Mongo's Pizza",
+              Cuisine = "Pizza",
+              Address = new BsonDocument
+              {
+                  {"street", "Pizza St"},
+                  {"zipcode", "10003"},
+              },
+              Borough = "Manhattan",
+          };
 
-             Restaurant newPizzaRestaurant = new()
-             {
-                 Id = oldId,
-                 Name = "Mongo's Pizza",
-                 Cuisine = "Pizza",
-                 Address = new BsonDocument
-                 {
-                     {"street", "Pizza St"},
-                     {"zipcode", "10003"},
-                 },
-                 Borough = "Manhattan",
-             };
-
-             return await _restaurantsCollection.ReplaceOneAsync(filter, newPizzaRestaurant);
+          return await _restaurantsCollection.ReplaceOneAsync(filter, newPizzaRestaurant);
 
    * - | **Delete a Document**
        |

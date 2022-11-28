@@ -1,0 +1,15 @@
+.. _csharp-crud-write-operations:
+
+===============
+Read Operations
+===============
+
+.. default-domain:: mongodb
+
+- :ref:`csharp-delete-guide`
+
+.. toctree::
+   :caption: Write Operations
+
+   /fundamentals/crud/read-operations/retrieve
+   /fundamentals/crud/read-operations/specify-query

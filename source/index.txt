@@ -56,7 +56,7 @@ Compatibility
 -------------
 
 For the compatibility charts that show the recommended {+driver-short+} version
-for each MongoDB Server version, see :ref:`csharp-compatibility`.
+for each MongoDB Server version, see :ref:`csharp-compatibility-tables`.
 
 Issues & Help
 -------------

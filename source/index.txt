@@ -50,12 +50,12 @@ API Documentation
 -----------------
 
 For detailed information about types and methods in the {+driver-short+}, see
-the `{+driver-long+} API documentation <{+api+}/R_Project_CSharpDriverDocs.htm>`__.
+the `{+driver-long+} API documentation <{+api-root+}/R_Project_CSharpDriverDocs.htm>`__.
 
 Compatibility
 -------------
 
-For the compatibility charts that show the recommended Go Driver version
+For the compatibility charts that show the recommended {+driver-short+} version
 for each MongoDB Server version, see :ref:`csharp-compatibility`.
 
 Issues & Help

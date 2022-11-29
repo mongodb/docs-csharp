@@ -20,7 +20,7 @@ Fundamentals
    /fundamentals/linq
    /fundamentals/class-mapping
 
-- :ref:`Connection to MongoDB <csharp-connection>`
+- :ref:`Connecting to MongoDB <csharp-connection>`
 - :ref:`csharp-crud`
 - :ref:`csharp-builders`
 - :ref:`csharp-data-formats`

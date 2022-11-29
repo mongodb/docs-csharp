@@ -19,7 +19,7 @@ Introduction
 
 Welcome to the documentation site for the official {+driver-long+}. 
 You can add the driver to your application to work with MongoDB in {+language+}. 
-Download it using `NuGet <https://www.nuget.org/>`__, or set up a runnable
+Download the driver using `NuGet <https://www.nuget.org/packages/MongoDB.Driver>`__, or set up a runnable
 project by following our :ref:`Quick Start guide <csharp-quickstart>`.
 
 Quick Start
@@ -67,5 +67,5 @@ additional resources for asking questions in the :ref:`csharp-issues-help` secti
 FAQ
 ---
 
-For answers to commonly asked questions about the {+driver-long+}, see :ref:`csharp-faq`
+For answers to commonly asked questions about the {+driver-long+}, see the :ref:`csharp-faq`
 section.

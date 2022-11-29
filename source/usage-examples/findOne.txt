@@ -121,6 +121,8 @@ Running any of the preceding full examples prints the following results:
 Additional Information
 ----------------------
 
+To learn more about retrieving documents, see the :ref:`csharp-retrieve` guide.
+
 To learn more about using builders, see :ref:`csharp-builders`.
 
 To learn how to find a document using LINQ, see :ref:`csharp-linq`.

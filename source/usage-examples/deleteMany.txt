@@ -75,6 +75,8 @@ Running either of the preceding full examples prints the following results:
 Additional Information
 ----------------------
 
+To learn more about deleting documents, see the :ref:`csharp-delete-guide` guide.
+
 To learn more about using builders, see :ref:`csharp-builders`.
 
 API Documentation

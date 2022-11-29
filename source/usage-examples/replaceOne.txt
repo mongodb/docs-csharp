@@ -78,6 +78,9 @@ Running either of the preceding full examples prints the following results:
 Additional Information
 ----------------------
 
+To learn more about replacing documents, see the :ref:`csharp-replace-operation`
+guide.
+
 To learn more about using builders, see :ref:`csharp-builders`.
 
 API Documentation

@@ -198,7 +198,7 @@ and load this sample data.
        | :ref:`Usage Example <csharp-update-one>`
        | :ref:`Fundamentals <csharp-update-operation>`
 
-     - .. code-block::
+     - .. code-block:: csharp
           :copyable: true
 
           var filter = Builders<Restaurant>.Filter
@@ -215,7 +215,7 @@ and load this sample data.
        | :ref:`Usage Example <csharp-update-many>`
        | :ref:`Fundamentals <csharp-update-operation>`
 
-     - .. code-block::
+     - .. code-block:: csharp
           :copyable: true
 
           var filter = Builders<Restaurant>.Filter
@@ -232,7 +232,7 @@ and load this sample data.
        | :ref:`Usage Example <csharp-update-many>`
        | :ref:`Fundamentals <csharp-update-operation>`
 
-     - .. code-block::
+     - .. code-block:: csharp
           :copyable: true
 
           var filter = Builders<Restaurant>.Filter
@@ -248,7 +248,7 @@ and load this sample data.
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOne.htm>`__
        | :ref:`Fundamentals <csharp-update-operation>`
 
-     - .. code-block::
+     - .. code-block:: csharp
           :copyable: true
 
           var filter = Builders<Restaurant>.Filter
@@ -270,7 +270,7 @@ and load this sample data.
        | :ref:`Usage Example <csharp-replace-one>`
        | :ref:`Fundamentals <csharp-replace-operation>`  
 
-     - .. code-block::
+     - .. code-block:: csharp
           :copyable: true
 
           var filter = Builders<Restaurant>.Filter
@@ -301,7 +301,7 @@ and load this sample data.
        | :ref:`Usage Example <csharp-replace-one>`
        | :ref:`Fundamentals <csharp-replace-operation>` 
 
-     - .. code-block::
+     - .. code-block:: csharp
           :copyable: true
 
           var filter = Builders<Restaurant>.Filter

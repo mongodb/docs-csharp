@@ -7,7 +7,11 @@ Quick Reference
 .. default-domain:: mongodb
 
 This page shows the driver syntax for several MongoDB commands and links to
-their related reference and API documentation.
+their related reference and API documentation. The examples in this guide use the 
+``restaurants`` collection from the ``sample_restaurants`` database, part of the 
+:atlas:`sample datasets </sample-data>` provided by Atlas. 
+See the :ref:`<csharp-quickstart>` to learn how to create a free MongoDB cluster
+and load this sample data.
 
 .. tip:: Using LINQ
 
@@ -242,7 +246,6 @@ their related reference and API documentation.
    * - | **Update an Array in a Document**
        |
        | `API Documentation <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_UpdateOne.htm>`__
-       | :ref:`Usage Example <csharp-update-one>`
        | :ref:`Fundamentals <csharp-update-operation>`
 
      - .. code-block::
@@ -367,7 +370,7 @@ their related reference and API documentation.
 
    * - | **Delete Multiple Documents (Async)**
        |
-       | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteMany.htm>`__ 
+       | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_IMongoCollectionExtensions_DeleteManyAsync.htm>`__ 
        | :ref:`Usage Example <csharp-delete-many>`
        | :ref:`Fundamentals <csharp-delete-guide>`
 
@@ -390,13 +393,13 @@ their related reference and API documentation.
              :language: csharp
 
              var filter = Builders<Restaurant>.Filter
-               .Eq(restaurant => restaurant.Cuisine, "Afghan";
+               .Eq(restaurant => restaurant.Cuisine, "Afghan)";
 
              var cursor = _restaurantsCollection.Find(filter).ToCursor(); 
              cursor.MoveNext();
              foreach (Restaurant r in cursor.Current)
              {
-                 WriteLine(r.ToJson());
+                 Console.WriteLine(r.ToJson());
              }   
 
           .. output::
@@ -430,7 +433,7 @@ their related reference and API documentation.
 
    * - | **List the Distinct Documents or Field Values**
        |
-       | `API Documentation <+api-root+}/Overload_MongoDB_Driver_MongoCollection_Distinct.htm>`__
+       | `API Documentation <{+api-root+}/Overload_MongoDB_Driver_MongoCollection_Distinct.htm>`__
 
      - .. io-code-block::
           :copyable: true
@@ -449,7 +452,7 @@ their related reference and API documentation.
 
    * - | **Limit the Number of Documents Retrieved**
        |
-       | `API Documentation <+api-root+}/P_MongoDB_Driver_Core_Operations_FindOperation_1_Limit.htm>`__
+       | `API Documentation <{+api-root+}/P_MongoDB_Driver_Core_Operations_FindOperation_1_Limit.htm>`__
 
      - .. io-code-block::
           :copyable: true
@@ -472,7 +475,7 @@ their related reference and API documentation.
 
    * - | **Skip Retrieved Documents**
        |
-       | `API Documentation <{+api-root+}P_MongoDB_Driver_Core_Operations_FindOperation_1_Skip.htm>`__
+       | `API Documentation <{+api-root+}/P_MongoDB_Driver_Core_Operations_FindOperation_1_Skip.htm>`__
 
      - .. io-code-block::
           :copyable: true
@@ -482,6 +485,7 @@ their related reference and API documentation.
 
              var filter = Builders<Restaurant>.Filter
                .Eq(restaurant => restaurant.Cuisine, "Asian");
+
              return _restaurantsCollection.Find(filter).Skip(2).ToList();
 
           .. output::
@@ -506,6 +510,7 @@ their related reference and API documentation.
 
              var filter = Builders<Restaurant>.Filter
                .Eq(restaurant => restaurant.Cuisine, "Brazilian");
+
              return _restaurantsCollection.Find(filter)
                .SortBy(r => r.Name).ToList();
 
@@ -532,9 +537,12 @@ their related reference and API documentation.
 
              var filter = Builders<Restaurant>.Filter
                .Eq(restaurant => restaurant.Cuisine, "Italian");
+
              var projection = Builders<Restaurant>.Projection
                .Include(restaurant => restaurant.Name)
-               .Include(restaurant => restaurant.Borough).Exclude(restaurant => restaurant.Id);
+               .Include(restaurant => restaurant.Borough)
+               .Exclude(restaurant => restaurant.Id);
+               
              return _restaurantsCollection.Find(filter).Project(projection).ToList(); 
 
           .. output::
@@ -557,5 +565,6 @@ their related reference and API documentation.
 
           var index = Builders<Restaurant>.IndexKeys
             .Ascending(restaurant => restaurant.Cuisine);
+
           _restaurantsCollection.Indexes
             .CreateOne(new CreateIndexModel<Restaurant>(index));

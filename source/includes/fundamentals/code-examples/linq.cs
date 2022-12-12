@@ -15,7 +15,7 @@ public class Restaurant
 
     public string Borough { get; set; }
 
-    public List<object> Grades { get; set; }
+    public List<Grade> Grades { get; set; }
 
 }
 // end-restaurant-model

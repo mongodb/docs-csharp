@@ -31,7 +31,7 @@ the name of the field in the document to the name of the property in the class.
    The type of the property in your class should match the type of the field in
    the document. The {+driver-short+} instantiates a serializer based on the
    type of the property in your class. If the types don't match when the driver
-   attempts to serialize the data, the serializer will throw an exception.
+   serializes the data, the serializer throws an exception.
 
 Manually Creating A Class Map
 -----------------------------
@@ -165,7 +165,7 @@ The following example shows how a document from the ``Person`` class with the
 
 .. code-block:: json
 
-   { "_id": "...", "_t": "personClass", "name": "...", "age": "...", "hobbies": [...]}
+   { "_id": "...", "_t": "personClass", "Name": "...", "Age": "...", "Hobbies": [...]}
 
 .. TODO: Link to page on polymorphism/discriminators
 
@@ -277,14 +277,15 @@ Dynamically Serialize Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use a method to determine whether or not to serialize a property. For
-the driver to automatically use the method when serializing, the method must be
-named ``ShouldSerialize<property name>``. When the driver sees a method with
-this naming convention, it will use the method to determine whether or not to
-serialize properties of the provided property name.
+the driver to automatically use the method when serializing, you must prefix the
+method name with ``ShouldSerialize`` followed by the name of the property that
+the method applies to. When the driver sees a method with this naming
+convention, it uses that method to determine whether or not to serialize
+properties that have the provided property name.
 
 The following example creates a method that only serializes the ``Age`` property
-if its value is greater than ``0``. The driver ignores any properties whose
-values don't meet this requirement:
+if its value is not equal to ``0``. The driver does not serialize any properties
+whose values don't meet this requirement:
 
 .. code-block:: csharp
 
@@ -296,7 +297,7 @@ values don't meet this requirement:
 
        public bool ShouldSerializeAge()
        {
-          return Age > 0;
+          return Age != 0;
        }
    }
 

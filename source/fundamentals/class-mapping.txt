@@ -309,7 +309,7 @@ You can also specify the method while registering a class map:
    {
        classmap.AutoMap();
        classmap.MapMember(p => c.Age).SetShouldSerializeMethod(
-           obj => ((Person) obj).Age > 0
+           obj => ((Person) obj).Age != 0
        );
    });
 

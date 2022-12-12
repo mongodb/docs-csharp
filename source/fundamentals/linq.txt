@@ -237,7 +237,7 @@ a ``$skip`` stage using LINQ:
        .Skip(2);
 
 The preceding example skips the first two restaurants that match the criteria, and
-returns the rest as follows:
+returns the rest. The result contains the following documents:
 
 .. code-block:: json
 

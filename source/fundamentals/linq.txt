@@ -48,8 +48,8 @@ as follows:
 .. code-block:: csharp
    :emphasize-lines: 2
 
-    var restaurantsCollection = db.GetCollection<Restaurant>("restaurants");
-    var queryableCollection = _restaurantsCollection.AsQueryable();
+    var restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
+    var queryableCollection = restaurantsCollection.AsQueryable();
 
 Once the collection is queryable, you can compose a query using 
 **method syntax**. Some pipeline stages also support **query comprehension syntax**,

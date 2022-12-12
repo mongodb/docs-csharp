@@ -39,14 +39,16 @@ The following ``Restaurant`` class models the documents in this collection:
 Make A Collection Queryable
 ---------------------------
 
-To use LINQ to query your collection, you must first make the collection
-queryable. To make your collection queryable, use the ``AsQueryable`` method
+To use LINQ to query your collection, you must first convert the collection to
+an `IQueryable
+<https://learn.microsoft.com/en-us/dotnet/api/system.linq.iqueryable?view=net-7.0>`__
+instance. To convert your collection, use the ``AsQueryable`` method
 as follows:
 
 .. code-block:: csharp
    :emphasize-lines: 2
 
-    _restaurantsCollection = db.GetCollection<Restaurant>("restaurants");
+    var restaurantsCollection = db.GetCollection<Restaurant>("restaurants");
     var queryableCollection = _restaurantsCollection.AsQueryable();
 
 Once the collection is queryable, you can compose a query using 
@@ -76,9 +78,7 @@ how to compose a query using LINQ:
              .Where(r => r.Name == "The Movable Feast")
              .Select(r => new { r.Name, r.Address });
 
-The documents found in the query are returned as an object that implements the
-`IQueryable <https://learn.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?redirectedfrom=MSDN&view=net-6.0>`__
-interface. You can print the results of the preceding example as follows: 
+You can print the results of the preceding example as follows: 
 
 .. io-code-block::
 
@@ -93,6 +93,20 @@ interface. You can print the results of the preceding example as follows:
    .. output::
       
       { "name" : "The Movable Feast", "address" : { "building" : "284", "coord" : [-73.982923900000003, 40.6580753], "street" : "Prospect Park West", "zipcode" : "11215" } }
+
+.. tip:: Accessing Query Results
+
+   You can also access the results of your query by using the ``ToList()`` or
+   ``ToCursor()`` methods:
+
+   .. code-block:: csharp
+
+      var results = query.ToList();
+
+   .. code-block:: csharp
+
+      var results = query.ToCursor();
+
 
 Supported Aggregation Stages
 ----------------------------
@@ -134,7 +148,7 @@ to generate a ``$project`` stage using LINQ:
          var query = queryableCollection
              .Select(r => new { r.Name, r.Address });
 
-The preceding example returns the following document:
+The result of the preceding example contains the following document:
 
 .. code-block:: json
 
@@ -175,7 +189,7 @@ to generate a ``$match`` stage using LINQ:
          var query = queryableCollection
              .Where(r => r.Name == "The Movable Feast");
 
-The preceding example returns the following document:
+The result of the preceding example contains the following document:
 
 .. code-block:: json
 
@@ -197,7 +211,7 @@ query. The following example shows how to generate a ``$limit`` stage using LINQ
        .Select(r => new {r.Name, r.Cuisine})
        .Take(5);
 
-The preceding example returns the following documents:
+The result of the preceding example contains the following documents:
 
 .. code-block:: json
 
@@ -268,7 +282,8 @@ to generate an ``$unwind`` stage using LINQ:
 
 The query in the preceding example finds the document where the ``Name`` field 
 has the value "The Movable Feast." Then, for each element in this document's 
-``Grades`` array, the query returns a new document. The results are as follows:
+``Grades`` array, the query returns a new document. The result contains the
+following documents:
 
 .. code-block:: json
 
@@ -309,8 +324,8 @@ to generate an ``$group`` stage using LINQ:
              .Select(g => new { Cuisine = g.Key, Count = g.Count() });
 
 The preceding example groups each document by the value in its ``Cuisine`` field,
-then counts how many documents have each ``Cuisine`` value. The results are 
-similar to the following:
+then counts how many documents have each ``Cuisine`` value. The result contains 
+the following documents:
 
 .. code-block:: json
 
@@ -361,7 +376,7 @@ to generate an ``$sort`` stage using LINQ:
 
 The preceding example returns the query results sorted alphabetically by the
 ``Name`` field, with a secondary descending sort on the ``RestaurantId`` field.
-The following is a subset of the returned results:
+The following is a subset of the documents contained in the returned results:
 
 .. code-block:: json
 

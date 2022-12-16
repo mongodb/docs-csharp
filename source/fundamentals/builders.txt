@@ -306,10 +306,12 @@ Use ``PipelineDefinitionBuilder`` classes to build the pipeline:
 
 The preceding example creates the following pipeline:
 
-.. code-block: json
+.. code-block:: json
    
    [{ "$match" : { "season" : "spring" } }, { "$sort" : { "category" : 1 } }, { "$group" : { "_id" : "$category", "avgPrice" : { "$avg" : "$price" }, "totalAvailable" : { "$sum" : "$stock" } } }]
 
+To learn more about the Aggregation Pipeline, see the
+:manual:`/core/aggregation-pipeline/` server manual page.
 
 Additional Information
 ----------------------
@@ -328,3 +330,4 @@ guide, see the following API Documentation:
 - `SortDefinitionBuilder <{+api-root+}/T_MongoDB_Driver_SortDefinitionBuilder_1.htm>`__
 - `UpdateDefinitionBuilder <{+api-root+}/T_MongoDB_Driver_UpdateDefinitionBuilder_1.htm>`__
 - `IndexKeysDefinitionBuilder <{+api-root+}/T_MongoDB_Driver_IndexKeysDefinitionBuilder_1.htm>`__
+- `IndexKeysDefinitionBuilder <{+api-root+}/T_MongoDB_Driver_PipelineDefinitionBuilder.htm>`__

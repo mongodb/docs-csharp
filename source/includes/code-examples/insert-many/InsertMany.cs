@@ -43,7 +43,7 @@ public class InsertMany
 
         // start-insert-many
         // Helper method to generate 5 new restaurants
-        List<Restaurant> restaurants = GenerateDocuments();
+        var restaurants = GenerateDocuments();
 
         _restaurantsCollection.InsertMany(restaurants);
         // end-insert-many
@@ -64,7 +64,7 @@ public class InsertMany
     private static List<Restaurant> GenerateDocuments()
     {
         // Generate 5 new restaurant documents
-        List<Restaurant> restaurantsList = new List<Restaurant>();
+        var restaurantsList = new List<Restaurant>();
         for (int i = 1; i <= 5; i++)
         {
             Restaurant newRestaurant = new()

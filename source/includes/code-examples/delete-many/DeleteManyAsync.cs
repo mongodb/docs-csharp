@@ -33,8 +33,7 @@ public class DeleteManyAsync
         var filter = Builders<Restaurant>.Filter
             .Regex(r => r.Name, "Green");
 
-        var result = await _restaurantsCollection.DeleteManyAsync(filter);
-        return result;
+        return await _restaurantsCollection.DeleteManyAsync(filter);
         // end-delete-many-async
     }
 

@@ -25,7 +25,6 @@ public class InsertOne
         WriteLine("Document Inserted: " + document.ToBsonDocument());
 
         Cleanup();
-
     }
 
     private static void InsertOneRestaurant()

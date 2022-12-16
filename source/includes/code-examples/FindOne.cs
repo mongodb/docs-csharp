@@ -37,7 +37,6 @@ public class FindOne
         // end-find-builders
 
         WriteLine(restaurant.ToBsonDocument());
-
     }
 
     private static void FindOneRestaurantLINQ()
@@ -48,7 +47,6 @@ public class FindOne
         // end-find-linq
 
         WriteLine(query.ToBsonDocument());
-
     }
 
     private static void Setup()

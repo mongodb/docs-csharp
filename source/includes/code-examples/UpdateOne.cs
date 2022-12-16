@@ -37,8 +37,7 @@ public class UpdateOne
         var update = Builders<Restaurant>.Update
             .Set(restaurant => restaurant.Name, newValue);
 
-        var result = _restaurantsCollection.UpdateOne(filter, update);
-        return result;
+        return _restaurantsCollection.UpdateOne(filter, update);
         // end-update-one
     }
 

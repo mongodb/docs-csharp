@@ -33,8 +33,7 @@ public class DeleteMany
         var filter = Builders<Restaurant>.Filter
             .Regex(r => r.Name, "Green");
 
-        var result = _restaurantsCollection.DeleteMany(filter);
-        return result;
+        return _restaurantsCollection.DeleteMany(filter);
         // end-delete-many-builders
     }
 

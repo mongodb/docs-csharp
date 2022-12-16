@@ -58,7 +58,8 @@ public class FindMany
     private static void FindAllRestaurantsSync()
     {
         // start-find-all-sync
-        var restaurants = _restaurantsCollection.Find(new BsonDocument()).ToList();
+        var restaurants = _restaurantsCollection.Find(Builders<BsonDocument>.Filter.Empty())
+            .ToList();
         // end-find-all-sync
         WriteLine("Number of documents found: " + restaurants.Count);
     }

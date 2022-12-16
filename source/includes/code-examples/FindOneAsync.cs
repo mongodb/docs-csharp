@@ -38,7 +38,6 @@ public class FindOneAsync
 
         return await _restaurantsCollection.Find(filter).FirstOrDefaultAsync();
         // end-find-builders
-
     }
 
     private static async Task<Restaurant> FindOneRestaurantLINQAsync()
@@ -47,7 +46,6 @@ public class FindOneAsync
         return await _restaurantsCollection.AsQueryable()
             .Where(r => r.Name == "Bagels N Buns").FirstOrDefaultAsync();
         // end-find-linq
-
     }
 
     private static void Setup()

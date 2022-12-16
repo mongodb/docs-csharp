@@ -33,8 +33,7 @@ public class DeleteOneAsync
         var filter = Builders<Restaurant>.Filter
             .Eq(r => r.Name, "Ready Penny Inn");
 
-        var result = await _restaurantsCollection.DeleteOneAsync(filter);
-        return result;
+        return _restaurantsCollection.DeleteOneAsync(filter);
         // end-delete-one-builders-async
     }
 

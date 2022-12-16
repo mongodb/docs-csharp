@@ -25,7 +25,6 @@ public class InsertOneAsync
         WriteLine("Document Inserted: " + document.ToBsonDocument());
 
         Cleanup();
-
     }
 
     private static async void InsertOneRestaurant()

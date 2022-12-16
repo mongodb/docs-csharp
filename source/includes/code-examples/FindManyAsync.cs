@@ -53,13 +53,13 @@ public class FindManyAsync
         return await _restaurantsCollection.AsQueryable()
             .Where(r => r.Cuisine == "Pizza").ToListAsync();
         // end-find-linq-async
-
     }
 
     private static async Task<List<Restaurant>> FindAllRestaurantsAsync()
     {
         // start-find-all-async
-        return await _restaurantsCollection.Find(new BsonDocument()).ToListAsync();
+        return await _restaurantsCollection.Find(Builders<BsonDocument>.Filter.Empty())
+            .ToListAsync();
         // end-find-all-async
     }
 

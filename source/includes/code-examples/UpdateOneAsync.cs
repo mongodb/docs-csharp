@@ -39,7 +39,6 @@ public class UpdateOneAsync
 
         return await _restaurantsCollection.UpdateOneAsync(filter, update);
         // end-update-one-async
-
     }
 
     private static void Setup()

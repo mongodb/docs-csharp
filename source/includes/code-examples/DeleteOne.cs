@@ -15,8 +15,10 @@ public class DeleteOne
     {
         Setup();
 
-        var doc = _restaurantsCollection.Find(Builders<Restaurant>.Filter
-            .Eq(r => r.Name, "Ready Penny Inn")).First();
+        var filter = Builders<Restaurant>.Filter
+            .Eq(r => r.Name, "Ready Penny Inn");
+
+        var doc = _restaurantsCollection.Find(filter).First();
 
         // Delete a document using builders
         WriteLine("Deleting a document with builders...");
@@ -33,8 +35,7 @@ public class DeleteOne
         var filter = Builders<Restaurant>.Filter
             .Eq(r => r.Name, "Ready Penny Inn");
 
-        var result = _restaurantsCollection.DeleteOne(filter);
-        return result;
+        return _restaurantsCollection.DeleteOne(filter);
         // end-delete-one-builders
     }
 

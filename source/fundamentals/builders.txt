@@ -278,7 +278,7 @@ Build an Aggregation Pipeline
 The ``PipelineDefinitionBuilder`` class provides a type-safe interface for
 defining an **aggregation pipeline**. An aggregation pipeline is a series of
 stages that are used to transform a document. Suppose you want to create a
-pipline that performs the following operations:
+pipeline that performs the following operations:
 
 - Matches all documents with "spring" in the ``Season`` field
 - Sorts the results by the ``Category`` field

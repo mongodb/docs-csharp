@@ -272,6 +272,45 @@ single field path``, in this case using ``Category``:
          // Using string-based field names
          var keys = builder.Wildcard("Category");
 
+Build an Aggregation Pipeline
+-----------------------------
+
+The ``PipelineDefinitionBuilder`` class provides a type-safe interface for
+defining an **aggregation pipeline**. An aggregation pipeline is a series of
+stages that are used to transform a document. Suppose you want to create a
+pipline that performs the following operations:
+
+- Matches all documents with "spring" in the ``Season`` field
+- Sorts the results by the ``Category`` field
+- Groups the documents by category and shows the average price and total
+  available for all documents in that category
+
+Use ``PipelineDefinitionBuilder`` classes to build the pipeline:
+
+.. code-block:: csharp
+
+   var sortBuilder = Builders<Flower>.Sort.Ascending(f => f.Category);
+   var matchFilter = Builders<Flower>.Filter.AnyEq(f => f.Season, "spring");
+
+   var pipeline = new EmptyPipelineDefinition<Flower>()
+       .Match(matchFilter)
+       .Sort(sortBuilder)
+       .Group(f => f.Category,
+              g => new
+                 {
+                    name = g.Key, 
+                    avgPrice = g.Average(f => f.Price), 
+                    totalAvailable = g.Sum(f => f.Stock)
+                  }
+             );   
+
+The preceding example creates the following pipeline:
+
+.. code-block: json
+   
+   [{ "$match" : { "season" : "spring" } }, { "$sort" : { "category" : 1 } }, { "$group" : { "_id" : "$category", "avgPrice" : { "$avg" : "$price" }, "totalAvailable" : { "$sum" : "$stock" } } }]
+
+
 Additional Information
 ----------------------
 

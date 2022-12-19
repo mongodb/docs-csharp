@@ -115,7 +115,9 @@ To resolve this issue, try the following steps:
    can severely affect your application performance. Before
    considering changes to this setting, address the concurrency problems
    in your application.
-   
+
+.. _csharp-faq-unsupported-expressions:
+
 Why are Certain LINQ or Builder Expressions Unsupported?
 --------------------------------------------------------
 

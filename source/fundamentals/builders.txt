@@ -310,8 +310,27 @@ The preceding example creates the following pipeline:
    
    [{ "$match" : { "season" : "spring" } }, { "$sort" : { "category" : 1 } }, { "$group" : { "_id" : "$category", "avgPrice" : { "$avg" : "$price" }, "totalAvailable" : { "$sum" : "$stock" } } }]
 
+You can add stages to your pipeline that don't have corresponding type-safe
+methods in the ``PipelineDefinitionBuilder`` interface by providing your query
+as a ``BsonDocument`` to the `AppendStage() method
+<{+api-root+}/M_MongoDB_Driver_PipelineDefinitionBuilder_AppendStage__3.htm>`__.
+
+.. code-block:: csharp
+
+   var pipeline = new EmptyPipelineDefinition<BsonDocument>().AppendStage<BsonDocument, BsonDocument, BsonDocument>("{ $set: { field1: '$field2' } }");
+
+.. note:: 
+
+   When using a ``BsonDocument`` to define your pipline stage, the driver does
+   not take into account any ``BsonClassMap``, serialization attributes or
+   serialization conventions. The field names used in the ``BsonDocument`` must
+   match those stored on the server.
+
+   For more information on providing a query as a ``BsonDocument``, see our
+   :ref:`FAQ page <csharp-faq-unsupported-expressions>`.
+
 To learn more about the Aggregation Pipeline, see the
-:manual:`/core/aggregation-pipeline/` server manual page.
+:manual:`Aggregation Pipline </core/aggregation-pipeline/>` server manual page.
 
 Additional Information
 ----------------------

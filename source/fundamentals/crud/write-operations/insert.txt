@@ -136,7 +136,7 @@ Parameters
 
 The ``InsertOne()`` method takes the document you seek to insert as a
 parameter. The ``InsertMany()`` method takes an ``IEnumerable``
-interface of documents, such as a list or array, as a parameter.
+collection of documents, such as a list or array, as a parameter.
 
 The ``InsertOne()`` method optionally takes a ``InsertOneOptions`` type as an additional parameter,
 which represents options you can use to configure the insert operation.
@@ -159,8 +159,8 @@ following properties:
          :manual:`document level validation </core/schema-validation>`.
 
    * - ``Comment``
-     - | Gets or sets the comment for the operation. See :manual:`the delete command
-         fields</reference/command/delete/#command-fields>`
+     - | Gets or sets the comment for the operation. See :manual:`the insert command
+         fields</reference/command/insert/#command-fields>`
          for more information.
 
 The ``InsertMany()`` method optionally takes a ``InsertManyOptions``

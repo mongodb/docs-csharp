@@ -12,12 +12,12 @@ public class FindOneAsync
     private static IMongoCollection<Restaurant> _restaurantsCollection;
     private static string _mongoConnectionString = "<Your MongoDB URI>";
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         Setup();
 
         // Find one document using builders
-        var buildersDocument = FindOneRestaurantBuilderAsync().Result.ToBsonDocument();
+        var buildersDocument = await FindOneRestaurantBuilderAsync().ToBsonDocument();
         WriteLine("Finding a document with builders...");
         WriteLine(buildersDocument);
 
@@ -25,7 +25,7 @@ public class FindOneAsync
         WriteLine();
 
         // Find one document using LINQ
-        var linqDocument = FindOneRestaurantLINQAsync().Result.ToBsonDocument();
+        var linqDocument = await FindOneRestaurantLINQAsync().ToBsonDocument();
         WriteLine("Finding a document with LINQ...");
         WriteLine(linqDocument);
     }

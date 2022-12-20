@@ -12,7 +12,7 @@ public class UpdateOneAsync
     private static IMongoCollection<Restaurant> _restaurantsCollection;
     private static string _mongoConnectionString = "<Your MongoDB URI>";
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         Setup();
 
@@ -20,8 +20,8 @@ public class UpdateOneAsync
         WriteLine();
 
         //Update one document asynchronously
-        var asyncResult = UpdateOneRestaurantAsync();
-        WriteLine($"Updated documents: {asyncResult.Result.ModifiedCount}");
+        var asyncResult = await UpdateOneRestaurantAsync();
+        WriteLine($"Updated documents: {asyncResult.ModifiedCount}");
         ResetSampleData();
     }
 

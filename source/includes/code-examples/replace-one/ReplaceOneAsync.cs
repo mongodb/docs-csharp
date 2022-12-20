@@ -10,7 +10,7 @@ public class ReplaceOneAsync
     private static IMongoCollection<Restaurant> _restaurantsCollection;
     private const string MongoConnectionString = "<Your MongoDB URI>";
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         Setup();
 
@@ -21,15 +21,15 @@ public class ReplaceOneAsync
         var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
         WriteLine($"First pizza restaurant before replacement: {oldPizzaRestaurant.Name}");
 
-        // Replace one document synchronously
-        var asyncResult = ReplaceOneRestaurant();
-        WriteLine($"Restaurants modified by replacement: {asyncResult.Result.ModifiedCount}");
+        // Replace one document asynchronously
+        var asyncResult = await ReplaceOneRestaurant();
+        WriteLine($"Restaurants modified by replacement: {asyncResult.ModifiedCount}");
 
         var firstPizzaRestaurant = _restaurantsCollection.Find(filter).First();
         WriteLine($"First pizza restaurant after replacement: {firstPizzaRestaurant.Name}");
 
         Write("Resetting sample data...");
-        _restaurantsCollection.ReplaceOneAsync(filter, oldPizzaRestaurant);
+        await _restaurantsCollection.ReplaceOneAsync(filter, oldPizzaRestaurant);
         WriteLine("done.");
     }
 

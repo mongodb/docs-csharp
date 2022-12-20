@@ -11,12 +11,12 @@ public class InsertOneAsync
     private static IMongoCollection<Restaurant> _restaurantsCollection;
     private static string _mongoConnectionString = "<Your MongoDB URI>";
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         Setup();
 
         WriteLine("Inserting a document...");
-        InsertOneRestaurant();
+        await InsertOneRestaurantAsync();
 
         // find and print newly inserted document
         var document = _restaurantsCollection.Find(Builders<Restaurant>.Filter
@@ -27,7 +27,7 @@ public class InsertOneAsync
         Cleanup();
     }
 
-    private static async void InsertOneRestaurant()
+    private static async void InsertOneRestaurantAsync()
     {
         // delete sample document if already exists
         Cleanup();

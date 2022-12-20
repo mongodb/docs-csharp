@@ -11,7 +11,7 @@ public class InsertManyAsync
     private static IMongoCollection<Restaurant> _restaurantsCollection;
     private const string MongoConnectionString = "<Your MongoDB URI>";
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         Setup();
 
@@ -26,7 +26,7 @@ public class InsertManyAsync
         WriteLine();
 
         WriteLine("Inserting documents...");
-        InsertManyRestaurantsAsync();
+        await InsertManyRestaurantsAsync();
 
         // Find and print newly inserted document
         foundRestaurants = _restaurantsCollection.Find(filter).ToList();

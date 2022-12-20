@@ -11,7 +11,7 @@ public class DeleteOneAsync
     private static IMongoCollection<Restaurant> _restaurantsCollection;
     private static string _mongoConnectionString = "<Your MongoDB URI>";
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         Setup();
 
@@ -20,9 +20,9 @@ public class DeleteOneAsync
 
         // Delete a document using builders
         WriteLine("Deleting a document with builders...");
-        var result = DeleteARestaurantBuilderAsync();
+        var result = await DeleteARestaurantBuilderAsync();
 
-        WriteLine($"Deleted documents: {result.Result.DeletedCount}");
+        WriteLine($"Deleted documents: {result.DeletedCount}");
 
         Restore(doc);
     }

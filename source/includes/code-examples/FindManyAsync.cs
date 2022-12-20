@@ -12,29 +12,29 @@ public class FindManyAsync
     private static IMongoCollection<Restaurant> _restaurantsCollection;
     private static string _mongoConnectionString = "<Your MongoDB URI>";
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         Setup();
 
         // Find multiple documents using builders
         WriteLine("Finding documents with builders...:");
-        var restaurantsBuilders = FindMultipleRestaurantsBuilderAsync();
-        WriteLine("Number of documents found: " + restaurantsBuilders.Result.Count);
+        var restaurantsBuilders = await FindMultipleRestaurantsBuilderAsync();
+        WriteLine("Number of documents found: " + restaurantsBuilders.Count);
 
         // Extra space for console readability 
         WriteLine();
 
         // Find multiple documents using LINQ
         WriteLine("Finding documents with LINQ...:");
-        var restaurantsLINQ = FindMultipleRestaurantsLINQAsync();
-        WriteLine("Number of documents found: " + restaurantsLINQ.Result.Count);
+        var restaurantsLINQ = await FindMultipleRestaurantsLINQAsync();
+        WriteLine("Number of documents found: " + restaurantsLINQ.Count);
 
         WriteLine();
 
         // Find all documents
         WriteLine("Finding all documents...:");
-        var allRestaurants = FindAllRestaurantsAsync();
-        WriteLine("Number of documents found: " + allRestaurants.Result.Count);
+        var allRestaurants = await FindAllRestaurantsAsync();
+        WriteLine("Number of documents found: " + allRestaurants.Count);
     }
 
     private static async Task<List<Restaurant>> FindMultipleRestaurantsBuilderAsync()

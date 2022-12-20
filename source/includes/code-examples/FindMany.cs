@@ -16,43 +16,42 @@ public class FindMany
         Setup();
 
         // Find multiple documents using builders
-        WriteLine("Finding documents with builders...:");
-        FindMultipleRestaurantsBuilderSync();
+        Console.WriteLine("Finding documents with builders...:");
+        var restaurants = FindMultipleRestaurantsBuilderSync();
+        Console.WriteLine("Number of documents found: " + restaurants.Count);
 
         // Extra space for console readability 
-        WriteLine();
+        Console.WriteLine();
 
         // Find multiple documents using LINQ
-        WriteLine("Finding documents with LINQ...:");
-        FindMultipleRestaurantsLINQSync();
+        Console.WriteLine("Finding documents with LINQ...:");
+        restaurants = FindMultipleRestaurantsLinqSync();
+        Console.WriteLine("Number of documents found: " + restaurants.Count);
 
-        WriteLine();
+        Console.WriteLine();
 
-        // Find All restaurants
-        WriteLine("Finding all documents...:");
-        FindAllRestaurantsSync();
+        // Find all restaurants
+        Console.WriteLine("Finding all documents...:");
+        restaurants = FindAllRestaurantsSync();
+        Console.WriteLine("Number of documents found: " + restaurants.Count);
     }
 
-    private static void FindMultipleRestaurantsBuilderSync()
+    public static List<Restaurant> FindMultipleRestaurantsBuilderSync()
     {
         // start-find-builders-sync
         var filter = Builders<Restaurant>.Filter
-            .Eq(r => r.Cuisine, "Pizza");
+            .Eq("cuisine", "Pizza");
 
-        var restaurants = _restaurantsCollection.Find(filter).ToList();
+        return _restaurantsCollection.Find(filter).ToList();
         // end-find-builders-sync
-
-        WriteLine("Number of documents found: " + restaurants.Count);
     }
 
-    private static void FindMultipleRestaurantsLINQSync()
+    public static List<Restaurant> FindMultipleRestaurantsLinqSync()
     {
-        // start-find-linq-sync
-        var query = _restaurantsCollection.AsQueryable()
+        // start-find-linq-async
+        return _restaurantsCollection.AsQueryable()
             .Where(r => r.Cuisine == "Pizza").ToList();
-        // end-find-linq-sync
-
-        WriteLine("Number of documents found: " + query.Count);
+        // end-find-linq-async
     }
 
     private static void FindAllRestaurantsSync()
@@ -61,7 +60,6 @@ public class FindMany
         var restaurants = _restaurantsCollection.Find(Builders<BsonDocument>.Filter.Empty())
             .ToList();
         // end-find-all-sync
-        WriteLine("Number of documents found: " + restaurants.Count);
     }
 
     private static void Setup()

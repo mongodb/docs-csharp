@@ -93,14 +93,14 @@ relevant options.
      - {+not-available+}
      - | Settings for automatic client-side encryption.
        |
-       | **Data Type**: ``AutoEncryptionOptions``
+       | **Data Type**: ```AutoEncryptionOptions <{+api-root+}/T_MongoDB_Driver_Encryption_AutoEncryptionOptions.htm>`__``
        | **Default**: ``null``
 
    * - **ClusterConfigurator**
      - {+not-available+}
      - | Low-level configuration options for sockets, TLS, cluster, and others. 
        | 
-       | **Data Type**: ``Action<ClusterBuilder>``
+       | **Data Type**: ``Action<`ClusterBuilder <{+api-root+}/T_MongoDB_Driver_Core_Configuration_ClusterBuilder.htm>`__>``
        | **Default**: ``null``
 
    * - **Compressors**
@@ -110,7 +110,7 @@ relevant options.
          that the server supports. See :ref:`csharp-network-compression` for 
          more information. 
        | 
-       | **Data Type**: ``CompressorConfiguration``
+       | **Data Type**: ```CompressorConfiguration <{+api-root+}/T_MongoDB_Driver_Core_Configuration_CompressorConfiguration.htm>`__``
        | **Default**: ``null``
 
    * - **ConnectTimeout**
@@ -120,7 +120,6 @@ relevant options.
        |
        | **DataType**: ``TimeSpan``
        | **Default**: 30 seconds
-
 
    * - **Credential**
      - .. code-block:: none
@@ -139,12 +138,17 @@ relevant options.
        | :ref:`authentication mechanisms <csharp-authentication-mechanisms>` for available
        | authentication mechanisms.
        |
-       | **Data Type**: ``MongoCredentialStore``
+       | **Data Type**: ```MongoCredential <{+api-root+}/T_MongoDB_Driver_MongoCredential.htm>`__``
        | **Default**: ``null``
 
    * - **DirectConnection**
      - ``directConnection=true``
      - | Specifies whether to force dispatch **all** operations to the host.
+       |
+       | If you specify this option, the driver doesn't accept the 
+       | :manual:`DNS seed list connection format. <reference/connection-string/#std-label-connections-dns-seedlist>`
+       | You must use the :manual:`standard connection URI format <reference/connection-string/#standard-connection-string-format/>` 
+       | instead. 
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
 
@@ -181,8 +185,8 @@ relevant options.
      - {+not-available+}
      - | The LINQ provider to use.
        |
-       | **Data Type**: ``LinqProvider``
-       | **Default**: ``LinqProvider.V2``
+       | **Data Type**: ```LinqProvider <{+api-root+}/T_MongoDB_Driver_Linq_LinqProvider.htm>`__``
+       | **Default**: ``LinqProvider.V3``
 
    * - **LoadBalanced**
      - ``loadBalanced=true``
@@ -205,7 +209,7 @@ relevant options.
      - | The greatest number of connections a driver's connection pool may be 
          establishing concurrently.
        |
-       | **Data Type**: ``int``
+       | **Data Type**: ``{+int-data-type+}``
        | **Default**: ``2``
 
    * - **MaxConnectionIdleTime**
@@ -245,12 +249,12 @@ relevant options.
      - | The client's default read concern. 
          See :ref:`read concern <read-concern>` for more information.
        |
-       | **Data Type**: ``ReadConcern``
+       | **Data Type**: ```ReadConcern <{+api-root+}/T_MongoDB_Driver_ReadConcern.htm>`__``
        | **Default**: ``ReadConcern.Default``
 
    * - **ReadEncoding**
      - {+not-available+}
-     - | Specifies whether UTF-8 string deserialization is strict or lenient. 
+     - | The UTF-8 encoding to use for string deserialization. 
          Strict encoding will throw an exception when an invalid UTF-8 byte sequence 
          is encountered.
        |
@@ -275,7 +279,7 @@ relevant options.
          still be eligible for server selection. Specifying ``-1`` means no maximum.
          See :ref:`read preference <read-preference>` for more information.
        |
-       | **Data Type**: ``ReadPreference``
+       | **Data Type**: ```ReadPreference <{+api-root+}/T_MongoDB_Driver_ReadPreference.htm>`__``
        | **Default**: ``ReadPreference.Primary``
 
    * - **ReplicaSetName**
@@ -306,21 +310,14 @@ relevant options.
          See :manual:`the MongoDB Manual</reference/connection-string/>` for more 
          information about connection string formats. 
        |
-       | **Data Type**: ``ConnectionStringScheme``
+       | **Data Type**: ```ConnectionStringScheme <{+api-root+}/T_MongoDB_Driver_Core_Configuration_ConnectionStringScheme.htm>`__``
        | **Default**: ``ConnectionStringScheme.MongoDB``
       
-   * - **SdamLogFilename**
-     - {+not-available+}
-     - | The name of the SDAM (Server Discovery and Monitoring) log file.
-       |
-       | **Data Type**: {+string-data-type+}
-       | **Default**: ``null``
-     
    * - **Server**
      - ``mongodb://sample.host:27017``
      - | The host and port number where MongoDB is running.
        |
-       | **Data Type**: ``MongoServerAddress``
+       | **Data Type**: ```MongoServerAddress <{+api-root+}/T_MongoDB_Driver_MongoServerAddress.htm>`__``
        | **Default**: ``localhost:27017``
 
    * - **ServerApi**
@@ -329,7 +326,7 @@ relevant options.
          :manual:`the MongoDB Manual</reference/stable-api>` for more information about
          Stable API versioning.
        |
-       | **Data Type**: ``ServerApi``
+       | **Data Type**: ```ServerApi <{+api-root+}/T_MongoDB_Driver_ServerApi.htm>`__``
        | **Default**: ``null``
 
    * - **Servers**
@@ -341,7 +338,7 @@ relevant options.
         sample.host3:27017
      - | The cluster members where MongoDB is running. 
        |
-       | **Data Type**: ``List<MongoServerAddress>``
+       | **Data Type**: ``IEnumerable<`MongoServerAddress <{+api-root+}/T_MongoDB_Driver_MongoServerAddress.htm>`__>``
        | **Default**: ``localhost:27017``
      
    * - **ServerSelectionTimeout**
@@ -373,7 +370,7 @@ relevant options.
      - | TLS/SSL options, including client certificates, revocation handling, and 
          enabled and disabled TLS/SSL protocols.
        |
-       | **Data Type**: ``SslSettings``
+       | **Data Type**: ```SslSettings <{+api-root+}/T_MongoDB_Driver_SslSettings.htm>`__``
        | **Default**: ``null``
 
    * - **UseTls**
@@ -405,7 +402,7 @@ relevant options.
          journaling, for the client. Specifying ``0`` for the timeout means no timeout. 
          See :ref:`write concern <wc-j>` for more information.
        |
-       | **Data Type**: ``WriteConcern``
+       | **Data Type**: ```WriteConcern <{+api-root+}/T_MongoDB_Driver_WriteConcern.htm>`__``
        | **Default**: ``WriteConcern.Acknowledged``
 
    * - **WriteEncoding**

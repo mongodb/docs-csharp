@@ -46,7 +46,8 @@ A standard connection string includes the following pieces:
      
      - Optional. The authentication database to use if the
        connection string includes ``username:password@``
-       authentication credentials but not the ``authSource`` option. If you don't include this piece, the client will authenticate the user against ``admin``.
+       authentication credentials but not the ``authSource`` option. If you don't include 
+       this piece, the client will authenticate the user against the ``admin`` database.
 
    * - ``?<options>``
 

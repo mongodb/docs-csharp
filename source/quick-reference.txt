@@ -13,40 +13,23 @@ their related reference and API documentation. The examples in this guide use th
 See the :ref:`<csharp-quickstart>` to learn how to create a free MongoDB cluster
 and load this sample data.
 
-The examples on this page use the following ``Restaurant``, ``Address``, and ``Grade`` 
+The examples on this page use the following ``Restaurant``, ``Address``, and ``GradeEntry`` 
 classes as models:
 
-.. code-block:: csharp
-   :copyable: true
+.. literalinclude:: includes/quick-start/Restaurant.cs
+   :language: csharp
+   :copyable:
+   :dedent:
 
-  public class Restaurant
-  {
-     public ObjectId Id { get; set; }
-     public string Name { get; set; }
-     [BsonElement("restaurant_id")]
-     public string RestaurantId { get; set; }
-     public string Cuisine { get; set; }
-     public Address Address { get; set; }
-     public string Borough { get; set; }
-     public List<GradeEntry> Grades { get; set; }
-  }
+.. literalinclude:: includes/quick-start/Address.cs
+   :language: csharp
+   :copyable:
+   :dedent:
 
-  public class Address
-  {
-     public string Building { get; set; }
-     [BsonElement("coord")]
-     public float[] Coordinates { get; set; }
-     public string Street { get; set; }
-     [BsonElement("zipcode")]
-     public string ZipCode { get; set; }
-  }
-
-  public class GradeEntry
-  {
-    public DateTime Date { get; set; }
-    public string Grade { get; set; }
-    public float Score { get; set; } 
-  }
+.. literalinclude:: includes/quick-start/GradeEntry.cs
+   :language: csharp
+   :copyable:
+   :dedent:
 
 After you've loaded the sample data into your MongoDB instance, you can use the 
 following code to access the ``restaurants`` collection:

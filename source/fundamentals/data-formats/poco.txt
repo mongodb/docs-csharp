@@ -18,9 +18,9 @@ Overview
 In this guide, you can learn about how you can use ":wikipedia:`Plain Old CLR/Class
 Objects <Plain_old_CLR_object>`", or **POCOs**, with the {+driver-short+} for your operations
 and queries. POCOs are simple class objects that do not inherit
-features from any framework-specific base class and do not return any
-special types. We recommend using POCOs in your {+language+} code to
-adhere to idiomatic driver usage and achieve the best performance.
+features from any framework-specific base classes or interfaces. We recommend
+using POCOs in your {+language+} code to adhere to idiomatic driver usage and
+achieve the best performance.
 
 You should read this guide if you want to learn more about how to use
 POCOs with the {+driver-short+} or if you need to adjust the driver's default

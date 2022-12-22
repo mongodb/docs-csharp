@@ -39,7 +39,7 @@ public class Bson
             }),
             new BsonElement("coord", new BsonArray
             {
-                {-73.982419, 41.579505 }
+                -73.982419, 41.579505
             }),
             new BsonElement("cuisine", "Pizza"),
             new BsonElement("name", "Mongo's Pizza")

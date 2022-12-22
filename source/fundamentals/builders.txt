@@ -321,7 +321,7 @@ as a ``BsonDocument`` to the `AppendStage() method
 
 .. note:: 
 
-   When using a ``BsonDocument`` to define your pipline stage, the driver does
+   When using a ``BsonDocument`` to define your pipeline stage, the driver does
    not take into account any ``BsonClassMap``, serialization attributes or
    serialization conventions. The field names used in the ``BsonDocument`` must
    match those stored on the server.
@@ -330,7 +330,7 @@ as a ``BsonDocument`` to the `AppendStage() method
    :ref:`FAQ page <csharp-faq-unsupported-expressions>`.
 
 To learn more about the Aggregation Pipeline, see the
-:manual:`Aggregation Pipline </core/aggregation-pipeline/>` server manual page.
+:manual:`Aggregation Pipeline </core/aggregation-pipeline/>` server manual page.
 
 Additional Information
 ----------------------

@@ -34,6 +34,15 @@ The following ``Restaurant`` class models the documents in this collection:
    :start-after: start-restaurant-model
    :end-before: end-restaurant-model
 
+.. note::
+
+   The documents in the ``restaurants`` collection use the camel
+   case naming convention. The examples in this guide use a ``ConventionPack``
+   to deserialize the fields in the collection into Pascal case and map them to
+   the properties in the ``Restaurant`` class.
+
+   To learn more about custom serialization see :ref:`csharp-custom-serialization`.
+
 .. _csharp-linq-queryable:
 
 Make A Collection Queryable
@@ -441,7 +450,7 @@ to generate a ``$lookup`` stage using LINQ:
                  restaurant => restaurant.Name,
                  review => review.RestaurantName,
                  (restaurant, reviews) =>
-                     new {restaurant, reviews}
+                     new { Restaurant = restaurant, Reviews = reviews }
              );
 
 The preceding example returns all documents from the ``restaurants`` collection. Each
@@ -483,7 +492,8 @@ aggregation stages:
 Supported Methods
 -----------------
 
-The {+driver-long+} implementation of LINQ supports the following methods:
+The following are some of the methods supported by the  {+driver-long+}
+implementation of LINQ:
 
 .. list-table::
    :header-rows: 1

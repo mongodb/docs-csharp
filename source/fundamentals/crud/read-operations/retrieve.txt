@@ -149,7 +149,7 @@ see :ref:`csharp-retrieve-additional-information`.
 
 .. note:: Find All Documents
 
-   To find all documents in a collection, pass an empty filter as a 
+   To find all documents in a collection, pass an empty filter 
    to the ``Find()`` method.
 
    .. code-block:: csharp

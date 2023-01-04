@@ -16,7 +16,7 @@ public class DeleteMany
         Setup();
 
         var docs = _restaurantsCollection.Find(Builders<Restaurant>.Filter
-            .Regex(r => r.Name, "Green")).ToList();
+            .Eq(r => r.Borough, "Brooklyn")).ToList();
 
         // Deleting documents using builders
         WriteLine("Deleting documents...");
@@ -31,7 +31,7 @@ public class DeleteMany
     {
         // start-delete-many-builders
         var filter = Builders<Restaurant>.Filter
-            .Regex(r => r.Name, "Green");
+            .Eq(r => r.Borough, "Brooklyn");
 
         return _restaurantsCollection.DeleteMany(filter);
         // end-delete-many-builders

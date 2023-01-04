@@ -16,7 +16,7 @@ public class DeleteManyAsync
         Setup();
 
         var docs = _restaurantsCollection.Find(Builders<Restaurant>.Filter
-            .Regex(r => r.Name, "Green")).ToList();
+            .Eq(r => r.Borough, "Brooklyn")).ToList();
 
         // Deleting documents using builders
         WriteLine("Deleting documents...");
@@ -33,7 +33,7 @@ public class DeleteManyAsync
     {
         // start-delete-many-async
         var filter = Builders<Restaurant>.Filter
-            .Regex(r => r.Name, "Green");
+            .Eq(r => r.Borough, "Brooklyn");
 
         return await _restaurantsCollection.DeleteManyAsync(filter);
         // end-delete-many-async

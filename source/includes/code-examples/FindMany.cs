@@ -48,10 +48,10 @@ public class FindMany
 
     public static List<Restaurant> FindMultipleRestaurantsLinqSync()
     {
-        // start-find-linq-async
+        // start-find-linq-sync
         return _restaurantsCollection.AsQueryable()
             .Where(r => r.Cuisine == "Pizza").ToList();
-        // end-find-linq-async
+        // end-find-linq-sync
     }
 
     private static void FindAllRestaurantsSync()

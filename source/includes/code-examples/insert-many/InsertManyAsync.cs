@@ -2,7 +2,6 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using static System.Console;
 
 namespace CSharpExamples.UsageExamples.InsertMany;
 
@@ -21,18 +20,18 @@ public class InsertManyAsync
 
         var foundRestaurants = _restaurantsCollection.Find(filter).ToList();
 
-        WriteLine($"Number of restaurants found before insert: {foundRestaurants.Count}");
+        Console.WriteLine($"Number of restaurants found before insert: {foundRestaurants.Count}");
 
         // Extra space for console readability
-        WriteLine();
+        Console.WriteLine();
 
-        WriteLine("Inserting documents...");
+        Console.WriteLine("Inserting documents...");
         await InsertManyRestaurantsAsync();
 
         // Find and print newly inserted document
         foundRestaurants = _restaurantsCollection.Find(filter).ToList();
 
-        WriteLine($"Number of restaurants inserted: {foundRestaurants.Count}");
+        Console.WriteLine($"Number of restaurants inserted: {foundRestaurants.Count}");
 
         Cleanup();
     }

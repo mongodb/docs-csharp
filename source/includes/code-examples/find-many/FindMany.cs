@@ -2,7 +2,6 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using static System.Console;
 
 namespace CSharpExamples.UsageExamples.FindMany;
 
@@ -57,7 +56,9 @@ public class FindMany
     private static void FindAllRestaurantsSync()
     {
         // start-find-all-sync
-        var restaurants = _restaurantsCollection.Find(Builders<BsonDocument>.Filter.Empty())
+        var filter = Builders<BsonDocument>.Filter.Empty();
+
+        var restaurants = _restaurantsCollection.Find(filter)
             .ToList();
         // end-find-all-sync
     }

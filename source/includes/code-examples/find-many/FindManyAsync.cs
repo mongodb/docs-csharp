@@ -3,38 +3,37 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using static System.Console;
 
 namespace CSharpExamples.UsageExamples.FindMany;
 
 public class FindManyAsync
 {
     private static IMongoCollection<Restaurant> _restaurantsCollection;
-    private static string _mongoConnectionString = "<Your MongoDB URI>";
+    private const string MongoConnectionString = "<Your MongoDB URI>";
 
     public static async Task Main(string[] args)
     {
         Setup();
 
         // Find multiple documents using builders
-        WriteLine("Finding documents with builders...:");
+        Console.WriteLine("Finding documents with builders...:");
         var restaurantsBuilders = await FindMultipleRestaurantsBuilderAsync();
-        WriteLine($"Number of documents found: {restaurantsBuilders.Count}");
+        Console.WriteLine($"Number of documents found: {restaurantsBuilders.Count}");
 
         // Extra space for console readability 
-        WriteLine();
+        Console.WriteLine();
 
         // Find multiple documents using LINQ
-        WriteLine("Finding documents with LINQ...:");
-        var restaurantsLINQ = await FindMultipleRestaurantsLINQAsync();
-        WriteLine($"Number of documents found: {restaurantsLINQ.Count}");
+        Console.WriteLine("Finding documents with LINQ...:");
+        var restaurantsLinq = await FindMultipleRestaurantsLinqAsync();
+        Console.WriteLine($"Number of documents found: {restaurantsLinq.Count}");
 
-        WriteLine();
+        Console.WriteLine();
 
         // Find all documents
-        WriteLine("Finding all documents...:");
+        Console.WriteLine("Finding all documents...:");
         var allRestaurants = await FindAllRestaurantsAsync();
-        WriteLine($"Number of documents found: {allRestaurants.Count}");
+        Console.WriteLine($"Number of documents found: {allRestaurants.Count}");
     }
 
     private static async Task<List<Restaurant>> FindMultipleRestaurantsBuilderAsync()
@@ -47,7 +46,7 @@ public class FindManyAsync
         // end-find-builders-async
     }
 
-    private static async Task<List<Restaurant>> FindMultipleRestaurantsLINQAsync()
+    private static async Task<List<Restaurant>> FindMultipleRestaurantsLinqAsync()
     {
         // start-find-linq-async
         return await _restaurantsCollection.AsQueryable()
@@ -58,7 +57,9 @@ public class FindManyAsync
     private static async Task<List<Restaurant>> FindAllRestaurantsAsync()
     {
         // start-find-all-async
-        return await _restaurantsCollection.Find(Builders<BsonDocument>.Filter.Empty())
+        var filter = Builders<BsonDocument>.Filter.Empty();
+
+        return await _restaurantsCollection.Find(filter)
             .ToListAsync();
         // end-find-all-async
     }
@@ -70,7 +71,7 @@ public class FindManyAsync
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
         // Establish the connection to MongoDB and get the restaurants database
-        var mongoClient = new MongoClient(_mongoConnectionString);
+        var mongoClient = new MongoClient(MongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     }

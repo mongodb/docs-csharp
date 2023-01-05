@@ -1,6 +1,5 @@
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using static System.Console;
 
 namespace CSharpExamples.UsageExamples.UpdateMany;
 
@@ -18,22 +17,22 @@ public class UpdateMany
         Setup();
 
         // Extra space for console readability 
-        WriteLine();
+        Console.WriteLine();
 
         // Number of restaurants with old cuisine
-        WriteLine($"Restaurants with {CuisineField} \"{OldCuisine}\" found: {FindCountOfRestaurantsWithCuisine(OldCuisine)}");
+        Console.WriteLine($"Restaurants with {CuisineField} \"{OldCuisine}\" found: {FindCountOfRestaurantsWithCuisine(OldCuisine)}");
 
         // Update many documents synchronously
         var syncResult = UpdateManyRestaurants();
-        WriteLine($"Restaurants modified by update: {syncResult.ModifiedCount}");
+        Console.WriteLine($"Restaurants modified by update: {syncResult.ModifiedCount}");
 
         // Number of restaurants with new cuisine
-        WriteLine($"Restaurants with {CuisineField} \"{NewCuisine}\" found after update: {FindCountOfRestaurantsWithCuisine(NewCuisine)}");
+        Console.WriteLine($"Restaurants with {CuisineField} \"{NewCuisine}\" found after update: {FindCountOfRestaurantsWithCuisine(NewCuisine)}");
 
         // Reset sample data
         Write("Resetting sample data...");
         ResetSampleData();
-        WriteLine("done.");
+        Console.WriteLine("done.");
     }
 
     private static UpdateResult UpdateManyRestaurants()

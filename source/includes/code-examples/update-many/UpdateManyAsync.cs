@@ -1,6 +1,5 @@
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using static System.Console;
 
 namespace CSharpExamples.UsageExamples.UpdateMany;
 
@@ -18,22 +17,22 @@ public class UpdateManyAsync
         Setup();
 
         // Extra space for console readability 
-        WriteLine();
+        Console.WriteLine();
 
         // Number of restaurants with old cuisine
-        WriteLine($"Restaurants with {CuisineField} \"{OldCuisine}\" found: {FindCountOfRestaurantsWithCuisine(OldCuisine)}");
+        Console.WriteLine($"Restaurants with {CuisineField} \"{OldCuisine}\" found: {FindCountOfRestaurantsWithCuisine(OldCuisine)}");
 
         // Update many documents synchronously
-        var asyncResult = UpdateManyRestaurantsAsync();
-        WriteLine($"Restaurants modified by update: {asyncResult.Result.ModifiedCount}");
+        var asyncResult = await UpdateManyRestaurantsAsync();
+        Console.WriteLine($"Restaurants modified by update: {asyncResult.Result.ModifiedCount}");
 
         // Number of restaurants with new cuisine
-        WriteLine($"Restaurants with {CuisineField} \"{NewCuisine}\" found after update: {FindCountOfRestaurantsWithCuisine(NewCuisine)}");
+        Console.WriteLine($"Restaurants with {CuisineField} \"{NewCuisine}\" found after update: {FindCountOfRestaurantsWithCuisine(NewCuisine)}");
 
         // Reset sample data
         Write("Resetting sample data...");
         ResetSampleData();
-        WriteLine("done.");
+        Console.WriteLine("done.");
     }
 
     private static async Task<UpdateResult> UpdateManyRestaurantsAsync()

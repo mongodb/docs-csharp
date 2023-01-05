@@ -2,7 +2,6 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using static System.Console;
 
 namespace CSharpExamples.UsageExamples.DeleteMany;
 
@@ -21,10 +20,10 @@ public class DeleteManyAsync
         var docs = _restaurantsCollection.Find(filter).ToList();
 
         // Deleting documents using builders
-        WriteLine("Deleting documents...");
+        Console.WriteLine("Deleting documents...");
         var result = await DeleteMultipleRestaurantsBuilderAsync();
 
-        WriteLine($"Deleted documents: {result.DeletedCount}");
+        Console.WriteLine($"Deleted documents: {result.DeletedCount}");
 
         Restore(docs);
 
@@ -44,7 +43,7 @@ public class DeleteManyAsync
     private static void Restore(IEnumerable<Restaurant> docs)
     {
         _restaurantsCollection.InsertMany(docs);
-        WriteLine("Resetting sample data...done.");
+        Console.WriteLine("Resetting sample data...done.");
     }
 
     private static void Setup()

@@ -2,7 +2,6 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using static System.Console;
 
 namespace CSharpExamples.UsageExamples.FindOne;
 
@@ -16,14 +15,14 @@ public class FindOne
         Setup();
 
         // Find one document using builders
-        WriteLine("Finding a document with builders...");
+        Console.WriteLine("Finding a document with builders...");
         FindOneRestaurantBuilder();
 
         // Extra space for console readability 
-        WriteLine();
+        Console.WriteLine();
 
         // Find one document using LINQ
-        WriteLine("Finding a document with LINQ...");
+        Console.WriteLine("Finding a document with LINQ...");
         FindOneRestaurantLinq();
     }
 
@@ -36,7 +35,7 @@ public class FindOne
         var restaurant = _restaurantsCollection.Find(filter).FirstOrDefault();
         // end-find-builders
 
-        WriteLine(restaurant.ToBsonDocument());
+        Console.WriteLine(restaurant.ToBsonDocument());
     }
 
     private static void FindOneRestaurantLinq()
@@ -46,7 +45,7 @@ public class FindOne
             .Where(r => r.Name == "Bagels N Buns").FirstOrDefault();
         // end-find-linq
 
-        WriteLine(query.ToBsonDocument());
+        Console.WriteLine(query.ToBsonDocument());
     }
 
     private static void Setup()

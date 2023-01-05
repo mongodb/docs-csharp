@@ -1,6 +1,5 @@
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using static System.Console;
 
 namespace CSharpExamples.UsageExamples.DeleteOne;
 
@@ -19,10 +18,10 @@ public class DeleteOneAsync
         var doc = _restaurantsCollection.Find(filter).First();
 
         // Delete a document using builders
-        WriteLine("Deleting a document with builders...");
+        Console.WriteLine("Deleting a document with builders...");
         var result = await DeleteARestaurantBuilderAsync();
 
-        WriteLine($"Deleted documents: {result.DeletedCount}");
+        Console.WriteLine($"Deleted documents: {result.DeletedCount}");
 
         Restore(doc);
     }

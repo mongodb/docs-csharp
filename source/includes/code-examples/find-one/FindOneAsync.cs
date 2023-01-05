@@ -3,7 +3,6 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using static System.Console;
 
 namespace CSharpExamples.UsageExamples.FindOne;
 
@@ -18,16 +17,16 @@ public class FindOneAsync
 
         // Find one document using builders
         var buildersDocument = await FindOneRestaurantBuilderAsync().ToBsonDocument();
-        WriteLine("Finding a document with builders...");
-        WriteLine(buildersDocument);
+        Console.WriteLine("Finding a document with builders...");
+        Console.WriteLine(buildersDocument);
 
         // Extra space for console readability
-        WriteLine();
+        Console.WriteLine();
 
         // Find one document using LINQ
         var linqDocument = await FindOneRestaurantLinqAsync().ToBsonDocument();
-        WriteLine("Finding a document with LINQ...");
-        WriteLine(linqDocument);
+        Console.WriteLine("Finding a document with LINQ...");
+        Console.WriteLine(linqDocument);
     }
 
     private static async Task<Restaurant> FindOneRestaurantBuilderAsync()

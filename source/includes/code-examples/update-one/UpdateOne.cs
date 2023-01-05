@@ -3,7 +3,6 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using static System.Console;
 
 namespace CSharpExamples.UsageExamples.UpdateOne;
 
@@ -17,11 +16,11 @@ public class UpdateOne
         Setup();
 
         // Extra space for console readability 
-        WriteLine();
+        Console.WriteLine();
 
         // Update one document synchronously
         var syncResult = UpdateOneRestaurant();
-        WriteLine($"Updated documents: {syncResult.ModifiedCount}");
+        Console.WriteLine($"Updated documents: {syncResult.ModifiedCount}");
         ResetSampleData();
     }
 

@@ -2,7 +2,6 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using static System.Console;
 
 namespace CsharpExamples.UsageExamples.InsertOne;
 
@@ -15,7 +14,7 @@ public class InsertOne
     {
         Setup();
 
-        WriteLine("Inserting a document...");
+        Console.WriteLine("Inserting a document...");
         InsertOneRestaurant();
 
         var filter = Builders<Restaurant>.Filter
@@ -24,7 +23,7 @@ public class InsertOne
         // find and print newly inserted document
         var document = _restaurantsCollection.Find(filter).FirstOrDefault();
 
-        WriteLine($"Document Inserted: {document.ToBsonDocument()}");
+        Console.WriteLine($"Document Inserted: {document.ToBsonDocument()}");
 
         Cleanup();
     }

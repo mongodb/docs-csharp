@@ -3,7 +3,6 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using static System.Console;
 
 namespace CSharpExamples.UsageExamples.UpdateOne;
 
@@ -17,11 +16,11 @@ public class UpdateOneAsync
         Setup();
 
         // Extra space for console readability 
-        WriteLine();
+        Console.WriteLine();
 
         //Update one document asynchronously
         var asyncResult = await UpdateOneRestaurantAsync();
-        WriteLine($"Updated documents: {asyncResult.ModifiedCount}");
+        Console.WriteLine($"Updated documents: {asyncResult.ModifiedCount}");
         ResetSampleData();
     }
 
@@ -48,7 +47,7 @@ public class UpdateOneAsync
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
         // Establish the connection to MongoDB and get the restaurants database
-        var mongoClient = new MongoClient(_mongoConnectionString);
+        var mongoClient = new MongoClient(MongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     }

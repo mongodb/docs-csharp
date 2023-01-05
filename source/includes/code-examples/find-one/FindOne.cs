@@ -24,7 +24,7 @@ public class FindOne
 
         // Find one document using LINQ
         WriteLine("Finding a document with LINQ...");
-        FindOneRestaurantLINQ();
+        FindOneRestaurantLinq();
     }
 
     private static void FindOneRestaurantBuilder()
@@ -39,11 +39,11 @@ public class FindOne
         WriteLine(restaurant.ToBsonDocument());
     }
 
-    private static void FindOneRestaurantLINQ()
+    private static void FindOneRestaurantLinq()
     {
         // start-find-linq
         var query = _restaurantsCollection.AsQueryable()
-            .Where(r => r.Name == "Bagels N Buns");
+            .Where(r => r.Name == "Bagels N Buns").FirstOrDefault();
         // end-find-linq
 
         WriteLine(query.ToBsonDocument());

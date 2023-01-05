@@ -19,7 +19,7 @@ public class FindManyAsync
         // Find multiple documents using builders
         WriteLine("Finding documents with builders...:");
         var restaurantsBuilders = await FindMultipleRestaurantsBuilderAsync();
-        WriteLine("Number of documents found: " + restaurantsBuilders.Count);
+        WriteLine($"Number of documents found: {restaurantsBuilders.Count}");
 
         // Extra space for console readability 
         WriteLine();
@@ -27,14 +27,14 @@ public class FindManyAsync
         // Find multiple documents using LINQ
         WriteLine("Finding documents with LINQ...:");
         var restaurantsLINQ = await FindMultipleRestaurantsLINQAsync();
-        WriteLine("Number of documents found: " + restaurantsLINQ.Count);
+        WriteLine($"Number of documents found: {restaurantsLINQ.Count}");
 
         WriteLine();
 
         // Find all documents
         WriteLine("Finding all documents...:");
         var allRestaurants = await FindAllRestaurantsAsync();
-        WriteLine("Number of documents found: " + allRestaurants.Count);
+        WriteLine($"Number of documents found: {allRestaurants.Count}");
     }
 
     private static async Task<List<Restaurant>> FindMultipleRestaurantsBuilderAsync()

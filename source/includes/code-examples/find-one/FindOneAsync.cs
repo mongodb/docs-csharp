@@ -25,7 +25,7 @@ public class FindOneAsync
         WriteLine();
 
         // Find one document using LINQ
-        var linqDocument = await FindOneRestaurantLINQAsync().ToBsonDocument();
+        var linqDocument = await FindOneRestaurantLinqAsync().ToBsonDocument();
         WriteLine("Finding a document with LINQ...");
         WriteLine(linqDocument);
     }
@@ -40,7 +40,7 @@ public class FindOneAsync
         // end-find-builders
     }
 
-    private static async Task<Restaurant> FindOneRestaurantLINQAsync()
+    private static async Task<Restaurant> FindOneRestaurantLinqAsync()
     {
         // start-find-linq
         return await _restaurantsCollection.AsQueryable()

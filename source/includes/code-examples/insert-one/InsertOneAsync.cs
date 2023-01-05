@@ -24,7 +24,7 @@ public class InsertOneAsync
 
         var document = _restaurantsCollection.Find(filter).FirstOrDefault();
 
-        WriteLine("Document Inserted: " + document.ToBsonDocument());
+        WriteLine($"Document Inserted: {document.ToBsonDocument()}");
 
         Cleanup();
     }

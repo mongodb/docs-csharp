@@ -24,7 +24,7 @@ public class InsertOne
         // find and print newly inserted document
         var document = _restaurantsCollection.Find(filter).FirstOrDefault();
 
-        WriteLine("Document Inserted: " + document.ToBsonDocument());
+        WriteLine($"Document Inserted: {document.ToBsonDocument()}");
 
         Cleanup();
     }

@@ -15,7 +15,8 @@ public class ReplaceOneAsync
         Setup();
 
         // Create filter 
-        var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Pizza");
+        var filter = Builders<Restaurant>.Filter
+            .Eq(r => r.Cuisine, "Pizza");
 
         // Find first pizza restaurant
         var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
@@ -36,7 +37,8 @@ public class ReplaceOneAsync
     private static async Task<ReplaceOneResult> ReplaceOneRestaurant()
     {
         // start-replace-one-async
-        var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Pizza");
+        var filter = Builders<Restaurant>.Filter
+            .Eq(r => r.Cuisine, "Pizza");
 
         // Find ID of first pizza restaurant
         var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();

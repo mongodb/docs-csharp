@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using static System.Console;
 
-namespace CsharpExamples.UsageExamples.InsertMany;
+namespace CSharpExamples.UsageExamples.InsertMany;
 
 public class InsertMany
 {
@@ -16,7 +16,8 @@ public class InsertMany
         Setup();
 
         // Attempt to find document before insert
-        var filter = Builders<Restaurant>.Filter.Eq(r => r.Name, "Mongo's Pizza");
+        var filter = Builders<Restaurant>.Filter
+            .Eq(r => r.Name, "Mongo's Pizza");
 
         var foundRestaurants = _restaurantsCollection.Find(filter).ToList();
 
@@ -88,7 +89,8 @@ public class InsertMany
 
     private static void Cleanup()
     {
-        var filter = Builders<Restaurant>.Filter.Eq(r => r.Name, "Mongo's Pizza");
+        var filter = Builders<Restaurant>.Filter
+            .Eq(r => r.Name, "Mongo's Pizza");
 
         _restaurantsCollection.DeleteMany(filter);
     }

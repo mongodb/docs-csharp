@@ -4,19 +4,21 @@ using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using static System.Console;
 
-namespace CSharpExamples.UsageExamples;
+namespace CSharpExamples.UsageExamples.DeleteMany;
 
 public class DeleteManyAsync
 {
     private static IMongoCollection<Restaurant> _restaurantsCollection;
-    private static string _mongoConnectionString = "<Your MongoDB URI>";
+    private const string MongoConnectionString = "<Your MongoDB URI>";
 
     public static async Task Main(string[] args)
     {
         Setup();
 
-        var docs = _restaurantsCollection.Find(Builders<Restaurant>.Filter
-            .Eq(r => r.Borough, "Brooklyn")).ToList();
+        var filter = Builders<Restaurant>.Filter
+            .Eq(r => r.Borough, "Brooklyn");
+
+        var docs = _restaurantsCollection.Find(filter).ToList();
 
         // Deleting documents using builders
         WriteLine("Deleting documents...");

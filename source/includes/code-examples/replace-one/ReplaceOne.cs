@@ -15,7 +15,8 @@ public class ReplaceOne
         Setup();
 
         // Create filter 
-        var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Pizza");
+        var filter = Builders<Restaurant>.Filter
+            .Eq(r => r.Cuisine, "Pizza");
 
         // Find first pizza restaurant
         var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
@@ -36,7 +37,8 @@ public class ReplaceOne
     private static ReplaceOneResult ReplaceOneRestaurant()
     {
         // start-replace-one
-        var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Pizza");
+        var filter = Builders<Restaurant>.Filter
+            .Eq(r => r.Cuisine, "Pizza");
 
         // Find ID of first pizza restaurant
         var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();

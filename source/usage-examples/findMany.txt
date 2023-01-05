@@ -20,7 +20,7 @@ Examples
 
 These examples use the following ``Restaurant`` class as a model:
 
-.. literalinclude:: ../includes/code-examples/FindMany.cs
+.. literalinclude:: ../includes/code-examples/find-many/Restaurant.cs
    :start-after: start-model
    :end-before: end-model
    :language: csharp

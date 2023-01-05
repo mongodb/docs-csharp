@@ -16,9 +16,9 @@ the connection URI or a ``MongoClientSettings`` object.
 
 .. _csharp-connection-uri:
 
-----------------------------------
+------------------------
 Using the Connection URI
-----------------------------------
+------------------------
 
 If you pass a connection URI to the ``MongoClient`` constructor, you can include
 connection options in the string as ``<name>=<value>`` pairs. In the following example,
@@ -76,6 +76,10 @@ relevant options.
      - | Specifies whether to relax TLS constraints as much as possible. This can include 
          allowing invalid certificates or hostname mismatches.
        |
+       | **Note:** If this property is set to ``true`` and
+       | ``SslSettings.CheckCertificateRevocation`` is set to ``false``, the 
+       | {+driver-short+} will throw an exception.
+       |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
 
@@ -116,7 +120,8 @@ relevant options.
    * - **ConnectTimeout**
      - ``connectTimeoutMS=0``
      - | The length of time the driver tries to establish a single TCP socket connection 
-         to the server before timing out. Specifying ``0`` disables the connection timeout.
+         to the server before timing out. Specifying ``TimeSpan.Infinite`` disables the 
+         connection timeout.
        |
        | **DataType**: ``TimeSpan``
        | **Default**: 30 seconds
@@ -149,6 +154,10 @@ relevant options.
        | :manual:`DNS seed list connection format. <reference/connection-string/#std-label-connections-dns-seedlist>`
        | You must use the :manual:`standard connection URI format <reference/connection-string/#standard-connection-string-format/>` 
        | instead. 
+       |
+       | **Note**: This property must be set to ``false`` if you specify more than one
+       | host name.
+       |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
 
@@ -161,14 +170,14 @@ relevant options.
        | **Default**: 10 seconds
 
    * - **HeartbeatTimeout**
-     - {+not-available+}
+     - ``heartbeatTimeoutMS=5000``
      - | The length of time a monitoring socket can be idle before timing out.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: Same value as ``ConnectTimeout``
      
    * - **IPv6**
-     - {+not-available+}
+     - ``ipv6=true``
      - | Specifies whether the host address is in IPv6 format.
        | 
        | **Data Type**: {+bool-data-type+}
@@ -177,6 +186,8 @@ relevant options.
    * - **IsFrozen**
      - {+not-available+}
      - | Indicates whether the settings have been frozen. Frozen settings can't be changed.
+       |
+       | **Note:** This option is read-only.
        | 
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
@@ -190,7 +201,13 @@ relevant options.
 
    * - **LoadBalanced**
      - ``loadBalanced=true``
-     - | Specifies whether the driver is connecting to a load balancer.
+     - | Specifies whether the driver is connecting to a load balancer. You can use this 
+       | property only if:
+       | 
+       | You specify just one host name
+       | You're not connecting to a replica set.
+       | You're not using the ``SrvMaxHosts`` property.
+       | You're not using the ``DirectConnection`` property.
        | 
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
@@ -199,7 +216,8 @@ relevant options.
      - ``localThresholdMS=0``
      - | The latency window for server eligibility. If a server's round trip takes longer 
          than the fastest server's round-trip time plus this value, the server isn't 
-         eligible for selection. Specifying ``0`` selects the fastest eligible server.
+         eligible for selection. Specifying ``TimeSpan.Infinite`` selects the fastest 
+         eligible server.
        | 
        | **Data Type**: ``TimeSpan``
        | **Default**: 15 milliseconds
@@ -215,7 +233,7 @@ relevant options.
    * - **MaxConnectionIdleTime**
      - ``maxIdleTimeMS=300000``
      - | The length of time a connection can be idle before the driver closes it. 
-         Specifying ``0`` means no maximum.
+         Specifying ``TimeSpan.Infinite`` means no maximum.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 10 minutes
@@ -307,7 +325,11 @@ relevant options.
      - | Specifies whether to use the standard connection string format (``MongoDB``) 
          or the DNS seed list format (``MongoDBPlusSrv``). 
          See :manual:`the MongoDB Manual</reference/connection-string/>` for more 
-         information about connection string formats. 
+         information about connection string formats.
+       |
+       | **Note**: If the ``DirectConnection`` property is set to ``true`` and you 
+       | try to use the DNS seed list format, the {+driver-short+} will throw an 
+       | exception. 
        |
        | **Data Type**: `ConnectionStringScheme <{+api-root+}/T_MongoDB_Driver_Core_Configuration_ConnectionStringScheme.htm>`__
        | **Default**: ``ConnectionStringScheme.MongoDB``
@@ -350,7 +372,7 @@ relevant options.
    * - **SocketTimeout**
      - ``socketTimeoutMS=0``
      - | The length of time the driver tries to send or receive on a socket before 
-         timing out. Specifying ``0`` means no timeout.
+         timing out. Specifying ``TimeSpan.Infinite`` means no timeout.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: OS default
@@ -361,6 +383,10 @@ relevant options.
          the seedlist or, during SRV polling, adding new hosts to the topology. 
          Specifying ``0`` means no maximum.
        |
+       | **Note**: You can use this property only if the connection-string scheme is set
+       | to ``ConnectionStringScheme.MongoDBPlusSrv``. You cannot use it when connecting 
+       | to a replica set.
+       |
        | **Data Type**: {+int-data-type+}
        | **Default**: ``0``
 
@@ -369,13 +395,17 @@ relevant options.
      - | TLS/SSL options, including client certificates, revocation handling, and 
          enabled and disabled TLS/SSL protocols.
        |
+       | **Note:** If ``SslSettings.CheckCertificateRevocation`` is set to ``false`` and 
+       | ``AllowInsecureTls`` is set to ``true``, the 
+       | {+driver-short+} will throw an exception.
+       |
        | **Data Type**: `SslSettings <{+api-root+}/T_MongoDB_Driver_SslSettings.htm>`__
        | **Default**: ``null``
 
    * - **UseTls**
      - ``tls=true`` or ``ssl=true``
      - | Specifies whether to require TLS for connections to the server. If you use 
-         a scheme of ``\"mongodb+srv\"`` or specify other TLS options, 
+         a scheme of ``"mongodb+srv"`` or specify other TLS options, 
          this option defaults to ``true``.
        |
        | **Data Type**: {+bool-data-type+}
@@ -384,7 +414,8 @@ relevant options.
    * - **WaitQueueTimeout**
      - ``waitQueueTimeoutMS=0``
      - | The length of time the driver tries to check out a connection from a 
-         server's connection pool before timing out. Specifying ``0`` means no timeout.
+         server's connection pool before timing out. Specifying ``TimeSpan.Infinite`` 
+         means no timeout.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 2 minutes

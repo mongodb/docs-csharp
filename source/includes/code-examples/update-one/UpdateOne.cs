@@ -47,7 +47,7 @@ public class UpdateOne
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
         // Establish the connection to MongoDB and get the restaurants database
-        var mongoClient = new MongoClient(_mongoConnectionString);
+        var mongoClient = new MongoClient(MongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     }

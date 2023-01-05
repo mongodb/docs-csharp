@@ -103,11 +103,10 @@ corresponding code.
 Expected Result
 ~~~~~~~~~~~~~~~
 
-Running any of the preceding full examples prints the following results:
+Running any of the preceding full examples prints results similar to the following:
 
 .. code-block:: none
 
-   // results truncated
    { 
       "_id" : ObjectId("5eb3d668b31de5d588f42950"), 
       "name" : "Bagels N Buns", 

@@ -30,7 +30,7 @@ public class UpdateMany
         Console.WriteLine($"Restaurants with {CuisineField} \"{NewCuisine}\" found after update: {FindCountOfRestaurantsWithCuisine(NewCuisine)}");
 
         // Reset sample data
-        Write("Resetting sample data...");
+        Console.WriteLine("Resetting sample data...");
         ResetSampleData();
         Console.WriteLine("done.");
     }

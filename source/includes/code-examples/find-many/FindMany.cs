@@ -1,5 +1,3 @@
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
@@ -53,12 +51,12 @@ public class FindMany
         // end-find-linq-sync
     }
 
-    private static void FindAllRestaurantsSync()
+    private static List<Restaurant> FindAllRestaurantsSync()
     {
         // start-find-all-sync
-        var filter = Builders<BsonDocument>.Filter.Empty();
+        var filter = Builders<Restaurant>.Filter.Empty;
 
-        var restaurants = _restaurantsCollection.Find(filter)
+        return _restaurantsCollection.Find(filter)
             .ToList();
         // end-find-all-sync
     }

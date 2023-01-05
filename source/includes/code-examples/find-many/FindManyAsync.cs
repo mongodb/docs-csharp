@@ -1,5 +1,3 @@
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -57,7 +55,7 @@ public class FindManyAsync
     private static async Task<List<Restaurant>> FindAllRestaurantsAsync()
     {
         // start-find-all-async
-        var filter = Builders<BsonDocument>.Filter.Empty();
+        var filter = Builders<Restaurant>.Filter.Empty;
 
         return await _restaurantsCollection.Find(filter)
             .ToListAsync();

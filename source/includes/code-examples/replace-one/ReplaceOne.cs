@@ -28,7 +28,7 @@ public class ReplaceOne
         var firstPizzaRestaurant = _restaurantsCollection.Find(filter).First();
         Console.WriteLine($"First pizza restaurant after replacement: {firstPizzaRestaurant.Name}");
 
-        Write("Resetting sample data...");
+        Console.WriteLine("Resetting sample data...");
         _restaurantsCollection.ReplaceOneAsync(filter, oldPizzaRestaurant);
         Console.WriteLine("done.");
     }

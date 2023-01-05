@@ -1,5 +1,4 @@
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
@@ -28,7 +27,7 @@ public class InsertOneAsync
         Cleanup();
     }
 
-    private static async void InsertOneRestaurantAsync()
+    private static async Task InsertOneRestaurantAsync()
     {
         // delete sample document if already exists
         Cleanup();

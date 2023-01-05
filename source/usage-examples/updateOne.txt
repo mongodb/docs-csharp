@@ -50,7 +50,7 @@ corresponding code.
       :tabid: update-async
 
 
-      .. literalinclude:: ../includes/code-examples/UpdateOneAsync.cs
+      .. literalinclude:: ../includes/code-examples/update-one/UpdateOneAsync.cs
          :start-after: start-update-one-async
          :end-before: end-update-one-async
          :language:  csharp
@@ -63,7 +63,7 @@ corresponding code.
    .. tab:: Synchronous
       :tabid: update-many-sync
 
-      .. literalinclude:: ../includes/code-examples/UpdateOne.cs
+      .. literalinclude:: ../includes/code-examples/update-one/UpdateOne.cs
          :start-after: start-update-one
          :end-before: end-update-one
          :language:  csharp

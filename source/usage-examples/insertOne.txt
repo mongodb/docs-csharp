@@ -38,7 +38,7 @@ corresponding code.
    .. tab:: Asynchronous
       :tabid: insert-one-async
 
-      .. literalinclude:: ../includes/code-examples/InsertOneAsync.cs
+      .. literalinclude:: ../includes/code-examples/insert-one/InsertOneAsync.cs
          :start-after: start-insert-one-async
          :end-before: end-insert-one-async
          :language:  csharp
@@ -51,7 +51,7 @@ corresponding code.
    .. tab:: Synchronous
       :tabid: insert-one-sync
 
-      .. literalinclude:: ../includes/code-examples/InsertOne.cs
+      .. literalinclude:: ../includes/code-examples/insert-one/InsertOne.cs
          :start-after: start-insert-one
          :end-before: end-insert-one
          :language:  csharp

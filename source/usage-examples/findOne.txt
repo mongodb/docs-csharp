@@ -40,7 +40,7 @@ corresponding code.
    .. tab:: Asynchronous
       :tabid: builders-async
 
-      .. literalinclude:: ../includes/code-examples/FindOneAsync.cs
+      .. literalinclude:: ../includes/code-examples/find-one/FindOneAsync.cs
          :start-after: start-find-builders
          :end-before: end-find-builders
          :language:  csharp
@@ -53,7 +53,7 @@ corresponding code.
    .. tab:: Synchronous
       :tabid: builders-sync
 
-      .. literalinclude:: ../includes/code-examples/FindOne.cs
+      .. literalinclude:: ../includes/code-examples/find-one/FindOne.cs
          :start-after: start-find-builders
          :end-before: end-find-builders
          :language:  csharp
@@ -77,7 +77,7 @@ corresponding code.
    .. tab:: Asynchronous
       :tabid: linq-async
 
-      .. literalinclude:: ../includes/code-examples/FindOneAsync.cs
+      .. literalinclude:: ../includes/code-examples/find-one/FindOneAsync.cs
          :start-after: start-find-linq
          :end-before: end-find-linq
          :language:  csharp
@@ -90,7 +90,7 @@ corresponding code.
    .. tab:: Synchronous
       :tabid: linq-sync
 
-      .. literalinclude:: ../includes/code-examples/FindOne.cs
+      .. literalinclude:: ../includes/code-examples/find-one/FindOne.cs
          :start-after: start-find-linq
          :end-before: end-find-linq
          :language:  csharp

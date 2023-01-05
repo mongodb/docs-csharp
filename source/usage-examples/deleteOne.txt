@@ -48,7 +48,7 @@ corresponding code.
    .. tab:: Asynchronous
       :tabid: builders-async
 
-      .. literalinclude:: ../includes/code-examples/DeleteOneAsync.cs
+      .. literalinclude:: ../includes/code-examples/delete-one/DeleteOneAsync.cs
          :start-after: start-delete-one-builders-async
          :end-before: end-delete-one-builders-async
          :language:  csharp
@@ -61,7 +61,7 @@ corresponding code.
    .. tab:: Synchronous
       :tabid: builders-sync
 
-      .. literalinclude:: ../includes/code-examples/DeleteOne.cs
+      .. literalinclude:: ../includes/code-examples/delete-one/DeleteOne.cs
          :start-after: start-delete-one-builders
          :end-before: end-delete-one-builders
          :language:  csharp

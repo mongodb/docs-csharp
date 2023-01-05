@@ -50,7 +50,7 @@ MongoDB allows you to manage this field in two ways:
   ``_id`` field value for a document, the driver will populate the field
   with an ``ObjectId``.
 
-Unless you provide strong guarantees for uniqueness, MongoDB recommends
+Unless you can guarantee uniqueness, MongoDB recommends
 you let the driver automatically generate ``_id`` values.
 
 .. note::

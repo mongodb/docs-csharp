@@ -1,6 +1,5 @@
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using static System.Console;
 
 namespace TestRun.Fundamentals;
 
@@ -22,10 +21,10 @@ public class Insert
             new() { Name = "Blue Moon Grill", Cuisine = "American" },
         };
 
-        InsertManyOptions opts = new InsertManyOptions() { BypassDocumentValidation = true };
+        var options = new InsertManyOptions() { BypassDocumentValidation = true };
 
-        WriteLine("Inserting documents...");
-        _restaurantsCollection.InsertMany(restaurantsList, opts);
+        Console.WriteLine("Inserting documents...");
+        _restaurantsCollection.InsertMany(restaurantsList, options);
         // end-insert
     }
     private static void Setup()

@@ -49,9 +49,9 @@ The following ``Guitar`` class models the documents in this collection.
 To learn more about class mapping, see :ref:`csharp-class-mapping`.
 
 The following code instantiates the ``_guitarsCollection`` object using the 
-``Guitars`` class as a type parameter. This type parameter causes the object to 
+``Guitar`` class as a type parameter. This type parameter causes the driver to 
 automatically serialize and deserialize the documents it sends to and receives
-from MongoDB to instances of the ``Guitars`` class:
+from MongoDB to instances of the ``Guitar`` class:
 
 .. code-block:: csharp
 

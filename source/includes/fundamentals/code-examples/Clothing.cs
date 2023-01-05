@@ -15,7 +15,7 @@ public class Clothing
     public bool InStock { get; set; }
 
     [BsonElement("price")]
-    [BsonRepresentation(BsonType.Double)]
+    [BsonRepresentation(BsonType.Decimal128)]
     public decimal Price { get; set; }
 
     [BsonElement("colorSelection")]

@@ -1,8 +1,7 @@
 using MongoDB.Driver;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serializaton.Conventions;
 
-namespace TestRun.Fundamentals;
+namespace DataFormats.Poco;
 
 public class Poco
 {
@@ -14,7 +13,7 @@ public class Poco
         Setup();
 
         // start-insert
-        var doc = new Clothing()
+        var doc = new Clothing
         {
             Name = "Denim Jacket",
             InStock = false,
@@ -38,23 +37,3 @@ public class Poco
         _myColl = myDatabase.GetCollection<Clothing>("sample_coll");
     }
 }
-
-// start-model
-public class Clothing
-{
-    public ObjectId Id { get; set; }
-
-    [BsonElement("name")]
-    public string Name { get; set; }
-
-    [BsonElement("inStock")]
-    public bool InStock { get; set; }
-
-    [BsonElement("price")]
-    [BsonRepresentation(BsonType.Double)]
-    public decimal Price { get; set; }
-
-    [BsonElement("colorSelection")]
-    public List<string> ColorSelection { get; set; }
-}
-// end-model

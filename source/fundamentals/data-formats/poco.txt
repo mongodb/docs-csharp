@@ -115,7 +115,7 @@ MongoDB collection.
    using the Pascal case naming convention, you can use the following
    code to use camel case field names in the serialized document:
 
-   .. literalinclude:: ../../includes/fundamentals/code-examples/poco.cs
+   .. literalinclude:: ../../includes/fundamentals/code-examples/Poco.cs
       :start-after: start-conventionpack
       :end-before: end-conventionpack
       :language:  csharp
@@ -195,10 +195,10 @@ The following code sample maps the ``Identifier`` property to the
 
    If you identify more than one property as the ``_id`` field using the
    ``[BsonId()]`` attribute, the driver throws a
-   ``DuplicateBsonMemberMapAttributeException``. If your POCO
-   properties use more than one of the three recognized field
-   names (``Id``, ``id``, and ``_id``), the driver throws a
-   ``BsonSerializationException``.
+   ``DuplicateBsonMemberMapAttributeException``. If you specify the same 
+   database field more than once
+   (for example, if your POCO includes properties named ``Id`` and ``_id``), 
+   the driver throws a ``BsonSerializationException``.
 
 Omit Empty Fields
 ~~~~~~~~~~~~~~~~~
@@ -232,7 +232,7 @@ serialization-related attributes:
 - ``[BsonElement()]``, which specifies custom field names in the camel case naming convention
 - ``[BsonRepresentation()]``, which specifies serialization of the ``Price`` field as a BSON ``Double`` type
 
-.. literalinclude:: ../../includes/fundamentals/code-examples/poco.cs
+.. literalinclude:: ../../includes/fundamentals/code-examples/Clothing.cs
    :start-after: start-model
    :end-before: end-model
    :language:  csharp
@@ -241,7 +241,7 @@ serialization-related attributes:
 
 The following code instantiates a ``Clothing`` object and inserts the document into a collection:
 
-.. literalinclude:: ../../includes/fundamentals/code-examples/poco.cs
+.. literalinclude:: ../../includes/fundamentals/code-examples/Poco.cs
    :start-after: start-insert
    :end-before: end-insert
    :language:  csharp

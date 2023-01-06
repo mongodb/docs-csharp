@@ -29,7 +29,7 @@ public class ReplaceOne
 
         Console.WriteLine("Resetting sample data...");
         _restaurantsCollection.ReplaceOneAsync(filter, oldRestaurant);
-        Console.WriteLine("done.");
+        Console.WriteLine("Done");
     }
 
     private static ReplaceOneResult ReplaceOneRestaurant()

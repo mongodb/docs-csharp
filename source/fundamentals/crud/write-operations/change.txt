@@ -251,11 +251,11 @@ match any existing documents.
             IsUpsert = true
         };
 
-        WriteLine("Updating documents...");
+        Console.WriteLine("Updating documents...");
         var result = _restaurantsCollection.UpdateMany(filter, update, opts);
       
-        WriteLine($"Updated documents: {result.ModifiedCount}");
-        WriteLine($"Result acknowledged? {result.IsAcknowledged}");
+        Console.WriteLine($"Updated documents: {result.ModifiedCount}");
+        Console.WriteLine($"Result acknowledged? {result.IsAcknowledged}");
 
    .. output::
       :language: none
@@ -450,11 +450,11 @@ match any existing documents.
           IsUpsert = true
       };
 
-      WriteLine("Replacing document...");
+      Console.WriteLine("Replacing document...");
       var result = _restaurantsCollection.ReplaceOne(filter, newRestaurant, opts);
       
-      WriteLine($"Replaced documents: {result.ModifiedCount}");
-      WriteLine($"Result acknowledged? {result.IsAcknowledged}"); 
+      Console.WriteLine($"Replaced documents: {result.ModifiedCount}");
+      Console.WriteLine($"Result acknowledged? {result.IsAcknowledged}"); 
 
    .. output::
       :language: none

@@ -23,6 +23,7 @@ public class Delete
         Console.WriteLine($"Deleted documents: {result.DeletedCount}");
         Console.WriteLine($"Result acknowledged? {result.IsAcknowledged}");
     }
+
     private static void Setup()
     {
         // This allows automapping of the camelCase database fields to our models. 

@@ -164,11 +164,11 @@ field value includes the phrase "Pearl Street":
 
       DeleteOptions opts = new DeleteOptions { Hint = "borough_1" };
 
-      WriteLine("Deleting documents...");
+      Console.WriteLine("Deleting documents...");
       var result = _restaurantsCollection.DeleteMany(filter, opts);
       
-      WriteLine($"Deleted documents: {result.DeletedCount}");
-      WriteLine($"Result acknowledged? {result.IsAcknowledged}");
+      Console.WriteLine($"Deleted documents: {result.DeletedCount}");
+      Console.WriteLine($"Result acknowledged? {result.IsAcknowledged}");
 
    .. output::
       :language: none

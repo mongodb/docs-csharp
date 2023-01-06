@@ -11,6 +11,7 @@ namespace Fundamentals
 
         private const string OldValue = "Manhattan";
         private const string NewValue = "Manhattan (north)";
+
         public static void Main(string[] args)
         {
             Setup();

@@ -27,6 +27,7 @@ public class Insert
         _restaurantsCollection.InsertMany(restaurantsList, options);
         // end-insert
     }
+
     private static void Setup()
     {
         // This allows automapping of the camelCase database fields to our models. 

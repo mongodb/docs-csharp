@@ -220,7 +220,7 @@ The following example performs these actions:
       using (var cursor = _restaurantsCollection.Find(filter, findOptions).ToCursor())
       {
          cursor.MoveNext();
-         WriteLine($"Number of documents in cursor: {cursor.Current.Count()}");
+         Console.WriteLine($"Number of documents in cursor: {cursor.Current.Count()}");
       }
 
    .. output::

@@ -161,6 +161,15 @@ relevant options.
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
 
+   * - **FSync**
+     - ``fsync=true``
+     - | Returns the ``fsync`` value of the write concern. 
+         See :manual:`the MongoDB Manual</reference/command/fsync/#fsync>` for more 
+         information about ``fsync``.
+       |
+       | **Data Type**: {+bool-data-type+}
+       | **Default**: ``false``
+
    * - **HeartbeatInterval**
      - ``heartbeatFrequencyMS=5000``
      - | The interval between regular server-monitoring checks. Must be greater than or 
@@ -239,11 +248,12 @@ relevant options.
        | **Default**: 10 minutes
 
    * - **MaxConnectionLifeTime**
-     - {+not-available+}
+     - ``maxLifetimeMS=50000`` 
      - | The length of time a connection can be pooled before expiring.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 30 minutes
+
    * - **MaxConnectionPoolSize**
      - ``maxPoolSize=150``
      - | The greatest number of clients or connections the driver can create in its 
@@ -410,6 +420,13 @@ relevant options.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
+
+   * - **UuidRepresentation**
+     - ``uuidRepresentation=pythonLegacy``
+     - | Returns the UUID representation.
+       |
+       | **Data Type**: `GuidRepresentation <+api-root+}/T_MongoDB_Bson_GuidRepresentation.htm>`__
+       | **Default**: ``GuidRepresentation.CSharpLegacy``
 
    * - **WaitQueueTimeout**
      - ``waitQueueTimeoutMS=0``

@@ -26,13 +26,26 @@ in the ``sample_restaurants`` database provided in the :atlas:`Atlas sample data
 To learn how to create a free MongoDB Atlas cluster and load the sample datasets,
 see the :ref:`<csharp-quickstart>`.
 
-The following ``Restaurant`` class models the documents in this collection:
+The following ``Restaurant``, ``Address`` and ``Grade`` classes model the
+documents in this collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
    :language: csharp
    :dedent:
    :start-after: start-restaurant-model
    :end-before: end-restaurant-model
+
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-address-model
+   :end-before: end-address-model
+
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-grade-model
+   :end-before: end-grade-model
 
 .. note::
 
@@ -48,10 +61,10 @@ The following ``Restaurant`` class models the documents in this collection:
 Make A Collection Queryable
 ---------------------------
 
-To use LINQ to query your collection, you must first convert the collection to
+To use LINQ to query your collection, you must first create an
 an `IQueryable
 <https://learn.microsoft.com/en-us/dotnet/api/system.linq.iqueryable?view=net-7.0>`__
-instance. To convert your collection, use the ``AsQueryable`` method
+object that links to the collection. To create the object, use the ``AsQueryable()`` method
 as follows:
 
 .. code-block:: csharp
@@ -60,7 +73,12 @@ as follows:
     var restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     var queryableCollection = restaurantsCollection.AsQueryable();
 
-Once the collection is queryable, you can compose a query using 
+The ``AsQueryable()`` method returns an `IMongoQueryable
+<{+api-root+}/T_MongoDB_Driver_Linq_IMongoQueryable_1.htm>`__ instance that
+has the ``IQueryable`` extension methods, along with a set of
+MongoDB specific methods.
+
+Once you have the queryable object, you can compose a query using 
 **method syntax**. Some pipeline stages also support **query comprehension syntax**,
 which resembles SQL query syntax.
 

@@ -77,8 +77,8 @@ relevant options.
          allowing invalid certificates or hostname mismatches.
        |
        | **Note:** If this property is set to ``true`` and
-       | ``SslSettings.CheckCertificateRevocation`` is set to ``false``, the 
-       | {+driver-short+} will throw an exception.
+         ``SslSettings.CheckCertificateRevocation`` is set to ``false``, the 
+         {+driver-short+} will throw an exception.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
@@ -138,9 +138,9 @@ relevant options.
          authentication credentials, mechanism, source, and other settings.
        |
        | If you don't specify an authentication mechanism, the driver uses either 
-       | ``SCRAM-SHA-1`` or ``SCRAM-SHA-256``, depending on the server version. See
-       | :ref:`authentication mechanisms <csharp-authentication-mechanisms>` for available
-       | authentication mechanisms.
+         ``SCRAM-SHA-1`` or ``SCRAM-SHA-256``, depending on the server version. See
+         :ref:`authentication mechanisms <csharp-authentication-mechanisms>` for available
+         authentication mechanisms.
        |
        | **Data Type**: `MongoCredential <{+api-root+}/T_MongoDB_Driver_MongoCredential.htm>`__
        | **Default**: ``null``
@@ -150,12 +150,12 @@ relevant options.
      - | Specifies whether to force dispatch **all** operations to the host.
        |
        | If you specify this option, the driver doesn't accept the 
-       | :manual:`DNS seed list connection format. <reference/connection-string/#std-label-connections-dns-seedlist>`
-       | You must use the :manual:`standard connection URI format <reference/connection-string/#standard-connection-string-format/>` 
-       | instead. 
+         :manual:`DNS seed list connection format. <reference/connection-string/#std-label-connections-dns-seedlist>`
+         You must use the :manual:`standard connection URI format <reference/connection-string/#standard-connection-string-format/>` 
+         instead. 
        |
        | **Note**: This property must be set to ``false`` if you specify more than one
-       | host name.
+         host name.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
@@ -184,9 +184,8 @@ relevant options.
 
    * - **IsFrozen**
      - {+not-available+}
-     - | Indicates whether the settings have been frozen. Frozen settings can't be changed.
-       |
-       | **Note:** This option is read-only.
+     - | Indicates whether the settings have been frozen. Frozen settings can't be changed. 
+         This option is read-only.
        | 
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
@@ -201,12 +200,12 @@ relevant options.
    * - **LoadBalanced**
      - ``loadBalanced=true``
      - | Specifies whether the driver is connecting to a load balancer. You can set this 
-       | property to ``true`` only if:
-       | 
-       | - You specify just one host name.
-       | - You're not connecting to a replica set.
-       | - You're not using the ``SrvMaxHosts`` property.
-       | - You're not using the ``DirectConnection`` property.
+         property to ``true`` only if:
+       |         
+         - You specify just one host name.
+         - You're not connecting to a replica set.
+         - You're not using the ``SrvMaxHosts`` property.
+         - You're not using the ``DirectConnection`` property.
        | 
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
@@ -333,8 +332,8 @@ relevant options.
          information about connection string formats.
        |
        | **Note**: If the ``DirectConnection`` property is set to ``true`` and you 
-       | try to use the DNS seed list format, the {+driver-short+} will throw an 
-       | exception. 
+         try to use the DNS seed list format, the {+driver-short+} will throw an 
+         exception. 
        |
        | **Data Type**: `ConnectionStringScheme <{+api-root+}/T_MongoDB_Driver_Core_Configuration_ConnectionStringScheme.htm>`__
        | **Default**: ``ConnectionStringScheme.MongoDB``
@@ -388,8 +387,8 @@ relevant options.
          the seedlist or, during SRV polling, adding new hosts to the topology. 
        |
        | **Note**: You can use this property only if the connection-string scheme is set
-       | to ``ConnectionStringScheme.MongoDBPlusSrv``. You cannot use it when connecting 
-       | to a replica set.
+         to ``ConnectionStringScheme.MongoDBPlusSrv``. You cannot use it when connecting 
+         to a replica set.
        |
        | **Data Type**: {+int-data-type+}
        | **Default**: ``0``
@@ -400,8 +399,8 @@ relevant options.
          enabled and disabled TLS/SSL protocols.
        |
        | **Note:** If ``SslSettings.CheckCertificateRevocation`` is set to ``false`` and 
-       | ``AllowInsecureTls`` is set to ``true``, the 
-       | {+driver-short+} will throw an exception.
+         ``AllowInsecureTls`` is set to ``true``, the 
+         {+driver-short+} will throw an exception.
        |
        | **Data Type**: `SslSettings <{+api-root+}/T_MongoDB_Driver_SslSettings.htm>`__
        | **Default**: ``null``

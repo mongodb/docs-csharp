@@ -120,8 +120,7 @@ relevant options.
    * - **ConnectTimeout**
      - ``connectTimeoutMS=0``
      - | The length of time the driver tries to establish a single TCP socket connection 
-         to the server before timing out. Specifying ``TimeSpan.Infinite`` disables the 
-         connection timeout.
+         to the server before timing out.
        |
        | **DataType**: ``TimeSpan``
        | **Default**: 30 seconds
@@ -157,15 +156,6 @@ relevant options.
        |
        | **Note**: This property must be set to ``false`` if you specify more than one
        | host name.
-       |
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``false``
-
-   * - **FSync**
-     - ``fsync=true``
-     - | Returns the ``fsync`` value of the write concern. 
-         See :manual:`the MongoDB Manual</reference/command/fsync/#fsync>` for more 
-         information about ``fsync``.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
@@ -210,13 +200,13 @@ relevant options.
 
    * - **LoadBalanced**
      - ``loadBalanced=true``
-     - | Specifies whether the driver is connecting to a load balancer. You can use this 
-       | property only if:
+     - | Specifies whether the driver is connecting to a load balancer. You can set this 
+       | property to ``true`` only if:
        | 
-       | You specify just one host name
-       | You're not connecting to a replica set.
-       | You're not using the ``SrvMaxHosts`` property.
-       | You're not using the ``DirectConnection`` property.
+       | * You specify just one host name.
+       | * You're not connecting to a replica set.
+       | * You're not using the ``SrvMaxHosts`` property.
+       | * You're not using the ``DirectConnection`` property.
        | 
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
@@ -225,24 +215,29 @@ relevant options.
      - ``localThresholdMS=0``
      - | The latency window for server eligibility. If a server's round trip takes longer 
          than the fastest server's round-trip time plus this value, the server isn't 
-         eligible for selection. Specifying ``TimeSpan.Infinite`` selects the fastest 
-         eligible server.
+         eligible for selection.
        | 
        | **Data Type**: ``TimeSpan``
        | **Default**: 15 milliseconds
+
+   * - **LoggingSettings**
+     - {+not-available+}
+     - | The settings used for logging.
+       |
+       | **Data Type**: `LoggingSettings <{+api-root+}/T_MongoDB_Driver_Core_Configuration_LoggingSettings.htm>`__
+       | **Default**: ``null``
 
    * - **MaxConnecting**
      - ``maxConnecting=3``
      - | The greatest number of connections a driver's connection pool may be 
          establishing concurrently.
        |
-       | **Data Type**: ``{+int-data-type+}``
+       | **Data Type**: {+int-data-type+}
        | **Default**: ``2``
 
    * - **MaxConnectionIdleTime**
      - ``maxIdleTimeMS=300000``
      - | The length of time a connection can be idle before the driver closes it. 
-         Specifying ``TimeSpan.Infinite`` means no maximum.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 10 minutes
@@ -382,7 +377,7 @@ relevant options.
    * - **SocketTimeout**
      - ``socketTimeoutMS=0``
      - | The length of time the driver tries to send or receive on a socket before 
-         timing out. Specifying ``TimeSpan.Infinite`` means no timeout.
+         timing out.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: OS default
@@ -391,7 +386,6 @@ relevant options.
      - ``srvMaxHosts=3``
      - | The greatest number of SRV results to randomly select when initially populating 
          the seedlist or, during SRV polling, adding new hosts to the topology. 
-         Specifying ``0`` means no maximum.
        |
        | **Note**: You can use this property only if the connection-string scheme is set
        | to ``ConnectionStringScheme.MongoDBPlusSrv``. You cannot use it when connecting 
@@ -413,7 +407,7 @@ relevant options.
        | **Default**: ``null``
 
    * - **UseTls**
-     - ``tls=true`` or ``ssl=true``
+     - ``tls=true`` 
      - | Specifies whether to require TLS for connections to the server. If you use 
          a scheme of ``"mongodb+srv"`` or specify other TLS options, 
          this option defaults to ``true``.
@@ -421,18 +415,10 @@ relevant options.
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
 
-   * - **UuidRepresentation**
-     - ``uuidRepresentation=pythonLegacy``
-     - | Returns the UUID representation.
-       |
-       | **Data Type**: `GuidRepresentation <+api-root+}/T_MongoDB_Bson_GuidRepresentation.htm>`__
-       | **Default**: ``GuidRepresentation.CSharpLegacy``
-
    * - **WaitQueueTimeout**
      - ``waitQueueTimeoutMS=0``
      - | The length of time the driver tries to check out a connection from a 
-         server's connection pool before timing out. Specifying ``TimeSpan.Infinite`` 
-         means no timeout.
+         server's connection pool before timing out. 
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 2 minutes
@@ -446,7 +432,7 @@ relevant options.
         &journal=true
 
      - | The default write-concern settings, including write timeout and 
-         journaling, for the client. Specifying ``0`` for the timeout means no timeout. 
+         journaling, for the client.
          See :ref:`write concern <wc-j>` for more information.
        |
        | **Data Type**: `WriteConcern <{+api-root+}/T_MongoDB_Driver_WriteConcern.htm>`__

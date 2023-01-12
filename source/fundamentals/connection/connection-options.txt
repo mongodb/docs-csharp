@@ -68,7 +68,6 @@ relevant options.
    :widths: 50 50
 
    * - **MongoClientSettings** Property
-     - Connection URI Example
      - Description
 
    * - **AllowInsecureTls**
@@ -141,7 +140,6 @@ relevant options.
           &authSource=$external`` 
 
    * - **DirectConnection**
-     - ``directConnection=true``
      - | Specifies whether to force dispatch **all** operations to the host.
        |
        | If you specify this option, the driver doesn't accept the 

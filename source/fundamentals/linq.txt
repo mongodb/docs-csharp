@@ -26,7 +26,7 @@ in the ``sample_restaurants`` database provided in the :atlas:`Atlas sample data
 To learn how to create a free MongoDB Atlas cluster and load the sample datasets,
 see the :ref:`<csharp-quickstart>`.
 
-The following ``Restaurant``, ``Address`` and ``Grade`` classes model the
+The following ``Restaurant``, ``Address`` and ``GradeEntry`` classes model the
 documents in this collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs

@@ -15,7 +15,7 @@ public class Restaurant
 
     public string Borough { get; set; }
 
-    public List<Grade> Grades { get; set; }
+    public List<GradeEntry> Grades { get; set; }
 
 }
 // end-restaurant-model
@@ -36,7 +36,7 @@ public class Address
 // end-address-model
 
 // start-grade-model
-public class Grade
+public class GradeEntry
 {
     public DateTime Date { get; set; }
 

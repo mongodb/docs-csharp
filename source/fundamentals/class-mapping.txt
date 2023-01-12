@@ -31,7 +31,7 @@ the name of the field in the document to the name of the property in the class.
    The type of the property in your class should match the type of the field in
    the document. The {+driver-short+} instantiates a serializer based on the
    type of the property in your class. If the types don't match when the driver
-   serializes the data, the serializer throws an exception.
+   attempts to deserialize the data, the serializer throws an exception.
 
 Manually Creating A Class Map
 -----------------------------

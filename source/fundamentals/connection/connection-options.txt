@@ -135,12 +135,12 @@ relevant options.
        | **Data Type**: `MongoCredential <{+api-root+}/T_MongoDB_Driver_MongoCredential.htm>`__
        | **Default**: ``null``
        | **Connection URI Example**: 
-       | .. code-block:: none
-          :copyable: false
+       .. code-block:: none
+        :copyable: false
 
-          mongodb://user1:password1&authMechanism=GSSAPI
-          &authMechanismProperties=SERVICE_NAME:other,REALM:otherrealm
-          &authSource=$external 
+        mongodb://user1:password1&authMechanism=GSSAPI
+        &authMechanismProperties=SERVICE_NAME:other,REALM:otherrealm
+        &authSource=$external 
 
    * - **DirectConnection**
      - | Specifies whether to force dispatch **all** operations to the host.
@@ -289,12 +289,12 @@ relevant options.
        | **Default**: ``ReadPreference.Primary``
        | **Connection URI Example**: 
        | **Connection URI Example**: 
-       | .. code-block:: none
-          :copyable: false
+       .. code-block:: none
+        :copyable: false
 
-          readPreference=primaryPreferred
-          &maxStalenessSeconds=90
-          &readPreferenceTags=dc:ny,rack:1``
+        readPreference=primaryPreferred
+        &maxStalenessSeconds=90
+        &readPreferenceTags=dc:ny,rack:1``
        |
        .. tip::
 
@@ -341,7 +341,7 @@ relevant options.
    * - **Server**
      - | The host and port number where MongoDB is running.
        |
-       | **Data Type**: `MongoServerAddress <{+api-root+}/T_MongoDB_Driver_MongoServerAddress.htm>`__``
+       | **Data Type**: `MongoServerAddress <{+api-root+}/T_MongoDB_Driver_MongoServerAddress.htm>`__
        | **Default**: ``localhost:27017``
        | **Connection URI Example**: ``mongodb://sample.host:27017``
 

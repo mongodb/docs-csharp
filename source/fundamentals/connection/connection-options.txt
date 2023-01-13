@@ -65,6 +65,7 @@ relevant options.
 
 .. list-table::
    :header-rows: 1
+   :widths: 30 70
 
    * - **MongoClientSettings** Property
      - Description
@@ -286,7 +287,6 @@ relevant options.
        |
        | **Data Type**: `ReadPreference <{+api-root+}/T_MongoDB_Driver_ReadPreference.htm>`__
        | **Default**: ``ReadPreference.Primary``
-       | **Connection URI Example**: 
        | **Connection URI Example**: 
        .. code-block:: none
         :copyable: false

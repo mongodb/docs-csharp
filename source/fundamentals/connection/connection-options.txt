@@ -134,9 +134,13 @@ relevant options.
        |
        | **Data Type**: `MongoCredential <{+api-root+}/T_MongoDB_Driver_MongoCredential.htm>`__
        | **Default**: ``null``
-       | **Connection URI Example**: ``mongodb://user1:password1&authMechanism=GSSAPI
-       |                               &authMechanismProperties=SERVICE_NAME:other,REALM:otherrealm
-       |                               &authSource=$external`` 
+       | **Connection URI Example**: 
+       | .. code-block:: none
+          :copyable: false
+
+          mongodb://user1:password1&authMechanism=GSSAPI
+          &authMechanismProperties=SERVICE_NAME:other,REALM:otherrealm
+          &authSource=$external 
 
    * - **DirectConnection**
      - | Specifies whether to force dispatch **all** operations to the host.
@@ -283,10 +287,15 @@ relevant options.
        |
        | **Data Type**: `ReadPreference <{+api-root+}/T_MongoDB_Driver_ReadPreference.htm>`__
        | **Default**: ``ReadPreference.Primary``
-       | **Connection URI Example**: ``readPreference=primaryPreferred
-       |                               &maxStalenessSeconds=90
-       |                               &readPreferenceTags=dc:ny,rack:1``
-       |        
+       | **Connection URI Example**: 
+       | **Connection URI Example**: 
+       | .. code-block:: none
+          :copyable: false
+
+          readPreference=primaryPreferred
+          &maxStalenessSeconds=90
+          &readPreferenceTags=dc:ny,rack:1``
+       |
        .. tip::
 
         You can include the ``readPreferenceTags`` parameter in the connection URI more 
@@ -350,9 +359,7 @@ relevant options.
        |
        | **Data Type**: IEnumerable<`MongoServerAddress <{+api-root+}/T_MongoDB_Driver_MongoServerAddress.htm>`__>
        | **Default**: ``localhost:27017``
-       | **Connection URI Example**: ``mongodb://sample.host1:27017,
-       |                               sample.host2:27017,
-       |                               sample.host3:27017``
+       | **Connection URI Example**: ``mongodb://sample.host1:27017,sample.host2:27017``
      
    * - **ServerSelectionTimeout**
      - | The length of time the driver tries to select a server before timing out.
@@ -417,9 +424,7 @@ relevant options.
        |
        | **Data Type**: `WriteConcern <{+api-root+}/T_MongoDB_Driver_WriteConcern.htm>`__
        | **Default**: ``WriteConcern.Acknowledged``
-       | **Connection URI Example**: ``w=majority
-       |                               &wTimeoutMS=0
-       |                               &journal=true``
+       | **Connection URI Example**: ``w=majority&wTimeoutMS=0&journal=true``
 
    * - **WriteEncoding**
      - | Specifies whether UTF-8 string serialization is strict or lenient. With strict

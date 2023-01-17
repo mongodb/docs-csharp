@@ -31,14 +31,7 @@ example are modeled by the following ``Restaurant`` class:
    :start-after: start-model
    :end-before: end-model
 
-.. note::
-
-   The documents in the ``restaurants`` collection use the camel
-   case naming convention. The examples in this guide use a ``ConventionPack``
-   to deserialize the fields in the collection into Pascal case and map them to
-   the properties in the ``Restaurant`` class.
-
-   To learn more about custom serialization see :ref:`csharp-custom-serialization`.
+.. include:: /includes/convention-pack-note.rst
 
 This collection is from the :atlas:`sample datasets </sample-data>` provided
 by Atlas. See the :ref:`<csharp-quickstart>` to learn how to create a free MongoDB cluster

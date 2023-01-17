@@ -80,7 +80,7 @@ corresponding code.
          :dedent:
 
       For a fully runnable example of the ``DeleteOne()`` method, see the
-      `Synchronous Delete One Example <{+example+}/delete-one/DeleteOneSync.cs>`__ 
+      `Synchronous Delete One Example <{+example+}/delete-one/DeleteOne.cs>`__ 
 
 Expected Result
 ~~~~~~~~~~~~~~~

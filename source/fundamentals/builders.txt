@@ -332,6 +332,49 @@ as a ``BsonDocument`` to the `AppendStage() method
 To learn more about the Aggregation Pipeline, see the
 :manual:`Aggregation Pipeline </core/aggregation-pipeline/>` server manual page.
 
+Build an Atlas Search Query
+---------------------------
+
+The ``Search`` class provides a type safe interface for creating a
+:manual:`$search </reference/operator/aggregation/search/>` 
+pipeline stage. 
+
+.. note:: Only Available on Atlas for MongoDB v4.2 and later
+
+   This aggregation pipeline operator is only available for collections hosted
+   on :atlas:`MongoDB Atlas </>` clusters running v4.2 or later that are
+   covered by an :atlas:`Atlas search index </reference/atlas-search/index-definitions/>`.
+   Learn more about the required setup and the functionality of this operator
+   from the :ref:`Atlas Search <fts-top-ref>` documentation.
+
+The following example creates a pipeline stage that searches for any document
+that has the word "yellow" in the ``Description`` field.
+
+.. code-block:: csharp
+
+   var result = flowerCollection.Aggregate()
+       .Search(Builders<Flower>.Search.Text(f => f.description, "yellow"));
+
+You can also build a search query that searches using multiple queries. The
+following example searches for any document that meets the following criteria:
+
+- Contains the word "yellow" in the ``Description`` field
+- Contains the word "Perennial" in the ``Category`` field
+- Doesn't contain the word "blue" in the ``Description`` field
+
+.. code-block:: csharp
+
+   var result = flowerCollection.Aggregate()
+       .Search(Builders<Flower>.Search.Compound()
+             .Must(Builders<Flower>.Search.Text(f => f.Description, "yellow"),
+                   Builders<Flower>.Search.Text(f => f.Category, "Perennial"))
+             .MustNot(Builders<Flower>.Search.Text(f => f.Description, "blue"))
+       );
+
+To learn more about the operations available to the ``$search`` pipeline stage,
+see the :atlas:`Operators and Collectors
+<atlas-search/operators-and-collectors>` Atlas guide.
+
 Additional Information
 ----------------------
 

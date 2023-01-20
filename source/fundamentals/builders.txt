@@ -373,7 +373,7 @@ following example searches for any document that meets the following criteria:
 
 To learn more about the operations available to the ``$search`` pipeline stage,
 see the :atlas:`Operators and Collectors
-<atlas-search/operators-and-collectors>` Atlas guide.
+</atlas-search/operators-and-collectors>` Atlas guide.
 
 Additional Information
 ----------------------

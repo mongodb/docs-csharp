@@ -335,7 +335,7 @@ To learn more about the Aggregation Pipeline, see the
 Build an Atlas Search Query
 ---------------------------
 
-The ``Search`` class provides a type safe interface for creating a
+The ``Search`` class provides a type-safe interface for creating a
 :manual:`$search </reference/operator/aggregation/search/>` 
 pipeline stage. 
 

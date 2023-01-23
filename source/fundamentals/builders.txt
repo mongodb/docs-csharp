@@ -358,9 +358,9 @@ that have the word "yellow" in the ``Description`` field.
 You can also combine multiple operations into a single search query. For example, 
 the following code sample searches for all documents that meet the following criteria:
 
-- Contains the word "yellow" in the ``Description`` field
-- Contains the word "Perennial" in the ``Category`` field
-- Doesn't contain the word "blue" in the ``Description`` field
+- Contain the word "yellow" in the ``Description`` field
+- Contain the word "Perennial" in the ``Category`` field
+- Don't contain the word "blue" in the ``Description`` field
 
 .. code-block:: csharp
 

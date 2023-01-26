@@ -296,6 +296,7 @@ relevant options.
           readPreference=primaryPreferred
           &maxStalenessSeconds=90
           &readPreferenceTags=dc:ny,rack:1
+
        |
 
        .. tip::

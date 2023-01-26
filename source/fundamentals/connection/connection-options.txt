@@ -135,6 +135,7 @@ relevant options.
        | **Data Type**: `MongoCredential <{+api-root+}/T_MongoDB_Driver_MongoCredential.htm>`__
        | **Default**: ``null``
        | **Connection URI Example**:
+
        .. code-block:: none
           :copyable: false
 
@@ -288,6 +289,7 @@ relevant options.
        | **Data Type**: `ReadPreference <{+api-root+}/T_MongoDB_Driver_ReadPreference.htm>`__
        | **Default**: ``ReadPreference.Primary``
        | **Connection URI Example**:
+
        .. code-block:: none
           :copyable: false
 
@@ -295,6 +297,7 @@ relevant options.
           &maxStalenessSeconds=90
           &readPreferenceTags=dc:ny,rack:1``
        |
+
        .. tip::
 
           You can include the ``readPreferenceTags`` parameter in the connection URI more

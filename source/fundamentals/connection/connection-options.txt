@@ -136,11 +136,11 @@ relevant options.
        | **Default**: ``null``
        | **Connection URI Example**: 
        .. code-block:: none
-        :copyable: false
+          :copyable: false
 
-        mongodb://user1:password1&authMechanism=GSSAPI
-        &authMechanismProperties=SERVICE_NAME:other,REALM:otherrealm
-        &authSource=$external 
+          mongodb://user1:password1&authMechanism=GSSAPI
+          &authMechanismProperties=SERVICE_NAME:other,REALM:otherrealm
+          &authSource=$external 
 
    * - **DirectConnection**
      - | Specifies whether to force dispatch **all** operations to the host.
@@ -289,18 +289,18 @@ relevant options.
        | **Default**: ``ReadPreference.Primary``
        | **Connection URI Example**: 
        .. code-block:: none
-        :copyable: false
+          :copyable: false
 
-        readPreference=primaryPreferred
-        &maxStalenessSeconds=90
-        &readPreferenceTags=dc:ny,rack:1``
+          readPreference=primaryPreferred
+          &maxStalenessSeconds=90
+          &readPreferenceTags=dc:ny,rack:1``
        |
        .. tip::
 
-        You can include the ``readPreferenceTags`` parameter in the connection URI more 
-        than once. If you do, the client treats each instance as a separate tag set. 
-        The order of the tags in the URI determines the order for read preference. You can
-        use this parameter only if the read-preference mode is not ``primary``.
+          You can include the ``readPreferenceTags`` parameter in the connection URI more 
+          than once. If you do, the client treats each instance as a separate tag set. 
+          The order of the tags in the URI determines the order for read preference. You can
+          use this parameter only if the read-preference mode is not ``primary``.
 
    * - **ReplicaSetName**
      - | The name of the replica set to connect to.

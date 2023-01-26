@@ -39,17 +39,17 @@ The ``LoggingSettings`` constructor accepts the following parameters:
          an ``ILoggerFactory`` object by using the ``LoggerFactory.Create()`` method.
        |
        | **Data Type**: `ILoggerFactory <https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.iloggerfactory?view=dotnet-plat-ext-7.0>`__
-       | **Default**: null
+       | **Default**: ``null``
 
    * - ``MaxDocumentSize``
      - | Optional. The maximum number of characters for extended JSON documents in logged 
          messages.
        |
        | For example, when the driver logs the ``CommandStarted`` message, it truncates 
-         the ``Command`` field to the specified character limit.
+         the ``Command`` field to the number of characters specified in this parameter.
        |
        | **Data Type**: {+int-data-type+}
-       | **Default**: 1000
+       | **Default**: ``1000``
 
 The following code sample shows how to create a ``MongoClient`` that 
 logs all debug messages to the console: 
@@ -82,7 +82,7 @@ MongoDB uses the following categories to classify messages:
      - Description
 
    * - ``MongoDB.Command``
-     - | The progress of commands run against your cluster, including the 
+     - | The progress of commands run against your cluster, represented by the 
          ``CommandStarted``, ``CommandSucceeded``, and ``CommandFailed`` events
 
    * - ``MongoDB.SDAM``

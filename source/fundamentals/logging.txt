@@ -19,7 +19,7 @@ In this guide, you can learn how to use the driver to configure logging for your
 application. 
 
 Configure Logging
-----------------
+-----------------
 
 To specify the logging settings for your application, create a new instance of the 
 ``LoggingSettings`` class, then assign it to the ``LoggingSettings`` property of your 
@@ -97,7 +97,7 @@ MongoDB uses the following categories to classify messages:
      - | Changes in the cluster connections and sockets 
 
    * - ``MongoDB.Internal.*``
-   	 - Prefix for all other {+driver-short+} internal components
+   	 - | Prefix for all other {+driver-short+} internal components
 
 .. tip::
  

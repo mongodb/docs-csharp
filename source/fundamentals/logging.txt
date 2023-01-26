@@ -97,7 +97,7 @@ MongoDB uses the following categories to classify messages:
      - | Changes in the cluster connections and sockets 
 
    * - ``MongoDB.Internal.*``
-  	 - | Prefix for all other {+driver-short+} internal components
+     - | Prefix for all other {+driver-short+} internal components
 
 .. tip::
  

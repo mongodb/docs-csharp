@@ -83,12 +83,12 @@ MongoDB uses the following categories to classify messages:
 
    * - ``MongoDB.Command``
      - | The progress of commands run against your cluster, including the 
-       | ``CommandStarted``, ``CommandSucceeded``, and ``CommandFailed`` events
+         ``CommandStarted``, ``CommandSucceeded``, and ``CommandFailed`` events
 
    * - ``MongoDB.SDAM``
      - | Changes in the topology of the cluster, including the ``ClusterOpening``, 
-       | ``ClusterOpened``, ``ClusterAddingServer``, ``ClusterAddedServer``, and 
-       | ``ClusterRemovingServer`` events 
+         ``ClusterOpened``, ``ClusterAddingServer``, ``ClusterAddedServer``, and 
+         ``ClusterRemovingServer`` events 
 
    * - ``MongoDB.ServerSelection``
      - | The decisions that determine which server to send a particular command to

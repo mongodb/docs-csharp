@@ -28,7 +28,7 @@ New features of the 2.19 driver release include:
   the configurable ``AllowedTypes`` function. 
 - Changed the default ``LinqProvider`` to LINQ3.
 - Added builders for creating Atlas searches.
-- Added support for Range Indexes preview.
-- Added support for Bucket and BucketAuto stages in LINQ3.
+- Added support for range indexes preview.
+- Added support for ``$bucket`` and ``$bucketAuto`` aggregation pipeline stages in LINQ3.
 - Added support for automatic KMS credentials for Azure VM Managed Identities.
 - Added native support for AWS IAM roles.

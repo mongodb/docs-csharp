@@ -22,7 +22,7 @@ Learn what's new in:
 What's New in 2.19 
 -------------------
 
-New features of the 2.19 driver release include:
+The 2.19 driver release includes the following new features:
 
 - The ``ObjectSerializer`` allows deserialization of only safe types, as determined by 
   the configurable ``AllowedTypes`` function. 

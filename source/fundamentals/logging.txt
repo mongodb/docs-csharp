@@ -82,45 +82,45 @@ MongoDB uses the following categories to classify messages:
      - Description
 
    * - ``MongoDB.Command``
-     - | The progress of commands run against your cluster, represented by the 
-         ``CommandStarted``, ``CommandSucceeded``, and ``CommandFailed`` events
+     - | The progress of commands run against your cluster, represented by
+         ``CommandStartedEvent``, ``CommandSucceededEvent``, and ``CommandFailedEvent``
 
    * - ``MongoDB.SDAM``
-     - | Changes in the topology of the cluster, including the 
-         ``ClusterAddedServer``, ``ClusterRemovedServer``, ``ServerHeartbeatStarted``,
-          ``TopologyDescriptionChanged``, and ``ServerDescriptionChangedEvent`` events 
+     - | Changes in the topology of the cluster, including
+         ``ClusterAddedServerEvent``, ``ClusterRemovedServerEvent``, 
+         ``ServerHeartbeatStartedEvent``, ``ClusterDescriptionChangedEvent``, 
+         and ``ServerDescriptionChangedEvent``
 
    * - ``MongoDB.ServerSelection``
      - | The decisions that determine which server to send a particular command to
 
    * - ``MongoDB.Connection``
-     - | Changes in the cluster connection pool, including the ``PoolReady``, 
-         ``PoolClosed``, ``ConnectionCreated``, and ``ConnectionCheckout`` events 
+     - | Changes in the cluster connection pool, including ``PoolReadyEvent``, 
+         ``PoolClosedEvent``, ``ConnectionCreatedEvent``, and ``ConnectionCheckoutEvent``
 
    * - ``MongoDB.Internal.*``
      - | Prefix for all other {+driver-short+} internal components
 
 .. tip::
  
-   To log messages from all components, use the ``Default`` category. 
+   You can specify the minimum verbosity for all logging categories by configuring the 
+   ``Default`` category. 
 
 Configure Log Verbosity
 -----------------------
 
-You can configure the log verbosity of each message category either in memory or in an 
-``appsettings.json`` file. 
-
-To configure the log verbosity of each message category in memory, create a 
-``Dictionary<string, string>`` where the key is ``"LogLevel:<category>" and the value 
-is the minimum log level of messages in that category. Add the dictionary to a 
-``ConfigurationBuilder`` object, then add the ``ConfigurationBuilder`` to your 
-``LoggerFactory``. 
-
-The following code sample shows how to configure a ``MongoClient`` to log two types 
-of messages: 
+You can configure the log verbosity of each message category by using standard .NET
+logging mechanisms. The following code sample shows how to configure a ``MongoClient`` 
+to log two types of messages: 
 
 - All messages with log level ``Error`` or higher from all categories 
 - All messages with log level ``Debug`` or higher from the SDAM category 
+
+In this example, the configuration is done in-memory. The code creates a 
+``Dictionary<string, string>`` where the key is ``"LogLevel:<category>" and the value 
+is the minimum log level of messages in that category. The code then adds the 
+dictionary to a ``ConfigurationBuilder`` object, then adds the ``ConfigurationBuilder`` 
+to a ``LoggerFactory``.
 
 .. code-block:: csharp
 
@@ -146,6 +146,5 @@ of messages:
 
 .. tip::
 
-   For more information on configuring log verbosity, including how to create an 
-   ``appsettings.json file``, see the 
+   For more information on configuring log verbosity, see the 
    `Microsoft .NET logging documentation. <https://learn.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line#configure-logging>`__

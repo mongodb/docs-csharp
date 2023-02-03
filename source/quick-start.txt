@@ -114,7 +114,7 @@ the {+driver-short+} to connect to your MongoDB cluster, run a query on the
 sample data, and print out the result.
 
 To learn more about connecting to Atlas with the {+driver-short+}, see
-the :atlas:`Atlas driver connection guide </driver-connection>`
+the :atlas:`Atlas driver connection </driver-connection>` guide
 and select **{+language+}** from the *Select your language* dropdown.
 
 Next steps

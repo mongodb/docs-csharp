@@ -57,10 +57,6 @@ source code.
 
    export MONGODB_URI='<your atlas connection string>'
 
-To learn more about connecting to Atlas with the {+driver-short+}, see
-the :atlas:`Atlas driver connection guide </driver-connection>`
-and select **C#** from the *Select your language* dropdown.
-
 Set Up Your Project
 -------------------
 
@@ -116,6 +112,10 @@ sample code with the following command from your command line:
 After completing this step, you should have a working application that uses
 the {+driver-short+} to connect to your MongoDB cluster, run a query on the
 sample data, and print out the result.
+
+To learn more about connecting to Atlas with the {+driver-short+}, see
+the :atlas:`Atlas driver connection guide </driver-connection>`
+and select **{+language+}** from the *Select your language* dropdown.
 
 Next steps
 ----------

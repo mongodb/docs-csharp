@@ -95,8 +95,9 @@ MongoDB uses the following categories to classify messages:
      - | The decisions that determine which server to send a particular command to
 
    * - ``MongoDB.Connection``
-     - | Changes in the cluster connection pool, including ``PoolReadyEvent``, 
-         ``PoolClosedEvent``, ``ConnectionCreatedEvent``, and ``ConnectionCheckoutEvent``
+     - | Changes in the cluster connection pool, including ``ConnectionPoolReadyEvent``, 
+         ``ConnectionPoolClosedEvent``, ``ConnectionCreatedEvent``, and 
+         ``ConnectionCheckoutEvent``
 
    * - ``MongoDB.Internal.*``
      - | Prefix for all other {+driver-short+} internal components
@@ -109,15 +110,15 @@ MongoDB uses the following categories to classify messages:
 Configure Log Verbosity
 -----------------------
 
-You can configure the log verbosity of each message category by using standard .NET
-logging mechanisms. The following code sample shows how to configure a ``MongoClient`` 
+You can configure the log verbosity of each message category by using the standard .NET
+logging mechanism. The following code sample shows how to configure a ``MongoClient`` 
 to log two types of messages: 
 
 - All messages with log level ``Error`` or higher from all categories 
 - All messages with log level ``Debug`` or higher from the SDAM category 
 
 In this example, the configuration is done in-memory. The code creates a 
-``Dictionary<string, string>`` where the key is ``"LogLevel:<category>" and the value 
+``Dictionary<string, string>`` where the key is ``"LogLevel:<category>"`` and the value 
 is the minimum log level of messages in that category. The code then adds the 
 dictionary to a ``ConfigurationBuilder`` object, then adds the ``ConfigurationBuilder`` 
 to a ``LoggerFactory``.

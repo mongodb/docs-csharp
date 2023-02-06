@@ -20,8 +20,7 @@ Create a MongoDB Cluster
 Set Up a Free Tier Cluster in Atlas
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-After setting up your .NET project dependencies, create a MongoDB cluster
-where you can store and manage your data. Complete the
+Complete the
 :atlas:`Get Started with Atlas </getting-started>` guide to set up a new
 Atlas account and free tier MongoDB cluster, load datasets, and
 interact with the data.
@@ -47,15 +46,19 @@ following:
 
 .. code-block:: bash
 
-   "mongodb+srv://username:password@cluster0.abc.mongodb.net/?retryWrites=true&w=majority"
+   "mongodb+srv://<username>:<password>@cluster0.abc.mongodb.net/?retryWrites=true&w=majority"
 
-Save your Atlas connection string to an environment variable named ``MONGODB_URI``. 
-This prevents potential security issues caused by including your credentials in the 
-source code.
+Run the following code at the command prompt to save your Atlas connection string to an 
+environment variable. This is safer than including your credentials in your source code. 
 
 .. code-block:: bash
 
    export MONGODB_URI='<your atlas connection string>'
+
+.. important::
+
+   Make sure to replace the ``<username>`` and ``<password>`` sections of the connection 
+   string with the username and password of your Atlas user.
 
 Set Up Your Project
 -------------------

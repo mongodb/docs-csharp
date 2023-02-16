@@ -20,6 +20,7 @@ Fundamentals
    /fundamentals/linq
    /fundamentals/class-mapping
    /fundamentals/logging
+   /fundamentals/atlas-search
 
 - :ref:`Connecting to MongoDB <csharp-connection>`
 - :ref:`csharp-crud`
@@ -31,3 +32,4 @@ Fundamentals
 - :ref:`csharp-linq`
 - :ref:`csharp-class-mapping`
 - :ref:`csharp-logging`
+- :ref:`csharp-atlas-search`

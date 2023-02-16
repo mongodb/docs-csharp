@@ -1,0 +1,123 @@
+.. _csharp-atlas-search:
+
+======================
+Atlas Full Text Search
+======================
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this guide you can learn how to use the ``Search`` class to build a ``$search``
+aggregation pipeline stage with the {+driver-long+}. The ``$search`` pipeline
+stage performs a full-text search of fields in an Atlas collection.
+
+To learn more about the ``$search`` pipeline stage, see :manual:`$search
+</reference/operator/aggregation/search/>`.
+
+.. note:: Only Available on Atlas for MongoDB v4.2 and Later
+
+   The ``$search`` aggregation-pipeline operator is available only for collections hosted
+   on :atlas:`MongoDB Atlas </>` clusters running MongoDB v4.2 or later that are
+   covered by an :atlas:`Atlas search index </reference/atlas-search/index-definitions/>`.
+   Learn more about the required setup and the functionality of this operator
+   from the :ref:`Atlas Search <fts-top-ref>` documentation.
+
+The examples in this guide use the ``restaurants`` collection
+in the ``sample_restaurants`` database provided in the :atlas:`Atlas sample datasets </sample-data>`.
+To learn how to create a free MongoDB Atlas cluster and load the sample datasets,
+see the :ref:`<csharp-quickstart>`.
+
+The following ``Restaurant``, ``Address`` and ``GradeEntry`` classes model the
+documents in this collection:
+
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-restaurant-model
+   :end-before: end-restaurant-model
+
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-address-model
+   :end-before: end-address-model
+
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-grade-model
+   :end-before: end-grade-model
+
+.. include:: /includes/convention-pack-note.rst
+
+Create An Atlas Search Index
+----------------------------
+
+Before you can perform a search on an Atlas collection, you must first create an **Atlas
+Search index** on the collection. An Atlas Search index is a data structure that
+categorizes data in a searchable format. 
+
+To learn how to create an Atlas Search Index see the
+:atlas:`</atlas-search/create-index>` Atlas guide.
+
+Atlas Search Operators
+----------------------
+
+The ``Search`` class contains several methods you can use to perform ``$search``
+operations. For a full list of available ``$search`` operations, see the :atlas:`Operators and Collectors
+</atlas-search/operators-and-collectors>` Atlas guide.
+
+.. note:: 
+
+   The ``Search`` class does not support the ``$embeddedDocument`` operator.
+
+Autocomplete
+~~~~~~~~~~~~
+
+Compound
+~~~~~~~~
+
+Equals
+~~~~~~
+
+Exists
+~~~~~~
+
+GeoShape
+~~~~~~~~
+
+GeoWithin
+~~~~~~~~~
+
+MoreLikeThis
+~~~~~~~~~~~~
+
+Near
+~~~~
+
+Phrase
+~~~~~~
+
+QueryString
+~~~~~~~~~~~
+
+Range
+~~~~~
+
+Regex
+~~~~~
+
+Span
+~~~~
+
+Text
+~~~~
+
+Wildcard
+~~~~~~~~

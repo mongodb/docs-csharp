@@ -28,7 +28,7 @@ project by following our :ref:`Quick Start guide <csharp-quickstart>`.
 Previous Versions
 -----------------
 
-For documentation on versions of the driver prior to v2.19, see the :ref:`csharp-previous-versions` section.
+For documentation on versions of the driver v2.18 and earlier, see the :ref:`csharp-previous-versions` section.
 
 Quick Start
 -----------

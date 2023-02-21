@@ -98,8 +98,8 @@ following sample code into ``Program.cs``
    :language: csharp
    :dedent:
 
-The sample code runs a query against your sample dataset in MongoDB Atlas. Run the 
-sample code with the following command from your command line:
+This sample code runs a query against your sample dataset in MongoDB Atlas. Run it
+from your command line by using the following command:
 
 .. code-block:: bash
 

@@ -20,33 +20,22 @@ Create a MongoDB Cluster
 Set Up a Free Tier Cluster in Atlas
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Complete the
-:atlas:`Get Started with Atlas </getting-started>` guide to set up a new
+Complete Chapter 1 of the
+:guides:`MongoDB Guide </atlas/account>` to set up a new
 Atlas account and free tier MongoDB cluster, load sample datasets, and
 interact with the data.
 
 After completing the steps in the Atlas guide, you have a new MongoDB
 cluster deployed in Atlas, a new database user, and
-:atlas:`sample datasets loaded </sample-data/>` into your cluster.
-
-Find Your Connection String
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To connect to the Atlas cluster you created in the previous step, you need the 
-*connection string* for your cluster and user. A connection string contains the 
-information the {+driver-short+} needs to connect 
-to a MongoDB cluster, including the hostname or IP address and port of the
-cluster, authentication mechanism, user credentials (when applicable), and
-other connection options.
-
-To retrieve the connection string for your Atlas cluster and user, complete the 
-:guides:`Get Connection String </atlas/connection-string>`
-guide. Once you have finished the guide, you will have a connection string similar to the 
-following:
+:atlas:`sample datasets loaded </sample-data/>` into your cluster. You also have
+a connection string similar to the following in your copy buffer:
 
 .. code-block:: bash
 
    "mongodb+srv://<username>:<password>@cluster0.abc.mongodb.net/?retryWrites=true&w=majority"
+
+Set Your Connection String
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Run the following code at the command prompt to save your Atlas connection string to an 
 environment variable. This is safer than including your credentials in your source code. 

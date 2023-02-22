@@ -87,11 +87,11 @@ Other Connection Targets
 Connect to Atlas
 ~~~~~~~~~~~~~~~~
 
-To connect to Atlas, create a client by passing your connection string
-and any settings. You can set a Stable API server version as a setting
-to avoid breaking changes when you upgrade to a new server version. To
-learn more about the Stable API feature, see the :ref:`Stable API page
-<csharp-stable-api>`.
+To connect to Atlas, create a client by passing settings that include
+your connection string and any other settings. You can set a Stable API
+server version as a setting to avoid breaking changes when you upgrade
+to a new server version. To learn more about the Stable API feature, see
+the :ref:`Stable API page <csharp-stable-api>`.
 
 The following code shows how you can instantiate a client that uses a
 Stable API version and a sample connection string with placeholders for

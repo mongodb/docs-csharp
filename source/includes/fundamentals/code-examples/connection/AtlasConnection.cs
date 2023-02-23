@@ -5,7 +5,7 @@ const string connectionUri = "mongodb+srv://<username>:<password>@cluster0.sampl
 
 var settings = MongoClientSettings.FromConnectionString(connectionString);
 
-// Use the ServerAPI() method to set Stable API version 1
+// Set the ServerApi field of the settings object to Stable API version 1
 var serverApi = new ServerApi(ServerApiVersion.V1);
 settings.ServerApi = serverApi;
 

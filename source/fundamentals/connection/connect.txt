@@ -87,14 +87,23 @@ Other Connection Targets
 Connect to Atlas
 ~~~~~~~~~~~~~~~~
 
-To connect to Atlas, create a client by passing settings that include
-your connection string and any other settings. You can set a Stable API
-server version as a setting to avoid breaking changes when you upgrade
-to a new server version. To learn more about the Stable API feature, see
-the :ref:`Stable API page <csharp-stable-api>`.
+To connect to an Atlas deployment, you need to create a client. You can
+create a client that uses your connection string and other 
+client options by passing a ``MongoClientSettings`` object to the ``MongoClient``
+constructor. To specify your connection URI, pass it to the ``FromConnectionString()``
+method, creating a ``MongoClientSettings`` instance. To specify any other
+settings, set the relevant fields of the settings object.
 
-The following code shows how you can instantiate a client that uses a
-Stable API version and a sample connection string with placeholders for
+To learn more about connection options, see the
+:ref:`Connection Options page <csharp-connection-options>`.
+
+You can set the {+stable-api+} version as a setting to avoid
+breaking changes when you upgrade to a new server version. To 
+learn more about the {+stable-api+} feature, see the :ref:`{+stable-api+} page
+<csharp-stable-api>`.
+
+The following code shows how you can instantiate a client that uses the
+{+stable-api+} version and a sample connection string with placeholders for
 your username and password. Instantiating the client creates a
 connection to MongoDB:
 

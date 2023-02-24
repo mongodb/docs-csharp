@@ -106,7 +106,7 @@ sample data, and print out the result.
 
 To learn more about connecting to Atlas with the {+driver-short+}, see
 the :atlas:`Atlas driver connection </driver-connection>` guide
-and select :guilabel:`{+language+}` from the :guilabel`Select your language` dropdown.
+and select :guilabel:`{+language+}` from the :guilabel:`Select your language` dropdown.
 
 Next steps
 ----------

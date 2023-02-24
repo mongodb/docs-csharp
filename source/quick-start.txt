@@ -20,10 +20,8 @@ Create a MongoDB Cluster
 Set Up a Free Tier Cluster in Atlas
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Complete Chapter 1 of the
-:guides:`MongoDB Guide </atlas/account>` to set up a new
-Atlas account and free tier MongoDB cluster, load sample datasets, and
-interact with the data.
+To set up your Atlas Free Tier Cluster required for this guide, complete the guide on 
+:guides:`MongoDB Atlas Setup </atlas/account>`.
 
 After completing the steps in the Atlas guide, you have a new MongoDB
 cluster deployed in Atlas, a new database user, and
@@ -37,12 +35,13 @@ a connection string similar to the following in your copy buffer:
 Set Your Connection String
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run the following code at the command prompt to save your Atlas connection string to an 
-environment variable. This is safer than including your credentials in your source code. 
+Run the following code at the command prompt to save your MongoDB connection string to an 
+environment variable. This method is safer than including your credentials in your source 
+code. 
 
 .. code-block:: bash
 
-   export MONGODB_URI='<your atlas connection string>'
+   export MONGODB_URI='<your MongoDB connection string>'
 
 .. important::
 
@@ -107,7 +106,7 @@ sample data, and print out the result.
 
 To learn more about connecting to Atlas with the {+driver-short+}, see
 the :atlas:`Atlas driver connection </driver-connection>` guide
-and select **{+language+}** from the :guilabel`Select your language` dropdown.
+and select :guilabel:`{+language+}` from the :guilabel`Select your language` dropdown.
 
 Next steps
 ----------

@@ -1,8 +1,8 @@
 .. _csharp-atlas-search:
 
-======================
-Atlas Full Text Search
-======================
+============
+Atlas Search
+============
 
 .. contents:: On this page
    :local:
@@ -14,8 +14,7 @@ Overview
 --------
 
 In this guide you can learn how to use the ``Search`` class to build a ``$search``
-aggregation pipeline stage with the {+driver-long+}. The ``$search`` pipeline
-stage performs a full-text search of fields in an Atlas collection.
+aggregation pipeline stage with the {+driver-long+}.
 
 To learn more about the ``$search`` pipeline stage, see :manual:`$search
 </reference/operator/aggregation/search/>`.

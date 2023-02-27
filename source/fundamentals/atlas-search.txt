@@ -123,7 +123,7 @@ that match all of the following criteria:
 - The ``in-stock`` field is not ``false``
 - The ``establishedYear`` field has a value greater than 1940
 
-.. code-block::csharp
+.. code-block:: csharp
 
    var result = guitarsCollection.Aggregate()
        .Search(Builders<Guitar>.Search.Compound()
@@ -453,7 +453,7 @@ Range
 ~~~~~
 
 Use the ``Range`` method to search for documents in which the value of a
-specified falls within a specified numeric or date range.
+specified field falls within a given numeric or date range.
 
 The following example searches the ``guitars`` collection for all documents with
 an ``establishedYear`` value greater than 1980 and less than 2020.

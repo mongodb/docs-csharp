@@ -63,7 +63,7 @@ The following ``Guitar`` class models the documents in this collection.
 
    To learn more about custom serialization, see :ref:`csharp-custom-serialization`.
 
-Create An Atlas Search Index
+Create an Atlas Search Index
 ----------------------------
 
 Before you can perform a search on an Atlas collection, you must first create an **Atlas

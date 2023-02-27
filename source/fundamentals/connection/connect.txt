@@ -87,7 +87,7 @@ Other Connection Targets
 Connect to Atlas
 ~~~~~~~~~~~~~~~~
 
-To connect to a MongoDB deployment on Atlas, you need to create a client. You can
+To connect to a MongoDB deployment on Atlas, create a client. You can
 create a client that uses your connection string and other 
 client options by passing a ``MongoClientSettings`` object to the ``MongoClient``
 constructor.

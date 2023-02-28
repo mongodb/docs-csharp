@@ -94,11 +94,11 @@ results based on the tokenization strategy specified when creating the index.
 The following example performs an autocomplete search on the ``guitars``
 collection using the string "Gib" in the ``make`` field.
 
-.. code-block:: csharp
-
-   var result =  guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Autocomplete(g => g.Make, "Gib"))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-autocomplete-search
+   :end-before: // end-autocomplete-search
+   :language: csharp
+   :dedent:
 
 The search returns the following document:
 
@@ -122,15 +122,11 @@ that match all of the following criteria:
 - The ``in-stock`` field is not ``false``
 - The ``establishedYear`` field has a value greater than 1940
 
-.. code-block:: csharp
-
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Compound()
-           .Must(Builders<Guitar>.Search.Exists(g => g.Rating))
-           .MustNot(Builders<Guitar>.Search.Equals(g => g.InStock, false))
-           .Must(Builders<Guitar>.Search.Range(g => g.EstablishedYear, SearchRangeBuilder.Gt(1940)))
-       )
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-compound-search
+   :end-before: // end-compound-search
+   :language: csharp
+   :dedent:
 
 The search returns the following documents:
 
@@ -139,7 +135,6 @@ The search returns the following documents:
    { "_id" : 1, "make" : "Fender", "description" : "...", "establishedYear" : 1946, "in-stock" : true, "rating" : 9 }
    { "_id" : 3, "make" : "PRS", "description" : "...", "establishedYear" : 1985, "in-stock" : true, "rating" : 9 }
    { "_id" : 5, "make" : "Ibanez", "description" : "...", "establishedYear" : 1957, "in-stock" : true, "rating" : 7 }
-
 
 To learn more about the ``compound`` operation, see the :atlas:`Atlas
 compound </atlas-search/compound>` guide.
@@ -153,11 +148,11 @@ or ``ObjectId`` value.
 The following example searches the ``guitars`` collection for any documents in
 which the value of the ``in-stock`` field is ``true``.
 
-.. code-block:: csharp
-
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Equals(g => g.InStock, true))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-equals-search
+   :end-before: // end-equals-search
+   :language: csharp
+   :dedent:
 
 The search returns the following documents:
 
@@ -181,11 +176,11 @@ field name exists.
 The following example searches the ``guitars`` collection for any documents in
 which the ``rating`` field exists.
 
-.. code-block:: csharp
-
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Exists(g => g.Rating))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-exists-search
+   :end-before: // end-exists-search
+   :language: csharp
+   :dedent:
 
 The search returns the following documents:
 
@@ -211,8 +206,6 @@ inclusive.
 
 .. include:: /includes/atlas-search-support-note.rst
 
-.. _csharp-search-collection-with-location:
-
 Consider some documents in the ``guitars`` collection have added an
 ``in-stock-location`` field. The changed documents in the collection now look as
 follows:
@@ -226,20 +219,11 @@ The following example searches for all documents in which the
 coordinates in the ``in-stock-location`` field intersect with a specified
 polygon:
 
-.. code-block:: csharp
-
-   GeoJsonPolygon<GeoJson2DGeographicCoordinates> searchArea = new(new(new(new GeoJson2DGeographicCoordinates[]
-   {
-       new(-72.93615, 41.69791),
-       new(-72.93615, 40.59791),
-       new(-74.93615, 40.59791),
-       new(-74.93615, 41.69791),
-       new(-72.93615, 41.69791),
-   })));
-
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.GeoShape(g => g.InStockLocation, GeoShapeRelation.Intersects, searchArea))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-geoshape-search
+   :end-before: // end-geoshape-search
+   :language: csharp
+   :dedent:
 
 The search returns the following document:
 
@@ -281,23 +265,11 @@ The following example searches for all documents in which the
 coordinates in the ``in-stock-location`` field falls within a specified
 polygon: 
 
-.. code-block:: csharp
-
-   GeoJsonPolygon<GeoJson2DGeographicCoordinates> searchArea = new(new(new(new GeoJson2DGeographicCoordinates[]
-   {
-       new(-74.3994140625, 40.5305017757),
-       new(-74.7290039063, 40.5805846641),
-       new(-74.7729492188, 40.9467136651),
-       new(-74.0698242188, 41.1290213475),
-       new(-73.65234375, 40.9964840144),
-       new(-72.6416015625, 40.9467136651),
-       new(-72.3559570313, 40.7971774152),
-       new(-74.3994140625, 40.5305017757),
-   })));
-
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.GeoWithin(g => g.InStockLocation, searchArea))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-geowithin-search
+   :end-before: // end-geowithin-search
+   :language: csharp
+   :dedent:
 
 The search returns the following document:
 
@@ -318,16 +290,11 @@ The following example searches the ``guitars`` collection for documents that are
 similar to an object in which the value of the ``Description`` field is "Classic
 guitar."
 
-.. code-block:: csharp
-
-   var searchDocument = new GuitarSearch()
-   {
-         Description = "Classic guitar",
-   };
-
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.MoreLikeThis(searchDocument))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-morelikethis-search
+   :end-before: // end-morelikethis-search
+   :language: csharp
+   :dedent:
 
 The search returns the following documents:
 
@@ -353,11 +320,11 @@ The following example searches the ``guitars`` collection for documents in which
 the value of the ``rating`` field is near ``9``. The documents are returned in
 order based on how close the value is to the number ``9``.
 
-.. code-block:: csharp
-
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Near(g => g.Rating, 9, 1))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-near-search
+   :end-before: // end-near-search
+   :language: csharp
+   :dedent:
 
 The search returns the following documents:
 
@@ -381,11 +348,11 @@ contains an input string.
 The following example searches the ``guitars`` collection for documents in which
 the ``description`` field contains the phrase "classic guitars."
 
-.. code-block:: csharp
-
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Phrase(g => g.Description,  "classic guitars"))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-phrase-search
+   :end-before: // end-phrase-search
+   :language: csharp
+   :dedent:
 
 The search returns the following documents:
 
@@ -397,11 +364,11 @@ The search returns the following documents:
 You can also search the collection for documents that match multiple separate
 phrases as follows:
 
-.. code-block:: csharp
-
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Phrase(g => g.Description,  new List<string>(){"classic guitars", "quality guitars"}))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-multiphrase-search
+   :end-before: // end-multiphrase-search
+   :language: csharp
+   :dedent:
 
 This search returns the following documents:
 
@@ -431,11 +398,11 @@ the value of the ``description`` field matches each of the following criteria:
 - Contains the string "classic" *or* the string "quality"
 - Does not contain the string "custom"
 
-.. code-block:: csharp
-
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.QueryString(g => g.Description, "(classic OR quality) AND NOT custom"))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-querystring-search
+   :end-before: // end-querystring-search
+   :language: csharp
+   :dedent:
 
 The search returns the following documents:
 
@@ -457,11 +424,11 @@ specified field falls within a given numeric or date range.
 The following example searches the ``guitars`` collection for all documents with
 an ``establishedYear`` value greater than 1980 and less than 2020.
 
-.. code-block:: csharp
-
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Range(r => r.EstablishedYear, SearchRangeBuilder.Gt(1980).Lt(2020)))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-range-search
+   :end-before: // end-range-search
+   :language: csharp
+   :dedent:
 
 The search returns the following results:
 
@@ -482,13 +449,11 @@ Use the ``Regex`` method to search for documents using a regular expression.
 The following example searches the ``guitars`` collection for documents in which
 the value of the ``make`` field contains exactly six letters.
 
-.. code-block:: csharp
-
-   var regex = "[A-Za-z]{6}";
-         
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Regex(r => r.Make, regex))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-regex-search
+   :end-before: // end-regex-search
+   :language: csharp
+   :dedent:
 
 The search returns the following results:
 
@@ -534,17 +499,11 @@ The following example searches the ``guitars`` collection for documents in which
 the value of the ``description`` field contains the strings "guitars" and
 "quality" within one word of each other.
 
-.. code-block:: csharp
-
-   var searchTerms = new[]
-   {
-             Builders<Guitar>.SearchSpan.Term(g => g.Description, "guitars"),
-             Builders<Guitar>.SearchSpan.Term(g => g.Description, "quality")
-   };
-         
-   var result = guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Span(Builders<Guitar>.SearchSpan.Near(searchTerms, 1)))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-span-search
+   :end-before: // end-span-search
+   :language: csharp
+   :dedent:
 
 The search returns the following document:
 
@@ -569,11 +528,11 @@ The following example searches the ``guitars`` collection for documents in which
 the value of the ``description`` field contains the string "used by
 professionals".
 
-.. code-block:: csharp
-
-   var result =  guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Text(g => g.Description, "quality guitars"))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-text-search
+   :end-before: // end-text-search
+   :language: csharp
+   :dedent:
 
 The search returns the following document:
 
@@ -615,11 +574,11 @@ characters in your search:
 The following example searches for documents in which the value of the ``make``
 field contains the string "Strand" followed by any other characters.
 
-.. code-block:: csharp
-
-   var result =  guitarsCollection.Aggregate()
-       .Search(Builders<Guitar>.Search.Wildcard(g => g.Make, "Strand*"))
-       .ToList();
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-wildcard-search
+   :end-before: // end-wildcard-search
+   :language: csharp
+   :dedent:
 
 The search returns the following document:
 

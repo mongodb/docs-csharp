@@ -170,7 +170,8 @@ Exists
 ~~~~~~
 
 Use the ``Exists`` method to search for documents in which a specified indexed
-field name exists.
+field name exists. If the specified field exists but is not indexed, the
+document is not included with the result set.
 
 The following example searches the ``guitars`` collection for any documents in
 which the ``rating`` field exists.
@@ -237,7 +238,7 @@ GeoWithin
 ~~~~~~~~~
 
 Use the ``GeoWithin`` method to search for documents in which the coordinates of
-their :manual:`GeoJSON </reference/geojson/>` field are within a specified
+their specified :manual:`GeoJSON </reference/geojson/>` field are within a given
 geometry. You can search for points that are within a:
 
 - Circle
@@ -286,8 +287,8 @@ Use the ``MoreLikeThis`` method to search for documents that are similar to an
 input document.
 
 The following example searches the ``guitars`` collection for documents that are
-similar to an object in which the value of the ``Description`` field is "Classic
-guitar."
+similar to an object in which the value of the ``Description`` field is "high
+quality."
 
 .. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
    :start-after: // start-morelikethis-search
@@ -299,8 +300,9 @@ The search returns the following documents:
 
 .. code-block:: json
 
-   { "_id" : 1, "make" : "Fender", "description" : "Classic guitars known for their versatility.", "establishedYear" : 1946, "in-stock" : true, "rating" : 9 }
-   { "_id" : 2, "make" : "Gibson", "description" : "Classic guitars known for their rich, full tones.", "establishedYear" : 1902, "in-stock" : true, "rating" : 8 }
+   { "_id" : 3, "make" : "PRS", "description" : "High-end guitars known for their quality.", "establishedYear" : 1985, "in-stock" : true, "rating" : 9 }
+   { "_id" : 4, "make" : "Kiesel", "description" : "Quality guitars made only for custom orders.", "establishedYear" : 2015, "in-stock" : false, "rating" : null }
+
 
 To learn more about the ``moreLikeThis`` operator, see the :atlas:`
 moreLikeThis </atlas-search/morelikethis>` Atlas guide.

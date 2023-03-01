@@ -119,7 +119,7 @@ public class AtlasSearchExamples
         // start-morelikethis-search
         var searchDocument = new GuitarSearch()
         {
-            Description = "Classic guitar",
+            Description = "high quality",
         };
 
         var result = guitarsCollection.Aggregate()
@@ -178,7 +178,7 @@ public class AtlasSearchExamples
     {
         // start-range-search
         var result = guitarsCollection.Aggregate()
-            .Search(Builders<Guitar>.Search.Range(g => r.EstablishedYear, SearchRangeBuilder.Gt(1980).Lt(2020)))
+            .Search(Builders<Guitar>.Search.Range(g => g.EstablishedYear, SearchRangeBuilder.Gt(1980).Lt(2020)))
             .ToList();
         // end-range-search
 
@@ -191,7 +191,7 @@ public class AtlasSearchExamples
         var regex = "[A-Za-z]{6}";
 
         var result = guitarsCollection.Aggregate()
-            .Search(Builders<Guitar>.Search.Regex(g => r.Make, regex))
+            .Search(Builders<Guitar>.Search.Regex(g => g.Make, regex))
             .ToList();
         // end-regex-search
 

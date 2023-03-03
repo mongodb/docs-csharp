@@ -24,6 +24,7 @@ of {+mongo-community+}:
 - :ref:`csharp-scram-sha-256`
 - :ref:`csharp-scram-sha-1`
 - :ref:`csharp-x509`
+- :ref:`csharp-aws`
 
 To authenticate using ``GSSAPI/Kerberos`` or ``LDAP``, see the
 :ref:`csharp-enterprise-authentication-mechanisms` fundamentals page. For more 

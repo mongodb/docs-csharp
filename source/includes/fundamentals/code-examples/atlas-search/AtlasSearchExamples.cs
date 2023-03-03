@@ -41,8 +41,7 @@ public class AtlasSearchExamples
             .Search(Builders<Guitar>.Search.Compound()
                 .Must(Builders<Guitar>.Search.Exists(g => g.Rating))
                 .MustNot(Builders<Guitar>.Search.Equals(g => g.InStock, false))
-                .Must(Builders<Guitar>.Search.Range(g => g.EstablishedYear, SearchRangeBuilder.Gt(1940)))
-            )
+                .Must(Builders<Guitar>.Search.Range(g => g.EstablishedYear, SearchRangeBuilder.Gt(1940))))
             .ToList();
         // end-compound-search
 
@@ -67,6 +66,7 @@ public class AtlasSearchExamples
             .Search(Builders<Guitar>.Search.Exists(g => g.Rating))
             .ToList();
         // end-exists-search
+
         return result;
     }
 
@@ -85,7 +85,6 @@ public class AtlasSearchExamples
         var result = guitarsCollection.Aggregate()
             .Search(Builders<Guitar>.Search.GeoShape(g => g.InStockLocation, GeoShapeRelation.Intersects, searchArea))
             .ToList();
-
         // end-geoshape-search
 
         return result;
@@ -254,6 +253,7 @@ public class GuitarSearch
 {
     public string Description { get; set; }
 }
+
 public class Guitar
 {
     public int Id { get; set; }

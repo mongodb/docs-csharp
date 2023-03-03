@@ -13,7 +13,7 @@ Atlas Search
 Overview
 --------
 
-In this guide you can learn how to use the ``Search`` class to build a ``$search``
+In this guide you can learn how to use the ``Search`` builder to build a ``$search``
 aggregation pipeline stage with the {+driver-long+}.
 
 To learn more about the ``$search`` pipeline stage, see :manual:`$search
@@ -192,7 +192,7 @@ The search returns the following documents:
    { "_id" : 5, "make" : "Ibanez", "description" : "...", "establishedYear" : 1957, "in-stock" : true, "rating" : 7 }
 
 
-To learn more about the ``equals`` operator, see the :atlas:`
+To learn more about the ``exists`` operator, see the :atlas:`
 exists </atlas-search/exists>` Atlas guide.
 
 GeoShape

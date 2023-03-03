@@ -23,8 +23,8 @@ of {+mongo-community+}:
 
 - :ref:`csharp-scram-sha-256`
 - :ref:`csharp-scram-sha-1`
-- :ref:`csharp-x509`
 - :ref:`csharp-aws`
+- :ref:`csharp-x509`
 
 To authenticate using ``GSSAPI/Kerberos`` or ``LDAP``, see the
 :ref:`csharp-enterprise-authentication-mechanisms` fundamentals page. For more 
@@ -316,15 +316,6 @@ string, add them as parameters as shown in the following example:
       var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<atlasUri>?authSource=$external&authMechanism=MONGODB-AWS&authMechanismProperties=AWS_SESSION_TOKEN:<awsSessionToken>";
       var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
       var client = new MongoClient(mongoClientSettings);
-
-
-=======>New in driver version 2.19**
-    The driver 2.19 introduced supporting official aws .net SDK that adds additional authentication types. 
-    New authenticators are considered for fetching credentials from environment before previous ones.
-
-    * App.config/Web.config
-    * Web identity provider
-    * Reading aws config on machine
 
 .. _csharp-x509:
 

@@ -145,8 +145,8 @@ string as follow:
 
 .. _csharp-aws:
 
-``MONGODB-AWS``
-~~~~~~~~~~~~~~~
+MONGODB-AWS
+~~~~~~~~~~~
 
 .. note::
 
@@ -295,14 +295,14 @@ To specify the authentication mechanism and authentication source by using a
    .. code-block:: csharp
 
       var awsCredentials = new MongoCredential("MONGODB-AWS", new MongoExternalIdentity("<awsKeyId>"), new PasswordEvidence("<awsSecretKey>"))
-                .WithMechanismProperty("AWS_SESSION_TOKEN", "<awsSessionToken>");
+          .WithMechanismProperty("AWS_SESSION_TOKEN", "<awsSessionToken>");
 
 To specify the authentication mechanism and authentication source in the connection
 string, add them as parameters as shown in the following example:
 
 .. code-block:: csharp
 
-   var connectionString = $"mongodb+srv://<awsKeyId>:<awsSecretKey>@<atlasUri>?authSource=$external&authMechanism=MONGODB-AWS";
+   var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<atlasUri>?authSource=$external&authMechanism=MONGODB-AWS";
    var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
    var client = new MongoClient(mongoClientSettings);
 

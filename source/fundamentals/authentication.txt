@@ -143,7 +143,7 @@ string as follow:
 
    To learn more on specifying the default mechanism, see :ref:`csharp-authentication-default`.
 
-.. _csharp-aws:
+.. _csharp-mongodb-aws:
 
 MONGODB-AWS
 ~~~~~~~~~~~
@@ -162,8 +162,8 @@ To instruct the driver to use this authentication mechanism, you can specify
 ``MONGODB-AWS`` either as a parameter in the connection string or by using
 the ``MongoCredential`` constructor and passing "MONGODB-AWS" as the authentication mechanism.
 
-Learn how to specify this authentication mechanism and the various ways to
-provide your AWS IAM credentials in the next sections.
+Learn how to provide your AWS IAM credentials by specifying them in environment variables 
+or on your ``MongoClientSettings`` object in the next sections.
 
 These sections contain code examples that use the following placeholders:
 
@@ -171,6 +171,65 @@ These sections contain code examples that use the following placeholders:
 * ``awsSecretKey`` - value of your AWS secret access key
 * ``atlasUri`` - hostname and port of your MongoDB Atlas deployment
 * ``awsSessionToken`` - value of your AWS session token
+
+.. important::
+
+   The {+driver-short+} will check for AWS IAM credentials in the order listed here.
+
+Specify Your Credentials in MongoClientSettings
++++++++++++++++++++++++++++++++++++++++++++++++
+
+You can supply your AWS IAM credentials on a ``MongoClientSettings`` object either by 
+using a ``MongoCredential`` instance or as part of the connection string.
+
+To use a ``MongoClientSettings`` object for ``MONGODB-AWS`` authentication, 
+you must perform the following steps:
+
+1. Specify the authentication mechanism and name of the database to authenticate against
+#. Supply the credentials
+
+To specify the authentication mechanism and authentication database by using a
+``MongoCredential``, create a ``MongoCredential`` instance and add it to your
+``MongoClientSettings`` as shown in the following example:
+
+.. code-block:: csharp
+
+   var awsCredentials = new MongoCredential("MONGODB-AWS", new MongoExternalIdentity("<awsKeyId>"), new PasswordEvidence("<awsSecretKey>"));
+
+   var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<atlasUri>");
+   mongoClientSettings.Credential = awsCredentials;
+   var client = new MongoClient(mongoClientSettings);
+
+.. note:: AWS Session Token in MongoCredential
+
+   To specify an AWS session token as part of the ``MongoCredential``, call the
+   ``WithMechanismProperty()`` method on the ``MongoCredential`` object and pass in the
+   token, as shown in the following example:
+
+   .. code-block:: csharp
+
+      var awsCredentials = new MongoCredential("MONGODB-AWS", new MongoExternalIdentity("<awsKeyId>"), new PasswordEvidence("<awsSecretKey>"))
+          .WithMechanismProperty("AWS_SESSION_TOKEN", "<awsSessionToken>");
+
+To specify the authentication mechanism and authentication database in the connection
+string, add them as parameters as shown in the following example:
+
+.. code-block:: csharp
+
+   var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<atlasUri>?authSource=$external&authMechanism=MONGODB-AWS";
+   var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
+   var client = new MongoClient(mongoClientSettings);
+
+.. note:: AWS Session Token in the Connection String
+
+   To specify an AWS session token as part of the connection string, add it as a 
+   parameter as shown in the following example:
+
+   .. code-block:: csharp
+
+      var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<atlasUri>?authSource=$external&authMechanism=MONGODB-AWS&authMechanismProperties=AWS_SESSION_TOKEN:<awsSessionToken>";
+      var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
+      var client = new MongoClient(mongoClientSettings);
 
 Specify Your Credentials in the Environment
 +++++++++++++++++++++++++++++++++++++++++++
@@ -181,25 +240,23 @@ from the environment by setting the appropriate environment variables.
 To use environment variables to supply your credentials, you must perform
 the following steps:
 
-1. Specify the authentication mechanism and authentication source
+1. Specify the authentication mechanism and name of the database to authenticate against
 #. Set the appropriate environment variables
 
-You can specify the authentication mechanism and authentication source 
+You can specify the authentication mechanism and authentication database 
 by using a ``MongoCredential`` or as part of the connection string.
 
-To specify the authentication mechanism and authentication source by using a 
+To specify the authentication mechanism and authentication database by using a 
 ``MongoCredential``, create a ``MongoCredential`` instance and add it to your 
 ``MongoClient`` as shown in the following example:
 
 .. code-block:: csharp
 
-   var awsCredentials = new MongoCredential("MONGODB-AWS", new MongoExternalAwsIdentity(), new ExternalEvidence());
-
    var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<atlasUri>");
-   mongoClientSettings.Credential = awsCredentials;
+   mongoClientSettings.Credential = new MongoCredential("MONGODB-AWS", new MongoExternalAwsIdentity(), new ExternalEvidence());
    var client = new MongoClient(mongoClientSettings);
 
-To specify the authentication mechanism and authentication source in the connection 
+To specify the authentication mechanism and authentication database in the connection 
 string, add them as parameters as shown in the following example:
 
 .. code-block:: csharp
@@ -208,24 +265,29 @@ string, add them as parameters as shown in the following example:
    var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
    var client = new MongoClient(mongoClientSettings);
 
-After specifying the authentication mechanism and source, you must set the 
+After specifying the authentication mechanism and database, you must set the 
 environment variables required for the type of authentication the driver will perform. 
 The next examples show how to provide your credentials by 
 setting environment variables for the following types of authentication:
 
+* Web identity provider
+* `Local configuration <https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html>`__
 * Programmatic access keys
 * ECS container credentials
 * EC2 container credentials
-* EKS container credentials
 
-.. important::
 
-   Before checking environment variables for AWS IAM credentials, the {+driver-short+} 
-   will look for credentials in the following places:
+To authenticate by using a **web identity provider**, such as any OpenID Connect-compatible
+identity provider, 
+create a file that contains your OpenID Connect (OIDC) token, then set the path to 
+this file in an environment variable by using ``bash`` or a similar shell as shown in
+the following example:
 
-   * App.config and web.config files for the project
-   * Web identity provider
-   * Local AWS configuration
+.. code-block:: bash
+
+   export AWS_WEB_IDENTITY_TOKEN_FILE=<path to file containing your OIDC token>
+
+You can use this to authenticate to Elastic Kubernetes Service (EKS) and other services.
 
 The following examples show how you can set your **programmatic access keys**
 in environment variables by using ``bash`` or a similar shell:
@@ -252,70 +314,6 @@ or a similar shell as shown in the following example:
 To authenticate by using **EC2 container credentials**, make sure none of the
 aforementioned environment variables are set. The driver obtains the
 credentials from the default IPv4 EC2 instance metadata endpoint.   
-
-To authenticate by using **EKS cluster credentials**,
-create a file that contains your OpenID Connect (OIDC) token, then set the path to 
-this file in an environment variable by using ``bash`` or a similar shell as shown in
-the following example:
-
-.. code-block:: bash
-
-   export AWS_WEB_IDENTITY_TOKEN_FILE=<path to file containing your OIDC token>
-
-Specify Your Credentials in MongoClientSettings
-+++++++++++++++++++++++++++++++++++++++++++++++
-
-You can supply your AWS IAM credentials on a ``MongoClientSettings`` object either by 
-using a ``MongoCredential`` instance or as part of the connection string.
-
-To use ``MongoClientSettings`` for ``MONGODB-AWS`` authentication, 
-you must perform the following steps:
-
-1. Specify the authentication mechanism and authentication source
-#. Supply the credentials
-
-To specify the authentication mechanism and authentication source by using a
-``MongoCredential``, create a ``MongoCredential`` instance and add it to your
-``MongoClientSettings`` as shown in the following example:
-
-.. code-block:: csharp
-
-   var awsCredentials = new MongoCredential("MONGODB-AWS", new MongoExternalIdentity("<awsKeyId>"), new PasswordEvidence("<awsSecretKey>"));
-
-   var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<atlasUri>");
-   mongoClientSettings.Credential = awsCredentials;
-   var client = new MongoClient(mongoClientSettings);
-
-.. note:: AWS Session Token in MongoCredential
-
-   To specify an AWS session token as part of the ``MongoCredential``, call the
-   ``WithMechanismProperty()`` method on the ``MongoCredential`` object and pass in the
-   token, as shown in the following example:
-
-   .. code-block:: csharp
-
-      var awsCredentials = new MongoCredential("MONGODB-AWS", new MongoExternalIdentity("<awsKeyId>"), new PasswordEvidence("<awsSecretKey>"))
-          .WithMechanismProperty("AWS_SESSION_TOKEN", "<awsSessionToken>");
-
-To specify the authentication mechanism and authentication source in the connection
-string, add them as parameters as shown in the following example:
-
-.. code-block:: csharp
-
-   var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<atlasUri>?authSource=$external&authMechanism=MONGODB-AWS";
-   var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
-   var client = new MongoClient(mongoClientSettings);
-
-.. note:: AWS Session Token in the Connection String
-
-   To specify an AWS session token as part of the connection string, add it as a 
-   parameter as shown in the following example:
-
-   .. code-block:: csharp
-
-      var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<atlasUri>?authSource=$external&authMechanism=MONGODB-AWS&authMechanismProperties=AWS_SESSION_TOKEN:<awsSessionToken>";
-      var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
-      var client = new MongoClient(mongoClientSettings);
 
 .. _csharp-x509:
 

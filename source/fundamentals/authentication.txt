@@ -162,7 +162,6 @@ The following sections contain code examples that use the following placeholders
 
 - ``<awsKeyId>`` - value of the AWS access key ID
 - ``<awsSecretKey>`` - value of the AWS secret access key
-- ``<atlasUri>`` - hostname and port of the MongoDB Atlas deployment
 - ``<awsSessionToken>`` - value of the AWS session token
 
 .. tip::
@@ -185,7 +184,7 @@ see the corresponding syntax for specifying your credentials:
       
       .. code-block:: csharp
 
-         var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<atlasUri>?authSource=$external&authMechanism=MONGODB-AWS";
+         var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<hostname>[:<port>]?authSource=$external&authMechanism=MONGODB-AWS";
          var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
          var client = new MongoClient(mongoClientSettings);
 
@@ -194,14 +193,14 @@ see the corresponding syntax for specifying your credentials:
 
       .. code-block:: csharp
 
-         var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<atlasUri>?authSource=$external&authMechanism=MONGODB-AWS&authMechanismProperties=AWS_SESSION_TOKEN:<awsSessionToken>";
+         var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<hostname>[:<port>]?authSource=$external&authMechanism=MONGODB-AWS&authMechanismProperties=AWS_SESSION_TOKEN:<awsSessionToken>";
 
    .. tab:: MongoCredential
       :tabid: mongodb-aws-mongoclientsettings-mongo-credential
 
       .. code-block:: csharp
 
-         var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<atlasUri>");
+         var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<hostname>[:<port>]");
          mongoClientSettings.Credential = new MongoCredential("MONGODB-AWS", new MongoExternalIdentity("<awsKeyId>"), new PasswordEvidence("<awsSecretKey>"));
          var client = new MongoClient(mongoClientSettings);
 
@@ -238,7 +237,7 @@ and external authentication source:
       
       .. code-block:: csharp
 
-         var connectionString = "mongodb+srv://<atlasUri>?authMechanism=MONGODB-AWS&authSource=$external";
+         var connectionString = "mongodb+srv://<hostname>[:<port>]?authMechanism=MONGODB-AWS&authSource=$external";
          var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
          var client = new MongoClient(mongoClientSettings);
 
@@ -247,17 +246,19 @@ and external authentication source:
 
       .. code-block:: csharp
 
-         var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<atlasUri>");
+         var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<hostname>[:<port>]");
          mongoClientSettings.Credential = new MongoCredential("MONGODB-AWS", new MongoExternalAwsIdentity(), new ExternalEvidence());
          var client = new MongoClient(mongoClientSettings);
    
 After you specify the authentication mechanism and source, you must set
-your credentials in the location appropriate to the credential type.
+your credentials in the location appropriate to the credential type. The {+driver-short+} 
+checks for credentials in the following locations in the order listed here:
 
-.. important::
-
-   The {+driver-short+} checks for credentials in the following locations in the order
-   listed here.
+- Web identity provider
+- Locally stored credentials
+- Environment variables
+- ECS container credentials
+- EC2 container credentials
 
 You can use an OpenID Connect (OIDC)-compatible **web identity provider** to authenticate
 to Amazon Elastic Kubernetes Service (EKS) or other services.

@@ -224,7 +224,7 @@ retrieve your credentials, perform the following actions:
 - Specify that the authentication source is external to MongoDB
 - Set your credentials in the appropriate location 
 
-You can specify the authentication mechanism and database either
+You can specify the authentication mechanism and source either
 by using a ``MongoCredential`` object or as part of the connection string. Select the 
 :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
 see the corresponding syntax for specifying the ``MONGODB-AWS`` authentication mechanism

@@ -255,7 +255,7 @@ your credentials in the location appropriate to the credential type. The {+drive
 checks for credentials in the following locations in the order listed here:
 
 - Web identity provider
-- Locally stored credentials
+- Shared AWS credentials file
 - Environment variables
 - ECS container credentials
 - EC2 container credentials
@@ -270,8 +270,8 @@ OIDC token, then set the absolute path to this file in an environment variable b
 
    export AWS_WEB_IDENTITY_TOKEN_FILE=<absolute path to file containing your OIDC token>
 
-To authenticate by using **locally stored credentials**, use the AWS CLI to create the 
-appropriate credential files.
+To authenticate by using a profile in a **shared AWS credentials file**, you can use a text
+editor, the AWS SDK for .NET, or the AWS CLI to create the appropriate credential file.
 
 To retrieve credentials directly from **environment variables**, set the following 
 environment variables by using ``bash`` or a similar shell:
@@ -287,13 +287,26 @@ environment variables by using ``bash`` or a similar shell:
    Omit the line containing ``AWS_SESSION_TOKEN`` if you don't need an AWS
    session token for that role.
 
-To authenticate by using **ECS container credentials**, set the ECS-endpoint-relative 
-URI in an environment variable by using ``bash``
-or a similar shell as shown in the following example:
+To authenticate by using **ECS container credentials**, set the URI of your ECS 
+endpoint in an environment variable by using ``bash`` or a similar shell.
+Select the :guilabel:`Full ECS URI` or :guilabel:`Relative ECS URI` tab to
+see the syntax for specifying the corresponding environment variable:
 
-.. code-block:: bash
+.. tabs::
 
-   export AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=<your ECS endpoint>
+   .. tab:: Full ECS URI
+      :tabid: mongodb-aws-full-ecs-uri
+      
+      .. code-block:: bash
+
+         export AWS_CONTAINER_CREDENTIALS_FULL_URI=<full ECS endpoint>
+
+   .. tab:: Relative ECS URI
+      :tabid: mongodb-aws-relative-ecs-uri
+
+      .. code-block:: bash
+
+         export AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=<relative ECS endpoint>
 
 To authenticate by using **EC2 container credentials**, make sure none of the
 environment variables mentioned earlier are set. The driver obtains the

@@ -72,6 +72,7 @@ public class Restaurant
 
     public List<GradeEntry> Grades { get; set; }
 }
+
 public class Address
 {
     public string Building { get; set; }
@@ -85,15 +86,11 @@ public class Address
     public string ZipCode { get; set; }
 }
 
-public class Address
+public class GradeEntry
 {
-    public string Building { get; set; }
+    public DateTime Date { get; set; }
 
-    [BsonElement("coord")]
-    public double[] Coordinates { get; set; }
+    public string Grade { get; set; }
 
-    public string Street { get; set; }
-
-    [BsonElement("zipcode")]
-    public string ZipCode { get; set; }
+    public float Score { get; set; }
 }

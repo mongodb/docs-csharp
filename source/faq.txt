@@ -4,13 +4,98 @@
 FAQ
 ===
 
-.. default-domain:: mongodb
-
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 2
+   :depth: 1
    :class: singlecol
+
+This page contains frequently asked questions and their corresponding answers.
+
+.. tip::
+
+   If you can't find an answer to your problem on this page,
+   see the :ref:`csharp-issues-help` page for next steps and more
+   resources.
+
+.. csharp-faq-connection-pool:
+
+How Does Connection Pooling Work in the {+driver-short+}?
+---------------------------------------------------------
+
+Every ``MongoClient`` instance has a built-in connection pool for each server
+in your MongoDB topology. Connection pools open sockets on demand to
+support concurrent MongoDB operations in your multi-threaded application.
+
+The maximum size of each connection pool is set by the ``MaxConnectionPoolSize`` option, which
+defaults to ``100``. If the number of in-use connections to a server reaches
+the value of ``MaxConnectionPoolSize``, the next request to that server will wait
+until a connection becomes available. 
+
+The driver has a wait queue that limits the number of threads that can
+wait for a connection. The size of the wait queue is determined by the
+``waitQueueMultiple`` option, which defaults to ``5``. The wait queue
+size is ``WaitQueueMultiple`` x ``MaxConnectionPoolSize``, which is ``500`` by
+default. You can also set the wait queue size by specifying the
+``WaitQueueSize`` option, which overrides the other settings. However,
+we do not recommend changing the wait queue size from the default.
+
+Each ``MongoClient`` instance opens two additional sockets per server in
+your MongoDB topology for monitoring the server's state.
+
+For example, a client connected to a 3-node replica set opens 6
+monitoring sockets. It also opens as many sockets as needed to support
+an application's threads on each server, up to
+the value of ``MaxConnectionPoolSize``. If ``MaxConnectionPoolSize`` is ``100`` and the
+application only uses the primary (the default), then only the primary
+connection pool grows and there can be at most ``106`` total connections. If the
+application uses a :ref:`read preference <read-preference>` to query the
+secondary nodes, their pools also grow and there can be ``306`` total connections.
+
+Additionally, connection pools are rate-limited such that each connection pool
+can only create, at maximum, the value of ``MaxConnecting`` connections
+in parallel at any time. Any additional connection stops waiting in the
+following cases:
+
+- One of the existing threads finishes creating a connection, or
+  an existing connection is checked back into the pool.
+- The driver's ability to reuse existing connections improves due to
+  rate-limits on connection creation.
+
+You can set the minimum number of concurrent connections to
+each server with the ``MinConnectionPoolSize`` option, which defaults to ``0``.
+The connection pool will be initialized with this number of sockets. If
+sockets are closed due to any network errors, causing the total number
+of sockets (both in use and idle) to drop below the minimum, more
+sockets are opened until the minimum is reached.
+
+You can set the maximum number of milliseconds that a connection can
+remain idle in the pool before being removed and replaced with
+the ``MaxConnectionIdleTime`` option, which defaults to 10 minutes.
+``MongoClient`` also has the ``MaxConnectionLifeTime`` option, which
+specifies the length of time, 30 minutes by default, that a connection
+can be pooled before expiring.
+
+The following default configuration for a ``MongoClient`` works for most
+applications:
+
+.. code-block:: csharp
+   
+   var client = new MongoClient("<connection string>");
+
+Create a client once for each process, and reuse it for all
+operations. It is a common mistake to create a new client for each
+request, which is very inefficient.
+
+To support high numbers of concurrent MongoDB threads
+within one process, you can increase ``MaxConnectionPoolSize``.
+
+A thread that waits more than the length of time defined by
+``MaxConnectionIdleTime`` for a socket raises a connection error. Use this
+option if it is more important to bound the duration of operations
+during a load spike than it is to complete every operation.
+
+There is no supported way to terminate a ``MongoClient`` in driver.
 
 Why Does the Driver Throw a Timeout During Server Selection?
 ------------------------------------------------------------

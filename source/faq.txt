@@ -18,7 +18,7 @@ This page contains frequently asked questions and their corresponding answers.
    see the :ref:`csharp-issues-help` page for next steps and more
    resources.
 
-.. csharp-faq-connection-pool:
+.. _csharp-faq-connection-pool:
 
 How Does Connection Pooling Work in the {+driver-short+}?
 ---------------------------------------------------------

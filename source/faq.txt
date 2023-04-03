@@ -34,7 +34,7 @@ until a connection becomes available.
 
 The driver has a wait queue that limits the number of threads that can
 wait for a connection. The size of the wait queue is determined by the
-``waitQueueMultiple`` option, which defaults to ``5``. The wait queue
+``WaitQueueMultiple`` option, which defaults to ``5``. The wait queue
 size is ``WaitQueueMultiple`` x ``MaxConnectionPoolSize``, which is ``500`` by
 default. You can also set the wait queue size by specifying the
 ``WaitQueueSize`` option, which overrides the other settings. However,
@@ -95,7 +95,7 @@ A thread that waits more than the length of time defined by
 option if it is more important to bound the duration of operations
 during a load spike than it is to complete every operation.
 
-There is no supported way to terminate a ``MongoClient`` in driver.
+There is no supported way to terminate a ``MongoClient`` in the driver.
 
 Why Does the Driver Throw a Timeout During Server Selection?
 ------------------------------------------------------------

@@ -57,10 +57,10 @@ connections.
 To support high numbers of concurrent MongoDB threads
 within one process, you can increase ``MaxConnectionPoolSize``.
 
-Additionally, connection pools are rate-limited such that each connection pool
-can only create, at maximum, the value of ``MaxConnecting`` connections
-in parallel at any time. Any additional request stops waiting until one the
-following cases occurs:
+Connection pools are rate-limited. The ``MaxConnecting`` setting
+determines the number of connections that the pool can create in
+parallel at any time. Any additional thread that attempts to check out a
+connection stops waiting only when one the following cases occurs:
 
 - One of the existing threads finishes creating a connection.
 - An existing connection is checked back into the pool.
@@ -70,8 +70,8 @@ following cases occurs:
 You can set the minimum number of concurrent connections to
 each server by using the ``MinConnectionPoolSize`` option, which
 defaults to ``0``. The connection pool will be initialized with this
-number of sockets. If errors cause any sockets to close and the the
-total number of sockets (both in use and idle) drops below the minimum,
+number of sockets. If errors cause any sockets to close and the
+total number of sockets (both in-use and idle) drops below the minimum,
 the driver opens more sockets until the number reaches the minimum.
 
 You can set the maximum number of milliseconds that a connection can

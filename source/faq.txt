@@ -30,7 +30,21 @@ support concurrent MongoDB operations in your multi-threaded application.
 The maximum size of each connection pool is set by the ``MaxConnectionPoolSize`` option, which
 defaults to ``100``. If the number of in-use connections to a server reaches
 the value of ``MaxConnectionPoolSize``, the next request to that server will wait
-until a connection becomes available. 
+until a connection becomes available.
+
+In addition to the sockets needed to support your application's threads,
+each ``MongoClient`` instance opens two additional sockets per server
+in your MongoDB topology for monitoring the server's state.
+For example, a client connected to a three-node replica set opens six
+monitoring sockets. If the application uses the default setting for
+``MaxConnectionPoolSize`` and only queries the primary (default) node, then
+there can be at most ``106`` total connections in the connection pool. If the
+application uses a :ref:`read preference <read-preference>` to query the
+secondary nodes, those connection pools grow and there can be
+``306`` total connections.
+
+To support high numbers of concurrent MongoDB threads
+within one process, you can increase ``MaxConnectionPoolSize``.
 
 The driver has a wait queue that limits the number of threads that can
 wait for a connection. The size of the wait queue is determined by the
@@ -42,27 +56,13 @@ size by specifying the ``WaitQueueSize`` option, which overrides the
 other settings. However, we do not recommend changing the wait queue
 size from the default.
 
-Each ``MongoClient`` instance opens two additional sockets per server in
-your MongoDB topology for monitoring the server's state.
-For example, a client connected to a three-node replica set opens six
-monitoring sockets. It also opens as many sockets as needed to support
-an application's threads on each server, up to
-the value of ``MaxConnectionPoolSize``. If ``MaxConnectionPoolSize`` is ``100`` and the
-application uses only the primary (the default), then only the primary
-connection pool grows and there can be at most ``106`` total connections. If the
-application uses a :ref:`read preference <read-preference>` to query the
-secondary nodes, their pools also grow and there can be ``306`` total
-connections.
-
-To support high numbers of concurrent MongoDB threads
-within one process, you can increase ``MaxConnectionPoolSize``.
-
 Connection pools are rate-limited. The ``MaxConnecting`` setting
 determines the number of connections that the pool can create in
-parallel at any time. Any additional thread that attempts to check out a
-connection stops waiting only when one the following cases occurs:
+parallel at any time. For example, if the value of ``MaxConnecting`` is
+``2``, the third thread that attempts to concurrently check out a
+connection succeeds only when one the following cases occurs:
 
-- One of the existing threads finishes creating a connection.
+- One of the first two threads finishes creating a connection.
 - An existing connection is checked back into the pool.
 - The driver's ability to reuse existing connections improves due to
   rate-limits on connection creation.

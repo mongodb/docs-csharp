@@ -60,7 +60,7 @@ Connection pools are rate-limited. The ``MaxConnecting`` setting
 determines the number of connections that the pool can create in
 parallel at any time. For example, if the value of ``MaxConnecting`` is
 ``2``, the third thread that attempts to concurrently check out a
-connection succeeds only when one the following cases occurs:
+connection succeeds only in one of the following cases:
 
 - One of the first two threads finishes creating a connection.
 - An existing connection is checked back into the pool.

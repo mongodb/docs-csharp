@@ -65,8 +65,8 @@ instance on port ``27017`` of ``localhost``:
 
 .. tip:: Reuse Your Client
 
-   As each ``MongoClient`` represents a pool of connections to the
-   database, most applications only require a single instance of a
+   Because each ``MongoClient`` represents a pool of connections to the
+   database, most applications require only a single instance of a
    ``MongoClient``, even across multiple requests. To learn more about
    how connection pools work in the driver, see the :ref:`FAQ page
    <csharp-faq-connection-pool>`.

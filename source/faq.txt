@@ -38,7 +38,7 @@ in your MongoDB topology for monitoring the server's state.
 For example, a client connected to a three-node replica set opens six
 monitoring sockets. If the application uses the default setting for
 ``MaxConnectionPoolSize`` and only queries the primary (default) node, then
-there can be at most ``106`` total connections in the connection pool. If the
+there can be at most ``106`` total connections in use. If the
 application uses a :ref:`read preference <read-preference>` to query the
 secondary nodes, those connection pools grow and there can be
 ``306`` total connections.
@@ -77,15 +77,19 @@ the driver opens more sockets until the number reaches the minimum.
 You can set the maximum number of milliseconds that a connection can
 remain idle in the pool by using the ``MaxConnectionIdleTime`` option.
 Once a connection is idle for ``MaxConnectionIdleTime``, the driver
-removes and replaces it. This option defaults to 10 minutes.
+removes it. This option defaults to 10 minutes. If the pool size falls
+below ``MinConnectionPoolSize``, the driver removes *and* replaces the
+idle connection.
+
 ``MongoClient`` also has the ``MaxConnectionLifeTime`` option, which
 specifies the length of time, 30 minutes by default, that a connection
 can be pooled before expiring.
 
-A thread that waits more than the length of time defined by
-``MaxConnectionIdleTime`` for a socket raises a connection error. Use this
-option if it is more important to bound the duration of operations
-during a load spike than it is to complete every operation.
+A thread that waits for a socket for the length of time defined by
+the ``ServerSelectionTimeout`` option raises a connection error.
+``ServerSelectionTimeout`` defaults to 30 seconds. Use this option if it
+is more important to bound the duration of operations during a load
+spike than it is to complete every operation.
 
 The following default configuration for a ``MongoClient`` works for most
 applications:

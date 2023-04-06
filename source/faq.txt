@@ -85,12 +85,6 @@ idle connection.
 specifies the length of time, 30 minutes by default, that a connection
 can be pooled before expiring.
 
-A thread that waits for a socket for the length of time defined by
-the ``ServerSelectionTimeout`` option raises a connection error.
-``ServerSelectionTimeout`` defaults to 30 seconds. Use this option if it
-is more important to bound the duration of operations during a load
-spike than it is to complete every operation.
-
 The following default configuration for a ``MongoClient`` works for most
 applications:
 

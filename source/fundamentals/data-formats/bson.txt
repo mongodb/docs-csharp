@@ -55,8 +55,8 @@ example BSON document. Each key-value pair in the ``BsonDocument`` object is a
 
 .. literalinclude:: ../../includes/fundamentals/code-examples/Bson.cs
    :start-after: start-create
-   :end-after: }; 
-   :language: csharp 
+   :end-before: newRestaurant.Add 
+   :language: csharp
    :copyable:
    :dedent:
 

@@ -34,4 +34,4 @@ Fundamentals
 - :ref:`csharp-linq`
 - :ref:`csharp-class-mapping`
 - :ref:`csharp-logging`
-- :ref:`csharp-fle`
+- :ref:`Encrypt Fields <csharp-fle>`

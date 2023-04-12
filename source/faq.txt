@@ -273,8 +273,8 @@ What Object Types Can Be Serialized?
 
 The ``ObjectSerializer`` allows serialization and deserialization only of types
 that are considered safe. When you construct an ``ObjectSerializer``,
-you can pass in a delegate of type ``Func<Type, bool>`` that accepts 
-an object type and returns a boolean value indicating whether the
+you can pass in a delegate of type ``Func<Type, bool>``. This delegate
+accepts an object type and returns a boolean value indicating whether the
 type is safe for serialization.
 
 In most cases, you should pass in the ``ObjectSerializer.DefaultAllowedTypes()``
@@ -286,7 +286,7 @@ delegate you pass to the ``ObjectSerializer`` constructor.
 
 In the following example,
 the ``ObjectSerializer`` will serialize and deserialize any type that is allowed by 
-``ObjectSerializer.DefaultAllowedTypes()`` or whose namespace begins with 
+``ObjectSerializer.DefaultAllowedTypes()`` or whose full name begins with 
 ``"MyNamespace"``:
 
 .. code-block:: csharp

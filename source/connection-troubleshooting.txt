@@ -70,7 +70,7 @@ Authentication Error
 ~~~~~~~~~~~~~~~~~~~~
 
 The {+driver-short+} can fail to connect to a MongoDB instance if
-the authorization is not configured correctly. If you are using ``SCRAM-SHA-256``
+the authentication mechanism is not configured correctly. If you are using ``SCRAM-SHA-256``
 or ``SCRAM-SHA-1`` for authentication and the driver fails to connect, the
 driver might raise an error message similar to one of the following messages:
 
@@ -124,13 +124,13 @@ The following example shows how to percent encode "#MyP@assword?":
 
 .. code-block:: csharp
 
-   Console.WriteLine(System.Web.HttpUtility.UrlEncode ("#MyP@assword?"));
+   Console.WriteLine(System.Web.HttpUtility.UrlEncode("#MyPaassword?"));
 
 This results in the following output:
 
 .. code-block:: none
 
-   %23MyP%40assword%3F
+   %23MyPassword%3F
 
 .. _csharp-troubleshooting-connection-mongoclientsettings:
 
@@ -267,12 +267,12 @@ issue.
 Set connectTimeoutMS
 --------------------
 
-The driver may hang when it's unable to establish a connection because it
+The driver may hang when it's unable to establish a connection because the driver
 takes too long attempting to reach unreachable replica set nodes. You can limit the
 time the driver spends attempting to establish the connection by using the
 ``connectTimeMS`` setting. To learn more about this setting, see the
 :manual:`Timeout Options </reference/connection-string/#timeout-options>` in
-the server manual.
+the Server manual.
 
 You should ensure the ``connectTimeoutMS`` setting is not lower than
 the highest network latency you have to a member of the set. If one of the

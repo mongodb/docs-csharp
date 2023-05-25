@@ -84,7 +84,7 @@ driver might raise an error message similar to one of the following messages:
    :copyable: false
 
    Authentication failed","attr":{"mechanism":"SCRAM-SHA-256","principalName":
-   "<user>","<auth databse>":"<user>","client":"127.0.0.1:2012",
+   "<user>","<auth database>":"<user>","client":"127.0.0.1:2012",
    "result":"UserNotFound: Could not find user}}
 
 .. code-block:: none
@@ -120,7 +120,7 @@ following characters, they must be
 
     : / ? # [ ] @
 
-The following example shows how to percent encode "#MyP@assword?":
+The following example shows how to percent encode "#MyPassword?":
 
 .. code-block:: csharp
 

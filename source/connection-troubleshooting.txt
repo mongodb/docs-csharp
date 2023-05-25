@@ -139,9 +139,9 @@ Verify the MongoClientSettings Properties
 
 You can use a ``MongoClientSettings`` object to configure the settings when
 attempting to connect to a MongoDB deployment. You can use the ``Credential``
-property to set authentication information. If this information is not correct,
-it will result in authentication errors when you attempt to connect to your
-MongoDB deployment.
+property to set authentication information. If the credential information is not
+correct, you will receive authentication errors when you attempt to connect to
+your MongoDB deployment.
 
 .. _csharp-troubleshooting-connection-admin:
 
@@ -152,7 +152,7 @@ To successfully authenticate a connection by using a username and password with
 ``SCRAM-SHA-256`` or ``SCRAM-SHA-1``, the username must be defined in the
 authentication database. The default authentication database is the ``admin``
 database. To use a different database for authentication, specify the
-``authSource`` in the connection string. The following example instructs the
+``authSource`` option in the connection string. The following example instructs the
 driver to use ``users`` as the authentication database:
 
 .. code-block:: csharp

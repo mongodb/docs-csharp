@@ -32,7 +32,7 @@ The examples in this guide use the following documents in a collection called
    { "_id": 5, "name": "Plankton", "finalGrade": 72.3}
    { "_id": 6, "name": "Karen", "finalGrade": 88.8}
 
-The following ``FinalGrades`` class models the documents in this
+The following ``FinalGrades`` class, or :ref:`poco <csharp-poco>`, models the documents in this
 collection.
 
 .. literalinclude:: /includes/fundamentals/code-examples/count-documents/FinalGrades.cs
@@ -237,11 +237,11 @@ Additional Information
 To learn more about the operations mentioned, see the following
 guides:
 
-- :ref:`golang-query-document`
-- :ref:`golang-skip`
-- :ref:`golang-limit`
-- :ref:`golang-aggregation` 
-- :ref:`golang-collations`
+- :ref:`csharp-specify-query`
+- :ref:`csharp-bson`
+- :ref:`csharp-guids`
+- :ref:`csharp-builders` 
+- :ref:`csharp-poco`
 
 API Documentation
 ~~~~~~~~~~~~~~~~~

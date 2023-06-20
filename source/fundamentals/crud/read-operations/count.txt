@@ -35,7 +35,7 @@ The examples in this guide use the following documents in a collection called
 The following ``FinalGrades`` class models the documents in this
 collection.
 
-.. literalinclude:: /includes/fundamentals/code-examples/count-documents/FinalGrades.cs
+.. literalinclude:: /includes/code-examples/count-documents/FinalGrades.cs
    :start-after: start-grades-struct
    :end-before: end-grades-struct
    :language: csharp

@@ -35,7 +35,7 @@ The examples in this guide use the following documents in a collection called
 The following ``FinalGrades`` class models the documents in this
 collection.
 
-.. literalinclude:: /includes/code-examples/count-documents/FinalGrades.cs
+.. literalinclude:: /includes/fundamentals/code-examples/count-documents/FinalGrades.cs
    :start-after: start-grades-struct
    :end-before: end-grades-struct
    :language: csharp
@@ -209,36 +209,27 @@ Example
 
 The following example performs the following actions:
 
-- Counts the number of documents where the ``rating`` is greater than ``5``
-- Assigns the count to the ``counted_documents`` field
+- Counts the number of documents where the ``final grade`` is less than ``80``
+- Assigns the count to the ``count`` field
 
 .. io-code-block::
    :copyable: true
 
    .. input::
-      :language: go
+      :language: csharp
 
-      matchStage := bson.D{{"$match", bson.D{{"rating", bson.D{{"$gt", 5}}}}}}
-      countStage := bson.D{{"$count", "counted_documents"}}
-
-      cursor, err := coll.Aggregate(context.TODO(), mongo.Pipeline{matchStage, countStage})
-      if err != nil {
-         panic(err)
-      }
-
-      var results []bson.D
-      if err = cursor.All(context.TODO(), &results); err != nil {
-         panic(err)
-      }
-      for _, result := range results {
-         fmt.Println(result)
-      }
+      var matchStage = Builders<FinalGrades>.Filter.Gt(f =>
+      f.finalGrade, 80);
+      var pipeline = new EmptyPipelineDefinition<FinalGrades>()
+      .Match(matchStage).Count();
+      Console.WriteLine(pipeline);
 
    .. output::
       :language: none
       :visible: false
 
-      [{counted_documents 5}]
+      [{ "$match" : { "finalGrade" : { "$gt" : 80.0 } } }, 
+      { "$count" : "count" }]
 
 Additional Information
 ----------------------

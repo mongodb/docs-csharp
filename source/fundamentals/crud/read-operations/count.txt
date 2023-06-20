@@ -35,9 +35,10 @@ The examples in this guide use the following documents in a collection called
 The following ``FinalGrades`` class models the documents in this
 collection.
 
-.. literalinclude:: /includes/fundamentals/code-examples/specify-query/FinalGrades.cs
+.. literalinclude:: /includes/fundamentals/code-examples/count-documents/FinalGrades.cs
+   :start-after: start-grades-struct
+   :end-before: end-grades-struct
    :language: csharp
-   :copyable:
    :dedent:
 
 .. note::
@@ -55,7 +56,7 @@ collection.
 Accurate Count
 --------------
 
-To count the number of documents that match your :ref`query filter<csharp-specify-query>`, use the
+To count the number of documents that match your :ref:`query filter <csharp-specify-query>`, use the
 ``CountDocuments()`` method. If you pass an empty query filter, this method
 returns the total number of documents in the collection.
 
@@ -131,8 +132,9 @@ following properties:
    .. code-block:: csharp
       :emphasize-lines: 1, 3
 
+      var filter = Builders<BsonDocument>.Filter.Empty;
+
       CountOptions opts = new CountOptions(){Hint = "_id_"};
-      
       var counter = collection.CountDocuments(filter, opts);
 
 .. _csharp-estimated-count:
@@ -140,7 +142,8 @@ following properties:
 Estimated Count
 ---------------
 
-To estimate the number of documents in your collection, use the
+To estimate the number of documents in your collection without the use
+of a filter, use the
 ``EstimatedDocumentCount()`` method. 
 
 .. note:: 
@@ -180,19 +183,18 @@ The following example estimates the number of documents in the
    :copyable: true
 
    .. input::
-      :language: go
+      :language: csharp
 
-      count, err := coll.EstimatedDocumentCount(context.TODO())
-      if err != nil {
-         panic(err)
-      }
-      fmt.Printf("Estimated number of documents in the ratings collection: %d\n", count)
+      var count = collection.EstimatedDocumentCount();
+      String output = String.Format("Estimated number of documents in
+      the grades collection: " + count);
+      Console.WriteLine(output);
 
    .. output::
       :language: none
       :visible: false
 
-      Estimated number of documents in the ratings collection: 9
+      Estimated number of documents in the grades collection: 6
 
 .. _csharp-count-aggregation:
 

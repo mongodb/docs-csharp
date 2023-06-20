@@ -48,7 +48,7 @@ collection.
    the properties in the ``FinalGrades`` class. 
 
    To learn more about custom serialization, see
-   :ref:`csharp-custom-serialization`.
+   :ref:`csharp-custom-serialization`. 
    
 .. _csharp-accurate-count:
 

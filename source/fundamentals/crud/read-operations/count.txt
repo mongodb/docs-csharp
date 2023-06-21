@@ -249,7 +249,7 @@ API Documentation
 To learn more about any of the methods or types discussed in this
 guide, see the following API Documentation:
 
-- `CountDocuments() <{+api+}/M_MongoDB_Driver_IMongoCollection_1_CountDocuments.htm>`__
-- `CountOptions <{+api+}/T_MongoDB_Driver_CountOptions.htm>`__
-- `EstimatedDocumentCount() <{+api+}/M_MongoDB_Driver_MongoCollectionBase_1_EstimatedDocumentCount.htm>`__
-- `EstimatedDocumentCountOptions <{+api+}/T_MongoDB_Driver_EstimatedDocumentCountOptions.htm>`__
+- `CountDocuments() <{+api-root+}/M_MongoDB_Driver_IMongoCollection_1_CountDocuments.htm>`__
+- `CountOptions <{+api-root+}/T_MongoDB_Driver_CountOptions.htm>`__
+- `EstimatedDocumentCount() <{+api-root+}/M_MongoDB_Driver_MongoCollectionBase_1_EstimatedDocumentCount.htm>`__
+- `EstimatedDocumentCountOptions <{+api-root+}/T_MongoDB_Driver_EstimatedDocumentCountOptions.htm>`__

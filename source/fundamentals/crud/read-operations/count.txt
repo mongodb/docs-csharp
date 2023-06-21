@@ -35,7 +35,7 @@ The examples in this guide use the following documents in a collection called
 The following ``Student`` class models the documents in this
 collection.
 
-.. literalinclude:: /source/includes/fundamentals/code-examples/CountDocuments.cs
+.. literalinclude:: /includes/fundamentals/code-examples/CountDocuments.cs
    :start-after: start-student-struct
    :end-before: end-student-struct
    :language: csharp

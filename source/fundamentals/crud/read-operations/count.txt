@@ -70,8 +70,8 @@ value of ``finalGrade`` is less than ``80``:
    :copyable: true
 
    .. literalinclude:: /includes/code-examples/count-documents/Student.cs
-   :start-after: start-count-guide
-   :end-before: end-count-guide
+   :start-after: start-accurate-count
+   :end-before: end-accurate-count
    :language: csharp
    :dedent:
 
@@ -86,12 +86,10 @@ value of ``finalGrade`` is less than ``80``:
 Modify Behavior
 ~~~~~~~~~~~~~~~
 
-You can modify the behavior of ``CountDocuments()`` by passing in a
-``CountOptions`` type. If you don't specify any options, the driver uses
-its default values.
+You can modify the behavior of ``CountDocuments()`` by passing a ``CountOptions`` type as 
+a parameter. If you don't specify any options, the driver uses default values.
 
-The ``CountOptions`` type allows you to configure options with the
-following properties:
+You can set the following properties in a ``CountOptions`` object:
 
 .. list-table::
    :widths: 30 70
@@ -129,10 +127,9 @@ following properties:
    with an empty query parameter.
 
    .. code-block:: csharp
-      :emphasize-lines: 1, 3
+      :emphasize-lines: 1, 2
 
       var filter = Builders<Student>.Filter.Empty;
-
       CountOptions opts = new CountOptions(){Hint = "_id_"};
       var counter = collection.CountDocuments(filter, opts);
 
@@ -141,8 +138,7 @@ following properties:
 Estimated Count
 ---------------
 
-To estimate the number of documents in your collection without the use
-of a filter, use the
+To estimate the total number of documents in your collection, use the
 ``EstimatedDocumentCount()`` method. 
 
 .. note:: 
@@ -154,12 +150,11 @@ of a filter, use the
 Modify Behavior
 ~~~~~~~~~~~~~~~
 
-You can modify the behavior of ``EstimatedDocumentCount()`` by passing
-in an ``EstimatedDocumentCountOptions`` type. If you don't specify any
-options, the driver uses its default values.
+You can modify the behavior of ``EstimatedDocumentCount()`` by passing a
+``EstimatedDocumentCountOptions`` type as a parameter. If you don't
+specify any options, the driver uses default values.
 
-The ``EstimatedDocumentCountOptions`` type allows you to configure
-options with the following property:
+You can set the following properties in a ``EstimatedDocumentCountOptions`` object:
 
 .. list-table::
    :widths: 30 70
@@ -181,10 +176,12 @@ The following example estimates the number of documents in the
 .. io-code-block::
    :copyable: true
 
-   .. input:: /source/includes/fundamentals/code-examples/CountDocuments.cs
-      :start-after: start-est-count
-      :end-before: end-est-count
+   .. input::
       :language: csharp
+      :dedent:
+
+      var count = _myColl.EstimatedDocumentCount();
+	  Console.WriteLine("Estimated number of documents in the students collection: " + count);
 
    .. output::
       :language: none
@@ -197,16 +194,16 @@ The following example estimates the number of documents in the
 Aggregation
 -----------
 
-You can also include the :manual:`$count </reference/operator/aggregation/count/>`
-stage to count the number of documents in an aggregation pipeline.
+You can also include the ``Count()`` builder method to count the number
+of documents in an aggregation pipeline.
 
 Example
 ~~~~~~~
 
 The following example performs the following actions:
 
-- Counts the number of documents where the ``finalGrade`` is greater than ``80``
-- Assigns the count to the ``count`` field
+- Specifies a filter in the match stage
+- Appends a count stage using ``Count()``
 
 .. io-code-block::
    :copyable: true
@@ -215,17 +212,16 @@ The following example performs the following actions:
       :language: csharp
 
       var matchStage = Builders<Student>
-      .Filter.Gt(f => f.finalGrade, 80);
-      var pipeline = new EmptyPipelineDefinition<Student>()
-      .Match(matchStage).Count();
-      Console.WriteLine(pipeline);
+			.Filter.Gt(s => s.FinalGrade, 80);
+	  var result = _myColl.Aggregate().Match(matchStage).Count();
+	  Console.WriteLine("Number of documents with a final grade more than 80: " + result.First().Count);
 
    .. output::
       :language: none
       :visible: false
 
-      [{ "$match" : { "finalGrade" : { "$gt" : 80.0 } } }, 
-      { "$count" : "count" }]
+      Number of documents with a final grade more than 80: 2
+      
 
 Additional Information
 ----------------------

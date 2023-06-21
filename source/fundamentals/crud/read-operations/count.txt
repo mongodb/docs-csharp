@@ -32,11 +32,11 @@ The examples in this guide use the following documents in a collection called
    { "_id": 5, "name": "Plankton", "finalGrade": 72.3}
    { "_id": 6, "name": "Karen", "finalGrade": 88.8}
 
-The following ``FinalGrades`` class is a Plain Old CLR/Class Object, or
+The following ``Student`` class is a Plain Old CLR/Class Object, or
 :ref:`poco <csharp-poco>`,  that models the documents in this
 collection.
 
-.. literalinclude:: /includes/code-examples/count-documents/FinalGrades.cs
+.. literalinclude:: /includes/code-examples/count-documents/Student.cs
    :start-after: start-grades-struct
    :end-before: end-grades-struct
    :language: csharp
@@ -47,7 +47,7 @@ collection.
    The documents in the ``grades`` collection use the camel-case naming
    convention. The examples in this guide use a ``ConventionPack``
    to deserialize the fields in the collection into Pascal case and map them to
-   the properties in the ``FinalGrades`` class. 
+   the properties in the ``Student`` class. 
 
    To learn more about custom serialization, see
    :ref:`csharp-custom-serialization`. 
@@ -62,7 +62,7 @@ To count the number of documents that match your :ref:`query filter <csharp-spec
 returns the total number of documents in the collection.
 
 Example 
-```````
+~~~~~~~
 
 The following example counts the number of documents where the
 ``finalGrade`` is less than ``80``:
@@ -133,7 +133,7 @@ following properties:
    .. code-block:: csharp
       :emphasize-lines: 1, 3
 
-      var filter = Builders<BsonDocument>.Filter.Empty;
+      var filter = Builders<Student>.Filter.Empty;
 
       CountOptions opts = new CountOptions(){Hint = "_id_"};
       var counter = collection.CountDocuments(filter, opts);
@@ -178,7 +178,7 @@ Example
 ```````
 
 The following example estimates the number of documents in the
-``ratings`` collection:
+``grades`` collection:
 
 .. io-code-block::
    :copyable: true
@@ -210,7 +210,7 @@ Example
 
 The following example performs the following actions:
 
-- Counts the number of documents where the ``final grade`` is less than ``80``
+- Counts the number of documents where the ``finalGrade`` is greater than ``80``
 - Assigns the count to the ``count`` field
 
 .. io-code-block::
@@ -219,9 +219,9 @@ The following example performs the following actions:
    .. input::
       :language: csharp
 
-      var matchStage = Builders<FinalGrades>.Filter.Gt(f =>
-      f.finalGrade, 80);
-      var pipeline = new EmptyPipelineDefinition<FinalGrades>()
+      var matchStage = Builders<Student>
+      .Filter.Gt(f => f.finalGrade, 80);
+      var pipeline = new EmptyPipelineDefinition<Student>()
       .Match(matchStage).Count();
       Console.WriteLine(pipeline);
 

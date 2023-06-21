@@ -1,7 +1,17 @@
-//start-grades-struct
+//start-count-guide
+var filter = Builders<Student>.Filter.Lt("finalGrade", 80);
+      var count = coll.CountDocuments(filter);
+      
+      Console.WriteLine("Number of documents with a final grade less
+      than 80: " + count);
+//end-count-guide
+
+
+//start-student-struct
 public class Student {
-    public ObjectId Id { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
     public double FinalGrade { get; set; }
 }
-//end-grades-struct
+//end-student-struct
+

@@ -32,7 +32,8 @@ The examples in this guide use the following documents in a collection called
    { "_id": 5, "name": "Plankton", "finalGrade": 72.3}
    { "_id": 6, "name": "Karen", "finalGrade": 88.8}
 
-The following ``FinalGrades`` class, or :ref:`poco <csharp-poco>`, models the documents in this
+The following ``FinalGrades`` class is a Plain Old CLR/Class Object, or
+:ref:`poco <csharp-poco>`,  that models the documents in this
 collection.
 
 .. literalinclude:: /includes/code-examples/count-documents/FinalGrades.cs

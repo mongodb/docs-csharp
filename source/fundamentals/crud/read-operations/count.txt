@@ -35,7 +35,7 @@ The examples in this guide use the following documents in a collection called
 The following ``Student`` class models the documents in this
 collection.
 
-.. literalinclude:: /includes/code-examples/count-documents/Student.cs
+.. literalinclude:: /source/includes/fundamentals/code-examples/CountDocuments.cs
    :start-after: start-student-struct
    :end-before: end-student-struct
    :language: csharp
@@ -69,13 +69,13 @@ value of ``finalGrade`` is less than ``80``:
 .. io-code-block::
    :copyable: true
 
-   .. literalinclude:: /includes/code-examples/count-documents/Student.cs
-   :start-after: start-accurate-count
-   :end-before: end-accurate-count
-   :language: csharp
-   :dedent:
+   .. input::
+      :language: csharp
+      :dedent:
 
-      
+      var filter = Builders<Student>.Filter.Lt(s => s.FinalGrade, 80.0);
+	  var count1 = _myColl.CountDocuments(filter);
+	  Console.WriteLine("Number of documents with a final grade less than 80: " + count1);
 
    .. output::
       :language: none

@@ -181,13 +181,10 @@ The following example estimates the number of documents in the
 .. io-code-block::
    :copyable: true
 
-   .. input::
+   .. input:: /source/includes/fundamentals/code-examples/CountDocuments.cs
+      :start-after: start-est-count
+      :end-before: end-est-count
       :language: csharp
-
-      var count = collection.EstimatedDocumentCount();
-      String output = String.Format("Estimated number of documents in
-      the students collection: " + count);
-      Console.WriteLine(output);
 
    .. output::
       :language: none

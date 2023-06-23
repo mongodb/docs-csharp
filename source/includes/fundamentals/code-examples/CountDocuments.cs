@@ -55,8 +55,8 @@ public class CountDocuments
 }
 //start-student-struct
 public class Student {
-	public int Id { get; set; }
-	public string Name { get; set; }
-	public double FinalGrade { get; set; }
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public double FinalGrade { get; set; }
 }
 // end-student-struct

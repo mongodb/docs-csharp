@@ -74,7 +74,8 @@ value of ``finalGrade`` is less than ``80``:
 
       var filter = Builders<Student>.Filter.Lt(s => s.FinalGrade, 80.0);
       var count = _myColl.CountDocuments(filter);
-      Console.WriteLine("Number of documents with a final grade less than 80: " + count);
+      Console.WriteLine("Number of documents with a final grade
+      less than 80: " + count);
 
    .. output::
       :language: none
@@ -213,7 +214,8 @@ The following example performs the following actions:
       var matchStage = Builders<Student>
         .Filter.Gt(s => s.FinalGrade, 80);
       var result = _myColl.Aggregate().Match(matchStage).Count();
-      Console.WriteLine("Number of documents with a final grade more than 80: " + result.First().Count);
+      Console.WriteLine("Number of documents with a final grade
+      more than 80: " + result.First().Count);
 
    .. output::
       :language: none

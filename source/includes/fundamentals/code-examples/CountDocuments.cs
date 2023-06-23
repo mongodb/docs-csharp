@@ -34,9 +34,12 @@ public class CountDocuments
     {
         var studentList = new List<Student>()
         {
-            new() { Id= 1, Name = "Jonathon Howard ", FinalGrade = 87.5 },
-            new() { Id= 2, Name = "ABCDEF Howard ", FinalGrade = 10.5 },
-            new() { Id= 3, Name = "aeufh Howard ", FinalGrade = 90.5 }
+            new() { Id = 1, Name = "Jonathon Howard", FinalGrade = 87.5 },
+            new() { Id = 2, Name = "Keisha Freeman", FinalGrade = 12.3 },
+            new() { Id = 3, Name = "Wei Zhang", FinalGrade = 99.0 },
+            new() { Id = 4, Name = "Juan Gonzalez", FinalGrade = 85.5 },
+            new() { Id = 5, Name = "Erik Trout", FinalGrade = 72.3 },
+            new() { Id = 6, Name = "Demarcus Smith", FinalGrade = 88.8 }
         };
         var options = new InsertManyOptions() { BypassDocumentValidation = true };
         _myColl.InsertMany(studentList, options);

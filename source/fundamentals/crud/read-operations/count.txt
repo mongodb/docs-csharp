@@ -33,7 +33,7 @@ The examples in this guide use the following documents in a collection called
    { "_id": 6, "name": "Demarcus Smith", "finalGrade": 88.8 }
 
 The following ``Student`` class models the documents in this
-collection.
+collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/CountDocuments.cs
    :start-after: start-student-struct
@@ -74,8 +74,7 @@ value of ``finalGrade`` is less than ``80``:
 
       var filter = Builders<Student>.Filter.Lt(s => s.FinalGrade, 80.0);
       var count = _myColl.CountDocuments(filter);
-      Console.WriteLine("Number of documents with a final grade
-      less than 80: " + count);
+      Console.WriteLine("Number of documents with a final grade less than 80: " + count);
 
    .. output::
       :language: none
@@ -131,7 +130,7 @@ You can set the following properties in a ``CountOptions`` object:
 
       var filter = Builders<Student>.Filter.Empty;
       CountOptions opts = new CountOptions(){Hint = "_id_"};
-      var counter = collection.CountDocuments(filter, opts);
+      var count = collection.CountDocuments(filter, opts);
 
 .. _csharp-estimated-count:
 
@@ -143,7 +142,7 @@ To estimate the total number of documents in your collection, use the
 
 .. note:: 
 
-    The ``EstimatedDocumentCount()`` method is quicker than the
+    The ``EstimatedDocumentCount()`` method is more efficient than the
     ``CountDocuments()`` method because it uses the collection's
     metadata rather than scanning the entire collection. 
 
@@ -180,8 +179,7 @@ The following example estimates the number of documents in the
       :language: csharp
 
       var count = _myColl.EstimatedDocumentCount();
-      Console.WriteLine("Estimated number of documents in 
-      the students collection: " + count);
+      Console.WriteLine("Estimated number of documents in the students collection: " + count);
 
    .. output::
       :language: none
@@ -194,7 +192,7 @@ The following example estimates the number of documents in the
 Aggregation
 -----------
 
-You can also include the ``Count()`` builder method to count the number
+You can use the ``Count()`` builder method to count the number
 of documents in an aggregation pipeline.
 
 Example
@@ -202,8 +200,9 @@ Example
 
 The following example performs the following actions:
 
-- Specifies a filter in the match stage
-- Appends a count stage using ``Count()``
+- Specifies a match stage to find documents with a ``FinalGrade`` value
+  greater than ``80``
+- Counts the number of documents that match the criteria
 
 .. io-code-block::
    :copyable: true
@@ -211,11 +210,10 @@ The following example performs the following actions:
    .. input::
       :language: csharp
 
-      var matchStage = Builders<Student>
+      var filter = Builders<Student>
         .Filter.Gt(s => s.FinalGrade, 80);
-      var result = _myColl.Aggregate().Match(matchStage).Count();
-      Console.WriteLine("Number of documents with a final grade
-      more than 80: " + result.First().Count);
+      var result = _myColl.Aggregate().Match(filter).Count();
+      Console.WriteLine("Number of documents with a final grade more than 80: " + result.First().Count);
 
    .. output::
       :language: none

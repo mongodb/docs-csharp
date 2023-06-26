@@ -19,14 +19,14 @@ application to upgrade your driver to a new version.
 
 Before you upgrade, perform the following actions:
 
-- Ensure the new version is compatible with the {+mdb-server+} versions
+- Ensure the new version is compatible with the MongoDB Server versions
   your application connects to and the .Net version your
   application runs on. See the :ref:`.Net/C# Driver Compatibility <csharp-compatibility-tables>`
   page for this information.
 - Address any breaking changes between the current version of the driver
   your application is using and your planned upgrade version in the
   :ref:`Breaking Changes <csharp-breaking-changes>` section. To learn
-  more about the {+mdb-server+} release compatibility changes, see the
+  more about the MongoDB Server release compatibility changes, see the
   :ref:`<csharp-server-release-changes>` section.
 
 .. tip::

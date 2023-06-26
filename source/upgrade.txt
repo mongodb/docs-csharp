@@ -71,6 +71,18 @@ Version 2.19.0 Breaking Changes
   More information about the ``ObjectSerializer`` can be found in our
   :ref:`FAQ <csharp-faq-object-serializer>`.
 
+- The default ``LinqProvider`` has been changed to LINQ3. The ``LinqProvider``
+  can be changed back to LINQ2 in the following way:
+  
+  .. code-block:: csharp
+    
+     var connectionString = "<YourMongoDBConnectionString>";
+     var clientSettings = MongoClientSettings
+        .FromConnectionString(connectionString);
+     clientSettings.LinqProvider = LinqProvider.V2;
+     var client = new MongoClient(clientSettings);
+
+
 .. _csharp-server-release-changes:
 
 Server Release Compatibility Changes

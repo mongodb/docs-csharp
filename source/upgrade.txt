@@ -71,6 +71,7 @@ Version 2.19.0 Breaking Changes
   More information about the ``ObjectSerializer`` can be found in our
   :ref:`FAQ <csharp-faq-object-serializer>`.
 
+.. _csharp-server-release-changes:
 
 Server Release Compatibility Changes
 ------------------------------------

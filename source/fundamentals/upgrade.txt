@@ -1,0 +1,74 @@
+.. _csharp-upgrade-driver:
+
+=======================
+Upgrade Driver Versions
+=======================
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 1
+   :class: singlecol
+
+
+Overview
+--------
+
+In this section, you can identify the changes you need to make to your
+application to upgrade your driver to a new version.
+
+Before you upgrade, perform the following actions:
+
+- Ensure the new version is compatible with the {+mdb-server+} versions
+  your application connects to and the .Net version your
+  application runs on. See the :ref:`.Net/C# Driver Compatibility <csharp-compatibility-tables>`
+  page for this information.
+- Address any breaking changes between the current version of the driver
+  your application is using and your planned upgrade version in the
+  :ref:`Breaking Changes <csharp-breaking-changes>` section. To learn
+  more about the {+mdb-server+} release compatibility changes, see the
+  :ref:`<csharp-server-release-changes>` section.
+
+.. tip::
+
+   To minimize the amount of changes your application may require when
+   upgrading driver versions in the future, use the
+   :ref:`{+stable-api+} <csharp-stable-api>`.
+
+.. _csharp-breaking-changes:
+
+Breaking Changes
+----------------
+
+A breaking change is a modification in a convention or behavior in
+a specific version of the driver that may prevent your application from
+working properly if not addressed before upgrading.
+
+The breaking changes in this section are categorized by the driver version that
+introduced them. When upgrading driver versions, address all the breaking
+changes between the current and upgrade versions. For example, if you
+are upgrading the driver from v2.0 to v2.20, address all breaking changes from
+the version after v2.0 including any listed under v2.20.
+
+Version 2.19.0 Breaking Changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- The ``ObjectSerializer`` has been changed to only allow deserialization of
+  types that are considered safe. What types are considered safe is
+  determined by a new configurable ``AllowedTypes`` function (of type
+  ``Func<Type, bool>``). The default ``AllowedTypes`` function is
+  ``ObjectSerializer.DefaultAllowedTypes`` which returns true for a
+  number of well-known framework types that we have deemed safe.
+  A typical example might be to allow all the default allowed types as
+  well as your own types. This could be accomplished as follows:
+
+  .. code-block:: csharp
+
+     var objectSerializer = new ObjectSerializer(
+        type => ObjectSerializer.DefaultAllowedTypes(type) || type.FullName.StartsWith("MyNamespace"));
+     BsonSerializer.RegisterSerializer(objectSerializer);
+    
+  More information about the ``ObjectSerializer`` can be found in our
+  :ref:`FAQ <csharp-faq-object-serializer>`.
+
+

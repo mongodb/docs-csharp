@@ -55,7 +55,7 @@ Version 2.19.0 Breaking Changes
 
 - The ``ObjectSerializer`` only allows deserialization of
   types that are considered safe. Previously, it allowed deserialization
- of all types. What types are considered safe is
+  of all types. What types are considered safe is
   determined by the configurable ``AllowedTypes`` function (of type
   ``Func<Type, bool>``). The default ``AllowedTypes`` function is
   ``ObjectSerializer.DefaultAllowedTypes`` which returns "true" for a

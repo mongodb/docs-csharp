@@ -14,14 +14,14 @@ Upgrade Driver Versions
 Overview
 --------
 
-In this section, you can identify the changes you need to make to your
-application to upgrade your driver to a new version.
+In this section, you can identify essential changes you must make to your
+application when you upgrade your driver to a new version.
 
 Before you upgrade, perform the following actions:
 
 - Ensure the new version is compatible with the MongoDB Server versions
-  your application connects to and the .Net version your
-  application runs on. See the :ref:`.Net/C# Driver Compatibility <csharp-compatibility-tables>`
+  your application connects to and the {+framework+} version your
+  application runs on. See the :ref:`.NET/C# Driver Compatibility <csharp-compatibility-tables>`
   page for this information.
 - Address any breaking changes between the current version of the driver
   your application is using and your planned upgrade version in the
@@ -40,9 +40,9 @@ Before you upgrade, perform the following actions:
 Breaking Changes
 ----------------
 
-A breaking change is a modification in a convention or behavior in
-a specific version of the driver that may prevent your application from
-working properly if not addressed before upgrading.
+A breaking change is a modification in a convention or behavior starting in
+a specific version of the driver. This type of change may prevent your application from
+working properly if not addressed before upgrading the driver.
 
 The breaking changes in this section are categorized by the driver version that
 introduced them. When upgrading driver versions, address all the breaking
@@ -53,21 +53,16 @@ the version after v2.0 including any listed under v2.20.
 Version 2.19.0 Breaking Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- The ``ObjectSerializer`` has been changed to only allow deserialization of
-  types that are considered safe. What types are considered safe is
-  determined by a new configurable ``AllowedTypes`` function (of type
+- The ``ObjectSerializer`` only allows deserialization of
+  types that are considered safe. Previously, it allowed deserialization
+ of all types. What types are considered safe is
+  determined by the configurable ``AllowedTypes`` function (of type
   ``Func<Type, bool>``). The default ``AllowedTypes`` function is
-  ``ObjectSerializer.DefaultAllowedTypes`` which returns true for a
+  ``ObjectSerializer.DefaultAllowedTypes`` which returns "true" for a
   number of well-known framework types that we have deemed safe.
   A typical example might be to allow all the default allowed types as
-  well as your own types. This could be accomplished as follows:
+  well as your own types.
 
-  .. code-block:: csharp
-
-     var objectSerializer = new ObjectSerializer(
-        type => ObjectSerializer.DefaultAllowedTypes(type) || type.FullName.StartsWith("MyNamespace"));
-     BsonSerializer.RegisterSerializer(objectSerializer);
-    
   More information about the ``ObjectSerializer`` can be found in our
   :ref:`FAQ <csharp-faq-object-serializer>`.
 
@@ -76,11 +71,26 @@ Version 2.19.0 Breaking Changes
   
   .. code-block:: csharp
     
-     var connectionString = "<YourMongoDBConnectionString>";
+     var connectionString = "<yourMongoDBConnectionString>";
      var clientSettings = MongoClientSettings
         .FromConnectionString(connectionString);
      clientSettings.LinqProvider = LinqProvider.V2;
      var client = new MongoClient(clientSettings);
+
+Version 2.14.0 Breaking Changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- This {+driver-long+} version removed support for {+framework+} v4.5.2 or earlier; the minimum
+  {+framework+} supported is v4.7.2.
+
+- This version of the {+driver-long+} does not support .NET Standard v1.5; the minimum .NET
+  Standard supported is v2.0.
+
+Version 2.13.0 Breaking Changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- The ``slave0k`` connection string option was removed; the
+  ``readPreference`` option is now used instead.
 
 
 .. _csharp-server-release-changes:
@@ -89,24 +99,24 @@ Server Release Compatibility Changes
 ------------------------------------
 
 A server release compatibility change is a modification
-to the MongoDB .NET/C# Driver that discontinues support for a set of
+to the {+driver-long+} that discontinues support for a set of
 MongoDB Server versions.
 
 The driver discontinues support for a MongoDB Server version after it
-reaches end-of-life(EOL).
+reaches end-of-life (EOL).
 
 To learn more about the MongoDB support for EOL products see the `Legacy
 Support Policy <https://www.mongodb.com/support-policy/legacy>`__. 
 
 To learn more about the compatibility between .NET/C# driver versions
 and MongoDB Server versions, visit the
-:ref:`Compatibility page<csharp-compatibility-tables>`. 
+:ref:`Compatibility<csharp-compatibility-tables>` page. 
 
 Version 2.14 Release Support Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- The v2.14 driver drops support for MongoDB Server 3.4 and earlier. To
-  use any driver from v2.14 and up, your MongoDB Server must be v3.6 or
+- The v2.14 driver drops support for MongoDB Server v3.4 and earlier. To
+  use any driver from v2.14 and later, your MongoDB Server must be v3.6 or
   later. To learn how to upgrade your MongoDB Server to v3.6, follow the
   link that corresponds to your MongoDB deployment configuration:
 

@@ -57,9 +57,11 @@ Version 2.19.0 Breaking Changes
   types that are considered safe. If not specified otherwise, the
   ``ObjectSerializer`` uses the types returned by
   ``ObjectSerializer.DefaultAllowedTypes``.
-
-  To learn more about the ``ObjectSerializer`` visit the
-  :ref:`FAQ <csharp-faq-object-serializer>`.
+  
+  .. tip:: 
+  
+     To learn more about the ``ObjectSerializer`` visit the
+     :ref:`FAQ <csharp-faq-object-serializer>`.
 
 - The default ``LinqProvider`` has been changed to LINQ3. The ``LinqProvider``
   can be configured for LINQ2 in ``MongoClientSettings`` as shown in the

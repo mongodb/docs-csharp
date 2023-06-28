@@ -40,7 +40,7 @@ Before you upgrade, perform the following actions:
 Breaking Changes
 ----------------
 
-A breaking change is a modification of a convention or behavior starting in
+A breaking change is a modification of a convention or a behavior starting in
 a specific version of the driver. This type of change may prevent your application from
 working properly if not addressed before upgrading the driver.
 
@@ -59,7 +59,9 @@ Version 2.19.0 Breaking Changes
   ``ObjectSerializer.DefaultAllowedTypes``. 
   
   To learn more about the ``ObjectSerializer``, visit the
-  :ref:`FAQ <csharp-faq-object-serializer>`.
+  :ref:`FAQ <csharp-faq-object-serializer>`. For more information on
+  ``DefaultAllowedTypes``, visit the `API Documentation
+  <https://mongodb.github.io/mongo-csharp-driver/2.19/apidocs/html/P_MongoDB_Bson_Serialization_Serializers_ObjectSerializer_DefaultAllowedTypes.htm>`__.
 
 - The default ``LinqProvider`` has been changed to LINQ3. The ``LinqProvider``
   can be configured for LINQ2 in ``MongoClientSettings`` as shown in the

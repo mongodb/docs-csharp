@@ -2,7 +2,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 
 // Replace the placeholder with your Atlas connection string
-const string connectionUri = "<your MongoDB URI>";
+const string connectionUri = "<connection string>";
 
 var settings = MongoClientSettings.FromConnectionString(connectionUri);
 

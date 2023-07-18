@@ -97,7 +97,7 @@ applications:
 
 .. code-block:: csharp
    
-   var client = new MongoClient("<connection string>");
+   var client = new MongoClient("<your MongoDB URI>");
 
 Create a client once for each process, and reuse it for all
 operations. It is a common mistake to create a new client for each

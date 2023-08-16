@@ -32,7 +32,7 @@ The 2.21 driver release includes the following new features:
 
 - Improvements and bug fixes to the LINQ3 integration.
 - Options for Atlas Search sorting, tracking, and scoring
-- Support for the Atlas Search :atlas:`embeddedDocument </atlas-search/embedded-document/>`__  operator.
+- Support for the Atlas Search :atlas:`embeddedDocument </atlas-search/embedded-document/>` operator.
 - An Atlas Search index management API.
 - Accepts anonymous types in the ``ObjectSerializer.DefaultAllowedTypes`` method.
 

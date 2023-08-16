@@ -50,6 +50,16 @@ changes between the current and upgrade versions. For example, if you
 are upgrading the driver from v2.0 to v2.20, address all breaking changes from
 the version after v2.0 including any listed under v2.20.
 
+.. _csharp-breaking-changes-2.21.0:
+
+Version 2.21.0 Breaking Changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- The function signature of ``Render`` methods in the Atlas Search builders
+  changed from
+  ``Render(IBsonSerializer<TDocument> documentSerializer, IBsonSerializerRegistry serializerRegistry)``
+  to ``Render(SearchDefinitionRenderContext<TDocument> renderContext)``.
+
 Version 2.19.0 Breaking Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

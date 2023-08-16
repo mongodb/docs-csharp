@@ -12,7 +12,7 @@ What's New
 
 Learn what's new in:
 
-* :ref:`Version 2.20 <version-2.21>`
+* :ref:`Version 2.21 <version-2.21>`
 * :ref:`Version 2.20 <version-2.20>`
 * :ref:`Version 2.19 <version-2.19>`
 

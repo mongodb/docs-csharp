@@ -58,13 +58,12 @@ by specifying the algorithms in one of two ways:
       want to use:
 
       .. code-block:: csharp
-         :emphasize-lines: 6-10
+         :emphasize-lines: 5-10
 
          var settings = new MongoClientSettings()
          {  
             Scheme = ConnectionStringScheme.MongoDB,
             Server = new MongoServerAddress("<cluster-url>"),
-
             Compressors = new List<CompressorConfiguration>()
             {  
                new CompressorConfiguration(CompressorType.Snappy),
@@ -73,4 +72,4 @@ by specifying the algorithms in one of two ways:
             }
          };
 
-        var client = new MongoClient(settings);
+         var client = new MongoClient(settings);

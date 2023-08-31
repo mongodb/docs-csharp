@@ -39,7 +39,7 @@ by specifying the algorithms in one of two ways:
       specify one or more compression algorithms, separating them with
       commas:
 
-      .. code-block:: javascript
+      .. code-block:: csharp
          :emphasize-lines: 2
 
          const string connectionUri =

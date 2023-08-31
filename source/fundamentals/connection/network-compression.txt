@@ -23,11 +23,12 @@ first one in the list supported by your MongoDB instance.
 Specify Compression Algorithms
 ------------------------------
 
-You can enable compression for the connection to your MongoDB instance
-by specifying the algorithms in one of two ways: 
+To enable compression for the connection to your MongoDB instance,
+specify the algorithms you want to use in one of the following ways: 
 
-1. Adding the parameter to your connection string 
-2. Specifying the ``compressors`` option in your ``MongoClientOptions``
+1. Add the algorithm to your connection string as a parameter 
+2. Specify the algorithms in the ``Compressors`` property of your ``MongoClientSettings``
+   object
 
 .. tabs::
 

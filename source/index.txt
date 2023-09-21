@@ -4,6 +4,13 @@ MongoDB C# Driver
 
 .. default-domain:: mongodb
 
+.. facet::
+   :name: programming_language
+   :values: csharp
+
+.. meta::
+   :keywords: dotnet
+
 .. toctree::
 
    /previous-versions

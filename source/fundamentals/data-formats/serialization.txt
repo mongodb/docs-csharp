@@ -22,7 +22,11 @@ Serializer Registry
 The serializer registry is an implementation of ``IBsonSerializerRegistry``
 that contains all registered serializers. You can access the serializer registry
 with the ``SerializerRegistry`` property of the ``BsonSerializer``
-class.
+class as follows:
+
+.. code-block:: csharp
+
+   var intSerializer = BsonSerializer.SerializerRegistry.GetSerializer<int>();
 
 .. important::
 
@@ -62,6 +66,13 @@ provider.
        }
    }
 
+You can register the serialization provider using the
+``RegisterSerializationProvider`` method as shown in the following example:
+
+.. code-block:: csharp
+
+   BsonSerializer.RegisterSerializationProvider(new MyProvider);
+
 Serializers
 -----------
 
@@ -71,16 +82,16 @@ interface. The {+driver-short+} has many built-in serializers made to handle
 primitive types, collection types, and custom classes.
 
 For a full list of available serializers, see the
-`Serializers namespace API documentation <https://mongodb.github.io/mongo-csharp-driver/2.18/apidocs/html/N_MongoDB_Bson_Serialization_Serializers.htm>`__.
+`Serializers namespace API documentation <{+api-root+}/N_MongoDB_Bson_Serialization_Serializers.htm>`__.
 
 Custom Serializers
 ~~~~~~~~~~~~~~~~~~
 
 In some cases, you may need to implement a custom serializer. When creating a
 custom serializer, your class should inherit from ``SerializerBase<T>`` and
-override the ``Deserialize`` and ``Serialize`` methods. 
+override the ``Deserialize()`` and ``Serialize()`` methods. 
 
-The following code example shows how to implement a custom serializer that reads
+The following code example shows how to implement a custom serializer for
 an ``Int32``:
 
 .. code-block:: csharp
@@ -120,7 +131,7 @@ IBsonIdProvider
 The `IBsonIdProvider
 <{+api-root+}/T_MongoDB_Bson_Serialization_IBsonIdProvider.htm>`__
 interface provides the ``GetDocumentId`` and ``SetDocumentId``
-methods, and is useful if your class uses an Id type other than ``ObjectId``.
+methods, and is useful if your class uses an ID type other than ``ObjectId``.
 
 IBsonDocumentSerializer
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -128,7 +139,7 @@ IBsonDocumentSerializer
 Implementing the `IBsonDocumentSerializer
 <{+api-root+}/T_MongoDB_Bson_Serialization_IBsonDocumentSerializer.htm>`__
 interface enables the driver to access your class's member
-information. This allows the driver to properly construct type-safe queries using a
+information. This allows the driver to properly construct type-safe queries when using a
 custom serializer.
 
 IBsonArraySerializer

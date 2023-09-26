@@ -43,7 +43,7 @@ For documentation on versions of the driver v2.18 and earlier, see the :ref:`csh
 Compatibility
 -------------
 
-You can use the C# driver to connect to deployments hosted in the
+You can use the {+driver-short+} to connect to deployments hosted in the
 following environments:
 
 .. include:: /includes/fact-environments.rst

@@ -13,65 +13,10 @@ Serialization
 Overview
 --------
 
-In this guide, you can learn about serialization with the {+driver-long+}.
-Serialization is the process of mapping a C# object to and from a BSON document.
-
-Serializer Registry
--------------------
-
-The serializer registry is an implementation of ``IBsonSerializerRegistry``
-that contains all registered serializers. You can access the serializer registry
-with the ``SerializerRegistry`` property of the ``BsonSerializer``
-class as follows:
-
-.. code-block:: csharp
-
-   var intSerializer = BsonSerializer.SerializerRegistry.GetSerializer<int>();
-
-.. important::
-
-   The serializer registry is a global registry. This means that you cannot use
-   multiple registries in a single application.
-
-Serialization Provider
-----------------------
-
-A serialization provider allows you to provide serializers to your
-serialization registry. The serialization provider should be registered as early
-as possible in your application to ensure that the serializers are used by the
-registry. Your serialization provider must implement the
-``IBsonSerializationProvider`` interface. 
-
-Example
-~~~~~~~
-
-The following example implements a serialization provider. The provider has a
-``GetSerializer`` method that returns a serializer based on the type of the
-input. If the method input is an ``int`` it returns a custom ``Int32``
-serializer, otherwise it returns ``null`` so that it can be handled by another
-provider. 
-
-.. code-block:: csharp
-   
-   class MyProvider : IBsonSerializationProvider
-   {
-       public IBsonSerializer GetSerializer(Type type)
-       {
-           if (type == typeof(int))
-           {
-               return new MyInt32Serializer();
-           }        
-   
-           return null;
-       }
-   }
-
-You can register the serialization provider using the
-``RegisterSerializationProvider`` method as shown in the following example:
-
-.. code-block:: csharp
-
-   BsonSerializer.RegisterSerializationProvider(new MyProvider);
+In this guide, you can learn how to use the {+driver-long+} to perform
+:wikipedia:`serialization </serialization>`.
+Serialization is the process of mapping a C# object to a BSON document for
+storage in MongoDB.
 
 Serializers
 -----------
@@ -84,35 +29,54 @@ primitive types, collection types, and custom classes.
 For a full list of available serializers, see the
 `Serializers namespace API documentation <{+api-root+}/N_MongoDB_Bson_Serialization_Serializers.htm>`__.
 
-Custom Serializers
-~~~~~~~~~~~~~~~~~~
+Serializer Registry
+-------------------
 
-In some cases, you may need to implement a custom serializer. When creating a
-custom serializer, your class should inherit from ``SerializerBase<T>`` and
-override the ``Deserialize()`` and ``Serialize()`` methods. 
-
-The following code example shows how to implement a custom serializer for
-an ``Int32``:
+The serializer registry is an implementation of the ``IBsonSerializerRegistry`` interface
+that contains all registered serializers. Before you can use a serializer, you
+must register it by adding it to the serializer registry, as
+shown in the following example:
 
 .. code-block:: csharp
 
-   class MyInt32Serializer : SerializerBase<int>
+   BsonSerializer.RegisterSerializer(typeof(MySerializerType), new MySerializer); 
+
+You can access the serializer registry with the ``SerializerRegistry`` property
+of the ``BsonSerializer`` class as follows:
+
+.. code-block:: csharp
+
+   var intSerializer = BsonSerializer.SerializerRegistry.GetSerializer<int>();
+
+.. important::
+
+   The serializer registry is a global registry. This means that you cannot use
+   multiple registries in a single application.
+
+Custom Serializers
+~~~~~~~~~~~~~~~~~~
+
+In some cases, you might need to create a custom serializer. When creating a
+custom serializer, implement the ``SerializerBase<T>`` interface and
+override the ``Deserialize()`` and ``Serialize()`` methods. 
+
+The following code example shows how to implement a custom serializer for
+an ``int``:
+
+.. code-block:: csharp
+
+   class MyIntSerializer : SerializerBase<int>
    {
        public override int Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
        {
-           return context.Reader.ReadInt32();
+           return context.Reader.ReadInt();
        }
    
        public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, int value)
        {
-           context.Writer.WriteInt32(value);
+           context.Writer.WriteInt(value);
        }
    }
-
-.. important:: 
-
-   The preceding code example shows an overly simplistic serializer. When
-   creating a custom serializer ensure it handles all standard and edge cases.
 
 .. tip::
 
@@ -122,25 +86,25 @@ an ``Int32``:
 Opt-in Interfaces
 -----------------
 
-The {+driver-short+} has several opt-in interfaces that you can implement with
-your custom serializer based on type of data your serializer handles.
+The {+driver-short+} has several optional interfaces that your custom serializer
+class can implement, depending on the type of data the serializer handles.
 
 IBsonIdProvider
 ~~~~~~~~~~~~~~~
 
 The `IBsonIdProvider
 <{+api-root+}/T_MongoDB_Bson_Serialization_IBsonIdProvider.htm>`__
-interface provides the ``GetDocumentId`` and ``SetDocumentId``
-methods, and is useful if your class uses an ID type other than ``ObjectId``.
+interface provides the ``GetDocumentId()`` and ``SetDocumentId()``
+methods, and is useful if the object you are serializing uses an ID type other than ``ObjectId``.
 
 IBsonDocumentSerializer
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Implementing the `IBsonDocumentSerializer
 <{+api-root+}/T_MongoDB_Bson_Serialization_IBsonDocumentSerializer.htm>`__
-interface enables the driver to access your class's member
-information. This allows the driver to properly construct type-safe queries when using a
-custom serializer.
+interface enables the driver to access the member
+information of the object your are serializing. This allows the driver to
+properly construct type-safe queries when using a custom serializer.
 
 IBsonArraySerializer
 ~~~~~~~~~~~~~~~~~~~~
@@ -159,8 +123,5 @@ guide, see the following API documentation:
 - `IBsonSerializerRegistry <{+api-root+}/P_MongoDB_Bson_Serialization_BsonSerializer_SerializerRegistry.htm>`__
 - `SerializerRegistry <{+api-root+}/P_MongoDB_Bson_Serialization_BsonSerializer_SerializerRegistry.htm>`__
 - `BsonSerializer <{+api-root+}/T_MongoDB_Bson_Serialization_BsonSerializer.htm>`__
-- `IBsonSerializationProvider <{+api-root+}/T_MongoDB_Bson_Serialization_IBsonSerializationProvider.htm>`__
-- `GetSerializer <{+api-root+}/M_MongoDB_Bson_Serialization_IBsonSerializationProvider_GetSerializer.htm>`__
-- `RegisterSerializationProvider <{+api-root+}/M_MongoDB_Bson_Serialization_BsonSerializer_RegisterSerializationProvider.htm>`_
 - `IBsonSerializer <{+api-root+}/T_MongoDB_Bson_Serialization_IBsonSerializer.htm>`__
 - `SerializerBase<T> <{+api-root+}/T_MongoDB_Bson_Serialization_Serializers_SerializerBase_1.htm>`__

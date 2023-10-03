@@ -14,9 +14,12 @@ Overview
 --------
 
 In this guide, you can learn how to use the {+driver-long+} to perform
-:wikipedia:`serialization </serialization>`.
-Serialization is the process of mapping a C# object to a BSON document for
-storage in MongoDB.
+serialization. Serialization is the process of mapping a C# object to a BSON
+document for storage in MongoDB.
+
+.. tip:: Serialization
+   To learn more about serialization, see the :wikipedia:`Serialization </serialization>`
+   article on Wikipedia.
 
 Serializers
 -----------
@@ -41,7 +44,7 @@ shown in the following example:
 
    BsonSerializer.RegisterSerializer(typeof(MySerializerType), new MySerializer); 
 
-You can access the serializer registry with the ``SerializerRegistry`` property
+To access the serializer registry, use the ``SerializerRegistry`` property
 of the ``BsonSerializer`` class as follows:
 
 .. code-block:: csharp
@@ -60,28 +63,22 @@ In some cases, you might need to create a custom serializer. When creating a
 custom serializer, implement the ``SerializerBase<T>`` interface and
 override the ``Deserialize()`` and ``Serialize()`` methods. 
 
-The following code example shows how to implement a custom serializer for
-an ``int``:
+The following code example shows the syntax for a custom serializer:
 
 .. code-block:: csharp
 
-   class MyIntSerializer : SerializerBase<int>
+   class MyPetSerializer : SerializerBase<Pet>
    {
-       public override int Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+       public override Pet Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
        {
-           return context.Reader.ReadInt();
+           // ...
        }
    
-       public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, int value)
+       public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, Pet value)
        {
-           context.Writer.WriteInt(value);
+           // ...
        }
    }
-
-.. tip::
-
-   The {+driver-short+} provides a built-in `Int32Serializer 
-   <{+api-root+}/T_MongoDB_Bson_Serialization_Serializers_Int32Serializer.htm>`__.
 
 Opt-in Interfaces
 -----------------
@@ -103,7 +100,7 @@ IBsonDocumentSerializer
 Implementing the `IBsonDocumentSerializer
 <{+api-root+}/T_MongoDB_Bson_Serialization_IBsonDocumentSerializer.htm>`__
 interface enables the driver to access the member
-information of the object your are serializing. This allows the driver to
+information of the object you are serializing. This allows the driver to
 properly construct type-safe queries when using a custom serializer.
 
 IBsonArraySerializer

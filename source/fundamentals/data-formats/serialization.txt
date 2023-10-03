@@ -117,7 +117,6 @@ Additional Information
 To learn more about any of the methods or types discussed in this
 guide, see the following API documentation:
 
-- `IBsonSerializerRegistry <{+api-root+}/P_MongoDB_Bson_Serialization_BsonSerializer_SerializerRegistry.htm>`__
 - `SerializerRegistry <{+api-root+}/P_MongoDB_Bson_Serialization_BsonSerializer_SerializerRegistry.htm>`__
 - `BsonSerializer <{+api-root+}/T_MongoDB_Bson_Serialization_BsonSerializer.htm>`__
 - `IBsonSerializer <{+api-root+}/T_MongoDB_Bson_Serialization_IBsonSerializer.htm>`__

@@ -18,6 +18,7 @@ serialization. Serialization is the process of mapping a C# object to a BSON
 document for storage in MongoDB.
 
 .. tip:: Serialization
+
    To learn more about serialization, see the :wikipedia:`Serialization </serialization>`
    article on Wikipedia.
 
@@ -35,10 +36,9 @@ For a full list of available serializers, see the
 Serializer Registry
 -------------------
 
-The serializer registry is an implementation of the ``IBsonSerializerRegistry`` interface
-that contains all registered serializers. Before you can use a serializer, you
-must register it by adding it to the serializer registry, as
-shown in the following example:
+The serializer registry contains all registered serializers that are available
+to your application. Before you can use a serializer, you must add it to the
+serializer registry, as shown in the following example:
 
 .. code-block:: csharp
 

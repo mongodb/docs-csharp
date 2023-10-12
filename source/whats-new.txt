@@ -27,10 +27,14 @@ What's New in 2.22
 The 2.22 driver release includes the following new features:
 
 - Improvements and bug fixes to the LINQ3 integration.
-- Added support for ``$set`` and ``$vectorSearch`` aggregation stages.
+- Added support for :manual:`$set
+  </reference/operator/aggregation/set/>` and :atlas:`$vectorSearch
+  </atlas-vector-search/vector-search-stage/>` aggregation stages.
 - Added synonym support for Atlas Search.
 - Reduced memory allocation when using encryption.
-- Added additional logging messages.
+- Added logging messages for server discovery and monitoring (SDAM) events. For more 
+  information on these events, see the
+  `MongoDB SDAM Logging and Monitoring specification. <https://github.com/mongodb/specifications/blob/master/source/server-discovery-and-monitoring/server-discovery-and-monitoring-logging-and-monitoring.rst#log-messages>`__
 
 .. _version-2.21:
 

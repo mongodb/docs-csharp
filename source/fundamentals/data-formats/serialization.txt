@@ -42,7 +42,7 @@ serializer registry, as shown in the following example:
 
 .. code-block:: csharp
 
-   BsonSerializer.RegisterSerializer(typeof(MySerializerType), new MySerializer); 
+   BsonSerializer.RegisterSerializer(new CustomTypeSerializer()); 
 
 To access the serializer registry, use the ``SerializerRegistry`` property
 of the ``BsonSerializer`` class as follows:
@@ -60,24 +60,35 @@ Custom Serializers
 ~~~~~~~~~~~~~~~~~~
 
 In some cases, you might need to create a custom serializer. When creating a
-custom serializer, implement the ``SerializerBase<T>`` interface and
-override the ``Deserialize()`` and ``Serialize()`` methods. 
+custom serializer, implement the ``SerializerBase<T>`` abstract base class and
+override the ``Deserialize()`` and ``Serialize()`` methods.
 
-The following code example shows the syntax for a custom serializer:
+The following code example shows a custom ``BsonRegularExpression`` serializer:
 
 .. code-block:: csharp
 
-   class MyPetSerializer : SerializerBase<Pet>
+   class CustomRegularExpressionSerializer : SerializerBase<BsonRegularExpression>
    {
-       public override Pet Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
-       {
-           // ...
-       }
-   
-       public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, Pet value)
-       {
-           // ...
-       }
+       public override BsonRegularExpression Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+     {
+         var type = context.Reader.GetCurrentBsonType();
+         switch (type)
+         {
+             case BsonType.RegularExpression:
+                 return context.Reader.ReadRegularExpression();
+             case BsonType.String:
+                 var pattern = context.Reader.ReadString();
+                 return new Regex(pattern);
+             default:
+                 var message = string.Format("Cannot convert a {0} to a BsonRegularExpression.", type);
+                 throw new NotSupportedException(message);
+         }
+     }
+
+     public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, BsonRegularExpression value)
+     {
+         context.Writer.WriteRegularExpression(value);
+     }
    }
 
 Opt-in Interfaces
@@ -92,7 +103,7 @@ IBsonIdProvider
 The `IBsonIdProvider
 <{+api-root+}/T_MongoDB_Bson_Serialization_IBsonIdProvider.htm>`__
 interface provides the ``GetDocumentId()`` and ``SetDocumentId()``
-methods, and is useful if the object you are serializing uses an ID type other than ``ObjectId``.
+methods, and is useful if the object you are serializing uses an ``_id`` type other than ``ObjectId``.
 
 IBsonDocumentSerializer
 ~~~~~~~~~~~~~~~~~~~~~~~

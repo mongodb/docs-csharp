@@ -131,7 +131,9 @@ Entity Framework Provider
 -------------------------
 
 The MongoDB Entity Framework Provider is an object-relational mapper (ORM) that lets you
-use Microsoft's Entity Framework to work with MongoDB data in an object-oriented way.
+use Microsoft's Entity Framework to work with MongoDB data. ORMs provide an
+object-oriented interface for data management.
+
 To learn more, see the
 `MongoDB Entity Framework Provider documentation <https://www.mongodb.com/docs/entity-framework/current/>`__.
 

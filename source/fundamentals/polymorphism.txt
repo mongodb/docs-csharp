@@ -27,48 +27,183 @@ to know to make sure documents are mapped to the right class.
 
 This guide explains the following:
 
-- The default discriminator conventions included with the {+driver-short+}
+- How to deserialize polymorphic types
+- The discriminator conventions included with the {+driver-short+}
 - How to create custom discriminator conventions
-- How to avoid errors when deserializing polymorphic types
+
+For example, suppose you're working with the following {+language+} classes: 
+
+.. code-block:: csharp
+   
+   public class Animal 
+   {
+   }
+
+   public class Cat : Animal 
+   {
+   }
+
+   public class Dog : Animal 
+   {
+   }
+
+   public class Lion : Cat 
+   {
+   }
+
+   public class Tiger : Cat 
+   {
+   }
+
+Specify Subclasses 
+------------------
+
+When deserializing polymorphic classes, the serializer must know about
+all subclasses in the inheritance hierarchy before it starts deserialization.
+
+Automatic Class Mapping
+~~~~~~~~~~~~~~~~~~~~~~~
+
+If you're relying on the automapper to map your classes, you must inform the
+serializer about the subclasses it should create class maps for.
+
+One way to do this is by applying the ``[BsonKnownTypes]`` attribute to each base class,
+passing the types of its direct child classes as arguments:
+
+.. code-block:: csharp
+   
+   [BsonKnownTypes(typeof(Cat), typeof(Dog))]
+   public class Animal 
+   {
+   }
+
+   [BsonKnownTypes(typeof(Lion), typeof(Tiger))]
+   public class Cat : Animal 
+   {
+   }
+
+   public class Dog : Animal 
+   {
+   }
+
+   public class Lion : Cat 
+   {
+   }
+
+   public class Tiger : Cat 
+   {
+   }
+
+You can also do this programmatically by calling the ``BsonClassMap.RegisterClassMap()``
+method for every class in the hierarchy, as shown in the following example:
+
+.. code-block:: csharp
+   
+   BsonClassMap.RegisterClassMap<Animal>();
+   BsonClassMap.RegisterClassMap<Cat>();
+   BsonClassMap.RegisterClassMap<Dog>();
+   BsonClassMap.RegisterClassMap<Lion>();
+   BsonClassMap.RegisterClassMap<Tiger>();
 
 Use Discriminators
 ------------------
 
 In MongoDB, a **discriminator** is a field added to a document to identify the class
-the document was serialized from. This is useful when more than one class from an
-inheritance hierarchy is serialized to a single collection by ensuring that each
-document is correctly deserialized to the right object type.
+to which the document serializes. When a collection contains more than one type from a
+single inheritance hierarchy, discriminators ensure that each
+document is serialized to the right class.
 
-In this section, you can learn about the default discriminator conventions included
+**Discriminator conventions** define the field name used for the discriminator and the value
+that goes there.
+The {+driver-short+} stores the discriminator
+value in a field named ``_t`` in the BSON document. Generally, ``_t`` is the second
+field in the BSON document after ``_id``.
+In this section, you can learn about the discriminator conventions included
 with the {+driver-short+} and how to create custom discriminator conventions.
 
-Default Discriminator Conventions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ScalarDiscriminatorConvention
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The default discriminator conventions both use an element named ``_t`` to store the
-discriminator value in the BSON document. This element is usually the second
-element in the BSON document after ``_id``.
+By default, the {+driver-short+} uses the ``ScalarDiscriminatorConvention``. In this
+convention, the value of the ``_t`` field is the name of the class from which the
+document was serialized.
 
-The default serializer in the {+driver-short+} includes the following
-discriminator conventions:
+If you serialized one object of each of the previous types to a single collection, the
+{+driver-short+} would apply the ``ScalarDiscriminatorConvention`` and set the value of each
+document's ``_t`` field to the class from which the document was serialized. This is
+shown in the following example:
 
-.. list-table::
-   :header-rows: 1
-   :stub-columns: 1
-   :widths: 10 20
+.. code-block:: json
+   
+   { _id: ..., _t: "Animal", ... }
+   { _id: ..., _t: "Cat", ... }
+   { _id: ..., _t: "Dog", ... }
+   { _id: ..., _t: "Lion", ... }
+   { _id: ..., _t: "Tiger", ... }
 
-   * - Discriminator Convention
-     - Description
+The ``ScalarDiscriminatorConvention`` uses concise discriminator values, but can be
+difficult to run a query on. For example, to find all documents of type or subtype ``Cat``,
+you would need to list each class you're looking for:
 
-   * - ``HierarchicalDiscriminatorConvention``
-     - **Default.** Behaves like the ``ScalarDiscriminatorConvention``
-       unless you set options to trigger hierarchical behavior. //TODO
-       the value of _t will be
-       an array of discriminator values, one for each level of the class inheritance tree.
+.. code-block:: csharp
+   :copyable: true
+   
+   var query = coll.Aggregate().Match(a => a is Cat || a is Lion || a is Tiger);
 
-   * - ``ScalarDiscriminatorConvention``
-     - The value of the ``_t`` field is the name of the class from which the document
-       was serialized.
+HierarchicalDiscriminatorConvention
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To simplify queries against your collection of polymorphic types, you can use the
+``HierarchicalDiscriminatorConvention`` instead. In this convention, the value of ``_t``
+is an array of discriminator values, one for each level of the class inheritance tree.
+
+To use the ``HierarchicalDiscriminatorConvention``, mark a base class as the root
+of a hierarchy. One way to do this is by applying the ``[BsonDiscriminatorAttribute]``
+attribute to the root class, passing the ``RootClass`` named parameter:
+
+.. code-block:: csharp
+   :emphasize-lines: 1,2 
+   
+   [BsonDiscriminator(RootClass = true)]
+   [BsonKnownTypes(typeof(Cat), typeof(Dog)]
+   public class Animal 
+   {
+   }
+
+You can also do this programmatically by calling the ``SetIsRootClass()`` method when
+you register the class map for the root class:
+
+.. code-block:: csharp
+   :copyable: true
+   :emphasize-lines: 3 
+   
+   BsonClassMap.RegisterClassMap<Animal>(cm => {
+       cm.AutoMap();
+       cm.SetIsRootClass(true);
+   });
+   BsonClassMap.RegisterClassMap<Cat>();
+   BsonClassMap.RegisterClassMap<Dog>();
+   BsonClassMap.RegisterClassMap<Lion>();
+   BsonClassMap.RegisterClassMap<Tiger>();
+
+If you serialized one object of each of the previous types to a single collection, the
+{+driver-short+} would apply the ``HierarchicalDiscriminatorConvention`` and the
+documents would appear as follows:
+
+{ _id: ..., _t: "Animal", ... }
+{ _id: ..., _t: ["Animal", "Cat"], ... }
+{ _id: ..., _t: ["Animal", "Dog"], ... }
+{ _id: ..., _t: ["Animal", "Cat", "Lion"], ... }
+{ _id: ..., _t: ["Animal", "Cat", "Tiger"], ... }
+
+When using the ``HierarchicalDiscriminatorConvention``, you can search for all
+documents of type or subtype ``Cat`` by using a single boolean condition, as shown in
+the following example:
+
+.. code-block:: csharp
+   :copyable: true
+   
+   var query = coll.Aggregate().Match(a => a is Cat);
 
 Custom Discriminator Conventions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -113,109 +248,6 @@ A document mapped to the ``Person`` class with the
 
 .. TODO: link to class map page
 
-Specify Subclasses 
-------------------
-
-When deserializing polymorphic classes, the serializer must know about
-all subclasses in the inheritance hierarchy before it starts deserialization.
-
-Automatic Class Mapping
-~~~~~~~~~~~~~~~~~~~~~~~
-
-If you're relying on the automapper to map your classes, you must inform the
-serializer about the subclasses it should create class maps for. Here is
-an example of how to do this:.
-Mark each class with an attribute declaring the classes that directly inherit from it.
-
-[BsonKnownTypes(typeof(Cat), typeof(Dog))]
-public class Animal 
-{
-}
-
-[BsonKnownTypes(typeof(Lion), typeof(Tiger))]
-public class Cat : Animal 
-{
-}
-
-public class Dog : Animal 
-{
-}
-
-public class Lion : Cat 
-{
-}
-
-public class Tiger : Cat 
-{
-}
-
-The BsonKnownTypesAttribute attribute lets the serializer know what subclasses it
-might encounter during deserialization, so when Animal is automapped, the serializer
-will also automap Cat and Dog, and recursively, Lion and Tiger as well.
-
-Manual Class Mapping
-~~~~~~~~~~~~~~~~~~~~
-
-If you're mapping your classes programmatically,
-call the ``BsonClassMap.RegisterClassMap()`` method for each class in the hierarchy.
-
-Or via code:
-
-BsonClassMap.RegisterClassMap<Animal>();
-BsonClassMap.RegisterClassMap<Cat>();
-BsonClassMap.RegisterClassMap<Dog>();
-BsonClassMap.RegisterClassMap<Lion>();
-BsonClassMap.RegisterClassMap<Tiger>();
 
 
-Scalar and Hierarchical Discriminators
 
-
-Normally a discriminator is simply the name of the class (although it could be different
-if you are using a custom discriminator convention or have explicitly specified a
-discriminator for a class). So a collection containing a mix of different type of Animal
-documents might look like:
-
-{ _id: ..., _t: "Animal", ... }
-{ _id: ..., _t: "Cat", ... }
-{ _id: ..., _t: "Dog", ... }
-{ _id: ..., _t: "Lion", ... }
-{ _id: ..., _t: "Tiger", ... }
-
-Sometimes it can be helpful to record a hierarchy of discriminator values, one for each
- level of the hierarchy. To do this, you must first mark a base class as being the root
-  of a hierarchy, and then the default HierarchicalDiscriminatorConvention will
-   automatically record discriminators as array values instead.
-
-To identify Animal as the root of a hierarchy use the BsonDiscriminatorAttribute
-attribute with the RootClass named parameter:
-
-[BsonDiscriminator(RootClass = true)]
-[BsonKnownTypes(typeof(Cat), typeof(Dog)]
-public class Animal 
-{
-}
-
-// the rest of the hierarchy as before
-Or via code:
-
-BsonClassMap.RegisterClassMap<Animal>(cm => {
-    cm.AutoMap();
-    cm.SetIsRootClass(true);
-});
-BsonClassMap.RegisterClassMap<Cat>();
-BsonClassMap.RegisterClassMap<Dog>();
-BsonClassMap.RegisterClassMap<Lion>();
-BsonClassMap.RegisterClassMap<Tiger>();
-
-Now that you have identified Animal as a root class, the discriminator values will look 
-a little bit different:
-
-{ _id: ..., _t: "Animal", ... }
-{ _id: ..., _t: ["Animal", "Cat"], ... }
-{ _id: ..., _t: ["Animal", "Dog"], ... }
-{ _id: ..., _t: ["Animal", "Cat", "Lion"], ... }
-{ _id: ..., _t: ["Animal", "Cat", "Tiger"], ... }
-The main reason you might choose to use hierarchical discriminators is because it makes it possibly to query for all instances of any class in the hierarchy. For example, to read all the Cat documents we can use the following filter.
-
-var filter = new BsonDocument("_t", "Cat");

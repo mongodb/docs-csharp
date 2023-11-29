@@ -258,7 +258,7 @@ discriminator field for the ``Animal`` class to "myAnimalClass":
        classMap.SetDiscriminator("myAnimalClass");
    });
 
-A instance of the previous ``Animal`` class appears as follows after serialization: 
+An instance of the previous ``Animal`` class appears as follows after serialization: 
 
 .. code-block:: json
    :copyable: false

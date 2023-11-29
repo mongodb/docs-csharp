@@ -4,8 +4,6 @@
 Insert Documents
 ================
 
-.. default-domain:: mongodb
-
 .. contents:: On this page
    :local:
    :backlinks: none
@@ -17,6 +15,13 @@ Overview
 
 In this guide, you can learn how to add documents to your MongoDB
 collections using insert operations.
+
+.. tip:: Interactive Lab
+
+   You can complete a short interactive lesson that demonstrates how to
+   insert data by using the ``InsertOneAsync()`` method in an in-browser coding
+   experience. To learn more, see the :ref:`csharp-insert-instruqt-lab`
+   section of this guide.
 
 Sample Data
 ~~~~~~~~~~~
@@ -255,6 +260,22 @@ If you look inside your collection, you should be able to see the following docu
    { "_id" : 1, "name" : "Restaurant A" }
    { "_id" : 2, "name" : "Restaurant B" }
    { "_id" : 3, "name" : "Restaurant D" }
+
+.. _csharp-insert-instruqt-lab:
+
+Complete an Interactive Lesson
+------------------------------
+
+This lab helps you understand how to perform insert operations in MongoDB
+by using the ``InsertOneAsync()`` method. You can complete this lab directly in
+your browser window without installing MongoDB or a code editor.
+
+.. tip::
+   
+   To expand the lab to a full-screen format, click the full-screen
+   button, :guilabel:`⛶`, in the lower-right corner of the lab pane.
+
+.. instruqt:: /mongodb-docs/tracks/insert-a-document---c-net-driver?token=em__BF-Ccd2b1dS3YLi
 
 .. _additional-info:
 

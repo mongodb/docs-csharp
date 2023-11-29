@@ -4,8 +4,6 @@
 Retrieve Data
 =============
 
-.. default-domain:: mongodb
-
 .. contents:: On this page
    :local:
    :backlinks: none
@@ -15,8 +13,16 @@ Retrieve Data
 Overview
 --------
 
-In this guide, you can learn how to retrieve data from your MongoDB
-collections with the {+driver-long+}.
+You can perform find operations to retrieve data from your MongoDB database.
+You can perform a find operation to match documents on a set of criteria
+by calling the ``Find()`` method.
+
+.. tip:: Interactive Lab
+   
+   You can complete a short interactive lesson that demonstrates how to
+   retrieve data by using the ``Find()`` method in an in-browser coding
+   experience. To learn more, see the :ref:`csharp-retrieve-instruqt-lab`
+   section of this guide.
 
 Sample Data
 ~~~~~~~~~~~
@@ -247,6 +253,21 @@ The following example performs these actions:
    `Dispose() <https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose?view=net-7.0>`__
    method once the cursor is no longer in use.
 
+.. _csharp-retrieve-instruqt-lab:
+
+Complete an Interactive Lesson
+------------------------------
+
+This lab helps you understand how to perform read operations in MongoDB
+by using the ``Find()`` method. You can complete this lab directly in
+your browser window without installing MongoDB or a code editor.
+
+.. tip::
+   
+   To expand the lab to a full-screen format, click the full-screen
+   button, :guilabel:`⛶`, in the lower-right corner of the lab pane.
+
+.. instruqt:: /mongodb-docs/tracks/find-csharp?token=em_R1T7ZloiDGciGxye
 
 .. _csharp-retrieve-additional-information:
 

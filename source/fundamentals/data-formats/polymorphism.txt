@@ -186,9 +186,9 @@ code example registers class maps for all five example classes but labels only t
    :copyable: true
    :emphasize-lines: 3 
    
-   BsonClassMap.RegisterClassMap<Animal>(cm => {
-       cm.AutoMap();
-       cm.SetIsRootClass(true);
+   BsonClassMap.RegisterClassMap<Animal>(classMap => {
+       classMap.AutoMap();
+       classMap.SetIsRootClass(true);
    });
    BsonClassMap.RegisterClassMap<Cat>();
    BsonClassMap.RegisterClassMap<Dog>();
@@ -258,8 +258,7 @@ discriminator field for the ``Animal`` class to "myAnimalClass":
        classMap.SetDiscriminator("myAnimalClass");
    });
 
-A document mapped to the ``Animal`` class with the
-"myAnimalClass" discriminator appears as follows after serialization: 
+A instance of the previous ``Animal`` class appears as follows after serialization: 
 
 .. code-block:: json
    :copyable: false

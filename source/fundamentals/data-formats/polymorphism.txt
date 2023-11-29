@@ -258,9 +258,7 @@ A document mapped to the ``Animal`` class with the
 
    { "_id": "...", "_t": "myAnimalClass"}
 
-
 Additional Information
 ----------------------
 
-class mapping
-
+To learn more about mapping classes, see the :ref:`csharp-class-mapping` documentation.

@@ -68,6 +68,7 @@ The following example shows how to apply the ``[BsonKnownTypes]`` attribute to
 classes in the example ``Animal`` hierarchy:
 
 .. code-block:: csharp
+   :emphasize-lines: 1,6
    
    [BsonKnownTypes(typeof(Cat), typeof(Dog))]
    public class Animal 
@@ -136,6 +137,7 @@ set the value of each document's ``_t`` field to the class from which the docume
 serialized. The BSON documents would look like this:
 
 .. code-block:: json
+   :copyable: false
    
    { _id: ..., _t: "Animal", ... }
    { _id: ..., _t: "Cat", ... }
@@ -167,7 +169,7 @@ as an argument. The following code example labels the ``Animal`` class as the
 root of the example inheritance hierarchy:
 
 .. code-block:: csharp
-   :emphasize-lines: 1,2 
+   :emphasize-lines: 1
    
    [BsonDiscriminator(RootClass = true)]
    [BsonKnownTypes(typeof(Cat), typeof(Dog)]
@@ -199,15 +201,18 @@ The {+driver-short+} would follow the ``HierarchicalDiscriminatorConvention`` an
 set the value of each document's ``_t`` field to an array containing all classes from which
 the document's type inherits. The BSON documents would look like this:
 
-{ _id: ..., _t: "Animal", ... }
-{ _id: ..., _t: ["Animal", "Cat"], ... }
-{ _id: ..., _t: ["Animal", "Dog"], ... }
-{ _id: ..., _t: ["Animal", "Cat", "Lion"], ... }
-{ _id: ..., _t: ["Animal", "Cat", "Tiger"], ... }
+.. code-block:: javascript
+   
+   { _id: ..., _t: "Animal", ... }
+   { _id: ..., _t: ["Animal", "Cat"], ... }
+   { _id: ..., _t: ["Animal", "Dog"], ... }
+   { _id: ..., _t: ["Animal", "Cat", "Lion"], ... }
+   { _id: ..., _t: ["Animal", "Cat", "Tiger"], ... }
 
 .. important:: Root Class Discriminator
 
-   Documents mapped to the root class still use a string value for the discriminator field. 
+   Any document mapped to the root class still uses a string value for the discriminator
+   field. 
 
 When using the ``HierarchicalDiscriminatorConvention``, you can search for all
 documents of type or subtype ``Cat`` by using a single boolean condition, as shown in
@@ -232,6 +237,7 @@ the custom discriminator value as a string argument. The following code example
 sets the value of the discriminator field for the ``Animal`` class to "myAnimalClass":
 
 .. code-block:: csharp
+   :emphasize-lines: 1
 
    [BsonDiscriminator("myAnimalClass")]
    public class Animal 
@@ -244,6 +250,7 @@ you register the class map. The following code example sets the value of the
 discriminator field for the ``Animal`` class to "myAnimalClass":
 
 .. code-block:: csharp
+   :emphasize-lines: 4
 
    BsonClassMap.RegisterClassMap<Animal>(classMap => 
    {
@@ -255,6 +262,7 @@ A document mapped to the ``Animal`` class with the
 "myAnimalClass" discriminator appears as follows after serialization: 
 
 .. code-block:: json
+   :copyable: false
 
    { "_id": "...", "_t": "myAnimalClass"}
 

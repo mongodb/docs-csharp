@@ -13,9 +13,9 @@ Retrieve Data
 Overview
 --------
 
-You can perform find operations to retrieve data from your MongoDB database.
-You can perform a find operation to match documents on a set of criteria
-by calling the ``Find()`` method.
+In this guide, you can learn how to use the {+driver-long+} to retrieve
+data from your MongoDB collections by using read operations. Call the
+``Find()`` method to match documents on a set of criteria.
 
 .. tip:: Interactive Lab
    
@@ -258,14 +258,15 @@ The following example performs these actions:
 Complete an Interactive Lesson
 ------------------------------
 
-This lab helps you understand how to perform read operations in MongoDB
-by using the ``Find()`` method. You can complete this lab directly in
-your browser window without installing MongoDB or a code editor.
+This lab helps you understand how to use the {+driver-short+} to perform
+read operations in MongoDB by using the ``Find()`` method. You can
+complete this lab directly in your browser window without installing
+MongoDB or a code editor.
 
 .. tip::
    
    To expand the lab to a full-screen format, click the full-screen
-   button, :guilabel:`⛶`, in the lower-right corner of the lab pane.
+   button, :guilabel:`⛶`, in the bottom right corner of the lab pane.
 
 .. instruqt:: /mongodb-docs/tracks/find-csharp?token=em_R1T7ZloiDGciGxye
 

@@ -19,7 +19,7 @@ documents in a MongoDB collection by performing the following operations:
 - :ref:`Update Operations <csharp-update-operation>`
 - :ref:`Replace Operations <csharp-replace-operation>`
 
-The {+driver-short+} provides the following methods to change documents,
+The {+driver-short+} provides the following methods to modify documents,
 each of which has an asynchronous and synchronous version:
 
 - ``UpdateOneAsync()`` or ``UpdateOne()``

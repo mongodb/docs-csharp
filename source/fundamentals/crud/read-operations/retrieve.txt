@@ -14,8 +14,8 @@ Overview
 --------
 
 In this guide, you can learn how to use the {+driver-long+} to retrieve
-data from your MongoDB collections by using read operations. Call the
-``Find()`` method to match documents on a set of criteria.
+data from a MongoDB collection by using read operations. You can call the
+``Find()`` method to retrieve documents that match a set of criteria.
 
 .. tip:: Interactive Lab
    

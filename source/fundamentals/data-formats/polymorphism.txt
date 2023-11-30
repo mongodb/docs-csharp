@@ -128,13 +128,13 @@ ScalarDiscriminatorConvention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 By default, the {+driver-short+} uses the ``ScalarDiscriminatorConvention``. According
-to this convention, the value of the ``_t`` field is the name of the class from which the
-document was serialized.
+to this convention, the {+driver-short+} sets the value of the ``_t`` field to the name of
+the class from which the document was serialized.
 
-Suppose you serialized one object of each of the example ``Animal`` types to a single
-collection. The {+driver-short+} would follow the ``ScalarDiscriminatorConvention`` and
-set the value of each document's ``_t`` field to the class from which the document was
-serialized. The BSON documents would look like this:
+Suppose you created an instance of the example ``Animal`` class and each of its
+subclasses. If you serialized these objects to a single collection, the {+driver-short+}
+would apply the ``ScalarDiscriminatorConvention`` and the corresponding
+BSON documents would appear as follows:
 
 .. code-block:: json
    :copyable: false
@@ -147,7 +147,7 @@ serialized. The BSON documents would look like this:
 
 The ``ScalarDiscriminatorConvention`` uses concise discriminator values, but can be
 difficult to run a query on. For example, to find all documents of type or subtype ``Cat``,
-you would need to explicitly list each class you're looking for:
+you must explicitly list each class you're looking for:
 
 .. code-block:: csharp
    :copyable: true
@@ -195,11 +195,11 @@ code example registers class maps for all five example classes but labels only t
    BsonClassMap.RegisterClassMap<Lion>();
    BsonClassMap.RegisterClassMap<Tiger>();
 
-Suppose you serialized one object of each of the example ``Animal`` types to a single
-collection after labeling the ``Animal`` class as the root of the inheritance hierarchy.
-The {+driver-short+} would follow the ``HierarchicalDiscriminatorConvention`` and
-set the value of each document's ``_t`` field to an array containing all classes from which
-the document's type inherits. The BSON documents would look like this:
+Suppose you labeled the example ``Animal`` class as the root of the inheritance hierarchy,
+and then created an instance of the ``Animal`` class and each of its
+subclasses. If you serialized these objects to a single collection, the {+driver-short+}
+would apply the ``HierarchicalDiscriminatorConvention`` and the corresponding
+BSON documents would appear as follows:
 
 .. code-block:: javascript
    

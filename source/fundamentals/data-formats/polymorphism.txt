@@ -110,6 +110,10 @@ in the following example:
    BsonClassMap.RegisterClassMap<Lion>();
    BsonClassMap.RegisterClassMap<Tiger>();
 
+.. tip:: Class Maps
+
+   To learn more about mapping classes, see the :ref:`csharp-class-mapping` documentation.
+
 Use Discriminators
 ------------------
 
@@ -131,10 +135,10 @@ By default, the {+driver-short+} uses the ``ScalarDiscriminatorConvention``. Acc
 to this convention, the {+driver-short+} sets the value of the ``_t`` field to the name of
 the class from which the document was serialized.
 
-Suppose you created an instance of the example ``Animal`` class and each of its
-subclasses. If you serialized these objects to a single collection, the {+driver-short+}
-would apply the ``ScalarDiscriminatorConvention`` and the corresponding
-BSON documents would appear as follows:
+Suppose you create an instance of the example ``Animal`` class and each of its 
+subclasses. If you serialize these objects to a single collection, the 
+{+driver-short+} applies the ``ScalarDiscriminatorConvention`` and the corresponding 
+BSON documents appear as follows:
 
 .. code-block:: json
    :copyable: false
@@ -195,11 +199,11 @@ code example registers class maps for all five example classes but labels only t
    BsonClassMap.RegisterClassMap<Lion>();
    BsonClassMap.RegisterClassMap<Tiger>();
 
-Suppose you labeled the example ``Animal`` class as the root of the inheritance hierarchy,
-and then created an instance of the ``Animal`` class and each of its
-subclasses. If you serialized these objects to a single collection, the {+driver-short+}
-would apply the ``HierarchicalDiscriminatorConvention`` and the corresponding
-BSON documents would appear as follows:
+Suppose you label the example ``Animal`` class as the root of the inheritance hierarchy,
+and then create an instance of the ``Animal`` class and each of its
+subclasses. If you serialize these objects to a single collection, the {+driver-short+}
+applies the ``HierarchicalDiscriminatorConvention`` and the corresponding
+BSON documents appear as follows:
 
 .. code-block:: javascript
    
@@ -264,8 +268,3 @@ An instance of the previous ``Animal`` class appears as follows after serializat
    :copyable: false
 
    { "_id": "...", "_t": "myAnimalClass"}
-
-Additional Information
-----------------------
-
-To learn more about mapping classes, see the :ref:`csharp-class-mapping` documentation.

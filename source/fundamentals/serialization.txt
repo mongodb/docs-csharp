@@ -145,9 +145,9 @@ To learn more about using the {+driver-short+} to serialize {+language+} objects
 see the following pages:
 
 - :ref:`csharp-class-mapping`
-- :ref:`POCOs (Plain Old CLR/Class Objects) <csharp-poco>`
+- :ref:`csharp-poco`
 - :ref:`csharp-polymorphism`
-- :ref:`GUIDs <csharp-guids>`
+- :ref:`csharp-guids`
 
 To learn more about any of the methods or types discussed in this
 guide, see the following API documentation:

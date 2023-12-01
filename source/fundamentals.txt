@@ -19,6 +19,7 @@ Fundamentals
    /fundamentals/authentication
    /fundamentals/enterprise-authentication
    /fundamentals/linq
+   /fundamentals/bson
    /fundamentals/serialization
    /fundamentals/logging
    /fundamentals/encrypt-fields
@@ -31,6 +32,7 @@ Fundamentals
 - :ref:`csharp-authentication-mechanisms`
 - :ref:`csharp-enterprise-authentication-mechanisms`
 - :ref:`csharp-linq`
+- :ref:`csharp-bson`
 - :ref:`csharp-serialization`
 - :ref:`csharp-logging`
 - :ref:`Encrypt Fields <csharp-fle>`

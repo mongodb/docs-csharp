@@ -4,8 +4,6 @@
 Data Formats
 ============
 
-.. default-domain:: mongodb
-
 .. toctree::
    :caption: Data Formats
 

@@ -35,4 +35,4 @@ Fundamentals
 - :ref:`csharp-bson`
 - :ref:`csharp-serialization`
 - :ref:`csharp-logging`
-- :ref:`Encrypt Fields <csharp-fle>`
+- :ref:`Encrypt Fields`

@@ -17,7 +17,7 @@ MongoDB C# Driver
    /whats-new
    /usage-examples
    /fundamentals
-   API Documentation <{+api-root+}/R_Project_CSharpDriverDocs.htm>
+   API Documentation <{+api-root+}/>
    /faq
    /connection-troubleshooting
    /issues-and-help

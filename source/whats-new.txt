@@ -37,7 +37,7 @@ The 2.23 driver release includes the following new features:
 
 - Improvements and bug fixes to the LINQ3 integration.
 - Added support for aggregation bitwise operators.
-- Added support for the ``$out`` operator in MongoDB Time series collections.
+- Added support for the ``$out`` operator in MongoDB time series collections.
 - Added `ChangeStreamSplitLargeEvent <https://mongodb.github.io/mongo-csharp-driver/2.23.0/api/MongoDB.Driver/MongoDB.Driver.ChangeStreamSplitEvent.html>`__
   to handle change stream events greater than 16 MB.
 

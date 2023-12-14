@@ -96,4 +96,4 @@ API Documentation
 - `InsertOne() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.InsertMany.html>`__
 - `InsertOneAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.InsertOneAsync.html>`__
 - `Find() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.Find.html>`__
-- `FirstOrDefault() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IFindFluentExtensions.FirstOrDefault>`__
+- `FirstOrDefault() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IFindFluentExtensions.FirstOrDefault.html>`__

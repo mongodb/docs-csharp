@@ -265,4 +265,4 @@ guide, see the following API Documentation:
 - `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
 - `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
 - `CreateGssapiCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreateGssapiCredential.html>`__
-- `CreatePlainCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreatePlainCredential>`__
+- `CreatePlainCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreatePlainCredential.html>`__

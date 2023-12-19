@@ -60,3 +60,26 @@ your MongoDB instance:
 
 For more information about connecting to your MongoDB instance, see the
 :ref:`Connection Guide <csharp-connection>`.
+
+Example Classes
+---------------
+
+The usage examples in this section use the following ``Restaurant``, ``Address``, and
+``GradeEntry`` classes as models:
+
+.. literalinclude:: /includes/code-examples/Restaurant.cs
+   :language: csharp
+   :copyable:
+   :dedent:
+
+.. literalinclude:: /includes/code-examples/Address.cs
+   :language: csharp
+   :copyable:
+   :dedent:
+
+.. literalinclude:: /includes/code-examples/GradeEntry.cs
+   :language: csharp
+   :copyable:
+   :dedent:
+
+.. include:: /includes/convention-pack-note.rst

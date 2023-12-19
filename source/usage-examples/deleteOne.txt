@@ -22,29 +22,6 @@ You can delete a document from a collection by using the synchronous
 
    To learn more about using ``DeleteMany()``, see :ref:`csharp-delete-many`.
 
-Examples
---------
-
-The examples on this page use the following ``Restaurant``, ``Address``, and ``GradeEntry`` 
-classes as models:
-
-.. literalinclude:: /includes/code-examples/Restaurant.cs
-   :language: csharp
-   :copyable:
-   :dedent:
-
-.. literalinclude:: /includes/code-examples/Address.cs
-   :language: csharp
-   :copyable:
-   :dedent:
-
-.. literalinclude:: /includes/code-examples/GradeEntry.cs
-   :language: csharp
-   :copyable:
-   :dedent:
-
-.. include:: /includes/convention-pack-note.rst
-
 Delete a Document Using Builders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

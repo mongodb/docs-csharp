@@ -4,7 +4,12 @@
 Update Many Documents
 =====================
 
-.. default-domain:: mongodb
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, .NET, operation
 
 .. contents:: On this page
    :local:

@@ -4,6 +4,13 @@
 Usage Examples
 ==============
 
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code, .NET, operation
+
 .. contents:: On this page
    :local:
    :backlinks: none

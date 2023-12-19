@@ -31,7 +31,8 @@ public class DeleteMany
     // Deletes all documents that have a Borough value of "Brooklyn"
     private static DeleteResult DeleteMultipleRestaurantsBuilder()
     {
-        // start-delete-many-builders Creates a filter for all documents the have a
+        // start-delete-many-builders 
+        // Creates a filter for all documents the have a
         // Borough value of "Brooklyn"
         var filter = Builders<Restaurant>.Filter
             .Eq(r => r.Borough, "Brooklyn");

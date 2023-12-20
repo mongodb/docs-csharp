@@ -31,7 +31,7 @@ Example
 -------
 
 Delete a Document by Using Builders
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following example uses ``Builders`` to delete a document in 
 the ``restaurants`` collection with the ``name`` "Ready Penny Inn".

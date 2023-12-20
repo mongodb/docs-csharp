@@ -49,8 +49,8 @@ public class FindMany
 
     public static List<Restaurant> FindMultipleRestaurantsLinqSync()
     {
-        // start-find-linq-sync
         // Finds all documents with a "cuisine" value of "Pizza" using a LINQ query
+        // start-find-linq-sync
         return _restaurantsCollection.AsQueryable()
             .Where(r => r.Cuisine == "Pizza").ToList();
         // end-find-linq-sync

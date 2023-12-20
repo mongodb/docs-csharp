@@ -1,3 +1,5 @@
+// Retrieves documents that match a query filter by using the C# driver
+
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
@@ -12,22 +14,22 @@ public class FindMany
     {
         Setup();
 
-        // Find multiple documents using builders
+        // Finds multiple documents using builders
         Console.WriteLine("Finding documents with builders...:");
         var restaurants = FindMultipleRestaurantsBuilderSync();
         Console.WriteLine($"Number of documents found: {restaurants.Count}");
 
-        // Extra space for console readability 
+        // Prints extra space for console readability 
         Console.WriteLine();
 
-        // Find multiple documents using LINQ
+        // Finds multiple documents using LINQ
         Console.WriteLine("Finding documents with LINQ...:");
         restaurants = FindMultipleRestaurantsLinqSync();
         Console.WriteLine($"Number of documents found: {restaurants.Count}");
 
         Console.WriteLine();
 
-        // Find all restaurants
+        // Finds all restaurants
         Console.WriteLine("Finding all documents...:");
         restaurants = FindAllRestaurantsSync();
         Console.WriteLine($"Number of documents found: {restaurants.Count}");
@@ -36,9 +38,11 @@ public class FindMany
     public static List<Restaurant> FindMultipleRestaurantsBuilderSync()
     {
         // start-find-builders-sync
+        // Creates a filter for all documents the have a "cuisine" value of "Pizza"
         var filter = Builders<Restaurant>.Filter
             .Eq("cuisine", "Pizza");
 
+        // Finds all documents that match the filter
         return _restaurantsCollection.Find(filter).ToList();
         // end-find-builders-sync
     }
@@ -46,6 +50,7 @@ public class FindMany
     public static List<Restaurant> FindMultipleRestaurantsLinqSync()
     {
         // start-find-linq-sync
+        // Finds all documents with a "cuisine" value of "Pizza" using a LINQ query
         return _restaurantsCollection.AsQueryable()
             .Where(r => r.Cuisine == "Pizza").ToList();
         // end-find-linq-sync
@@ -63,11 +68,11 @@ public class FindMany
 
     private static void Setup()
     {
-        // This allows automapping of the camelCase database fields to our models. 
+        // Allows automapping of the camelCase database fields to models 
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
-        // Establish the connection to MongoDB and get the restaurants database
+        // Establishes the connection to MongoDB and get the restaurants database
         var mongoClient = new MongoClient(MongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");

@@ -31,11 +31,11 @@ public class DeleteOneAsync
     private static async Task<DeleteResult> DeleteARestaurantBuilderAsync()
     {
         // start-delete-one-builders-async
-        // Creates a filter for all documents the have a Name value of "Ready Penny Inn"
+        // Creates a filter for all documents that have a Name value of "Ready Penny Inn"
         var filter = Builders<Restaurant>.Filter
             .Eq(r => r.Name, "Ready Penny Inn");
 
-        // Asynchronously deletes the first document that has a matches the filter
+        // Asynchronously deletes the first document that matches the filter
         return await _restaurantsCollection.DeleteOneAsync(filter);
         // end-delete-one-builders-async
     }
@@ -51,7 +51,7 @@ public class DeleteOneAsync
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
-        // Establishes the connection to MongoDB and get the restaurants database
+        // Establishes the connection to MongoDB and accesses the "restaurants" collection
         var mongoClient = new MongoClient(MongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");

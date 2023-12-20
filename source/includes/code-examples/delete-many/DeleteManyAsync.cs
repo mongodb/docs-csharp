@@ -19,7 +19,7 @@ public class DeleteManyAsync
 
         var docs = _restaurantsCollection.Find(filter).ToList();
 
-        // Deletes documents using builders
+        // Deletes documents by using builders
         Console.WriteLine("Deleting documents...");
         var result = await DeleteMultipleRestaurantsBuilderAsync();
 
@@ -34,7 +34,7 @@ public class DeleteManyAsync
     private static async Task<DeleteResult> DeleteMultipleRestaurantsBuilderAsync()
     {
         // start-delete-many-async
-        // Creates a filter for all documents the have a
+        // Creates a filter for all documents that have a
         // Borough value of "Brooklyn"
         var filter = Builders<Restaurant>.Filter
             .Eq(r => r.Borough, "Brooklyn");
@@ -56,7 +56,7 @@ public class DeleteManyAsync
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
-        // Establishes the connection to MongoDB and get the restaurants database
+        // Establishes the connection to MongoDB and accesses the "restaurants" collection
         var mongoClient = new MongoClient(MongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");

@@ -14,7 +14,7 @@ public class FindMany
     {
         Setup();
 
-        // Finds multiple documents using builders
+        // Finds multiple documents by using builders
         Console.WriteLine("Finding documents with builders...:");
         var restaurants = FindMultipleRestaurantsBuilderSync();
         Console.WriteLine($"Number of documents found: {restaurants.Count}");
@@ -22,14 +22,14 @@ public class FindMany
         // Prints extra space for console readability 
         Console.WriteLine();
 
-        // Finds multiple documents using LINQ
+        // Retrieves multiple documents by using LINQ
         Console.WriteLine("Finding documents with LINQ...:");
         restaurants = FindMultipleRestaurantsLinqSync();
         Console.WriteLine($"Number of documents found: {restaurants.Count}");
 
         Console.WriteLine();
 
-        // Finds all restaurants
+        // Retrieves all documents in the "restaurants" collection
         Console.WriteLine("Finding all documents...:");
         restaurants = FindAllRestaurantsSync();
         Console.WriteLine($"Number of documents found: {restaurants.Count}");
@@ -38,18 +38,18 @@ public class FindMany
     public static List<Restaurant> FindMultipleRestaurantsBuilderSync()
     {
         // start-find-builders-sync
-        // Creates a filter for all documents the have a "cuisine" value of "Pizza"
+        // Creates a filter for all documents that have a "cuisine" value of "Pizza"
         var filter = Builders<Restaurant>.Filter
             .Eq("cuisine", "Pizza");
 
-        // Finds all documents that match the filter
+        // Retrieves all documents that match the filter
         return _restaurantsCollection.Find(filter).ToList();
         // end-find-builders-sync
     }
 
     public static List<Restaurant> FindMultipleRestaurantsLinqSync()
     {
-        // Finds all documents with a "cuisine" value of "Pizza" using a LINQ query
+        // Retrieves all documents with a "cuisine" value of "Pizza" by using a LINQ query
         // start-find-linq-sync
         return _restaurantsCollection.AsQueryable()
             .Where(r => r.Cuisine == "Pizza").ToList();
@@ -72,7 +72,7 @@ public class FindMany
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
-        // Establishes the connection to MongoDB and get the restaurants database
+        // Establishes the connection to MongoDB and accesses the "restaurants" collection
         var mongoClient = new MongoClient(MongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");

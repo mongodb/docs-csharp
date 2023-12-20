@@ -20,6 +20,9 @@ Delete Many Documents
 You can delete more than one document using the ``DeleteMany()`` synchronous
 method or the ``DeleteManyAsync()`` asynchronous method on a collection object.
 
+Example
+-------
+
 The following code deletes all documents in the ``restaurants`` collection whose 
 ``borough`` field value equals the word "Brooklyn".
 

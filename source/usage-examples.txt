@@ -71,8 +71,9 @@ For more information about connecting to your MongoDB instance, see the
 Example Classes
 ---------------
 
-The usage examples in this section use the following ``Restaurant``, ``Address``, and
-``GradeEntry`` classes as models:
+The usage examples in this section show how to perform operations on documents
+in the ``restaurants`` collection. The examples use the following ``Restaurant``,
+``Address``, and ``GradeEntry`` classes to model the data in this collection:
 
 .. literalinclude:: /includes/code-examples/Restaurant.cs
    :language: csharp

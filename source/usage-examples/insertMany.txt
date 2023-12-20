@@ -20,6 +20,9 @@ Insert Multiple Documents
 You can insert multiple documents into a collection by using the synchronous
 ``InsertMany()`` method or the asynchronous ``InsertManyAsync()`` method.
 
+Example
+-------
+
 The following example inserts multiple documents into 
 the ``restaurants`` collection.
 

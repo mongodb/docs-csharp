@@ -30,6 +30,9 @@ a ``MongoCollection`` object. This method requires a **query filter**, which spe
    You can pass an instance of `UpdateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOptions.html>`__ to the ``UpdateOne()`` method in
    order to customize its behavior.
 
+Example
+-------
+
 The following example uses ``Builders`` to update the ``name`` of the
 first document named "Bagels N Buns" in the ``restaurants`` collection  to 
 "2 Bagels 2 Buns".

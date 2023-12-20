@@ -19,6 +19,9 @@ Find a Document
 
 You can retrieve a document by using the ``Find()`` method on a collection object.
 
+Example
+-------
+
 Find a Document Using Builders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

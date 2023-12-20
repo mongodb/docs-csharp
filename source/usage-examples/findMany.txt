@@ -20,6 +20,9 @@ Find Multiple Documents
 You can retrieve multiple documents from a collection by using the 
 ``Find()`` method.
 
+Example
+-------
+
 Find Documents Using Builders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 

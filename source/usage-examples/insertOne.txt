@@ -20,6 +20,9 @@ Insert a Document
 You can insert a single document into a collection by using the synchronous
 ``InsertOne()`` method, or the asynchronous ``InsertOneAsync()`` method.
 
+Example
+-------
+
 The following example inserts a document into the ``restaurants`` collection.
 
 Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the 

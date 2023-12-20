@@ -27,6 +27,9 @@ You can delete a document from a collection by using the synchronous
 
    To learn more about using ``DeleteMany()``, see :ref:`csharp-delete-many`.
 
+Example
+-------
+
 Delete a Document Using Builders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

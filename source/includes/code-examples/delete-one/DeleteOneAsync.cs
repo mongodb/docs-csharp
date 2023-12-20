@@ -31,7 +31,7 @@ public class DeleteOneAsync
     private static async Task<DeleteResult> DeleteARestaurantBuilderAsync()
     {
         // start-delete-one-builders-async
-        // Creates a filter for all documents that have a Name value of "Ready Penny Inn"
+        // Creates a filter for all documents that have a "name" value of "Ready Penny Inn"
         var filter = Builders<Restaurant>.Filter
             .Eq(r => r.Name, "Ready Penny Inn");
 

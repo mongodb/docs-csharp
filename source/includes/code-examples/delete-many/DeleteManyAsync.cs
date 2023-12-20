@@ -35,7 +35,7 @@ public class DeleteManyAsync
     {
         // start-delete-many-async
         // Creates a filter for all documents that have a
-        // Borough value of "Brooklyn"
+        // "borough" value of "Brooklyn"
         var filter = Builders<Restaurant>.Filter
             .Eq(r => r.Borough, "Brooklyn");
 

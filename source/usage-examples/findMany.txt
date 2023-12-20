@@ -23,8 +23,8 @@ You can retrieve multiple documents from a collection by using the
 Example
 -------
 
-Find Documents Using Builders
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+Find Documents by Using Builders
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 The following example uses ``Builders`` to find documents in 
 the ``restaurants`` collection with the ``cuisine`` "Pizza".
@@ -62,8 +62,8 @@ corresponding code.
       find multiple documents, see
       `Synchronous Find Multiple Example <{+example+}/find-many/FindMany.cs>`__.
 
-Find Documents Using LINQ
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Find Documents by Using LINQ
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following example uses LINQ to find documents in the
 ``restaurants`` collection with the ``cuisine`` "Pizza".

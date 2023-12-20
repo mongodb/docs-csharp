@@ -30,7 +30,7 @@ You can delete a document from a collection by using the synchronous
 Example
 -------
 
-Delete a Document Using Builders
+Delete a Document by Using Builders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following example uses ``Builders`` to delete a document in 

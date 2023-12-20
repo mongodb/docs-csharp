@@ -20,6 +20,9 @@ Update Many Documents
 You can update more than one document using the ``UpdateMany()`` method on
 a collection object.
 
+Example
+-------
+
 The following code updates all documents in the ``restaurants`` collection that have a 
 ``cuisine`` field with the value of "Pizza". After the update, these documents will 
 have a ``cuisine`` field with a value of "Pasta and breadsticks".

@@ -14,7 +14,7 @@ public class FindOneAsync
     {
         Setup();
 
-        // Find one document using builders
+        // Find one document by using builders
         var buildersDocument = await FindOneRestaurantBuilderAsync();
         Console.WriteLine("Finding a document with builders...");
         Console.WriteLine(buildersDocument.ToBsonDocument());
@@ -22,7 +22,7 @@ public class FindOneAsync
         // Extra space for console readability
         Console.WriteLine();
 
-        // Find one document using LINQ
+        // Find one document by using LINQ
         var linqDocument = await FindOneRestaurantLinqAsync();
         Console.WriteLine("Finding a document with LINQ...");
         Console.WriteLine(linqDocument.ToBsonDocument());

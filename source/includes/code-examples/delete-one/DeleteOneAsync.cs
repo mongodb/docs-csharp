@@ -19,7 +19,7 @@ public class DeleteOneAsync
 
         var doc = _restaurantsCollection.Find(filter).First();
 
-        // Deletes a document using builders
+        // Deletes a document by using builders
         Console.WriteLine("Deleting a document with builders...");
         var result = await DeleteARestaurantBuilderAsync();
 

@@ -13,14 +13,14 @@ public class FindOne
     {
         Setup();
 
-        // Find one document using builders
+        // Find one document by using builders
         Console.WriteLine("Finding a document with builders...");
         FindOneRestaurantBuilder();
 
         // Extra space for console readability 
         Console.WriteLine();
 
-        // Find one document using LINQ
+        // Find one document by using LINQ
         Console.WriteLine("Finding a document with LINQ...");
         FindOneRestaurantLinq();
     }

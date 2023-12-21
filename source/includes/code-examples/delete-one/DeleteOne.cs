@@ -19,7 +19,7 @@ public class DeleteOne
 
         var doc = _restaurantsCollection.Find(filter).First();
 
-        // Delete a document by using builders
+        // Deletes a document by using builders
         Console.WriteLine("Deleting a document with builders...");
         var result = DeleteARestaurantBuilder();
 

@@ -52,7 +52,7 @@ public class FindOneAsync
 
     private static void Setup()
     {
-        // // Allows automapping of the camelCase database fields to models 
+        // Allows automapping of the camelCase database fields to models 
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 

@@ -93,11 +93,11 @@ two documents for use as parameters in an update operation:
 - An update document that sets the value of the ``borough`` field of these restaurants 
   to "Manhattan (north)"
 
-.. literalinclude:: /includes/fundamentals/code-examples/crud/change/Update.cs
+.. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
    :language: csharp
    :dedent:
-   :start-after: start-builders
-   :end-before: end-builders
+   :start-after: // start-update-many
+   :end-before: // end-update-many
 
 .. tip:: Aggregation Pipelines in Update Operations
 

@@ -33,7 +33,7 @@ public class InsertManyAsync
         // Asynchronously inserts the documents by using a helper method
         await InsertManyRestaurantsAsync();
 
-        // Finds the newly inserted documents
+        // Finds all documents that match the filter after the insert
         foundRestaurants = _restaurantsCollection.Find(filter).ToList();
 
         // Prints the number of documents found

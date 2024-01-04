@@ -22,7 +22,7 @@ public class InsertOne
         var filter = Builders<Restaurant>.Filter
             .Eq(r => r.Name, "Mongo's Pizza");
 
-        // Finds the newly inserted document
+        // Finds the newly inserted document by using the filter
         var document = _restaurantsCollection.Find(filter).FirstOrDefault();
 
         // Prints the document

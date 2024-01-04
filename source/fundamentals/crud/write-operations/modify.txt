@@ -10,6 +10,13 @@ Modify Documents
    :depth: 2
    :class: singlecol
 
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: update, replace, synchronous, asynchronous, bulk
+
 Overview
 --------
 

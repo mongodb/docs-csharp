@@ -205,11 +205,11 @@ The following code uses the ``InsertMany()`` method to insert four new
 ``Restaurant`` documents into a collection with
 ``BypassDocumentValidation`` set to ``true``:
 
-.. literalinclude:: /includes/fundamentals/code-examples/crud/insert.cs
+.. literalinclude:: /includes/code-examples/insert-many/InsertMany.cs
    :language: csharp
    :dedent:
-   :start-after: start-insert
-   :end-before: end-insert
+   :start-after: start-insert-many
+   :end-before: end-insert-many
 
 The ``InsertMany()`` method has no return value. You can verify that
 your documents were successfully inserted by executing a ``Find()``

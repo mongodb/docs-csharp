@@ -50,7 +50,7 @@ public class InsertMany
         var restaurants = GenerateDocuments();
 
         // Inserts the new documents into the restaurants collection
-        _restaurantsCollection.InsertMany(restaurants, options);
+        _restaurantsCollection.InsertMany(restaurants);
         // end-insert-many
     }
 

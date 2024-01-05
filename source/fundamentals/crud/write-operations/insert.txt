@@ -208,7 +208,7 @@ additional ``IsOrdered`` property:
 Example
 ~~~~~~~
 
-The following code uses the ``InsertMany()`` method to insert four new
+The following code uses the ``InsertMany()`` method to insert five new
 ``Restaurant`` documents into a collection with
 ``BypassDocumentValidation`` set to ``true``:
 

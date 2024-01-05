@@ -18,20 +18,20 @@ public class UpdateMany
     {
         Setup();
 
-        // Extra space for console readability 
+        // Prints extra space for console readability  
         Console.WriteLine();
 
-        // Number of restaurants with old cuisine
+        // Finds the number of restaurants with a "cuisine" value of "Pizza"
         Console.WriteLine($"Restaurants with {CuisineField} \"{OldCuisine}\" found: {FindCountOfRestaurantsWithCuisine(OldCuisine)}");
 
-        // Update many documents synchronously
+        // Updates many documents by using a helper method
         var syncResult = UpdateManyRestaurants();
         Console.WriteLine($"Restaurants modified by update: {syncResult.ModifiedCount}");
 
-        // Number of restaurants with new cuisine
+        // Finds the number of restaurants with a "cuisine" value of "Pasta and breadsticks"
         Console.WriteLine($"Restaurants with {CuisineField} \"{NewCuisine}\" found after update: {FindCountOfRestaurantsWithCuisine(NewCuisine)}");
 
-        // Reset sample data
+        // Resets the sample data
         Console.WriteLine("Resetting sample data...");
         ResetSampleData();
         Console.WriteLine("done.");
@@ -43,12 +43,17 @@ public class UpdateMany
         const string oldValue = "Pizza";
         const string newValue = "Pasta and breadsticks";
 
-        var filter = Builders<Restaurant>.Filter
+       // Creates a filter for all documents with a "cuisine" value of "Pizza"
+       var filter = Builders<Restaurant>.Filter
             .Eq(restaurant => restaurant.Cuisine, oldValue);
 
+        // Creates a an update document that indicates that the "cuisine" field is changing 
+        // and it's new value will be "Pasta and breadsticks"
         var update = Builders<Restaurant>.Update
             .Set(restaurant => restaurant.Cuisine, newValue);
 
+        // Finds all the documents that matches the filter and updates the "cuisine" value
+        // of each by using the update document
         return _restaurantsCollection.UpdateMany(filter, update);
         // end-update-many
     }
@@ -63,11 +68,11 @@ public class UpdateMany
 
     private static void Setup()
     {
-        // This allows automapping of the camelCase database fields to our models. 
+        // Allows automapping of the camelCase database fields to models 
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
-        // Establish the connection to MongoDB and get the restaurants database
+        // Establishes the connection to MongoDB and accesses the "sample_restaurants" collection
         var mongoClient = new MongoClient(MongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_restaurants");
         _restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");

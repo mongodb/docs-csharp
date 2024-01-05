@@ -49,12 +49,25 @@ public class InsertMany
         // Generates 5 new restaurants by using a helper method
         var restaurants = GenerateDocuments();
 
+        // Inserts the new documents into the restaurants collection
+        _restaurantsCollection.InsertMany(restaurants, options);
+        // end-insert-many
+    }
+
+    private static void InsertManyRestaurantsWithOptions()
+    {
+        Cleanup();
+
+        // start-insert-many-with-options
+        // Generates 5 new restaurants by using a helper method
+        var restaurants = GenerateDocuments();
+
         // Creates an option object to bypass documentation validation on a the documents
         var options = new InsertManyOptions() { BypassDocumentValidation = true };
 
         // Inserts the new documents into the restaurants collection with the specified options
         _restaurantsCollection.InsertMany(restaurants, options);
-        // end-insert-many
+        // end-insert-many-with-options
     }
 
     private static void Setup()

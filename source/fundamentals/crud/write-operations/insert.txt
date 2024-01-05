@@ -215,8 +215,8 @@ The following code uses the ``InsertMany()`` method to insert five new
 .. literalinclude:: /includes/code-examples/insert-many/InsertMany.cs
    :language: csharp
    :dedent:
-   :start-after: start-insert-many
-   :end-before: end-insert-many
+   :start-after: start-insert-many-with-options
+   :end-before: end-insert-many-with-options
 
 The ``InsertMany()`` method has no return value. You can verify that
 your documents were successfully inserted by executing a ``Find()``

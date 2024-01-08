@@ -33,13 +33,12 @@ public class UpdateOneAsync
         var filter = Builders<Restaurant>.Filter
             .Eq(restaurant => restaurant.Name, oldValue);
 
-        // Creates a an update document that indicates that the "name" field is  
-        // changing and it's new value will be "2 Bagels 2 Buns"
+        // Creates instructions to update the "name" field of the first document
+        // that matches the filter
         var update = Builders<Restaurant>.Update
             .Set(restaurant => restaurant.Name, newValue);
 
-        // Finds the first document that matches the filter and updates the "name" 
-        // value by using the update document
+        // Updates the first document that has a "name" value of "Bagels N Buns"
         return await _restaurantsCollection.UpdateOneAsync(filter, update);
         // end-update-one-async
     }

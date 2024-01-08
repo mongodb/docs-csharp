@@ -47,13 +47,12 @@ public class UpdateMany
        var filter = Builders<Restaurant>.Filter
             .Eq(restaurant => restaurant.Cuisine, oldValue);
 
-        // Creates a an update document that indicates that the "cuisine" field is  
-        // changing and it's new value will be "Pasta and breadsticks"
+        // Creates instructions to update the "cuisine" field of documents that
+        // match the filter
         var update = Builders<Restaurant>.Update
             .Set(restaurant => restaurant.Cuisine, newValue);
 
-        // Finds all the documents that matches the filter and updates the "cuisine" 
-        // value of each by using the update document
+        // Updates all documents that have a "cuisine" value of "Pizza"
         return _restaurantsCollection.UpdateMany(filter, update);
         // end-update-many
     }

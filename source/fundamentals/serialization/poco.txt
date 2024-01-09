@@ -56,7 +56,6 @@ driver serializes a sample POCO to BSON:
              public string Name { get; set; }
              public bool InStock { get; set; }
              public double Price { get; set; }
-             public int Upc { get; }
              public List<string> ColorSelection { get; set; }
          }
 
@@ -97,11 +96,12 @@ serialization. To force the automapper to include a property in the class map, a
 ``[BsonElement]`` attribute to the property.
 
 The following code example applies the ``[BsonElement]`` attribute to the ``Upc`` property
-of the ``Clothing`` class:
+of the ``Clothing`` class. ``Upc`` is a read-only property because it has a ``get`` method
+but no ``set`` method.
 
 .. code-block:: csharp
    :copyable: false
-   :emphasize-lines: 7
+   :emphasize-lines: 9
 
    public class Clothing
    {
@@ -109,12 +109,13 @@ of the ``Clothing`` class:
        public string Name { get; set; }
        public bool InStock { get; set; }
        public double Price { get; set; }
+       public List<string> ColorSelection { get; set; }
+       
        [BsonElement]
        public int Upc { get; }
-       public List<string> ColorSelection { get; set; }
    }
          
-You can also add a read-only property to the class map manually, as shown in the
+You can also add a read-only property when you register the class map, as shown in the
 following example:
 
 .. code-block:: csharp
@@ -127,8 +128,8 @@ following example:
 
 .. note::
 
-   When the {+driver-short+} serializes a read-only property, the property's value is
-   stored in the database, but never deserialized again.
+   When the {+driver-short+} serializes a read-only property, the property and its value
+   are stored in the database, but never deserialized again.
 
 Set Field Names
 ~~~~~~~~~~~~~~~
@@ -250,7 +251,6 @@ The following code sample maps the ``Identifier`` property to the
    (for example, if your POCO includes properties named ``Id`` and ``_id``), 
    the driver throws a ``BsonSerializationException``.
 
-
 Omit Empty Fields
 ~~~~~~~~~~~~~~~~~
 
@@ -275,15 +275,16 @@ serializing the ``YearBuilt`` property if it is undefined:
 Customize Default Values
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-In {+language+}, before a value is assigned to a property, the property has a default
-value. The default value depends on the property's data type.
+In {+language+}, a property has a default value until you assign a value to it. The
+default value depends on the property's data type. For example, the default value for
+a reference-type property is ``null``.
 
 To specify a different default value for a property, apply the
 ``[BsonDefaultValue()]`` attribute to the property and pass the desired default value as
 an argument.
 
 The following code examples applies the ``[BsonDefaultValue()]`` attribute to the
-``YearBuilt`` property. Until this property is given a value, its value will be ``1900``. 
+``YearBuilt`` property. Until this property is assigned a value, its value is ``1900``. 
 
 .. code-block:: csharp
    :copyable: true
@@ -310,12 +311,12 @@ you register the class map, as shown in the following example:
    });
 
 By default, the {+driver-short+} serializes all properties, including those that
-contain default values. If you want the driver to ignore a property if it contains the
+contain default values. To instruct the driver to ignore a property that has the
 default value, use the ``[BsonIgnoreIfDefault]`` attribute.
 
 The following code example applies the ``[BsonIgnoreIfDefault]`` attribute to the
 ``YearBuilt`` property. If the value of this property is the default for its data type
-(``0``), the driver won't serialize it.
+(``0`` for ``int`` properties), the driver won't serialize it.
 
 .. code-block:: csharp
    :copyable: true
@@ -342,11 +343,9 @@ you register the class map, as shown in the following example:
    });
 
 You can both specify a different default value for a property and instruct the driver to
-ignore the property if it contains this default value.
-In the following code example, if a value has not been assigned
-to the ``YearBuilt`` property, it will have the specified default value of ``1900``.
-Because ``1900`` is the default value for this property, the driver will ignore the
-property if it has this value.
+ignore the property if it contains this default value. To do so, apply both the
+``[BsonDefaultValue()]`` and ``[BsonIgnoreIfDefault]`` attributes to the property,
+as shown in the following code example:
 
 .. code-block:: csharp
    :copyable: true
@@ -361,16 +360,24 @@ property if it has this value.
        public int YearBuilt { get; set; }
    }
 
+The previous code example shows the following serialization behavior:
+
+- If a value hasn't been assigned to the ``YearBuilt`` property, it has the specified
+  default value of ``1900``.
+- Because ``1900`` is the default value for this property, the driver will ignore the
+  property if it has this value.
+
 Specify an ID Generator
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Every document in a MongoDB collection must have a unique ID. When you serialize an object
 to a collection, if the ``Id`` property contains the default
-value for its data type, the {+driver-short+} generates a unique ID value for it.
+value for its data type, the {+driver-short+} doesn't serialize it. Instead, the driver
+generates a unique ID value for the property.
 
-If the ``Id`` property is a ``Guid``, ``ObjectId``, or ``string``, the driver can
+If the ``Id`` property is of type ``Guid``, ``ObjectId``, or ``string``, the driver can
 generate the ID value on its own. If the ``Id`` property is any other data type, you must
-specify the ``IIdGenerator`` type that the driver will use to generate the value.
+specify the ``IIdGenerator`` type that the driver uses to generate the value.
 To specify the ``IIdGenerator`` type, apply the ``[BsonId(IdGenerator)]`` attribute
 to the property and pass the ``IIdGenerator`` type as an argument.
 
@@ -380,7 +387,7 @@ The {+driver-short+} includes the following ``IIdGenerator`` types:
    :header-rows: 1
    :widths: 10 10
 
-   * - ``Id`` Type
+   * - ``Id`` Field Data Type
      - ``IIdGenerator`` Type
    * - ``Guid`` value generated by the COMB algorithm
      - ``CombGuidGenerator``
@@ -388,8 +395,8 @@ The {+driver-short+} includes the following ``IIdGenerator`` types:
      - ``BsonObjectIdGenerator``
 
 In the following code example, if the ``Id`` property of the ``House`` class contains
-the default value (``null``), the driver will use the COMB algorithm to generate a
-unique value for it:
+the default value (``null``), the driver uses the COMB algorithm to generate a
+unique value during serialization:
 
 .. code-block:: csharp
    :copyable: false
@@ -403,9 +410,9 @@ unique value for it:
 
 .. note::
    
-   In the previous code example, if the ``Id`` property didn't use the
+   In the previous code example, if the ``Id`` property didn't have the
    ``[BsonId(IdGenerator)]`` attribute, the driver would generate a non-COMB GUID
-   for the ID.
+   to assign to the ``Id`` field.
 
 You can also specify an ``IIdGenerator`` type while registering the class map, as shown in
 the following example:
@@ -449,7 +456,7 @@ types:
      - ``ZeroIdChecker<T>``
 
 In the following code example, if the ``Id`` property of the ``House`` class contains
-the default value (``null``), the driver will throw an exception:
+the default value (``null``), the driver throws an exception:
 
 .. code-block:: csharp
    :copyable: false
@@ -469,7 +476,7 @@ To customize how the {+driver-short+} serializes ``DateTime`` properties, use th
 
 If a ``DateTime`` property represents only a date, you can apply the
 ``[BsonDateTimeOptions(DateOnly = true)]`` attribute to it.
-If you do, the driver won't perform time-zone conversion on the value.
+If you do, the driver won't perform any time-zone conversion on the value.
 
 In the following code example, the ``PatientRecord`` class uses a ``DateTime`` for the
 ``DateOfBirth`` property. The ``[BsonDateTimeOptions(DateOnly = true)]``
@@ -492,7 +499,7 @@ of a ``DateTime`` property. In the following code example, the ``PatientRecord``
 uses a ``DateTime`` for the ``AppointmentTime`` property.
 The ``[BsonDateTimeOptions(Kind = DateTimeKind.Local)]`` attribute indicates
 that the time component of the property's value is in local time. When the
-driver serializes this property, it will convert the time to UTC, the standard
+driver serializes this property, it converts the time to UTC, the standard
 format for times stored in MongoDB.
 
 .. code-block:: csharp
@@ -526,7 +533,7 @@ registering the class map:
 .. tip:: DateTimeKind Values
 
    The ``DateTimeKind`` enum is part of the {+framework+}. For more information on
-   its members, see the `Microsoft documentation. <https://learn.microsoft.com/en-us/dotnet/api/system.datetimekind?view=net-8.0>`__
+   its members, see the `Microsoft documentation for the DateTimeKind enum. <https://learn.microsoft.com/en-us/dotnet/api/system.datetimekind?view=net-8.0>`__
 
 Customize Dictionary Serialization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -547,6 +554,35 @@ can serialize a ``Dictionary`` to. This enum includes the following members:
   ``{ k : key, v : value }``. Because the keys and values are
   tagged with element names, this format is much easier to query than ``ArrayOfArrays``.
 
+In the following code example, the ``RoomSize`` property is a dictionary that contains
+each room in a house and its corresponding size. The {+driver-short+} would serialize
+this property to a ``BsonArray`` object, and each entry in the dictionary to a
+``BsonDocument`` of the form ``{ k : "<room>", v : <size> }``. 
+
+.. code-block:: csharp
+   :copyable: true
+   :emphasize-lines: 5
+
+   public class House
+   {
+       public Guid Id { get; set; }
+
+       [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfDocuments)]
+       public Dictionary<string, float> RoomSize { get; set; }
+   }
+
+You can also specify the serialization format of a dictionary when
+you register the class map, as shown in the following example:
+
+.. code-block:: csharp
+   :copyable: true
+
+   BsonClassMap.RegisterClassMap<House>(classMap => 
+   {
+       classMap.AutoMap();
+       classMAp.MapMember(h => h.RoomSize).SetSerializer(new DictionaryInterfaceImplementerSerializer<Dictionary<string, float>>(DictionaryRepresentation.ArrayOfDocuments));
+   });
+
 Example
 -------
 
@@ -558,6 +594,8 @@ serialization-related attributes:
 
 - ``[BsonElement()]``, which specifies custom field names in the camel case naming convention
 - ``[BsonRepresentation()]``, which specifies serialization of the ``Price`` field as a BSON ``Double`` type
+- ``[BsonDefaultValue("Generic item")]``, which sets the ``Name`` property to
+  ``"Generic item"`` if no value has been assigned to it
 
 .. literalinclude:: ../../includes/fundamentals/code-examples/Clothing.cs
    :start-after: start-model

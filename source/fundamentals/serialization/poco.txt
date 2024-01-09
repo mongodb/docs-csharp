@@ -101,7 +101,7 @@ of the ``Clothing`` class:
 
 .. code-block:: csharp
    :copyable: false
-   :emphasize-lines: 7-8
+   :emphasize-lines: 7
 
    public class Clothing
    {
@@ -141,6 +141,7 @@ field in the serialized BSON document:
 
 .. code-block:: csharp
    :copyable: true
+   :emphasize-lines: 5
 
    public class House
    {
@@ -179,6 +180,7 @@ In the following code sample, the ``YearBuilt`` property, defined as a
 
 .. code-block:: csharp
    :copyable: true
+   :emphasize-lines: 5
 
    public class House
    {
@@ -204,6 +206,7 @@ sample, the driver stores the ``YearBuilt`` property after the
 
 .. code-block:: csharp
    :copyable: true
+   :emphasize-lines: 5, 8
 
    public class House
    {
@@ -230,6 +233,7 @@ The following code sample maps the ``Identifier`` property to the
 
 .. code-block:: csharp
    :copyable: true
+   :emphasize-lines: 3
 
    public class House
    {
@@ -257,6 +261,7 @@ serializing the ``YearBuilt`` property if it is undefined:
 
 .. code-block:: csharp
    :copyable: true
+   :emphasize-lines: 5
 
    public class House
    {
@@ -282,6 +287,7 @@ The following code examples applies the ``[BsonDefaultValue()]`` attribute to th
 
 .. code-block:: csharp
    :copyable: true
+   :emphasize-lines: 5
 
    public class House
    {
@@ -313,6 +319,7 @@ The following code example applies the ``[BsonIgnoreIfDefault]`` attribute to th
 
 .. code-block:: csharp
    :copyable: true
+   :emphasize-lines: 5
 
    public class House
    {
@@ -343,6 +350,7 @@ property if it has this value.
 
 .. code-block:: csharp
    :copyable: true
+   :emphasize-lines: 5-6
 
    public class House
    {
@@ -370,7 +378,6 @@ The {+driver-short+} includes the following ``IIdGenerator`` types:
 
 .. list-table::
    :header-rows: 1
-   :stub-columns: 1
    :widths: 10 10
 
    * - ``Id`` Type
@@ -432,7 +439,6 @@ types:
 
 .. list-table::
    :header-rows: 1
-   :stub-columns: 1
    :widths: 10 10 
 
    * - ID Validation 
@@ -471,7 +477,7 @@ attribute indicates that the property contains only a date.
 
 .. code-block:: csharp
    :copyable: true
-   :emphasize-lines: 5-6
+   :emphasize-lines: 5
 
    public class PatientRecord
    {
@@ -491,7 +497,7 @@ format for times stored in MongoDB.
 
 .. code-block:: csharp
    :copyable: true
-   :emphasize-lines: 8-9
+   :emphasize-lines: 8
 
    public class PatientRecord
    {

@@ -541,8 +541,7 @@ can serialize a ``Dictionary`` to. This enum includes the following members:
   are also valid ``BsonElement`` names.
 - **ArrayOfArrays**: The driver serializes the dictionary to a ``BsonArray``. Each
   entry in the dictionary is a nested ``BsonArray`` that contains two elements:
-  the entry's key and the entry's value. This is the default representation when
-  ``Document`` doesn't apply. 
+  the entry's key and the entry's value.
 - **ArrayOfDocuments**: The driver serializes the dictionary to a ``BsonArray``. Each
   entry in the dictionary is a nested ``BsonDocument`` of the form
   ``{ k : key, v : value }``. Because the keys and values are

@@ -653,5 +653,9 @@ guide, see the following API documentation:
 - `[BsonRepresentation()] <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Attributes.BsonRepresentationAttribute.html>`__
 - `[BsonId()] <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Attributes.BsonIdAttribute.html>`__
 - `[BsonIgnore()] <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Attributes.BsonIgnoreAttribute.html>`__
+- `[BsonDefaultValue()] <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Attributes.BsonDefaultValueAttribute.html>`__
+- `[BsonIgnoreIfDefault] <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Attributes.BsonIgnoreIfDefaultAttribute.html>`__
+- `[BsonDateTimeOptions()] <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Attributes.BsonDateTimeOptionsAttribute.html>`__
+- `[BsonDictionaryOptions()] <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptionsAttribute.html>`__
 - `ConventionPack <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Conventions.ConventionPack.html>`__
 - `InsertOne() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.InsertMany.html>`__

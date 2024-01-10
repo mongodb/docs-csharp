@@ -360,7 +360,7 @@ as shown in the following code example:
        public int YearBuilt { get; set; }
    }
 
-The previous code example shows the following serialization behavior:
+The previous code example sets the following serialization behavior:
 
 - If a value hasn't been assigned to the ``YearBuilt`` property, it has the specified
   default value of ``1900``.
@@ -496,7 +496,7 @@ attribute indicates that the property contains only a date.
 
 You can also use the ``[BsonDateTimeOptions()]`` attribute to specify the ``DateTimeKind``
 of a ``DateTime`` property. In the following code example, the ``PatientRecord`` class
-uses a ``DateTime`` for the ``AppointmentTime`` property.
+has an ``AppointmentTime`` property of type ``DateTime``.
 The ``[BsonDateTimeOptions(Kind = DateTimeKind.Local)]`` attribute indicates
 that the time component of the property's value is in local time. When the
 driver serializes this property, it converts the time to UTC, the standard
@@ -504,14 +504,11 @@ format for times stored in MongoDB.
 
 .. code-block:: csharp
    :copyable: true
-   :emphasize-lines: 8
+   :emphasize-lines: 5
 
    public class PatientRecord
    {
        public Guid Id { get; set; }
-
-       [BsonDateTimeOptions(DateOnly = true)]
-       public DateTime DateOfBirth { get; set; }
 
        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
        public DateTime AppointmentTime { get; set; }
@@ -526,8 +523,10 @@ registering the class map:
    BsonClassMap.RegisterClassMap<House>(classMap => 
    {
       classMap.AutoMap();
-      classMap.MapMember(p => p.DateOfBirth).SetSerializer(new DateTimeSerializer(dateOnly: true));
-      classMap.MapMember(p => p.AppointmentTime).SetSerializer(new DateTimeSerializer(DateTimeKind.Local));
+      classMap.MapMember(p => p.DateOfBirth)
+         .SetSerializer(new DateTimeSerializer(dateOnly: true));
+      classMap.MapMember(p => p.AppointmentTime)
+         .SetSerializer(new DateTimeSerializer(DateTimeKind.Local));
    });
 
 .. tip:: DateTimeKind Values
@@ -539,23 +538,25 @@ Customize Dictionary Serialization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``DictionaryRepresentation`` enum defines the formats the {+driver-short+}
-can serialize a ``Dictionary`` to. This enum includes the following members:
+can serialize a ``Dictionary`` instance to. This enum includes the following members:
 
-- **Document**: Default. The driver serializes the ``Dictionary`` to a ``BsonDocument``.
+- **Document**: (Default) The driver serializes the ``Dictionary`` to a ``BsonDocument``.
   Each entry in the dictionary is a ``BsonElement`` with a name equal to
   the entry's key and a value equal to the entry's value. You can
   use this representation only when all the keys in the dictionary are strings that
   are also valid ``BsonElement`` names.
 - **ArrayOfArrays**: The driver serializes the dictionary to a ``BsonArray``. Each
-  entry in the dictionary is a nested ``BsonArray`` that contains two elements:
+  entry in the dictionary is a nested, two-element ``BsonArray`` that contains
   the entry's key and the entry's value.
 - **ArrayOfDocuments**: The driver serializes the dictionary to a ``BsonArray``. Each
   entry in the dictionary is a nested ``BsonDocument`` of the form
   ``{ k : key, v : value }``. Because the keys and values are
-  tagged with element names, this format is much easier to query than ``ArrayOfArrays``.
+  tagged with element names, you can query this format more intuitively than
+  an ``ArrayOfArrays``.
 
 In the following code example, the ``RoomSize`` property is a dictionary that contains
-each room in a house and its corresponding size. The {+driver-short+} would serialize
+each room in a house and its corresponding size. The ``[BsonDictionaryOptions()]``
+attribute instructs the {+driver-short+} to serialize
 this property to a ``BsonArray`` object, and each entry in the dictionary to a
 ``BsonDocument`` of the form ``{ k : "<room>", v : <size> }``. 
 
@@ -580,7 +581,9 @@ you register the class map, as shown in the following example:
    BsonClassMap.RegisterClassMap<House>(classMap => 
    {
        classMap.AutoMap();
-       classMAp.MapMember(h => h.RoomSize).SetSerializer(new DictionaryInterfaceImplementerSerializer<Dictionary<string, float>>(DictionaryRepresentation.ArrayOfDocuments));
+       classMAp.MapMember(h => h.RoomSize)
+         .SetSerializer(new DictionaryInterfaceImplementerSerializer<Dictionary<string, float>>
+         (DictionaryRepresentation.ArrayOfDocuments));
    });
 
 Example
@@ -594,7 +597,7 @@ serialization-related attributes:
 
 - ``[BsonElement()]``, which specifies custom field names in the camel case naming convention
 - ``[BsonRepresentation()]``, which specifies serialization of the ``Price`` field as a BSON ``Double`` type
-- ``[BsonDefaultValue("Generic item")]``, which sets the ``Name`` property to
+- ``[BsonDefaultValue()]``, which sets the ``Name`` property to
   ``"Generic item"`` if no value has been assigned to it
 
 .. literalinclude:: ../../includes/fundamentals/code-examples/Clothing.cs

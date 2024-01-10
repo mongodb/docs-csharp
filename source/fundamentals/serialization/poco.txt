@@ -554,7 +554,7 @@ can serialize a ``Dictionary`` instance to. This enum includes the following mem
   tagged with element names, you can query this format more intuitively than
   an ``ArrayOfArrays``.
 
-In the following code example, the ``RoomSize`` property is a dictionary that contains
+In the following code example, the ``RoomSizes`` property is a dictionary that contains
 each room in a house and its corresponding size. The ``[BsonDictionaryOptions()]``
 attribute instructs the {+driver-short+} to serialize
 this property to a ``BsonArray`` object, and each entry in the dictionary to a
@@ -569,7 +569,7 @@ this property to a ``BsonArray`` object, and each entry in the dictionary to a
        public Guid Id { get; set; }
 
        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfDocuments)]
-       public Dictionary<string, float> RoomSize { get; set; }
+       public Dictionary<string, float> RoomSizes { get; set; }
    }
 
 You can also specify the serialization format of a dictionary when
@@ -581,7 +581,7 @@ you register the class map, as shown in the following example:
    BsonClassMap.RegisterClassMap<House>(classMap => 
    {
        classMap.AutoMap();
-       classMAp.MapMember(h => h.RoomSize)
+       classMAp.MapMember(h => h.RoomSizes)
          .SetSerializer(new DictionaryInterfaceImplementerSerializer<Dictionary<string, float>>
          (DictionaryRepresentation.ArrayOfDocuments));
    });

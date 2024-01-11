@@ -1,4 +1,4 @@
-// Queries a database by using predefined Atlas Search Indexes through the C# driver 
+// Queries a database by using predefined Atlas search indexes through the C# driver 
 
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -38,7 +38,8 @@ public class AtlasSearchExamples
 
     public static List<Guitar> CompoundSearch()
     {
-        // Find documents with 
+        // Find documents that meet multiple search criteria by using the
+        // Compound() search function
         // start-compound-search
         var result = guitarsCollection.Aggregate()
             .Search(Builders<Guitar>.Search.Compound()

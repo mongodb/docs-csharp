@@ -1,4 +1,4 @@
-// Defines a template for connecting to a server through a URI
+// Defines a template for connecting to a server by using a URI
 
 // start local connection
 using MongoDB.Driver;

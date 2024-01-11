@@ -1,4 +1,4 @@
-// Counts the number of documents in a collection, query result or after
+// Counts the number of documents in a collection, in a query result, or after
 // applying a filter by using the C# driver
 
 using MongoDB.Bson.Serialization.Conventions;
@@ -13,7 +13,7 @@ public class CountDocuments
         Setup();
         InsertSampleData();
         
-        // Finds and counts all documents with a "finalGrade" of less than 80
+        // Finds and counts all documents with a "finalGrade" value less than 80
         // start-accurate-ct
         var filter = Builders<Student>.Filter.Lt(s => s.FinalGrade, 80.0);
         var count1 = _myColl.CountDocuments(filter);

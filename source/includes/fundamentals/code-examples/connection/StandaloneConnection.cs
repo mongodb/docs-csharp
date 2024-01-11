@@ -1,4 +1,4 @@
-// Connects directly to a server by using credentials
+// Connects directly to a server with credentials
 
 // start standalone connection
 using MongoDB.Driver;

@@ -12,7 +12,7 @@ var settings = MongoClientSettings.FromConnectionString(connectionUri);
 // Sets the ServerApi field of the settings object to Stable API version 1
 settings.ServerApi = new ServerApi(ServerApiVersion.V1);
 
-// Creates a new client and connect to the server
+// Creates a new client and connects to the server
 var client = new MongoClient(settings);
 
 // Sends a ping to confirm a successful connection

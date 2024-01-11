@@ -20,7 +20,7 @@ public class Builders
         var projection = Builders<Flower>.Projection.Include("Name").Include("Price").Exclude("Id");
 
         // Creates a sort object that sorts results by ascending price, and, in
-        // the case the two documents have the same price, sorts in reverse
+        // the case the multiple documents have the same price, sorts in reverse
         // alphabetical order by category
         var sort = Builders<Flower>.Sort.Ascending("Price").Descending("Category");
 

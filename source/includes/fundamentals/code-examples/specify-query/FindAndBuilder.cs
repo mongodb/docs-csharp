@@ -8,6 +8,6 @@ var result = _guitarsCollection.Find(filter).ToList();
 
 foreach (var doc in result)
 {
-    // Prints a document in bson (json) format
+    // Prints the documents in bson (json) format
     Console.WriteLine(doc.ToBsonDocument());
 }

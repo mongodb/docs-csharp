@@ -1,4 +1,5 @@
-// Creates a filter for all documents with an "establishedYear" greater than 1985
+// Creates a filter for all documents with an "establishedYear" value greater
+// than 1985
 var filter = Builders<Guitar>.Filter.Gt(g => g.EstablishedYear, 1985);
 
 // Finds all documents that match the filter

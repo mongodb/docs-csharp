@@ -8,4 +8,4 @@ const string connectionUri = "mongodb://sample.host1:27017/?replicaSet=sampleRS"
 
 // Creates a new client and connects to the server
 var client = new MongoClient(connectionUri);
-// start replica set connection
+// end replica set connection

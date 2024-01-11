@@ -8,4 +8,4 @@ const string connectionUri = "mongodb://localhost:27017";
 
 // Creates a new client and connects to the server
 var client = new MongoClient(connectionUri);
-//end local connection
+// end local connection

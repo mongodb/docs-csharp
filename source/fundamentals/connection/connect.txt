@@ -64,6 +64,8 @@ instance on port ``27017`` of ``localhost``:
 
 .. literalinclude:: /includes/fundamentals/code-examples/connection/LocalConnection.cs
    :language: csharp
+   :start-after: // start local connection
+   :end-before: // end local connection
 
 .. tip:: Reuse Your Client
 
@@ -88,6 +90,8 @@ MongoDB instance on port ``27017`` of ``localhost``:
 .. literalinclude:: /includes/fundamentals/code-examples/connection/MongoClientSettings.cs
    :language: csharp
    :dedent:
+   :start-after: // start mongo client settings
+   :end-before: // end mongo client settings
 
 Other Connection Targets
 ------------------------
@@ -115,6 +119,8 @@ deployment and verify that the connection is successful:
 
 .. literalinclude:: /includes/fundamentals/code-examples/connection/AtlasConnection.cs
    :language: csharp
+   :start-after: // start atlas connection
+   :end-before: // end atlas connection
 
 .. tip::
 

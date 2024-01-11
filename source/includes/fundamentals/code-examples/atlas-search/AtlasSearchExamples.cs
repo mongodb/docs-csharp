@@ -1,3 +1,5 @@
+// Queries a database by using predefined Atlas Search Indexes through the C# driver 
+
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;

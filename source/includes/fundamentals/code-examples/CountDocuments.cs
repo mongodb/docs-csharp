@@ -1,3 +1,6 @@
+// Counts the number of documents in a collection, query result or after
+// applying a filter by using the C# driver
+
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 namespace TestRun.Fundamentals;

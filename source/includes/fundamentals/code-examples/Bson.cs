@@ -6,6 +6,8 @@ public class Bson
 {
     public static void Main(string[] args)
     {
+        // Creates a new document, adds "restaurant_id" field, removes the
+        // "cuisine" field and sets the "name" value
         //start-create
         var newRestaurant = new BsonDocument
         {

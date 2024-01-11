@@ -10,6 +10,13 @@ Retrieve Data
    :depth: 2
    :class: singlecol
 
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: code examples, read, search, cursor
+
 Overview
 --------
 
@@ -221,7 +228,7 @@ The following example performs these actions:
 - Finds all documents with "Pizza" in the ``cuisine`` field
 - Sets the ``BatchSize`` to ``3``
 - Stores the results in a cursor
-- Prints the number of documents currently held in the cursor
+- Prints the documents in the cursor
 
 .. io-code-block::
    :copyable: true

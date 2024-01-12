@@ -66,12 +66,16 @@ Example
 The following example counts the number of documents where the
 value of ``finalGrade`` is less than ``80``:
 
-.. literalinclude:: /includes/fundamentals/code-examples/CountDocuments.cs
-   :start-after: start-accurate-ct
-   :end-before: end-accurate-ct
-   :language: csharp
+.. io-code-block::
    :copyable: true
-   :dedent:
+
+   .. input::
+      :language: csharp
+      :dedent:
+
+      var filter = Builders<Student>.Filter.Lt(s => s.FinalGrade, 80.0);
+      var count = _myColl.CountDocuments(filter);
+      Console.WriteLine("Number of documents with a final grade less than 80: " + count);
 
    .. output::
       :language: none
@@ -169,12 +173,15 @@ Example
 The following example estimates the number of documents in the
 ``students`` collection:
 
-.. literalinclude:: /includes/fundamentals/code-examples/CountDocuments.cs
-   :start-after: start-est-count
-   :end-before: end-est-count
-   :language: csharp
+.. io-code-block::
    :copyable: true
-   :dedent:
+
+   .. input::
+      :language: csharp
+      :dedent:
+
+      var count = _myColl.EstimatedDocumentCount();
+      Console.WriteLine("Estimated number of documents in the students collection: " + count);
 
    .. output::
       :language: none
@@ -199,12 +206,16 @@ The following example performs the following actions:
   greater than ``80``
 - Counts the number of documents that match the criteria
 
-.. literalinclude:: /includes/fundamentals/code-examples/CountDocuments.cs
-   :start-after: start-agg-count
-   :end-before: end-agg-count
-   :language: csharp
-   :copyable: true
-   :dedent:
+.. io-code-block::
+
+   .. input::
+      :language: csharp
+      :dedent:
+
+      var filter = Builders<Student>
+        .Filter.Gt(s => s.FinalGrade, 80);
+      var result = _myColl.Aggregate().Match(filter).Count();
+      Console.WriteLine("Number of documents with a final grade more than 80: " + result.First().Count);
 
    .. output::
       :language: none

@@ -1,4 +1,4 @@
-// Counts the number of documents in a collection, in a query result, or after
+// Counts the number of documents in a collection and after
 // applying a filter by using the C# driver
 
 using MongoDB.Bson.Serialization.Conventions;
@@ -20,7 +20,7 @@ public class CountDocuments
         Console.WriteLine("Number of documents with a final grade less than 80: " + count1);
         // end-accurate-ct
 
-        // Finds the number of documents in the _myColl collection
+        // Finds the total number of documents in the collection
         //  start-est-count
         var count2 = _myColl.EstimatedDocumentCount();
         Console.WriteLine("Estimated number of documents in the students collection: " + count2);

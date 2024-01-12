@@ -66,15 +66,12 @@ Example
 The following example counts the number of documents where the
 value of ``finalGrade`` is less than ``80``:
 
-.. io-code-block::
+.. literalinclude:: /includes/fundamentals/code-examples/CountDocuments.cs
+   :start-after: start-accurate-ct
+   :end-before: end-accurate-ct
+   :language: csharp
    :copyable: true
-
-   .. input::
-      :language: csharp
-
-      var filter = Builders<Student>.Filter.Lt(s => s.FinalGrade, 80.0);
-      var count = _myColl.CountDocuments(filter);
-      Console.WriteLine("Number of documents with a final grade less than 80: " + count);
+   :dedent:
 
    .. output::
       :language: none
@@ -172,14 +169,12 @@ Example
 The following example estimates the number of documents in the
 ``students`` collection:
 
-.. io-code-block::
+.. literalinclude:: /includes/fundamentals/code-examples/CountDocuments.cs
+   :start-after: start-est-count
+   :end-before: end-est-count
+   :language: csharp
    :copyable: true
-
-   .. input::
-      :language: csharp
-
-      var count = _myColl.EstimatedDocumentCount();
-      Console.WriteLine("Estimated number of documents in the students collection: " + count);
+   :dedent:
 
    .. output::
       :language: none
@@ -204,22 +199,18 @@ The following example performs the following actions:
   greater than ``80``
 - Counts the number of documents that match the criteria
 
-.. io-code-block::
+.. literalinclude:: /includes/fundamentals/code-examples/CountDocuments.cs
+   :start-after: start-agg-count
+   :end-before: end-agg-count
+   :language: csharp
    :copyable: true
-
-   .. input::
-      :language: csharp
-
-      var filter = Builders<Student>
-        .Filter.Gt(s => s.FinalGrade, 80);
-      var result = _myColl.Aggregate().Match(filter).Count();
-      Console.WriteLine("Number of documents with a final grade more than 80: " + result.First().Count);
+   :dedent:
 
    .. output::
       :language: none
       :visible: false
 
-      Number of documents with a final grade more than 80: 2
+      Number of documents with a final grade more than 80: 4
       
 
 Additional Information

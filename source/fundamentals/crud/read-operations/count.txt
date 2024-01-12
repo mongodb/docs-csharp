@@ -71,7 +71,6 @@ value of ``finalGrade`` is less than ``80``:
 
    .. input::
       :language: csharp
-      :dedent:
 
       var filter = Builders<Student>.Filter.Lt(s => s.FinalGrade, 80.0);
       var count = _myColl.CountDocuments(filter);
@@ -178,7 +177,6 @@ The following example estimates the number of documents in the
 
    .. input::
       :language: csharp
-      :dedent:
 
       var count = _myColl.EstimatedDocumentCount();
       Console.WriteLine("Estimated number of documents in the students collection: " + count);
@@ -207,10 +205,10 @@ The following example performs the following actions:
 - Counts the number of documents that match the criteria
 
 .. io-code-block::
+   :copyable: true
 
    .. input::
       :language: csharp
-      :dedent:
 
       var filter = Builders<Student>
         .Filter.Gt(s => s.FinalGrade, 80);

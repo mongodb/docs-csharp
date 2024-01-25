@@ -13,5 +13,5 @@ raw: ${prefix}/master -> ${base}/upcoming/
 [*-master]: ${prefix}/${version}/fundamentals/data-formats/guid-serialization/ -> ${base}/${version}/fundamentals/serialization/guid-serialization/
 [*-master]: ${prefix}/${version}/fundamentals/data-formats/poco/ -> ${base}/${version}/fundamentals/serialization/poco/
 [*-master]: ${prefix}/${version}/fundamentals/data-formats/polymorphism/ -> ${base}/${version}/fundamentals/serialization/polymorphic-objects/
-[*-master]: ${prefix}/${version}/fundamentals/data-formats/bson -> ${base}/${version}/fundamentals/bson/
+[*-master]: ${prefix}/${version}/fundamentals/data-formats/bson/ -> ${base}/${version}/fundamentals/bson/
 [*-master]: ${prefix}/${version}/fundamentals/class-mapping/ -> ${base}/${version}/fundamentals/serialization/class-mapping/

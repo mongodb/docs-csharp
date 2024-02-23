@@ -1,3 +1,7 @@
+// Asynchronously deletes multiple documents from a collection by using the C# driver
+
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
@@ -24,8 +28,6 @@ public class DeleteManyAsync
         Console.WriteLine($"Deleted documents: {result.DeletedCount}");
 
         Restore(docs);
-
-        return result;
     }
 
     private static async Task<DeleteResult> DeleteMultipleRestaurantsBuilderAsync()
@@ -94,5 +96,5 @@ public class GradeEntry
 
     public string Grade { get; set; }
 
-    public float Score { get; set; }
+    public float? Score { get; set; }
 }

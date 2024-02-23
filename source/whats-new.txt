@@ -36,18 +36,18 @@ What's New in 2.24
 The 2.24 driver release includes the following new features:
 
 - Added `IMongoCollection.DistinctMany() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.DistinctMany.html>`__ method.
-- Added support for latest optional arguments for the :manual:`$dateFromString </reference/operator/aggregation/dateFromString/>`
+- Added support for latest optional arguments for :manual:`$dateFromString </reference/operator/aggregation/dateFromString/>`
   aggregation expression.
-- Added support for sorting by score in the :manual:`$search </reference/operator/aggregation/search/>`
+- Added support for sorting by score in :manual:`$search </reference/operator/aggregation/search/>`.
   aggregation stage.
 - Added ``VectorSearchScore`` builder for :manual:`$vectorSearch </reference/operator/aggregation/vectorSearch/>`
   aggregation stage.
 - Added support for `$in <https://www.mongodb.com/docs/manual/reference/operator/query/in/>`__
   operator in Atlas Search.
 - Added ``Mql.Exists()``, ``Mql.IsMissing()``, and ``Mql.IsNullOrMissing()`` methods for
-  LINQ queries. 
+  LINQ queries.
 - Added support for ``IComparable.CompareTo()`` method in LINQ queries.
-- Added support for nested calls to the ``AsQueryable()`` method to support LINQ queries
+- Added support for nested calls to ``AsQueryable()`` method to support LINQ queries
   by the `MongoDB Entity Framework Core Provider <https://www.mongodb.com/docs/entity-framework/current/>`__.
 - Added support for TLS 1.3.
 - Updated ``libmongocrypt`` package version to 1.8.2.

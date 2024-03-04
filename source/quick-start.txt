@@ -4,7 +4,12 @@
 Quick Start
 ===========
 
-.. default-domain:: mongodb
+.. facet::
+   :name: genre
+   :values: tutorial
+
+.. meta::
+   :keywords: set up, runnable app, initialize, connect
 
 .. contents:: On this page
    :local:

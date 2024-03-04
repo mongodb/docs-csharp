@@ -107,6 +107,7 @@ collection using the string "Gib" in the ``make`` field.
    :dedent:
 
 .. note::
+   
    If the field you are searching has a search index, it must be included in your ``Autocomplete`` call:
    ``Search.Autocomplete(g => g.Make, "Gib"), indexName: <make_search_index>)``
 

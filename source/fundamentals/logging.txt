@@ -18,6 +18,15 @@ Starting in version 2.18, the {+driver-short+} uses the standard
 In this guide, you can learn how to use the driver to configure logging for your 
 application. 
 
+.. important::
+
+   To use this feature, you must include the `Microsoft.Extensions.Logging
+   namespace <https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging>`__:
+
+   .. code-block:: csharp
+
+      using Microsoft.Extensions.Logging;
+
 Configure Logging
 -----------------
 

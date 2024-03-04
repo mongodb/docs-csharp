@@ -4,6 +4,13 @@
 Logging
 =======
 
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: loggerfactory, logger, audit
+
 .. contents:: On this page
    :local:
    :backlinks: none

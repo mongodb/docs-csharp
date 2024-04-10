@@ -52,7 +52,7 @@ code.
 .. note:: PowerShell Environment Variables
 
    If you are using Microsoft PowerShell, run the following command to
-   save the environment variable:
+   save your connection string in an environment variable:
    
    .. code-block:: bash
    

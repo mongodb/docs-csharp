@@ -43,7 +43,7 @@ The 2.24 driver release includes the following new features:
   ``BsonClassMapSerializer`` cannot locate a matching creator.
 - Added a ``LoggedStages`` field to surface the MQL executed after performing
   a LINQ query.
-- Added support for overriding the "mongodb" service name with a custom one
+- Added support for overriding the ``"mongodb"`` service name with a custom one
   by using the ``srvServiceName`` connection option.
 - Fixed behavior in which bulk write operations enumerated the requests
   parameter more than once.

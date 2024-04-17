@@ -35,7 +35,7 @@ Learn what's new in:
 What's New in 2.25
 ------------------
 
-The 2.24 driver release includes the following new features:
+The 2.25 driver release includes the following new features:
 
 - Added support for the ``MONGODB-OIDC`` authentication mechanism and automatic
   token acquisition for Azure Identity Provider.

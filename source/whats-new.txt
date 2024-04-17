@@ -15,10 +15,11 @@ What's New
    :values: reference
 
 .. meta::
-   :keywords: update, new feature, deprecation, upgrade, driver v2.19, driver v2.20, driver v2.21, driver v2.22, driver v2.23
+   :keywords: update, new feature, deprecation, upgrade, driver v2.19, driver v2.20, driver v2.21, driver v2.22, driver v2.23, driver v2.24, driver v2.25
 
 Learn what's new in:
 
+* :ref:`Version 2.25 <version-2.25>`
 * :ref:`Version 2.24 <version-2.24>`
 * :ref:`Version 2.23 <version-2.23>`
 * :ref:`Version 2.22 <version-2.22>`
@@ -27,6 +28,25 @@ Learn what's new in:
 * :ref:`Version 2.19 <version-2.19>`
 
 .. _upcoming-breaking-changes:
+
+
+.. _version-2.25:
+
+What's New in 2.25
+------------------
+
+The 2.24 driver release includes the following new features:
+
+- Added support for the ``MONGODB-OIDC`` authentication mechanism and automatic
+  token acquisition for Azure Identity Provider.
+- Added the class name to the error message reported when
+  ``BsonClassMapSerializer`` cannot locate a matching creator.
+- Added a ``LoggedStages`` field to surface the MQL executed after performing
+  a LINQ query.
+- Added support for overriding the "mongodb" service name with a custom one
+  by using the ``srvServiceName`` connection option.
+- Fixed behavior in which bulk write operations enumerated the requests
+  parameter more than once.
 
 .. _version-2.24:
 

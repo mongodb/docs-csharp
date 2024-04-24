@@ -135,4 +135,4 @@ use any driver from v2.14 and later, your MongoDB Server must be v3.6 or
 later.
 
 To learn how to upgrade your MongoDB Server deployment, see
-:manual:`Release Notes </release-notes/`> in the MongoDB Server manual.
+:manual:`Release Notes </release-notes/>` in the MongoDB Server manual.

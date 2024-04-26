@@ -293,7 +293,7 @@ see the corresponding syntax.
    .. tab:: Connection String
       :tabid: mongodb-azure-imds-connection-string
     
-      The following code example shows how to specify Azure IMDS OIDC authenticaton.
+      The following code example shows how to specify Azure IMDS OIDC authentication.
       Replace the ``<resource>`` placeholder with the percent-encoded application or
       service that the OIDC access token is intended for.
      
@@ -306,9 +306,10 @@ see the corresponding syntax.
    .. tab:: MongoCredential
       :tabid: mongodb-azure-mongo-credential
 
-      The following code example shows how to specify Azure IMDS OIDC authenticaton.
-      Replace the ``<username>`` placeholder with the client ID of the Azure managed
-      identity, and replace the ``<resource>`` placeholder with the percent-encoded
+      The following code example shows how to specify Azure IMDS OIDC authentication.
+      Replace the ``<username>`` placeholder with the client ID or application ID of the
+      Azure managed identity or enterprise application. Replace the ``<resource>``
+      placeholder with the percent-encoded
       application or service that the OIDC access token is intended for.
       
       .. code-block:: csharp

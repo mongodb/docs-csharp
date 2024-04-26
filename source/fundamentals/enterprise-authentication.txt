@@ -270,8 +270,9 @@ The following sections describe how to use the MONGODB-OIDC authentication mecha
 authenticate from various platforms.
 
 For more information about the MONGODB-OIDC authentication mechanism, see
-:manual:`OpenID Connect Authentication </core/security-oidc/>` in the MongoDB Server
-manual.
+:manual:`OpenID Connect Authentication </core/security-oidc/>` and
+:manual:`MongoDB Server Parameters </reference/parameters/#mongodb-parameter-param.oidcIdentityProviders>`
+in the MongoDB Server manual.
 
 .. _csharp-mongodb-oidc-azure-imds:
 
@@ -293,13 +294,15 @@ see the corresponding syntax.
    .. tab:: Connection String
       :tabid: mongodb-azure-imds-connection-string
     
-      The following code example shows how to specify Azure IMDS OIDC authentication.
-      Replace the ``<resource>`` placeholder with the percent-encoded application or
-      service that the OIDC access token is intended for.
-     
+      The following code example shows how to specify Azure IMDS OIDC authentication. 
+      Replace the ``<percent-encoded audience>`` placeholder with the percent-encoded
+      value of the ``audience`` parameter configured on your MongoDB deployment. 
+      
       .. code-block:: csharp
 
-         var connectionString = "mongodb://<username>@<hostname>[:<port>]/?authMechanism=MONGODB-OIDC&authMechanismProperties=ENVIRONMENT:azure,TOKEN_RESOURCE:<resource>");
+         var connectionString = "mongodb://<username>@<hostname>[:<port>]/?" +
+            "authMechanism=MONGODB-OIDC" +
+            "&authMechanismProperties=ENVIRONMENT:azure,TOKEN_RESOURCE:<percent-encoded audience>");
          var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
          var client = new MongoClient(mongoClientSettings);
 
@@ -308,23 +311,24 @@ see the corresponding syntax.
 
       The following code example shows how to specify Azure IMDS OIDC authentication.
       Replace the ``<username>`` placeholder with the client ID or application ID of the
-      Azure managed identity or enterprise application. Replace the ``<resource>``
-      placeholder with the percent-encoded
-      application or service that the OIDC access token is intended for.
-      
+      Azure managed identity or enterprise application. Replace the ``<audience>``
+      placeholder with the value of the ``audience`` parameter configured on your MongoDB
+      deployment. 
+
       .. code-block:: csharp
 
-        var credential = 
-         var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<hostname>[:<port>]");
+         var mongoClientSettings = MongoClientSettings.FromConnectionString(
+            "mongodb+srv://<hostname>[:<port>]");
          mongoClientSettings.Credential = MongoCredential.CreateOidcCredential("azure", "<username>")
-            .WithMechanismProperty("TOKEN_RESOURCE", "<resource>"); 
+            .WithMechanismProperty("TOKEN_RESOURCE", "<audience>"); 
          var client = new MongoClient(mongoClientSettings);
 
 Custom Callback
 ~~~~~~~~~~~~~~~
 
-On some platforms, such as Azure Functions and Azure Kubernetes Service (AKS), you
-must define a custom callback function to use OIDC to authenticate.
+The {+driver-short+} doesn't offer built-in support for all platforms, including
+Azure Functions and Azure Kubernetes Service (AKS). Instead, you
+must define a custom callback to use OIDC to authenticate from these platforms.
 
 First, define a class that implements the ``IOidcCallback`` interface. This interface
 contains two methods:
@@ -340,17 +344,24 @@ in the local file system.
 
 .. code-block:: csharp
 
-   public class OidcCustomCallback : IOidcCallback
+   public class MyCallback : IOidcCallback
    {
-       public OidcAccessToken GetOidcAccessToken(OidcCallbackParameters parameters, CancellationToken cancellationToken)
+       public OidcAccessToken GetOidcAccessToken(
+           OidcCallbackParameters parameters,
+           CancellationToken cancellationToken)
        {
            var accessToken = File.ReadAllText("access-token.dat");
            return new(accessToken, expiresIn: null);
        }
 
-       public async Task<OidcAccessToken> GetOidcAccessTokenAsync(OidcCallbackParameters parameters, CancellationToken cancellationToken)
+       public async Task<OidcAccessToken> GetOidcAccessTokenAsync(
+           OidcCallbackParameters parameters,
+           CancellationToken cancellationToken)
        {
-           var accessToken = await File.ReadAllTextAsync("access-token.dat", cancellationToken).ConfigureAwait(false);
+           var accessToken = await File.ReadAllTextAsync(
+               "access-token.dat",
+               cancellationToken)
+               .ConfigureAwait(false);
            return new(accessToken, expiresIn: null);
        }
    }
@@ -363,7 +374,7 @@ class. Store the result of this method call in the ``Credential`` property of yo
 .. code-block:: csharp
 
    var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb://<hostname>[:port]");
-   mongoClientSettings.Credential = MongoCredential.CreateOidcCredential(new OidcCustomCallback());
+   mongoClientSettings.Credential = MongoCredential.CreateOidcCredential(new MyCallback());
    var client = new MongoClient(mongoClientSettings);
 
 API Documentation

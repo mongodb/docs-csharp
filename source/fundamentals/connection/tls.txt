@@ -31,7 +31,7 @@ through a parameter in your connection string.
 
 .. note::
 
-   If you connect by using the DNS seedlist protocol, note that the driver enables
+   If you connect by using the DNS seedlist protocol, the driver enables
    TLS/SSL by default. To disable it, set the ``tls`` or ``ssl`` parameter value to
    ``false`` in your connection string or ``MongoClientSettings`` instance.
 

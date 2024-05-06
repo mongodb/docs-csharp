@@ -599,8 +599,8 @@ serialization-related attributes:
 - ``[BsonRepresentation()]``, which specifies serialization of the ``Price`` field as a BSON ``Double`` type
 - ``[BsonDefaultValue()]``, which sets the ``Name`` property to
   ``"Generic item"`` if no value has been assigned to it
-- ``[BsonDateTimeOptions(DateOnly = true)]``, which specifies that our DateTime property
-  only represents a date value with no associated time
+- ``[BsonDateTimeOptions(DateOnly = true)]``, which specifies that the ``DateTime`` property
+  represents only a date value, with no associated time
 
 .. literalinclude:: ../../includes/fundamentals/code-examples/Clothing.cs
    :start-after: start-model

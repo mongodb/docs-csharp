@@ -175,8 +175,8 @@ Consider that some documents in the ``guitars`` collection have added a
 
 After creating an ``embeddedDocument`` index on the ``productDetails`` field,
 you can perform Atlas search operations on documents in that field. The
-following example searches the documents in the ``productDetails`` array field
-and returns any with a ``serial`` field value of ``"YZ5678"``:
+following example searches the ``productDetails`` array fields
+and returns any documents with a ``serial`` field value of ``"YZ5678"``:
 
 .. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
    :start-after: // start-compound-search

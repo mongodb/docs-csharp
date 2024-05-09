@@ -183,6 +183,14 @@ The error message consists of multiple parts:
      can use tools like ``openssl s_client`` to debug TLS/SSL-related
      certificate problems.
 
+.. _csharp-faq-linq-vs-builder:
+
+Should I Use LINQ or Builder Classes When Querying for Documents?
+-----------------------------------------------------------------
+
+If you define your documents using C# classes, use LINQ. If you use the
+``BsonDocument`` class to represent your documents, use builders. 
+
 .. _csharp-faq-unsupported-expressions:
 
 Why are Certain LINQ or Builder Expressions Unsupported?

@@ -158,7 +158,8 @@ within a field's array value.
 
    To learn how to define an ``embeddedDocument`` index, see
    :atlas:`Define the Index for the embeddedDocument Type
-   </atlas-search/field-types/embedded-documents-type/#define-the-index-for-the-fts-field-type-type>`.
+   </atlas-search/field-types/embedded-documents-type/#define-the-index-for-the-fts-field-type-type>`
+   in the Atlas documentation.
 
 Consider that some documents in the ``guitars`` collection have added a
 ``productDetails`` field that holds an array of product detail objects:

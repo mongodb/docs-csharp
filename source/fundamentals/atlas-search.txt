@@ -145,8 +145,8 @@ The search returns the following documents:
 To learn more about the ``compound`` operator, see the :atlas:`compound </atlas-search/compound>` 
 Atlas guide.
 
-Embedded Document
-~~~~~~~~~~~~~~~~~
+EmbeddedDocument
+~~~~~~~~~~~~~~~~
 
 Use the ``EmbeddedDocument()`` method to perform search operations on documents
 within a field's array value.

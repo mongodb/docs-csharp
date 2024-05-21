@@ -82,14 +82,6 @@ public class BookTransaction
         database.DropCollection("books");
         database.CreateCollection("books");
     }
-
-    public static void PrintBooks(List<Book> books) {
-        foreach (Book b in books) {
-            Console.WriteLine(String.Format("Title: {0}\tAuthor: {1}\tIn Stock: {2}", b.Title, b.Author, b.InStock));
-        }
-        Console.WriteLine();
-    }
-
 }
 
 public class Book

@@ -68,10 +68,10 @@ these methods:
             :header-rows: 1
 
             * - Method
-                - Description
+              - Description
 
             * - ``StartTransaction()``
-                - | Starts a new transaction, configured with the given options, on
+              - | Starts a new transaction, configured with the given options, on
                     this session. Returns an error if there is already
                     a transaction in progress for the session. To learn more about
                     this method, see the :manual:`startTransaction() page
@@ -80,7 +80,7 @@ these methods:
                 | **Parameter**: ``TransactionOptions``
 
             * - ``AbortTransaction()``
-                - | Ends the active transaction for this session. Returns an
+              - | Ends the active transaction for this session. Returns an
                     error if there is no active transaction for the session or the
                     transaction has been committed or ended. To learn more about
                     this method, see the :manual:`abortTransaction() page
@@ -89,7 +89,7 @@ these methods:
                 | **Parameter**: ``CancellationToken``
 
             * - ``CommitTransaction()``
-                - | Commits the active transaction for this session. Returns an
+              - | Commits the active transaction for this session. Returns an
                     error if there is no active transaction for the session or if the
                     transaction was ended. To learn more about
                     this method, see the :manual:`commitTransaction() page
@@ -98,7 +98,7 @@ these methods:
                 | **Parameter**: ``CancellationToken``
 
             * - ``WithTransaction()``
-                - | Starts a transaction on this session and runs the given callback. To
+              - | Starts a transaction on this session and runs the given callback. To
                     learn more about this method, see the :manual:`withTransaction() page
                     </reference/method/Session.withTransaction/>` in the Server manual.
 
@@ -120,10 +120,10 @@ these methods:
             :header-rows: 1
 
             * - Method
-                - Description
+              - Description
 
             * - ``StartTransaction()``
-                - | Starts a new transaction, configured with the given options, on
+              - | Starts a new transaction, configured with the given options, on
                     this session. Returns an error if there is already
                     a transaction in progress for the session. To learn more about
                     this method, see the :manual:`startTransaction() page
@@ -132,7 +132,7 @@ these methods:
                 | **Parameter**: ``TransactionOptions``
 
             * - ``AbortTransactionAsync()``
-                - | Ends the active transaction for this session. Returns an
+              - | Ends the active transaction for this session. Returns an
                     error if there is no active transaction for the session or the
                     transaction has been committed or ended. To learn more about
                     this method, see the :manual:`abortTransaction() page
@@ -143,7 +143,7 @@ these methods:
 
 
             * - ``CommitTransactionAsync()``
-                - | Commits the active transaction for this session. Returns an
+              - | Commits the active transaction for this session. Returns an
                     error if there is no active transaction for the session or if the
                     transaction was ended. To learn more about
                     this method, see the :manual:`commitTransaction() page
@@ -153,7 +153,7 @@ these methods:
                 | **Return Type**: ``Task``
 
             * - ``WithTransactionAsync()``
-                - | Starts a transaction on this session and runs the given callback. To
+              - | Starts a transaction on this session and runs the given callback. To
                     learn more about this method, see the :manual:`withTransaction() page
                     </reference/method/Session.withTransaction/>` in the Server manual.
 

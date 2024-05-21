@@ -38,7 +38,7 @@ guarantees that the data involved in your transaction operations remains
 consistent, even if the operations encounter unexpected errors.
 
 When using the {+driver-short+}, you can create a new session from a
-``MongoClient`` instance as a ``IClientSession`` type. We recommend that you reuse
+``MongoClient`` instance as an ``IClientSession`` type. We recommend that you reuse
 your client for multiple sessions and transactions instead of
 instantiating a new client each time.
 
@@ -58,7 +58,7 @@ the session state by using the method set provided by the ``IClientSession``
 interface. The following table describes these methods:
 
 .. list-table::
-   :widths: 25 25 75
+   :widths: 20 20 60
    :header-rows: 1
 
    * - Synchronous Method
@@ -157,4 +157,4 @@ guide, see the following API Documentation:
 
 - `IClientSession <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.html>`__
 - `MongoClient <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
-- `TransactionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html/>`
+- `TransactionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html>`__

@@ -64,8 +64,8 @@ these methods:
         :tabid: synchronous-methods
 
         .. list-table::
-        :widths: 40 60
-        :header-rows: 1
+            :widths: 40 60
+            :header-rows: 1
 
             * - Method
                 - Description
@@ -116,8 +116,8 @@ these methods:
         :tabid: asynchronous-methods
 
         .. list-table::
-        :widths: 40 60
-        :header-rows: 1
+            :widths: 40 60
+            :header-rows: 1
 
             * - Method
                 - Description

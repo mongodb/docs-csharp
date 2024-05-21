@@ -101,6 +101,13 @@ these methods:
      - | Starts a transaction on this session and runs the given callback. To learn
          more about this method, see the :manual:`withTransaction() page
          </reference/method/Session.withTransaction/>` in the Server manual.
+
+         .. note:: Handling Exceptions
+
+            When catching exceptions within the callback function used by
+            ``WithTransaction()`` and ``WithTransactionAsync()``, you  **must** rethrow
+            the exception before exiting the try-catch block. Failing to do so can
+            result in an infinite loop.
        |
        | **Parameters**: ``Func <IClientSessionHandle, CancellationToken, Task<TResult>>``, ``TransactionOptions``, ``CancellationToken``
        | **Return Type**: ``Task <TResult>``

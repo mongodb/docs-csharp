@@ -58,7 +58,7 @@ the session state by using the method set provided by the ``IClientSession``
 interface. The following table describes these methods:
 
 .. list-table::
-   :widths: 20 20 60
+   :widths: 20 20 40
    :header-rows: 1
 
    * - Synchronous Method

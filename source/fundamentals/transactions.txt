@@ -104,10 +104,11 @@ these methods:
 
                     .. warning:: Handling Exceptions
 
-                        When catching exceptions within the callback function used by
-                        ``WithTransaction()``, you  **must** rethrow the exception before
-                        exiting the try-catch block. Failing to do so can result in an
-                        infinite loop.
+                       When catching exceptions within the callback function used by
+                       ``WithTransaction()``, you  **must** rethrow the exception before
+                       exiting the try-catch block. Failing to do so can result in an
+                       infinite loop.
+
                 |
                 | **Parameters**: ``Func <IClientSessionHandle, CancellationToken, Task<TResult>>``, ``TransactionOptions``, ``CancellationToken``
                 | **Return Type**: ``Task <TResult>``
@@ -159,10 +160,11 @@ these methods:
 
                     .. warning:: Handling Exceptions
 
-                        When catching exceptions within the callback function used by
-                        ``WithTransactionAsync()``, you  **must** rethrow the exception
-                        before exiting the try-catch block. Failing to do so can result in an
-                        infinite loop.
+                       When catching exceptions within the callback function used by
+                       ``WithTransactionAsync()``, you  **must** rethrow the exception
+                       before exiting the try-catch block. Failing to do so can result in an
+                       infinite loop.
+
                 |
                 | **Parameters**: ``Func <IClientSessionHandle, CancellationToken, Task<TResult>>``, ``TransactionOptions``, ``CancellationToken``
                 | **Return Type**: ``Task <TResult>``

@@ -1,4 +1,4 @@
-.. csharp-transactions:
+.. _csharp-transactions:
 
 ============
 Transactions

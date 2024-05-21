@@ -9,7 +9,7 @@ Transactions
    :values: reference
 
 .. meta::
-   :keywords: code example, rollback, undo operation
+   :keywords: code example, multi-document
 
 .. contents:: On this page
    :local:

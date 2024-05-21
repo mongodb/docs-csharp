@@ -102,7 +102,7 @@ these methods:
          more about this method, see the :manual:`withTransaction() page
          </reference/method/Session.withTransaction/>` in the Server manual.
 
-         .. note:: Handling Exceptions
+         .. warning:: Handling Exceptions
 
             When catching exceptions within the callback function used by
             ``WithTransaction()`` and ``WithTransactionAsync()``, you  **must** rethrow

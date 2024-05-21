@@ -55,14 +55,15 @@ Methods
 Create an ``IClientSession`` by using either the ``StartSession()`` or
 ``StartSessionAsync()`` methods on your ``MongoClient`` instance. You can then modify
 the session state by using the method set provided by the ``IClientSession`` 
-interface. The following table describes these methods:
+interface. The following table describes the synchronous and asynchronous versions of
+these methods:
 
 .. list-table::
-   :widths: 20 20 40
+   :widths: 20 20 60
    :header-rows: 1
 
-   * - Synchronous Method
-     - Asynchronous Method
+   * - Synchronous
+     - Asynchronous
      - Description
 
    * - ``StartTransaction()``

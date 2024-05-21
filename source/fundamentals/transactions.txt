@@ -58,59 +58,114 @@ the session state by using the method set provided by the ``IClientSession``
 interface. The following table describes the synchronous and asynchronous versions of
 these methods:
 
-.. list-table::
-   :widths: 20 20 60
-   :header-rows: 1
+.. tabs::
 
-   * - Synchronous
-     - Asynchronous
-     - Description
+    .. tab:: Synchronous Methods
+        :tabid: synchronous-methods
 
-   * - ``StartTransaction()``
-     - 
-     - | Starts a new transaction, configured with the given options, on
-         this session. Returns an error if there is already
-         a transaction in progress for the session. To learn more about
-         this method, see the :manual:`startTransaction() page
-         </reference/method/Session.startTransaction/>`  in the Server manual.
-       |
-       | **Parameter**: ``TransactionOptions``
+        .. list-table::
+        :widths: 40 60
+        :header-rows: 1
 
-   * - ``AbortTransaction()``
-     - ``AbortTransactionAsync()``
-     - | Ends the active transaction for this session. Returns an
-         error if there is no active transaction for the session or the
-         transaction has been committed or ended. To learn more about
-         this method, see the :manual:`abortTransaction() page
-         </reference/method/Session.abortTransaction/>`  in the Server manual.
-       |
-       | **Parameter**: ``CancellationToken``
+        * - Method
+            - Description
 
-   * - ``CommitTransaction()``
-     - ``CommitTransactionAsync()``
-     - | Commits the active transaction for this session. Returns an
-         error if there is no active transaction for the session or if the
-         transaction was ended. To learn more about
-         this method, see the :manual:`commitTransaction() page
-         </reference/method/Session.commitTransaction/>`  in the Server manual.
-       |
-       | **Parameter**: ``CancellationToken``
+        * - ``StartTransaction()``
+            - | Starts a new transaction, configured with the given options, on
+                this session. Returns an error if there is already
+                a transaction in progress for the session. To learn more about
+                this method, see the :manual:`startTransaction() page
+                </reference/method/Session.startTransaction/>`  in the Server manual.
+            |
+            | **Parameter**: ``TransactionOptions``
 
-   * - ``WithTransaction()``
-     - ``WithTransactionAsync()``
-     - | Starts a transaction on this session and runs the given callback. To learn
-         more about this method, see the :manual:`withTransaction() page
-         </reference/method/Session.withTransaction/>` in the Server manual.
+        * - ``AbortTransaction()``
+            - | Ends the active transaction for this session. Returns an
+                error if there is no active transaction for the session or the
+                transaction has been committed or ended. To learn more about
+                this method, see the :manual:`abortTransaction() page
+                </reference/method/Session.abortTransaction/>`  in the Server manual.
+            |
+            | **Parameter**: ``CancellationToken``
 
-         .. warning:: Handling Exceptions
+        * - ``CommitTransaction()``
+            - | Commits the active transaction for this session. Returns an
+                error if there is no active transaction for the session or if the
+                transaction was ended. To learn more about
+                this method, see the :manual:`commitTransaction() page
+                </reference/method/Session.commitTransaction/>`  in the Server manual.
+            |
+            | **Parameter**: ``CancellationToken``
 
-            When catching exceptions within the callback function used by
-            ``WithTransaction()`` and ``WithTransactionAsync()``, you  **must** rethrow
-            the exception before exiting the try-catch block. Failing to do so can
-            result in an infinite loop.
-       |
-       | **Parameters**: ``Func <IClientSessionHandle, CancellationToken, Task<TResult>>``, ``TransactionOptions``, ``CancellationToken``
-       | **Return Type**: ``Task <TResult>``
+        * - ``WithTransaction()``
+            - | Starts a transaction on this session and runs the given callback. To
+                learn more about this method, see the :manual:`withTransaction() page
+                </reference/method/Session.withTransaction/>` in the Server manual.
+
+                .. warning:: Handling Exceptions
+
+                    When catching exceptions within the callback function used by
+                    ``WithTransaction()``, you  **must** rethrow the exception before
+                    exiting the try-catch block. Failing to do so can result in an
+                    infinite loop.
+            |
+            | **Parameters**: ``Func <IClientSessionHandle, CancellationToken, Task<TResult>>``, ``TransactionOptions``, ``CancellationToken``
+            | **Return Type**: ``Task <TResult>``
+
+    .. tab:: Asynchronous Methods
+        :tabid: asynchronous-methods
+
+        .. list-table::
+        :widths: 40 60
+        :header-rows: 1
+
+        * - Method
+            - Description
+
+        * - ``StartTransaction()``
+            - | Starts a new transaction, configured with the given options, on
+                this session. Returns an error if there is already
+                a transaction in progress for the session. To learn more about
+                this method, see the :manual:`startTransaction() page
+                </reference/method/Session.startTransaction/>`  in the Server manual.
+            |
+            | **Parameter**: ``TransactionOptions``
+
+        * - ``AbortTransactionAsync()``
+            - | Ends the active transaction for this session. Returns an
+                error if there is no active transaction for the session or the
+                transaction has been committed or ended. To learn more about
+                this method, see the :manual:`abortTransaction() page
+                </reference/method/Session.abortTransaction/>`  in the Server manual.
+            |
+            | **Parameter**: ``CancellationToken``
+            | **Return Type**: ``Task``
+
+
+        * - ``CommitTransactionAsync()``
+            - | Commits the active transaction for this session. Returns an
+                error if there is no active transaction for the session or if the
+                transaction was ended. To learn more about
+                this method, see the :manual:`commitTransaction() page
+                </reference/method/Session.commitTransaction/>`  in the Server manual.
+            |
+            | **Parameter**: ``CancellationToken``
+            | **Return Type**: ``Task``
+
+        * - ``WithTransactionAsync()``
+            - | Starts a transaction on this session and runs the given callback. To
+                learn more about this method, see the :manual:`withTransaction() page
+                </reference/method/Session.withTransaction/>` in the Server manual.
+
+                .. warning:: Handling Exceptions
+
+                    When catching exceptions within the callback function used by
+                    ``WithTransactionAsync()``, you  **must** rethrow the exception
+                    before exiting the try-catch block. Failing to do so can result in an
+                    infinite loop.
+            |
+            | **Parameters**: ``Func <IClientSessionHandle, CancellationToken, Task<TResult>>``, ``TransactionOptions``, ``CancellationToken``
+            | **Return Type**: ``Task <TResult>``
 
 Example
 -------

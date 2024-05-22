@@ -53,10 +53,12 @@ Methods
 -------
 
 Create an ``IClientSession`` by using either the ``StartSession()`` or
-``StartSessionAsync()`` methods on your ``MongoClient`` instance. You can then modify
-the session state by using the method set provided by the ``IClientSession`` 
-interface. The following tables describe the synchronous and asynchronous versions of
-these methods:
+``StartSessionAsync()`` methods on your ``MongoClient`` instance, depending on your
+application's usecase. You can then modify the session state by using the method set
+provided by the ``IClientSession`` interface. Select from the following
+:guilabel:`Synchronous Methods` and :guilabel:`Asynchronous Methods`
+tabs to learn about the methods to manage your transaction that correspond to each
+framework:
 
 .. tabs::
 
@@ -108,7 +110,9 @@ these methods:
                    ``WithTransaction()``, you  **must** rethrow the exception before
                    exiting the try-catch block. Failing to do so can result in an
                    infinite loop. For further details on how to handle exceptions in this
-                   case, see the :manual:`C# example on the Transactions page </core/transactions/>`.
+                   case, see :manual:`Transactions </core/transactions/>` in the Server
+                   manual and select :guilabel:`C#` from the language dropdown to view 
+                   the example.
 
                 |
                 | **Parameters**: ``Func <IClientSessionHandle, CancellationToken, Task<TResult>>``, ``TransactionOptions``, ``CancellationToken``
@@ -164,9 +168,10 @@ these methods:
                    When catching exceptions within the callback function used by
                    ``WithTransactionAsync()``, you  **must** rethrow the exception
                    before exiting the try-catch block. Failing to do so can result in an
-                   infinite loop. For further details on how to handle
-                   exceptions in this case, see the :manual:`C# example on the Transactions
-                   page </core/transactions/>`.
+                   infinite loop. For further details on how to handle exceptions in this
+                   case, see :manual:`Transactions </core/transactions/>` in the Server
+                   manual and select :guilabel:`C#` from the language dropdown to view 
+                   the example.
 
                 |
                 | **Parameters**: ``Func <IClientSessionHandle, CancellationToken, Task<TResult>>``, ``TransactionOptions``, ``CancellationToken``
@@ -175,15 +180,14 @@ these methods:
 Example
 -------
 
-The following example shows how you can create a session, create a
-transaction, and commit a multi-document insert and single-document update operation
-through the following steps:
+This example shows how you can create a session, create a
+transaction, and commit an insert operation into multiple collections through
+the following steps:
 
-1. Create a session from the client using the ``StartSession()`` method.
+1. Create a session from the client by using the ``StartSession()`` method.
 #. Use the ``StartTransaction()`` method to start a transaction.
-#. Insert multiple documents.
-#. Update one of the documents.
-#. Commit the transaction using the ``CommitTransaction()`` method.
+#. Insert documents into the ``books`` and ``films`` collections.
+#. Commit the transaction by using the ``CommitTransaction()`` method.
 
 .. io-code-block::
 
@@ -195,17 +199,9 @@ through the following steps:
   
    .. output::
       :language: console
-      
-      Initial Books:
-      Title: Beloved  Author: Toni Morrison   In Stock: True
-      Title: Sula     Author: Toni Morrison   In Stock: True
+      :visible: false
 
-      Books after Committing Transaction:
-      Title: Beloved  Author: Toni Morrison   In Stock: True
-      Title: Sula     Author: Toni Morrison   In Stock: False
-
-For a fully runnable version of this example, see the `BookTransaction code sample
-<{+fundamentals-example+}/Transaction.cs>`__.
+      Successfully committed transaction!
 
 Additional Information
 ----------------------
@@ -223,10 +219,10 @@ API Documentation
 To learn more about any of the types or methods discussed in this
 guide, see the following API Documentation:
 
-- `IClientSession <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.html>`__
-- `MongoClient <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
-- `StartTransaction <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.StartTransaction.html>`__
-- `AbortTransaction <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransaction.html>`__ / `AbortTransactionAsync <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransactionAsync.html>`__
-- `CommitTransaction <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransaction.html>`__ / `CommitTransactionAsync <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransactionAsync.html>`__
-- `WithTransaction <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransaction.html>`__ / `WithTransactionAsync <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransactionAsync.html>`__
-- `TransactionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html>`__
+- `IClientSession() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.html>`__
+- `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
+- `StartTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.StartTransaction.html>`__
+- `AbortTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransaction.html>`__ / `AbortTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransactionAsync.html>`__
+- `CommitTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransaction.html>`__ / `CommitTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransactionAsync.html>`__
+- `WithTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransaction.html>`__ / `WithTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransactionAsync.html>`__
+- `TransactionOptions() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html>`__

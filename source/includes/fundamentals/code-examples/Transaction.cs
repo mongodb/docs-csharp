@@ -10,15 +10,16 @@ public class BookTransaction
 
     public static void Main(string[] args)
     {   
-        // Establishes the connection to MongoDB and accesses the bookstore database
+        // Establishes the connection to MongoDB and accesses the library database
         var mongoClient = new MongoClient(MongoConnectionString);
-        var database = mongoClient.GetDatabase("bookstore");
+        var database = mongoClient.GetDatabase("library");
 
-        // Cleans up the books collection we'll be using
+        // Cleans up the collections we'll be using
         Setup(database);
 
         // begin-transaction
         var books = database.GetCollection<Book>("books");
+        var films = database.GetCollection<Film>("films");
         
         // Begins transaction
         using (var session = mongoClient.StartSession()) {
@@ -26,37 +27,21 @@ public class BookTransaction
 
             try {
                 // Creates sample data
-                var book1 = new Book {
+                var book = new Book {
                     Title = "Beloved",
                     Author = "Toni Morrison",
                     InStock = true
                 };
 
-                var book2 = new Book {
-                    Title = "Sula",
-                    Author = "Toni Morrison",
+                var film = new Film {
+                    Title = "Star Wars",
+                    Director = "George Lucas",
                     InStock = true
                 };
 
                 // Inserts sample data
-                books.InsertOne(session, book1);
-                books.InsertOne(session, book2);
-
-                // Fetches and prints the sample books we added
-                var initialBooks = books.Find<Book>(session, Builders<Book>.Filter.Empty)
-                                        .ToList();
-                Console.WriteLine("Initial Books:");
-                foreach (Book b in initialBooks) {
-                    Console.WriteLine(
-                        String.Format("Title: {0}\tAuthor: {1}\tIn Stock: {2}", 
-                                        b.Title, b.Author, b.InStock));
-                }
-                Console.WriteLine();
-
-                // Updates our "Sula" book to no longer be in stock
-                var filter = Builders<Book>.Filter.Eq(b => b.Title, "Sula");
-                var update = Builders<Book>.Update.Set(b => b.InStock, false);
-                books.UpdateOne(session, filter, update);
+                books.InsertOne(session, book);
+                films.InsertOne(session, film);
 
                 // Commits our transaction
                 session.CommitTransaction();
@@ -65,15 +50,8 @@ public class BookTransaction
                 return;
             }
 
-            // Fetches and prints the books after the updates we made
-            var booksAfterCommit = books.Find<Book>(session, Builders<Book>.Filter.Empty)
-                                    .ToList();
-            Console.WriteLine("Books after Committing Transaction:");
-            foreach (Book b in booksAfterCommit) {
-                Console.WriteLine(
-                    String.Format("Title: {0}\tAuthor: {1}\tIn Stock: {2}", 
-                                    b.Title, b.Author, b.InStock));
-            }
+            // Prints a success message if no error thrown
+            Console.WriteLine("Successfully committed transaction!");
         }
         // end-transaction
     }
@@ -81,6 +59,9 @@ public class BookTransaction
     public static void Setup(IMongoDatabase database) {
         database.DropCollection("books");
         database.CreateCollection("books");
+
+        database.DropCollection("films");
+        database.CreateCollection("films");
     }
 }
 
@@ -93,6 +74,20 @@ public class Book
 
     [BsonElement("author")]
     public string Author { get; set; }
+
+    [BsonElement("inStock")]
+    public bool InStock { get; set; }
+}
+
+public class Film
+{
+    public ObjectId Id { get; set; }
+
+    [BsonElement("title")]
+    public string Title { get; set; }
+
+    [BsonElement("director")]
+    public string Director { get; set; }
 
     [BsonElement("inStock")]
     public bool InStock { get; set; }

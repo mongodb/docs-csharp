@@ -219,8 +219,8 @@ API Documentation
 To learn more about any of the types or methods discussed in this
 guide, see the following API Documentation:
 
-- `IClientSession() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.html>`__
-- `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
+- `IClientSession <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.html>`__
+- `MongoClient <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
 - `StartTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.StartTransaction.html>`__
 - `AbortTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransaction.html>`__ / `AbortTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransactionAsync.html>`__
 - `CommitTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransaction.html>`__ / `CommitTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransactionAsync.html>`__

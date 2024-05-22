@@ -107,7 +107,8 @@ these methods:
                    When catching exceptions within the callback function used by
                    ``WithTransaction()``, you  **must** rethrow the exception before
                    exiting the try-catch block. Failing to do so can result in an
-                   infinite loop.
+                   infinite loop. For further details on how to handle exceptions in this
+                   case, see the :manual:`C# example on the Transactions page </core/transactions/>`.
 
                 |
                 | **Parameters**: ``Func <IClientSessionHandle, CancellationToken, Task<TResult>>``, ``TransactionOptions``, ``CancellationToken``
@@ -163,7 +164,9 @@ these methods:
                    When catching exceptions within the callback function used by
                    ``WithTransactionAsync()``, you  **must** rethrow the exception
                    before exiting the try-catch block. Failing to do so can result in an
-                   infinite loop.
+                   infinite loop. For further details on how to handle
+                   exceptions in this case, see the :manual:`C# example on the Transactions
+                   page </core/transactions/>`.
 
                 |
                 | **Parameters**: ``Func <IClientSessionHandle, CancellationToken, Task<TResult>>``, ``TransactionOptions``, ``CancellationToken``

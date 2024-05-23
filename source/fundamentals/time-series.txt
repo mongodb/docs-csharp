@@ -98,10 +98,3 @@ Query a Time Series Collection
 To query a time series collection, use the same conventions as you
 would for :doc:`retrieving </fundamentals/crud/read-operations/retrieve>`
 and aggregating data.
-
-.. note:: Window Functions
-
-   MongoDB version 5.0 introduces window functions into the aggregation
-   pipeline. You can use window functions to perform operations on a
-   contiguous span of time series data. For more information, see our
-   :ref:`Aggregates Builders guide <builders-aggregates-setWindowFields>`.

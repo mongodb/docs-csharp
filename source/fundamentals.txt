@@ -38,5 +38,5 @@ Fundamentals
 - :ref:`csharp-specify-query`
 - :ref:`csharp-serialization`
 - :ref:`csharp-logging`
-- :ref:`time-series`
+- :ref:`csharp-time-series`
 - :ref:`Encrypt Fields <csharp-fle>`

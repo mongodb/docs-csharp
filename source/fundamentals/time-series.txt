@@ -1,3 +1,5 @@
+.. _csharp-time-series:
+
 =======================
 Time Series Collections
 =======================
@@ -13,8 +15,8 @@ Time Series Collections
 Overview
 --------
 
-In this guide, you can learn about **time series collections** in
-MongoDB, and how to interact with them using the {+driver-long+}.
+In this guide, you can learn how to use and interact with **time series collections** in
+MongoDB using the {+driver-long+}.
 
 Time series collections efficiently store sequences of measurements over
 a period of time. Time series data consists of any data collected over
@@ -48,10 +50,9 @@ method:
 - The name of the new collection to create
 - The `TimeSeriesOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TimeSeriesOptions.html>`__  for creating the collection in a `CreateCollectionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CreateCollectionOptions.html>`__ object
 
-.. literalinclude:: 
-   :start-after: begin time series
-   :end-before: end time series
-   :emphasize-lines: 5
+.. literalinclude:: /includes/fundamentals/code-snippets/TimeSeries.cs
+   :start-after: begin-time-series
+   :end-before: end-time-series
    :language: csharp
    :dedent:
 
@@ -62,34 +63,34 @@ method:
 To check if you successfully created the collection, send the
 ``"listCollections"`` command to the `runCommand() <{+api+}/apidocs/mongodb-driver-sync/com/mongodb/client/MongoDatabase.html#runCommand(org.bson.conversions.Bson)>`__ method.
 
-.. literalinclude:: /includes/fundamentals/code-snippets/TimeSeries.java
-   :start-after: begin check collection type
-   :end-before: end check collection type
-   :emphasize-lines: 1
-   :language: java
+.. literalinclude:: /includes/fundamentals/code-snippets/TimeSeries.cs
+   :start-after: begin-run-command
+   :end-before: end-run-command
+   :language: csharp
    :dedent:
 
 Your output should look similar to the following:
 
 .. code-block:: json
-   :emphasize-lines: 7, 10
 
-   {
-    "id": <some number>,
-    "ns": "<db name>.$cmd.listCollections",
-    "firstBatch": [
-     {
-       "name": "<time series collection name>",
-       "type": "timeseries",
-       "options": {
-        "expireAfterSeconds": <some number>,
-         "timeseries": { ... }
-        },
+    {
+    "cursor":{
         ...
-      },
-      ...
-    ]
-   }
+        "firstBatch":[
+            {
+                "name":"september2021",
+                "type":"timeseries",
+                "options":{
+                "timeseries":{
+                    ...
+                }
+                },
+                "info":{
+                "readOnly":false
+                }
+            },
+    ...   
+    }
 
 Query a Time Series Collection
 ------------------------------

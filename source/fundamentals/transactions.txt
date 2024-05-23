@@ -52,13 +52,12 @@ instantiating a new client each time.
 Methods
 -------
 
-Create an ``IClientSession`` by using either the ``StartSession()`` or
-``StartSessionAsync()`` methods on your ``MongoClient`` instance, depending on your
-application's usecase. You can then modify the session state by using the method set
+Create an ``IClientSession`` by using either the synchronous ``StartSession()`` or
+the asynchronous ``StartSessionAsync()`` method on your ``MongoClient`` instance. 
+You can then modify the session state by using the method set
 provided by the ``IClientSession`` interface. Select from the following
 :guilabel:`Synchronous Methods` and :guilabel:`Asynchronous Methods`
-tabs to learn about the methods to manage your transaction that correspond to each
-framework:
+tabs to learn about the methods to manage your transaction:
 
 .. tabs::
 
@@ -181,8 +180,8 @@ Example
 -------
 
 This example shows how you can create a session, create a
-transaction, and commit an insert operation into multiple collections through
-the following steps:
+transaction, and insert documents into multiple collections within the transaction
+through the following steps:
 
 1. Create a session from the client by using the ``StartSession()`` method.
 #. Use the ``StartTransaction()`` method to start a transaction.
@@ -225,4 +224,4 @@ guide, see the following API Documentation:
 - `AbortTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransaction.html>`__ / `AbortTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransactionAsync.html>`__
 - `CommitTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransaction.html>`__ / `CommitTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransactionAsync.html>`__
 - `WithTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransaction.html>`__ / `WithTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransactionAsync.html>`__
-- `TransactionOptions() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html>`__
+- `TransactionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html>`__

@@ -4,8 +4,6 @@
 Time Series Collections
 =======================
 
-.. default-domain:: mongodb
-
 .. contents:: On this page
    :local:
    :backlinks: none
@@ -43,12 +41,15 @@ measurement.
 Create a Time Series Collection
 -------------------------------
 
-To create a time series collection, pass the following parameters to the
-`CreateCollection() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoDatabase.CreateCollection.html>`__
-method:
+.. important::
 
-- The name of the new collection to create
-- The `TimeSeriesOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TimeSeriesOptions.html>`__  for creating the collection in a `CreateCollectionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CreateCollectionOptions.html>`__ object
+   Time series collections require MongoDB 5.0 or later.
+
+To create a time series collection, pass the following parameters to the
+``CreateCollection()`` method:
+
+- Name of the new collection to create
+- A ``CreateCollectionOptions`` object that contains a ``TimeSeriesOptions`` object
 
 .. literalinclude:: /includes/fundamentals/code-examples/TimeSeries.cs
    :start-after: begin-time-series
@@ -56,12 +57,8 @@ method:
    :language: csharp
    :dedent:
 
-.. important::
-
-   Time series collections require MongoDB 5.0 or later.
-
 To check if you successfully created the collection, send the
-``"listCollections"`` command to the `RunCommand() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoDatabase.RunCommand.html>`__ method.
+``"listCollections"`` command to the ``RunCommand()`` method.
 
 .. literalinclude:: /includes/fundamentals/code-examples/TimeSeries.cs
    :start-after: begin-run-command
@@ -95,6 +92,25 @@ Your output will look similar to the following:
 Query a Time Series Collection
 ------------------------------
 
-To query a time series collection, use the same conventions as you
-would for :doc:`retrieving </fundamentals/crud/read-operations/retrieve>`
-and aggregating data.
+To query a time series collection, follow the conventions for 
+:doc:`retrieving </fundamentals/crud/read-operations/retrieve>` and aggregating data.
+
+Additional Information
+----------------------
+
+To learn more about the operations mentioned, see the following
+guides:
+
+- :ref:`manual-timeseries-collection`
+- :ref:`manual-timeseries-collection-limitations`
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+To learn more about any of the methods or types discussed in this
+guide, see the following API Documentation:
+
+- `CreateCollection() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoDatabase.CreateCollection.html>`__
+- `CreateCollectionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CreateCollectionOptions.html>`__
+- `TimeSeriesOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TimeSeriesOptions.html>`__
+- `RunCommand() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoDatabase.RunCommand.html>`__

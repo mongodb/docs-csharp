@@ -63,7 +63,7 @@ method:
 To check if you successfully created the collection, send the
 ``"listCollections"`` command to the `RunCommand() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoDatabase.RunCommand.html>`__ method.
 
-.. literalinclude:: /includes/fundamentals/code-snippets/TimeSeries.cs
+.. literalinclude:: /includes/fundamentals/code-examples/TimeSeries.cs
    :start-after: begin-run-command
    :end-before: end-run-command
    :language: csharp

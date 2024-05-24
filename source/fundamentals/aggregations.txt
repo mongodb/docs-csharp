@@ -39,7 +39,7 @@ stages** are the assembly stations, and **operator expressions** are the
 specialized tools.
 
 Aggregation Versus Find Operations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use find operations to perform the following actions:
 
@@ -72,7 +72,7 @@ using aggregation operations:
      a strict memory limit of 100 megabytes and will ignore the ``AllowDiskUse`` property.
 
 Aggregation Example
------------------
+-------------------
 
 .. note::
   

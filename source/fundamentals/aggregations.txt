@@ -142,5 +142,5 @@ following API documentation:
 
 - `Aggregate() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.Aggregate.html>`__
 - `AggregateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateOptions.html>`__
-- `$group <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateFluentBase-1.Group.html}>`__
+- `$group <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateFluentBase-1.Group.html>`__
 - `$match <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateFluentBase-1.Match.html>`__

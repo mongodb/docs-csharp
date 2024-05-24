@@ -18,6 +18,7 @@ Fundamentals
    /fundamentals/stable-api
    /fundamentals/authentication
    /fundamentals/enterprise-authentication
+   /fundamentals/aggregations
    /fundamentals/linq
    /fundamentals/bson
    /fundamentals/specify-query
@@ -33,6 +34,7 @@ Fundamentals
 - :ref:`csharp-stable-api`
 - :ref:`csharp-authentication-mechanisms`
 - :ref:`csharp-enterprise-authentication-mechanisms`
+- :ref:`csharp-aggregations`
 - :ref:`csharp-linq`
 - :ref:`csharp-bson`
 - :ref:`csharp-specify-query`

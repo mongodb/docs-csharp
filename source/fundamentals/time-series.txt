@@ -49,7 +49,7 @@ To create a time series collection, pass the following parameters to the
 ``CreateCollection()`` method:
 
 - Name of the new collection to create
-- A ``CreateCollectionOptions`` object that contains a ``TimeSeriesOptions`` object
+- ``CreateCollectionOptions`` object that contains a ``TimeSeriesOptions`` object
 
 .. literalinclude:: /includes/fundamentals/code-examples/TimeSeries.cs
    :start-after: begin-time-series
@@ -58,7 +58,8 @@ To create a time series collection, pass the following parameters to the
    :dedent:
 
 To check if you successfully created the collection, send the
-``"listCollections"`` command to the ``RunCommand()`` method.
+``"listCollections"`` command to the ``RunCommand()`` method as shown in the following
+example:
 
 .. literalinclude:: /includes/fundamentals/code-examples/TimeSeries.cs
    :start-after: begin-run-command
@@ -92,14 +93,14 @@ Your output will look similar to the following:
 Query a Time Series Collection
 ------------------------------
 
-To query a time series collection, follow the conventions for 
-:doc:`retrieving </fundamentals/crud/read-operations/retrieve>` and aggregating data.
+To query a time series collection, follow the conventions for retrieving and aggregating
+data. For more information about these conventions, see the :ref:`csharp-retrieve` guide.
 
 Additional Information
 ----------------------
 
-To learn more about the operations mentioned, see the following
-guides:
+To learn more about the operations mentioned on this page, see the following
+Server manual guides:
 
 - :ref:`manual-timeseries-collection`
 - :ref:`manual-timeseries-collection-limitations`
@@ -108,7 +109,7 @@ API Documentation
 ~~~~~~~~~~~~~~~~~
 
 To learn more about any of the methods or types discussed in this
-guide, see the following API Documentation:
+guide, see the following API documentation:
 
 - `CreateCollection() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoDatabase.CreateCollection.html>`__
 - `CreateCollectionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CreateCollectionOptions.html>`__

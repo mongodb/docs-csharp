@@ -15,15 +15,16 @@ public class Aggregation
 
         var database = mongoClient.GetDatabase("sample_restaurants");
         var collection = database.GetCollection<Restaurant>("restaurants");
-        var queryableCollection = collection.AsQueryable();
 
         // begin-aggregation
+        // Defines a queryable collection object as a prerequisite to using LINQ
+        var queryableCollection = collection.AsQueryable();
+
         // Executes the $match and $group aggregation stages
         var query = queryableCollection
                         .Where(r => r.Cuisine == "Bakery")
                         .GroupBy(r => r.Borough)
                         .Select(g => new { _id = g.Key, Count = g.Count() });
-    
 
         // Prints the aggregated results
         foreach(var result in query.ToList())
@@ -33,7 +34,8 @@ public class Aggregation
         // end-aggregation
     }
 
-    public class Restaurant {
+    public class Restaurant
+    {
         [BsonElement("borough")]
         public string Borough { get; set; }
 

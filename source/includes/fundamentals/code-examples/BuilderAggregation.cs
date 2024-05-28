@@ -43,7 +43,8 @@ public class Aggregation
         // end-aggregation
     }
 
-    public class Restaurant {
+    public class Restaurant
+    {
         [BsonElement("borough")]
         public string Borough { get; set; }
 

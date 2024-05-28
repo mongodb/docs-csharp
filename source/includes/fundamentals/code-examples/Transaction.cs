@@ -22,18 +22,22 @@ public class BookTransaction
         var films = database.GetCollection<Film>("films");
         
         // Begins transaction
-        using (var session = mongoClient.StartSession()) {
+        using (var session = mongoClient.StartSession())
+        {
             session.StartTransaction();
 
-            try {
+            try
+            {
                 // Creates sample data
-                var book = new Book {
+                var book = new Book
+                {
                     Title = "Beloved",
                     Author = "Toni Morrison",
                     InStock = true
                 };
 
-                var film = new Film {
+                var film = new Film
+                {
                     Title = "Star Wars",
                     Director = "George Lucas",
                     InStock = true
@@ -45,7 +49,9 @@ public class BookTransaction
 
                 // Commits our transaction
                 session.CommitTransaction();
-            } catch (Exception e) {
+            } 
+            catch (Exception e)
+            {
                 Console.WriteLine("Error writing to MongoDB: " + e.Message);
                 return;
             }

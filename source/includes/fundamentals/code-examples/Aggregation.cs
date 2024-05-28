@@ -17,7 +17,8 @@ public class Aggregation
 
         // begin-aggregation
         // Defines our $match and $group aggregation stages
-        var matchStage = new BsonDocument {
+        var matchStage = new BsonDocument
+        {
             {
                 "$match", new BsonDocument {
                     { "cuisine", "Bakery" }
@@ -25,7 +26,8 @@ public class Aggregation
             }
         };
 
-        var groupStage = new BsonDocument {
+        var groupStage = new BsonDocument
+        {
             {
                 "$group", new BsonDocument {
                     { "_id", "$borough" },
@@ -39,7 +41,8 @@ public class Aggregation
         var results = collection.Aggregate<BsonDocument>(pipeline).ToList();
 
         // Prints the aggregated results
-        foreach(BsonDocument result in results) {
+        foreach(BsonDocument result in results)
+        {
             Console.WriteLine(result);
         }
         // end-aggregation

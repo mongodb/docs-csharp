@@ -18,7 +18,7 @@ Fundamentals
    /fundamentals/stable-api
    /fundamentals/authentication
    /fundamentals/enterprise-authentication
-   /fundamentals/aggregations
+   /fundamentals/aggregation
    /fundamentals/linq
    /fundamentals/bson
    /fundamentals/specify-query

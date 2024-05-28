@@ -62,7 +62,8 @@ public class BookTransaction
         // end-transaction
     }
 
-    public static void Setup(IMongoDatabase database) {
+    public static void Setup(IMongoDatabase database)
+    {
         database.DropCollection("books");
         database.CreateCollection("books");
 

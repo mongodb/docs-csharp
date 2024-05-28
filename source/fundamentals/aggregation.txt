@@ -92,14 +92,14 @@ performing aggregation operations:
 Aggregation Example
 -------------------
 
+To perform an aggregation, pass a list of aggregation stages to the
+``IMongoCollection<TDocument>.Aggregate()`` method.
+
 .. note::
   
   This example uses the ``sample_restaurants.restaurants`` collection
   from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
   free MongoDB Atlas cluster and load the sample datasets, see :ref:`csharp-quickstart`.
-
-To perform an aggregation, pass a list of aggregation stages to the
-``IMongoCollection<TDocument>.Aggregate()`` method.
 
 The following code example produces a count of the number of bakeries in each borough
 of New York. To do so, it uses an aggregation pipeline with the following stages:
@@ -111,80 +111,80 @@ of New York. To do so, it uses an aggregation pipeline with the following stages
   documents by the ``borough`` field, accumulating a count of documents for each distinct value
   of that field.
 
-We have provided three versions of this example that each provide different approaches to
-defining the aggregation stages used in the example pipeline. The first uses 
-``BsonDocument`` objects, the second uses LINQ, and the third uses builders.
+The following sections contain versions of this example that each provide different 
+approaches to creating and combining the aggregation stages used in the example pipeline. 
 
-.. tabs::
+LINQ Approach
+~~~~~~~~~~~~~
 
-   .. tab:: ``BsonDocument`` approach
-      :tabid: bsondocument
+.. io-code-block::
 
-      .. io-code-block::
+   .. input:: /includes/fundamentals/code-examples/LinqAggregation.cs
+      :language: csharp
+      :dedent:
+      :start-after: begin-aggregation
+      :end-before: end-aggregation
+   
+   .. output::
+      :language: console
+      :visible: false
 
-         .. input:: /includes/fundamentals/code-examples/Aggregation.cs
-            :language: csharp
-            :dedent:
-            :start-after: begin-aggregation
-            :end-before: end-aggregation
-      
-         .. output::
-            :language: console
-            :visible: false
+      { _id = Bronx, Count = 71 }
+      { _id = Brooklyn, Count = 173 }
+      { _id = Staten Island, Count = 20 }
+      { _id = Missing, Count = 2 }
+      { _id = Manhattan, Count = 221 }
+      { _id = Queens, Count = 204 }
 
-            { "_id" : "Brooklyn", "count" : 173 }
-            { "_id" : "Manhattan", "count" : 221 }
-            { "_id" : "Bronx", "count" : 71 }
-            { "_id" : "Missing", "count" : 2 }
-            { "_id" : "Staten Island", "count" : 20 }
-            { "_id" : "Queens", "count" : 204 }
+To learn more about using LINQ to construct aggregation pipelines, see the
+:ref:`csharp-linq` guide.      
 
-   .. tab:: LINQ approach
-      :tabid: linq
+Builders Approach
+~~~~~~~~~~~~~~~~~
 
-      .. io-code-block::
+.. io-code-block::
 
-         .. input:: /includes/fundamentals/code-examples/LinqAggregation.cs
-            :language: csharp
-            :dedent:
-            :start-after: begin-aggregation
-            :end-before: end-aggregation
-         
-         .. output::
-            :language: console
-            :visible: false
+   .. input:: /includes/fundamentals/code-examples/BuilderAggregation.cs
+      :language: csharp
+      :dedent:
+      :start-after: begin-aggregation
+      :end-before: end-aggregation
+   
+   .. output::
+      :language: console
+      :visible: false
 
-            { _id = Bronx, Count = 71 }
-            { _id = Brooklyn, Count = 173 }
-            { _id = Staten Island, Count = 20 }
-            { _id = Missing, Count = 2 }
-            { _id = Manhattan, Count = 221 }
-            { _id = Queens, Count = 204 }
+      { _id = Bronx, Count = 71 }
+      { _id = Brooklyn, Count = 173 }
+      { _id = Staten Island, Count = 20 }
+      { _id = Missing, Count = 2 }
+      { _id = Manhattan, Count = 221 }
+      { _id = Queens, Count = 204 }
 
-   .. tab:: Builders approach
-      :tabid: builders
+To learn more about using builders to construct aggregation pipelines,
+see the :ref:`csharp-builders-aggregation` section of the Operations with Builders guide.       
 
-      .. io-code-block::
+BsonDocument Approach
+~~~~~~~~~~~~~~~~~~~~~
 
-         .. input:: /includes/fundamentals/code-examples/BuilderAggregation.cs
-            :language: csharp
-            :dedent:
-            :start-after: begin-aggregation
-            :end-before: end-aggregation
-         
-         .. output::
-            :language: console
-            :visible: false
+.. io-code-block::
 
-            { _id = Bronx, Count = 71 }
-            { _id = Brooklyn, Count = 173 }
-            { _id = Staten Island, Count = 20 }
-            { _id = Missing, Count = 2 }
-            { _id = Manhattan, Count = 221 }
-            { _id = Queens, Count = 204 }      
+   .. input:: /includes/fundamentals/code-examples/Aggregation.cs
+      :language: csharp
+      :dedent:
+      :start-after: begin-aggregation
+      :end-before: end-aggregation
 
-To learn more about using LINQ and Builders to construct aggregation pipelines,
-see :ref:`csharp-linq` and :ref:`Builders <csharp-builders-aggregation>`.
+   .. output::
+      :language: console
+      :visible: false
+
+      { "_id" : "Brooklyn", "count" : 173 }
+      { "_id" : "Manhattan", "count" : 221 }
+      { "_id" : "Bronx", "count" : 71 }
+      { "_id" : "Missing", "count" : 2 }
+      { "_id" : "Staten Island", "count" : 20 }
+      { "_id" : "Queens", "count" : 204 }
 
 Additional Information
 ----------------------

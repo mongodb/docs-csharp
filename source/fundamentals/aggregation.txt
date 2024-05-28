@@ -28,35 +28,56 @@ return computed results. The MongoDB Aggregation framework is modeled on the
 concept of data processing pipelines. Documents enter a pipeline comprised of one or
 more stages, and this pipeline transforms the documents into an aggregated result.
 
-An aggregation operation is similar to a car factory. A car factory has
-an assembly line, which contains assembly stations with specialized
-tools to do specific jobs, like drills and welders. Raw parts enter the
-factory, and then the assembly line transforms and assembles them into a
-finished product.
+Analogy
+~~~~~~~
 
-The **aggregation pipeline** is the assembly line, **aggregation
-stages** are the assembly stations, and **operator expressions** are the
-specialized tools.
+Aggregation operations function similarly to car factories with assembly
+lines. The assembly lines have stations with specialized tools to
+perform specific tasks. For example, when building a car, the assembly
+line begins with the frame. Then, as the car frame moves through the
+assembly line, each station assembles a separate part. The result is a
+transformed final product, the finished car.
 
-Aggregation Versus Find Operations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The assembly line represents the *aggregation pipeline*, the individual
+stations represent the *aggregation stages*, the specialized tools
+represent the *expression operators*, and the finished product
+represents the *aggregated result*.
 
-You can use find operations to perform the following actions:
+Compare Aggregation and Find Operations
+---------------------------------------
 
-- Select which documents to return
-- Select which fields to return
-- Sort the results
+The following table lists the different tasks you can perform with find
+operations, compared to what you can achieve with aggregation
+operations. The aggregation framework provides expanded functionality
+that allows you to transform and manipulate your data.
 
-You can use aggregation operations to perform the following actions:
+.. list-table::
+   :header-rows: 1
+   :widths: 50 50
 
-- Perform find operations
-- Rename fields
-- Calculate fields
-- Summarize data
-- Group values
+   * - Find Operations
+     - Aggregation Operations
+
+   * - | Select *certain* documents to return
+       | Select *which* fields to return
+       | Sort the results
+       | Limit the results
+       | Count the results
+     - | Select *certain* documents to return
+       | Select *which* fields to return
+       | Sort the results
+       | Limit the results
+       | Count the results
+       | Rename fields
+       | Compute new fields
+       | Summarize data
+       | Connect and merge data sets
+
+Server Limitations
+------------------
 
 Consider the following :manual:`limitations </core/aggregation-pipeline-limits/>` when 
-using aggregation operations:
+performing aggregation operations:
 
 - Returned documents must not violate the :manual:`BSON document size limit </reference/limits/#mongodb-limit-BSON-Document-Size>`
   of 16 megabytes.
@@ -65,10 +86,8 @@ using aggregation operations:
   the `AllowDiskUse <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateOptions.AllowDiskUse.html#MongoDB_Driver_AggregateOptions_AllowDiskUse>`__
   property of the ``AggregateOptions`` object that you pass to the ``Aggregate()`` method.
 
-  .. important:: ``$graphLookup`` exception
-
-     The :manual:`$graphLookup </reference/operator/aggregation/graphLookup/>` stage has
-     a strict memory limit of 100 megabytes and will ignore the ``AllowDiskUse`` property.
+- The :manual:`$graphLookup </reference/operator/aggregation/graphLookup/>` stage has
+  a strict memory limit of 100 megabytes and ignores the ``AllowDiskUse`` property.
 
 Aggregation Example
 -------------------
@@ -77,7 +96,7 @@ Aggregation Example
   
   This example uses the ``sample_restaurants.restaurants`` collection
   from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
-  free MongoDB Atlas cluster and load the sample datasets, see :ref:`<csharp-quickstart>`.
+  free MongoDB Atlas cluster and load the sample datasets, see :ref:`csharp-quickstart`.
 
 To perform an aggregation, pass a list of aggregation stages to the
 ``IMongoCollection<TDocument>.Aggregate()`` method.
@@ -89,45 +108,94 @@ of New York. To do so, it uses an aggregation pipeline with the following stages
   ``cuisine`` field contains the value ``"Bakery"``.
 
 - A :manual:`$group </reference/operator/aggregation/group/>` stage to group the matching
-  documents by the ``borough`` field, accumulating a count of documents for each distinct value.
+  documents by the ``borough`` field, accumulating a count of documents for each distinct value
+  of that field.
 
-.. io-code-block::
+.. tabs::
 
-   .. input:: /includes/fundamentals/code-examples/Aggregation.cs
-      :language: csharp
-      :dedent:
-      :start-after: begin-aggregation
-      :end-before: end-aggregation
-  
-   .. output::
-      :language: console
-      :visible: false
+   .. tab:: ``BsonDocument`` approach
+      :tabid: bsondocument
 
-      { "_id" : "Brooklyn", "count" : 173 }
-      { "_id" : "Manhattan", "count" : 221 }
-      { "_id" : "Bronx", "count" : 71 }
-      { "_id" : "Missing", "count" : 2 }
-      { "_id" : "Staten Island", "count" : 20 }
-      { "_id" : "Queens", "count" : 204 }
+      .. io-code-block::
+
+         .. input:: /includes/fundamentals/code-examples/Aggregation.cs
+            :language: csharp
+            :dedent:
+            :start-after: begin-aggregation
+            :end-before: end-aggregation
+      
+         .. output::
+            :language: console
+            :visible: false
+
+            { "_id" : "Brooklyn", "count" : 173 }
+            { "_id" : "Manhattan", "count" : 221 }
+            { "_id" : "Bronx", "count" : 71 }
+            { "_id" : "Missing", "count" : 2 }
+            { "_id" : "Staten Island", "count" : 20 }
+            { "_id" : "Queens", "count" : 204 }
+
+   .. tab:: LINQ approach
+      :tabid: linq
+
+      .. io-code-block::
+
+         .. input:: /includes/fundamentals/code-examples/LinqAggregation.cs
+            :language: csharp
+            :dedent:
+            :start-after: begin-aggregation
+            :end-before: end-aggregation
+         
+         .. output::
+            :language: console
+            :visible: false
+
+            { _id = Bronx, Count = 71 }
+            { _id = Brooklyn, Count = 173 }
+            { _id = Staten Island, Count = 20 }
+            { _id = Missing, Count = 2 }
+            { _id = Manhattan, Count = 221 }
+            { _id = Queens, Count = 204 }
+
+   .. tab:: Builders approach
+      :tabid: builders
+
+      .. io-code-block::
+
+         .. input:: /includes/fundamentals/code-examples/BuilderAggregation.cs
+            :language: csharp
+            :dedent:
+            :start-after: begin-aggregation
+            :end-before: end-aggregation
+         
+         .. output::
+            :language: console
+            :visible: false
+
+            { _id = Bronx, Count = 71 }
+            { _id = Brooklyn, Count = 173 }
+            { _id = Staten Island, Count = 20 }
+            { _id = Missing, Count = 2 }
+            { _id = Manhattan, Count = 221 }
+            { _id = Queens, Count = 204 }      
+
+To learn more about using LINQ and builders to construct aggregation pipelines,
+see :ref:`csharp-linq` and :ref:`csharp-builders-aggregation`.
 
 Additional Information
 ----------------------
-
-LINQ
-~~~~
-To learn about using LINQ to construct aggregation pipelines, see :ref:`csharp-linq`.
 
 MongoDB Server Manual
 ~~~~~~~~~~~~~~~~~~~~~
 
 To view a full list of expression operators, see 
-:manual:`Aggregation Operators. </reference/operator/aggregation/>`
+:manual:`Aggregation Operators </reference/operator/aggregation/>`.
 
 To learn more about assembling an aggregation pipeline and view examples, see
-:manual:`Aggregation Pipeline. </core/aggregation-pipeline/>`
+:manual:`Aggregation Pipeline </core/aggregation-pipeline/>`.
 
 To learn more about creating pipeline stages, see 
-:manual:`Aggregation Stages. </reference/operator/aggregation-pipeline/>`
+:manual:`Aggregation Stages </reference/operator/aggregation-pipeline/>`.
 
 To learn about explaining MongoDB aggregation operations, see
 :manual:`Explain Results </reference/explain-results/>` and
@@ -141,5 +209,5 @@ following API documentation:
 
 - `Aggregate() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.Aggregate.html>`__
 - `AggregateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateOptions.html>`__
-- `$group <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateFluentBase-1.Group.html>`__
-- `$match <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateFluentBase-1.Match.html>`__
+- `Group() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateFluentBase-1.Group.html>`__
+- `Match() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateFluentBase-1.Match.html>`__

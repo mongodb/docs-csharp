@@ -16,7 +16,7 @@ public class Aggregation
         var collection = database.GetCollection<BsonDocument>("restaurants");
 
         // begin-aggregation
-        // Defines our $match and $group aggregation stages
+        // Defines the $match and $group aggregation stages
         var matchStage = new BsonDocument
         {
             {

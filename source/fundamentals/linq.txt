@@ -10,6 +10,13 @@ LINQ
    :depth: 2
    :class: singlecol
 
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: code example, query, aggregation
+
 
 Overview
 --------
@@ -645,4 +652,3 @@ uses a scalar operation, then prints the translated query:
    ``LoggedStages`` is not thread-safe. Executing a query and accessing the
    associated ``LoggedStages`` property from multiple threads might have
    non-deterministic results.
-   

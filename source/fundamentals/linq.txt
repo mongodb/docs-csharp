@@ -587,7 +587,7 @@ View Translated Queries
 -----------------------
 
 When you run a LINQ query, the {+driver-short+} automatically translates your
-query into an aggregation pipeline using the {+query-api+}. You can view
+query into an aggregation pipeline written with the {+query-api+}. You can view
 the translated query by using the ``ToString()`` method or the
 ``LoggedStages`` property.
 
@@ -602,6 +602,7 @@ the translated query:
    .. input::
       :language: csharp
 
+       var queryableCollection = _restaurantsCollection.AsQueryable();
        var query = queryableCollection
              .Where(r => r.Name == "The Movable Feast");
 
@@ -633,6 +634,7 @@ uses a scalar operation, then prints the translated query:
 
    .. input::
       :language: csharp
+      :emphasize-lines: 6
 
 
       var queryableCollection = _restaurantsCollection.AsQueryable();

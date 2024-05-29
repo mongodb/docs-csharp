@@ -188,8 +188,12 @@ The error message consists of multiple parts:
 Should I Use LINQ or Builder Classes When Querying for Documents?
 -----------------------------------------------------------------
 
-If you define your documents using C# classes, use LINQ. If you use the
-``BsonDocument`` class to represent your documents, use builders. 
+If you're used to programming in C#, consider using LINQ because of its similar feel
+to programming in native C#. If you have prior experience with other MongoDB drivers,
+consider using Builder classes because of its consistency with other drivers.
+
+We encourage experimenting with both approaches to determine the most suitable framework
+for your purposes.
 
 .. _csharp-faq-unsupported-expressions:
 

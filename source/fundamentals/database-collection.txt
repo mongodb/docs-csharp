@@ -4,6 +4,13 @@
 Databases and Collections
 =========================
 
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: access data, delete data, organize connections
+
 .. contents:: On this page
    :local:
    :backlinks: none
@@ -30,20 +37,22 @@ Access a Database
 You can access a database by retrieving an `IMongoDatabase
 <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoDatabase.html>`__
 instance from your ``IMongoClient`` instance. You can use
-an ``IMongoDatabase`` instance to perform database-level operations and access
+the returned ``IMongoDatabase`` instance to perform database-level operations and access
 collections that the database contains.
 
-Call the `GetDatabase()
+To create an ``IMongoDatabase``, call the `GetDatabase()
 <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoClient.GetDatabase.html>`__
 method on an `IMongoClient
 <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoClient.html>`__
-instance to create an ``IMongoDatabase``, passing the database name as a
-parameter.
+instance, passing the database name as a
+parameter. You can also pass an optional `MongoDatabaseSettings
+<{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoDatabaseSettings.html>`__
+as a parameter to customize how you access a database.
 
 If you pass the name of a nonexistent database to the ``GetDatabase()``
 method, the driver still returns an
 ``IMongoDatabase`` instance. When you insert any data into a collection in this
-database, the server creates the collection at that time.
+database, the server creates the database and collection at that time.
 
 The following example creates a client, then uses the ``GetDatabase()``
 method to access a database called ``test_db``:
@@ -141,9 +150,12 @@ You can access a collection by retrieving an `IMongoCollection
 <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.html>`__
 instance from your database. You can use an ``IMongoCollection``
 instance to perform data operations,
-create aggregations, and manage indexes. Call the `GetCollection()
+create aggregations, and manage indexes. To retrieve an
+``IMongoCollection``, call the `GetCollection()
 <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoDatabase.GetCollection.html>`__
-method on an ``IMongoDatabase`` instance to retrieve an ``IMongoCollection``.
+method on an ``IMongoDatabase`` instance.  You can also pass an optional `MongoCollectionSettings
+<{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCollectionSettings.html>`__
+as a parameter to customize how you access a collection.
 
 If you pass the name of a nonexistent collection to this method, the
 driver still returns an ``IMongoCollection`` instance. When you insert
@@ -152,23 +164,12 @@ explicitly create a collection, see the :ref:`Create a Collection
 <csharp-create-collection>` section of this guide.
 
 This example uses the ``GetCollection()`` method to
-perform the following actions:
-
-- Access a collection called ``coll_xyz`` from a database referenced by
-  the ``myDB`` variable
-- Set a write concern on the collection in the ``MongoCollectionSettings`` type
+access a collection called ``coll_xyz`` from a database referenced by
+the ``myDB`` variable:
 
 .. code-block:: csharp
 
-   var settings = new MongoCollectionSettings
-   {
-       WriteConcern = WriteConcern.WMajority
-   };
-
-   var myColl = myDB.GetCollection<BsonDocument>("coll_xyz", settings);
-
-To learn more about write concerns, see :manual:`Write Concern </reference/write-concern/>` in
-the Server manual.
+   var myColl = myDB.GetCollection<BsonDocument>("coll_xyz");
 
 .. _csharp-coll-parameterization:
 
@@ -216,9 +217,6 @@ optional `CreateCollectionOptions
 parameters. You can then access the created collection to perform data
 operations, create aggregations, and manage indexes.
 
-The following code shows how to create a collection called ``coll_abc``
-within a database referenced by the ``myDB`` variable:
-
 The following code shows how to use the asynchronous
 ``CreateCollectionAsync()`` method or the synchronous
 ``CreateCollection()`` method to create a collection called
@@ -240,7 +238,7 @@ The following code shows how to use the asynchronous
       .. code-block:: csharp
          :copyable: true
          
-        myDB.CreateCollection("coll_abc");
+         myDB.CreateCollection("coll_abc");
 
 List Collections
 ----------------
@@ -292,8 +290,7 @@ collection. To drop a collection, call the asynchronous `DropCollectionAsync()
 <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoDatabase.DropCollectionAsync.html>`__ method or the
 synchronous `DropCollection()
 <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoDatabase.DropCollection.html>`__
-method on your ``IMongoCollection`` instance. The following code shows
-how to drop a collection referenced by the ``myColl`` variable:
+method on your ``IMongoCollection`` instance.
 
 The following code shows how to use the asynchronous
 ``DropCollectionAsync()`` method or the synchronous ``DropCollection()`` method to

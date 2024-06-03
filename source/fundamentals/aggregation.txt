@@ -68,6 +68,7 @@ that allows you to transform and manipulate your data.
        | Sort the results
        | Limit the results
        | Count the results
+       | Group the results
        | Rename fields
        | Compute new fields
        | Summarize data

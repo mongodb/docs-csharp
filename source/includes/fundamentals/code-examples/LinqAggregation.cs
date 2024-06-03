@@ -20,14 +20,14 @@ public class Aggregation
         // Defines a queryable collection object as a prerequisite to using LINQ
         var queryableCollection = collection.AsQueryable();
 
-        // Executes the $match and $group aggregation stages
+        // Defines the query with $match and $group stages
         var query = queryableCollection
-                        .Where(r => r.Cuisine == "Bakery")
-                        .GroupBy(r => r.Borough)
-                        .Select(g => new { _id = g.Key, Count = g.Count() });
+            .Where(r => r.Cuisine == "Bakery")
+            .GroupBy(r => r.Borough)
+            .Select(g => new { _id = g.Key, Count = g.Count() });
 
-        // Prints the aggregated results
-        foreach(var result in query.ToList())
+        // Executes the query and prints the aggregated results
+        foreach (var result in query.ToList())
         {
             Console.WriteLine(result);
         }

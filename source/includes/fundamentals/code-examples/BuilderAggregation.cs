@@ -36,7 +36,7 @@ public class Aggregation
         var results = collection.Aggregate(pipeline).ToList();
 
         // Prints the aggregated results
-        foreach(var result in results)
+        foreach (var result in results)
         {
             Console.WriteLine(result);
         }

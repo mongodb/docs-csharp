@@ -20,7 +20,9 @@ public class Aggregation
         var matchStage = new BsonDocument
         {
             {
-                "$match", new BsonDocument {
+                "$match",
+                new BsonDocument
+                {
                     { "cuisine", "Bakery" }
                 }
             }
@@ -29,7 +31,9 @@ public class Aggregation
         var groupStage = new BsonDocument
         {
             {
-                "$group", new BsonDocument {
+                "$group",
+                new BsonDocument
+                {
                     { "_id", "$borough" },
                     { "count", new BsonDocument("$sum", 1) }
                 }
@@ -37,11 +41,11 @@ public class Aggregation
         };
 
         // Executes the aggregation pipeline
-        var pipeline = new BsonDocument[] { matchStage, groupStage };
+        var pipeline = new[] { matchStage, groupStage };
         var results = collection.Aggregate<BsonDocument>(pipeline).ToList();
 
         // Prints the aggregated results
-        foreach(BsonDocument result in results)
+        foreach (BsonDocument result in results)
         {
             Console.WriteLine(result);
         }

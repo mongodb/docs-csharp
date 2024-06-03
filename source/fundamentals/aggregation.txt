@@ -103,7 +103,7 @@ To perform an aggregation, pass a list of aggregation stages to the
   free MongoDB Atlas cluster and load the sample datasets, see :ref:`csharp-quickstart`.
 
 The following code example produces a count of the number of bakeries in each borough
-of New York. To do so, it uses an aggregation pipeline with the following stages:
+of New York City. To do so, it uses an aggregation pipeline that contains the following stages:
 
 - A :manual:`$match </reference/operator/aggregation/match/>` stage to filter for documents whose
   ``cuisine`` field contains the value ``"Bakery"``.
@@ -112,8 +112,8 @@ of New York. To do so, it uses an aggregation pipeline with the following stages
   documents by the ``borough`` field, accumulating a count of documents for each distinct value
   of that field.
 
-The following sections contain versions of this example that each provide different 
-approaches to creating and combining the aggregation stages used in the example pipeline. 
+The following sections implement this example by using LINQ, Builders, and BsonDocument
+approaches to create and combine the aggregation stages used in the example pipeline.
 
 LINQ Approach
 ~~~~~~~~~~~~~

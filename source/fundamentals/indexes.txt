@@ -140,7 +140,7 @@ created in the preceding code snippet:
 For more information, see :manual:`Compound Indexes </core/index-compound>` in the Server manual.
 
 Multikey Indexes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 **Multikey indexes**  are indexes that improve performance for queries that specify a
 field with an index that contains an array value. You can define a multikey index using

@@ -14,17 +14,17 @@ Indexes
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 3
+   :depth: 2
    :class: singlecol
 
 Overview
 --------
 
-In this guide, you can learn how to use indexes with the {+driver-long}. Indexes can
-improve the efficiency of queries and add additional functionality to querying and storing
+In this guide, you can learn how to use indexes with the {+driver-long+}. Indexes can
+improve the efficiency of queries and add functionality to querying and storing
 documents.
 
-Without indexes, MongoDB must scan every document in a collection to find the documents
+Without indexes, MongoDB must scan *every* document in a collection to find the documents
 that match each query. These collection scans are slow and can negatively affect the
 performance of your application. However, if an appropriate index exists for a query,
 MongoDB can use the index to limit the documents it must inspect.
@@ -32,21 +32,20 @@ MongoDB can use the index to limit the documents it must inspect.
 Query Coverage and Performance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When you execute a query against MongoDB, your query can include three
-parts:
+When you execute a query against MongoDB, your query can include various
+elements:
 
-- Query criteria that specify one or more fields and values that you are looking for
+- Query criteria that specify fields and values that you are looking for
 - Options that affect the query's execution, such as read concern
-- Projection criteria to specify the fields you want MongoDB to return (optional)
+- Projection criteria to specify the fields you want MongoDB to return
+- Sort criteria to specify the order of documents returned from MongoDB
 
-When all the fields specified in the query criteria and projection of a
-query are indexed, MongoDB returns results directly from the index
-without scanning any documents in the collection or loading them into
-memory.
+When all the fields specified in the query, projection, and sort are in the same index,
+MongoDB returns results directly from that index, also called a **covered query**.
 
 For more information on how to ensure your index covers your query
 criteria and projection, see the MongoDB manual articles on
-:manual:`query coverage </core/query-optimization/#read-operations-covered-query>`
+:manual:`query coverage </core/query-optimization/#covered-query>`
 and :manual:`index intersection </core/index-intersection>`.
 
 Operational Considerations
@@ -94,7 +93,8 @@ Single Field Indexes
    The ``_id_`` index is an example of a single-field index. This index is automatically
    created on the ``_id`` field when a new collection is created.
 
-The following example creates an index in ascending order on the ``title`` field:
+The following example creates an index in ascending order on the ``title`` field within
+the ``sample_mflix.movies`` collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/Indexes.cs
    :language: csharp
@@ -119,11 +119,8 @@ Compound Indexes
  **Compound indexes**  hold references to multiple fields within a collection's documents,
  improving query and sort performance.
 
-.. tip::
-
-   Read more about compound indexes, **index prefixes**, and sort order :manual:`here </core/index-compound/#prefixes>`.
-
-The following example creates a compound index on the ``type`` and ``rated`` fields:
+The following example creates a compound index on the ``type`` and ``rated`` fields within
+the ``sample_mflix.movies`` collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/Indexes.cs
    :language: csharp
@@ -150,7 +147,7 @@ field with an index that contains an array value. You can define a multikey inde
 the same syntax as a single field or compound index.
 
 The following example creates a compound, multikey index on the ``rated``, ``genres``
-(an array of Strings), and ``title`` fields:
+(an array of Strings), and ``title`` fields within the ``sample_mflix.movies`` collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/Indexes.cs
    :language: csharp
@@ -219,7 +216,8 @@ creating the index.
 Single Field
 ++++++++++++
 
-The following example creates a text index on the ``plot`` field:
+The following example creates a text index on the ``plot`` field within the
+``sample_mflix.movies`` collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/Indexes.cs
    :language: csharp
@@ -244,7 +242,7 @@ index. A text search runs on all the text fields within the compound
 index.
 
 The following snippet creates a compound text index for the ``title`` and ``genre``
-fields:
+fields within the ``sample_mflix.movies`` collection:
 
 .. code-block:: csharp
 
@@ -267,8 +265,8 @@ only **GeoJSON objects**. For more details on this type, see the MongoDB
 Server manual page on :manual:`GeoJSON objects </reference/geojson>`.
 
 The ``location.geo`` field in following sample document from the
-``theaters`` collection in the ``sample_mflix`` database is a GeoJSON Point
-object that describes the coordinates of the theater:
+``sample_mflix.theaters`` collection is a GeoJSON Point object that describes the
+coordinates of the theater:
 
 .. code-block:: json
 
@@ -344,6 +342,25 @@ the following:
 
 To learn more, see :manual:`Unique Indexes </core/index-unique>` in the Server manual.
 
+Wildcard Indexes
+~~~~~~~~~~~~~~~~
+
+**Wildcard indexes** enable queries against unknown or arbitrary fields.
+These indexes can be beneficial if you are using a dynamic schema.
+
+The following example creates an ascending wildcard index on all
+values of the ``location`` field within the ``sample_mflix.theaters`` collection,
+including values nested in subdocuments and arrays:
+
+.. literalinclude:: /includes/fundamentals/code-examples/Indexes.cs
+   :language: csharp
+   :start-after: begin-wildcard-index
+   :end-before: end-wildcard-index
+   :dedent:
+
+For more information, see the :manual:`Wildcard Indexes</core/index-wildcard>` page in the
+Server manual.
+
 .. _search-indexes:
 
 Atlas Search Indexes
@@ -361,7 +378,7 @@ documentation.
    The Atlas Search Index management methods run asynchronously. The
    driver methods can return before confirming that they ran
    successfully. To determine the current status of the indexes, call the
-   `IMongoSearchIndexManager.List() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Search.IMongoSearchIndexManager.List.html>` method.
+   `IMongoSearchIndexManager.List() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Search.IMongoSearchIndexManager.List.html>`__ method.
 
 The following sections contain links to tutorials with code examples that demonstrate
 how to create and interact with Atlas Search indexes.
@@ -374,26 +391,26 @@ create an Atlas Search index on the collection. An Atlas Search
 index is a data structure that categorizes data in a searchable format.
 
 To learn how to create an Atlas Search index using the {+driver-short+}, see
-:atlas:`Create an Atlas Search Index <atlas-search/create-index/>` in the Atlas manual
+:atlas:`Create an Atlas Search Index </atlas-search/create-index/>` in the Atlas manual
 and select :guilabel:`C#` from the language dropdown.
 
 List Search Indexes
 ~~~~~~~~~~~~~~~~~~~
 
 To learn how to view a list of your Atlas Search indexes using the {+driver-short+}, see
-:atlas:`View an Atlas Search Index <atlas-search/create-index/>` in the Atlas manual
+:atlas:`View an Atlas Search Index </atlas-search/create-index/>` in the Atlas manual
 and select :guilabel:`C#` from the language dropdown.
 
 Update a Search Index
 ~~~~~~~~~~~~~~~~~~~~~
 
 To learn how to modify an existing Atlas Search index using the {+driver-short+}, see
-:atlas:`Edit an Atlas Search Index <atlas-search/edit-index/>` in the Atlas manual
+:atlas:`Edit an Atlas Search Index </atlas-search/edit-index/>` in the Atlas manual
 and select :guilabel:`C#` from the language dropdown.
 
 Drop a Search Index
 ~~~~~~~~~~~~~~~~~~~
 
 To learn how to delete an Atlas Search index using the {+driver-short+}, see
-:atlas:`Delete an Atlas Search Index <atlas-search/edit-index/>` in the Atlas manual
+:atlas:`Delete an Atlas Search Index </atlas-search/edit-index/>` in the Atlas manual
 and select :guilabel:`C#` from the language dropdown.

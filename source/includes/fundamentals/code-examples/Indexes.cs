@@ -26,6 +26,7 @@ public class Indexes
         TextIndex(movieCollection);
         GeoSpatialIndex(movieCollection);
         UniqueIndex(theaterCollection);
+        WildcardIndex(theaterCollection);
     }
 
     private static void SingleIndex(IMongoCollection<Movie> collection)
@@ -157,6 +158,15 @@ public class Indexes
         var options = new CreateIndexOptions { Unique = true };
         collection.Indexes.CreateOne("{ theaterId : -1 }", options);
         // end-unique-index
+    }
+
+    private static void WildcardIndex(IMongoCollection<Theater> collection)
+    {
+        Console.WriteLine("wildcard index");
+
+        // begin-wildcard-index
+        collection.Indexes.CreateOne("{ \"location.$**\" : 1 }");
+        // end-wildcard-index
     }
 
     public class Movie

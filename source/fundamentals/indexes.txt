@@ -387,12 +387,9 @@ Create a Search Index
 +++++++++++++++++++++
 
 Before you can perform a search on an Atlas collection, you must first
-create an Atlas Search index on the collection. An Atlas Search
-index is a data structure that categorizes data in a searchable format.
-
-To learn how to create an Atlas Search index using the {+driver-short+}, see
-:atlas:`Create an Atlas Search Index </atlas-search/create-index/>` in the Atlas manual
-and select :guilabel:`C#` from the language dropdown.
+create an Atlas Search index on the collection. To learn how to create an Atlas Search
+index using the {+driver-short+}, see:atlas:`Create an Atlas Search Index </atlas-search/create-index/>`
+in the Atlas manual and select :guilabel:`C#` from the language dropdown.
 
 List Search Indexes
 +++++++++++++++++++

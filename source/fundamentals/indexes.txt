@@ -393,7 +393,7 @@ List Search Indexes
 +++++++++++++++++++
 
 To learn how to view a list of your Atlas Search indexes using the {+driver-short+}, see
-:atlas:`View an Atlas Search Index </atlas-search/create-index/>` in the Atlas manual
+:atlas:`View an Atlas Search Index </atlas-search/view-index/>` in the Atlas manual
 and select :guilabel:`C#` from the language dropdown.
 
 Update a Search Index
@@ -407,5 +407,5 @@ Drop a Search Index
 +++++++++++++++++++
 
 To learn how to delete an Atlas Search index using the {+driver-short+}, see
-:atlas:`Delete an Atlas Search Index </atlas-search/edit-index/>` in the Atlas manual
+:atlas:`Delete an Atlas Search Index </atlas-search/delete-index/>` in the Atlas manual
 and select :guilabel:`C#` from the language dropdown.

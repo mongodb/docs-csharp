@@ -83,10 +83,10 @@ and provide sample code for creating each index type.
 Single Field Indexes
 ~~~~~~~~~~~~~~~~~~~~
 
- **Single-field indexes**  are indexes with a reference to a single field within a
- collection's documents. They improve single field query and sort performance, and support
- :manual:`TTL Indexes </core/index-ttl>` that automatically remove documents from a
- collection after a certain amount of time or at a specific clock time.
+**Single-field indexes**  are indexes with a reference to a single field within a
+collection's documents. They improve single field query and sort performance, and support
+:manual:`TTL Indexes </core/index-ttl>` that automatically remove documents from a
+collection after a certain amount of time or at a specific clock time.
 
 .. note::
 
@@ -116,8 +116,8 @@ For more information, see :manual:`Single Field Indexes </core/index-single>` in
 Compound Indexes
 ~~~~~~~~~~~~~~~~
 
- **Compound indexes**  hold references to multiple fields within a collection's documents,
- improving query and sort performance.
+**Compound indexes**  hold references to multiple fields within a collection's documents,
+improving query and sort performance.
 
 The following example creates a compound index on the ``type`` and ``rated`` fields within
 the ``sample_mflix.movies`` collection:

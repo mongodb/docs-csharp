@@ -364,7 +364,7 @@ Server manual.
 .. _search-indexes:
 
 Atlas Search Indexes
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 The Atlas Search feature enables you to perform full-text searches on collections hosted
 on MongoDB Atlas. The indexes specify the behavior of the search and which fields to
@@ -384,7 +384,7 @@ The following sections contain links to tutorials with code examples that demons
 how to create and interact with Atlas Search indexes.
 
 Create a Search Index
-~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++
 
 Before you can perform a search on an Atlas collection, you must first
 create an Atlas Search index on the collection. An Atlas Search
@@ -395,21 +395,21 @@ To learn how to create an Atlas Search index using the {+driver-short+}, see
 and select :guilabel:`C#` from the language dropdown.
 
 List Search Indexes
-~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++
 
 To learn how to view a list of your Atlas Search indexes using the {+driver-short+}, see
 :atlas:`View an Atlas Search Index </atlas-search/create-index/>` in the Atlas manual
 and select :guilabel:`C#` from the language dropdown.
 
 Update a Search Index
-~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++
 
 To learn how to modify an existing Atlas Search index using the {+driver-short+}, see
 :atlas:`Edit an Atlas Search Index </atlas-search/edit-index/>` in the Atlas manual
 and select :guilabel:`C#` from the language dropdown.
 
 Drop a Search Index
-~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++
 
 To learn how to delete an Atlas Search index using the {+driver-short+}, see
 :atlas:`Delete an Atlas Search Index </atlas-search/edit-index/>` in the Atlas manual

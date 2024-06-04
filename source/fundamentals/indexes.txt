@@ -65,12 +65,12 @@ index planning.
 For more information on designing your data model and choosing indexes
 appropriate for your application, see the Server documentation on
 :manual:`Indexing Strategies </applications/indexes>` and
-:manual:`Data Modeling and Indexes </core/data-model-operations/#data-model-indexes>`.
+:manual:`Data Modeling and Indexes </core/data-model-operations/#indexes>`.
 
 Index Types
 -----------
 
-MongoDB supports several different index types to support querying
+MongoDB provides several different index types to support querying
 your data. The following sections describe the most common index types
 and provide sample code for creating each index type.
 
@@ -139,7 +139,7 @@ created in the preceding code snippet:
 
 For more information, see :manual:`Compound Indexes </core/index-compound>` in the Server manual.
 
-Multikey Indexes (Indexes on Array Fields)
+Multikey Indexes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Multikey indexes**  are indexes that improve performance for queries that specify a
@@ -248,10 +248,8 @@ fields within the ``sample_mflix.movies`` collection:
 
     collection.Indexes.CreateOne("{ title : \"text\", genre: \"text\" }");
 
-For more information, see the following Server Manual Entries:
-
-- :manual:`Compound Text Index Restrictions </core/index-text/#std-label-text-index-compound>`
-- :manual:`Text Indexes </core/index-text>`
+For more information, see :manual:`Compound Text Index Restrictions </core/index-text/#std-label-text-index-compound>`
+and :manual:`Text Indexes </core/index-text>` in the Server manual.
 
 Geospatial Indexes
 ~~~~~~~~~~~~~~~~~~
@@ -264,7 +262,7 @@ To create a 2dsphere index, you must specify a field that contains
 only **GeoJSON objects**. For more details on this type, see the MongoDB
 Server manual page on :manual:`GeoJSON objects </reference/geojson>`.
 
-The ``location.geo`` field in following sample document from the
+The ``location.geo`` field in the following sample document from the
 ``sample_mflix.theaters`` collection is a GeoJSON Point object that describes the
 coordinates of the theater:
 

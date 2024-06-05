@@ -337,13 +337,14 @@ To learn more about the Aggregation Pipeline, see the
 
 .. _csharp-builders-out:
 
-Write Pipeline Results to a Time Series Collection
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Write Pipeline Results to a Collection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can write the documents returned from an aggregation pipeline to a
 collection by creating an ``$out`` stage at the end of your aggregation
 pipeline. To create an ``$out`` stage, call the ``Out()`` method on a
-``PipelineStageDefinitionBuilder``.
+``PipelineStageDefinitionBuilder``. The ``Out()`` method requires the name of
+the collection you want to write the documents to.
 
 The following example builds an aggregation pipeline that matches all documents
 with a ``season`` field value of ``"Spring"`` and outputs them to
@@ -370,7 +371,7 @@ series collection by using the ``datePlanted`` field as the time field.
 The following example creates a ``TimeSeriesOptions`` object and specifies
 ``datePlanted`` as the ``timeField``. It then builds an aggregation pipeline that matches all documents
 with a ``season`` field value of ``"Spring"`` and outputs them to a
-time series collection called ``"springFlowerTimes"``:
+time series collection called ``"springFlowerTimes"``.
 
 .. code-block:: csharp
 

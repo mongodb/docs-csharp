@@ -369,14 +369,14 @@ You can write the results of an aggregation pipeline to a time series collection
 by specifying a ``TimeSeriesOption`` object and passing it as the second
 parameter to the ``Out()`` method.
 
-Consider the documents in the collection contain a ``datePlanted`` field that
+Imagine that the documents in the ``plants.flowers`` collection contain a ``datePlanted`` field that
 holds BSON date values. You can store the documents in this collection in a time
 series collection by using the ``datePlanted`` field as the time field.
 
 The following example creates a ``TimeSeriesOptions`` object and specifies
 ``datePlanted`` as the ``timeField``. It then builds an aggregation pipeline that matches all documents
 with a ``season`` field value of ``"Spring"`` and outputs them to a
-time series collection called ``"springFlowerTimes"``.
+time series collection called ``springFlowerTimes``.
 
 .. code-block:: csharp
 

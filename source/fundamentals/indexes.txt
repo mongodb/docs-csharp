@@ -180,14 +180,14 @@ The following example creates a clustered index on the ``_id`` field while creat
 
 .. code-block:: csharp
 
-    var teaDatabase = mongoClient.GetDatabase("sample_mflix");
+    var database = mongoClient.GetDatabase("sample_mflix");
     var clusteredIndexOptions = new ClusteredIndexOptions<Review>
     { 
         Key = new BsonDocument("_id", 1),
         Unique = true
     };
 
-    teaDatabase.CreateCollection("reviews", new CreateCollectionOptions<Review>
+    database.CreateCollection("reviews", new CreateCollectionOptions<Review>
     {
         ClusteredIndex = clusteredIndexOptions
     });

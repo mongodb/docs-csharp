@@ -94,10 +94,11 @@ public class Indexes
     {
         Console.WriteLine("text index");
 
-        // begin-text-index
         try
         {
+            // begin-text-index
             collection.Indexes.CreateOne("{ plot : \"text\" }");
+            // end-text-index
         }
         // Prints a message if a text index already exists with a different configuration 
         catch (MongoCommandException e)
@@ -107,7 +108,6 @@ public class Indexes
                 Console.WriteLine("There is an existing text index with different options");
             }
         }
-        // end-text-index
 
         // begin-text-query
         // Define query parameters
@@ -123,10 +123,11 @@ public class Indexes
     {
         Console.WriteLine("geospatial index");
 
-        // begin-geospatial-index
         try
         {
+            // begin-geospatial-index
             collection.Indexes.CreateOne("{ \"location.geo\": \"2dsphere\" }");
+            // end-geospatial-index
         }
         // Prints a message if a geospatial index already exists with a different configuration 
         catch (MongoCommandException e)
@@ -136,7 +137,6 @@ public class Indexes
                 Console.WriteLine("There is an existing geospatial index with different options");
             }
         }
-        // end-geospatial-index
 
         // begin-geospatial-query
         // Stores the coordinates of the NY MongoDB headquarters

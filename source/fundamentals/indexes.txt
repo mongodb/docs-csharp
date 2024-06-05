@@ -43,7 +43,7 @@ elements:
 When all the fields specified in the query, projection, and sort are in the same index,
 MongoDB returns results directly from that index, also called a **covered query**.
 
-For more information on how to ensure your index covers your query
+For more information about how to ensure your index covers your query
 criteria and projection, see the :manual:`Covered Query </core/query-optimization/#covered-query>`
 section in the MongoDB server manual.
 

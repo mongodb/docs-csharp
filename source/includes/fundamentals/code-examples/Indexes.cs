@@ -53,7 +53,7 @@ public class Indexes
         Console.WriteLine("compound index");
 
         // begin-compound-index
-        collection.Indexes.CreateOne("{ title : 1, rated: 1 }");
+        collection.Indexes.CreateOne("{ type : 1, rated: 1 }");
         // end-compound-index
 
         // begin-compound-index-query
@@ -61,7 +61,7 @@ public class Indexes
         var typeFilter = Builders<Movie>.Filter.Eq("type", "movie");
         var ratedFilter = Builders<Movie>.Filter.Eq("rated", "G");
         var filter = Builders<Movie>.Filter.And(typeFilter, ratedFilter);
-        var sort = Builders<Movie>.Sort.Ascending("{ title : 1, rated: 1 }");
+        var sort = Builders<Movie>.Sort.Ascending("{ type : 1, rated: 1 }");
         var projection = Builders<Movie>.Projection.Include("type").Include("rated").Exclude("_id");
 
         // Execute query
@@ -167,6 +167,18 @@ public class Indexes
         // begin-wildcard-index
         collection.Indexes.CreateOne("{ \"location.$**\" : 1 }");
         // end-wildcard-index
+    }
+
+    private static void ListIndexes(IMongoCollection<Movie> collection)
+    {
+        // begin-list-indexes
+        var indexes = collection.Indexes.List();
+
+        foreach (var index in indexes.ToList())
+        {
+            Console.WriteLine(index);
+        }
+        // end-list-indexes
     }
 
     public class Movie

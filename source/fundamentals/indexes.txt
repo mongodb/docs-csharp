@@ -407,3 +407,18 @@ Drop a Search Index
 To learn how to delete an Atlas Search index using the {+driver-short+}, see
 :atlas:`Delete an Atlas Search Index </atlas-search/delete-index/>` in the Atlas manual
 and select :guilabel:`C#` from the language dropdown.
+
+List Indexes
+------------
+
+You can use the `IMongoIndexManager<TDocument>.List() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoIndexManager-1.List.html>`__
+method to retrieve a list of indexes in your collection.
+
+The following example uses the ``IMongoIndexManager<TDocument>.List()`` method to list
+all indexes in a collection:
+
+.. literalinclude:: /includes/fundamentals/code-examples/Indexes.cs
+   :language: csharp
+   :start-after: begin-list-indexes
+   :end-before: end-list-indexes
+   :dedent:

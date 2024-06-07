@@ -555,6 +555,7 @@ the ``plot_embedding`` field using vector embeddings for the string ``"time trav
 The results of the preeding example contain the following documents:
 
 .. code-block:: json
+
    { "_id" : ObjectId("573a13a0f29313caabd04a4f"), "plot" : "A reporter, learning of time travelers visiting 20th century disasters, tries to change the history they know by averting upcoming disasters.", "title" : "Thrill Seekers" }
    { "_id" : ObjectId("573a13d8f29313caabda6557"), "plot" : "At the age of 21, Tim discovers he can travel in time and change what happens and has happened in his own life. His decision to make his world a better place by getting a girlfriend turns out not to be as easy as you might think.", "title" : "About Time" }
    { "_id" : ObjectId("573a13a5f29313caabd13b4b"), "plot" : "Hoping to alter the events of the past, a 19th century inventor instead travels 800,000 years into the future, where he finds humankind divided into two warring races.", "title" : "The Time Machine" }
@@ -567,7 +568,7 @@ The results of the preeding example contain the following documents:
    { "_id" : ObjectId("573a13e5f29313caabdc40c9"), "plot" : "A dimension-traveling wizard gets stuck in the 21st century because cell-phone radiation interferes with his magic. With his home world on the brink of war, he seeks help from a jaded ...", "title" : "The Portal" }
 
 For more information about the ``$vectorSearch`` aggregation stage, Atlas Vector Search
-indexes, and how to incorporate them into your application, see :manual:`$vectorSearch <reference/operator/aggregation/vectorSearch/>`.
+indexes, and how to incorporate them into your application, see :manual:`$vectorSearch </reference/operator/aggregation/vectorSearch/>`.
 For more examples about running Atlas Vector Search queries using the {+driver-short+},
 see :atlas:`Run Vector Search Queries </atlas-vector-search/vector-search-stage/>` in the
 Atlas manual and select :guilabel:`C#` from the language dropdown.

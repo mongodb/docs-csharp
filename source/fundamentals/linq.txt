@@ -501,7 +501,8 @@ $vectorSearch
 ~~~~~~~~~~~~~
 
 The ``$vectorSearch`` aggregation stage performs an *approximate nearest neighbor* search
-on an Atlas Vector Search index in the specified field.
+on an Atlas Vector Search index in the specified field. Your collection *must* have a
+defined Atlas Vector Search index before you can perform a vector search on your data.
 
 .. tip::
 

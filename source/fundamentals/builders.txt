@@ -368,8 +368,8 @@ field of the documents in the collection.
 The following example shows how to use builders to generate an aggregation pipeline to
 perform the following operations:
 
-- Perform a vector search on the Atlas Vector Search index of the ``plot_embedding`` field using vector embeddings for the string ``"time travel"``
-- Fetch the ``Title`` and ``Plot`` fields from documents found in the vector search
+- Performs a vector search on the Atlas Vector Search index of the ``plot_embedding`` field using vector embeddings for the string ``"time travel"``
+- Fetches the ``Title`` and ``Plot`` fields from documents found in the vector search
 
 .. code-block:: csharp
 

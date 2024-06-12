@@ -24,7 +24,7 @@ public class Indexes
         CompoundIndex(movieCollection);
         MultiKeyIndex(movieCollection);
         TextIndex(movieCollection);
-        GeoSpatialIndex(movieCollection);
+        GeoSpatialIndex(theaterCollection);
         UniqueIndex(theaterCollection);
         WildcardIndex(theaterCollection);
     }
@@ -34,7 +34,7 @@ public class Indexes
         Console.WriteLine("single index");
 
         // begin-single-index
-        collection.Indexes.CreateOne("{ title : 1 }");
+        collection.Indexes.CreateOne(Builders<Movie>.IndexKeys.Ascending("title"));
         // end-single-index
 
         // begin-single-index-query
@@ -53,7 +53,9 @@ public class Indexes
         Console.WriteLine("compound index");
 
         // begin-compound-index
-        collection.Indexes.CreateOne("{ type : 1, rated: 1 }");
+        collection.Indexes.CreateOne(Builders<Movie>.IndexKeys
+            .Ascending("type")
+            .Ascending("rated"));
         // end-compound-index
 
         // begin-compound-index-query
@@ -74,7 +76,10 @@ public class Indexes
         Console.WriteLine("multi-key index");
 
         // begin-multi-key-index
-        collection.Indexes.CreateOne("{ rated: 1, genres: 1, title: 1 }");
+        collection.Indexes.CreateOne(Builders<Movie>.IndexKeys
+            .Ascending("rated")
+            .Ascending("genres")
+            .Ascending("title"));
         // end-multi-key-index
 
         // begin-multi-key-query
@@ -97,7 +102,7 @@ public class Indexes
         try
         {
             // begin-text-index
-            collection.Indexes.CreateOne("{ plot : \"text\" }");
+            collection.Indexes.CreateOne(Builders<Movie>.IndexKeys.Text("plot"));
             // end-text-index
         }
         // Prints a message if a text index already exists with a different configuration 
@@ -119,14 +124,14 @@ public class Indexes
         // end-text-query
     }
 
-    private static void GeoSpatialIndex(IMongoCollection<Movie> collection)
+    private static void GeoSpatialIndex(IMongoCollection<Theater> collection)
     {
         Console.WriteLine("geospatial index");
 
         try
         {
             // begin-geospatial-index
-            collection.Indexes.CreateOne("{ \"location.geo\": \"2dsphere\" }");
+            collection.Indexes.CreateOne(Builders<Theater>.IndexKeys.Geo2DSphere("location.geo"));
             // end-geospatial-index
         }
         // Prints a message if a geospatial index already exists with a different configuration 
@@ -143,7 +148,7 @@ public class Indexes
         var refPoint = GeoJson.Point(GeoJson.Position(-73.98456, 40.7612));
 
         // Creates a filter to match documents that represent locations up to 1000 meters from the specified point directly from the geospatial index
-        var filter = Builders<Movie>.Filter.Near("location.geo", refPoint, 1000.0, 0.0);
+        var filter = Builders<Theater>.Filter.Near("location.geo", refPoint, 1000.0, 0.0);
 
         // Execute the query
         var results = collection.Find(filter);
@@ -156,7 +161,9 @@ public class Indexes
 
         // begin-unique-index
         var options = new CreateIndexOptions { Unique = true };
-        collection.Indexes.CreateOne("{ theaterId : -1 }", options);
+        collection.Indexes.CreateOne(
+            Builders<Theater>.IndexKeys.Descending("theaterId"),
+            options);
         // end-unique-index
     }
 
@@ -165,7 +172,7 @@ public class Indexes
         Console.WriteLine("wildcard index");
 
         // begin-wildcard-index
-        collection.Indexes.CreateOne("{ \"location.$**\" : 1 }");
+        collection.Indexes.CreateOne(Builders<Theater>.IndexKeys.Ascending("location.$**"));
         // end-wildcard-index
     }
 
@@ -207,6 +214,9 @@ public class Indexes
     {
         [BsonElement("theaterId")]
         public string TheaterId { get; set; }
+
+        [BsonElement("location.geo")]
+        public string LocationGeo { get; set; }
     }
 
     public class Vendor
@@ -215,4 +225,3 @@ public class Indexes
         public string Id { get; set; }
     }
 }
-

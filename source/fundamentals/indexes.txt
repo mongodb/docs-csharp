@@ -185,7 +185,7 @@ The following example creates a clustered index on the ``_id`` field while creat
     var database = mongoClient.GetDatabase("sample_mflix");
     var clusteredIndexOptions = new ClusteredIndexOptions<Review>
     { 
-        Key = Builders<Review>.IndexKeys.Ascending("_id"),
+        Key = Builders<Review>.IndexKeys.Ascending(r => r.Id),
         Unique = true
     };
 
@@ -300,7 +300,10 @@ fields within the ``sample_mflix.movies`` collection:
 
 .. code-block:: csharp
 
-    collection.Indexes.CreateOne("{ title : \"text\", genre: \"text\" }");
+    var indexModel = new CreateIndexModel<Movie>(Builders<Movie>.IndexKeys
+        .Text(m => m.Title)
+        .Text(m => m.Genre));
+    collection.Indexes.CreateOne(indexModel);
 
 For more information, see :manual:`Compound Text Index Restrictions </core/indexes/index-types/index-text/text-index-restrictions/#compound-text-index>`
 and :manual:`Text Indexes </core/index-text>` in the Server manual.

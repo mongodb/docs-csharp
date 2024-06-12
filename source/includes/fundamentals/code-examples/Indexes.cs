@@ -34,14 +34,15 @@ public class Indexes
         Console.WriteLine("single index");
 
         // begin-single-index
-        collection.Indexes.CreateOne(Builders<Movie>.IndexKeys.Ascending("title"));
+        var indexModel = new CreateIndexModel<Movie>(Builders<Movie>.IndexKeys.Ascending(m => m.Title));
+        collection.Indexes.CreateOne(indexModel);
         // end-single-index
 
         // begin-single-index-query
         // Define query parameters
-        var filter = Builders<Movie>.Filter.Eq("title", "Batman");
-        var sort = Builders<Movie>.Sort.Ascending("title");
-        var projection = Builders<Movie>.Projection.Include("title").Exclude("_id");
+        var filter = Builders<Movie>.Filter.Eq(m => m.Title, "Batman");
+        var sort = Builders<Movie>.Sort.Ascending(m => m.Title);
+        var projection = Builders<Movie>.Projection.Include(m => m.Title).Exclude(m => m.Id);
 
         // Execute query
         var results = collection.Find(filter).Sort(sort).Project(projection);
@@ -53,18 +54,22 @@ public class Indexes
         Console.WriteLine("compound index");
 
         // begin-compound-index
-        collection.Indexes.CreateOne(Builders<Movie>.IndexKeys
-            .Ascending("type")
-            .Ascending("rated"));
+        var indexModel = new CreateIndexModel<Movie>(Builders<Movie>.IndexKeys
+            .Ascending(m => m.Type)
+            .Ascending(m => m.Rated));
+        collection.Indexes.CreateOne(indexModel);
         // end-compound-index
 
         // begin-compound-index-query
         // Define query parameters
-        var typeFilter = Builders<Movie>.Filter.Eq("type", "movie");
-        var ratedFilter = Builders<Movie>.Filter.Eq("rated", "G");
+        var typeFilter = Builders<Movie>.Filter.Eq(m => m.Type, "movie");
+        var ratedFilter = Builders<Movie>.Filter.Eq(m => m.Rated, "G");
         var filter = Builders<Movie>.Filter.And(typeFilter, ratedFilter);
-        var sort = Builders<Movie>.Sort.Ascending("{ type : 1, rated: 1 }");
-        var projection = Builders<Movie>.Projection.Include("type").Include("rated").Exclude("_id");
+        var sort = Builders<Movie>.Sort.Ascending(m => m.Type).Ascending(m => m.Rated);
+        var projection = Builders<Movie>.Projection
+            .Include(m => m.Type)
+            .Include(m => m.Rated)
+            .Exclude(m => m.Id);
 
         // Execute query
         var results = collection.Find(filter).Sort(sort).Project(projection);
@@ -76,19 +81,23 @@ public class Indexes
         Console.WriteLine("multi-key index");
 
         // begin-multi-key-index
-        collection.Indexes.CreateOne(Builders<Movie>.IndexKeys
-            .Ascending("rated")
-            .Ascending("genres")
-            .Ascending("title"));
+        var indexModel = new CreateIndexModel<Movie>(Builders<Movie>.IndexKeys
+            .Ascending(m => m.Rated)
+            .Ascending(m => m.Genres)
+            .Ascending(m => m.Title));
+        collection.Indexes.CreateOne(indexModel);
         // end-multi-key-index
 
         // begin-multi-key-query
         // Define query parameters
-        var genreFilter = Builders<Movie>.Filter.Eq("genres", "Animation");
-        var ratedFilter = Builders<Movie>.Filter.Eq("rated", "G");
+        var genreFilter = Builders<Movie>.Filter.AnyEq(m => m.Genres, "Animation");
+        var ratedFilter = Builders<Movie>.Filter.Eq(m => m.Rated, "G");
         var filter = Builders<Movie>.Filter.And(genreFilter, ratedFilter);
-        var sort = Builders<Movie>.Sort.Ascending("title");
-        var projection = Builders<Movie>.Projection.Include("title").Include("rated").Exclude("_id");
+        var sort = Builders<Movie>.Sort.Ascending(m => m.Title);
+        var projection = Builders<Movie>.Projection
+            .Include(m => m.Title)
+            .Include(m => m.Rated)
+            .Exclude(m => m.Id);
 
         // Execute query
         var results = collection.Find(filter).Sort(sort).Project(projection);
@@ -102,7 +111,8 @@ public class Indexes
         try
         {
             // begin-text-index
-            collection.Indexes.CreateOne(Builders<Movie>.IndexKeys.Text("plot"));
+            var indexModel = new CreateIndexModel<Movie>(Builders<Movie>.IndexKeys.Text(m => m.Plot));
+            collection.Indexes.CreateOne(indexModel);
             // end-text-index
         }
         // Prints a message if a text index already exists with a different configuration 
@@ -117,7 +127,7 @@ public class Indexes
         // begin-text-query
         // Define query parameters
         var filter = Builders<Movie>.Filter.Text("java coffee shop");
-        var projection = Builders<Movie>.Projection.Include("plot").Exclude("_id");
+        var projection = Builders<Movie>.Projection.Include(m => m.Plot).Exclude(m => m.Id);
 
         // Execute query
         var results = collection.Find(filter).Project(projection);
@@ -131,7 +141,8 @@ public class Indexes
         try
         {
             // begin-geospatial-index
-            collection.Indexes.CreateOne(Builders<Theater>.IndexKeys.Geo2DSphere("location.geo"));
+            var indexModel = new CreateIndexModel<Theater>(Builders<Theater>.IndexKeys.Geo2DSphere(t => t.Location.Geo));
+            collection.Indexes.CreateOne(indexModel);
             // end-geospatial-index
         }
         // Prints a message if a geospatial index already exists with a different configuration 
@@ -148,7 +159,7 @@ public class Indexes
         var refPoint = GeoJson.Point(GeoJson.Position(-73.98456, 40.7612));
 
         // Creates a filter to match documents that represent locations up to 1000 meters from the specified point directly from the geospatial index
-        var filter = Builders<Theater>.Filter.Near("location.geo", refPoint, 1000.0, 0.0);
+        var filter = Builders<Theater>.Filter.Near(m => m.Location.Geo, refPoint, 1000.0, 0.0);
 
         // Execute the query
         var results = collection.Find(filter);
@@ -161,9 +172,9 @@ public class Indexes
 
         // begin-unique-index
         var options = new CreateIndexOptions { Unique = true };
-        collection.Indexes.CreateOne(
-            Builders<Theater>.IndexKeys.Descending("theaterId"),
+        var indexModel = new CreateIndexModel<Theater>(Builders<Theater>.IndexKeys.Descending(t => t.TheaterId),
             options);
+        collection.Indexes.CreateOne(indexModel);
         // end-unique-index
     }
 
@@ -172,7 +183,8 @@ public class Indexes
         Console.WriteLine("wildcard index");
 
         // begin-wildcard-index
-        collection.Indexes.CreateOne(Builders<Theater>.IndexKeys.Ascending("location.$**"));
+        var indexModel = new CreateIndexModel<Theater>(Builders<Theater>.IndexKeys.Wildcard(t => t.Location));
+        collection.Indexes.CreateOne(indexModel);
         // end-wildcard-index
     }
 
@@ -215,13 +227,13 @@ public class Indexes
         [BsonElement("theaterId")]
         public string TheaterId { get; set; }
 
-        [BsonElement("location.geo")]
-        public string LocationGeo { get; set; }
+        [BsonElement("location")]
+        public Location Location { get; set; }
     }
 
-    public class Vendor
+    public class Location
     {
-        [BsonId]
-        public string Id { get; set; }
+        [BsonElement("geo")]
+        public string Geo { get; set; }
     }
 }

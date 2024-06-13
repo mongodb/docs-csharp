@@ -74,7 +74,7 @@ The 2.25 driver release includes the following new features:
   a LINQ query.
 - Added support for overriding the ``"mongodb"`` service name with a custom one
   by using the ``srvServiceName`` connection option.
-- Improved behavior of bulk write operations to preven enumerating the requests
+- Improved behavior of bulk write operations to prevent enumerating the requests
   parameter more than once.
 
 .. _version-2.24:

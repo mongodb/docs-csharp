@@ -56,7 +56,7 @@ The 2.26 driver release includes the following new features:
 
 - Implemented signing of NuGet packages.
 
-- Implemented read and write retries to additional ``mongos`` instances when
+- Implemented read and write retries to other ``mongos`` instances when
   possible.
 
 .. _version-2.25:

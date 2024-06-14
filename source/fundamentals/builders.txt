@@ -378,7 +378,8 @@ perform the following operations:
 
    // Specifies that the vector search will consider the 150 nearest neighbors
    // in the specified index
-   var options = new VectorSearchOptions<EmbeddedMovie>() {
+   var options = new VectorSearchOptions<EmbeddedMovie>()
+   {
       IndexName = "vector_index",
       NumberOfCandidates = 150
    };

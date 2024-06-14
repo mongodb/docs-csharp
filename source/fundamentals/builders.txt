@@ -351,7 +351,7 @@ Perform an Atlas Vector Search
 ------------------------------
 
 You can use builders to create a ``$vectorSearch`` aggregation pipeline stage to perform an
-approximate nearest neighbor search on an Atlas Vector Search index. Your collection *must*
+approximate nearest neighbor search on a vector in the specified field. Your collection *must*
 have a defined Atlas Vector Search index before you can perform a vector search on your data.
 
 .. tip::

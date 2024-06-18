@@ -1,3 +1,6 @@
+.NET
+~~~~
+
 .. list-table::
    :header-rows: 1
    :stub-columns: 1
@@ -7,11 +10,13 @@
      - .NET 8
      - .NET 7
      - .NET 6 [#atlas-connection]_
+     - .NET 5
      - .NET 4.8
      - .NET 4.7 [#2.14-note]_
      - .NET 4.6
 
    * - 2.14 to 2.26
+     - ✓
      - ✓
      - ✓
      - ✓
@@ -25,7 +30,9 @@
      - ✓
      - ✓
      - ✓
+     - ✓
    * - 2.12
+     - ✓
      - ✓
      - ✓
      - ✓
@@ -39,7 +46,9 @@
      - ✓
      - ✓
      - ✓
+     - ✓
    * - 2.10
+     - ✓
      - ✓
      - ✓
      - ✓
@@ -53,7 +62,9 @@
      - ✓
      - ✓
      - ✓
+     - ✓
    * - 2.8
+     - ✓
      - ✓
      - ✓
      - ✓
@@ -67,7 +78,9 @@
      - ✓
      - ✓
      - ✓
+     - ✓
    * - 2.6
+     - ✓
      - ✓
      - ✓
      - ✓
@@ -81,7 +94,9 @@
      - ✓
      - ✓
      - ✓
+     - ✓
    * - 2.4
+     - ✓
      - ✓
      - ✓
      - ✓
@@ -95,7 +110,9 @@
      - ✓
      - ✓
      - ✓
+     - ✓
    * - 2.2
+     -
      -
      -
      -
@@ -103,6 +120,7 @@
      - ✓
      - ✓
    * - 2.0
+     -
      -
      -
      -
@@ -118,3 +136,22 @@ through 4.8 only.
 .. [#2.14-note] {+driver-short+} versions 2.14 or later requires .NET Framework 4.7.2 or
    later.
 
+.NET Core
+~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
+   :class: compatibility-large no-padding
+
+   * - {+driver-short+} Version
+     - .NET Core 3.1
+     - .NET Core 3.0
+     - .NET Core 2.2
+     - .NET Core 2.1
+
+   * - 2.0 to 2.26
+     - ✓
+     - ✓
+     - ✓
+     - ✓

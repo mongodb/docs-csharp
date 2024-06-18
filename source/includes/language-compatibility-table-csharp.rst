@@ -11,14 +11,10 @@
      - .NET 7
      - .NET 6 [#atlas-connection]_
      - .NET 5
-     - .NET Core 3.1
-     - .NET Core 3.0
-     - .NET Core 2.2
-     - .NET Core 2.1
+     - .NET Core 3.X
+     - .NET Core 2.X
 
    * - 2.3 to 2.26
-     - ✓
-     - ✓
      - ✓
      - ✓
      - ✓

@@ -256,29 +256,5 @@
      -
      - ✓
      - ✓
-   * - 1.11
-     -
-     -
-     -
-     -
-     -
-     -
-     -
-     -
-     - ✓
-     - ✓
-     - ✓
-   * - 1.10
-     -
-     -
-     -
-     -
-     -
-     -
-     -
-     -
-     -
-     - ✓
-     - ✓
 
 The driver doesn't support older versions of MongoDB.

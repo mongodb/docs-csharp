@@ -179,20 +179,24 @@ the same machine doesn't require any authorization to connect.
 
 .. _csharp-troubleshooting-connection-X509:
 
-Check Your Ephemeral Key Usage
-------------------------------
+X.509 Credential Error
+~~~~~~~~~~~~~~~~~~~~~~
 
-There is a {+language+} bug on Windows where the {+driver-short+} may be unable to locate an
-``X.509`` authentication certificate created in memory. This error is accompanied by the following
-error message:
+If you are using Windows as your operating system, you might encounter an issue where the
+{+driver-short+} is unable to locate an ``X.509`` authentication certificate in memory.
+This is an issue with the Windows OS where authentication using ephemeral keys may fail.
+This error is raised with the following error message:
 
 .. code-block:: none
 
    No credentials are available in the security package
 
-This is a known Windows OS issue where authentication using ephemeral keys may fail. As a
-workaround, use the following code to generate any ``X.509`` certificates required by your
-application:
+The following section describes a method that may help resolve the issue.
+
+Create and Store the Certificate On-Disk
+----------------------------------------
+
+Use the following code to generate any ``X.509`` certificates required by your application:
 
 .. code-block:: csharp
 

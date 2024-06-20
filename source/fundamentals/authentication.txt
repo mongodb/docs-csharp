@@ -390,9 +390,9 @@ see the corresponding syntax for specifying the ``X.509`` authentication mechani
 
 .. note::
 
-   If you are using Windows, the driver may be unable to locate an ``X.509``
+   If you are using Windows, the driver might be unable to locate an ``X.509``
    authentication certificate created in memory. To learn more about a potential solution to
-   this issue, see the :ref:`Check Ephemeral Key Usage <csharp-troubleshooting-connection-X509>`
+   this issue, see the :ref:`csharp-troubleshooting-connection-X509`
    section of the Connection Troubleshooting guide.
 
 API Documentation

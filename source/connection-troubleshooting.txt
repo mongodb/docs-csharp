@@ -187,6 +187,7 @@ There is a {+language+} bug on Windows where the {+driver-short+} may be unable 
 error message:
 
 .. code-block:: none
+
    No credentials are available in the security package
 
 This is a known Windows OS issue where authentication using ephemeral keys may fail. As a

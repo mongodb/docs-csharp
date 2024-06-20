@@ -179,8 +179,8 @@ the same machine doesn't require any authorization to connect.
 
 .. _csharp-troubleshooting-connection-X509:
 
-Check Ephemeral Key Usage
--------------------------
+Check Your Ephemeral Key Usage
+------------------------------
 
 There is a {+language+} bug on Windows where the {+driver-short+} may be unable to locate an
 ``X.509`` authentication certificate created in memory. This error is accompanied by the following

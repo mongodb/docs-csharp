@@ -388,6 +388,13 @@ see the corresponding syntax for specifying the ``X.509`` authentication mechani
          You can alternatively pass ``null`` as the parameter to prompt the MongoDB
          server to infer the username based on your ``X.509`` certificate.
 
+.. note::
+
+   There is a known bug on Windows where the driver may be unable to locate an
+   authentication certificate created in memory. To learn more about troubleshooting
+   this issue, see the :ref:`Check Ephemeral Key Usage <csharp-troubleshooting-connection-X509>`
+   section of the Connection Troubleshooting guide.
+
 API Documentation
 -----------------
 

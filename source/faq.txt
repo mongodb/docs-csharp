@@ -304,7 +304,7 @@ before doing anything else.
 What is the Difference Between the {+driver-short+} and the {+ef-provider-long+}?
 -------------------------------------------------------------------------------------------------
 
-The {+csharp-driver-long+} is a library that exposes MongoDB functionality
+The {+driver-short+} is a library that exposes MongoDB functionality
 directly, and includes a capable LINQ provider with projections, group
 operations, and flexible mapping. The driver includes features such as the
 following:
@@ -316,11 +316,11 @@ following:
 - Aggregation operations
 - Custom mapping
 
-The `{+provider-long+} <https://www.mongodb.com/docs/entity-framework/current/>`__ 
-allows you to use Microsoft's {+framework-core+} with
-MongoDB in your {+dotnet-csharp+} applications. The {+provider-short+} supports
+The `{+ef-provider-short+} <https://www.mongodb.com/docs/entity-framework/current/>`__ 
+allows you to use Microsoft's Entity Framework Core with
+MongoDB in your {+lang-framework+} applications. The {+ef-provider-short+} supports
 change tracking, entity-based LINQ operations, and modeling familiar to
-{+framework-core+} users. The provider includes features such as the following:
+Entity Framework Core users. The provider includes features such as the following:
 
 - Intelligent object tracking
 - Entity-based LINQ operations

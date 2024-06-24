@@ -305,7 +305,7 @@ What is the Difference Between the {+driver-short+} and the {+ef-provider-long+}
 -------------------------------------------------------------------------------------------------
 
 The {+driver-short+} is a library that exposes MongoDB functionality
-directly, and includes a capable LINQ provider with projections, group
+directly and includes a LINQ provider with projections, group
 operations, and flexible mapping. The driver includes features such as the
 following:
 

@@ -1,8 +1,8 @@
 .. _csharp-geo:
 
-=========================
-Work with Geospatial Data
-=========================
+==================
+Geospatial Queries
+==================
 
 .. facet::
    :name: genre
@@ -23,7 +23,7 @@ Overview
 In this guide, you can learn how to work with **geospatial data** formats,
 indexes, and queries.
 
-Geospatial data represents a geographic location on the surface of the Earth, or data
+Geospatial data represents a geographic location on the surface of the Earth or data
 on a Euclidean plane.
 
 Examples of geospatial data include:
@@ -62,8 +62,7 @@ containing the following values:
 - Latitude in the second position (required)
 - Elevation in the third position (optional)
 
-The following is the **position** of the MongoDB Headquarters in
-New York City, NY.
+The following is the position of the MongoDB Headquarters in New York City, NY.
 
 .. code-block:: csharp
 
@@ -94,7 +93,7 @@ Here are some common GeoJSON types and how you can specify them with positions:
 - ``LineString``: an array of two or more positions that forms a series of line
   segments. A ``LineString`` can represent a path, route, border, or any other linear
   geospatial data. The following ``LineString`` represents a segment of
-  `the Great Wall of China <https://commons.wikimedia.org/wiki/File:GreatWallChina4.png>`__:
+  the Great Wall of China:
 
   .. code-block:: csharp
 
@@ -108,8 +107,7 @@ Here are some common GeoJSON types and how you can specify them with positions:
 
 - ``Polygon``: an array of positions in which the first and last
   position are the same and enclose some space. The following
-  ``Polygon`` roughly represents `the land within Vatican City
-  <https://commons.wikimedia.org/wiki/File:Vatican_City_map_EN.png>`__:
+  ``Polygon`` roughly represents the land within the Vatican City:
 
   .. code-block:: csharp
 
@@ -182,8 +180,8 @@ the server manual.
 Examples
 --------
 
-The following examples uses the MongoDB Atlas sample dataset. To obtain the sample dataset
-used in the following example, see :ref:`csharp-quickstart`..
+The following examples uses the MongoDB Atlas sample dataset. To obtain this sample
+dataset, see :ref:`csharp-quickstart`.
 
 The examples use the ``theaters`` collection in the ``sample_mflix`` database
 from the sample dataset. The ``theaters`` collection contains a ``2dsphere`` index

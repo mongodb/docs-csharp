@@ -34,8 +34,8 @@ Examples of geospatial data include:
 - Dog exercise areas in New York City
 - Points on a graph
 
-Store Geospatial Data
----------------------
+Geospatial Data Formats
+-----------------------
 
 All geospatial data in MongoDB is stored in one of the following formats:
 
@@ -196,6 +196,7 @@ from nearest to farthest.
 
 .. code-block:: csharp
 
+   // Point representation of the MongoDB Headquarters
    var point = GeoJson.Point(GeoJson.Position(-73.986805, 40.7620853));
 
    // Specifies a maxDistance of 1000 meters and a minDistance of 0 meters
@@ -223,7 +224,8 @@ within the boundaries of Manhattan Island.
 .. code-block:: csharp
 
    // Polygon representation of Manhattan Island
-   var polygon = GeoJson.Polygon(
+   var polygon = GeoJson.Polygon
+   (
       GeoJson.Position(-73.925492, 40.877410),
       GeoJson.Position(-73.910372, 40.872366),
       GeoJson.Position(-73.935127, 40.834020),

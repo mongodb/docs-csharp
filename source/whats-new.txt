@@ -48,13 +48,13 @@ The 2.27 driver release includes the following new features:
 - Disallows the use of the comma character in ``authMechanismProperties``
   connection string values.
 
-- Fixes a translation bug that caused an error during serialization of
-  numbers with different sizes.
+- Fixes a translation bug that caused an error during serialization involving
+  numbers of different sizes.
 
 - Adds support for Linux distributions that use the ``libdl.so.2`` library.
 
 For more information about this release, see the :github:`v2.27 release notes
-<mongo-csharp-driver/releases/tag/v2.27.0>`.
+</mongodb/mongo-csharp-driver/releases/tag/v2.27.0>`.
 
 .. _csharp-version-2.26:
 

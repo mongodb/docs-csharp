@@ -46,7 +46,8 @@ The 2.27 driver release includes the following new features:
   applied to Atlas Search Index Helper commands.
 
 - Disallows the use of the comma character in ``authMechanismProperties``
-  connection string values.
+  connection string values when using the ``MONGODB-OIDC`` authentication
+  mechanism. 
 
 - Fixes a translation bug that caused an error during serialization involving
   numbers of different sizes.

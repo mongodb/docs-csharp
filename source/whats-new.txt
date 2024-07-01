@@ -42,8 +42,8 @@ The 2.27 driver release includes the following new features:
 
 - Implements the ``Equals()`` method for serializers in LINQ3.
 
-- Includes tests confirming that read and write concerns are not
-  applied to Atlas Search Index Helper commands.
+- Ensures that read and write concerns are not applied to Atlas Search Index
+  Helper commands to avoid errors.
 
 - Disallows the use of the comma character in ``authMechanismProperties``
   connection string values when using the ``MONGODB-OIDC`` authentication

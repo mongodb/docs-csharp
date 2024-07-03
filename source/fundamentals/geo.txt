@@ -20,7 +20,7 @@ Search Geospatially
 Overview
 --------
 
-In this guide, you can learn how to work with **geospatial data** formats,
+In this guide, you can learn how to work with **geospatial data**, data formats,
 indexes, and queries.
 
 Geospatial data represents a geographic location on the surface of the Earth.
@@ -66,6 +66,13 @@ The following is the position of the MongoDB Headquarters in New York City, NY.
 .. code-block:: csharp
 
    GeoJson.Position(-73.986805, 40.7620853)
+
+Alternatively, you can use the ``GeoJson.Geographic()`` method to construct a coordinate
+pair.
+
+.. code-block:: csharp
+
+   GeoJson.Geographic(-73.986805, 40.7620853)
 
 .. important:: Longitude then Latitude
 
@@ -215,7 +222,7 @@ The results of the preceding example contain the following documents:
    { "_id" : ObjectId("59a47286cfa9a3a73e51e838"), "theaterId" : 1448 }
 
 Query by Polygon
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 The following example queries for documents with a ``location.geo`` field value that exists
 within the boundaries of Manhattan.

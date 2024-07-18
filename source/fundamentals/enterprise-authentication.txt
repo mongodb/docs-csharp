@@ -297,6 +297,9 @@ see the corresponding syntax.
       The following code example shows how to specify Azure IMDS OIDC authentication. 
       Replace the ``<percent-encoded audience>`` placeholder with the percent-encoded
       value of the ``audience`` parameter configured on your MongoDB deployment. 
+
+      The comma (``,``) character is reserved. You must specify values that contain 
+      commas in a ``MongoCredential`` instance, as demonstrated in the :guilabel:`MongoCredential` tab.
       
       .. code-block:: csharp
 
@@ -346,7 +349,10 @@ see the corresponding syntax.
       The following code example shows how to specify GCP IMDS OIDC authentication as
       part of the authentication string. 
       Replace the ``<audience>`` placeholder with the
-      value of the ``audience`` parameter configured on your MongoDB deployment. 
+      value of the ``audience`` parameter configured on your MongoDB deployment.
+
+      The comma (``,``) character is reserved. You must specify values that contain 
+      commas in a ``MongoCredential`` instance, as demonstrated in the :guilabel:`MongoCredential` tab. 
       
       .. code-block:: csharp
 

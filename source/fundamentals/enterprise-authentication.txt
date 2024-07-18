@@ -298,8 +298,9 @@ see the corresponding syntax.
       Replace the ``<percent-encoded audience>`` placeholder with the percent-encoded
       value of the ``audience`` parameter configured on your MongoDB deployment. 
 
-      The comma (``,``) character is reserved. You must specify values that contain 
-      commas in a ``MongoCredential`` instance, as demonstrated in the :guilabel:`MongoCredential` tab.
+      You can't pass values containing the comma (``,``) character to the ``authMechanismProperties`` 
+      option. You must specify values that contain commas in a ``MongoCredential`` object, 
+      as demonstrated in the :guilabel:`MongoCredential` tab.
       
       .. code-block:: csharp
 
@@ -351,8 +352,9 @@ see the corresponding syntax.
       Replace the ``<audience>`` placeholder with the
       value of the ``audience`` parameter configured on your MongoDB deployment.
 
-      The comma (``,``) character is reserved. You must specify values that contain 
-      commas in a ``MongoCredential`` instance, as demonstrated in the :guilabel:`MongoCredential` tab. 
+      You can't pass values containing the comma (``,``) character to the ``authMechanismProperties`` 
+      option. You must specify values that contain commas in a ``MongoCredential`` object, 
+      as demonstrated in the :guilabel:`MongoCredential` tab.
       
       .. code-block:: csharp
 

@@ -298,7 +298,7 @@ see the corresponding syntax.
       Replace the ``<percent-encoded audience>`` placeholder with the percent-encoded
       value of the ``audience`` parameter configured on your MongoDB deployment. 
 
-      You can't pass values containing the comma (``,``) character to the ``authMechanismProperties`` 
+      You cannot pass values containing the comma (``,``) character to the ``authMechanismProperties`` 
       option. You must specify values that contain commas in a ``MongoCredential`` object, 
       as demonstrated in the :guilabel:`MongoCredential` tab.
       
@@ -352,7 +352,7 @@ see the corresponding syntax.
       Replace the ``<audience>`` placeholder with the
       value of the ``audience`` parameter configured on your MongoDB deployment.
 
-      You can't pass values containing the comma (``,``) character to the ``authMechanismProperties`` 
+      You cannot pass values containing the comma (``,``) character to the ``authMechanismProperties`` 
       option. You must specify values that contain commas in a ``MongoCredential`` object, 
       as demonstrated in the :guilabel:`MongoCredential` tab.
       

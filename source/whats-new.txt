@@ -40,7 +40,7 @@ What's New in 2.28
 The 2.28 driver release includes the following new features:
 
 - All {+driver-short+} components are strongly named. If your application
-  contains binding redirects or dynamic assembly loading, 
+  contains binding redirects or dynamic assembly loading, it might require modification.
 - Adds support for additional numeric conversions involving ``Nullable<T>``.
 - Adds support for the ``delegated`` option when using KMIP for CSFLE or
   Queryable Encryption.

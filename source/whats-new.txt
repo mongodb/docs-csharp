@@ -42,8 +42,8 @@ The 2.28 driver release includes the following new features:
 - All {+driver-short+} components are strongly named. If your application
   contains binding redirects or dynamic assembly loading, it might require modification.
 - Adds support for additional numeric conversions involving ``Nullable<T>``.
-- Adds support for the ``delegated`` option when using KMIP for CSFLE or
-  Queryable Encryption.
+- Adds support for the ``delegated`` option when using KMIP for :ref:`CSFLE or
+  Queryable Encryption <csharp-fle>`.
 
 For more information about this release, see the :github:`v2.28 release notes
 </mongodb/mongo-csharp-driver/releases/tag/v2.28.0>`.

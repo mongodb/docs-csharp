@@ -50,6 +50,47 @@ changes between the current and upgrade versions. For example, if you
 are upgrading the driver from v2.0 to v2.20, address all breaking changes from
 the version after v2.0 including any listed under v2.20.
 
+.. _csharp-breaking-changes-2.28.0:
+
+Version 2.28.0 Breaking Changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- All {+driver-short+} components are strongly named. If your application
+  has dependencies that reference multiple {+driver-short+} versions, you must create
+  binding redirects, as shown in the following example:
+
+  .. code-block:: csharp
+
+     <configuration>
+         <runtime>
+             <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+                 <dependentAssembly>
+                     <assemblyIdentity name="MongoDB.Driver"
+                                       publicKeyToken="94992a530f44e321"
+                                       culture="neutral" />
+                     <bindingRedirect oldVersion="2.28.0.0"
+                                      newVersion="version number to use" />
+                 </dependentAssembly>
+                 <dependentAssembly>
+                     <assemblyIdentity name="MongoDB.Bson"
+                                       publicKeyToken="94992a530f44e321"
+                                       culture="neutral" />
+                     <bindingRedirect oldVersion="2.28.0.0"
+                                      newVersion="version number to use" />
+                 </dependentAssembly>
+                 <dependentAssembly>
+                     <assemblyIdentity name="MongoDB.Driver.Core"
+                                       publicKeyToken="94992a530f44e321"
+                                       culture="neutral" />
+                     <bindingRedirect oldVersion="2.28.0.0"
+                                      newVersion="<version number to use>" />
+                 </dependentAssembly>
+             </assemblyBinding>
+         </runtime>
+     </configuration>
+
+  
+
 .. _csharp-breaking-changes-2.21.0:
 
 Version 2.21.0 Breaking Changes

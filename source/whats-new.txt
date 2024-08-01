@@ -40,7 +40,7 @@ What's New in 2.28
 .. warning:: Potential Breaking Change in v2.28
 
    - All {+driver-short+} components are strongly named. If your application
-     If your application has dependencies that reference multiple {+driver-short+}
+     has dependencies that reference multiple {+driver-short+}
      versions, you must create binding redirects to manage those dependencies.
      For more information, see :ref:`csharp-breaking-changes-2.28.0`.
 

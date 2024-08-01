@@ -52,8 +52,8 @@ the version after v2.0 including any listed under v2.20.
 
 .. _csharp-breaking-changes-2.28.0:
 
-Version 2.28.0 Breaking Changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 2.28.0 Potential Breaking Change
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - All {+driver-short+} components are strongly named. If your application
   has dependencies that reference multiple {+driver-short+} versions, you must create

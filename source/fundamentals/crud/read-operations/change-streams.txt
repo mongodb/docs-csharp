@@ -65,7 +65,7 @@ classes:
 - ``Collection``: To monitor changes in the collection
 
 The following example opens a change stream on the ``restaurants`` collection
-and outputs the type of changes as they occur. Select the
+and outputs the operation type of changes as they occur. Select the
 :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the corresponding
 code.
 
@@ -233,22 +233,23 @@ Include Pre-Images and Post-Images
 By default, when you perform an operation on a collection, the
 corresponding change event includes only the delta of the fields
 modified by that operation. To see the full document before or after a
-change, specify the ``FullDocumentBeforeChange`` or the ``FullDocument``
-parameters in the ``Watch()`` or ``WatchAsync()`` method.
+change, create a ``ChangeStreamOptions`` object and specify the
+``FullDocumentBeforeChange`` or the ``FullDocument`` options. Then, pass the
+``ChangeStreamOptions`` object to the ``Watch()`` or ``WatchAsync()`` method.
 
 The **pre-image** is the full version of a document *before* a change. To include the
 pre-image in the change stream event, set the ``FullDocumentBeforeChange``
-parameter to one of the following values:
+option to one of the following values:
 
 - ``ChangeStreamFullDocumentBeforeChangeOption.WhenAvailable``: The change event
   includes a pre-image of the modified document for change events only if the
   pre-image is available.
-- ``ChangeStreamFullDocumentBeforeChangeOption.ChangeStreamFullDocumentOption.Required``:
+- ``ChangeStreamFullDocumentBeforeChangeOption.Required``:
   The change event includes a pre-image of the modified document for change
   events. If the pre-image is not available, the driver raises an error.
 
 The **post-image** is the full version of a document *after* a change. To include the
-post-image in the change stream event, set the ``full_document`` parameter to
+post-image in the change stream event, set the ``FullDocument`` option to
 one of the following values:
 
 - ``ChangeStreamFullDocumentOption.UpdateLookup``: The change event includes a
@@ -261,7 +262,7 @@ one of the following values:
   not available, the driver raises an error.
 
 The following example opens a change stream on a collection and includes the post-image
-of updated documents by specifying the ``FullDocument`` parameter. Select the
+of updated documents by specifying the ``FullDocument`` option. Select the
 :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the corresponding
 code.
 

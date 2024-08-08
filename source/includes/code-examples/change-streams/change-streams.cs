@@ -67,7 +67,7 @@ using (var cursor = _restaurantsCollection.Watch(pipeline))
 
 // start-change-stream-post-image
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
-            .Match(change => change.OperationType == ChangeStreamOperationType.Update);
+    .Match(change => change.OperationType == ChangeStreamOperationType.Update);
 
 var options = new ChangeStreamOptions
 {
@@ -85,7 +85,7 @@ using (var cursor = _restaurantsCollection.Watch(pipeline, options))
 
 // start-change-stream-post-image-async
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
-            .Match(change => change.OperationType == ChangeStreamOperationType.Update);
+    .Match(change => change.OperationType == ChangeStreamOperationType.Update);
 
 var options = new ChangeStreamOptions
 {

@@ -20,7 +20,7 @@ var collection = database.GetCollection<Restaurant>("restaurants");
 using var cursor = await collection.WatchAsync();
 await cursor.ForEachAsync(change =>
 {
-    Console.WriteLine("Received the following type of change: "change.OperationType);
+    Console.WriteLine("Received the following type of change: " + change.OperationType);
 });
 // end-open-change-stream-async
 

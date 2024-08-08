@@ -106,10 +106,10 @@ Modify the Change Stream Output
 
 You can pass the ``pipeline`` parameter to the ``Watch()`` and ``WatchAsync()``
 methods to modify the change stream output. This parameter allows you to watch
-for only specified change events. Format the parameter as a list of objects that
-each represent an aggregation stage.
+for only specified change events. Create the pipeline by using the
+``EmptyPipelineDefinition`` class, and appending the relevant aggregation stage methods.
 
-You can specify the following stages in the ``pipeline`` parameter:
+You can specify the following aggregation stages in the ``pipeline`` parameter:
 
 - ``$addFields``
 - ``$match``
@@ -119,6 +119,9 @@ You can specify the following stages in the ``pipeline`` parameter:
 - ``$redact``
 - ``$set``
 - ``$unset``
+
+To learn how to build an aggregation pipeline by using the
+``PipelineDefinitionBuilder`` class, see :ref:`csharp-builders-aggregation`.
 
 The following example uses the ``pipeline`` parameter to open a change stream
 that records only update operations. Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the
@@ -150,7 +153,7 @@ manual.
 Modify ``Watch()`` Behavior
 ---------------------------
 
-The ``Watch()`` and ``WatchAsync`` methods accept optional parameters, which represent
+The ``Watch()`` and ``WatchAsync()`` methods accept optional parameters, which represent
 options you can use to configure the operation. If you don't specify any
 options, the driver does not customize the operation.
 
@@ -237,23 +240,25 @@ The **pre-image** is the full version of a document *before* a change. To includ
 pre-image in the change stream event, set the ``FullDocumentBeforeChange``
 parameter to one of the following values:
 
-- ``WhenAvailable``: The change event includes a pre-image of the
-  modified document for change events only if the pre-image is available.
-- ``Required``: The change event includes a pre-image of the
-  modified document for change events. If the pre-image is not available, the
-  driver raises an error.
+- ``ChangeStreamFullDocumentBeforeChangeOption.WhenAvailable``: The change event
+  includes a pre-image of the modified document for change events only if the
+  pre-image is available.
+- ``ChangeStreamFullDocumentBeforeChangeOption.ChangeStreamFullDocumentOption.Required``:
+  The change event includes a pre-image of the modified document for change
+  events. If the pre-image is not available, the driver raises an error.
 
 The **post-image** is the full version of a document *after* a change. To include the
 post-image in the change stream event, set the ``full_document`` parameter to
 one of the following values:
 
-- ``UpdateLookup``: The change event includes a copy of the entire changed
-  document from some time after the change.
-- ``WhenAvailable``: The change event includes a post-image of the
-  modified document for change events only if the post-image is available.
-- ``Required``: The change event includes a post-image of the
-  modified document for change events. If the post-image is not available, the
-  driver raises an error.
+- ``ChangeStreamFullDocumentOption.UpdateLookup``: The change event includes a
+  copy of the entire changed document from some time after the change.
+- ``ChangeStreamFullDocumentOption.WhenAvailable``: The change event includes a
+  post-image of the modified document for change events only if the post-image
+  is available.
+- ``ChangeStreamFullDocumentOption.Required``: The change event includes a
+  post-image of the modified document for change events. If the post-image is
+  not available, the driver raises an error.
 
 The following example opens a change stream on a collection and includes the post-image
 of updated documents by specifying the ``FullDocument`` parameter. Select the
@@ -297,4 +302,4 @@ guide, see the following API documentation:
 - `Watch() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoClient.Watch.html>`__
 - `WatchAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoClient.WatchAsync.html>`__
 - `ChangeStreamOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ChangeStreamOptions.html>`__
-- `UpdateOne() <{+new-api-root+}MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.UpdateOne.html>`__
+- `UpdateOne() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.UpdateOne.html>`__

@@ -2,12 +2,12 @@
 var database = client.GetDatabase("sample_restaurants");
 var collection = database.GetCollection<Restaurant>("restaurants");
 
-// Open a change stream and print the changes as they're received
+// Opens a change stream and prints the changes as they're received
 using (var cursor = collection.Watch())
 {
     foreach (var change in cursor.ToEnumerable())
     {
-        Console.WriteLine("Received the following type of change: " + change.OperationType);
+        Console.WriteLine("Received the following type of change: " + change.BackingDocument);
     }
 }
 // end-open-change-stream
@@ -16,11 +16,11 @@ using (var cursor = collection.Watch())
 var database = client.GetDatabase("sample_restaurants");
 var collection = database.GetCollection<Restaurant>("restaurants");
 
-// Open a change stream and print the changes as they're received
+// Opens a change streams and print the changes as they're received
 using var cursor = await collection.WatchAsync();
 await cursor.ForEachAsync(change =>
 {
-    Console.WriteLine("Received the following type of change: " + change.OperationType);
+    Console.WriteLine("Received the following type of change: " + change.BackingDocument);
 });
 // end-open-change-stream-async
 
@@ -41,7 +41,7 @@ var result = collection.UpdateOne(filter, update);
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
             .Match(change => change.OperationType == ChangeStreamOperationType.Update);
 
-// Open a change stream and print the changes as they're received
+// Opens a change stream and prints the changes as they're received
 using (var cursor = await _restaurantsCollection.WatchAsync(pipeline))
 {
     await cursor.ForEachAsync(change =>
@@ -55,7 +55,7 @@ using (var cursor = await _restaurantsCollection.WatchAsync(pipeline))
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
             .Match(change => change.OperationType == ChangeStreamOperationType.Update);
 
-// Open a change stream and print the changes as they're received
+// Opens a change streams and print the changes as they're received
 using (var cursor = _restaurantsCollection.Watch(pipeline))
 {
     foreach (var change in cursor.ToEnumerable())
@@ -78,7 +78,7 @@ using (var cursor = _restaurantsCollection.Watch(pipeline, options))
 {
     foreach (var change in cursor.ToEnumerable())
     {
-        Console.WriteLine(change);
+        Console.WriteLine(changeFullDocument.ToBsonDocument());
     }
 }
 // end-change-stream-post-image
@@ -95,6 +95,6 @@ var options = new ChangeStreamOptions
 using var cursor = await _restaurantsCollection.WatchAsync(pipeline, options);
 await cursor.ForEachAsync(change =>
 {
-    Console.WriteLine(change);
+    Console.WriteLine(changeFullDocument.ToBsonDocument());
 });
 // end-change-stream-post-image-async

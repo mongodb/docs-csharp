@@ -21,7 +21,7 @@ Overview
 --------
 
 In this guide, you can learn how to use a **change stream** to monitor real-time
-changes to your database. A change stream is a {+mdb-server+} feature that
+changes to your data. A change stream is a {+mdb-server+} feature that
 allows your application to subscribe to data changes on a collection, database,
 or deployment.
 
@@ -65,7 +65,7 @@ classes:
 - ``Collection``: To monitor changes in the collection
 
 The following example opens a change stream on the ``restaurants`` collection
-and outputs the operation type of changes as they occur. Select the
+and outputs the changes as they occur. Select the
 :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the corresponding
 code.
 
@@ -88,18 +88,16 @@ code.
          :language: csharp
 
 To begin watching for changes, run the application. Then, in a separate
-application or shell, modify the ``restaurants`` collection. The following
-example updates a document with a ``name`` field value of ``Blarney Castle``:
+application or shell, modify the ``restaurants`` collection. Updating a document
+with the ``"name"`` value of ``"Blarney Castle"`` results in the following
+change stream output:
 
-.. _csharp-change-stream-update:
+.. code-block:: sh
 
-.. literalinclude:: /includes/code-examples/change-streams/change-streams.cs
-   :start-after: start-modify-document
-   :end-before: end-modify-document
-   :language: csharp
-
-When you update the collection, the change stream application prints the type of change
-as it occurs.
+   { "_id" : { "_data" : "..." }, "operationType" : "update", "clusterTime" : Timestamp(...), 
+   "wallTime" : ISODate("..."), "ns" : { "db" : "sample_restaurants", "coll" : "restaurants" }, 
+   "documentKey" : { "_id" : ObjectId("...") }, "updateDescription" : { "updatedFields" : { "cuisine" : "Irish" }, 
+   "removedFields" : [], "truncatedArrays" : [] } }
 
 Modify the Change Stream Output
 -------------------------------
@@ -107,7 +105,7 @@ Modify the Change Stream Output
 You can pass the ``pipeline`` parameter to the ``Watch()`` and ``WatchAsync()``
 methods to modify the change stream output. This parameter allows you to watch
 for only specified change events. Create the pipeline by using the
-``EmptyPipelineDefinition`` class, and appending the relevant aggregation stage methods.
+``EmptyPipelineDefinition`` class and appending the relevant aggregation stage methods.
 
 You can specify the following aggregation stages in the ``pipeline`` parameter:
 
@@ -121,7 +119,8 @@ You can specify the following aggregation stages in the ``pipeline`` parameter:
 - ``$unset``
 
 To learn how to build an aggregation pipeline by using the
-``PipelineDefinitionBuilder`` class, see :ref:`csharp-builders-aggregation`.
+``PipelineDefinitionBuilder`` class, see :ref:`csharp-builders-aggregation` in
+the Operations with Builders guide.
 
 The following example uses the ``pipeline`` parameter to open a change stream
 that records only update operations. Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the
@@ -164,7 +163,7 @@ of ``Watch()`` and ``WatchAsync()``:
    :widths: 30 70
    :header-rows: 1
 
-   * - Property
+   * - Option
      - Description
 
    * - ``FullDocument``
@@ -200,7 +199,7 @@ of ``Watch()`` and ``WatchAsync()``:
        | ``StartAtOperationTime`` is mutually exclusive with ``ResumeAfter`` and ``StartAfter``.
 
    * - ``MaxAwaitTime``
-     - | The maximum amount of time, in milliseconds, the server waits for new
+     - | Specifies the maximum amount of time, in milliseconds, the server waits for new
          data changes to report to the change stream cursor before returning an
          empty batch. Defaults to 1000 milliseconds.
 
@@ -211,14 +210,14 @@ of ``Watch()`` and ``WatchAsync()``:
          cursor and set this parameter to ``True``.
 
    * - ``BatchSize``
-     - | The maximum number of change events to return in each batch of the
+     - | Specifies the maximum number of change events to return in each batch of the
          response from the MongoDB cluster.
 
    * - ``Collation``
-     - | The collation to use for the change stream cursor.
+     - | Specifies the collation to use for the change stream cursor.
 
    * - ``Comment``
-     - | A comment to attach to the operation.
+     - | Specifies a comment to attach to the operation.
 
 .. _csharp-change-stream-pre-post-image:
 
@@ -283,6 +282,15 @@ code.
          :start-after: start-change-stream-post-image
          :end-before: end-change-stream-post-image
          :language: csharp
+
+Running the preceding code example and updating a document with the ``"name"``
+value of ``"Blarney Castle"`` results in the following change stream output:
+
+.. code-block:: sh
+
+   { "_id" : ObjectId("..."), "name" : "Blarney Castle", "restaurant_id" : "40366356", 
+   "cuisine" : "Traditional Irish", "address" : { "building" : "202-24", "coord" : [-73.925044200000002, 40.5595462], 
+   "street" : "Rockaway Point Boulevard", "zipcode" : "11697" }, "borough" : "Queens", "grades" : [...] }
 
 To learn more about pre-images and post-images, see 
 :manual:`Change Streams with Document Pre- and Post-Images </changeStreams#change-streams-with-document-pre--and-post-images>` 

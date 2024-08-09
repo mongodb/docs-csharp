@@ -78,7 +78,7 @@ using (var cursor = _restaurantsCollection.Watch(pipeline, options))
 {
     foreach (var change in cursor.ToEnumerable())
     {
-        Console.WriteLine(changeFullDocument.ToBsonDocument());
+        Console.WriteLine(change.FullDocument.ToBsonDocument());
     }
 }
 // end-change-stream-post-image
@@ -95,6 +95,6 @@ var options = new ChangeStreamOptions
 using var cursor = await _restaurantsCollection.WatchAsync(pipeline, options);
 await cursor.ForEachAsync(change =>
 {
-    Console.WriteLine(changeFullDocument.ToBsonDocument());
+    Console.WriteLine(change.FullDocument.ToBsonDocument());
 });
 // end-change-stream-post-image-async

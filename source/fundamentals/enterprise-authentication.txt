@@ -51,8 +51,8 @@ user to authenticate to a Kerberos service using the user's principal name.
 The following examples specify the authentication mechanism using the following
 placeholders:
 
-- ``<db_username>``: Your :wikipedia:`URL-encoded <Percent-encoding>` principal name; for example "username%40REALM.ME"
-- ``<db_password>``: Your Kerberos user's password
+- ``<username>``: Your :wikipedia:`URL-encoded <Percent-encoding>` principal name; for example "username%40REALM.ME"
+- ``<password>``: Your Kerberos user's password
 - ``<hostname>``: The network address of your MongoDB server, accessible by your client
 
 Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
@@ -66,7 +66,7 @@ mechanism:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<db_username>:<db_password>@<hostname>/?authMechanism=GSSAPI");
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -74,7 +74,7 @@ mechanism:
       .. code-block:: csharp
          :emphasize-lines: 1
 
-         var credential = MongoCredential.CreateGssapiCredential("<db_username>", "<db_password>");
+         var credential = MongoCredential.CreateGssapiCredential("<username>", "<password>");
          var settings = MongoClientSettings.FromConnectionString("<connection string>");
          settings.Credential = credential;
          var mongoClient = new MongoClient(settings);
@@ -219,8 +219,8 @@ using your directory-server username and password.
 The following examples specify the authentication mechanism using the following
 placeholders:
 
-- ``<db_username>``: Your LDAP username
-- ``<db_password>``: Your LDAP password
+- ``<username>``: Your LDAP username
+- ``<password>``: Your LDAP password
 - ``<hostname>``: The network address of your MongoDB server, accessible by your
   client
 - ``<authenticationDb>``: The MongoDB database that contains your user's
@@ -237,7 +237,7 @@ mechanism:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<db_username>:<db_password>@<hostname>/?authSource=<authenticationDb>&authMechanism=PLAIN");
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authSource=<authenticationDb>&authMechanism=PLAIN");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -245,7 +245,7 @@ mechanism:
       .. code-block:: csharp
          :emphasize-lines: 1
 
-         var credential = MongoCredential.CreatePlainCredential("<authenticationDb>", "<db_username>", "<db_password>");
+         var credential = MongoCredential.CreatePlainCredential("<authenticationDb>", "<username>", "<password>");
          var settings = MongoClientSettings.FromConnectionString("<connection string>");
          settings.Credential = credential;
          var mongoClient = new MongoClient(settings);

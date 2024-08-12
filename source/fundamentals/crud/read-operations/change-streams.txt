@@ -89,10 +89,11 @@ code.
 
 To begin watching for changes, run the application. Then, in a separate
 application or shell, modify the ``restaurants`` collection. Updating a document
-with the ``"name"`` value of ``"Blarney Castle"`` results in the following
+that has a ``"name"`` value of ``"Blarney Castle"`` results in the following
 change stream output:
 
 .. code-block:: sh
+   :copyable: false
 
    { "_id" : { "_data" : "..." }, "operationType" : "update", "clusterTime" : Timestamp(...), 
    "wallTime" : ISODate("..."), "ns" : { "db" : "sample_restaurants", "coll" : "restaurants" }, 
@@ -217,7 +218,7 @@ of ``Watch()`` and ``WatchAsync()``:
      - | Specifies the collation to use for the change stream cursor.
 
    * - ``Comment``
-     - | Specifies a comment to attach to the operation.
+     - | Attaches a comment to the operation.
 
 .. _csharp-change-stream-pre-post-image:
 
@@ -283,10 +284,11 @@ code.
          :end-before: end-change-stream-post-image
          :language: csharp
 
-Running the preceding code example and updating a document with the ``"name"``
+Running the preceding code example and updating a document that has a ``"name"``
 value of ``"Blarney Castle"`` results in the following change stream output:
 
 .. code-block:: sh
+   :copyable: false
 
    { "_id" : ObjectId("..."), "name" : "Blarney Castle", "restaurant_id" : "40366356", 
    "cuisine" : "Traditional Irish", "address" : { "building" : "202-24", "coord" : [-73.925044200000002, 40.5595462], 

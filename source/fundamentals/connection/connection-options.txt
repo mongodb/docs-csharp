@@ -306,7 +306,6 @@ relevant options.
           readPreference=primaryPreferred
           &maxStalenessSeconds=90
           &readPreferenceTags=dc:ny,rack:1
-        |
         
         You can include the ``readPreferenceTags`` parameter in the connection URI more
         than once. If you do, the client treats each instance as a separate tag set.

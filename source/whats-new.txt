@@ -32,6 +32,16 @@ Learn what's new in:
 
 .. _upcoming-breaking-changes:
 
+.. _csharp-version-3.0:
+
+What's New in 3.0
+-----------------
+
+.. warning:: Breaking Changes in v3.0
+
+   The v3.0 driver contains breaking changes. See :ref:`<csharp-breaking-changes-3.0>`
+   for more information.
+
 .. _csharp-version-2.28:
 
 What's New in 2.28

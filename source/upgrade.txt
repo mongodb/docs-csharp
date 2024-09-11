@@ -64,7 +64,7 @@ Version 3.0 Potential Breaking Change
 - This version of the driver removes support for the
   ``MONGODB-CR`` authentication mechanism. To learn more about
   configuring authentication in the {+driver-short+}, see
-  :ref:`Authentication Mechanisms. <csharp-authentication-default>`
+  :ref:`Authentication Mechanisms. <csharp-authentication-mechanisms>`
 
 .. _csharp-breaking-changes-2.28.0:
 

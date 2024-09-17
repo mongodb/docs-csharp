@@ -17,7 +17,6 @@ Upgrade Driver Versions
    :depth: 1
    :class: singlecol
 
-
 Overview
 --------
 
@@ -56,6 +55,14 @@ introduced them. When upgrading driver versions, address all the breaking
 changes between the current and upgrade versions. For example, if you
 are upgrading the driver from v2.0 to v2.20, address all breaking changes from
 the version after v2.0 including any listed under v2.20.
+
+.. _csharp-breaking-changes-3.0:
+
+Version 3.0 Potential Breaking Change
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- The LINQ2 provider has been removed from this version of the driver.
+  You must use LINQ3 for all LINQ queries.
 
 .. _csharp-breaking-changes-2.28.0:
 

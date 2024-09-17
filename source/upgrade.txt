@@ -66,6 +66,11 @@ Version 3.0 Potential Breaking Change
   configuring authentication in the {+driver-short+}, see
   :ref:`Authentication Mechanisms. <csharp-authentication-mechanisms>`
 
+- This version removes the ``ClusterBuilder.ConfigureSdamLogging()`` method.
+  To configure SDAM logging,
+  use the `ClusterBuilder.ConfigureLoggingSettings() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.ClusterBuilder.ConfigureLoggingSettings.html>`__
+  method instead.
+
 .. _csharp-breaking-changes-2.28.0:
 
 Version 2.28.0 Potential Breaking Change

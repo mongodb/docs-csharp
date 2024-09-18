@@ -31,8 +31,7 @@ The {+driver-short+} automatically translates LINQ queries into
 .. important:: 
 
    LINQ3 is the only LINQ provider available in the {+driver-long+}. If you have
-   manually configured your project to use LINQ2, you must change your provider to
-   LINQ3 to use this version of the driver.
+   manually configured your project to use LINQ2, it will not compile.
 
 The examples in this guide use the ``restaurants`` collection
 in the ``sample_restaurants`` database provided in the :atlas:`Atlas sample datasets </sample-data>`.

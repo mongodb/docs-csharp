@@ -66,6 +66,10 @@ Version 3.0 Potential Breaking Change
   configuring authentication in the {+driver-short+}, see
   :ref:`Authentication Mechanisms. <csharp-authentication-mechanisms>`
 
+- This version of the driver replaces the ``IMongoQueryable`` interface with the
+  ``IQueryable`` interface, following the pattern used by most other LINQ providers. If your
+  application contains references to ``IMongoQueryable``, replace them with ``IQueryable``.
+
 .. _csharp-breaking-changes-2.28.0:
 
 Version 2.28.0 Potential Breaking Change

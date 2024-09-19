@@ -38,12 +38,14 @@ Learn what's new in:
 What's New in 2.29
 ------------------
 
-The 2.29 driver release has been tested against {+mdb-server+} version 8.0 and
+The 2.29 driver release adds support for {+mdb-server+} version 8.0 and
 includes the following new features:
 
 - Adds support for v2 of the Queryable Encryption range protocol.
 
-- Adds support for range indexes for Queryable Encryption.
+- Adds support for range indexes for Queryable Encryption. For more information about
+  Queryable Encryption, see :manual:`Queryable Encryption </core/queryable-encryption>`
+  in the {+mdb-server+} manual.
 
 For more information about this release, see the :github:`v2.29 release notes
 </mongodb/mongo-csharp-driver/releases/tag/v2.29.0>`.

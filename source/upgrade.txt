@@ -69,6 +69,9 @@ Version 3.0 Potential Breaking Change
 - This version removes the ``ClusterBuilder.ConfigureSdamLogging()`` method.
   To configure logging in your application, see the :ref:`csharp-logging` guide.
 
+- The LINQ2 provider has been removed from this version of the driver.
+  You must use LINQ3 for all LINQ queries.
+
 .. _csharp-breaking-changes-2.28.0:
 
 Version 2.28.0 Potential Breaking Change

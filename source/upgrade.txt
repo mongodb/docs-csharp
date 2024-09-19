@@ -72,6 +72,29 @@ Version 3.0 Potential Breaking Change
 - The LINQ2 provider has been removed from this version of the driver.
   You must use LINQ3 for all LINQ queries.
 
+- In driver v2.x, you could choose between two GUID representation modes.
+  ``GuidRepresentationMode.V2`` was the default. This mode assumed that all GUIDs in a
+  document use the same ``BsonBinaryData`` subtype, and GUID representation was
+  controlled by the reader or writer, not the serializer.
+
+  In driver v3.0, ``GuidRepresentationMode.V3`` is the only option. Running in this mode
+  changes the behavior of the driver in the following ways: 
+  This mode is more flexible than ``V2``, but it also means you must ensure that 
+  each GUID field is serialized and deserialized correctly.
+  
+  - The methods in the ``BsonBinaryReader``, ``BsonBinaryWriter``, ``JsonReader``, and
+    ``JsonWriter`` classes no longer check the ``GuidRepresentationMode``.
+  - Removed the ``BsonBinaryData(Guid)`` constructor. To construct a ``BsonBinaryData``
+    object from a GUID, use the ``BsonBinaryData.Create(Guid, GuidRepresentation)`` constructor.
+  - Removed the ``BsonBinaryData.GuidRepresentation`` property. This information is no
+    longer stored in the ``BsonBinaryData`` object and must be specified by the user.
+  - Calling the ``BsonBinaryData.ToGuid()`` method without the ``GuidRepresentation``
+    parameter works only on GUIDs of subtype 4.
+
+If you map your data only to POCOs, you can ignore the GUID representation. However, if you
+serialize and deserialize BSON documents directly, you must specify the GUID representation and ensure that
+it matches the format used by your documents.
+
 .. _csharp-breaking-changes-2.28.0:
 
 Version 2.28.0 Potential Breaking Change

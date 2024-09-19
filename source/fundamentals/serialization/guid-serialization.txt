@@ -41,66 +41,26 @@ created ``BsonBinaryData`` subtype 4.
    
    Use ``BsonBinaryData`` subtype 4 for all new GUIDs. 
 
-GuidRepresentationMode
-----------------------
 
 In many MongoDB collections, all GUID fields use the same subtype of ``BsonBinaryData``.
 Some older collections, however, may contain some GUID fields that 
 use subtype 3 and others that use subtype 4. 
-To ensure that the driver serializes and deserializes all GUIDs correctly,  
-you should set the ``BsonDefaults.GuidRepresentationMode`` property to one of the 
-following ``GuidRepresentationMode`` values: 
 
-V2
-~~
-
-``GuidRepresentationMode.V2`` assumes that all GUIDs in a document use the same 
-``BsonBinaryData`` subtype. In this mode, GUID representation is 
-controlled by the reader or writer, not the serializer.
-
-``V2`` is the default ``GuidRepresentationMode``.
-
-.. note::
-   
-   When version 3 of the {+driver-short+} is released, support for ``GuidRepresentationMode.V2``
-   will be removed from the driver and ``V3`` will become the default. 
-
-V3
-~~
-
-``GuidRepresentationMode.V3`` allows fields in the same document to use different 
-GUID formats. 
-In this mode, GUID representation is controlled at the property level by configuring the 
+The driver allows fields in the same document to use different 
+GUID formats. GUID representation is controlled at the property level by configuring the 
 serializer for each property.
 
-To use ``GuidRepresentationMode.V3``, run the following line of code. You should run this 
-code during the bootstrapping phase of your application, before creating 
-a ``MongoClient`` object. 
+Serializing GUIDs
+-----------------
 
-.. code-block:: csharp
-
-   BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V3;
-
-Running in ``V3`` mode changes the behavior of the driver in the following ways:
-
-- The ``BsonBinaryReader.ReadBinaryData()`` method ignores ``readerSettings.GuidRepresentation``
-- The ``BsonBinaryWriter.WriteBinaryData()`` method ignores ``writerSettings.GuidRepresentation``
-- The ``JsonReader.ReadBinaryData()`` method ignores ``readerSettings.GuidRepresentation``
-- ``JsonWriter`` ignores ``writerSettings.GuidRepresentation``
-- Calling the ``BsonBinaryData.ToGuid()`` method without the ``GuidRepresentation``
-  parameter works only on GUIDs of subtype 4.
+The driver handles GUID serialization at the level of individual
+properties. You must ensure that 
+each GUID field is serialized and deserialized correctly.
 
 .. note::
 
-   You can't use both ``GuidRepresentationMode.V2`` and ``GuidRepresentationMode.V3`` 
-   in a single application.
-
-Serializing GUIDs in V3
------------------------
-
-``GuidRepresentationMode.V3`` handles GUID serialization at the level of individual
-properties. This mode is more flexible than ``V2``, but it also means you must ensure that 
-each GUID field is serialized and deserialized correctly.
+   Default value is unspecified. Driver throws an exception rather than guessing.
+   You must specify the format for every GUID, or globally register a serializer.
 
 If you're using the {+driver-short+} to :ref:`automap your {+language+} classes to document schemas <csharp-class-mapping>`,
 you can use the ``BsonGuidRepresentation`` attribute on a GUID property 
@@ -150,12 +110,12 @@ in your application, such as during the bootstrapping phase:
    serializer for the most commonly used GUID subtype, then use the ``BsonGuidRepresentation``
    attribute to denote any GUID properties of another subtype.  
 
-Serializing Objects in V3
--------------------------
+Serializing Objects
+-------------------
 
 You can use an ``ObjectSerializer`` to serialize hierarchical objects to subdocuments. 
-To ensure that GUIDs in these objects are serialized and deserialized correctly when using 
-``V3``, you should select the correct GUID representation when constructing your 
+To ensure that GUIDs in these objects are serialized and deserialized correctly,
+you should select the correct GUID representation when constructing your 
 ``ObjectSerializer``. 
 
 The following code sample shows how to 

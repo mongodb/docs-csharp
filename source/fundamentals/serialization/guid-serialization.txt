@@ -155,10 +155,10 @@ in your application, such as during the bootstrapping phase:
 
 .. tip::
 
-   When you're working with two subtypes, you can combine a global serializer with the 
-   ``BsonGuidRepresentation`` property attribute. For example, you can register a global
-   serializer for the most commonly used GUID subtype, then use the ``BsonGuidRepresentation``
-   attribute to denote any GUID properties of another subtype.  
+   When you're working with two ``BsonBinaryData`` subtypes, you can combine a global
+   serializer with the  ``BsonGuidRepresentation`` property attribute. For example, you
+   can register a global serializer for the most commonly used GUID subtype, then use
+   the ``BsonGuidRepresentation`` attribute to denote any GUID properties of another subtype.  
 
 .. important::
 

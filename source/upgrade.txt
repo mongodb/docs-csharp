@@ -85,11 +85,9 @@ Version 3.0 Potential Breaking Change
     objects of subtype 4. If the object has any other subtype, you must call the
     ``BsonBinaryData.ToGuid(GuidRepresentation)`` method and specify the subtype. 
 
-  .. note::
-
-     The preceding changes affect your application only if you serialize and deserialize
-     BSON documents directly. If you map your MongoDB documents only to :ref:`csharp-poco`,
-     the ``GuidRepresentationMode`` doesn't affect your application.
+  The preceding changes affect your application only if you serialize and deserialize
+  BSON documents directly. If you map your MongoDB documents only to :ref:`csharp-poco`,
+  the ``GuidRepresentationMode`` doesn't affect your application.
 
 .. _csharp-breaking-changes-2.28.0:
 

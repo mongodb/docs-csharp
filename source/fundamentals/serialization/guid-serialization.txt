@@ -24,47 +24,104 @@ In this guide, you can learn how to serialize **globally unique identifiers**
 (`GUIDs <https://learn.microsoft.com/en-us/dynamicsax-2012/developer/guids>`__),
 also known as **universally unique identifiers** (UUIDs).
 
+A Short History of MongoDB GUIDs
+--------------------------------
+
+A GUID is a 16-byte integer that you can use as a unique ID for a MongoDB document.
+The following code block shows an example GUID:
+
+.. code-block::
+
+  00112233-4455-6677-8899-aabbccddeeff
+
+Originally, MongoDB represented GUIDs as ``BsonBinaryData``
+values of subtype 3. Because subtype 3 didn't standardize the byte order of GUIDs
+during encoding, different MongoDB drivers encoded GUIDs with different byte orders.
+
+Use the following tabs to compare the ways in which different MongoDB language drivers
+encoded the preceding GUID to ``BsonBinaryData`` subtype 3:
+
+.. tabs::
+
+   .. tab:: {+driver-short+}
+      :tabid: csharp
+
+      .. code-block:: csharp
+
+         33221100-5544-7766-8899-aabbccddeeff
+
+   .. tab:: PyMongo
+      :tabid: pymongo
+
+      .. code-block:: python
+
+         00112233-4455-6677-8899-aabbccddeeff
+
+   .. tab:: Java Driver
+      :tabid: java
+
+      .. code-block:: java
+
+         77665544-3322-1100-ffee-ddccbbaa9988
+
+To standardize GUID byte order, we added ``BsonBinaryData`` subtype 4, which all
+MongoDB drivers encode in the same way. We recommend using 
+``BsonBinaryData`` subtype 4 for all new GUIDs.
+
+For a list of all ``BsonBinaryData`` subtypes, see the
+API documentation for the `BsonBinarySubType <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonBinarySubType.html>`__
+enum.
+
 .. tip::
 
    In MongoDB applications, ``ObjectId`` can be used as a unique identifier for
    a document. Consider using ``ObjectId`` in place of a GUID with MongoDB
    applications where possible.
 
-A GUID is a 16-byte integer that you can use as a unique ID for a MongoDB document. 
-Originally, GUIDs in MongoDB were represented as ``BsonBinaryData`` values of subtype 3. 
-Subtype 3 did not standardize the byte order during serialization, which led to 
-inconsistent serialization across MongoDB drivers. 
-To standardize the byte order and ensure consistent serialization across drivers, we 
-created ``BsonBinaryData`` subtype 4.
-
-.. note::
-   
-   Use ``BsonBinaryData`` subtype 4 for all new GUIDs. 
-
-
-In many MongoDB collections, all GUID fields use the same subtype of ``BsonBinaryData``.
-Some older collections, however, may contain some GUID fields that 
-use subtype 3 and others that use subtype 4. 
-
-The driver allows fields in the same document to use different 
-GUID formats. GUID representation is controlled at the property level by configuring the 
-serializer for each property.
-
 Serializing GUIDs
 -----------------
 
-The driver handles GUID serialization at the level of individual
-properties. You must ensure that 
-each GUID field is serialized and deserialized correctly.
+Although we recommend using subtype 4 for all new ``BsonBinaryData`` GUIDs, some older
+MongoDB collections might contain some GUID fields that use subtype 3 and others that use
+subtype 4. To account for these differences, the {+driver-short+} handles GUID
+serialization at the level of individual properties.
+
+If you're using the {+driver-short+} to
+:ref:`automap your {+language+} classes to document schemas <csharp-class-mapping>`,
+you can add the ``BsonGuidRepresentation`` attribute to a GUID property 
+to specify its representation. This attribute accepts a value from the 
+``GuidRepresentation`` enum, which contains the following members:
+
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
+   :widths: 10 10 
+
+   * - GuidRepresentation Member
+     - BsonBinaryData Subtype
+   
+   * - ``Standard``
+     - 4
+   
+   * - ``CSharpLegacy``
+     - 3
+   
+   * - ``JavaLegacy``
+     - 3
+   
+   * - ``PythonLegacy``
+     - 3
+   
+   * - ``Unspecified``
+     - N/A
 
 .. note::
+   
+   The ``CSharpLegacy``, ``JavaLegacy``, and ``PythonLegacy`` GUID representations are
+   all equivalent to ``BsonBinaryData`` subtype 3, but use different byte orders.
 
-   Default value is unspecified. Driver throws an exception rather than guessing.
-   You must specify the format for every GUID, or globally register a serializer.
-
-If you're using the {+driver-short+} to :ref:`automap your {+language+} classes to document schemas <csharp-class-mapping>`,
-you can use the ``BsonGuidRepresentation`` attribute on a GUID property 
-to specify the representation:
+The following code example specifies the ``Standard`` GUID representation for the
+``G`` property: 
 
 .. code-block:: csharp
 
@@ -76,20 +133,13 @@ to specify the representation:
       public Guid G { get; set; }
    }
 
-.. note::
-
-   ``GuidRepresentation.Standard`` is equivalent to ``BsonBinaryData`` subtype 4.
-   Other GUID representations in the {+driver-short+}, such as ``CSharpLegacy``,
-   ``JavaLegacy``, and ``PythonLegacy``, are equivalent to subtype 3 but use 
-   different byte orders.
-
 If you're writing your own serialization code, you can use the 
 ``GuidSerializer`` class to serialize and deserialize individual GUID values to and 
 from BSON fields. To ensure that the driver handles GUIDs correctly, use the 
 ``GuidRepresentation`` parameter when you construct a ``GuidSerializer``.
 
-The following code sample creates an instance of ``GuidSerializer`` 
-for serializing GUID representations of subtype 4: 
+The following code sample creates an instance of the ``GuidSerializer`` class 
+for serializing properties that use ``BsonBinaryData`` subtype 4: 
 
 .. code-block::
 
@@ -109,6 +159,12 @@ in your application, such as during the bootstrapping phase:
    ``BsonGuidRepresentation`` property attribute. For example, you can register a global
    serializer for the most commonly used GUID subtype, then use the ``BsonGuidRepresentation``
    attribute to denote any GUID properties of another subtype.  
+
+.. important::
+
+   If you don't globally register a serializer, you must apply the ``BsonGuidRepresentation``
+   attribute to every serializable GUID property. Otherwise, the driver throws an exception
+   when it tries to serialize the property.
 
 Serializing Objects
 -------------------

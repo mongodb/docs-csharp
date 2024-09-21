@@ -24,13 +24,21 @@ In this guide, you can learn how to serialize **globally unique identifiers**
 (`GUIDs <https://learn.microsoft.com/en-us/dynamicsax-2012/developer/guids>`__),
 also known as **universally unique identifiers** (UUIDs).
 
-A Short History of MongoDB GUIDs
---------------------------------
+.. tip:: ObjectId
+
+   In MongoDB applications, you can use the
+   `ObjectId <{+new-api-root+}/api/MongoDB.Bson/MongoDB.Bson.ObjectId.html>`__ type
+   as a unique identifier for a document. Consider using ``ObjectId`` in place of a GUID
+   in MongoDB applications where possible.
+
+GUIDs in MongoDB
+----------------
 
 A GUID is a 16-byte integer that you can use as a unique ID for a MongoDB document.
 The following code block shows an example GUID:
 
 .. code-block::
+   :copyable: false
 
   00112233-4455-6677-8899-aabbccddeeff
 
@@ -47,6 +55,7 @@ encoded the preceding GUID to ``BsonBinaryData`` subtype 3:
       :tabid: csharp
 
       .. code-block:: csharp
+         :copyable: false
 
          33221100-5544-7766-8899-aabbccddeeff
 
@@ -54,6 +63,7 @@ encoded the preceding GUID to ``BsonBinaryData`` subtype 3:
       :tabid: pymongo
 
       .. code-block:: python
+         :copyable: false
 
          00112233-4455-6677-8899-aabbccddeeff
 
@@ -61,22 +71,17 @@ encoded the preceding GUID to ``BsonBinaryData`` subtype 3:
       :tabid: java
 
       .. code-block:: java
+         :copyable: false
 
          77665544-3322-1100-ffee-ddccbbaa9988
 
-To standardize GUID byte order, we added ``BsonBinaryData`` subtype 4, which all
-MongoDB drivers encode in the same way. We recommend using 
-``BsonBinaryData`` subtype 4 for all new GUIDs.
+To standardize GUID byte order across applications, we added ``BsonBinaryData`` subtype 4,
+which all MongoDB drivers encode in the same way. If your application uses GUIDs, we
+recommend using ``BsonBinaryData`` subtype 4 to store them.
 
 For a list of all ``BsonBinaryData`` subtypes, see the
 API documentation for the `BsonBinarySubType <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonBinarySubType.html>`__
 enum.
-
-.. tip::
-
-   In MongoDB applications, ``ObjectId`` can be used as a unique identifier for
-   a document. Consider using ``ObjectId`` in place of a GUID with MongoDB
-   applications where possible.
 
 Serializing GUIDs
 -----------------
@@ -86,11 +91,9 @@ MongoDB collections might contain some GUID fields that use subtype 3 and others
 subtype 4. To account for these differences, the {+driver-short+} handles GUID
 serialization at the level of individual properties.
 
-If you're using the {+driver-short+} to
-:ref:`automap your {+language+} classes to document schemas <csharp-class-mapping>`,
-you can add the ``BsonGuidRepresentation`` attribute to a GUID property 
-to specify its representation. This attribute accepts a value from the 
-``GuidRepresentation`` enum, which contains the following members:
+The {+driver-short+} uses the ``GuidRepresentation`` enum to represent the different
+``BsonBinaryData`` subtypes. The following table shows the ``GuidRepresentation`` enum
+members and the corresponding ``BsonBinaryData`` subtypes:
 
 .. list-table::
    :header-rows: 1
@@ -120,6 +123,17 @@ to specify its representation. This attribute accepts a value from the
    The ``CSharpLegacy``, ``JavaLegacy``, and ``PythonLegacy`` GUID representations are
    all equivalent to ``BsonBinaryData`` subtype 3, but use different byte orders.
 
+The following sections describe the ways in which you can configure GUID representation
+in your application.
+
+Configure with Attributes
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you're using the {+driver-short+} to
+:ref:`automap your {+language+} classes to document schemas <csharp-class-mapping>`,
+you can add the ``BsonGuidRepresentation`` attribute to a GUID property 
+to specify its representation. This attribute accepts a value from the 
+
 The following code example specifies the ``Standard`` GUID representation for the
 ``G`` property: 
 
@@ -132,6 +146,9 @@ The following code example specifies the ``Standard`` GUID representation for th
       [BsonGuidRepresentation(GuidRepresentation.Standard)]
       public Guid G { get; set; }
    }
+
+Configure in Code
+~~~~~~~~~~~~~~~~~
 
 If you're writing your own serialization code, you can use the 
 ``GuidSerializer`` class to serialize and deserialize individual GUID values to and 
@@ -171,8 +188,7 @@ Serializing Objects
 
 You can use an ``ObjectSerializer`` to serialize hierarchical objects to subdocuments. 
 To ensure that GUIDs in these objects are serialized and deserialized correctly,
-you should select the correct GUID representation when constructing your 
-``ObjectSerializer``. 
+select the correct GUID representation when constructing your ``ObjectSerializer``. 
 
 The following code sample shows how to 
 create an ``ObjectSerializer`` for a GUID representation of subtype 4:
@@ -209,4 +225,3 @@ guide, see the following API documentation:
 - `BsonGuidRepresentation <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Attributes.BsonGuidRepresentationAttribute.html>`__
 - `GuidSerializer <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Serializers.GuidSerializer.html>`__
 - `ObjectSerializer <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Serializers.ObjectSerializer.html>`__
-

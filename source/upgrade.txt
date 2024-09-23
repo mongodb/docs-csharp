@@ -74,7 +74,7 @@ Version 3.0 Potential Breaking Change
 
 - Exception classes and their related types no longer contain the ``[Serializable]``
   attribute, and therefore no longer support the Microsoft legacy serialization API. To
-  learn how to perform serialization with the {+driver-short+}, see the
+  learn how to use the {+driver-short+} to serialize objects, see the
   :ref:`csharp-serialization` guide.
 
 .. _csharp-breaking-changes-2.28.0:

@@ -28,8 +28,8 @@ also known as **universally unique identifiers** (UUIDs).
 
    In MongoDB applications, you can use the
    `ObjectId <{+new-api-root+}/api/MongoDB.Bson/MongoDB.Bson.ObjectId.html>`__ type
-   as a unique identifier for a document. Consider using ``ObjectId`` in place of a GUID
-   in MongoDB applications where possible.
+   as a unique identifier for a document. Consider using ``ObjectId`` instances in place
+   of GUIDs in MongoDB applications where possible.
 
 GUIDs in MongoDB
 ----------------
@@ -43,11 +43,12 @@ The following code block shows an example GUID:
   00112233-4455-6677-8899-aabbccddeeff
 
 Originally, MongoDB represented GUIDs as ``BsonBinaryData``
-values of subtype 3. Because subtype 3 didn't standardize the byte order of GUIDs
+values of :manual:`subtype 3. </reference/bson-types/#binary-data>`
+Because subtype 3 didn't standardize the byte order of GUIDs
 during encoding, different MongoDB drivers encoded GUIDs with different byte orders.
 
-Use the following tabs to compare the ways in which different MongoDB language drivers
-encoded the preceding GUID to ``BsonBinaryData`` subtype 3:
+The following tabs show different driver encodings of the preceding GUID to
+``BsonBinaryData`` subtype 3:
 
 .. tabs::
 

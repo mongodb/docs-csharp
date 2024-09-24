@@ -66,6 +66,10 @@ Version 3.0 Potential Breaking Change
   configuring authentication in the {+driver-short+}, see
   :ref:`Authentication Mechanisms. <csharp-authentication-mechanisms>`
 
+- This version of the driver replaces the ``IMongoQueryable`` interface with the
+  ``IQueryable`` interface, following the pattern used by most other LINQ providers. If your
+  application contains references to ``IMongoQueryable``, replace them with ``IQueryable``.
+
 - This version removes the ``ClusterBuilder.ConfigureSdamLogging()`` method.
   To configure logging in your application, see the :ref:`csharp-logging` guide.
 
@@ -76,6 +80,9 @@ Version 3.0 Potential Breaking Change
   attribute, and therefore no longer support the Microsoft legacy serialization API. To
   learn how to use the {+driver-short+} to serialize objects, see the
   :ref:`csharp-serialization` guide.
+
+- TLS 1.0 and 1.1 are no longer supported. You must use TLS 1.2 or higher. To learn
+  more about configuring TLS/SSL in the {+driver-short+}, see :ref:`<csharp-tls>`.
 
 .. _csharp-breaking-changes-2.28.0:
 

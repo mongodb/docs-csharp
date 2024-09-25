@@ -4,6 +4,13 @@
 Upgrade Driver Versions
 =======================
 
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   /upgrade/v2
+   /upgrade/v3
+
 .. facet::
    :name: genre
    :values: reference
@@ -20,8 +27,8 @@ Upgrade Driver Versions
 Overview
 --------
 
-In this section, you can identify the potentially *breaking changes* that each
-version of the {+driver-short+} introduced. 
+Use the guides on this page to identify the potentially *breaking changes* that each
+version of the {+driver-short+} introduces. 
 A breaking change is a modification of a convention or a behavior starting in
 a specific version of the driver. This type of change may prevent your application from
 working properly if you don't address it.

@@ -93,7 +93,7 @@ Version 2.28.0 Breaking Change
 .. _csharp-breaking-changes-2.21.0:
 
 Version 2.21.0 Breaking Changes
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - The driver changes the signature of ``Render`` methods in the Atlas Search builders.
   In previous driver versions, these methods had the following signature:
@@ -111,7 +111,7 @@ Version 2.21.0 Breaking Changes
 .. _csharp-breaking-changes-2.19.0:
 
 Version 2.19.0 Breaking Changes
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - The ``ObjectSerializer`` only allows deserialization of
   types that are considered safe. If not specified otherwise, the
@@ -136,7 +136,7 @@ Version 2.19.0 Breaking Changes
      var client = new MongoClient(clientSettings);
 
 Version 2.14.0 Breaking Changes
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - The driver drops support for {+mdb-server+} v3.4 and earlier. You must upgrade
   your {+mdb-server+} to v3.6 or later.

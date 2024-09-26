@@ -107,7 +107,7 @@ Version 3.0 Potential Breaking Change
   version 3.0, the driver defaults to serializing these values as BSON ``Decimal128``
   values instead.
   To serialize a a ``decimal`` or ``Decimal128`` value as a string, 
-  you must apply the ``[BsonRepresentation(BsonType.String)]`` attribute to the field.
+  apply the ``[BsonRepresentation(BsonType.String)]`` attribute to the field.
   
   To learn more about serialization, see the :ref:`csharp-serialization` guide.
 

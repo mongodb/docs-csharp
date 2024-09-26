@@ -14,7 +14,7 @@ Upgrade to Version 3.0
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 2
+   :depth: 1
    :class: singlecol
 
 Overview
@@ -35,10 +35,9 @@ To upgrade the {+driver-short+} to version 3.0, follow these steps:
 
 #. If you're using a 2.x version of the {+driver-short+}, upgrade to
    v{+last-version-2-number+}. To do so, follow the
-   :ref:`v2.x upgrade guide <csharp-upgrade-v2>` guide.
+   :ref:`v2.x upgrade guide. <csharp-upgrade-v2>`
 
-#. Address any breaking changes between the driver version your
-   application uses and your target upgrade version in the
+#. Address the breaking changes described in the
    :ref:`Breaking Changes by Version <csharp-breaking-changes-v3>` section.
 
    .. example::
@@ -49,17 +48,8 @@ To upgrade the {+driver-short+} to version 3.0, follow these steps:
 
 .. _csharp-breaking-changes-v3:
 
-Breaking Changes by Version
----------------------------
-
-The following sections describe the potential breaking changes introduced by each driver
-version. If a driver version is not included in this section, it doesn't introduce any
-breaking changes.
-
-.. _csharp-breaking-changes-3.0:
-
 Version 3.0 Breaking Changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 - The driver drops support for {+mdb-server+} v3.6 and earlier. You must upgrade
   your {+mdb-server+} to v4.0 or later.

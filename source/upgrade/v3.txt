@@ -1,7 +1,7 @@
 .. _csharp-upgrade-v3:
 
 ======================
-Upgrade to Version 3.x
+Upgrade to Version 3.0
 ======================
 
 .. facet::
@@ -21,13 +21,13 @@ Overview
 --------
 
 This page describes the changes you might need to make to your
-application when you upgrade the {+driver-short+} to version 3.x.
+application when you upgrade the {+driver-short+} to version 3.0.
 
 How to Upgrade
 --------------
 
 Each section of this page lists the potential breaking changes introduced by a driver version.
-To upgrade the {+driver-short+} to version 3.x, follow these steps:
+To upgrade the {+driver-short+} to version 3.0, follow these steps:
 
 1. Review the :ref:`Compatibility <csharp-compatibility-tables>` page to ensure the new
    driver version is compatible with the {+mdb-server+} versions your application connects

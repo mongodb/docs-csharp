@@ -102,6 +102,15 @@ Version 3.0 Potential Breaking Change
 - TLS 1.0 and 1.1 are no longer supported. You must use TLS 1.2 or higher. To learn
   more about configuring TLS/SSL in the {+driver-short+}, see :ref:`<csharp-tls>`.
 
+- In previous versions of the driver, if a field had the C# data type ``Decimal128`` or
+  ``decimal``, the driver serialized the value as a BSON ``string`` by default. In
+  version 3.0, the driver defaults to serializing these values as BSON ``Decimal128``
+  values instead.
+  To serialize a a ``decimal`` or ``Decimal128`` value as a string, 
+  you must apply the ``[BsonRepresentation(BsonType.String)]`` attribute to the field.
+  
+  To learn more about serialization, see the :ref:`csharp-serialization` guide.
+
 .. _csharp-breaking-changes-2.28.0:
 
 Version 2.28.0 Potential Breaking Change

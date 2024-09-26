@@ -57,8 +57,38 @@ The 3.0 driver release includes the following new features:
   This type is available in .NET 5 and later.
   To learn more about the ``Half`` type, see the
   `Half Struct <https://learn.microsoft.com/en-us/dotnet/api/system.half?view=net-8.0>`__
-  API reference page on MSDN. 
+  API reference page on MSDN.
 
+- Adds support for implicit client-side projection when using the ``Find()`` and
+  ``Select()`` methods. In previous versions of the driver, you could perform client-side
+  projection only after calling the ``ToEnumerable()`` or ``AsEnumerable()`` method, and
+  only by using the ``Select()`` method, similar to the following examples:
+
+  .. code-block:: csharp
+
+     var find = collection
+         .Find(doc => doc.Id == 1)
+         .ToEnumerable()
+         .Select(doc => new { R = MyFunction(doc.Name) });
+  
+     var enumerable = collection.AsQueryable()
+         .Where(doc => doc.Id == 1)
+         .AsEnumerable()
+         .Select(doc => new { R = MyFunction(doc.Name) });
+
+  In {+driver-short+} v3.0, you can perform client-side projection directly in the
+  ``Find()`` and ``Select()`` methods, as shown in the following examples:
+
+  .. code-block:: csharp
+
+     var find = collection
+         .Find(doc => doc.Id == 1)
+         .Project(doc => new { R = MyFunction(doc.Name) });
+
+     var queryable = collection.AsQueryable()
+         .Where(doc => doc.Id == 1)
+         .Select(doc => new { R = MyFunction(doc.Name) });
+ 
 .. _csharp-version-2.28:
 
 What's New in 2.28

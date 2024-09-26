@@ -26,7 +26,7 @@ application when you upgrade the {+driver-short+} to version 3.0.
 How to Upgrade
 --------------
 
-Each section of this page lists the potential breaking changes introduced by a driver version.
+This page lists the potential breaking changes introduced by the {+driver-short+} version 3.0.
 To upgrade the {+driver-short+} to version 3.0, follow these steps:
 
 1. Review the :ref:`Compatibility <csharp-compatibility-tables>` page to ensure the new
@@ -38,7 +38,7 @@ To upgrade the {+driver-short+} to version 3.0, follow these steps:
    :ref:`v2.x upgrade guide. <csharp-upgrade-v2>`
 
 #. Address the breaking changes described in the
-   :ref:`Breaking Changes by Version <csharp-breaking-changes-v3>` section.
+   :ref:`<csharp-breaking-changes-v3>` section.
 
    .. example::
     

@@ -61,6 +61,9 @@ Version 3.0 Breaking Changes
   and {+mdb-server+} versions, visit the
   :ref:`Compatibility <csharp-compatibility-tables>` page.
 
+- The classes, methods, and properties ``MongoDB.Driver.Core`` namespace that were
+  deprecated in v{+last-version-2-number+} are marked ``internal``.
+
 - The driver drops support for the
   ``MONGODB-CR`` authentication mechanism. To learn more about
   configuring authentication in the {+driver-short+}, see
@@ -102,5 +105,3 @@ Version 3.0 Breaking Changes
 
 - TLS 1.0 and 1.1 are no longer supported. You must use TLS 1.2 or higher. To learn
   more about configuring TLS/SSL in the {+driver-short+}, see :ref:`<csharp-tls>`.
-
-- Most of the types in the ``MongoDB.Driver.Core`` namespace are marked ``internal``.

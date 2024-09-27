@@ -102,3 +102,5 @@ Version 3.0 Breaking Changes
 
 - TLS 1.0 and 1.1 are no longer supported. You must use TLS 1.2 or higher. To learn
   more about configuring TLS/SSL in the {+driver-short+}, see :ref:`<csharp-tls>`.
+
+- Most of the types in the ``MongoDB.Driver.Core`` namespace are marked ``internal``.

@@ -103,9 +103,8 @@ Version 3.0 Potential Breaking Change
   more about configuring TLS/SSL in the {+driver-short+}, see :ref:`<csharp-tls>`.
 
 - By default, the driver serializes ``Decimal128`` and ``decimal`` values as BSON
-  ``Decimal128`` values. In previous versions of the driver,
-  the driver serialized these values as BSON ``string`` values
-  by default.
+  ``Decimal128`` values. In previous versions of the driver, the driver serialized these
+  values as BSON ``string`` values by default.
   To serialize a ``decimal`` or ``Decimal128`` value as a string in v3.0, 
   apply the ``[BsonRepresentation(BsonType.String)]`` attribute to the field.
   

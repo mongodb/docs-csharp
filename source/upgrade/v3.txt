@@ -116,3 +116,21 @@ Version 3.0 Breaking Changes
   
   To learn more about specifying BSON types during serialization, see the
   :ref:`Custom Serialization <csharp-custom-serialization>` section of the POCOs page.
+
+- The default JSON output mode is Relaxed Extended JSON, a string format based on the
+  JSON standard that describes BSON documents. Relaxed Extended JSON emphasizes
+  readability and interoperability at the expense of type preservation.
+
+  To use a different JSON output mode, set the ``JsonWriterSettings.OutputMode`` property
+  to a value from the ``JsonOutputMode`` enum, as shown in the following code example:
+
+  .. code-block:: csharp
+
+     // Configure JsonWriterSettings
+     var jsonWriterSettings = new JsonWriterSettings
+     {
+         OutputMode = JsonOutputMode.Strict
+     };
+
+     // Serialize the document to JSON using the configured settings
+     var json = document.ToJson(jsonWriterSettings);

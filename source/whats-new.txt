@@ -88,8 +88,8 @@ The 3.0 driver release includes the following new features:
   projection only after calling the ``ToEnumerable()`` or ``AsEnumerable()`` method, and
   only within the ``Select()`` method.
   
-  Select a tab below to see how to enable and use client-side projection for the
-  corresponding method.
+  To learn how to enable and use client-side projection for a driver method, select the
+  corresponding tab:
 
   .. tabs::
 

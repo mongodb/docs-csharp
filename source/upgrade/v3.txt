@@ -61,6 +61,11 @@ Version 3.0 Breaking Changes
   and {+mdb-server+} versions, visit the
   :ref:`Compatibility <csharp-compatibility-tables>` page.
 
+- The classes, methods, and properties in the ``MongoDB.Driver.Core`` namespace that were
+  deprecated in v{+last-version-2-number+} are marked ``internal``. If the driver
+  provides a replacement for a deprecated class, method, or property, the compiler
+  messages in v{+last-version-2-number+} will display it.
+
 - The driver drops support for the
   ``MONGODB-CR`` authentication mechanism. To learn more about
   configuring authentication in the {+driver-short+}, see
@@ -102,3 +107,32 @@ Version 3.0 Breaking Changes
 
 - TLS 1.0 and 1.1 are no longer supported. You must use TLS 1.2 or higher. To learn
   more about configuring TLS/SSL in the {+driver-short+}, see :ref:`<csharp-tls>`.
+
+- By default, the driver serializes ``Decimal128`` and ``decimal`` values as BSON
+  ``Decimal128`` values. In previous versions of the driver, the driver serialized these
+  values as BSON ``string`` values by default.
+  To serialize a ``decimal`` or ``Decimal128`` value as a string in v3.0, 
+  apply the ``[BsonRepresentation(BsonType.String)]`` attribute to the field.
+  
+  To learn more about specifying BSON types during serialization, see the
+  :ref:`Custom Serialization <csharp-custom-serialization>` section of the POCOs page.
+
+- The default JSON output mode is Relaxed Extended JSON, a string format based on the
+  JSON standard that describes BSON documents. Relaxed Extended JSON emphasizes
+  readability and interoperability at the expense of type preservation.
+
+  To use a different JSON output mode, create a new ``JsonWriterSettings`` object. Set
+  the ``OutputMode`` property of this object to a value from the ``JsonOutputMode`` enum,
+  then pass the object to the ``ToJson()`` method when you serialize your document.
+  The following code example shows how to serialize a BSON document to Strict JSON:
+
+  .. code-block:: csharp
+
+     // Configure JsonWriterSettings
+     var jsonWriterSettings = new JsonWriterSettings
+     {
+         OutputMode = JsonOutputMode.Strict
+     };
+
+     // Serialize the document to JSON using the configured settings
+     var json = document.ToJson(jsonWriterSettings);

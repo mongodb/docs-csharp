@@ -121,7 +121,7 @@ The 3.0 driver release includes the following new features:
           };
          
           var queryable = collection
-              .AsQueryable(translateOptions)
+              .AsQueryable(translationOptions)
               .Where(doc => doc.Id == 1)
               .Select(doc => new { R = MyFunction(doc.Name) });
 

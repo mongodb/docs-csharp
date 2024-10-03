@@ -1,12 +1,5 @@
 eol = true
 
-[[banners]]
-targets = ["*"]
-variant = "info"
-value = """\
-    This version of the documentation is archived and no longer supported. View the `current documentation {+current-documentation+}`__ to learn how to `upgrade your version of the {+driver-short+} {+current-documentation+}/upgrade`__.\
-    """
-
 name = "csharp"
 title = "C#/.NET"
 toc_landing_pages = [
@@ -46,3 +39,10 @@ int-data-type = "``integer``"
 not-available = "N/A"
 analyzer = "MongoDB C# Analyzer"
 current-documentation = "https://www.mongodb.com/docs/drivers/csharp/current/"
+
+[[banners]]
+targets = ["*"]
+variant = "info"
+value = """\
+    This version of the documentation is archived and no longer supported. View the `current documentation {+current-documentation+}`__ to learn how to `upgrade your version of the {+driver-short+} {+current-documentation+}/upgrade`__.\
+    """

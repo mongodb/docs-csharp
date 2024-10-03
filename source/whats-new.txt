@@ -82,11 +82,11 @@ The 3.0 driver release includes the following new features:
   `TimeOnly Struct. <https://learn.microsoft.com/en-us/dotnet/api/system.timeonly?view=net-6.0>`__
   API reference page on MSDN.
 
-- Adds support for client-side projection when using the ``Find()`` method,
-  the ``Select()`` method, or the ``Project()`` aggregation stage.
+- Adds support for implicit client-side projection when using the ``Find()`` method,
+  the ``Select()`` method, or the ``Project()`` aggregation stage with the LINQ3 provider.
   In previous versions of the driver, you could perform client-side
-  projection only after calling the ``ToEnumerable()`` or ``AsEnumerable()`` method, and
-  only within the ``Select()`` method.
+  projection with the LINQ3 provider only after calling the ``ToEnumerable()`` or
+  ``AsEnumerable()`` method, and only within the ``Select()`` method.
   
   To learn how to enable and use client-side projection for a driver method, select the
   corresponding tab:
@@ -99,7 +99,7 @@ The 3.0 driver release includes the following new features:
        .. code-block:: csharp
 
           // Enable client-side projection
-          var findOptions = new FindOptions;
+          var findOptions = new FindOptions();
           findOptions.TranslationOptions = new ExpressionTranslationOptions
           {
               EnableClientSideProjections = true
@@ -115,13 +115,14 @@ The 3.0 driver release includes the following new features:
        .. code-block:: csharp
 
           // Enable client-side projection
-          var translationOptions = new ExpressionTranslationOptions
+          var aggregateOptions = new AggregateOptions();
+          aggregateOptions.TranslationOptions = new ExpressionTranslationOptions
           {
               EnableClientSideProjections = true
           };
          
           var queryable = collection
-              .AsQueryable(translationOptions)
+              .AsQueryable(aggregateOptions)
               .Where(doc => doc.Id == 1)
               .Select(doc => new { R = MyFunction(doc.Name) });
 
@@ -131,14 +132,14 @@ The 3.0 driver release includes the following new features:
        .. code-block:: csharp
 
           // Enable client-side projection
-          var aggregateOptions = new AggregateOptions;
+          var aggregateOptions = new AggregateOptions();
           aggregateOptions.TranslationOptions = new ExpressionTranslationOptions
           {
               EnableClientSideProjections = true
           };
 
           var aggregate = collection
-              .Aggregate(pipeline, aggregateOptions)
+              .Aggregate(aggregateOptions)
               .Project(doc => new { R = MyFunction(doc.Name) });
   
   .. tip:: MongoClientSettings

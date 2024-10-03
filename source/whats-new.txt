@@ -86,7 +86,7 @@ The 3.0 driver release includes the following new features:
   the ``Select()`` method, or the ``Project()`` aggregation stage with the LINQ3 provider.
   In previous versions of the driver, you could perform client-side
   projection with the LINQ3 provider only after calling the ``ToEnumerable()`` or
-  ``AsEnumerable()`` method, and only within the ``Select()`` method.
+  ``AsEnumerable()`` method.
   
   To learn how to enable and use client-side projection for a driver method, select the
   corresponding tab:

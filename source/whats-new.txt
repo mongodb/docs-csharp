@@ -59,8 +59,11 @@ The 3.0 driver release includes the following new features:
   `Half Struct <https://learn.microsoft.com/en-us/dotnet/api/system.half?view=net-8.0>`__
   API reference page on MSDN.
 
-- Serializes ``DateTimeOffset`` values as BSON documents, and the
-  ``DateTime`` values in these documents as milliseconds since the Unix epoch.
+- Serializes ``DateTimeOffset`` values as BSON documents by default. Previous
+  driver versions serialized these values as BSON arrays.
+
+For more information about this release, see the :github:`v3.0 release notes
+</mongodb/mongo-csharp-driver/releases/tag/v3.0.0>`.
 
 .. _csharp-version-2.28:
 

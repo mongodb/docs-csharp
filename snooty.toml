@@ -1,3 +1,5 @@
+eol = true
+
 name = "csharp"
 title = "C#/.NET"
 toc_landing_pages = [
@@ -36,3 +38,11 @@ string-data-type = "``string``"
 int-data-type = "``integer``"
 not-available = "N/A"
 analyzer = "MongoDB C# Analyzer"
+current-url-base = "https://www.mongodb.com/docs/drivers/csharp/current/"
+
+[[banners]]
+targets = ["*"]
+variant = "info"
+value = """\
+    This version of the documentation is archived and no longer supported. View the `current documentation <{+current-url-base+}>`__ to learn how to `upgrade your version of the {+driver-short+} <{+current-url-base+}upgrade>`__.\
+    """

@@ -49,6 +49,7 @@ The 3.0 driver release includes the following new features:
   `mongocsharpdriver <https://www.nuget.org/packages/mongocsharpdriver/#readme-body-tab>`__ NuGet package,
   which implements the v1.x driver API in driver versions 2.x. This package will no
   longer receive updates.
+
 - Adds the ``MongoClientSettings.TranslationOptions`` connection option, which specifies
   options for translating LINQ queries to the Query API. See :ref:`csharp-connection-options`
   for more information.
@@ -58,6 +59,96 @@ The 3.0 driver release includes the following new features:
   To learn more about the ``Half`` type, see the
   `Half Struct <https://learn.microsoft.com/en-us/dotnet/api/system.half?view=net-8.0>`__
   API reference page on MSDN.
+
+- The ``IMongoClient`` interface inherits the ``IDisposable`` interface. As a result, the
+  ``MongoClient`` class and other classes that implement the ``IMongoClient`` interface
+  contain a ``Dispose()`` method, which disposes of the underlying cluster and
+  connections to the MongoDB server. This implementation is experimental.
+  
+  To learn more about the ``IDisposable`` interface and use of the
+  ``Dispose()`` method, see
+  `Dispose Pattern <https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/dispose-pattern>`__
+  on MSDN.
+
+- Adds support for the ``DateOnly`` type, which represents a date value with no
+  time component. This type is available in .NET 6 and later. To learn more about the
+  ``DateOnly`` type, see the
+  `DateOnly Struct. <https://learn.microsoft.com/en-us/dotnet/api/system.dateonly?view=net-6.0>`__
+  API reference page on MSDN.
+
+- Adds support for the ``TimeOnly`` type, which represents a time value with no
+  date component. This type is available in .NET 6 and later. To learn more about the
+  ``TimeOnly`` type, see the
+  `TimeOnly Struct. <https://learn.microsoft.com/en-us/dotnet/api/system.timeonly?view=net-6.0>`__
+  API reference page on MSDN.
+
+- Adds support for implicit client-side projection when using the ``Find()`` method,
+  the ``Select()`` method, or the ``Project()`` aggregation stage with the LINQ3 provider.
+  In previous versions of the driver, you could perform client-side
+  projection with the LINQ3 provider only after calling the ``ToEnumerable()`` or
+  ``AsEnumerable()`` method.
+  
+  To learn how to enable and use client-side projection for a driver method, select the
+  corresponding tab:
+
+  .. tabs::
+
+    .. tab:: Find() Method
+       :tabid: find-method
+
+       .. code-block:: csharp
+
+          // Enable client-side projection
+          var findOptions = new FindOptions();
+          findOptions.TranslationOptions = new ExpressionTranslationOptions
+          {
+              EnableClientSideProjections = true
+          };
+         
+          var find = collection
+              .Find(doc => doc.Id == 1, findOptions);
+              .Project(doc => new { R = MyFunction(doc.Name) });
+  
+    .. tab:: Select() Method
+       :tabid: select-method
+
+       .. code-block:: csharp
+
+          // Enable client-side projection
+          var aggregateOptions = new AggregateOptions();
+          aggregateOptions.TranslationOptions = new ExpressionTranslationOptions
+          {
+              EnableClientSideProjections = true
+          };
+         
+          var queryable = collection
+              .AsQueryable(aggregateOptions)
+              .Where(doc => doc.Id == 1)
+              .Select(doc => new { R = MyFunction(doc.Name) });
+
+    .. tab:: Project() Method
+       :tabid: project-method
+
+       .. code-block:: csharp
+
+          // Enable client-side projection
+          var aggregateOptions = new AggregateOptions();
+          aggregateOptions.TranslationOptions = new ExpressionTranslationOptions
+          {
+              EnableClientSideProjections = true
+          };
+
+          var aggregate = collection
+              .Aggregate(aggregateOptions)
+              .Project(doc => new { R = MyFunction(doc.Name) });
+  
+  .. tip:: MongoClientSettings
+
+     To enable client-side projection for all queries on a client, set the
+     ``TranslationOptions`` property of the ``MongoClientSettings`` object to ``true``.
+  
+  To learn more about using the aggregation pipeline with the {+driver-short+}, see
+  :ref:`csharp-aggregation`.
 
 For more information about this release, see the :github:`v3.0 release notes
 </mongodb/mongo-csharp-driver/releases/tag/v3.0.0>`.

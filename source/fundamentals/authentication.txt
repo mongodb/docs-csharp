@@ -153,8 +153,8 @@ MONGODB-AWS
    The ``MONGODB-AWS`` authentication mechanism is available only for
    MongoDB deployments on MongoDB Atlas.
 
-The ``MONGODB-AWS`` authentication mechanism uses a user's Amazon Web Services
-Identity and Access Management (AWS IAM) credentials to authenticate them to MongoDB.
+The ``MONGODB-AWS`` authentication mechanism uses Amazon Web Services
+Identity and Access Management (AWS IAM) credentials to authenticate a user to MongoDB.
 
 To use AWS authentication, first perform the following steps:
 

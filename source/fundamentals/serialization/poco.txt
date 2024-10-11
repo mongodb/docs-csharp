@@ -197,8 +197,8 @@ Conversions Specification
 .. important:: Serializing NaN and Infinity
 
    If you try to serialize or deserialize a floating-point
-  ``Infinity`` or ``NaN`` value to an integral representation, the driver throws an
-  ``OverflowException``.
+   ``Infinity`` or ``NaN`` value to an integral representation, the driver throws an
+   ``OverflowException``.
 
 Set Field Order
 ~~~~~~~~~~~~~~~

@@ -147,7 +147,7 @@ Version 3.0 Breaking Changes
 
 - If you try to serialize or deserialize a floating-point
   ``Infinity`` or ``NaN`` value to an integral representation, the driver throws an
-  ``OverflowException``. To learn more about the floating-point ``Infinity`` and ``NaN``
+  ``OverflowException``. To learn more about floating-point ``Infinity`` and ``NaN``
   values, see
   `Double.NaN, <https://learn.microsoft.com/en-us/dotnet/api/system.double.nan?view=net-8.0#system-double-nan>`__
   `Double.PositiveInfinity, <https://learn.microsoft.com/en-us/dotnet/api/system.double.positiveinfinity?view=net-8.0#system-double-positiveinfinity>`__

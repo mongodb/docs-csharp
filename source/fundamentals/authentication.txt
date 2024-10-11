@@ -168,7 +168,8 @@ To use AWS authentication, first perform the following steps:
 
 After you register the AWS authentication provider, you can either specify the AWS IAM 
 credentials explicitly or instruct the driver to retrieve them automatically from an
-external source. The following sections describe both of these methods. 
+external source. The following sections describe both of these methods.
+ 
 The code examples in these sections use the following placeholders:
 
 - ``<awsKeyId>`` - value of the AWS access key ID

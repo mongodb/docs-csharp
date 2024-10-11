@@ -69,7 +69,7 @@ Version 3.0 Breaking Changes
 - The methods, properties, and constructors in the ``MongoDB.Bson`` namespace that were
   deprecated in previous versions of the driver have been removed. If the driver
   provides a replacement for a deprecated method, property, or constructor, the compiler
-  messages in v{+last-version-2-number+} will display it.
+  messages by the v{+last-version-2-number+} driver will display it.
 
 - The driver drops support for the
   ``MONGODB-CR`` authentication mechanism. To learn more about

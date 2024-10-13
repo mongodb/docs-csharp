@@ -122,9 +122,9 @@ field to ``"Sandwiches and Salads"``.
 Replace Operations
 ~~~~~~~~~~~~~~~~~~
 
-A replace operation removes all fields and values of a specified document and
+A replace operation removes all fields and values in a specified document and
 replaces them with new ones. To perform a replace operation, create an instance
-of ``ReplaceOne`` and pass it a query filter and the fields and values you want
+of the ``BulkWriteReplaceOneModel`` class and pass it a query filter and the fields and values you want
 to store in the matching document.
 
 The following example creates an instance of ``ReplaceOne``:

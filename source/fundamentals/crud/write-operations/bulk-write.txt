@@ -47,59 +47,77 @@ the following operation classes:
 - ``BulkWriteDeleteOneModel``
 - ``BulkWriteDeleteManyModel``
 
-Then, pass an ``IReadOnlyList`` of these instances to the ``MongoClient.BulkWrite()`` or
-``MongoClient.BulkWriteAsync()`` method.
+Then, pass an ``IReadOnlyList`` of the instances you created to the
+``MongoClient.BulkWrite()`` or ``MongoClient.BulkWriteAsync()`` method.
 
 The following sections show how to create and use instances of the preceding classes.
 
 Insert Operations
 ~~~~~~~~~~~~~~~~~
 
-To perform an insert operation, create an instance of the ``BulkWriteInsertOneModel``
-and specify the document you want to insert.
+To perform an insert operation, create an instance of the ``BulkWriteInsertOneModel`` class
+and pass the following arguments:
 
-The following example creates an instance of the ``BulkWriteInsertOneModel``:
+- The names of the database and collection to insert the BSON document into, in the format
+  "database.collection"
+- The BSON document to insert into the collection, as a ``BsonDocument`` object
 
-.. literalinclude:: /includes/write/bulk-write.py
+The following example creates an instance of the ``BulkWriteInsertOneModel`` class. The
+``BsonDocument`` object represents a new restaurant named "Mongo's Deli" to be inserted
+into the ``sample_restaurants.restaurants`` collection.
+
+.. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-insert-one
    :end-before: end-bulk-insert-one
    :language: csharp
    :copyable:
+   :dedent: 8
 
-To insert multiple documents, create an instance of ``InsertOne`` for each document.
+To insert multiple documents, create an instance of ``BulkWriteInsertOneModel`` for
+each document.
 
 Update Operations
 ~~~~~~~~~~~~~~~~~
 
-To update a document, create an instance of ``UpdateOne`` and pass in
+To update a document, create an instance of the ``BulkWriteUpdateOneModel`` class and pass
 the following arguments:
 
-- A **query filter** that specifies the criteria used to match documents in your collection
+- The names of the database and collection to insert the BSON document into, in the format
+  "database.collection".
+- A **query filter** that specifies the criteria used to match documents in your collection.
+  The ``BulkWriteUpdateOneModel`` operation updates *only the first document* that matches your
+  query filter.
 - The update operation you want to perform. For more information about update
   operations, see the :manual:`Field Update Operators
   </reference/operator/update-field/>` guide in the {+mdb-server+} manual.
 
-``UpdateOne`` updates *the first* document that matches your query filter.
+The following example creates an instance of the ``BulkWriteUpdateOneModel`` class. The
+filter matches the first document in the ``sample_restaurants.restaurants`` collection
+where the ``name`` field is ``"Mongo's Deli"``. The update operation sets the ``cuisine``
+field to ``"Sandwiches and Salads"``.
 
-The following example creates an instance of ``UpdateOne``:
-
-.. literalinclude:: /includes/write/bulk-write.py
+.. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-update-one
    :end-before: end-bulk-update-one
-   :language: python
+   :language: csharp
    :copyable:
+   :dedent: 8
 
-To update multiple documents, create an instance of ``UpdateMany`` and pass in
-the same arguments. ``UpdateMany`` updates *all* documents that match your query
-filter.
+To update multiple documents, create an instance of the ``BulkWriteUpdateManyModel`` class
+and pass in the same arguments described previously. The ``BulkWriteUpdateManyModel``
+operation updates *all documents* that match your query filter.
 
-The following example creates an instance of ``UpdateMany``:
+The following example creates an instance of the ``BulkWriteUpdateManyModel`` class. The
+filter matches all documents in the ``sample_restaurants.restaurants`` collection
+where the ``name`` field is ``"Mongo's Deli"``. The update operation sets the ``cuisine``
+field to ``"Sandwiches and Salads"``.
 
-.. literalinclude:: /includes/write/bulk-write.py
+.. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-update-many
    :end-before: end-bulk-update-many
-   :language: python
+   :language: csharp
    :copyable:
+   :dedent: 8
 
 Replace Operations
 ~~~~~~~~~~~~~~~~~~

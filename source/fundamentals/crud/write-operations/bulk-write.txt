@@ -40,29 +40,54 @@ Define the Write Operations
 For each write operation you want to perform, create an instance of one of
 the following operation classes:
 
-- ``BulkWriteInsertOneModel``
-- ``BulkWriteUpdateOneModel``
-- ``BulkWriteUpdateManyModel``
-- ``BulkWriteReplaceOneModel``
-- ``BulkWriteDeleteOneModel``
-- ``BulkWriteDeleteManyModel``
+- ``BulkWriteInsertOneModel<TDocument>``
+- ``BulkWriteUpdateOneModel<TDocument>``
+- ``BulkWriteUpdateManyModel<TDocument>``
+- ``BulkWriteReplaceOneModel<TDocument>``
+- ``BulkWriteDeleteOneModel<TDocument>``
+- ``BulkWriteDeleteManyModel<TDocument>``
 
 Then, pass an ``IReadOnlyList`` of the instances you created to the
 ``MongoClient.BulkWrite()`` or ``MongoClient.BulkWriteAsync()`` method.
 
 The following sections show how to create and use instances of the preceding classes.
 
+.. tip:: Bulk Write Operations with POCOs
+
+    The examples in this guide use ``BsonDocument`` as the type for ``TDocument``.
+    You can also use a Plain Old CLR Objects (POCO) as the type for ``TDocument``.
+    
+    To use a POCO, define a class that represents the documents in your collection.
+    The class must have properties that match the fields in your documents.
+    For more information, see :ref:`<csharp-poco>`.
+
 Insert Operations
 ~~~~~~~~~~~~~~~~~
 
-To perform an insert operation, create an instance of the ``BulkWriteInsertOneModel`` class
-and pass the following arguments:
+To perform an insert operation, create an instance of the
+``BulkWriteInsertOneModel<TDocument>`` class.
+The ``BulkWriteInsertOneModel<TDocument>`` constructor accepts the following parameters:
 
-- The names of the database and collection to insert the BSON document into, in the format
-  "database.collection"
-- The BSON document to insert into the collection, as a ``BsonDocument`` object
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
+   :widths: 10 10 20 (Optional)
 
-The following example creates an instance of the ``BulkWriteInsertOneModel`` class. The
+   * - Parameter
+     - Description
+   
+   * - ``collectionNamespace``
+     - | The database and collection to insert the BSON document into.
+       |
+       | **Data Type:** {+string-data-type+} or `CollectionNamespace <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CollectionNamespace.html>`__
+
+   * - ``document``
+     - | The document to insert into the collection.
+       |
+       | **Data Type:** ``TDocument``
+
+The following example creates an instance of the ``BulkWriteInsertOneModel<TDocument>``
+class. The
 ``BsonDocument`` object represents a new restaurant named "Mongo's Deli" to be inserted
 into the ``sample_restaurants.restaurants`` collection.
 
@@ -73,28 +98,83 @@ into the ``sample_restaurants.restaurants`` collection.
    :copyable:
    :dedent: 8
 
-To insert multiple documents, create an instance of ``BulkWriteInsertOneModel`` for
-each document.
+.. tip:: Insert Multiple Documents
+    
+   To insert multiple documents, create an instance of the
+   ``BulkWriteInsertOneModel<TDocument>`` class for each document you want to insert.
 
 Update Operations
 ~~~~~~~~~~~~~~~~~
 
-To update a document, create an instance of the ``BulkWriteUpdateOneModel`` class and pass
-the following arguments:
+To update a document, create an instance of the ``BulkWriteUpdateOneModel<TDocument>``
+class. The ``BulkWriteUpdateOneModel<TDocument>`` constructor accepts the following
+parameters:
 
-- The names of the database and collection to insert the BSON document into, in the format
-  "database.collection".
-- A **query filter** that specifies the criteria used to match documents in your collection.
-  The ``BulkWriteUpdateOneModel`` operation updates *only the first document* that matches your
-  query filter.
-- The update operation you want to perform. For more information about update
-  operations, see the :manual:`Field Update Operators
-  </reference/operator/update-field/>` guide in the {+mdb-server+} manual.
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
 
-The following example creates an instance of the ``BulkWriteUpdateOneModel`` class. The
+   * - Parameter
+     - Description
+   
+   * - ``collectionNamespace``
+     - | The database and collection to insert the BSON document into.
+       |
+       | **Data Type:** {+string-data-type+} or `CollectionNamespace <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CollectionNamespace.html>`__
+
+   * - ``filter``
+     - | The **query filter** that specifies the criteria used to match documents in your collection.
+       | The ``UpdateOne`` operation updates *only the first document* that matches the
+       | query filter.
+       |
+       | **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
+
+   * - ``update``
+     - | The update operation you want to perform. For more information about update
+       | operations, see
+       | :manual:`Field Update Operators </reference/operator/update-field/>` in the
+       | {+mdb-server+} manual.
+       |
+       | **Data Type:** `UpdateDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinition-1.html>`__
+
+   * - ``collation``
+     - | *Optional.* The language collation to use when sorting results. See
+       | :manual:`the delete statements</reference/command/delete/#std-label-deletes-array-collation>`
+         for more information.
+       |
+       | **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
+       | **Default:** ``null``
+   
+   * - ``hint``
+     - | *Optional.* The index to use to scan for documents. 
+         See :manual:`the MongoDB server manual</reference/command/update/#std-label-update-command-hint>`
+         for more information.
+       |
+       | **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
+       | **Default:** ``null``
+
+   * - ``isUpsert``
+     - | *Optional.* Specifies whether the update operation performs an upsert operation if no 
+       | documents match the query filter. 
+       | See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
+       | for more information.
+       |
+       | **Data Type:** {+bool-data-type+}
+       | **Default:** ``false``
+
+   * - ``arrayFilters``
+     - | Specifies which array elements to modify for an update operation on an array field.
+       | See :manual:`the MongoDB server manual</reference/command/update/#update-elements-match-arrayfilters-criteria>`
+       | for more information.
+       |
+       | **Data Type:** `IEnumerable<ArrayFilterDefinition> <https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1?view=net-8.0>`__ 
+       | **Default:** ``null``
+
+The following example creates an instance of the ``BulkWriteUpdateOneModel<TDocument>``
+class, and uses ``BsonDocument`` as the type for ``TDocument``. The
 filter matches the first document in the ``sample_restaurants.restaurants`` collection
-where the ``name`` field is ``"Mongo's Deli"``. The update operation sets the ``cuisine``
-field to ``"Sandwiches and Salads"``.
+where the value of the ``name`` field is ``"Mongo's Deli"``. The update operation sets
+the value of the ``cuisine`` field to ``"Sandwiches and Salads"``.
 
 .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-update-one
@@ -103,14 +183,17 @@ field to ``"Sandwiches and Salads"``.
    :copyable:
    :dedent: 8
 
-To update multiple documents, create an instance of the ``BulkWriteUpdateManyModel`` class
-and pass in the same arguments described previously. The ``BulkWriteUpdateManyModel``
+To update multiple documents, create an instance of the
+``BulkWriteUpdateManyModel<TDocument>`` class. The constructor for this class
+accepts the same parameters as the ``BulkWriteUpdateOneModel<TDocument>`` constructor.
+The ``BulkWriteUpdateManyModel<TDocument>``
 operation updates *all documents* that match your query filter.
 
-The following example creates an instance of the ``BulkWriteUpdateManyModel`` class. The
+The following example creates an instance of the ``BulkWriteUpdateManyModel<TDocument>``
+class, and uses ``BsonDocument`` as the type for ``TDocument``. The
 filter matches all documents in the ``sample_restaurants.restaurants`` collection
-where the ``name`` field is ``"Mongo's Deli"``. The update operation sets the ``cuisine``
-field to ``"Sandwiches and Salads"``.
+where the value of the ``name`` field is ``"Mongo's Deli"``. The update operation sets
+the value of the ``cuisine`` field to ``"Sandwiches and Salads"``.
 
 .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-update-many
@@ -122,79 +205,144 @@ field to ``"Sandwiches and Salads"``.
 Replace Operations
 ~~~~~~~~~~~~~~~~~~
 
-A replace operation removes all fields and values in a specified document and
-replaces them with new ones. To perform a replace operation, create an instance
-of the ``BulkWriteReplaceOneModel`` class and pass it a query filter and the fields and values you want
-to store in the matching document.
+To replace the fields in a document, create an instance of the
+``BulkWriteReplaceOneModel<TDocument>`` class. The ``BulkWriteReplaceOneModel<TDocument>``
+constructor accepts the following parameters:
 
-The following example creates an instance of ``ReplaceOne``:
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
 
-.. literalinclude:: /includes/write/bulk-write.py
+   * - Parameter
+     - Description
+   
+   * - ``collectionNamespace``
+     - | The database and collection to insert the BSON document into.
+       |
+       | **Data Type:** {+string-data-type+} or `CollectionNamespace <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CollectionNamespace.html>`__
+
+   * - ``filter``
+     - | The **query filter** that specifies the criteria used to match documents in your collection.
+       | The ``UpdateOne`` operation updates *only the first document* that matches the
+       | query filter.
+       |
+       | **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
+
+   * - ``replacement``
+     - | The replacement document, which specifies the fields and values to insert in the
+       | target document.
+       |
+       | **Data Type:** ``TDocument``
+
+   * - ``collation``
+     - | *Optional.* The language collation to use when sorting results. See
+       | :manual:`the delete statements</reference/command/delete/#std-label-deletes-array-collation>`
+         for more information.
+       |
+       | **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
+       | **Default:** ``null``
+   
+   * - ``hint``
+     - | *Optional.* The index to use to scan for documents. 
+         See :manual:`the MongoDB server manual</reference/command/update/#std-label-update-command-hint>`
+         for more information.
+       |
+       | **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
+       | **Default:** ``null``
+
+   * - ``isUpsert``
+     - | *Optional.* Specifies whether the update operation performs an upsert operation if no 
+       | documents match the query filter. 
+       | See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
+       | for more information.
+       |
+       | **Data Type:** {+bool-data-type+}
+       | **Default:** ``false``
+
+The following example creates an instance of the ``BulkWriteReplaceOneyModel<TDocument>``
+class, and uses ``BsonDocument`` as the type for ``TDocument``. The
+filter matches the document in the ``sample_restaurants.restaurants`` collection
+where the value of the ``restaurant_id`` field is ``"1234"``. The replace operation
+removes all fields from this document and sets new values in the ``name``, ``cuisine``,
+``borough``, and ``restaurant_id`` fields.
+
+.. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-replace-one
    :end-before: end-bulk-replace-one
-   :language: python
+   :language: csharp
    :copyable:
+   :dedent: 8
 
-To replace multiple documents, you must create an instance of ``ReplaceOne`` for each document.
+.. tip:: Replace Multiple Documents
+    
+   To replace multiple documents, you must create an instance of the
+   ``BulkWriteReplaceOneModel<TDocument>`` class for each document you want to replace.
 
 Delete Operations
 ~~~~~~~~~~~~~~~~~
 
-To delete a document, create an instance of ``DeleteOne`` and pass in a
-query filter specifying the document you want to delete. ``DeleteOne`` removes
-only *the first* document that matches your query filter.
+To delete a document, create an instance of the ``BulkWriteDeleteOneModel`` and pass in
+a query filter that specifies the document that you want to delete. The
+``BulkWriteDeleteOneModel`` operation removes
+only the *first document* that matches your query filter.
 
-The following example creates an instance of ``DeleteOne``:
+The following example creates an instance of the ``BulkWriteDeleteOneModel`` class:
 
-.. literalinclude:: /includes/write/bulk-write.py
+.. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-delete-one
    :end-before: end-bulk-delete-one
-   :language: python
+   :language: csharp
    :copyable:
+   :dedent: 8
 
-To delete multiple documents, create an instance of ``DeleteMany`` and pass in a
-query filter specifying the document you want to delete. ``DeleteMany`` removes
-*all* documents that match your query filter.
+To delete multiple documents, create an instance of the ``BulkWriteDeleteManyModel``
+class and pass a query filter that specifies the document that you want to delete.
+The ``BulkWriteDeleteManyModel`` operation removes *all* documents that match your
+query filter.
 
-The following example creates an instance of ``DeleteMany``:
+The following example creates an instance of the ``BulkWriteDeleteManyModel`` class:
 
-.. literalinclude:: /includes/write/bulk-write.py
+.. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-delete-many
    :end-before: end-bulk-delete-many
-   :language: python
+   :language: csharp
    :copyable:
+   :dedent: 8
 
-Call the ``bulk_write()`` Method
+Call the ``BulkWrite()`` Method
 --------------------------------
 
-After you define a class instance for each operation you want to perform,
-pass a list of these instances to the ``bulk_write()`` method.
-By default, the method runs the operations in the order
+After you define a ``BulkWriteModel`` instance for each operation that you want to perform,
+pass an ``IList`` of these instances to the ``BulkWrite()`` or ``BulkWriteAsync()`` method.
+By default, these methods run the operations in the order
 they're defined in the list.
 
-The following example performs multiple write operations by using the
-``bulk_write()`` method:
+The following code examples show how to use the asynchronous
+``BulkWriteAsync()`` method and the synchronous ``BulkWrite()`` method to
+perform multiple write operations.
 
 .. io-code-block::
 
-   .. input:: /includes/write/bulk-write.py
+   .. input:: /includes/fundamentals/code-examples/BulkWrite.cs
       :start-after: start-bulk-write-mixed
       :end-before: end-bulk-write-mixed
-      :language: python
+      :language: csharp
+      :dedent: 8
 
    .. output::
       
       BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2, 'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []}, acknowledged=True)
 
-If any of the write operations fail, {+driver-short+} raises a
-``BulkWriteError`` and does not perform any further operations.
-``BulkWriteError`` provides a ``details`` attribute that includes the operation
+If any of the write operations fail, the {+driver-short+} raises a
+``BulkWriteException`` and does not perform any further operations.
+``BulkWriteException`` provides a ``details`` attribute that includes the operation
 that failed, and details about the exception.
 
 .. note::
 
-   When {+driver-short+} runs a bulk operation, it uses the ``write_concern`` of the
-   collection in which the operation is running. The driver reports all write
+   When the {+driver-short+} executes a bulk write operation, it uses the
+   ``WriteConcern`` of the
+   collection on which the operation is running. The driver reports all write
    concern errors after attempting all operations, regardless of execution order. 
 
 Customize Bulk Write Operations

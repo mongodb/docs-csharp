@@ -45,58 +45,81 @@ class BulkWrite
         // end-bulk-update-many
     }
 
-
-# start-bulk-replace-one
-    operation = pymongo.ReplaceOne(
-    { "restaurant_id": "1234" },
+    static void ReplaceOne()
     {
-    "name": "Mongo's Pizza",
-        "cuisine": "Pizza",
-        "borough": "Brooklyn",
-        "restaurant_id": "5678"
+        // start-bulk-replace-one
+        var replaceOneModel = new BulkWriteReplaceOneModel<BsonDocument>(
+            "sample_restaurants.restaurants",
+            Builders<BsonDocument>.Filter.Eq("restaurant_id", "1234"),
+            new BsonDocument{
+                { "name", "Mongo's Pizza" },
+                { "cuisine", "Pizza" },
+                { "borough", "Brooklyn" },
+                { "restaurant_id", "5678" }
+            }
+        );
+        // end-bulk-replace-one
     }
-)
-# end-bulk-replace-one
 
-# start-bulk-delete-one
-operation = pymongo.DeleteOne({ "restaurant_id": "5678" })
-# end-bulk-delete-one
+    static void DeleteOne()
+    {
+        // start-bulk-delete-one
+        var deleteOneModel = new BulkWriteDeleteOneModel<BsonDocument>(
+            "sample_restaurants.restaurants",
+            Builders<BsonDocument>.Filter.Eq("restaurant_id", "5678")
+        );
+        // end-bulk-delete-one
+    }
 
-# start-bulk-delete-many
-operation = pymongo.DeleteMany({ "name": "Mongo's Deli" })
-# end-bulk-delete-many
+    static void DeleteMany()
+    {
+        // start-bulk-delete-many
+        var deleteManyModel = new BulkWriteDeleteManyModel<BsonDocument>(
+            "sample_restaurants.restaurants",
+            Builders<BsonDocument>.Filter.Eq("name", "Mongo's Deli")
+        );
+        // end-bulk-delete-many
+    }
 
-# start-bulk-write-mixed
-operations = [
-    pymongo.InsertOne(
+    static void BulkWrite()
+    {
+        // start-bulk-write-mixed
+        var bulkWriteModels = new WriteModel<BsonDocument>[]
         {
-    "name": "Mongo's Deli",
-            "cuisine": "Sandwiches",
-            "borough": "Manhattan",
-            "restaurant_id": "1234"
-        }
-    ),
-    pymongo.InsertOne(
-        {
-    "name": "Mongo's Deli",
-            "cuisine": "Sandwiches",
-            "borough": "Brooklyn",
-            "restaurant_id": "5678"
-        }
-    ),
-    pymongo.UpdateMany(
-        { "name": "Mongo's Deli" },
-        { "$set": { "cuisine": "Sandwiches and Salads" } },
-    ),
-    pymongo.DeleteOne(
-        { "restaurant_id": "1234" }
-    )
-]
+            new BulkWriteInsertOneModel<BsonDocument>(
+                new BsonDocument{
+                    { "name", "Mongo's Deli" },
+                    { "cuisine", "Sandwiches" },
+                    { "borough", "Manhattan" },
+                    { "restaurant_id", "1234" }
+                }
+            ),
+            new BulkWriteInsertOneModel<BsonDocument>(
+                new BsonDocument{
+                    { "name", "Mongo's Deli" },
+                    { "cuisine", "Sandwiches" },
+                    { "borough", "Brooklyn" },
+                    { "restaurant_id", "5678" }
+                }
+            ),
+            new BulkWriteUpdateManyModel<BsonDocument>(
+                Builders<BsonDocument>.Filter.Eq("name", "Mongo's Deli"),
+                Builders<BsonDocument>.Update.Set("cuisine", "Sandwiches and Salads")
+            ),
+            new BulkWriteDeleteOneModel<BsonDocument>(
+                Builders<BsonDocument>.Filter.Eq("restaurant_id", "1234")
+            )
+            // end-bulk-write-mixed
+        };
 
-results = restaurants.bulk_write(operations)
+        //results = restaurants.bulk_write(operations)
+        Console.WriteLine("Bulk write results: " + results);
+    }
 
-print(results)
-# end-bulk-write-mixed
+}
+
+
+
 
 # start-bulk-write-unordered
 results = restaurants.bulk_write(operations, ordered = False)

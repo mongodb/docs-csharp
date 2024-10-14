@@ -594,7 +594,7 @@ $bitAnd
 The ``$bitAnd`` aggregation stage performs a bitwise AND operation on the given
 arguments. ``$bitAnd`` can take // describe arguments
 
-..code-block:: csharp
+.. code-block:: csharp
     var queryable = collection.AsQueryable()
       .Select(x => x.P & x.Q
       );
@@ -615,7 +615,7 @@ $bitOr
 The ``$bitOr`` aggregation stage performs a bitwise OR operation on the given
 arguments. ``$bitOr`` can take // describe arguments - same as AND and XOR
 
-..code-block:: csharp
+.. code-block:: csharp
     var queryable = collection.AsQueryable()
       .Select(x => x.P | x.Q
       );
@@ -628,7 +628,7 @@ $bitNot
 The ``$bitNot`` aggregation stage performs a bitwise NOT operation on the given
 argument. ``$bitOr`` only takes one argument.
 
-..code-block:: csharp
+.. code-block:: csharp
     var queryable = collection.AsQueryable()
       .Select(x => !x.P
       );
@@ -641,7 +641,7 @@ $bitXor
 The ``$bitXor`` aggregation stage performs a bitwise XOR operation on the given
 arguments. ``$bitXor`` can take // describe arguments - same as AND and XOR
 
-..code-block:: csharp
+.. code-block:: csharp
     var queryable = collection.AsQueryable()
       .Select(x => x.P ^ x.Q
       );

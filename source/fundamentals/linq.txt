@@ -68,8 +68,9 @@ object that links to the collection. To create the object, use the ``AsQueryable
 as follows:
 
 .. code-block:: csharp
-   :emphasize-lines: 2
+   :emphasize-lines: 3
 
+    var restaurantsDatabase = client.GetDatabase("sample_restaurants")
     var restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     var queryableCollection = restaurantsCollection.AsQueryable();
 
@@ -586,6 +587,33 @@ to incorporate them into your application, see :atlas:`Atlas Vector Search Overv
 in the Atlas manual. For more examples about running Atlas Vector Search queries using the
 {+driver-short+}, see :atlas:`Run Vector Search Queries </atlas-vector-search/vector-search-stage/>`
 in the Atlas manual and select :guilabel:`C#` from the language dropdown.
+
+$bitAnd
+~~~~~~~
+
+The ``$bitAnd`` aggregation stage performs a bitwise AND operation on the list
+of arguments. The arguments should be a list of ``NumberInt`` and ``NumberLong`` //check these out
+values.
+
+// 2 arguments <-- the example should correspond to the pagewide example
+// 3 arguments 
+
+
+// restaurants collection
+
+
+$bitOr
+~~~~~~
+
+
+$bitNot
+~~~~~~~
+
+
+$bitXor
+~~~~~~~
+
+// at the end, add note about the behaviors
 
 Unsupported Aggregation Stages
 ------------------------------

@@ -70,7 +70,7 @@ as follows:
 .. code-block:: csharp
    :emphasize-lines: 3
 
-    var restaurantsDatabase = client.GetDatabase("sample_restaurants")
+    var restaurantsDatabase = client.GetDatabase("sample_restaurants");
     var restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
     var queryableCollection = restaurantsCollection.AsQueryable();
 
@@ -591,13 +591,20 @@ in the Atlas manual and select :guilabel:`C#` from the language dropdown.
 $bitAnd
 ~~~~~~~
 
-The ``$bitAnd`` aggregation stage performs a bitwise AND operation on the list
-of arguments. The arguments should be a list of ``NumberInt`` and ``NumberLong`` //check these out
-values.
+The ``$bitAnd`` aggregation stage performs a bitwise AND operation on the given
+arguments. ``$bitAnd`` can take // describe arguments
+
+..code-block:: csharp
+    var queryable = collection.AsQueryable()
+      .Select(x => x.P & x.Q
+      );
+
+The result of the preceding example look like this:
+
+// what should the parameters look like?
 
 // 2 arguments <-- the example should correspond to the pagewide example
 // 3 arguments 
-
 
 // restaurants collection
 
@@ -605,15 +612,42 @@ values.
 $bitOr
 ~~~~~~
 
+The ``$bitOr`` aggregation stage performs a bitwise OR operation on the given
+arguments. ``$bitOr`` can take // describe arguments - same as AND and XOR
+
+..code-block:: csharp
+    var queryable = collection.AsQueryable()
+      .Select(x => x.P | x.Q
+      );
+
+The result of the preceding example look like this:
 
 $bitNot
 ~~~~~~~
 
+The ``$bitNot`` aggregation stage performs a bitwise NOT operation on the given
+argument. ``$bitOr`` only takes one argument.
+
+..code-block:: csharp
+    var queryable = collection.AsQueryable()
+      .Select(x => !x.P
+      );
+
+The result of the preceding example looks like this:
 
 $bitXor
 ~~~~~~~
 
-// at the end, add note about the behaviors
+The ``$bitXor`` aggregation stage performs a bitwise XOR operation on the given
+arguments. ``$bitXor`` can take // describe arguments - same as AND and XOR
+
+..code-block:: csharp
+    var queryable = collection.AsQueryable()
+      .Select(x => x.P ^ x.Q
+      );
+
+The result of the preceding example look like this:
+// at the end, add note about the behaviors? <-- what is this referring to?
 
 Unsupported Aggregation Stages
 ------------------------------

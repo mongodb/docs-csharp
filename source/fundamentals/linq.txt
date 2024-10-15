@@ -7,7 +7,7 @@ LINQ
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 2
+   :depth: 3
    :class: singlecol
 
 .. facet::
@@ -610,14 +610,18 @@ The examples for this section use the following documents in a collection called
    { "_id": 6, "name": "cheese", "price": 4 }
 
 The following ``Ingredient`` class models the documents in the ``ingredients``
- collection:
+collection:
 
 .. code-block:: csharp
 
-   public class Ingredient {
+   public class Ingredient 
+   {
       public int Id { get; set; }
+
       public string Name { get; set; }
+
       public int Price { get; set; }
+      
       public int Count { get; set; }
    }
 
@@ -638,7 +642,7 @@ LINQ:
 
     var query = queryableCollection.AsQueryable()
       .Where(i => i.Name == "eggs")
-      .Select(x => x.Price & x.Count);
+      .Select(i => i.Price & i.Count);
 
 The preceding example finds the document where the ``Name`` field has the value
 ``"eggs"``. It then performs a bitwise AND operation on the values of the 
@@ -651,9 +655,9 @@ documents in the collection:
 .. code-block:: csharp
 
     var query = queryableCollection.AsQueryable()
-      .Select(x => x.Price & x.Count);
+      .Select(i => i.Price & i.Count);
 
-The result of the preceding example contains the following values.
+The result of the preceding example contains the following values:
 
 .. code-block:: json
 
@@ -664,12 +668,12 @@ The result of the preceding example contains the following values.
    4
    null
 
-Note that the ``null`` result comes from the document where the ``Name`` field
+The ``null`` result comes from the document where the ``Name`` field
 has the value of ``"cheese"``. This document is missing a ``Count`` field, so
 the expression evaluates to ``null``.
 
 $bitOr
-~~~~~~
+++++++
 
 The ``$bitOr`` aggregation stage performs a bitwise OR operation on the given
 arguments. The following example shows how to generate a ``$bitOr`` stage using
@@ -679,7 +683,7 @@ LINQ:
 
     var query = queryableCollection.AsQueryable()
       .Where(i => i.Name == "eggs")
-      .Select(x => x.Price | x.Count);
+      .Select(i => i.Price | i.Count);
 
 The preceding example finds the document where the ``Name`` field has the value
 ``"eggs"``. It then performs a bitwise OR operation on the values of the 
@@ -687,33 +691,51 @@ The preceding example finds the document where the ``Name`` field has the value
 ``13``.
 
 $bitNot
-~~~~~~~
++++++++
 
 The ``$bitNot`` aggregation stage performs a bitwise NOT operation on the given
 argument. ``$bitNot`` only takes one argument.
 
 .. code-block:: csharp
 
-    var queryable = collection.AsQueryable()
-      .Select(x => ~x.P
-      );
+   var queryable = collection.AsQueryable()
+      .Select(i => ~i.Count);
 
-The result of the preceding example looks like this:
+The result of the preceding example contains the following values:
+
+.. code-block:: json
+
+   -2
+   -5
+   -13
+   -5
+   -101
+   null
 
 $bitXor
-~~~~~~~
++++++++
 
 The ``$bitXor`` aggregation stage performs a bitwise XOR operation on the given
-arguments. ``$bitXor`` can take // describe arguments - same as AND and XOR
+arguments. 
+
+The following example shows how to generate a ``$bitXor`` stage using
+LINQ:
 
 .. code-block:: csharp
 
-    var queryable = collection.AsQueryable()
-      .Select(x => x.P ^ x.Q
-      );
+   var query = queryableCollection.AsQueryable()
+      .Where(i => i.Name == "eggs" || i.Name == "watermelon")
+      .Select(i => i.Price ^ i.Count);
 
-The result of the preceding example look like this:
-// at the end, add note about the behaviors? <-- what is this referring to?
+The preceding example finds the documents where the ``Name`` field has the value
+``"eggs"`` or ``"watermelon"``. It then performs a bitwise OR operation on the 
+values of the ``Price`` and ``Count`` fields in these documents. The result 
+contains the following values:
+
+.. code-block:: json
+   
+   4
+   9
 
 Unsupported Aggregation Stages
 ------------------------------

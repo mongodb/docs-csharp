@@ -588,52 +588,114 @@ in the Atlas manual. For more examples about running Atlas Vector Search queries
 {+driver-short+}, see :atlas:`Run Vector Search Queries </atlas-vector-search/vector-search-stage/>`
 in the Atlas manual and select :guilabel:`C#` from the language dropdown.
 
-$bitAnd
-~~~~~~~
+Bitwise Operators
+~~~~~~~~~~~~~~~~~
 
-The ``$bitAnd`` aggregation stage performs a bitwise AND operation on the given
-arguments. ``$bitAnd`` can take // describe arguments
+This version of the {+driver-short+} supports the following bitwise operators in 
+the aggregation pipeline. You can use multiple bitwise operators within the same 
+stage. All operands must be of type ``int`` or ``long``. ``$bitAnd``, ``$bitOr``,
+and ``$bitXor`` all take two or more operands. ``$bitNot`` can only take one
+operand.
+
+The examples for this section use the following documents in a collection called
+``ingredients``:
+
+.. code-block:: json
+
+   { "_id": 1, "name": "watermelon", "price": 5, "count": 1 },
+   { "_id": 2, "name": "onions", "price": 2, "count": 4 },
+   { "_id": 3, "name": "eggs", "price": 5, "count": 12 },
+   { "_id": 4, "name": "potatoes", "price": 3, "count": 0 },
+   { "_id": 5, "name": "pasta", "price": 4, "count": 100 },
+   { "_id": 6, "name": "cheese", "price": 4 }
+
+The following ``Ingredient`` class models the documents in the ``ingredients``
+ collection:
 
 .. code-block:: csharp
 
-    var queryable = collection.AsQueryable()
-      .Select(x => x.P & x.Q
-      );
+   public class Ingredient {
+      public int Id { get; set; }
+      public string Name { get; set; }
+      public int Price { get; set; }
+      public int Count { get; set; }
+   }
 
-The result of the preceding example look like this:
+.. note::
 
-// what should the parameters look like?
+   For all bitwise operators, if the operand list contains a missing or undefined
+   value, the entire expression evaluates to ``null``.
 
-// 2 arguments <-- the example should correspond to the pagewide example
-// 3 arguments 
 
-// restaurants collection
+$bitAnd
++++++++
 
+The ``$bitAnd`` aggregation stage performs a bitwise AND operation on the given
+arguments. The following example shows how to generate a ``$bitAnd`` stage using
+LINQ:
+
+.. code-block:: csharp
+
+    var query = queryableCollection.AsQueryable()
+      .Where(i => i.Name == "eggs")
+      .Select(x => x.Price & x.Count);
+
+The preceding example finds the document where the ``Name`` field has the value
+``"eggs"``. It then performs a bitwise AND operation on the values of the 
+``Price`` and ``Count`` fields in this document. The result contains one value:
+``4``.
+
+The following example performs the same bitwise AND operation, but on all 
+documents in the collection:
+
+.. code-block:: csharp
+
+    var query = queryableCollection.AsQueryable()
+      .Select(x => x.Price & x.Count);
+
+The result of the preceding example contains the following values.
+
+.. code-block:: json
+
+   1
+   0
+   4
+   0
+   4
+   null
+
+Note that the ``null`` result comes from the document where the ``Name`` field
+has the value of ``"cheese"``. This document is missing a ``Count`` field, so
+the expression evaluates to ``null``.
 
 $bitOr
 ~~~~~~
 
 The ``$bitOr`` aggregation stage performs a bitwise OR operation on the given
-arguments. ``$bitOr`` can take // describe arguments - same as AND and XOR
+arguments. The following example shows how to generate a ``$bitOr`` stage using
+LINQ:
 
 .. code-block:: csharp
 
-    var queryable = collection.AsQueryable()
-      .Select(x => x.P | x.Q
-      );
+    var query = queryableCollection.AsQueryable()
+      .Where(i => i.Name == "eggs")
+      .Select(x => x.Price | x.Count);
 
-The result of the preceding example look like this:
+The preceding example finds the document where the ``Name`` field has the value
+``"eggs"``. It then performs a bitwise OR operation on the values of the 
+``Price`` and ``Count`` fields in this document. The result contains one value:
+``13``.
 
 $bitNot
 ~~~~~~~
 
 The ``$bitNot`` aggregation stage performs a bitwise NOT operation on the given
-argument. ``$bitOr`` only takes one argument.
+argument. ``$bitNot`` only takes one argument.
 
 .. code-block:: csharp
 
     var queryable = collection.AsQueryable()
-      .Select(x => !x.P
+      .Select(x => ~x.P
       );
 
 The result of the preceding example looks like this:
@@ -645,7 +707,7 @@ The ``$bitXor`` aggregation stage performs a bitwise XOR operation on the given
 arguments. ``$bitXor`` can take // describe arguments - same as AND and XOR
 
 .. code-block:: csharp
-   
+
     var queryable = collection.AsQueryable()
       .Select(x => x.P ^ x.Q
       );

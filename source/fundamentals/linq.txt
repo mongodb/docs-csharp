@@ -617,18 +617,11 @@ The examples for this section use the following documents in a collection called
 The following ``Ingredient`` class models the documents in the ``ingredients``
 collection:
 
-.. code-block:: csharp
-
-   public class Ingredient 
-   {
-      public int Id { get; set; }
-
-      public string Name { get; set; }
-
-      public int Price { get; set; }
-      
-      public int Count { get; set; }
-   }
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-ingredient-model
+   :end-before: end-ingredient-model
 
 .. note:: Missing or Undefined Operands
 
@@ -643,11 +636,11 @@ arguments. You can use the ``$bitAnd`` operator by connecting two or more
 clauses with a ``&`` character. The following example shows how to create a 
 ``$bitAnd`` stage using LINQ: 
 
-.. code-block:: csharp
-
-    var query = queryableCollection
-      .Where(i => i.Name == "eggs")
-      .Select(i => i.Price & i.Count);
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-bitAnd-example
+   :end-before: end-bitAnd-example
 
 The preceding example retrieves the document in which the ``Name`` field has the 
 value ``"eggs"``. It then performs a bitwise AND operation on the values of the 
@@ -656,10 +649,11 @@ value ``"eggs"``. It then performs a bitwise AND operation on the values of the
 The following example performs the same bitwise AND operation, but on all 
 documents in the collection:
 
-.. code-block:: csharp
-
-    var query = queryableCollection
-      .Select(i => i.Price & i.Count);
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-bitAnd-collection-example
+   :end-before: end-bitAnd-collection-example
 
 The result of the preceding example contains the following values:
 
@@ -684,11 +678,11 @@ arguments. You can use the ``$bitOr`` operator by connecting two or more
 clauses with a ``|`` character. The following example shows how to create a 
 ``$bitOr`` stage using LINQ:
 
-.. code-block:: csharp
-
-    var query = queryableCollection
-      .Where(i => i.Name == "eggs")
-      .Select(i => i.Price | i.Count);
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-bitOr-example
+   :end-before: end-bitOr-example
 
 The preceding example retrieves the document in which the ``Name`` field has the 
 value ``"eggs"``. It then performs a bitwise OR operation on the values of the 
@@ -703,10 +697,11 @@ argument. You can use the ``$bitNot`` operator by preceding an
 operand with a ``~`` character. ``$bitNot`` only takes one argument. The 
 following example shows how to create a ``$bitNot`` stage using LINQ:
 
-.. code-block:: csharp
-
-   var queryable = collection
-      .Select(i => ~i.Count);
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-bitNot-example
+   :end-before: end-bitNot-example
 
 The result of the preceding example contains the following values:
 
@@ -727,11 +722,11 @@ arguments. You can use the ``$bitXor`` operator by connecting two or more
 clauses with a ``^`` character. The following example shows how to create a 
 ``$bitXor`` stage using LINQ:
 
-.. code-block:: csharp
-
-   var query = queryableCollection
-      .Where(i => i.Name == "eggs" || i.Name == "watermelon")
-      .Select(i => i.Price ^ i.Count);
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-bitXor-example
+   :end-before: end-bitXor-example
 
 The preceding example retrieves the documents in which the ``Name`` field has 
 the value ``"eggs"`` or ``"watermelon"``. It then performs a bitwise XOR 

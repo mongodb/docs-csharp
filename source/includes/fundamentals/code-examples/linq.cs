@@ -63,3 +63,56 @@ public class Review
 }
 
 // end-review-model
+
+// start-ingredient-model
+
+public class Ingredient 
+{
+    public int Id { get; set; }
+
+    public string Name { get; set; }
+
+    public int Price { get; set; }
+
+    public int Count { get; set; }
+}
+
+// end-ingredient-model
+
+// start-bitAnd-example
+
+var query = queryableCollection
+    .Where(i => i.Name == "eggs")
+    .Select(i => i.Price & i.Count);
+
+// end-bitAnd-example
+
+// start-bitAnd-collection-example
+
+var query = queryableCollection
+    .Select(i => i.Price & i.Count);
+
+// end-bitAnd-collection-example
+
+// start-bitOr-example
+
+var query = queryableCollection
+    .Where(i => i.Name == "eggs")
+    .Select(i => i.Price | i.Count);
+
+// end-bitOr-example
+
+// start-bitNot-example
+
+var queryable = collection
+    .Select(i => ~i.Count);
+
+// end-bitNot-example
+
+// start-bitXor-example
+
+var query = queryableCollection
+    .Where(i => i.Name == "eggs" || i.Name == "watermelon")
+    .Select(i => i.Price ^ i.Count);
+
+// end-bitXor-example

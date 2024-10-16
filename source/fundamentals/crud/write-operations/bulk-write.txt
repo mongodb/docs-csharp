@@ -38,7 +38,7 @@ Define the Write Operations
 ---------------------------
 
 For each write operation you want to perform, create an instance of one of
-the following operation classes:
+the following ``BulkWriteModel`` classes:
 
 - ``BulkWriteInsertOneModel<TDocument>``
 - ``BulkWriteUpdateOneModel<TDocument>``
@@ -47,15 +47,12 @@ the following operation classes:
 - ``BulkWriteDeleteOneModel<TDocument>``
 - ``BulkWriteDeleteManyModel<TDocument>``
 
-Then, pass an ``IReadOnlyList`` of the instances you created to the
-``MongoClient.BulkWrite()`` or ``MongoClient.BulkWriteAsync()`` method.
-
 The following sections show how to create and use instances of the preceding classes.
 
 .. tip:: Bulk Write Operations with POCOs
 
     The examples in this guide use ``BsonDocument`` as the type for ``TDocument``.
-    You can also use a Plain Old CLR Objects (POCO) as the type for ``TDocument``.
+    You can also use a Plain Old CLR Object (POCO) as the type for ``TDocument``.
     
     To use a POCO, define a class that represents the documents in your collection.
     The class must have properties that match the fields in your documents.
@@ -123,22 +120,21 @@ parameters:
 
    * - ``filter``
      - | The **query filter** that specifies the criteria used to match documents in your collection.
-       | The ``UpdateOne`` operation updates *only the first document* that matches the
-       | query filter.
+         The ``UpdateOne`` operation updates *only the first document* that matches the
+         query filter.
        |
        | **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
 
    * - ``update``
      - | The update operation you want to perform. For more information about update
-       | operations, see
-       | :manual:`Field Update Operators </reference/operator/update-field/>` in the
-       | {+mdb-server+} manual.
+         operations, see :manual:`Field Update Operators </reference/operator/update-field/>`
+         in the {+mdb-server+} manual.
        |
        | **Data Type:** `UpdateDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinition-1.html>`__
 
    * - ``collation``
-     - | *Optional.* The language collation to use when sorting results. See
-       | :manual:`the delete statements</reference/command/delete/#std-label-deletes-array-collation>`
+     - | *Optional.* The language collation to use when sorting results. See the
+         :manual:`{+mdb+server+} manual</reference/command/delete/#std-label-deletes-array-collation>`
          for more information.
        |
        | **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
@@ -146,7 +142,7 @@ parameters:
    
    * - ``hint``
      - | *Optional.* The index to use to scan for documents. 
-         See :manual:`the MongoDB server manual</reference/command/update/#std-label-update-command-hint>`
+         See the :manual:`{+mdb-server+} manual</reference/command/update/#std-label-update-command-hint>`
          for more information.
        |
        | **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
@@ -154,17 +150,16 @@ parameters:
 
    * - ``isUpsert``
      - | *Optional.* Specifies whether the update operation performs an upsert operation if no 
-       | documents match the query filter. 
-       | See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
-       | for more information.
+         documents match the query filter. See the :manual:`{+mdb-server+} manual</reference/command/update/#std-label-update-command-upsert>`
+         for more information.
        |
        | **Data Type:** {+bool-data-type+}
        | **Default:** ``false``
 
    * - ``arrayFilters``
      - | Specifies which array elements to modify for an update operation on an array field.
-       | See :manual:`the MongoDB server manual</reference/command/update/#update-elements-match-arrayfilters-criteria>`
-       | for more information.
+         See the :manual:`{+mdb-server+} manual</reference/command/update/#update-elements-match-arrayfilters-criteria>`
+         for more information.
        |
        | **Data Type:** `IEnumerable<ArrayFilterDefinition> <https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1?view=net-8.0>`__ 
        | **Default:** ``null``
@@ -222,20 +217,20 @@ constructor accepts the following parameters:
 
    * - ``filter``
      - | The **query filter** that specifies the criteria used to match documents in your collection.
-       | The ``UpdateOne`` operation updates *only the first document* that matches the
-       | query filter.
+         The ``UpdateOne`` operation updates *only the first document* that matches the
+         query filter.
        |
        | **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
 
    * - ``replacement``
      - | The replacement document, which specifies the fields and values to insert in the
-       | target document.
+         target document.
        |
        | **Data Type:** ``TDocument``
 
    * - ``collation``
      - | *Optional.* The language collation to use when sorting results. See
-       | :manual:`the delete statements</reference/command/delete/#std-label-deletes-array-collation>`
+         the :manual:`{+mdb-server+} manual</reference/command/delete/#std-label-deletes-array-collation>`
          for more information.
        |
        | **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
@@ -243,7 +238,7 @@ constructor accepts the following parameters:
    
    * - ``hint``
      - | *Optional.* The index to use to scan for documents. 
-         See :manual:`the MongoDB server manual</reference/command/update/#std-label-update-command-hint>`
+         See the :manual:`{+mdb-server+} manual</reference/command/update/#std-label-update-command-hint>`
          for more information.
        |
        | **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
@@ -251,9 +246,9 @@ constructor accepts the following parameters:
 
    * - ``isUpsert``
      - | *Optional.* Specifies whether the update operation performs an upsert operation if no 
-       | documents match the query filter. 
-       | See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
-       | for more information.
+         documents match the query filter. 
+         See the :manual:`{+mdb-server+} manual</reference/command/update/#std-label-update-command-upsert>`
+         for more information.
        |
        | **Data Type:** {+bool-data-type+}
        | **Default:** ``false``
@@ -274,7 +269,7 @@ removes all fields from this document and sets new values in the ``name``, ``cui
 
 .. tip:: Replace Multiple Documents
     
-   To replace multiple documents, you must create an instance of the
+   To replace multiple documents, create an instance of the
    ``BulkWriteReplaceOneModel<TDocument>`` class for each document you want to replace.
 
 Delete Operations
@@ -298,14 +293,14 @@ parameters:
 
    * - ``filter``
      - | The **query filter** that specifies the criteria used to match documents in your collection.
-       | The ``DeleteOne`` operation deletes *only the first document* that matches the
-       | query filter.
+         The ``DeleteOne`` operation deletes *only the first document* that matches the
+         query filter.
        |
        | **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
 
    * - ``collation``
      - | *Optional.* The language collation to use when sorting results. See
-       | :manual:`the delete statements</reference/command/delete/#std-label-deletes-array-collation>`
+         the :manual:`{+mdb-server+} manual</reference/command/delete/#std-label-deletes-array-collation>`
          for more information.
        |
        | **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
@@ -313,7 +308,7 @@ parameters:
    
    * - ``hint``
      - | *Optional.* The index to use to scan for documents. 
-         See :manual:`the MongoDB server manual</reference/command/update/#std-label-update-command-hint>`
+         See the :manual:`{+mdb-server+} manual</reference/command/update/#std-label-update-command-hint>`
          for more information.
        |
        | **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
@@ -348,8 +343,8 @@ where the value of the ``name`` field is ``"Mongo's Deli"``.
    :copyable:
    :dedent: 8
 
-Call the ``BulkWrite()`` Method
---------------------------------
+Run the Write Operations
+------------------------
 
 After you define a ``BulkWriteModel`` instance for each operation that you want to perform,
 pass an ``IReadOnlyList`` collection of these instances to the ``BulkWrite()`` or
@@ -381,8 +376,8 @@ perform multiple write operations.
       :tabid: bulk-write-sync
 
       .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
-         :start-after: start-bulk-write-async
-         :end-before: end-bulk-write-async
+         :start-after: start-bulk-write-sync
+         :end-before: end-bulk-write-sync
          :language: csharp
          :copyable:
          :dedent: 8
@@ -393,9 +388,11 @@ The preceding code examples produce the following output:
       
    BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2, 'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []}, acknowledged=True)
 
-If any of the write operations fail, the {+driver-short+} raises a
-``BulkWriteException`` and does not perform any further operations. You can examine
-the properties of the exception to determine which operation failed.
+.. tip:: Troubleshooting Bulk Write Operations
+    
+    If any of the write operations fail, the {+driver-short+} raises a
+    ``BulkWriteException`` and does not perform any further operations. You can examine
+    the properties of the exception to determine which operation failed.
 
 Customize Bulk Write Operations
 -------------------------------
@@ -471,8 +468,8 @@ a delete operation:
       :tabid: bulk-write-options-sync
 
       .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
-        :start-after: start-bulk-write-options-async
-        :end-before: end-bulk-write-options-async
+        :start-after: start-bulk-write-options-sync
+        :end-before: end-bulk-write-options-sync
         :language: csharp
         :copyable:
         :dedent: 8
@@ -482,7 +479,7 @@ a delete operation:
    Unordered bulk operations do not guarantee order of execution. The order can
    differ from the way you list them to optimize the runtime.
    
-   If any of the write operations in an unordered bulk write fail, the {+driver-short+}
+   If any of the write operations in an unordered bulk write fail, the driver
    reports the errors only after attempting all operations.
 
 Return Value

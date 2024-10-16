@@ -259,7 +259,7 @@ constructor accepts the following parameters:
        | **Data Type:** {+bool-data-type+}
        | **Default:** ``false``
 
-The following example creates an instance of the ``BulkWriteReplaceOneyModel<TDocument>``
+The following example creates an instance of the ``BulkWriteReplaceOneModel<TDocument>``
 class, and uses ``BsonDocument`` as the type for ``TDocument``. The
 filter matches the document in the ``sample_restaurants.restaurants`` collection
 where the value of the ``restaurant_id`` field is ``"1234"``. The replace operation
@@ -281,12 +281,49 @@ removes all fields from this document and sets new values in the ``name``, ``cui
 Delete Operations
 ~~~~~~~~~~~~~~~~~
 
-To delete a document, create an instance of the ``BulkWriteDeleteOneModel`` and pass in
-a query filter that specifies the document that you want to delete. The
-``BulkWriteDeleteOneModel`` operation removes
-only the *first document* that matches your query filter.
+To delete a document, create an instance of the ``BulkWriteDeleteOneModel<TDocument>``
+class. The ``BulkWriteDeleteOneModel<TDocument>`` constructor accepts the following
+parameters:
 
-The following example creates an instance of the ``BulkWriteDeleteOneModel`` class:
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - Parameter
+     - Description
+   
+   * - ``collectionNamespace``
+     - | The database and collection to insert the BSON document into.
+       |
+       | **Data Type:** {+string-data-type+} or `CollectionNamespace <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CollectionNamespace.html>`__
+
+   * - ``filter``
+     - | The **query filter** that specifies the criteria used to match documents in your collection.
+       | The ``DeleteOne`` operation deletes *only the first document* that matches the
+       | query filter.
+       |
+       | **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
+
+   * - ``collation``
+     - | *Optional.* The language collation to use when sorting results. See
+       | :manual:`the delete statements</reference/command/delete/#std-label-deletes-array-collation>`
+         for more information.
+       |
+       | **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
+       | **Default:** ``null``
+   
+   * - ``hint``
+     - | *Optional.* The index to use to scan for documents. 
+         See :manual:`the MongoDB server manual</reference/command/update/#std-label-update-command-hint>`
+         for more information.
+       |
+       | **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
+       | **Default:** ``null``
+
+The following example creates an instance of the ``BulkWriteDeleteOneModel<TDocument>``
+class, and uses ``BsonDocument`` as the type for ``TDocument``. The
+filter matches the document in the ``sample_restaurants.restaurants`` collection
+where the value of the ``restaurant_id`` field is ``"5678"``.
 
 .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-delete-one
@@ -295,12 +332,15 @@ The following example creates an instance of the ``BulkWriteDeleteOneModel`` cla
    :copyable:
    :dedent: 8
 
-To delete multiple documents, create an instance of the ``BulkWriteDeleteManyModel``
+To delete multiple documents, create an instance of the ``BulkWriteDeleteManyModel<TDocument>``
 class and pass a query filter that specifies the document that you want to delete.
-The ``BulkWriteDeleteManyModel`` operation removes *all* documents that match your
+The ``DeleteMany`` operation removes *all documents* that match your
 query filter.
 
-The following example creates an instance of the ``BulkWriteDeleteManyModel`` class:
+The following example creates an instance of the ``BulkWriteDeleteManyModel<TDocument>``
+class, and uses ``BsonDocument`` as the type for ``TDocument``. The
+filter matches the document in the ``sample_restaurants.restaurants`` collection
+where the value of the ``name`` field is ``"Mongo's Deli"``.
 
 .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-delete-many
@@ -313,45 +353,58 @@ Call the ``BulkWrite()`` Method
 --------------------------------
 
 After you define a ``BulkWriteModel`` instance for each operation that you want to perform,
-pass an ``IList`` of these instances to the ``BulkWrite()`` or ``BulkWriteAsync()`` method.
-By default, these methods run the operations in the order
-they're defined in the list.
+pass an ``IReadOnlyList`` collection of these instances to the ``BulkWrite()`` or
+``BulkWriteAsync()`` method. By default, these methods run the operations in the order
+they're defined in the collection.
+
+.. tip:: IReadOnlyList
+
+   ``Array`` and ``List`` are two common classes that implement the ``IReadOnlyList``
+   interface.
 
 The following code examples show how to use the asynchronous
 ``BulkWriteAsync()`` method and the synchronous ``BulkWrite()`` method to
 perform multiple write operations.
 
-.. io-code-block::
+.. tabs::
 
-   .. input:: /includes/fundamentals/code-examples/BulkWrite.cs
-      :start-after: start-bulk-write-mixed
-      :end-before: end-bulk-write-mixed
-      :language: csharp
-      :dedent: 8
+   .. tab:: Asynchronous
+      :tabid: bulk-write-async
 
-   .. output::
+      .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
+         :start-after: start-bulk-write-async
+         :end-before: end-bulk-write-async
+         :language: csharp
+         :copyable:
+         :dedent: 8
+
+   .. tab:: Synchronous
+      :tabid: bulk-write-sync
+
+      .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
+         :start-after: start-bulk-write-async
+         :end-before: end-bulk-write-async
+         :language: csharp
+         :copyable:
+         :dedent: 8
+
+The preceding code examples produce the following output:
+
+.. code-block:: shell
       
-      BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2, 'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []}, acknowledged=True)
+   BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2, 'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []}, acknowledged=True)
 
 If any of the write operations fail, the {+driver-short+} raises a
-``BulkWriteException`` and does not perform any further operations.
-``BulkWriteException`` provides a ``details`` attribute that includes the operation
-that failed, and details about the exception.
-
-.. note::
-
-   When the {+driver-short+} executes a bulk write operation, it uses the
-   ``WriteConcern`` of the
-   collection on which the operation is running. The driver reports all write
-   concern errors after attempting all operations, regardless of execution order. 
+``BulkWriteException`` and does not perform any further operations. You can examine
+the properties of the exception to determine which operation failed.
 
 Customize Bulk Write Operations
 -------------------------------
 
-The ``bulk_write()`` method optionally accepts additional
-parameters, which represent options you can use to configure the bulk write
-operation. If you don't specify any additional options, the driver does not customize
-the bulk write operation.
+When you call the ``BulkWrite()`` or ``BulkWriteAsync()`` method, you can pass an
+instance of the ``ClientBulkWriteOptions`` class. The ``ClientBulkWriteOptions`` class
+contains the following properties, which represent options you can use to configure the
+bulk write operation:
 
 .. list-table::
    :widths: 30 70
@@ -360,60 +413,84 @@ the bulk write operation.
    * - Property
      - Description
 
-   * - ``ordered``
-     - | If ``True``, the driver performs the write operations in the order
-         provided. If an error occurs, the remaining operations are not
-         attempted. 
-       |
-       | If ``False``, the driver performs the operations in an
-         arbitrary order and attempts to perform all operations.
-       | Defaults to ``True``.
-
-   * - ``bypass_document_validation``
+   * - ``BypassDocumentValidation``
      - | Specifies whether the operation bypasses document-level validation. For more
          information, see :manual:`Schema
-         Validation </core/schema-validation/#schema-validation>` in the MongoDB
-         Server manual.
-       | Defaults to ``False``.
+         Validation </core/schema-validation/#schema-validation>` in the {+mdb-server+}
+         manual.
+       | Defaults to ``false``.
 
-   * - ``session``
-     - | An instance of ``ClientSession``. For more information, see the `API
-         documentation <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession>`__.
-
-   * - ``comment``
-     - | A comment to attach to the operation. For more information, see the :manual:`delete command
+   * - ``Comment``
+     - | A comment to attach to the operation, in the form of a ``BsonValue``. For
+         more information, see the :manual:`delete command
          fields </reference/command/delete/#command-fields>` guide in the
          {+mdb-server+} manual.
 
-   * - ``let``
-     - | A map of parameter names and values. Values must be constant or closed
+   * - ``IsOrdered``
+     - | If ``true``, the driver performs the write operations in the order
+         provided. If an error occurs, the remaining operations are not
+         attempted. 
+       |
+       | If ``false``, the driver performs the operations in an
+         arbitrary order and attempts to perform all operations.
+       | Defaults to ``True``.
+
+   * - ``Let``
+     - | A map of parameter names and values, in the form of a ``BsonDocument``. Values
+         must be constant or closed
          expressions that don't reference document fields. For more information,
          see the :manual:`let statement
          </reference/command/delete/#std-label-delete-let-syntax>` in the
          {+mdb-server+} manual.
+    
+   * - ``VerboseResult``
+     - | Specifies whether the ``ClientBulkWriteResult`` object returned by the operation
+         includes detailed results for each successful write operation.
+       | Defaults to ``false``.
 
-The following example calls the ``bulk_write()`` method from the preceding example, with the ``ordered`` option set
-to ``False``:
+   * - ``WriteConcern``
+     - | The write concern to use for the write operation, as a value from the ``WriteConcern``
+         enum.
+       | Defaults to the write concern of the collection on which the operation is running.
 
-.. literalinclude:: /includes/write/bulk-write.py
-   :start-after: start-bulk-write-unordered
-   :end-before: end-bulk-write-unordered
-   :language: python
-   :copyable:
+The following code examples use a ``ClientBulkWriteOptions`` object to customize
+a delete operation:
 
-If any of the write operations in an unordered bulk write fail, {+driver-short+}
-reports the errors only after attempting all operations.
+.. tabs::
 
-.. note::
+   .. tab:: Asynchronous
+      :tabid: bulk-write-options-async
+
+      .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
+         :start-after: start-bulk-write-options-async
+         :end-before: end-bulk-write-options-async
+         :language: csharp
+         :copyable:
+         :dedent: 8
+
+   .. tab:: Synchronous
+      :tabid: bulk-write-options-sync
+
+      .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
+        :start-after: start-bulk-write-options-async
+        :end-before: end-bulk-write-options-async
+        :language: csharp
+        :copyable:
+        :dedent: 8
+
+.. note:: Unordered Bulk Write Operations
 
    Unordered bulk operations do not guarantee order of execution. The order can
    differ from the way you list them to optimize the runtime.
+   
+   If any of the write operations in an unordered bulk write fail, the {+driver-short+}
+   reports the errors only after attempting all operations.
 
 Return Value
 ------------
 
-The ``bulk_write()`` method returns a ``BulkWriteResult`` object. The
-``BulkWriteResult`` object contains the following properties:
+The ``BulkWrite()`` and ``BulkWriteAsync()`` methods return a ``ClientBulkWriteResult``
+object that contains the following properties:
 
 .. list-table::
    :widths: 30 70
@@ -422,53 +499,58 @@ The ``bulk_write()`` method returns a ``BulkWriteResult`` object. The
    * - Property
      - Description
 
-   * - ``acknowledged``
-     - | Indicates if the server acknowledged the write operation.
+   * - ``Acknowledged``
+     - | Indicates whether the server acknowledged the bulk write operation.
 
-   * - ``bulk_api_result``
-     - | The raw bulk API result returned by the server.
-         
-   * - ``deleted_count``
+   * - ``DeleteResults``
+     - | An ``IReadOnlyDictionary<int, BulkWriteDeleteResult>`` object containing the
+         results of each successful delete operation, if any.
+   
+   * - ``DeletedCount``
      - | The number of documents deleted, if any.
 
-   * - ``inserted_count``
+   * - ``InsertResults``
+     - | An ``IReadOnlyDictionary<int, BulkWriteInsertOneResult>`` object containing the
+         results of each successful insert operation, if any.
+   
+   * - ``InsertedCount``
      - | The number of documents inserted, if any.
 
-   * - ``matched_count``
+   * - ``MatchedCount``
      - | The number of documents matched for an update, if applicable.
 
-   * - ``modified_count``
+   * - ``ModifiedCount``
      - | The number of documents modified, if any.
 
-   * - ``upserted_count``
+   * - ``UpsertResults``
+     - | An ``IReadOnlyDictionary<int, BulkWriteUpdateResult>`` object containing the
+         results of each successful update operation, if any.
+   
+   * - ``UpsertedCount``
      - | The number of documents upserted, if any.
-
-   * - ``upserted_ids``
-     - | A map of the operation's index to the ``_id`` of the upserted documents, if
-         applicable.
 
 Additional Information
 ----------------------
 
 To learn how to perform individual write operations, see the following guides:
 
-- :ref:`pymongo-write-insert`
-- :ref:`pymongo-write-update`
-- :ref:`pymongo-write-replace`
-- :ref:`pymongo-write-delete`
-
-API Documentation
-~~~~~~~~~~~~~~~~~
+- :ref:`csharp-change-guide`
+- :ref:`csharp-insert-guide`
+- :ref:`csharp-delete-guide`
 
 To learn more about any of the methods or types discussed in this
-guide, see the following API Documentation:
+guide, see the following API documentation:
 
-- `bulk_write() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.bulk_write>`__
-- `InsertOne <{+api-root+}pymongo/operations.html#pymongo.operations.InsertOne>`__
-- `UpdateOne <{+api-root+}pymongo/operations.html#pymongo.operations.UpdateOne>`__
-- `UpdateMany <{+api-root+}pymongo/operations.html#pymongo.operations.UpdateMany>`__
-- `ReplaceOne <{+api-root+}pymongo/operations.html#pymongo.operations.ReplaceOne>`__
-- `DeleteOne <{+api-root+}pymongo/operations.html#pymongo.operations.DeleteOne>`__
-- `DeleteMany <{+api-root+}pymongo/operations.html#pymongo.operations.DeleteMany>`__
-- `BulkWriteResult <{+api-root+}pymongo/results.html#pymongo.results.BulkWriteResult>`__
-- `BulkWriteError <{+api-root+}pymongo/errors.html#pymongo.errors.BulkWriteError>`__
+- `BulkWrite() <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWrite.html>`__
+- `BulkWriteAsync() <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteAsync.html>`__
+- `ClientBulkWriteOptions <{+new-api-root+}/MongoDB.Driver/MongoClient.ClientBulkWriteOptions.html>`__
+- `ClientBulkWriteResult <{+new-api-root+}/MongoDB.Driver/MongoClient.ClientBulkWriteResult.html>`__
+- `BulkWriteInsertOneModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteInsertOneModel-1.html>`__
+- `BulkWriteUpdateOneModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteUpdateOneModel-1.html>`__
+- `BulkWriteUpdateManyModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteUpdateManyModel-1.html>`__
+- `BulkWriteReplaceOneModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteReplaceOneModel-1.html>`__
+- `BulkWriteDeleteOneModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteDeleteOneModel-1.html>`__
+- `BulkWriteDeleteManyModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteDeleteManyModel-1.html>`__
+- `BulkWriteInsertOneResult <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteInsertOneResult.html>`__
+- `BulkWriteUpdateResult <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteUpdateResult.html>`__
+- `BulkWriteDeleteResult <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteDeleteResult.html>`__

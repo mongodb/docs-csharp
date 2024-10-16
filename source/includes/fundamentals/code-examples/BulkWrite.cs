@@ -2,12 +2,6 @@ using System;
 
 class BulkWrite
 {
-    static void Main(string[] args)
-    {
-        Console.WriteLine("Hello, World!");
-        BulkWrite
-    }
-
     static void InsertOne()
     {
         // start-bulk-insert-one
@@ -81,12 +75,16 @@ class BulkWrite
         // end-bulk-delete-many
     }
 
-    static void BulkWrite()
+    static void BulkWriteSync()
     {
-        // start-bulk-write-mixed
+        // start-bulk-write-sync
+        var client = new MongoClient("mongodb://localhost:27017");
+        var collection = "sample_restaurants.restaurants";
+
         var bulkWriteModels = new WriteModel<BsonDocument>[]
         {
             new BulkWriteInsertOneModel<BsonDocument>(
+                collection,
                 new BsonDocument{
                     { "name", "Mongo's Deli" },
                     { "cuisine", "Sandwiches" },
@@ -95,6 +93,7 @@ class BulkWrite
                 }
             ),
             new BulkWriteInsertOneModel<BsonDocument>(
+                collection,
                 new BsonDocument{
                     { "name", "Mongo's Deli" },
                     { "cuisine", "Sandwiches" },
@@ -103,24 +102,100 @@ class BulkWrite
                 }
             ),
             new BulkWriteUpdateManyModel<BsonDocument>(
+                ,collection
                 Builders<BsonDocument>.Filter.Eq("name", "Mongo's Deli"),
                 Builders<BsonDocument>.Update.Set("cuisine", "Sandwiches and Salads")
             ),
             new BulkWriteDeleteOneModel<BsonDocument>(
+                collection,
                 Builders<BsonDocument>.Filter.Eq("restaurant_id", "1234")
             )
-            // end-bulk-write-mixed
         };
 
-        //results = restaurants.bulk_write(operations)
+        var results = client.BulkWriteSync(bulkWriteModels);
         Console.WriteLine("Bulk write results: " + results);
+        // start-bulk-write-sync
+    }
+    static async void BulkWriteAsync()
+    {
+        // start-bulk-write-async
+        var client = new MongoClient("mongodb://localhost:27017");
+        var collection = "sample_restaurants.restaurants";
+
+        var bulkWriteModels = new WriteModel<BsonDocument>[]
+        {
+            new BulkWriteInsertOneModel<BsonDocument>(
+                collection,
+                new BsonDocument{
+                    { "name", "Mongo's Deli" },
+                    { "cuisine", "Sandwiches" },
+                    { "borough", "Manhattan" },
+                    { "restaurant_id", "1234" }
+                }
+            ),
+            new BulkWriteInsertOneModel<BsonDocument>(
+                collection,
+                new BsonDocument{
+                    { "name", "Mongo's Deli" },
+                    { "cuisine", "Sandwiches" },
+                    { "borough", "Brooklyn" },
+                    { "restaurant_id", "5678" }
+                }
+            ),
+            new BulkWriteUpdateManyModel<BsonDocument>(
+                ,collection
+                Builders<BsonDocument>.Filter.Eq("name", "Mongo's Deli"),
+                Builders<BsonDocument>.Update.Set("cuisine", "Sandwiches and Salads")
+            ),
+            new BulkWriteDeleteOneModel<BsonDocument>(
+                collection,
+                Builders<BsonDocument>.Filter.Eq("restaurant_id", "1234")
+            )
+        };
+
+        var results = await client.BulkWriteAsync(bulkWriteModels);
+        Console.WriteLine("Bulk write results: " + results);
+        // end-bulk-write-async
     }
 
+    static void BulkWriteOptionsSync()
+    {
+        // start-bulk-write-options-sync
+        var client = new MongoClient("mongodb://localhost:27017");
+
+        var deleteOneModel = new BulkWriteDeleteOneModel<BsonDocument>(
+            "sample_restaurants.restaurants",
+            Builders<BsonDocument>.Filter.Eq("restaurant_id", "5678")
+        );
+
+        var clientBulkWriteOptions = new ClientBulkWriteOptions
+        {
+            IsOrdered = false,
+            WriteConcern = WriteConcern.Unacknowledged,
+            VerboseResult = true
+        };
+
+        var results = client.BulkWriteSync(deleteOneModel, clientBulkWriteOptions);
+        // end-bulk-write-options-sync
+    }
+    static async void BulkWriteOptionsAsync()
+    {
+        // start-bulk-write-options-async
+        var client = new MongoClient("mongodb://localhost:27017");
+
+        var deleteOneModel = new BulkWriteDeleteOneModel<BsonDocument>(
+            "sample_restaurants.restaurants",
+            Builders<BsonDocument>.Filter.Eq("restaurant_id", "5678")
+        );
+
+        var clientBulkWriteOptions = new ClientBulkWriteOptions
+        {
+            IsOrdered = false,
+            WriteConcern = WriteConcern.Unacknowledged,
+            VerboseResult = true
+        };
+
+        var results = await client.BulkWriteAsync(deleteOneModel, clientBulkWriteOptions);
+        // end-bulk-write-options-async
+    }
 }
-
-
-
-
-# start-bulk-write-unordered
-results = restaurants.bulk_write(operations, ordered = False)
-# end-bulk-write-unordered

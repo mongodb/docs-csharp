@@ -591,16 +591,16 @@ in the Atlas manual and select :guilabel:`C#` from the language dropdown.
 Bitwise Operators
 ~~~~~~~~~~~~~~~~~
 
-The following section describes the `bitwise operators <https://en.wikipedia.org/wiki/Bitwise_operation>`__ 
+The following section describes the :wikipedia:`bitwise operators </Bitwise_operation>`
 supported by the {+driver-short+} that you can use in an aggregation pipeline.
 You can use multiple bitwise operators in the same 
 stage. The following guidelines apply when using bitwise operators:
 
 - All operands must be of type ``int`` or ``long``.
 
-- ``$bitAnd``, ``$bitOr``, and ``$bitXor`` all take two or more operands. ``$bitNot`` can only take one operand.
+- ``$bitAnd``, ``$bitOr``, and ``$bitXor`` take two or more operands. ``$bitNot`` takes one operand.
 
-- The bitwise operation will be evaluated from left to right.
+- Bitwise operations are evaluated from left to right.
 
 The examples for this section use the following documents in a collection called
 ``ingredients``:
@@ -633,8 +633,12 @@ $bitAnd
 
 The ``$bitAnd`` aggregation operator performs a bitwise AND operation on the given
 arguments. You can use the ``$bitAnd`` operator by connecting two or more 
-clauses with a ``&`` character. The following example shows how to create a 
-``$bitAnd`` stage using LINQ: 
+clauses with a ``&`` character. 
+
+The following example shows how to create a ``$bitAnd`` stage by using LINQ. The
+code retrieves the document in which the ``Name`` field has the 
+value ``"eggs"``. It then performs a bitwise AND operation on the values of the 
+``Price`` and ``Count`` fields in this document.
 
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
    :language: csharp
@@ -642,9 +646,8 @@ clauses with a ``&`` character. The following example shows how to create a
    :start-after: start-bitAnd-example
    :end-before: end-bitAnd-example
 
-The preceding example retrieves the document in which the ``Name`` field has the 
-value ``"eggs"``. It then performs a bitwise AND operation on the values of the 
-``Price`` and ``Count`` fields in this document, returning a value of ``4``.
+The preceding code returns ``4``, the result of the AND operation on the values
+of the ``Price`` field (``5``) and the ``Count`` field (``12``).
 
 The following example performs the same bitwise AND operation, but on all 
 documents in the collection:
@@ -678,8 +681,12 @@ $bitOr
 
 The ``$bitOr`` aggregation operator performs a bitwise OR operation on the given
 arguments. You can use the ``$bitOr`` operator by connecting two or more 
-clauses with a ``|`` character. The following example shows how to create a 
-``$bitOr`` stage using LINQ:
+clauses with a ``|`` character. 
+
+The following example shows how to create a ``$bitOr`` stage by using LINQ. The
+code retrieves the document in which the ``Name`` field has the 
+value ``"eggs"``. It then performs a bitwise OR operation on the values of the 
+``Price`` and ``Count`` fields in this document.
 
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
    :language: csharp
@@ -687,10 +694,8 @@ clauses with a ``|`` character. The following example shows how to create a
    :start-after: start-bitOr-example
    :end-before: end-bitOr-example
 
-The preceding example retrieves the document in which the ``Name`` field has the 
-value ``"eggs"``. It then performs a bitwise OR operation on the values of the 
-``Price`` and ``Count`` fields in this document, returning the value
-``13``.
+The preceding code returns ``13``, the result of the OR operation on the values
+of the ``Price`` field (``5``) and the ``Count`` field (``12``).
 
 $bitNot
 +++++++
@@ -698,7 +703,7 @@ $bitNot
 The ``$bitNot`` aggregation operator performs a bitwise NOT operation on the given
 argument. You can use the ``$bitNot`` operator by preceding an 
 operand with a ``~`` character. ``$bitNot`` only takes one argument. The 
-following example shows how to create a ``$bitNot`` stage using LINQ:
+following example shows how to create a ``$bitNot`` stage by using LINQ:
 
 .. io-code-block::
    :copyable: true
@@ -725,8 +730,13 @@ $bitXor
 
 The ``$bitXor`` aggregation operator performs a bitwise XOR operation on the given
 arguments. You can use the ``$bitXor`` operator by connecting two or more 
-clauses with a ``^`` character. The following example shows how to create a 
-``$bitXor`` stage using LINQ:
+clauses with a ``^`` character. 
+
+The following example shows how to create a ``$bitXor`` stage by using LINQ. The
+code retrieves the documents in which the ``Name`` field has 
+the value ``"eggs"`` or ``"watermelon"``. It then performs a bitwise XOR 
+operation on the values of the ``Price`` and ``Count`` fields in these 
+documents.
 
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
    :language: csharp
@@ -734,10 +744,7 @@ clauses with a ``^`` character. The following example shows how to create a
    :start-after: start-bitXor-example
    :end-before: end-bitXor-example
 
-The preceding example retrieves the documents in which the ``Name`` field has 
-the value ``"eggs"`` or ``"watermelon"``. It then performs a bitwise XOR 
-operation on the values of the ``Price`` and ``Count`` fields in these 
-documents. The result contains the following values:
+The result contains the following values:
 
 .. code-block:: json
    

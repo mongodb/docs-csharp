@@ -591,7 +591,7 @@ in the Atlas manual and select :guilabel:`C#` from the language dropdown.
 Bitwise Operators
 ~~~~~~~~~~~~~~~~~
 
-The following section describes the :wikipedia:`bitwise operators </Bitwise_operation>`
+This section describes the :wikipedia:`bitwise operators <Bitwise_operation>`
 supported by the {+driver-short+} that you can use in an aggregation pipeline.
 You can use multiple bitwise operators in the same 
 stage. The following guidelines apply when using bitwise operators:
@@ -602,7 +602,7 @@ stage. The following guidelines apply when using bitwise operators:
 
 - Bitwise operations are evaluated from left to right.
 
-The examples for this section use the following documents in a collection called
+The examples in this section use the following documents in a collection called
 ``ingredients``:
 
 .. code-block:: json
@@ -649,7 +649,7 @@ value ``"eggs"``. It then performs a bitwise AND operation on the values of the
 The preceding code returns ``4``, the result of the AND operation on the values
 of the ``Price`` field (``5``) and the ``Count`` field (``12``).
 
-The following example performs the same bitwise AND operation, but on all 
+The following example performs the same bitwise AND operation on all 
 documents in the collection:
 
 .. io-code-block::

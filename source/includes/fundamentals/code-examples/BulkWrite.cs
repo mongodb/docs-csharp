@@ -114,7 +114,7 @@ class BulkWrite
 
         var results = client.BulkWriteSync(bulkWriteModels);
         Console.WriteLine("Bulk write results: " + results);
-        // start-bulk-write-sync
+        // end-bulk-write-sync
     }
     static async void BulkWriteAsync()
     {

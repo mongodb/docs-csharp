@@ -598,8 +598,7 @@ stage. The following guidelines apply when using bitwise operators:
 
 - All operands must be of type ``int`` or ``long``.
 
-- ``$bitAnd``, ``$bitOr``, and ``$bitXor`` all take two or more operands. 
-  ``$bitNot`` can only take one operand.
+- ``$bitAnd``, ``$bitOr``, and ``$bitXor`` all take two or more operands. ``$bitNot`` can only take one operand.
 
 - The bitwise operation will be evaluated from left to right.
 

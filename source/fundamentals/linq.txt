@@ -591,9 +591,9 @@ in the Atlas manual and select :guilabel:`C#` from the language dropdown.
 Bitwise Operators
 ~~~~~~~~~~~~~~~~~
 
-The {+driver-short+} supports the use of the following 
-`bitwise operators <https://en.wikipedia.org/wiki/Bitwise_operation>`__ in the 
-aggregation pipeline. You can use multiple bitwise operators in the same 
+The following section describes the `bitwise operators <https://en.wikipedia.org/wiki/Bitwise_operation>`__ 
+supported by the {+driver-short+} that you can use in an aggregation pipeline.
+You can use multiple bitwise operators in the same 
 stage. The following limits apply when using bitwise operators:
 
 All operands must be of type ``int`` or ``long``. ``$bitAnd``, ``$bitOr``,

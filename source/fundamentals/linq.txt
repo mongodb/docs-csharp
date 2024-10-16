@@ -649,22 +649,25 @@ value ``"eggs"``. It then performs a bitwise AND operation on the values of the
 The following example performs the same bitwise AND operation, but on all 
 documents in the collection:
 
-.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
-   :language: csharp
-   :dedent:
-   :start-after: start-bitAnd-collection-example
-   :end-before: end-bitAnd-collection-example
+.. io-code-block::
+   :copyable: true
 
-The result of the preceding example contains the following values:
+   .. input:: /includes/fundamentals/code-examples/linq.cs
+      :language: csharp
+      :dedent:
+      :start-after: start-bitAnd-collection-example
+      :end-before: end-bitAnd-collection-example
 
-.. code-block:: json
+   .. output::
+      :language: json
+      :visible: false
 
-   1
-   0
-   4
-   0
-   4
-   null
+      1
+      0
+      4
+      0
+      4
+      null
 
 The ``null`` result comes from the document where the ``Name`` field
 has the value of ``"cheese"``. This document is missing a ``Count`` field, so
@@ -697,22 +700,25 @@ argument. You can use the ``$bitNot`` operator by preceding an
 operand with a ``~`` character. ``$bitNot`` only takes one argument. The 
 following example shows how to create a ``$bitNot`` stage using LINQ:
 
-.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
-   :language: csharp
-   :dedent:
-   :start-after: start-bitNot-example
-   :end-before: end-bitNot-example
+.. io-code-block::
+   :copyable: true
 
-The result of the preceding example contains the following values:
+   .. input:: /includes/fundamentals/code-examples/linq.cs
+      :language: csharp
+      :dedent:
+      :start-after: start-bitNot-example
+      :end-before: end-bitNot-example
 
-.. code-block:: json
+   .. output:: 
+      :language: json
+      :visible: false
 
-   -2
-   -5
-   -13
-   -5
-   -101
-   null
+      -2
+      -5
+      -13
+      -5
+      -101
+      null
 
 $bitXor
 +++++++

@@ -70,9 +70,9 @@ as follows:
 .. code-block:: csharp
    :emphasize-lines: 3
 
-    var restaurantsDatabase = client.GetDatabase("sample_restaurants");
-    var restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
-    var queryableCollection = restaurantsCollection.AsQueryable();
+   var restaurantsDatabase = client.GetDatabase("sample_restaurants");
+   var restaurantsCollection = restaurantsDatabase.GetCollection<Restaurant>("restaurants");
+   var queryableCollection = restaurantsCollection.AsQueryable();
 
 The ``AsQueryable()`` method returns an `IMongoQueryable
 <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.IMongoQueryable.html>`__ instance that
@@ -591,11 +591,16 @@ in the Atlas manual and select :guilabel:`C#` from the language dropdown.
 Bitwise Operators
 ~~~~~~~~~~~~~~~~~
 
-This version of the {+driver-short+} supports the following bitwise operators in 
-the aggregation pipeline. You can use multiple bitwise operators within the same 
-stage. All operands must be of type ``int`` or ``long``. ``$bitAnd``, ``$bitOr``,
+The {+driver-short+} supports the use of the following 
+`bitwise operators <https://en.wikipedia.org/wiki/Bitwise_operation>`__ in the 
+aggregation pipeline. You can use multiple bitwise operators in the same 
+stage. The following limits apply when using bitwise operators:
+
+All operands must be of type ``int`` or ``long``. ``$bitAnd``, ``$bitOr``,
 and ``$bitXor`` all take two or more operands. ``$bitNot`` can only take one
 operand.
+
+The bitwise operation will be evaluated from left to right.
 
 The examples for this section use the following documents in a collection called
 ``ingredients``:
@@ -625,36 +630,35 @@ collection:
       public int Count { get; set; }
    }
 
-.. note::
+.. note:: Missing or Undefined Operands
 
-   For all bitwise operators, if the operand list contains a missing or undefined
-   value, the entire expression evaluates to ``null``.
-
+   If the operand list you pass to any bitwise operator contains a missing or 
+   undefined value, the entire expression evaluates to ``null``.
 
 $bitAnd
 +++++++
 
-The ``$bitAnd`` aggregation stage performs a bitwise AND operation on the given
-arguments. The following example shows how to generate a ``$bitAnd`` stage using
-LINQ:
+The ``$bitAnd`` aggregation operator performs a bitwise AND operation on the given
+arguments. You can use the ``$bitAnd`` operator by connecting two or more 
+clauses with a ``&`` character. The following example shows how to create a 
+``$bitAnd`` stage using LINQ: 
 
 .. code-block:: csharp
 
-    var query = queryableCollection.AsQueryable()
+    var query = queryableCollection
       .Where(i => i.Name == "eggs")
       .Select(i => i.Price & i.Count);
 
-The preceding example finds the document where the ``Name`` field has the value
-``"eggs"``. It then performs a bitwise AND operation on the values of the 
-``Price`` and ``Count`` fields in this document. The result contains one value:
-``4``.
+The preceding example retrieves the document in which the ``Name`` field has the 
+value ``"eggs"``. It then performs a bitwise AND operation on the values of the 
+``Price`` and ``Count`` fields in this document, returning a value of ``4``.
 
 The following example performs the same bitwise AND operation, but on all 
 documents in the collection:
 
 .. code-block:: csharp
 
-    var query = queryableCollection.AsQueryable()
+    var query = queryableCollection
       .Select(i => i.Price & i.Count);
 
 The result of the preceding example contains the following values:
@@ -675,30 +679,33 @@ the expression evaluates to ``null``.
 $bitOr
 ++++++
 
-The ``$bitOr`` aggregation stage performs a bitwise OR operation on the given
-arguments. The following example shows how to generate a ``$bitOr`` stage using
-LINQ:
+The ``$bitOr`` aggregation operator performs a bitwise OR operation on the given
+arguments. You can use the ``$bitOr`` operator by connecting two or more 
+clauses with a ``|`` character. The following example shows how to create a 
+``$bitOr`` stage using LINQ:
 
 .. code-block:: csharp
 
-    var query = queryableCollection.AsQueryable()
+    var query = queryableCollection
       .Where(i => i.Name == "eggs")
       .Select(i => i.Price | i.Count);
 
-The preceding example finds the document where the ``Name`` field has the value
-``"eggs"``. It then performs a bitwise OR operation on the values of the 
-``Price`` and ``Count`` fields in this document. The result contains one value:
+The preceding example retrieves the document in which the ``Name`` field has the 
+value ``"eggs"``. It then performs a bitwise OR operation on the values of the 
+``Price`` and ``Count`` fields in this document, returning the value
 ``13``.
 
 $bitNot
 +++++++
 
-The ``$bitNot`` aggregation stage performs a bitwise NOT operation on the given
-argument. ``$bitNot`` only takes one argument.
+The ``$bitNot`` aggregation operator performs a bitwise NOT operation on the given
+argument. You can use the ``$bitNot`` operator by preceding an 
+operand with a ``~`` character. ``$bitNot`` only takes one argument. The 
+following example shows how to create a ``$bitNot`` stage using LINQ:
 
 .. code-block:: csharp
 
-   var queryable = collection.AsQueryable()
+   var queryable = collection
       .Select(i => ~i.Count);
 
 The result of the preceding example contains the following values:
@@ -715,22 +722,21 @@ The result of the preceding example contains the following values:
 $bitXor
 +++++++
 
-The ``$bitXor`` aggregation stage performs a bitwise XOR operation on the given
-arguments. 
-
-The following example shows how to generate a ``$bitXor`` stage using
-LINQ:
+The ``$bitXor`` aggregation operator performs a bitwise XOR operation on the given
+arguments. You can use the ``$bitXor`` operator by connecting two or more 
+clauses with a ``^`` character. The following example shows how to create a 
+``$bitXor`` stage using LINQ:
 
 .. code-block:: csharp
 
-   var query = queryableCollection.AsQueryable()
+   var query = queryableCollection
       .Where(i => i.Name == "eggs" || i.Name == "watermelon")
       .Select(i => i.Price ^ i.Count);
 
-The preceding example finds the documents where the ``Name`` field has the value
-``"eggs"`` or ``"watermelon"``. It then performs a bitwise OR operation on the 
-values of the ``Price`` and ``Count`` fields in these documents. The result 
-contains the following values:
+The preceding example retrieves the documents in which the ``Name`` field has 
+the value ``"eggs"`` or ``"watermelon"``. It then performs a bitwise XOR 
+operation on the values of the ``Price`` and ``Count`` fields in these 
+documents. The result contains the following values:
 
 .. code-block:: json
    

@@ -594,13 +594,14 @@ Bitwise Operators
 The following section describes the `bitwise operators <https://en.wikipedia.org/wiki/Bitwise_operation>`__ 
 supported by the {+driver-short+} that you can use in an aggregation pipeline.
 You can use multiple bitwise operators in the same 
-stage. The following limits apply when using bitwise operators:
+stage. The following guidelines apply when using bitwise operators:
 
-All operands must be of type ``int`` or ``long``. ``$bitAnd``, ``$bitOr``,
-and ``$bitXor`` all take two or more operands. ``$bitNot`` can only take one
-operand.
+- All operands must be of type ``int`` or ``long``.
 
-The bitwise operation will be evaluated from left to right.
+- ``$bitAnd``, ``$bitOr``, and ``$bitXor`` all take two or more operands. 
+   ``$bitNot`` can only take one operand.
+
+- The bitwise operation will be evaluated from left to right.
 
 The examples for this section use the following documents in a collection called
 ``ingredients``:

@@ -158,13 +158,15 @@ Identity and Access Management (AWS IAM) credentials to authenticate a user to M
 
 To use AWS authentication, first perform the following steps:
 
-- Add the ``MongoDB.Driver.Authentication.AWS`` NuGet package to your project.
+- Add the `MongoDB.Driver.Authentication.AWS <https://www.nuget.org/packages/MongoDB.Driver.Authentication.AWS>`__
+  NuGet package to your project.
 - Add the following line of code to your application's bootstrap code to register the
   AWS authentication provider:
 
   .. code-block:: csharp
+     :copyable: true
 
-     MongoAuthentication.RegisterAwsAuthenticationProvider();
+     MongoClientSettings.Extensions.AddAWSAuthentication();
 
 After you register the AWS authentication provider, you can either specify the AWS IAM 
 credentials explicitly or instruct the driver to retrieve them automatically from an

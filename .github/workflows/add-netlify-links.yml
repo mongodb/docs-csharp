@@ -25,28 +25,11 @@ jobs:
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          # Function to validate file paths
-          validate_file_path() {
-            local file_path="$1"
-            # Allow only alphanumeric characters, _ . / and -
-            if [[ ! "$file_path" =~ ^[a-zA-Z0-9._/-]+$ ]]; then
-              echo "Invalid file path detected: $file_path" >&2
-              return 1
-            fi
-          }
-
           new_links=""
           base_link='https://deploy-preview-${{ github.event.number }}--mongodb-docs-csharp.netlify.app'
           files=$(echo "$CHANGED_FILES" | tr "," "\n")
           for file in $files; do
             echo "processing ${file}"
-            
-            # Validate file path and skip if invalid 
-            validate_file_path "$file"
-            if [ $? -ne 0 ]; then
-              continue
-            fi
-            
             if (! grep -s "includes/"  <<< "$file") && 
                 (! grep -s "images/"  <<< "$file") && 
                 (! grep -s "examples/"  <<< "$file"); then

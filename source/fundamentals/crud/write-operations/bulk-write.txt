@@ -20,11 +20,14 @@ Bulk Write Operations
 Overview
 --------
 
+This guide shows you how to use the {+driver-short+} to perform **bulk write operations**
+that include multiple write operations in a single database call.
+
 Consider a scenario in which you want to insert a document into a collection,
 update multiple other documents, then delete a document. If you use
-individual methods, each operation requires its own database call. This guide
-shows you how to use bulk write operations to perform multiple write operations
-in a single database call.
+individual methods, each operation requires its own database call. If you use
+a bulk write operation, you can improve efficiency by performing multiple write
+operations in a single database call.
 
 Sample Data
 ~~~~~~~~~~~
@@ -51,11 +54,10 @@ The following sections show how to create and use instances of the preceding cla
 
 .. tip:: Bulk Write Operations with POCOs
 
-    The examples in this guide use ``BsonDocument`` as the type for ``TDocument``.
-    You can also use a Plain Old CLR Object (POCO) as the type for ``TDocument``.
-    
-    To use a POCO, define a class that represents the documents in your collection.
-    The class must have properties that match the fields in your documents.
+    The examples in this guide use the ``BsonDocument`` type for the ``TDocument`` type
+    in all generic classes. You can also use a Plain Old CLR Object (POCO) for these
+    classes. To do so, you must define a class that represents the documents in your
+    collection. The class must have properties that match the fields in your documents.
     For more information, see :ref:`<csharp-poco>`.
 
 Insert Operations
@@ -164,11 +166,11 @@ parameters:
        | **Data Type:** `IEnumerable<ArrayFilterDefinition> <https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1?view=net-8.0>`__ 
        | **Default:** ``null``
 
-The following example creates an instance of the ``BulkWriteUpdateOneModel<TDocument>``
-class, and uses ``BsonDocument`` as the type for ``TDocument``. The
-filter matches the first document in the ``sample_restaurants.restaurants`` collection
-where the value of the ``name`` field is ``"Mongo's Deli"``. The update operation sets
-the value of the ``cuisine`` field to ``"Sandwiches and Salads"``.
+In the following code example, the ``BulkWriteUpdateOneModel<BsonDocument>`` object
+represents an update operation on the ``sample_restaurants.restaurants`` collection.
+The operation matches the first document in the collection where the value of the ``name``
+field is ``"Mongo's Deli"``. It then updates the value of the ``cuisine`` field in the
+matched document to ``"Sandwiches and Salads"``.
 
 .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-update-one
@@ -347,9 +349,10 @@ Run the Write Operations
 ------------------------
 
 After you define a ``BulkWriteModel`` instance for each operation that you want to perform,
-pass an ``IReadOnlyList`` collection of these instances to the ``BulkWrite()`` or
-``BulkWriteAsync()`` method. By default, these methods run the operations in the order
-they're defined in the collection.
+create an instance of a class that implements the ``IReadOnlyList`` interface. Add your
+``BulkWriteModel`` objects to this ``IReadOnlyList``, then pass the ``IReadOnlyList``
+to the ``BulkWrite()`` or ``BulkWriteAsync()`` method. By default, these methods run
+the operations in the order they're defined in the collection.
 
 .. tip:: IReadOnlyList
 
@@ -388,7 +391,7 @@ The preceding code examples produce the following output:
       
    BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2, 'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []}, acknowledged=True)
 
-.. tip:: Troubleshooting Bulk Write Operations
+.. tip::
     
     If any of the write operations fail, the {+driver-short+} raises a
     ``BulkWriteException`` and does not perform any further operations. You can examine

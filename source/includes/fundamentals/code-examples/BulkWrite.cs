@@ -81,7 +81,7 @@ class BulkWrite
         var client = new MongoClient("mongodb://localhost:27017");
         var collection = "sample_restaurants.restaurants";
 
-        var bulkWriteModels = new WriteModel<BsonDocument>[]
+        var bulkWriteModels = new[]
         {
             new BulkWriteInsertOneModel<BsonDocument>(
                 collection,
@@ -122,7 +122,7 @@ class BulkWrite
         var client = new MongoClient("mongodb://localhost:27017");
         var collection = "sample_restaurants.restaurants";
 
-        var bulkWriteModels = new WriteModel<BsonDocument>[]
+        var bulkWriteModels = new[]
         {
             new BulkWriteInsertOneModel<BsonDocument>(
                 collection,

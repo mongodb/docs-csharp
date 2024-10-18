@@ -50,7 +50,8 @@ the following ``BulkWriteModel`` classes:
 - ``BulkWriteDeleteOneModel<TDocument>``
 - ``BulkWriteDeleteManyModel<TDocument>``
 
-The following sections show how to create and use instances of the preceding classes.
+The following sections show how to create and use instances of the preceding classes
+to perform the corresponding write operation in a bulk write.
 
 .. tip:: Bulk Write Operations with POCOs
 
@@ -104,7 +105,7 @@ into the ``sample_restaurants.restaurants`` collection.
 Update Operations
 ~~~~~~~~~~~~~~~~~
 
-To update a document, create an instance of the ``BulkWriteUpdateOneModel<TDocument>``
+To update a single document, create an instance of the ``BulkWriteUpdateOneModel<TDocument>``
 class. The ``BulkWriteUpdateOneModel<TDocument>`` constructor accepts the following
 parameters:
 
@@ -359,9 +360,9 @@ the operations in the order they're defined in the collection.
    ``Array`` and ``List`` are two common classes that implement the ``IReadOnlyList``
    interface.
 
-The following code examples show how to use the asynchronous
+Select from the following tabs to view how to use the asynchronous
 ``BulkWriteAsync()`` method and the synchronous ``BulkWrite()`` method to
-perform multiple write operations.
+perform a bulk write operation.
 
 .. tabs::
 

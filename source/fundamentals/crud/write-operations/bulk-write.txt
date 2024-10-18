@@ -431,7 +431,9 @@ bulk write operation:
          attempted. 
        |
        | If ``false``, the driver performs the operations in an
-         arbitrary order and attempts to perform all operations.
+         arbitrary order and attempts to perform all operations. If any of the write
+         operations in an unordered bulk write fail, the driver
+         reports the errors only after attempting all operations.
        | Defaults to ``True``.
 
    * - ``Let``
@@ -476,14 +478,6 @@ a delete operation:
         :language: csharp
         :copyable:
         :dedent: 8
-
-.. note:: Unordered Bulk Write Operations
-
-   Unordered bulk operations do not guarantee order of execution. The order can
-   differ from the way you list them to optimize the runtime.
-   
-   If any of the write operations in an unordered bulk write fail, the driver
-   reports the errors only after attempting all operations.
 
 Return Value
 ------------

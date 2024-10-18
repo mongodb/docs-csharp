@@ -102,7 +102,7 @@ class BulkWrite
                 }
             ),
             new BulkWriteUpdateManyModel<BsonDocument>(
-                ,collection
+                collection,
                 Builders<BsonDocument>.Filter.Eq("name", "Mongo's Deli"),
                 Builders<BsonDocument>.Update.Set("cuisine", "Sandwiches and Salads")
             ),
@@ -143,7 +143,7 @@ class BulkWrite
                 }
             ),
             new BulkWriteUpdateManyModel<BsonDocument>(
-                ,collection
+                collection,
                 Builders<BsonDocument>.Filter.Eq("name", "Mongo's Deli"),
                 Builders<BsonDocument>.Update.Set("cuisine", "Sandwiches and Salads")
             ),

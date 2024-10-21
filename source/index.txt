@@ -25,7 +25,7 @@ MongoDB C# Driver
    /issues-and-help
    /compatibility
    /upgrade
-   MongoDB Analyzer <https://www.mongodb.com/docs/mongodb-analyzer>
+   MongoDB Analyzer <https://www.mongodb.com/docs/mongodb-analyzer/>
 
 Introduction
 ------------

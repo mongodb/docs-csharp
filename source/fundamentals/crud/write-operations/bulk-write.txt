@@ -21,13 +21,10 @@ Overview
 --------
 
 This guide shows you how to use the {+driver-short+} to perform **bulk write operations**
-that include multiple write operations in a single database call.
-
-Consider a scenario in which you want to insert a document into a collection,
-update multiple other documents, then delete a document. If you use
-individual methods, each operation requires its own database call. If you use
-a bulk write operation, you can improve efficiency by performing multiple write
-operations in a single database call.
+from your ``MongoClient`` instance. A bulk write operation is a single database call
+that performs multiple write operations on one or more MongoDB collections. This is more
+efficient than performing multiple individual write operations because it reduces the
+number of round trips between your application and the database.
 
 Sample Data
 ~~~~~~~~~~~

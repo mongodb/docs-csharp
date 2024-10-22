@@ -86,9 +86,8 @@ The ``BulkWriteInsertOneModel<TDocument>`` constructor accepts the following par
        | **Data Type:** ``TDocument``
 
 The following example creates an instance of the ``BulkWriteInsertOneModel<TDocument>``
-class. The
-``BsonDocument`` object represents a new restaurant named "Mongo's Deli" to be inserted
-into the ``sample_restaurants.restaurants`` collection.
+class. This instance directs the driver to insert a document in which the ``"name"`` field
+is ``"Mongo's Deli"`` into the ``sample_restaurants.restaurants`` collection.
 
 .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-insert-one
@@ -186,10 +185,10 @@ accepts the same parameters as the ``BulkWriteUpdateOneModel<TDocument>`` constr
 The ``BulkWriteUpdateManyModel<TDocument>``
 operation updates *all documents* that match your query filter.
 
-The following example creates an instance of the ``BulkWriteUpdateManyModel<TDocument>``
-class, and uses ``BsonDocument`` as the type for ``TDocument``. The
-filter matches all documents in the ``sample_restaurants.restaurants`` collection
-where the value of the ``name`` field is ``"Mongo's Deli"``. The update operation sets
+In the following code example, the ``BulkWriteUpdateManyModel<BsonDocument>`` object
+represents an update operation on the ``sample_restaurants.restaurants`` collection.
+The operation matches all documents in the collection where
+the value of the ``name`` field is ``"Mongo's Deli"``. It then updates
 the value of the ``cuisine`` field to ``"Sandwiches and Salads"``.
 
 .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
@@ -256,12 +255,12 @@ constructor accepts the following parameters:
        | **Data Type:** {+bool-data-type+}
        | **Default:** ``false``
 
-The following example creates an instance of the ``BulkWriteReplaceOneModel<TDocument>``
-class, and uses ``BsonDocument`` as the type for ``TDocument``. The
-filter matches the document in the ``sample_restaurants.restaurants`` collection
-where the value of the ``restaurant_id`` field is ``"1234"``. The replace operation
-removes all fields from this document and sets new values in the ``name``, ``cuisine``,
-``borough``, and ``restaurant_id`` fields.
+In the following example, the ``BulkWriteReplaceOneModel<BsonDocument>`` object
+represents a replace operation on the ``sample_restaurants.restaurants`` collection.
+The operation matches the document in the collection
+where the value of the ``restaurant_id`` field is ``"1234"``. It then
+removes all fields other than ``_id`` from this document, and sets new values in the
+``name``, ``cuisine``, ``borough``, and ``restaurant_id`` fields.
 
 .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
    :start-after: start-bulk-replace-one
@@ -317,9 +316,9 @@ parameters:
        | **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
        | **Default:** ``null``
 
-The following example creates an instance of the ``BulkWriteDeleteOneModel<TDocument>``
-class, and uses ``BsonDocument`` as the type for ``TDocument``. The
-filter matches the document in the ``sample_restaurants.restaurants`` collection
+In the following code example, the ``BulkWriteDeleteOneModel<BsonDocument>`` object
+represents a delete operation on the ``sample_restaurants.restaurants`` collection.
+The operation matches and deletes the first document
 where the value of the ``restaurant_id`` field is ``"5678"``.
 
 .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs
@@ -334,9 +333,14 @@ class and pass a query filter that specifies the document that you want to delet
 The ``DeleteMany`` operation removes *all documents* that match your
 query filter.
 
-The following example creates an instance of the ``BulkWriteDeleteManyModel<TDocument>``
-class, and uses ``BsonDocument`` as the type for ``TDocument``. The
-filter matches the document in the ``sample_restaurants.restaurants`` collection
+In the following code example, the ``BulkWriteDeleteOneModel<BsonDocument>`` object
+represents a delete operation on the ``sample_restaurants.restaurants`` collection.
+The operation matches and deletes the first document
+where the value of the ``restaurant_id`` field is ``"5678"``.
+
+In the following code example, the ``BulkWriteDeleteManyModel<BsonDocument>`` object
+represents a delete operation on the ``sample_restaurants.restaurants`` collection.
+The operation matches and deletes all documents
 where the value of the ``name`` field is ``"Mongo's Deli"``.
 
 .. literalinclude:: /includes/fundamentals/code-examples/BulkWrite.cs

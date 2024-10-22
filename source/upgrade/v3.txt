@@ -68,9 +68,10 @@ Version 3.0 Breaking Changes
   and .NET versions, visit the
   :ref:`Compatibility <csharp-compatibility-tables>` page.
 
-- The v1.x legacy API, which was deprecated in v2, has been removed. If the driver
-  provides a replacement for a deprecated API, the compiler
-  messages in v2.x will display it.
+- The driver removes the
+  `mongocsharpdriver <https://www.nuget.org/packages/mongocsharpdriver/#readme-body-tab>`__
+  NuGet package, which implements the legacy v1.x API in driver versions 2.x.
+  If you're using the v1.x API, you must migrate to the new API.
 
 - The classes, methods, and properties in the ``MongoDB.Driver.Core`` namespace that were
   deprecated in v{+last-version-2-number+} are marked ``internal``. If the driver

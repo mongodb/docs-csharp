@@ -333,11 +333,6 @@ class and pass a query filter that specifies the document that you want to delet
 The ``DeleteMany`` operation removes *all documents* that match your
 query filter.
 
-In the following code example, the ``BulkWriteDeleteOneModel<BsonDocument>`` object
-represents a delete operation on the ``sample_restaurants.restaurants`` collection.
-The operation matches and deletes the first document
-where the value of the ``restaurant_id`` field is ``"5678"``.
-
 In the following code example, the ``BulkWriteDeleteManyModel<BsonDocument>`` object
 represents a delete operation on the ``sample_restaurants.restaurants`` collection.
 The operation matches and deletes all documents

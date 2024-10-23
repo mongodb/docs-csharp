@@ -1,0 +1,75 @@
+.. _csharp-authentication-x509:
+
+X.509
+~~~~~
+
+The ``X.509`` authentication mechanism uses :wikipedia:`TLS <Transport_Layer_Security>`
+with ``X.509`` certificates to authenticate your user, identified by the
+distinguished names of your client certificate. When you specify the 
+``X.509`` authentication mechanism, the server authenticates the connection using 
+the subject name of the client certificate.
+
+To learn more about using TLS/SSL, see our :ref:`TLS/SSL guide <csharp-tls>`.
+
+To learn more about ``X.509`` certificates, see the :ref:`X.509 Server Manual Entry <x509-client-authentication>`.
+
+Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
+see the corresponding syntax for specifying the ``X.509`` authentication mechanism:
+
+.. tabs::
+
+   .. tab:: Connection String
+      :tabid: default-connection-string
+
+      .. code-block:: csharp
+
+         var connectionString = "mongodb://<hostname>/?authMechanism=MONGODB-X509";
+         var settings = MongoClientSettings.FromConnectionString(connectionString);
+
+         settings.useTls = true;
+         settings.SslSettings = new SslSettings
+         {
+            ClientCertificates = new List<X509Certificate>()
+            {
+                new X509Certificate2("<path to X.509 certificate>", "<X.509 certificate password>")
+            }
+         };
+
+   .. tab:: MongoCredential
+      :tabid: default-mongo-credential
+
+      .. code-block:: csharp
+
+         var credential = MongoCredential.CreateMongoX509Credential("<X.509 certificate username>")
+         var settings = new MongoClientSettings 
+         {
+             Credential =  credential
+             SslSettings = new SslSettings
+             {
+                 ClientCertificates = new List<X509Certificate>()
+                 {
+                     new X509Certificate2("<path to X.509 certificate>", "<X.509 certificate password>")
+                 },
+             },
+             UseTls = true,
+             Server = new MongoServerAddress("<hostname", "<port>"),
+         };
+
+      .. note:: Certificate Type
+
+         Your certificate must be a :wikipedia:`PKCS #12<PKCS_12>` type certificate
+         with a ``.p12`` extension.
+
+      .. tip:: Username parameter
+
+         The username parameter provided to ``CreateMongoX509Credential`` must
+         match the distinguished subject name of your ``X.509`` certificate exactly.
+         You can alternatively pass ``null`` as the parameter to prompt the MongoDB
+         server to infer the username based on your ``X.509`` certificate.
+
+.. note::
+
+   If you are using Windows, the driver might be unable to locate an ``X.509``
+   authentication certificate created in memory. To learn more about a potential solution to
+   this issue, see the :ref:`csharp-troubleshooting-connection-X509`
+   section of the Connection Troubleshooting guide.

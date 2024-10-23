@@ -1,0 +1,183 @@
+.. _csharp-mongodb-aws:
+.. _csharp-authentication-aws:
+
+MONGODB-AWS
+~~~~~~~~~~~
+
+.. note::
+
+   The ``MONGODB-AWS`` authentication mechanism is available only for
+   MongoDB deployments on MongoDB Atlas.
+
+The ``MONGODB-AWS`` authentication mechanism uses Amazon Web Services
+Identity and Access Management (AWS IAM) credentials to authenticate a user to MongoDB.
+
+To use AWS authentication, first perform the following steps:
+
+- Add the `MongoDB.Driver.Authentication.AWS <https://www.nuget.org/packages/MongoDB.Driver.Authentication.AWS>`__
+  NuGet package to your project.
+- Add the following line of code to your application's bootstrap code to register the
+  AWS authentication provider:
+
+  .. code-block:: csharp
+     :copyable: true
+
+     MongoClientSettings.Extensions.AddAWSAuthentication();
+
+After you register the AWS authentication provider, you can either specify the AWS IAM 
+credentials explicitly or instruct the driver to retrieve them automatically from an
+external source. The following sections describe both of these methods.
+ 
+The code examples in these sections use the following placeholders:
+
+- ``<awsKeyId>`` - value of the AWS access key ID
+- ``<awsSecretKey>`` - value of the AWS secret access key
+- ``<awsSessionToken>`` - value of the AWS session token
+
+.. tip::
+
+   To learn more about configuring MongoDB Atlas with AWS IAM, see the
+   :atlas:`Set Up Passwordless Authentication with AWS IAM Roles </security/passwordless-authentication/#set-up-passwordless-authentication-with-aws-iam-roles>` guide.
+
+Specify Your AWS IAM Credentials
+++++++++++++++++++++++++++++++++
+
+You can supply your AWS IAM credentials on a ``MongoClientSettings`` object either by 
+using a ``MongoCredential`` object or as part of the connection string. Select the 
+:guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
+see the corresponding syntax for specifying your credentials: 
+
+.. tabs::
+
+   .. tab:: Connection String
+      :tabid: mongodb-aws-mongoclientsettings-connection-string
+      
+      .. code-block:: csharp
+
+         var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<hostname>[:<port>]?authSource=$external&authMechanism=MONGODB-AWS";
+         var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
+         var client = new MongoClient(mongoClientSettings);
+
+      If you're using an AWS session token, include the ``authMechanismProperties``
+      parameter in the connection string as shown below:
+
+      .. code-block:: csharp
+
+         var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<hostname>[:<port>]?authSource=$external&authMechanism=MONGODB-AWS&authMechanismProperties=AWS_SESSION_TOKEN:<awsSessionToken>";
+
+   .. tab:: MongoCredential
+      :tabid: mongodb-aws-mongoclientsettings-mongo-credential
+
+      .. code-block:: csharp
+
+         var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<hostname>[:<port>]");
+         mongoClientSettings.Credential = new MongoCredential("MONGODB-AWS", new MongoExternalIdentity("<awsKeyId>"), new PasswordEvidence("<awsSecretKey>"));
+         var client = new MongoClient(mongoClientSettings);
+
+      If you're using an AWS session token, call the ``WithMechanismProperty()`` 
+      method on your ``MongoCredential`` object as shown below:
+
+      .. code-block:: csharp
+
+         mongoClientSettings.Credential = new MongoCredential("MONGODB-AWS", new MongoExternalIdentity("<awsKeyId>"), new PasswordEvidence("<awsSecretKey>"))
+             .WithMechanismProperty("AWS_SESSION_TOKEN", "<awsSessionToken>");
+
+Retrieve Credentials Automatically
+++++++++++++++++++++++++++++++++++
+
+Instead of specifying your AWS IAM credentials in ``MongoClientSettings``, you can 
+instruct the {+driver-short+} to use the AWS SDK to automatically retrieve your 
+credentials from an external source. To instruct the driver to
+retrieve your credentials, perform the following actions:
+
+- Specify ``MONGODB-AWS`` as the authentication mechanism
+- Specify that the authentication source is external to MongoDB
+- Set your credentials in the appropriate location 
+
+You can specify the authentication mechanism and source either
+by using a ``MongoCredential`` object or as part of the connection string. Select the 
+:guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
+see the corresponding syntax for specifying the ``MONGODB-AWS`` authentication mechanism
+and external authentication source:
+
+.. tabs::
+
+   .. tab:: Connection String
+      :tabid: mongodb-aws-automatic-connection-string
+      
+      .. code-block:: csharp
+
+         var connectionString = "mongodb+srv://<hostname>[:<port>]?authMechanism=MONGODB-AWS&authSource=$external";
+         var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
+         var client = new MongoClient(mongoClientSettings);
+
+   .. tab:: MongoCredential
+      :tabid: mongodb-aws-automatic-mongo-credential
+
+      .. code-block:: csharp
+
+         var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<hostname>[:<port>]");
+         mongoClientSettings.Credential = new MongoCredential("MONGODB-AWS", new MongoExternalAwsIdentity(), new ExternalEvidence());
+         var client = new MongoClient(mongoClientSettings);
+   
+After you specify the authentication mechanism and source, you must set
+your credentials in the location appropriate to the credential type. The {+driver-short+} 
+checks for credentials in the following locations in the order listed here:
+
+- Web identity provider
+- Shared AWS credentials file
+- Environment variables
+- ECS container credentials
+- EC2 container credentials
+
+You can use an OpenID Connect (OIDC)-compatible **web identity provider** to authenticate
+to Amazon Elastic Kubernetes Service (EKS) or other services.
+To use a web identity provider, create a file that contains your
+OIDC token, then set the absolute path to this file in an environment variable by using 
+``bash`` or a similar shell as shown in the following example:
+
+.. code-block:: bash
+
+   export AWS_WEB_IDENTITY_TOKEN_FILE=<absolute path to file containing your OIDC token>
+
+To authenticate by using a profile in a **shared AWS credentials file**, you can use a text
+editor, the AWS SDK for .NET, or the AWS CLI to create the appropriate credential file.
+
+To retrieve credentials directly from **environment variables**, set the following 
+environment variables by using ``bash`` or a similar shell:
+
+.. code-block:: bash
+
+   export AWS_ACCESS_KEY_ID=<awsKeyId>
+   export AWS_SECRET_ACCESS_KEY=<awsSecretKey>
+   export AWS_SESSION_TOKEN=<awsSessionToken>
+
+.. note::
+   
+   Omit the line containing ``AWS_SESSION_TOKEN`` if you don't need an AWS
+   session token for that role.
+
+To authenticate by using **ECS container credentials**, set the URI of your ECS 
+endpoint in an environment variable by using ``bash`` or a similar shell.
+Select the :guilabel:`Full ECS URI` or :guilabel:`Relative ECS URI` tab to
+see the syntax for specifying the corresponding environment variable:
+
+.. tabs::
+
+   .. tab:: Full ECS URI
+      :tabid: mongodb-aws-full-ecs-uri
+      
+      .. code-block:: bash
+
+         export AWS_CONTAINER_CREDENTIALS_FULL_URI=<full ECS endpoint>
+
+   .. tab:: Relative ECS URI
+      :tabid: mongodb-aws-relative-ecs-uri
+
+      .. code-block:: bash
+
+         export AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=<relative ECS endpoint>
+
+To authenticate by using **EC2 container credentials**, make sure none of the
+environment variables mentioned earlier are set. The driver obtains the
+credentials from the default IPv4 EC2 instance metadata endpoint.   

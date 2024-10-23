@@ -1,0 +1,48 @@
+.. _csharp-authentication-LDAP:
+.. _csharp-authentication-ldap:
+
+Authenticate with LDAP (PLAIN)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can authenticate to a Lightweight Directory Access Protocol (LDAP) server 
+using your directory-server username and password.
+
+The following examples specify the authentication mechanism using the following
+placeholders:
+
+- ``<username>``: Your LDAP username
+- ``<password>``: Your LDAP password
+- ``<hostname>``: The network address of your MongoDB server, accessible by your
+  client
+- ``<authenticationDb>``: The MongoDB database that contains your user's
+  authentication
+
+Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
+see the corresponding syntax for specifying the LDAP authentication
+mechanism:
+
+.. tabs::
+
+   .. tab:: Connection String
+      :tabid: connection-string
+
+      .. code-block:: csharp
+
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authSource=<authenticationDb>&authMechanism=PLAIN");
+
+   .. tab:: MongoCredential
+      :tabid: mongo-credential
+
+      .. code-block:: csharp
+         :emphasize-lines: 1
+
+         var credential = MongoCredential.CreatePlainCredential("<authenticationDb>", "<username>", "<password>");
+         var settings = MongoClientSettings.FromConnectionString("<connection string>");
+         settings.Credential = credential;
+         var mongoClient = new MongoClient(settings);
+
+      .. tip::
+
+         The method refers to PLAIN instead of LDAP since it
+         authenticates using the PLAIN Simple Authentication and Security Layer
+         (SASL) defined in `RFC-4616 <https://tools.ietf.org/html/rfc4616>`__.

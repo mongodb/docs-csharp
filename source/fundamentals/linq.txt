@@ -633,8 +633,11 @@ collection:
 
 .. note:: Missing or Undefined Operands
 
-   If the operand list you pass to any bitwise operator contains a missing or 
-   undefined value, the entire expression evaluates to ``null``.
+   If the operands you pass to any bitwise operator are of type `nullable <https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types>`__
+   ``int`` or ``long`` and contain a missing or undefined value, the entire expression 
+   evaluates to ``null``. If the operands are of type non-nullable ``int`` or 
+   ``long`` and contain a missing or undefined value, the {+driver-short+} will
+   throw an error.
 
 $bitAnd
 +++++++

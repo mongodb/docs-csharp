@@ -607,12 +607,20 @@ The examples in this section use the following documents in a collection called
 
 .. code-block:: json
 
-   { "_id": 1, "name": "watermelon", "price": 5, "count": 1 },
-   { "_id": 2, "name": "onions", "price": 2, "count": 4 },
-   { "_id": 3, "name": "eggs", "price": 5, "count": 12 },
-   { "_id": 4, "name": "potatoes", "price": 3, "count": 0 },
-   { "_id": 5, "name": "pasta", "price": 4, "count": 100 },
-   { "_id": 6, "name": "cheese", "price": 4 }
+   { "_id" : 1, "name" : "watermelon", "is_available" : 1, "is_cheap" : 1 },
+   { "_id" : 2, "name" : "onions", "is_available" : 1, "is_cheap" : 0 },
+   { "_id" : 3, "name" : "eggs", "is_available" : 0, "is_cheap" : 0 },
+   { "_id" : 4, "name" : "potatoes", "is_available" : 1, "is_cheap" : 1 },
+   { "_id" : 5, "name" : "pasta", "is_available" : 0, "is_cheap" : 1 },
+   { "_id" : 6, "name" : "cheese", "is_available" : 1 }
+
+The ``"is_available"`` field represents if an ingredient is available. If this
+field has a value of ``0``, the ingredient is not available. If it has a value
+of ``1``, the ingredient is available.
+
+The ``"is_cheap"`` field represents if an ingredient is cheap. If this field has
+a value of ``0``, the ingredient is not cheap. If it has a value of ``1``, the
+ingredient is cheap.
 
 The following ``Ingredient`` class models the documents in the ``ingredients``
 collection:
@@ -637,8 +645,8 @@ clauses with a ``&`` character.
 
 The following example shows how to create a ``$bitAnd`` stage by using LINQ. The
 code retrieves the document in which the ``Name`` field has the 
-value ``"eggs"``. It then performs a bitwise AND operation on the values of the 
-``Price`` and ``Count`` fields in this document.
+value ``"watermelon"``. It then performs a bitwise AND operation on the values of the 
+``IsAvailable`` and ``IsCheap`` fields in this document.
 
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
    :language: csharp
@@ -646,8 +654,8 @@ value ``"eggs"``. It then performs a bitwise AND operation on the values of the
    :start-after: start-bitAnd-example
    :end-before: end-bitAnd-example
 
-The preceding code returns ``4``, the result of the AND operation on the values
-of the ``Price`` field (``5``) and the ``Count`` field (``12``).
+The preceding code returns ``1``, the result of the AND operation on the values
+of the ``IsAvailable`` field (``1``) and the ``IsCheap`` field (``1``).
 
 The following example performs the same bitwise AND operation on all 
 documents in the collection:
@@ -664,12 +672,12 @@ documents in the collection:
    .. output::
       :language: json
       :visible: false
-
+      
       1
       0
-      4
       0
-      4
+      1
+      0
       null
 
 The ``null`` result comes from the document where the ``Name`` field
@@ -685,8 +693,8 @@ clauses with a ``|`` character.
 
 The following example shows how to create a ``$bitOr`` stage by using LINQ. The
 code retrieves the document in which the ``Name`` field has the 
-value ``"eggs"``. It then performs a bitwise OR operation on the values of the 
-``Price`` and ``Count`` fields in this document.
+value ``"onions"``. It then performs a bitwise OR operation on the values of the 
+``IsAvailable`` and ``IsCheap`` fields in this document.
 
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
    :language: csharp
@@ -694,8 +702,8 @@ value ``"eggs"``. It then performs a bitwise OR operation on the values of the
    :start-after: start-bitOr-example
    :end-before: end-bitOr-example
 
-The preceding code returns ``13``, the result of the OR operation on the values
-of the ``Price`` field (``5``) and the ``Count`` field (``12``).
+The preceding code returns ``1``, the result of the OR operation on the values
+of the ``IsAvailable`` field (``1``) and the ``IsCheap`` field (``0``).
 
 $bitNot
 +++++++
@@ -719,10 +727,10 @@ following example shows how to create a ``$bitNot`` stage by using LINQ:
       :visible: false
 
       -2
-      -5
-      -13
-      -5
-      -101
+      -1
+      -1
+      -2
+      -2
       null
 
 $bitXor
@@ -734,8 +742,8 @@ clauses with a ``^`` character.
 
 The following example shows how to create a ``$bitXor`` stage by using LINQ. The
 code retrieves the documents in which the ``Name`` field has 
-the value ``"eggs"`` or ``"watermelon"``. It then performs a bitwise XOR 
-operation on the values of the ``Price`` and ``Count`` fields in these 
+the value ``"watermelon"`` or ``"onions"``. It then performs a bitwise XOR 
+operation on the values of the ``IsAvailable`` and ``IsCheap`` fields in these 
 documents.
 
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
@@ -748,8 +756,9 @@ The result contains the following values:
 
 .. code-block:: json
    
-   4
-   9
+   0
+   1
+
 
 Unsupported Aggregation Stages
 ------------------------------

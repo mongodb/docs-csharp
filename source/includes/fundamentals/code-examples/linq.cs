@@ -72,9 +72,11 @@ public class Ingredient
 
     public string Name { get; set; }
 
-    public int Price { get; set; }
+    [BsonElement("is_available")]
+    public int? IsAvailable { get; set; }
 
-    public int Count { get; set; }
+    [BsonElement("is_cheap")]
+    public int? IsCheap { get; set; }
 }
 
 // end-ingredient-model
@@ -82,37 +84,37 @@ public class Ingredient
 // start-bitAnd-example
 
 var query = queryableCollection
-    .Where(i => i.Name == "eggs")
-    .Select(i => i.Price & i.Count);
+    .Where(i => i.Name == "watermelon")
+    .Select(i => i.IsAvailable & i.IsCheap);
 
 // end-bitAnd-example
 
 // start-bitAnd-collection-example
 
 var query = queryableCollection
-    .Select(i => i.Price & i.Count);
+    .Select(i => i.IsAvailable & i.IsCheap);
 
 // end-bitAnd-collection-example
 
 // start-bitOr-example
 
 var query = queryableCollection
-    .Where(i => i.Name == "eggs")
-    .Select(i => i.Price | i.Count);
+    .Where(i => i.Name == "onions")
+    .Select(i => i.IsAvailable | i.IsCheap);
 
 // end-bitOr-example
 
 // start-bitNot-example
 
-var queryable = collection
-    .Select(i => ~i.Count);
+var query = queryableCollection
+    .Select(i => ~i.IsCheap);
 
 // end-bitNot-example
 
 // start-bitXor-example
 
 var query = queryableCollection
-    .Where(i => i.Name == "eggs" || i.Name == "watermelon")
-    .Select(i => i.Price ^ i.Count);
+    .Where(i => i.Name == "watermelon" || i.Name == "onions")
+    .Select(i => i.IsAvailable ^ i.IsCheap);
 
 // end-bitXor-example

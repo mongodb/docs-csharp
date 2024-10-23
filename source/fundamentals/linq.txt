@@ -681,7 +681,7 @@ documents in the collection:
       null
 
 The ``null`` result comes from the document where the ``Name`` field
-has the value of ``"cheese"``. This document is missing a ``Count`` field, so
+has the value of ``"cheese"``. This document is missing an ``IsCheap`` field, so
 the expression evaluates to ``null``.
 
 $bitOr

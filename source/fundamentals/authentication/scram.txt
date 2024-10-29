@@ -30,7 +30,7 @@ authentication mechanism in {+mdb-server+} versions earlier than 4.0.
 You can use SCRAM when connecting to MongoDB Atlas, MongoDB
 Enterprise Advanced, and MongoDB Community Edition.
 
-.. tip:: SCRAM mechanisms
+.. tip:: SCRAM Mechanisms
 
    To learn more about the SCRAM family of authentication mechanisms, see
    `RFC 5802 <https://tools.ietf.org/html/rfc5802>`__ and

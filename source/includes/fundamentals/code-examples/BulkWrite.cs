@@ -112,11 +112,11 @@ class BulkWrite
             )
         };
 
-        var results = client.BulkWriteSync(bulkWriteModels);
+        var results = client.BulkWrite(bulkWriteModels);
         Console.WriteLine("Bulk write results: " + results);
         // end-bulk-write-sync
     }
-    static async void BulkWriteAsync()
+    static async Task BulkWriteAsync()
     {
         // start-bulk-write-async
         var client = new MongoClient("mongodb://localhost:27017");
@@ -175,10 +175,10 @@ class BulkWrite
             VerboseResult = true
         };
 
-        var results = client.BulkWriteSync(deleteOneModel, clientBulkWriteOptions);
+        var results = client.BulkWrite(deleteOneModel, clientBulkWriteOptions);
         // end-bulk-write-options-sync
     }
-    static async void BulkWriteOptionsAsync()
+    static async Task BulkWriteOptionsAsync()
     {
         // start-bulk-write-options-async
         var client = new MongoClient("mongodb://localhost:27017");

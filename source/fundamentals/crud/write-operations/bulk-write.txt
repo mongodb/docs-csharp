@@ -388,12 +388,6 @@ The preceding code examples produce the following output:
       
    BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2, 'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []}, acknowledged=True)
 
-.. tip::
-    
-    If any of the write operations fail, the {+driver-short+} raises a
-    ``BulkWriteException`` and does not perform any further operations. You can examine
-    the properties of the exception to determine which operation failed.
-
 Customize Bulk Write Operations
 -------------------------------
 
@@ -490,7 +484,9 @@ object that contains the following properties:
      - Description
 
    * - ``Acknowledged``
-     - | Indicates whether the server acknowledged the bulk write operation.
+     - | Indicates whether the server acknowledged the bulk write operation. If the
+         value of this property is ``false`` and you try to access any other property
+         of the ``ClientBulkWriteResult`` object, the driver throws an exception.
 
    * - ``DeleteResults``
      - | An ``IReadOnlyDictionary<int, BulkWriteDeleteResult>`` object containing the
@@ -519,6 +515,45 @@ object that contains the following properties:
    * - ``UpsertedCount``
      - | The number of documents upserted, if any.
 
+Handling Exceptions
+-------------------
+
+If any of the operations in a bulk write operation fail, the {+driver-short+} throws a
+``ClientBulkWriteException`` and does not perform any further operations.
+
+A ``ClientBulkWriteException`` object contains the following properties:
+
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - Property
+     - Description
+   * - ``connectionId``
+     - | The connection identifier.
+       |
+       | **Data Type:** `ConnectionId <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Connections.ConnectionId.html>`__
+   * - ``message``
+     - | The error message.
+       |
+       | **Data Type:** {+string-data-type+}
+   * - ``writeErrors``
+     - | A dictionary of errors that occurred during the bulk write operation.
+       |
+       | **Data Type:** IReadOnlyDictionary<int, `WriteError <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.WriteError.html>`__>
+   * - ``partialResult``
+     - | The results of any successful operations performed before the exception was thrown.
+       |
+       | **Data Type:** `ClientBulkWriteResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ClientBulkWriteResult.html>`__
+   * - ``writeConcernErrors``
+     - | Write concern errors that occurred during execution of the bulk write operation.
+       |
+       | **Data Type:** IReadOnlyList<`MongoWriteConcernException <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoWriteConcernException.html>`__>
+   * - ``innerException``
+     - | The inner exception.
+       |
+       | **Data Type:** `Exception <https://learn.microsoft.com/dotnet/api/system.exception>`__
+
 Additional Information
 ----------------------
 
@@ -544,3 +579,4 @@ guide, see the following API documentation:
 - `BulkWriteInsertOneResult <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteInsertOneResult.html>`__
 - `BulkWriteUpdateResult <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteUpdateResult.html>`__
 - `BulkWriteDeleteResult <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteDeleteResult.html>`__
+- `ClientBulkWriteException <{+new-api-root+}/MongoDB.Driver/MongoClient.ClientBulkWriteException.html>`__

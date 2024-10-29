@@ -536,7 +536,7 @@ A ``ClientBulkWriteException`` object contains the following properties:
    * - ``message``
      - | The error message.
        |
-       | **Data Type:** {+string-data-type+}
+       | **Data Type:** string
    * - ``writeErrors``
      - | A dictionary of errors that occurred during the bulk write operation.
        |
@@ -566,17 +566,17 @@ To learn how to perform individual write operations, see the following guides:
 To learn more about any of the methods or types discussed in this
 guide, see the following API documentation:
 
-- `BulkWrite() <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWrite.html>`__
-- `BulkWriteAsync() <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteAsync.html>`__
-- `ClientBulkWriteOptions <{+new-api-root+}/MongoDB.Driver/MongoClient.ClientBulkWriteOptions.html>`__
-- `ClientBulkWriteResult <{+new-api-root+}/MongoDB.Driver/MongoClient.ClientBulkWriteResult.html>`__
-- `BulkWriteInsertOneModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteInsertOneModel-1.html>`__
-- `BulkWriteUpdateOneModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteUpdateOneModel-1.html>`__
-- `BulkWriteUpdateManyModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteUpdateManyModel-1.html>`__
-- `BulkWriteReplaceOneModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteReplaceOneModel-1.html>`__
-- `BulkWriteDeleteOneModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteDeleteOneModel-1.html>`__
-- `BulkWriteDeleteManyModel <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteDeleteManyModel-1.html>`__
-- `BulkWriteInsertOneResult <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteInsertOneResult.html>`__
-- `BulkWriteUpdateResult <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteUpdateResult.html>`__
-- `BulkWriteDeleteResult <{+new-api-root+}/MongoDB.Driver/MongoClient.BulkWriteDeleteResult.html>`__
-- `ClientBulkWriteException <{+new-api-root+}/MongoDB.Driver/MongoClient.ClientBulkWriteException.html>`__
+- `BulkWrite() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoClient.BulkWrite.html>`__
+- `BulkWriteAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoClient.BulkWriteAsync.html>`__
+- `ClientBulkWriteOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ClientBulkWriteOptions.html>`__
+- `ClientBulkWriteResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ClientBulkWriteResult.html>`__
+- `BulkWriteInsertOneModel <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BulkWriteInsertOneModel-1.html>`__
+- `BulkWriteUpdateOneModel <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BulkWriteUpdateOneModel-1.html>`__
+- `BulkWriteUpdateManyModel <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BulkWriteUpdateManyModel-1.html>`__
+- `BulkWriteReplaceOneModel <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BulkWriteReplaceOneModel-1.html>`__
+- `BulkWriteDeleteOneModel <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BulkWriteDeleteOneModel-1.html>`__
+- `BulkWriteDeleteManyModel <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BulkWriteDeleteManyModel-1.html>`__
+- `BulkWriteInsertOneResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BulkWriteInsertOneResult.html>`__
+- `BulkWriteUpdateResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BulkWriteUpdateResult.html>`__
+- `BulkWriteDeleteResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BulkWriteDeleteResult.html>`__
+- `ClientBulkWriteException <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ClientBulkWriteException.html>`__

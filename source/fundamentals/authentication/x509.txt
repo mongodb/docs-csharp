@@ -1,11 +1,29 @@
 .. _csharp-authentication-x509:
 
+=====
 X.509
-~~~~~
+=====
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: .NET, certificate, code example
+
+Overview
+--------
 
 In the **X.509** authentication mechanism, the server and client use the
 :wikipedia:`TLS <Transport_Layer_Security>` protocol to exchange X.509 public-key
-certificates.
+certificates. You can use X.509 certificates to authenticate to MongoDB Atlas, MongoDB
+Enterprise Advanced, and MongoDB Community Edition.
 
 .. tip:: X.509 Mechanism
 
@@ -20,15 +38,15 @@ Code Placeholders
 
 .. include:: /includes/auth-placeholders.rst
 
-Using X.509 in Your Application
--------------------------------
+Using X.509 Authentication in Your Application
+----------------------------------------------
 
-To use an X.509 certificate to authenticate your MongoDB user, you must use a
+To use an X.509 certificate for authentication, you must use a
 ``MongoClientSettings`` object to specify
 the path to your X.509 certificate and the password for the certificate. The certificate
 must use the :wikipedia:`PKCS #12<PKCS_12>` (``.p12``) format.
 
-You must also specify the ``MONGODB-X509`` authenticatino mechanism. You can specify
+You must also specify ``MONGODB-X509`` as the authentication mechanism. You can specify
 this mechanism either in your connection string or by using a ``MongoCredential`` object. 
 Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
 see the corresponding syntax:

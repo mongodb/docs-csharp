@@ -1,22 +1,51 @@
 .. _csharp-kerberos:
 .. _csharp-authentication-kerberos:
 
-Authenticate with GSSAPI/Kerberos
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=================
+Kerberos (GSSAPI)
+=================
 
-The Generic Security Services API (GSSAPI) authentication mechanism allows the 
-user to authenticate to a Kerberos service using the user's principal name.
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
 
-The following examples specify the authentication mechanism using the following
-placeholders:
+.. facet::
+   :name: genre
+   :values: reference
 
-- ``<username>``: Your :wikipedia:`URL-encoded <Percent-encoding>` principal name; for example "username%40REALM.ME"
-- ``<password>``: Your Kerberos user's password
-- ``<hostname>``: The network address of your MongoDB server, accessible by your client
+.. meta::
+   :keywords: .NET, code example
 
+Overview
+--------
+
+The Generic Security Services API (GSSAPI) authentication mechanism allows you to
+use your principal name to authenticate to a Kerberos service. You can use the
+GSSAPI authentication mechanism to authenticate only
+to MongoDB Enterprise Advanced.
+
+Code Placeholders 
+~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/auth-placeholders.rst
+
+Using GSSAPI Authentication in Your Application
+-----------------------------------------------
+
+The code examples on this page use the following placeholders to represent the values
+you must specify to use GSSAPI authentication: 
+
+- ``<username>``: Your :wikipedia:`URL-encoded <Percent-encoding>` principal name. For
+  example: "username%40REALM.ME"
+- ``<password>``: Your Kerberos user's password.
+- ``<hostname>``: The network address of your MongoDB server.
+
+You can supply your Kerberos credentials either by
+using a ``MongoCredential`` object or as part of the connection string.
 Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
-see the corresponding syntax for specifying the GSSAPI/Kerberos authentication
-mechanism:
+see the corresponding syntax:
 
 .. tabs::
 
@@ -48,18 +77,17 @@ mechanism:
    - On Linux, the user has initialized their keytab via ``kinit username@REALM.COM``.
   
 Additional Properties
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~
 
-You can specify additional properties with your authentication
-mechanism using the connection string or a factory method in the ``MongoCredential``
-class.
+You can include the following GSSAPI configuration options in either your connection string
+or your ``MongoCredential`` object.
 
 Fully Qualified Domain Name
 ```````````````````````````
 
 The following example shows how to use the DNS server to retrieve the fully
 qualified domain name of the host:
-  
+
 .. tabs::
 
    .. tab:: Connection String
@@ -87,7 +115,7 @@ Realm
 
 The following example shows how to specify the user's realm when it is different
 from the service's realm:
-  
+
 .. tabs::
 
    .. tab:: Connection String
@@ -110,7 +138,7 @@ from the service's realm:
          settings.Credential = credential;
          var mongoClient = new MongoClient(settings);
 
-Service name
+Service Name
 ````````````
 
 The following example shows how to specify the service name when it is not the
@@ -138,9 +166,9 @@ default ``mongodb``:
          settings.Credential = credential;
          var mongoClient = new MongoClient(settings);
 
-Multiple properties
+Multiple Properties
 ```````````````````
-  
+
 The following example shows how to specify multiple authentication mechanism
 properties:
 
@@ -166,3 +194,15 @@ properties:
          var settings = MongoClientSettings.FromConnectionString("<connection string>");
          settings.Credential = credential;
          var mongoClient = new MongoClient(settings);
+
+API Documentation
+-----------------
+
+To learn more about any of the methods or types discussed on this
+page, see the following API documentation:
+
+- `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
+- `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
+- `MongoCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
+- `MongoCredential.CreateGssapiCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreateGssapiCredential.html>`__
+- `MongoCredential.WithMechanismProperty() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.WithMechanismProperty.html>`__

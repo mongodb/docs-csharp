@@ -1,25 +1,57 @@
 .. _csharp-authentication-LDAP:
 .. _csharp-authentication-ldap:
 
-Authenticate with LDAP (PLAIN)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+====
+LDAP
+====
 
-You can authenticate to a Lightweight Directory Access Protocol (LDAP) server 
-using your directory-server username and password.
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
 
-The following examples specify the authentication mechanism using the following
-placeholders:
+.. facet::
+   :name: genre
+   :values: reference
 
-- ``<username>``: Your LDAP username
-- ``<password>``: Your LDAP password
-- ``<hostname>``: The network address of your MongoDB server, accessible by your
-  client
-- ``<authenticationDb>``: The MongoDB database that contains your user's
-  authentication
+.. meta::
+   :keywords: .NET, code example
 
+Overview
+--------
+
+The PLAIN authentication mechanism allows you to use your Lightweight Directory Access
+Protocol (LDAP) username and password to authenticate to MongoDB.
+You can use the PLAIN authentication mechanism to authenticate only
+to MongoDB Enterprise Advanced.
+
+.. tip::
+
+   The method refers to PLAIN instead of LDAP because it
+   authenticates using the PLAIN Simple Authentication and Security Layer
+   (SASL) defined in `RFC-4616 <https://tools.ietf.org/html/rfc4616>`__.
+
+Code Placeholders 
+~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/auth-placeholders.rst
+
+Using PLAIN in Your Application
+-------------------------------
+
+The code examples on this page use the following placeholders to represent the values
+you must specify to use PLAIN authentication: 
+
+- ``<username>``: Your LDAP username.
+- ``<password>``: Your LDAP password.
+- ``<hostname>``: The network address of your MongoDB server.
+- ``<authenticationDb>``: The MongoDB database that contains your user's LDAP credentials.
+
+You can supply your LDAP credentials either by
+using a ``MongoCredential`` object or as part of the connection string.
 Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
-see the corresponding syntax for specifying the LDAP authentication
-mechanism:
+see the corresponding syntax:
 
 .. tabs::
 
@@ -41,8 +73,13 @@ mechanism:
          settings.Credential = credential;
          var mongoClient = new MongoClient(settings);
 
-      .. tip::
+API Documentation
+-----------------
 
-         The method refers to PLAIN instead of LDAP since it
-         authenticates using the PLAIN Simple Authentication and Security Layer
-         (SASL) defined in `RFC-4616 <https://tools.ietf.org/html/rfc4616>`__.
+To learn more about any of the methods or types discussed on this
+page, see the following API documentation:
+
+- `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
+- `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
+- `MongoCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
+- `MongoCredential.CreatePlainCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreatePlainCredential.html>`__

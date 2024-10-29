@@ -15,7 +15,7 @@ SCRAM
    :values: reference
 
 .. meta::
-   :keywords: .NET, salt, default
+   :keywords: .NET, salt, default, code example
 
 Overview
 --------
@@ -27,7 +27,7 @@ default authentication mechanism in {+mdb-server+} version 4.0
 and later. SCRAM-SHA-1, which uses the SHA-1 algorithm instead, is the default
 authentication mechanism in {+mdb-server+} versions earlier than 4.0.
 
-You can use SCRAM when connecting to MongoDB Atlas, MongoDB
+You can use SCRAM to authenticate to MongoDB Atlas, MongoDB
 Enterprise Advanced, and MongoDB Community Edition.
 
 .. tip:: SCRAM Mechanisms

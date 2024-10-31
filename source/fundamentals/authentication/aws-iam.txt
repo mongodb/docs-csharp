@@ -1,14 +1,14 @@
 .. _csharp-mongodb-aws:
 .. _csharp-authentication-aws:
 
-=======
-AWS IAM
-=======
+==================================
+AWS Identity and Access Management
+==================================
 
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 2
+   :depth: 3
    :class: singlecol
 
 .. facet::
@@ -23,18 +23,24 @@ Overview
 
 The ``MONGODB-AWS`` authentication mechanism uses Amazon Web Services
 Identity and Access Management (AWS IAM) credentials to authenticate a user to MongoDB.
-You can use the ``MONGODB-AWS`` authentication mechanism to authenticate only
-to MongoDB atlas.
+You can use this mechanism only when authenticating to MongoDB Atlas.
 
 .. tip:: AWS IAM Authentication in Atlas
 
    To learn more about configuring MongoDB Atlas for AWS IAM authentication, see
-   :atlas:`<security/aws-iam-authentication/>` in the Atlas documentation.
+   :atlas:`</security/aws-iam-authentication/>` in the Atlas documentation.
 
 Code Placeholders 
 ~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/auth-placeholders.rst
+The code examples on this page use the following placeholders:
+
+- ``<hostname>``: The network address of your MongoDB Atlas deployment
+- ``<awsKeyId>``: Your AWS access key ID
+- ``<awsSecretKey>``: Your AWS secret access key
+- ``<awsSessionToken>``: Your AWS session token
+
+To use the code examples on this page, replace these placeholders with your own values.
 
 Using AWS IAM Authentication in Your Application
 ------------------------------------------------
@@ -60,12 +66,6 @@ To use AWS IAM authentication, perform the following steps:
 After you register the AWS authentication provider, you can either specify your AWS IAM 
 credentials explicitly or instruct the driver to retrieve them automatically from an
 external source. The following sections describe both of these methods.
-
-The code examples in these sections use the following placeholders:
-
-- ``<awsKeyId>`` - value of the AWS access key ID
-- ``<awsSecretKey>`` - value of the AWS secret access key
-- ``<awsSessionToken>`` - value of the AWS session token
 
 Specify AWS IAM Credentials Manually
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -98,7 +98,7 @@ see the corresponding syntax for specifying your credentials:
 
       .. code-block:: csharp
 
-         var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<hostname>[:<port>]");
+         var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<hostname>");
          mongoClientSettings.Credential = new MongoCredential("MONGODB-AWS", new MongoExternalIdentity("<awsKeyId>"), new PasswordEvidence("<awsSecretKey>"));
          var client = new MongoClient(mongoClientSettings);
 
@@ -132,7 +132,7 @@ and external authentication source:
       
       .. code-block:: csharp
 
-         var connectionString = "mongodb+srv://<hostname>[:<port>]?authMechanism=MONGODB-AWS&authSource=$external";
+         var connectionString = "mongodb+srv://<hostname>?authMechanism=MONGODB-AWS&authSource=$external";
          var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
          var client = new MongoClient(mongoClientSettings);
 
@@ -222,7 +222,7 @@ API Documentation
 To learn more about any of the methods or types discussed on this
 page, see the following API documentation:
 
-- `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
-- `MongoClientSettings() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
-- `MongoCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
-- `MongoClientSettings.Extensions.AddAWSAuthentication() <{+new-api-root+}/MongoDB.Driver/MongoClientSettings.Extensions.html#MongoDB_Driver_MongoClientSettings_Extensions_AddAWSAuthentication>`__
+- `MongoClient <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
+- `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
+- `MongoCredential <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
+- `AddAWSAuthentication() <{+new-api-root+}/MongoDB.Driver.Authentication.Aws/MongoDB.Driver.Authentication.AWS.ExtensionManagerExtensions.AddAWSAuthentication.html>`__

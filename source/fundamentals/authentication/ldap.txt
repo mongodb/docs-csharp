@@ -23,32 +23,33 @@ Overview
 
 The PLAIN authentication mechanism allows you to use your Lightweight Directory Access
 Protocol (LDAP) username and password to authenticate to MongoDB.
-You can use the PLAIN authentication mechanism to authenticate only
-to MongoDB Enterprise Advanced.
+You can use this mechanism only when authenticating to MongoDB Enterprise Advanced.
 
-.. tip::
+.. tip:: PLAIN Authentication
 
-   The method refers to PLAIN instead of LDAP because it
-   authenticates using the PLAIN Simple Authentication and Security Layer
+   LDAP authentication uses the PLAIN Simple Authentication and Security Layer
    (SASL) defined in `RFC-4616 <https://tools.ietf.org/html/rfc4616>`__.
 
 Code Placeholders 
 ~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/auth-placeholders.rst
-
-Using PLAIN in Your Application
--------------------------------
-
-The code examples on this page use the following placeholders to represent the values
-you must specify to use PLAIN authentication: 
+The code examples on this page use the following placeholders:
 
 - ``<username>``: Your LDAP username.
 - ``<password>``: Your LDAP password.
-- ``<hostname>``: The network address of your MongoDB server.
-- ``<authenticationDb>``: The MongoDB database that contains your user's LDAP credentials.
+- ``<hostname>``: The network address of your MongoDB deployment.
+- ``<port>``: The port number of your MongoDB deployment. If you omit this parameter,
+  the driver uses the default port number (``27017``).
+- ``<authenticationDb>``: The MongoDB database that contains the user's LDAP credentials.
+   If you omit this parameter, the driver uses the default database (``admin``).
 
-You can supply your LDAP credentials either by
+To use the code examples on this page, replace these placeholders with your own values.
+
+Using PLAIN Authentication in Your Application
+----------------------------------------------
+
+You can specify the ``PLAIN`` authentication mechanism and supply your LDAP credentials
+either by
 using a ``MongoCredential`` object or as part of the connection string.
 Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
 see the corresponding syntax:
@@ -79,7 +80,7 @@ API Documentation
 To learn more about any of the methods or types discussed on this
 page, see the following API documentation:
 
-- `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
+- `MongoClient <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
 - `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
-- `MongoCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
+- `MongoCredential <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
 - `CreatePlainCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreatePlainCredential.html>`__

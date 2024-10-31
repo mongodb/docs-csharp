@@ -43,10 +43,20 @@ Enterprise Advanced, and MongoDB Community Edition.
 Code Placeholders 
 ~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/auth-placeholders.rst
+The code examples on this page use the following placeholders:
 
-Using SCRAM in Your Application
--------------------------------
+- ``<db_username>``: The MongoDB username of the user to authenticate.
+- ``<db_password>``: The MongoDB password of the user to authenticate.
+- ``<hostname>``: The network address of the MongoDB deployment.
+- ``<port>``: The port number of the MongoDB deployment. You don't need a port number
+  when connecting to a MongoDB Atlas cluster.
+- ``<authenticationDb>``: The MongoDB database that contains the user's authentication
+  data. If you omit this parameter, the driver uses the default value, ``admin``.
+
+To use the code examples on this page, replace these placeholders with your own values.
+
+Using SCRAM Authentication in Your Application
+----------------------------------------------
 
 To use SCRAM to authenticate your MongoDB user, specify your
 MongoDB credentials, but don't specify an authentication mechanism.

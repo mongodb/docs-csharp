@@ -22,27 +22,28 @@ Overview
 --------
 
 The Generic Security Services API (GSSAPI) authentication mechanism allows you to
-use your principal name to authenticate to a Kerberos service. You can use the
-GSSAPI authentication mechanism to authenticate only
-to MongoDB Enterprise Advanced.
+use your principal name to authenticate to a Kerberos service.
+You can use this mechanism only when authenticating to MongoDB Enterprise Advanced.
 
 Code Placeholders 
 ~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/auth-placeholders.rst
+The code examples on this page use the following placeholders:
+
+- ``<username>``: Your :wikipedia:`URL-encoded <Percent-encoding>` principal name. For
+  example: ``"username%40REALM.ME"``
+- ``<password>``: Your Kerberos user's password.
+- ``<hostname>``: The network address of your MongoDB deployment.
+- ``<port>``: The port number of your MongoDB deployment. If you omit this parameter,
+  the driver uses the default port number (``27017``).
+
+To use the code examples on this page, replace these placeholders with your own values.
 
 Using GSSAPI Authentication in Your Application
 -----------------------------------------------
 
-The code examples on this page use the following placeholders to represent the values
-you must specify to use GSSAPI authentication: 
-
-- ``<username>``: Your :wikipedia:`URL-encoded <Percent-encoding>` principal name. For
-  example: "username%40REALM.ME"
-- ``<password>``: Your Kerberos user's password.
-- ``<hostname>``: The network address of your MongoDB server.
-
-You can supply your Kerberos credentials either by
+You can specify the ``GSSAPI`` authentication mechanism and supply your Kerberos
+credentials either by
 using a ``MongoCredential`` object or as part of the connection string.
 Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
 see the corresponding syntax:
@@ -54,7 +55,7 @@ see the corresponding syntax:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI");
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>[:<port>]/?authMechanism=GSSAPI");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -69,7 +70,7 @@ see the corresponding syntax:
 
 .. tip:: Omitting the Password
 
-   You can omit the password if one of the following are true:
+   You can omit the password parameter if either of the following is true:
 
    - On Windows, the process owner running the application is the same as the
      user needing authentication.
@@ -95,7 +96,7 @@ qualified domain name of the host:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<db_username>:<db_password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=CANONICALIZE_HOSTNAME:true");
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>[:<port>]/?authMechanism=GSSAPI&authMechanismProperties=CANONICALIZE_HOSTNAME:true");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -103,7 +104,7 @@ qualified domain name of the host:
       .. code-block:: csharp
          :emphasize-lines: 1, 2
 
-         var credential = MongoCredential.CreateGssapiCredential("<db_username>", "<db_passwordpassword>");
+         var credential = MongoCredential.CreateGssapiCredential("<username>", "<password>");
          credential = credential.WithMechanismProperty("CANONICALIZE_HOST_NAME", "true");
          
          var settings = MongoClientSettings.FromConnectionString("<connection string>");
@@ -114,7 +115,8 @@ Realm
 `````
 
 The following example shows how to specify the user's realm when it is different
-from the service's realm:
+from the service's realm. Replace the ``<user's realm>`` placeholder with the
+realm of the Kerberos user.
 
 .. tabs::
 
@@ -123,7 +125,7 @@ from the service's realm:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<db_username>:<db_password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_REALM:<user's realm>");
+         var mongoClient = new MongoClient("mongodb://<db_username>:<db_password>@<hostname>[:<port>]/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_REALM:<user's realm>");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -131,7 +133,7 @@ from the service's realm:
       .. code-block:: csharp
          :emphasize-lines: 1, 2
 
-         var credential = MongoCredential.CreateGssapiCredential("<db_username>", "<db_password>");
+         var credential = MongoCredential.CreateGssapiCredential("<username>", "<password>");
          credential = credential.WithMechanismProperty("SERVICE_REALM", "<user's realm>");
          
          var settings = MongoClientSettings.FromConnectionString("<connection string>");
@@ -142,7 +144,8 @@ Service Name
 ````````````
 
 The following example shows how to specify the service name when it is not the
-default ``mongodb``:
+default ``mongodb``. Replace the ``<service name>`` placeholder with the name of
+the service.
 
 .. tabs::
 
@@ -151,7 +154,7 @@ default ``mongodb``:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<db_username>:<db_password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:<service name>");
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>[:<port>]/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:<service name>");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -179,7 +182,7 @@ properties:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<db_username>:<db_password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:<service name>,SERVICE_REALM:<user's realm>");
+         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:<service name>,SERVICE_REALM:<user's realm>");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential

@@ -75,7 +75,7 @@ a mechanism to learn more about how to use it with your application.
      - Yes
      - Yes
      - No
-   * - :ref:`<Kerberos (GSSAPI) <csharp-authentication-kerberos>`
+   * - :ref:`Kerberos (GSSAPI) <csharp-authentication-kerberos>`
      - No
      - Yes
      - No

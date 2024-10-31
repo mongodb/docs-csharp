@@ -44,7 +44,8 @@ Using X.509 Authentication in Your Application
 To use an X.509 certificate for authentication, you must use a
 ``MongoClientSettings`` object to specify
 the path to your X.509 certificate and the password for the certificate. The certificate
-must use the :wikipedia:`PKCS #12<PKCS_12>` (``.p12``) format.
+must use the :wikipedia:`PKCS #12<PKCS_12>` (``.p12``) or
+:wikipedia:`PEM<Privacy-Enhanced_Mail>` (``.pem``) format.
 
 You must also specify ``MONGODB-X509`` as the authentication mechanism. You can specify
 this mechanism either in your connection string or by using a ``MongoCredential`` object. 
@@ -61,7 +62,7 @@ see the corresponding syntax:
          var connectionString = "mongodb://<hostname>/?authMechanism=MONGODB-X509";
          var settings = MongoClientSettings.FromConnectionString(connectionString);
 
-         settings.useTls = true;
+         settings.UseTls = true;
          settings.SslSettings = new SslSettings
          {
             ClientCertificates = new List<X509Certificate>()

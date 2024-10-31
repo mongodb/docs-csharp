@@ -29,8 +29,7 @@ to MongoDB atlas.
 .. tip:: AWS IAM Authentication in Atlas
 
    To learn more about configuring MongoDB Atlas for AWS IAM authentication, see
-   :atlas:`Set Up Passwordless Authentication with AWS IAM Roles </security/passwordless-authentication/#set-up-passwordless-authentication-with-aws-iam-roles>`
-   in the Atlas documentation.
+   :atlas:`<security/aws-iam-authentication/>` in the Atlas documentation.
 
 Code Placeholders 
 ~~~~~~~~~~~~~~~~~

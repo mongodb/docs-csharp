@@ -17,6 +17,16 @@ Authentication Mechanisms
 .. meta::
    :keywords: .NET, community, security
 
+.. toctree::
+   :caption: Authentication
+
+   SCRAM </fundamentals/authentication/scram>
+   X.509 </fundamentals/authentication/x509>
+   AWS IAM </fundamentals/authentication/aws-iam>
+   OIDC </fundamentals/authentication/oidc>
+   LDAP </fundamentals/authentication/ldap>
+   Kerberos </fundamentals/authentication/kerberos>
+
 Overview
 --------
 

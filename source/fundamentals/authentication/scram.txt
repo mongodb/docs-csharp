@@ -34,7 +34,8 @@ Enterprise Advanced, and MongoDB Community Edition.
 
    To learn more about the SCRAM family of authentication mechanisms, see
    `RFC 5802 <https://tools.ietf.org/html/rfc5802>`__ and
-   :wikipedia:`Salted_Challenge_Response_Authentication_Mechanism` on Wikipedia.
+   :wikipedia:`Salted Challenge Response Authentication Mechanism <Salted_Challenge_Response_Authentication_Mechanism>`
+   on Wikipedia.
 
    For more information about the MongoDB implementation of SCRAM, see
    :manual:`SCRAM </core/security-scram>` in the {+mdb-server+} manual.
@@ -61,7 +62,7 @@ see the corresponding syntax:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<db_username>:<db_password>@<hostname>:<port>/?authSource=<authenticationDb>");
+         var mongoClient = new MongoClient("mongodb://<db_username>:<db_password>@<hostname>[:<port>]/?authSource=<authenticationDb>");
 
    .. tab:: MongoCredential
       :tabid: default-mongo-credential
@@ -79,7 +80,7 @@ API Documentation
 To learn more about any of the methods or types discussed on this
 page, see the following API documentation:
 
-- `MongoCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
-- `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
+- `MongoCredential <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
+- `MongoClient <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
 - `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
 - `CreateCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreateCredential.html>`__

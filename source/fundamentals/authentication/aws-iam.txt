@@ -25,10 +25,11 @@ The ``MONGODB-AWS`` authentication mechanism uses Amazon Web Services
 Identity and Access Management (AWS IAM) credentials to authenticate a user to MongoDB.
 You can use this mechanism only when authenticating to MongoDB Atlas.
 
-.. tip:: AWS IAM Authentication in Atlas
+.. tip:: Configure Atlas for AWS IAM Authentication
 
    To learn more about configuring MongoDB Atlas for AWS IAM authentication, see
-   :atlas:`</security/aws-iam-authentication/>` in the Atlas documentation.
+   :atlas:`Set Up Authentication with AWS IAM </security/aws-iam-authentication/>` in
+   the Atlas documentation.
 
 Code Placeholders 
 ~~~~~~~~~~~~~~~~~

@@ -25,13 +25,12 @@ The OpenID Connect (OIDC) authentication mechanism allows you to authenticate to
 MongoDB by using a third-party identity provider, such as Azure or Google Cloud
 Platform (GCP). 
 
-You can use the OIDC authentication mechanism to authenticate only
-to MongoDB Atlas.
+You can use this mechanism only when authenticating to MongoDB Atlas.
 
 .. tip:: OIDC Authentication
 
    To learn more about configuring MongoDB Atlas for OIDC authentication, see
-   :atlas:`Set Up Passwordless Authentication with AWS IAM Roles </workforce-oidc/#std-label-oidc-authentication-workforce>`
+   :atlas:`Set up Workforce Identity Federation with OIDC </workforce-oidc/#std-label-oidc-authentication-workforce>`
    in the Atlas documentation.
    
    For more information about using OIDC authentication with MongoDB, see
@@ -42,7 +41,14 @@ to MongoDB Atlas.
 Code Placeholders 
 ~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/auth-placeholders.rst
+The code examples on this page use the following placeholders:
+
+- ``<username>``: The client ID or application ID of the Azure managed identity or
+  enterprise application, if authenticating against Azure IMDS.
+- ``<hostname>``: The network address of your MongoDB Atlas cluster.
+- ``<audience>``: The audience parameter configured on your MongoDB Atlas cluster.
+
+To use the code examples on this page, replace these placeholders with your own values.
 
 Using OIDC Authentication in Your Application
 ---------------------------------------------
@@ -65,6 +71,8 @@ using a ``MongoCredential`` object or as part of the connection string. Select t
 :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
 see the corresponding syntax.
 
+.. include:: /includes/comma-auth-options.rst
+
 .. tabs::
 
    .. tab:: Connection String
@@ -72,12 +80,8 @@ see the corresponding syntax.
     
       The following code example shows how to specify Azure IMDS OIDC authentication. 
       Replace the ``<percent-encoded audience>`` placeholder with the percent-encoded
-      value of the ``audience`` parameter configured on your MongoDB deployment. 
+      value of the ``audience`` parameter configured on your MongoDB Atlas cluster. 
 
-      You cannot pass values containing the comma (``,``) character to the ``authMechanismProperties`` 
-      option. You must specify values that contain commas in a ``MongoCredential`` object, 
-      as demonstrated in the :guilabel:`MongoCredential` tab.
-      
       .. code-block:: csharp
 
          var connectionString = "mongodb://<username>@<hostname>/?" +
@@ -89,11 +93,7 @@ see the corresponding syntax.
    .. tab:: MongoCredential
       :tabid: mongodb-azure-mongo-credential
 
-      The following code example shows how to specify Azure IMDS OIDC authentication.
-      Replace the ``<username>`` placeholder with the client ID or application ID of the
-      Azure managed identity or enterprise application. Replace the ``<audience>``
-      placeholder with the value of the ``audience`` parameter configured on your MongoDB
-      deployment. 
+      The following code example shows how to specify Azure IMDS OIDC authentication:
 
       .. code-block:: csharp
 
@@ -118,23 +118,19 @@ using a ``MongoCredential`` object or as part of the connection string. Select t
 :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
 see the corresponding syntax.
 
+.. include:: /includes/comma-auth-options.rst
+      
 .. tabs::
 
    .. tab:: Connection String
       :tabid: mongodb-gcp-imds-connection-string
     
       The following code example shows how to specify GCP IMDS OIDC authentication as
-      part of the authentication string. 
-      Replace the ``<audience>`` placeholder with the
-      value of the ``audience`` parameter configured on your MongoDB deployment.
+      part of the authentication string:
 
-      You cannot pass values containing the comma (``,``) character to the ``authMechanismProperties`` 
-      option. You must specify values that contain commas in a ``MongoCredential`` object, 
-      as demonstrated in the :guilabel:`MongoCredential` tab.
-      
       .. code-block:: csharp
 
-         var connectionString = "mongodb://<hostname>[:<port>]/?" +
+         var connectionString = "mongodb://<hostname>/?" +
             "authMechanism=MONGODB-OIDC" +
             "&authMechanismProperties=ENVIRONMENT:gcp,TOKEN_RESOURCE:<audience>");
          var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
@@ -144,15 +140,12 @@ see the corresponding syntax.
       :tabid: mongodb-gcp-mongo-credential
 
       The following code example shows how to specify GCP IMDS OIDC authentication by using
-      a ``MongoCredential`` object.
-      Replace the ``<audience>``
-      placeholder with the value of the ``audience`` parameter configured on your MongoDB
-      deployment. 
+      a ``MongoCredential`` object:
 
       .. code-block:: csharp
 
          var mongoClientSettings = MongoClientSettings.FromConnectionString(
-            "mongodb+srv://<hostname>[:<port>]");
+            "mongodb+srv://<hostname>");
          mongoClientSettings.Credential = MongoCredential.CreateOidcCredential("gcp")
             .WithMechanismProperty("TOKEN_RESOURCE", "<audience>"); 
          var client = new MongoClient(mongoClientSettings);
@@ -207,7 +200,7 @@ class. Store the result of this method call in the ``Credential`` property of yo
 
 .. code-block:: csharp
 
-   var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb://<hostname>[:port]");
+   var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb://<hostname>");
    mongoClientSettings.Credential = MongoCredential.CreateOidcCredential(new MyCallback());
    var client = new MongoClient(mongoClientSettings);
 

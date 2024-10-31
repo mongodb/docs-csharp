@@ -22,7 +22,7 @@ Overview
 
 In the **X.509** authentication mechanism, the server and client use the
 :wikipedia:`TLS <Transport_Layer_Security>` protocol to exchange X.509 public-key
-certificates. You can use X.509 certificates to authenticate to MongoDB Atlas, MongoDB
+certificates. You can use this mechanism to authenticate to MongoDB Atlas, MongoDB
 Enterprise Advanced, and MongoDB Community Edition.
 
 .. tip:: X.509 Mechanism
@@ -36,7 +36,19 @@ Enterprise Advanced, and MongoDB Community Edition.
 Code Placeholders 
 ~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/auth-placeholders.rst
+The code examples on this page use the following placeholders:
+
+- ``<hostname>``: The network address of your MongoDB deployment.
+- ``<port>``: The port number of the MongoDB deployment. If you omit this parameter,
+  the driver uses the default port number (``27017``).
+- ``<X.509 certificate username>``: The username of the user associated with the X.509
+  certificate. The username must match the distinguished subject name of the certificate.
+  If you omit this parameter, the MongoDB deployment infers the username
+  from the X.509 certificate.
+- ``<path to X.509 certificate>``: The path to the X.509 certificate file.
+- ``<X.509 certificate password>``: The password for the X.509 certificate.
+
+To use the code examples on this page, replace these placeholders with your own values.
 
 Using X.509 Authentication in Your Application
 ----------------------------------------------
@@ -59,7 +71,7 @@ see the corresponding syntax:
 
       .. code-block:: csharp
 
-         var connectionString = "mongodb://<hostname>/?authMechanism=MONGODB-X509";
+         var connectionString = "mongodb://<hostname>[:<port>]/?authMechanism=MONGODB-X509";
          var settings = MongoClientSettings.FromConnectionString(connectionString);
 
          settings.UseTls = true;
@@ -67,7 +79,7 @@ see the corresponding syntax:
          {
             ClientCertificates = new List<X509Certificate>()
             {
-                new X509Certificate2("/path/to/X.509/certificate", "<X.509 certificate password>")
+                new X509Certificate2("<path to X.509 certificate>", "<X.509 certificate password>")
             }
          };
 
@@ -84,26 +96,17 @@ see the corresponding syntax:
              {
                  ClientCertificates = new List<X509Certificate>()
                  {
-                     new X509Certificate2("/path/to/X.509/certificate", "<X.509 certificate password>")
+                     new X509Certificate2("<path to X.509 certificate>", "<X.509 certificate password>")
                  },
              },
              UseTls = true,
-             Server = new MongoServerAddress("<hostname>", "<port>"),
+             Server = new MongoServerAddress("<hostname>"[, "<port>"]),
          };
 
-      .. note:: Certificate Username
+Troubleshooting
+---------------
 
-         If you pass your X.509 certificate username to the ``CreateMongoX509Credential()``
-         method, it must match the distinguished subject name of your X.509 certificate.
-         If you pass ``null`` to this method, the MongoDB deployment uses your
-         X.509 certificate to infer your username.
-
-.. note::
-
-   If you are using Windows, the driver might be unable to locate an ``X.509``
-   authentication certificate created in memory. To learn more about a potential solution to
-   this issue, see the :ref:`csharp-troubleshooting-connection-X509`
-   section of the Connection Troubleshooting guide.
+.. include:: /includes/troubleshooting/x509.rst
 
 API Documentation
 -----------------
@@ -111,16 +114,16 @@ API Documentation
 To learn more about any of the MongoDB methods and types used on this
 page, see the following API documentation:
 
-- `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
-- `MongoClientSettings() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
-- `MongoCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
+- `MongoClient <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
+- `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
+- `MongoCredential <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
+- `SslSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SslSettings.html>`__
+- `MongoServerAddress <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoServerAddress.html>`__
 - `CreateMongoX509Credential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreateMongoX509Credential.html>`__
-- `SslSettings() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SslSettings.html>`__
-- `MongoServerAddress() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoServerAddress.html>`__
 
 For more information about the .NET types used on this page, see the
 following MSDN documentation:
 
-- `X509Certificate() <https://docs.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate>`__
-- `X509Certificate2() <https://docs.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate2>`__
+- `X509Certificate <https://docs.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate>`__
+- `X509Certificate2 <https://docs.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate2>`__
 

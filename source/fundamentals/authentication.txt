@@ -79,6 +79,3 @@ a mechanism to learn more about how to use it with your application.
      - No
      - Yes
      - No
-
-
-

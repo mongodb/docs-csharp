@@ -204,5 +204,5 @@ page, see the following API documentation:
 - `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
 - `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
 - `MongoCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
-- `MongoCredential.CreateGssapiCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreateGssapiCredential.html>`__
-- `MongoCredential.WithMechanismProperty() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.WithMechanismProperty.html>`__
+- `CreateGssapiCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreateGssapiCredential.html>`__
+- `WithMechanismProperty() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.WithMechanismProperty.html>`__

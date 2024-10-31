@@ -1,26 +1,59 @@
 .. _csharp-mongodb-oidc:
 .. _csharp-authentication-oidc:
 
-MONGODB-OIDC
-~~~~~~~~~~~~
+===================================
+OIDC (Workload Identity Federation)
+===================================
 
-.. important::
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
 
-   The MONGODB-OIDC authentication mechanism requires {+mdb-server+} v7.0 or later running
-   on a Linux platform.
+.. facet::
+   :name: genre
+   :values: reference
 
-The following sections describe how to use the MONGODB-OIDC authentication mechanism to
+.. meta::
+   :keywords: .NET, code example
+
+Overview
+--------
+
+The OpenID Connect (OIDC) authentication mechanism allows you to authenticate to
+MongoDB by using a third-party identity provider, such as Azure or Google Cloud
+Platform (GCP). 
+
+You can use the OIDC authentication mechanism to authenticate only
+to MongoDB Atlas.
+
+.. tip:: OIDC Authentication
+
+   To learn more about configuring MongoDB Atlas for OIDC authentication, see
+   :atlas:`Set Up Passwordless Authentication with AWS IAM Roles </workforce-oidc/#std-label-oidc-authentication-workforce>`
+   in the Atlas documentation.
+   
+   For more information about using OIDC authentication with MongoDB, see
+   :manual:`OpenID Connect Authentication </core/security-oidc/>` and
+   :manual:`MongoDB Server Parameters </reference/parameters/#mongodb-parameter-param.oidcIdentityProviders>`
+   in the {+mdb-server+} manual.
+
+Code Placeholders 
+~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/auth-placeholders.rst
+
+Using OIDC Authentication in Your Application
+---------------------------------------------
+
+The following sections describe how to use OIDC authentication to
 authenticate from various platforms.
-
-For more information about the MONGODB-OIDC authentication mechanism, see
-:manual:`OpenID Connect Authentication </core/security-oidc/>` and
-:manual:`MongoDB Server Parameters </reference/parameters/#mongodb-parameter-param.oidcIdentityProviders>`
-in the {+mdb-server+} manual.
 
 .. _csharp-mongodb-oidc-azure-imds:
 
 Azure IMDS
-++++++++++
+~~~~~~~~~~
 
 If your application runs on an Azure VM, or otherwise uses the
 `Azure Instance Metadata Service <https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service>`__
@@ -47,7 +80,7 @@ see the corresponding syntax.
       
       .. code-block:: csharp
 
-         var connectionString = "mongodb://<db_username>@<hostname>[:<port>]/?" +
+         var connectionString = "mongodb://<username>@<hostname>/?" +
             "authMechanism=MONGODB-OIDC" +
             "&authMechanismProperties=ENVIRONMENT:azure,TOKEN_RESOURCE:<percent-encoded audience>");
          var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
@@ -57,7 +90,7 @@ see the corresponding syntax.
       :tabid: mongodb-azure-mongo-credential
 
       The following code example shows how to specify Azure IMDS OIDC authentication.
-      Replace the ``<db_username>`` placeholder with the client ID or application ID of the
+      Replace the ``<username>`` placeholder with the client ID or application ID of the
       Azure managed identity or enterprise application. Replace the ``<audience>``
       placeholder with the value of the ``audience`` parameter configured on your MongoDB
       deployment. 
@@ -65,15 +98,15 @@ see the corresponding syntax.
       .. code-block:: csharp
 
          var mongoClientSettings = MongoClientSettings.FromConnectionString(
-            "mongodb+srv://<hostname>[:<port>]");
-         mongoClientSettings.Credential = MongoCredential.CreateOidcCredential("azure", "<db_username>")
+            "mongodb+srv://<hostname>");
+         mongoClientSettings.Credential = MongoCredential.CreateOidcCredential("azure", "<username>")
             .WithMechanismProperty("TOKEN_RESOURCE", "<audience>"); 
          var client = new MongoClient(mongoClientSettings);
 
 .. _csharp-mongodb-oidc-gcp-imds:
 
 GCP IMDS
-++++++++
+~~~~~~~~
 
 If your application runs on a Google Compute Engine VM, or otherwise uses the
 `GCP Instance Metadata Service <https://cloud.google.com/compute/docs/metadata/querying-metadata>`__,
@@ -125,7 +158,7 @@ see the corresponding syntax.
          var client = new MongoClient(mongoClientSettings);
 
 Custom Callback
-+++++++++++++++
+~~~~~~~~~~~~~~~
 
 The {+driver-short+} doesn't offer built-in support for all platforms, including
 Azure Functions and Azure Kubernetes Service (AKS). Instead, you
@@ -177,3 +210,19 @@ class. Store the result of this method call in the ``Credential`` property of yo
    var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb://<hostname>[:port]");
    mongoClientSettings.Credential = MongoCredential.CreateOidcCredential(new MyCallback());
    var client = new MongoClient(mongoClientSettings);
+
+API Documentation
+-----------------
+
+To learn more about any of the methods or types discussed on this
+page, see the following API documentation:
+
+- `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
+- `MongoClientSettings() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
+- `MongoCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
+- `MongoClientSettings.Extensions.AddAWSAuthentication() <{+new-api-root+}/MongoDB.Driver/MongoClientSettings.Extensions.html#MongoDB_Driver_MongoClientSettings_Extensions_AddAWSAuthentication>`__
+- `CreateOidcCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreateOidcCredential.html>`__
+- `WithMechanismProperty() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreateOidcCredential.html#MongoDB_Driver_MongoDB_Driver_MongoCredential_WithMechanismProperty>`__
+- `IOidcCallback <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core/Authentication/IOidcCallback.html>`__
+- `OidcAccessToken <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core/Authentication/OidcAccessToken.html>`__
+- `OidcCallbackParameters <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core/Authentication/OidcCallbackParameters.html>`__

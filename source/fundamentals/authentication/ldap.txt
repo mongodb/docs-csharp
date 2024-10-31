@@ -82,4 +82,4 @@ page, see the following API documentation:
 - `MongoClient() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
 - `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
 - `MongoCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
-- `MongoCredential.CreatePlainCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreatePlainCredential.html>`__
+- `CreatePlainCredential() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.CreatePlainCredential.html>`__

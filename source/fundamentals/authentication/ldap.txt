@@ -61,7 +61,9 @@ see the corresponding syntax:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authSource=<authenticationDb>&authMechanism=PLAIN");
+         var mongoClient = new MongoClient(
+            "mongodb://<username>:<password>@<hostname>/?authSource=<authenticationDb>" +
+            "&authMechanism=PLAIN");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -69,7 +71,8 @@ see the corresponding syntax:
       .. code-block:: csharp
          :emphasize-lines: 1
 
-         var credential = MongoCredential.CreatePlainCredential("<authenticationDb>", "<username>", "<password>");
+         var credential = MongoCredential
+            .CreatePlainCredential("<authenticationDb>", "<username>", "<password>");
          var settings = MongoClientSettings.FromConnectionString("<connection string>");
          settings.Credential = credential;
          var mongoClient = new MongoClient(settings);

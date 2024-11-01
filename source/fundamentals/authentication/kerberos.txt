@@ -55,7 +55,8 @@ see the corresponding syntax:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>[:<port>]/?authMechanism=GSSAPI");
+         var mongoClient = new MongoClient(
+            "mongodb://<username>:<password>@<hostname>[:<port>]/?authMechanism=GSSAPI");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -96,7 +97,9 @@ qualified domain name of the host:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>[:<port>]/?authMechanism=GSSAPI&authMechanismProperties=CANONICALIZE_HOSTNAME:true");
+         var mongoClient = new MongoClient(
+            "mongodb://<username>:<password>@<hostname>[:<port>]/?authMechanism=GSSAPI&" +
+            "authMechanismProperties=CANONICALIZE_HOSTNAME:true");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -125,7 +128,9 @@ realm of the Kerberos user.
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<db_username>:<db_password>@<hostname>[:<port>]/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_REALM:<user's realm>");
+         var mongoClient = new MongoClient(
+            "mongodb://<username>:<password>@<hostname>[:<port>]/?authMechanism=GSSAPI&" +
+            "authMechanismProperties=SERVICE_REALM:<user's realm>");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -154,7 +159,9 @@ the service.
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>[:<port>]/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:<service name>");
+         var mongoClient = new MongoClient(
+            "mongodb://<username>:<password>@<hostname>[:<port>]/?authMechanism=GSSAPI&" +
+            "authMechanismProperties=SERVICE_NAME:<service name>");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -162,7 +169,7 @@ the service.
       .. code-block:: csharp
          :emphasize-lines: 1, 2
 
-         var credential = MongoCredential.CreateGssapiCredential("<db_username>", "<db_password>");
+         var credential = MongoCredential.CreateGssapiCredential("<username>", "<password>");
          credential = credential.WithMechanismProperty("SERVICE_NAME", "<service name>");
          
          var settings = MongoClientSettings.FromConnectionString("<connection string>");
@@ -182,7 +189,9 @@ properties:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<username>:<password>@<hostname>/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:<service name>,SERVICE_REALM:<user's realm>");
+         var mongoClient = new MongoClient(
+            "mongodb://<username>:<password>@<hostname>[:<port>]/?authMechanism=GSSAPI&" +
+            "authMechanismProperties=SERVICE_NAME:<service name>,SERVICE_REALM:<user's realm>");
 
    .. tab:: MongoCredential
       :tabid: mongo-credential
@@ -190,9 +199,10 @@ properties:
       .. code-block:: csharp
          :emphasize-lines: 2, 3
 
-         var credential = MongoCredential.CreateGssapiCredential("<db_username>", "<db_password>");
-         credential = credential.WithMechanismProperty("SERVICE_REALM", "<user's realm>")
-             .WithMechanismProperty("SERVICE_NAME", "<service name>");
+         var credential = MongoCredential.CreateGssapiCredential("<username>", "<password>");
+         credential = credential
+            .WithMechanismProperty("SERVICE_REALM", "<user's realm>")
+            .WithMechanismProperty("SERVICE_NAME", "<service name>");
          
          var settings = MongoClientSettings.FromConnectionString("<connection string>");
          settings.Credential = credential;

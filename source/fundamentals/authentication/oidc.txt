@@ -25,7 +25,8 @@ The OpenID Connect (OIDC) authentication mechanism allows you to authenticate to
 MongoDB by using a third-party identity provider, such as Azure or Google Cloud
 Platform (GCP). 
 
-You can use this mechanism only when authenticating to MongoDB Atlas.
+You can use this mechanism only when authenticating to MongoDB Atlas or MongoDB
+Enterprise Advanced, and only when authenticating to MongoDB v7.0 or later.
 
 .. tip:: OIDC Authentication
 
@@ -45,8 +46,11 @@ The code examples on this page use the following placeholders:
 
 - ``<username>``: The client ID or application ID of the Azure managed identity or
   enterprise application, if authenticating against Azure IMDS.
-- ``<hostname>``: The network address of your MongoDB Atlas cluster.
-- ``<audience>``: The audience parameter configured on your MongoDB Atlas cluster.
+- ``<hostname>``: The network address of your MongoDB deployment.
+- ``<port>``: The port number of your MongoDB deployment. If you omit this parameter,
+  the driver uses the default port number (``27017``). You don't need to specify a port
+  when connecting to a MongoDB Atlas cluster.
+- ``<audience>``: The audience parameter configured on your MongoDB deployment.
 
 To use the code examples on this page, replace these placeholders with your own values.
 
@@ -80,11 +84,11 @@ see the corresponding syntax.
     
       The following code example shows how to specify Azure IMDS OIDC authentication. 
       Replace the ``<percent-encoded audience>`` placeholder with the percent-encoded
-      value of the ``audience`` parameter configured on your MongoDB Atlas cluster. 
+      value of the ``audience`` parameter configured on your MongoDB deployment.
 
       .. code-block:: csharp
 
-         var connectionString = "mongodb://<username>@<hostname>/?" +
+         var connectionString = "mongodb://<username>@<hostname>[:<port>]/?" +
             "authMechanism=MONGODB-OIDC" +
             "&authMechanismProperties=ENVIRONMENT:azure,TOKEN_RESOURCE:<percent-encoded audience>");
          var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
@@ -98,8 +102,9 @@ see the corresponding syntax.
       .. code-block:: csharp
 
          var mongoClientSettings = MongoClientSettings.FromConnectionString(
-            "mongodb+srv://<hostname>");
-         mongoClientSettings.Credential = MongoCredential.CreateOidcCredential("azure", "<username>")
+            "mongodb+srv://<hostname>[:<port>]");
+         mongoClientSettings.Credential = MongoCredential
+            .CreateOidcCredential("azure", "<username>")
             .WithMechanismProperty("TOKEN_RESOURCE", "<audience>"); 
          var client = new MongoClient(mongoClientSettings);
 
@@ -130,8 +135,7 @@ see the corresponding syntax.
 
       .. code-block:: csharp
 
-         var connectionString = "mongodb://<hostname>/?" +
-            "authMechanism=MONGODB-OIDC" +
+         var connectionString = "mongodb://<hostname>[:<port>]/?authMechanism=MONGODB-OIDC" +
             "&authMechanismProperties=ENVIRONMENT:gcp,TOKEN_RESOURCE:<audience>");
          var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
          var client = new MongoClient(mongoClientSettings);
@@ -145,8 +149,9 @@ see the corresponding syntax.
       .. code-block:: csharp
 
          var mongoClientSettings = MongoClientSettings.FromConnectionString(
-            "mongodb+srv://<hostname>");
-         mongoClientSettings.Credential = MongoCredential.CreateOidcCredential("gcp")
+            "mongodb+srv://<hostname>[:<port>]");
+         mongoClientSettings.Credential = MongoCredential
+            .CreateOidcCredential("gcp")
             .WithMechanismProperty("TOKEN_RESOURCE", "<audience>"); 
          var client = new MongoClient(mongoClientSettings);
 
@@ -200,7 +205,8 @@ class. Store the result of this method call in the ``Credential`` property of yo
 
 .. code-block:: csharp
 
-   var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb://<hostname>");
+   var mongoClientSettings = MongoClientSettings
+      .FromConnectionString("mongodb://<hostname>[:<port>]");
    mongoClientSettings.Credential = MongoCredential.CreateOidcCredential(new MyCallback());
    var client = new MongoClient(mongoClientSettings);
 

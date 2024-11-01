@@ -72,14 +72,17 @@ see the corresponding syntax:
 
       .. code-block:: csharp
 
-         var mongoClient = new MongoClient("mongodb://<db_username>:<db_password>@<hostname>[:<port>]/?authSource=<authenticationDb>");
+         var mongoClient = new MongoClient(
+            "mongodb://<db_username>:<db_password>@<hostname>[:<port>]/?" +
+            "authSource=<authenticationDb>");
 
    .. tab:: MongoCredential
       :tabid: default-mongo-credential
 
       .. code-block:: csharp
 
-         var credential = MongoCredential.CreateCredential("<authenticationDb>", "<db_username>", "<db_password>");
+         var credential = MongoCredential
+            .CreateCredential("<authenticationDb>", "<db_username>", "<db_password>");
          var settings = MongoClientSettings.FromConnectionString("<connection string>");
          settings.Credential = credential;
          var mongoClient = new MongoClient(settings);

@@ -69,7 +69,7 @@ a mechanism to learn more about how to use it with your application.
      - No
    * - :ref:`OIDC (Workload Identity Federation) <csharp-authentication-oidc>`
      - Yes
-     - No
+     - Yes
      - No
    * - :ref:`<csharp-authentication-ldap>`
      - Yes

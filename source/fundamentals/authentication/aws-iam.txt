@@ -83,7 +83,9 @@ see the corresponding syntax for specifying your credentials:
       
       .. code-block:: csharp
 
-         var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<hostname>?authSource=$external&authMechanism=MONGODB-AWS";
+         var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<hostname>?" +
+            "authSource=$external" +
+            "&authMechanism=MONGODB-AWS";
          var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
          var client = new MongoClient(mongoClientSettings);
 
@@ -92,15 +94,22 @@ see the corresponding syntax for specifying your credentials:
 
       .. code-block:: csharp
 
-         var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<hostname>?authSource=$external&authMechanism=MONGODB-AWS&authMechanismProperties=AWS_SESSION_TOKEN:<awsSessionToken>";
+         var connectionString = "mongodb+srv://<awsKeyId>:<awsSecretKey>@<hostname>?" +
+            "authSource=$external" +
+            "&authMechanism=MONGODB-AWS" +
+            "&authMechanismProperties=AWS_SESSION_TOKEN:<awsSessionToken>";
 
    .. tab:: MongoCredential
       :tabid: mongodb-aws-mongoclientsettings-mongo-credential
 
       .. code-block:: csharp
 
-         var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<hostname>");
-         mongoClientSettings.Credential = new MongoCredential("MONGODB-AWS", new MongoExternalIdentity("<awsKeyId>"), new PasswordEvidence("<awsSecretKey>"));
+         var mongoClientSettings = MongoClientSettings
+             .FromConnectionString("mongodb+srv://<hostname>");
+         mongoClientSettings.Credential = new MongoCredential(
+             "MONGODB-AWS",
+             new MongoExternalIdentity("<awsKeyId>"),
+             new PasswordEvidence("<awsSecretKey>"));
          var client = new MongoClient(mongoClientSettings);
 
       If you're using an AWS session token, call the ``WithMechanismProperty()`` 
@@ -108,8 +117,11 @@ see the corresponding syntax for specifying your credentials:
 
       .. code-block:: csharp
 
-         mongoClientSettings.Credential = new MongoCredential("MONGODB-AWS", new MongoExternalIdentity("<awsKeyId>"), new PasswordEvidence("<awsSecretKey>"))
-             .WithMechanismProperty("AWS_SESSION_TOKEN", "<awsSessionToken>");
+         mongoClientSettings.Credential = new MongoCredential(
+            "MONGODB-AWS",
+            new MongoExternalIdentity("<awsKeyId>"),
+            new PasswordEvidence("<awsSecretKey>"))
+            .WithMechanismProperty("AWS_SESSION_TOKEN", "<awsSessionToken>");
 
 Retrieve AWS IAM Credentials Automatically
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -133,8 +145,11 @@ and external authentication source:
       
       .. code-block:: csharp
 
-         var connectionString = "mongodb+srv://<hostname>?authMechanism=MONGODB-AWS&authSource=$external";
-         var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
+         var connectionString = "mongodb+srv://<hostname>?" +
+            "authMechanism=MONGODB-AWS" +
+            "&authSource=$external";
+         var mongoClientSettings = MongoClientSettings
+            .FromConnectionString(connectionString);
          var client = new MongoClient(mongoClientSettings);
 
    .. tab:: MongoCredential
@@ -142,8 +157,12 @@ and external authentication source:
 
       .. code-block:: csharp
 
-         var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb+srv://<hostname>");
-         mongoClientSettings.Credential = new MongoCredential("MONGODB-AWS", new MongoExternalAwsIdentity(), new ExternalEvidence());
+         var mongoClientSettings = MongoClientSettings
+            .FromConnectionString("mongodb+srv://<hostname>");
+         mongoClientSettings.Credential = new MongoCredential(
+            "MONGODB-AWS",
+            new MongoExternalAwsIdentity(),
+            new ExternalEvidence());
          var client = new MongoClient(mongoClientSettings);
    
 After you specify the authentication mechanism and source, you must set

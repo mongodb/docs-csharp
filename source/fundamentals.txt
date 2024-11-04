@@ -30,6 +30,7 @@ Fundamentals
    /fundamentals/time-series
    /fundamentals/encrypt-fields
    /fundamentals/geo
+   Store Large Files </fundamentals/gridfs>
 
 - :ref:`Connecting to MongoDB <csharp-connection>`
 - :ref:`csharp-db-coll`

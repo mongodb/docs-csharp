@@ -39,7 +39,8 @@ The code examples on this page use the following placeholders:
 - ``<password>``: Your LDAP password.
 - ``<hostname>``: The network address of your MongoDB deployment.
 - ``<port>``: The port number of your MongoDB deployment. If you omit this parameter,
-  the driver uses the default port number (``27017``).
+  the driver uses the default port number (``27017``). You don't need to specify a port
+  when connecting to a MongoDB Atlas cluster.
 - ``<authenticationDb>``: The MongoDB database that contains the user's LDAP credentials.
    If you omit this parameter, the driver uses the default database (``admin``).
 
@@ -62,7 +63,7 @@ see the corresponding syntax:
       .. code-block:: csharp
 
          var mongoClient = new MongoClient(
-            "mongodb://<username>:<password>@<hostname>/?authSource=<authenticationDb>" +
+            "mongodb://<username>:<password>@<hostname>[:<port>]/?authSource=<authenticationDb>" +
             "&authMechanism=PLAIN");
 
    .. tab:: MongoCredential

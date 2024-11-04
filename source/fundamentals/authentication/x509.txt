@@ -40,7 +40,8 @@ The code examples on this page use the following placeholders:
 
 - ``<hostname>``: The network address of your MongoDB deployment.
 - ``<port>``: The port number of the MongoDB deployment. If you omit this parameter,
-  the driver uses the default port number (``27017``).
+  the driver uses the default port number (``27017``). You don't need a port number
+  when connecting to a MongoDB Atlas cluster.
 - ``<X.509 certificate username>``: The username of the user associated with the X.509
   certificate. The username must match the distinguished subject name of the certificate.
   If you omit this parameter, the MongoDB deployment infers the username

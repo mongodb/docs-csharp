@@ -20,9 +20,10 @@ Use OData with MongoDB
 Overview
 --------
 
-OData (Open Data Protocol) is an open protocol that allows the creation and
-consumption of queryable and interoperable RESTful APIs in a simple and standard
-way. It is a set of best practices for building and consuming RESTful APIs.
+OData (Open Data Protocol) is a standardized protocol for building and consuming
+RESTful APIs that allows for the querying and manipulation of data by using
+HTTP requests. It provides a uniform way to expose and interact
+with data from multiple sources. 
 
 In this tutorial, you will learn how to integrate OData with your MongoDB application.
 
@@ -63,7 +64,7 @@ Tutorial
       following ``Restaurant.cs``, ``Address.cs``, and ``GradeEntry.cs`` files into the
       folder:
 
-      .. literalinclude:: /includes/code-examples/Restaurant.cs
+      .. literalinclude:: /includes/code-examples/RestaurantOdata.cs
          :language: csharp
          :copyable:
          :dedent:
@@ -86,7 +87,7 @@ Tutorial
       controller file called ``RestaurantsController.cs``. Copy the following code
       into the file:
 
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/odata.cs
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/OData.cs
          :language: csharp
          :start-after: // start-controller
          :end-before: // end-controller
@@ -106,7 +107,7 @@ Tutorial
       In your ``Program.cs`` file, add the following code to configure the OData
       service and map your controller endpoints.
 
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/odata.cs
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/OData.cs
          :language: csharp
          :start-after: // start-configure
          :end-before: // end-configure

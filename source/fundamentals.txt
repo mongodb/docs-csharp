@@ -30,6 +30,7 @@ Fundamentals
    /fundamentals/time-series
    /fundamentals/encrypt-fields
    /fundamentals/geo
+   /fundamentals/odata
 
 - :ref:`Connecting to MongoDB <csharp-connection>`
 - :ref:`csharp-db-coll`
@@ -50,3 +51,4 @@ Fundamentals
 - :ref:`csharp-time-series`
 - :ref:`Encrypt Fields <csharp-fle>`
 - :ref:`csharp-geo`
+- :ref:`csharp-odata`

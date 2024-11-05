@@ -14,15 +14,15 @@ public class RestaurantsController : ODataController
     public RestaurantsController(IMongoClient client)
     {
         var database = client.GetDatabase("sample_restaurants");
-        _restaurants = database.GetCollection<Restaurant>("restaurants").AsQueryable();
+        _restaurants = database.GetCollection<Restaurant>("restaurants")
+            .AsQueryable();
     }
 
     // Register Get endpoint and set max documents to 5
     [MongoEnableQuery(PageSize = 5)]
     public ActionResult<IEnumerable<Restaurant>> Get()
     {
-        var restaurantList = _restaurants.Take(5);
-        return Ok(restaurantList);
+        return Ok(_restaurants);
     }
 }
 // end-controller
@@ -37,10 +37,14 @@ using ODataTest.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Register a convention pack to convert fields to camel case
-var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
-ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
+var camelCaseConvention = new ConventionPack {
+        new CamelCaseElementNameConvention()
+    };
+ConventionRegistry.Register(
+    "CamelCase", camelCaseConvention, type => true);
 
-builder.Services.AddSingleton<IMongoClient>(new MongoClient("Your connection URI"));
+builder.Services.AddSingleton<IMongoClient>(
+    new MongoClient("Your connection URI"));
 
 // Register the Restaurants entity and set the Id field as the key
 var modelBuilder = new ODataConventionModelBuilder();
@@ -49,7 +53,8 @@ modelBuilder.EntityType<Restaurant>().HasKey(r => r.Id);
 
 // Add OData and specify query capabilities
 builder.Services.AddControllers().AddOData(
-    options => options.Select().AddRouteComponents("odata", modelBuilder.GetEdmModel())
+    options => options.Select()
+        .AddRouteComponents("odata", modelBuilder.GetEdmModel())
 );
 
 var app = builder.Build();

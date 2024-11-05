@@ -104,7 +104,7 @@ Tutorial
 
    .. step:: Configure the OData Service
 
-      In your ``Program.cs`` file, add the following code to configure the OData
+      Paste the following code into your ``Program.cs`` file to configure the OData
       service and map your controller endpoints.
 
       .. literalinclude:: /includes/fundamentals/code-examples/connection/OData.cs
@@ -129,13 +129,13 @@ Tutorial
    .. step:: Run the Application
 
       Run the application by using your IDE, or by running the following command
-      in your shell at the route directory of your project:
+      in your shell at the root directory of your project:
 
       .. code-block:: shell
 
          dotnet run ODataExample.csproj
 
-      After running the application, your terminal should display output similar
+      After running the application, your terminal displays output similar
       to the following:
 
       .. code-block:: none
@@ -153,7 +153,7 @@ Tutorial
 
          After running your application, your IDE might automatically open a
          browser window to the URL where the application is running, which
-         displays a ``page can't be found`` error. This is expected because the
+         displays a ``"page can't be found"`` error. This is expected because the
          application only has a single ``Get`` endpoint configured.
       
    .. step:: Query the Data
@@ -166,7 +166,7 @@ Tutorial
       ``http://localhost:5183/odata/Restaurants``.
 
       If successful, the browser displays 5 restaurants in the
-      collection, in JSON format. The output should look similar to the
+      collection, in JSON format. The output is similar to the
       following:
 
       .. code-block:: json

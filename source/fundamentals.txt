@@ -28,7 +28,7 @@ Fundamentals
    Indexes </fundamentals/indexes>
    Logging </fundamentals/logging>
    Time Series Collections </fundamentals/time-series>
-   In-Use Encryption </fundamentals/encrypt-fields.txt>
+   In-Use Encryption </fundamentals/encrypt-fields>
    Search Geospatially </fundamentals/geo>
 
 - :ref:`Connecting to MongoDB <csharp-connection>`

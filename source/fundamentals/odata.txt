@@ -118,9 +118,9 @@ Tutorial
       
       This code performs the following actions:
 
-      - Instantiates a new ``MongoClient`` and passes it to the controller
+      - Instantiates a new ``MongoClient`` and passes it to the controller.
       - Defines the Entity Data Model (EDM) and registers ``Restaurants`` as an
-        entity set with the key, ``Id``.
+        entity set with the key ``Id``.
       - Adds the OData service and enables the ``Select()`` query capability.
       - Registers the route by using the ``AddRouteComponents()`` method.
       - Calls the ``UseRouting()`` and ``MapControllers()`` methods to match
@@ -147,7 +147,7 @@ Tutorial
          info: Microsoft.Hosting.Lifetime[0]
                Hosting environment: Development
          info: Microsoft.Hosting.Lifetime[0]
-               Content root path: /Users/jordan.smith/Documents/mongo/ODataTest/ODataTest
+               Content root path: <Path to your project>
 
       .. tip::
 
@@ -190,9 +190,9 @@ Tutorial
                  ...
                ]
              },
-             
+
              ...
-             
+
              ]
          }
 

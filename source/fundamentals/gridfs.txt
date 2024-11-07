@@ -148,35 +148,83 @@ Upload Files
 
 You can upload files to a GridFS bucket by using the following methods:
 
-- :ref:`open_upload_stream() <gridfs-open-upload-stream>`: Opens a new upload stream to which
-  you can write file contents
-- :ref:`upload_from_stream() <gridfs-upload-from-stream>`: Uploads the contents of an existing
-  stream to a GridFS file
+- ``OpenUploadStream()``: Opens a new upload stream to which you can write file contents
+- ``UploadFromStream()``: Uploads the contents of an existing stream to a GridFS file
+
+The following sections describe these methods in more detail.
 
 .. _gridfs-open-upload-stream:
 
 Write to an Upload Stream
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the ``open_upload_stream()`` method to create an upload stream for a given
-file name. The ``open_upload_stream()`` method allows you to specify configuration
-information in an ``options::gridfs::upload`` instance, which you can pass as a
-parameter.
+Use the ``OpenUploadStream()`` method to create an upload stream for a given
+file name. This method accepts the following parameters:
 
-This example uses an upload stream to perform the following
-actions:
+.. list-table::
 
-- Sets the ``chunk_size_bytes`` field of an options instance
-- Opens a writable stream for a new GridFS file named ``"my_file"``
-  and applies the ``chunk_size_bytes`` option
-- Calls the ``write()`` method to write data to ``my_file``, which the stream points to
-- Calls the ``close()`` method to close the stream pointing to ``my_file`` 
- 
-.. literalinclude:: /includes/write/gridfs.cpp
-   :language: cpp
+   * - Parameter
+     - Description
+   * - ``filename``
+     - | The name of the file to upload.
+       | 
+       | **Data type**: {+string-data-type+}
+   * - ``options``
+     - | *Optional.* An instance of the ``GridFSUploadOptions`` class that specifies the
+         configuration for the upload stream. The default value is ``null``.
+       | 
+       | **Data type**: `GridFSUploadOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.OpenUploadStream.html>`__
+   * - ``cancellationToken``
+     - | *Optional.* A token that you can use to cancel the operation.
+       | 
+       | **Data type**: `CancellationToken <https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken>`__
+
+The following code example demonstrates how to open an upload stream by performing the
+following steps:
+
+- Calls the ``OpenUploadStream()`` method to open a writable GridFS stream for a new file
+  named ``"my_file"``
+- Calls the ``Write()`` method to write data to ``my_file``
+- Calls the ``Close()`` method to close the stream that points to ``my_file`` 
+
+.. literalinclude:: /includes/code-examples/GridFS.cs
+   :language: csharp
    :dedent:
    :start-after: start-open-upload-stream
    :end-before: end-open-upload-stream
+
+To customize the upload stream configuration, pass an instance of the
+``GridFSUploadOptions`` class to the ``OpenUploadStream()`` method. The ``GridFSUploadOptions``
+class contains the following properties:
+
+.. list-table::
+
+   * - Property
+     - Description
+   * - ``BatchSize``
+     - | The number of chunks to upload in each batch. The default value is ``16777216``
+         divided by the value of the following property, ``ChunkSizeBytes``. 
+       | 
+       | **Data type**: ``int?`` 
+       
+   * - ``ChunkSizeBytes``
+     - | The maximum size of each chunk.
+       | 
+       | **Data type**: ``int?``
+
+   * - ``Metadata``
+     - | Metadata to store with the file. The default value is ``null``.
+       | 
+       | **Data type**: `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
+       
+The following example performs the same steps as the preceding example, but also uses
+the ``ChunkSizeBytes`` option to specify the maximum size of each chunk:
+
+.. literalinclude:: /includes/code-examples/GridFS.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-open-upload-stream-with-options
+   :end-before: end-open-upload-stream-with-options
 
 .. _gridfs-upload-from-stream:
 

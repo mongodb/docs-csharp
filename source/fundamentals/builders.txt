@@ -105,10 +105,10 @@ Use builders to check which documents in the collection have a
    var builder = Builders<Flower>.Filter;
    var filter = builder.AnyEq(f => f.Season, "winter");
 
-You can also use the ``ElemMatch()`` method to find documents that contain an
-array field that contains at least one element that matches your search criteria. The
-following example returns documents that contain the value ``"Summer"`` in
-their ``Season`` array:
+You can also call the ``ElemMatch()`` method to find documents that have an
+array field that contains at least one element that matches a specified search
+criteria. The following example returns documents that contain the value
+``"Summer"`` in their ``Season`` array:
 
 .. code-block:: csharp
    :copyable: true

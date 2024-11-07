@@ -116,6 +116,9 @@ their ``Season`` array:
    var builder = Builders<Flower>.Filter;
    var filter = builder.ElemMatch(f => f.Season, s => s == "Summer");
 
+To learn more about array operators, see the :manual:`Array Query Operators
+</reference/operator/query-array/>` guide in the {+mdb-server+} manual.
+
 .. _csharp-builders-projection:
 
 Create a Projection

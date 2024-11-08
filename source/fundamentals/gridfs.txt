@@ -213,10 +213,18 @@ class contains the following properties:
        | **Data type**: ``int?``
 
    * - ``Metadata``
-     - | Metadata to store with the file. The default value is ``null``.
+     - | Metadata to store with the file, including the following elements:
+
+       |  - The ``_id`` of the file
+          - The name of the file
+          - The length and size of the file
+          - The upload date and time
+          - A ``metadata`` document in which you can store other information
+         
+       |   The default value is ``null``.
        | 
        | **Data type**: `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
-       
+
 The following example performs the same steps as the preceding example, but also uses
 the ``ChunkSizeBytes`` option to specify the maximum size of each chunk:
 
@@ -231,58 +239,95 @@ the ``ChunkSizeBytes`` option to specify the maximum size of each chunk:
 Upload an Existing Stream
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the ``upload_from_stream()`` method to upload the contents of a stream to
-a new GridFS file. The ``upload_from_stream()`` method allows you to specify configuration
-information in an ``options::gridfs::upload`` instance, which you can pass as a
-parameter.
+Use the ``UploadFromStream()`` method to upload the contents of a stream to a new GridFS
+file. This method accepts the following parameters:
 
-This example performs the following actions:
+.. list-table::
+
+   * - Parameter
+     - Description
+   
+   * - ``filename``
+     - | The name of the file to upload.
+       | 
+       | **Data type**: {+string-data-type+}
+   
+   * - ``source``
+     - | The stream from which to read the file contents.
+       | 
+       | **Data type**: `Stream <https://learn.microsoft.com/dotnet/api/system.io.stream>`__
+   
+   * - ``options``
+     - | *Optional.* An instance of the ``GridFSUploadOptions`` class that specifies the
+         configuration for the upload stream. The default value is ``null``.
+       | 
+       | **Data type**: `GridFSUploadOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.OpenUploadStream.html>`__
+   
+   * - ``cancellationToken``
+     - | *Optional.* A token that you can use to cancel the operation.
+       | 
+       | **Data type**: `CancellationToken <https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken>`__
+
+The following code example demonstrates how to open an upload stream by performing the
+following steps:
 
 - Opens a file located at ``/path/to/input_file`` as a stream in binary read mode
-- Calls the ``upload_from_stream()`` method to upload the contents of the stream
-  to a GridFS file named ``"new_file"`` 
+- Calls the ``UploadFromStream()`` method to write the contents of the stream to a GridFS
+  file named ``"new_file"``
 
-.. literalinclude:: /includes/write/gridfs.cpp
-   :language: cpp
+.. literalinclude:: /includes/code-examples/GridFS.cs
+   :language: csharp
    :dedent:
-   :start-after: start-upload-from-stream
-   :end-before: end-upload-from-stream
+   :start-after: //start-upload-from-stream
+   :end-before: //end-upload-from-stream
 
 .. _gridfs-retrieve-file-info:
 
 Retrieve File Information
 -------------------------
 
-In this section, you can learn how to retrieve file metadata stored in the
-``files`` collection of the GridFS bucket. The metadata contains information
-about the file it refers to, including:
+To retrieve files from a GridFS bucket, call the ``Find()`` method on your ``GridFSBucket``
+instance. This method accepts the following parameters:
 
-- The ``_id`` of the file
-- The name of the file
-- The length/size of the file
-- The upload date and time
-- A ``metadata`` document in which you can store other information
+.. list-table::
 
-To retrieve files from a GridFS bucket, call the ``mongocxx::gridfs::bucket::find()``
-method on your bucket. The method returns a ``mongocxx::cursor`` instance from
-which you can access the results. To learn more about cursors, see the
-:ref:`<cpp-cursors>` guide.
+   * - Parameter
+     - Description
+   
+   * - ``filter``
+     - | A query filter that specifies the entries to match in the ``files`` collection.
+       | **Data type**: `FilterDefinition <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__<`GridFSFileInfo <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSFileInfo.html>`__>
 
-Example 
-~~~~~~~
+   * - ``source``
+     - | The stream from which to read the file contents.
+       | 
+       | **Data type**: `Stream <https://learn.microsoft.com/dotnet/api/system.io.stream>`__
+
+   * - ``options``
+     - | *Optional.* An instance of the ``GridFSFindOptions`` class that specifies the
+         configuration for the find operation. The default value is ``null``.
+       | 
+       | **Data type**: `GridFSFindOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSFindOptions.html>`__
+
+   * - ``cancellationToken``
+     - | *Optional.* A token that you can use to cancel the operation.
+       | 
+       | **Data type**: `CancellationToken <https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken>`__
 
 The following code example shows how to retrieve and print file metadata
-from files in a GridFS bucket. It uses a ``for`` loop to iterate through
+from files in a GridFS bucket. The ``Find()`` method returns an
+``IAsyncCursor<GridFSFileInfo>`` instance from
+which you can access the results.It uses a ``foreach`` loop to iterate through
 the returned cursor and display the contents of the files uploaded in the
-:ref:`gridfs-upload-files` examples:
+:ref:`gridfs-upload-files` examples. 
 
 .. io-code-block::
    :copyable:
 
-   .. input:: /includes/write/gridfs.cpp
-      :start-after: start-retrieve-file-info
-      :end-before: end-retrieve-file-info
-      :language: cpp
+   .. input:: /includes/code-examples/GridFS.cs
+      :start-after: start-find
+      :end-before: end-find
+      :language: csharp
       :dedent:
 
    .. output::
@@ -293,10 +338,20 @@ the returned cursor and display the contents of the files uploaded in the
       { "_id" : { "$oid" : "..." }, "length" : 50, "chunkSize" : 1048576, "uploadDate" :
       { "$date" : ... }, "filename" : "my_file" }
 
-The ``find()`` method accepts various query specifications. You can use its
-``mongocxx::options::find`` parameter to specify the sort order, maximum number of
-documents to return, and the number of documents to skip before returning. To
-view a list of available options, see the `API documentation <{+api+}/classmongocxx_1_1v__noabi_1_1options_1_1find.html>`__.
+To customize the find operation, pass an instance of the
+``GridFSFindOptions`` class to the ``Find()`` method. The ``GridFSFindOptions``
+class contains the following properties:
+
+.. list-table::
+
+   * - Property
+     - Description
+   
+   * - ``Sort``
+     - | The sort order of the results. If you don't specify a sort order, the ``Find()``
+         method returns the results in the order in which they were inserted.
+       | 
+       | **Data type**: `SortDefinition <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSFindOptions.Sort.html#MongoDB_Driver_GridFS_GridFSFindOptions_Sort>`__<`GridFSFileInfo <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSFileInfo.html>`__>
 
 .. _gridfs-download-files:
 
@@ -385,12 +440,3 @@ API Documentation
 
 To learn more about using the {+driver-short+} to store and retrieve large files,
 see the following API documentation:
-
-- `gridfs_bucket() <{+api+}/classmongocxx_1_1v__noabi_1_1database.html#afe549c42c37bfbf67d77a1ac1eaec422>`__
-- `mongocxx::options::gridfs::bucket <{+api+}/classmongocxx_1_1v__noabi_1_1options_1_1gridfs_1_1bucket.html>`__
-- `open_upload_stream() <{+api+}/classmongocxx_1_1v__noabi_1_1gridfs_1_1bucket.html#ad1f2b7ea5ee9068a9e2c0424ad3b3673>`__
-- `upload_from_stream() <{+api+}/classmongocxx_1_1v__noabi_1_1gridfs_1_1bucket.html#ad8fa27fb5be7c209211bdb071c5cca44>`__
-- `find() <{+api+}/classmongocxx_1_1v__noabi_1_1gridfs_1_1bucket.html#acd33e4ce5db96ec7bc50edf498a174c4>`__
-- `open_download_stream() <{+api+}/classmongocxx_1_1v__noabi_1_1gridfs_1_1bucket.html#a0ba68864a0cbaf60baf3fc1ef864858a>`__
-- `download_to_stream() <{+api+}/classmongocxx_1_1v__noabi_1_1gridfs_1_1bucket.html#ab6e51f650e11c5c6e8aea8f71a6ba04f>`__
-- `delete_file() <{+api+}/classmongocxx_1_1v__noabi_1_1gridfs_1_1bucket.html#a3c231ffa4ed1b1f278ca1f3ea2ca044d>`__

@@ -81,21 +81,43 @@ class Program
     static void UploadStream()
     {
         // Uploads data to a stream, then writes the stream to a GridFS file
+        //start-upload-from-stream
         using (var fileStream = new FileStream("/path/to/input_file", FileMode.Open, FileAccess.Read))
         {
             bucket.UploadFromStream("new_file", fileStream);
         }
+        //end-upload-from-stream
     }
 
-// Prints information about each file in the bucket
-{
-    var filter = Builders<GridFSFileInfo>.Filter.Empty;
-    var files = await bucket.FindAsync(filter);
-    await files.ForEachAsync(file =>
+    static void Find()
     {
-        Console.WriteLine(file.ToJson());
-    });
-}
+        // Prints information about each file in the bucket
+        // start-find
+        var filter = Builders<GridFSFileInfo>.Filter.Empty;
+
+        var files = bucket.Find(filter);
+
+        foreach (var file in files.ToList())
+        {
+            Console.WriteLine(file.ToJson());
+        }
+        // end-find
+    }
+
+    static void FindAsync()
+    {
+        // Prints information about each file in the bucket
+        // start-find-async
+        var filter = Builders<GridFSFileInfo>.Filter.Empty;
+
+        var files = await bucket.FindAsync(filter);
+
+        await files.ForEachAsync(file =>
+        {
+            Console.WriteLine(file.ToJson());
+        });
+        // end-find-async
+    }
 
 // Downloads a file from the GridFS bucket by referencing its ObjectId value
 {
@@ -104,11 +126,11 @@ class Program
     var id = doc["_id"].AsObjectId;
 
     using (var downloader = bucket.OpenDownloadStream(id))
-    {
-        var buffer = new byte[downloader.FileLength];
-        await downloader.ReadAsync(buffer, 0, buffer.Length);
-        // Process the buffer as needed
-    }
+{
+    var buffer = new byte[downloader.FileLength];
+    await downloader.ReadAsync(buffer, 0, buffer.Length);
+    // Process the buffer as needed
+}
 }
 
 // Downloads an entire GridFS file to a download stream

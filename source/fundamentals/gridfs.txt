@@ -234,7 +234,6 @@ method. The ``GridFSUploadOptions`` class contains the following properties:
 
    * - ``Metadata``
      - Metadata to store with the file, including the following elements:
-      
        - The ``_id`` of the file
        - The name of the file
        - The length and size of the file

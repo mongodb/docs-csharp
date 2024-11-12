@@ -234,14 +234,14 @@ method. The ``GridFSUploadOptions`` class contains the following properties:
 
    * - ``Metadata``
      - | Metadata to store with the file, including the following elements:
-
+       |
        |  - The ``_id`` of the file
           - The name of the file
           - The length and size of the file
           - The upload date and time
           - A ``metadata`` document in which you can store other information
-         
-       |   The default value is ``null``.
+       |  
+       | The default value is ``null``.
        | 
        | **Data type**: `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
 
@@ -452,8 +452,8 @@ code.
 Download to an Existing Stream
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the ``DownloadToStream()`` method to download the contents of a GridFS file to an
-existing stream. These methods accept the following parameters:
+Use the ``DownloadToStreamAsync()`` or ``DownloadToStream()`` method to download the
+contents of a GridFS file to an existing stream. These methods accept the following parameters:
 
 .. list-table::
 
@@ -525,7 +525,10 @@ on your ``GridFSBucket`` instance. These methods accept the following parameters
    
    * - ``filter``
      - | A query filter that specifies the entries to match in the ``files`` collection.
-       | **Data type**: `FilterDefinition <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__ <`GridFSFileInfo <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSFileInfo.html>`__>
+       | **Data type**: ``FilterDefinition<GridFSFileInfo>``. For more information, see
+         the API documentation for the
+         `Find() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.Find.html>`__
+         method.
 
    * - ``source``
      - | The stream from which to read the file contents.
@@ -605,10 +608,12 @@ To customize the find operation, pass an instance of the
      - Description
    
    * - ``Sort``
-     - | The sort order of the results. If you don't specify a sort order, the ``Find()``
+     - | The sort order of the results. If you don't specify a sort order, the
          method returns the results in the order in which they were inserted.
        | 
-       | **Data type**: `SortDefinition <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSFindOptions.Sort.html#MongoDB_Driver_GridFS_GridFSFindOptions_Sort>`__ <`GridFSFileInfo <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSFileInfo.html>`__>
+       | **Data type**: ``SortDefinition<GridFSFileInfo>``. For more information, see
+         the API documentation for the
+         `Sort <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSFindOptions.Sort.html>`__ property.
 
 .. _gridfs-delete-files:
 
@@ -683,20 +688,19 @@ To learn more about the classes used on this page, see the following API documen
 - `GridFSFindOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSFindOptions.html>`__
 - `GridFSUploadOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSUploadOptions.html>`__
 - `GridFSFileInfo <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSFileInfo.html>`__
--
 
 To learn more about the methods in the ``GridFSBucket`` class used on this page, see the
 following API documentation:
 
-- `OpenUploadStreamAsync <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.OpenUploadStreamAsync.html>`__
-- `OpenUploadStream <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.OpenUploadStream.html>`__
-- `UploadFromStreamAsync <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.UploadFromStreamAsync.html>`__
-- `UploadFromStream <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.UploadFromStream.html>`__
-- `OpenDownloadStreamAsync <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.OpenDownloadStreamAsync.html>`__
-- `OpenDownloadStream <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.OpenDownloadStream.html>`__
-- `DownloadToStreamAsync <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.DownloadToStreamAsync.html>`__
-- `DownloadToStream <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.DownloadToStream.html>`__
-- `FindAsync <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.FindAsync.html>`__
-- `Find <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.Find.html>`__
-- `DeleteAsync <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.DeleteAsync.html>`__
-- `Delete <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.Delete.html>`__
+- `OpenUploadStreamAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.OpenUploadStreamAsync.html>`__
+- `OpenUploadStream() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.OpenUploadStream.html>`__
+- `UploadFromStreamAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.UploadFromStreamAsync.html>`__
+- `UploadFromStream() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.UploadFromStream.html>`__
+- `OpenDownloadStreamAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.OpenDownloadStreamAsync.html>`__
+- `OpenDownloadStream() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.OpenDownloadStream.html>`__
+- `DownloadToStreamAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.DownloadToStreamAsync.html>`__
+- `DownloadToStream() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.DownloadToStream.html>`__
+- `FindAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.FindAsync.html>`__
+- `Find() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.Find.html>`__
+- `DeleteAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.DeleteAsync.html>`__
+- `Delete() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.Delete.html>`__

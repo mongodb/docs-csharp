@@ -371,8 +371,8 @@ class GridFS
             var id = doc["_id"].AsObjectId;
 
             bucket.DownloadToStream(id, outputFile);
-            // end-download-to-stream
         }
+        // end-download-to-stream
     }
 
     static async Task DeleteFileAsync()

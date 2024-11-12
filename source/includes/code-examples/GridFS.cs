@@ -1,15 +1,11 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
 
-class Program
-{
-    static async Task Main(string[] args)
-    { }
+namespace Fundamentals;
 
+class GridFS
+{
     static void CreateBucket()
     {
         // Initialize MongoDB client
@@ -37,9 +33,16 @@ class Program
 
     static void UploadFile()
     {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
         // Uploads a file called "my_file" to the GridFS bucket and writes data to it
         // start-open-upload-stream
-        using (var uploader = bucket.OpenUploadStream("my_file", options))
+        using (var uploader = bucket.OpenUploadStream("my_file"))
         {
             // ASCII for "HelloWorld"
             byte[] bytes = { 72, 101, 108, 108, 111, 87, 111, 114, 108, 100 };
@@ -54,8 +57,46 @@ class Program
         // end-open-upload-stream
     }
 
+    static async Task UploadFileWithOptionsAsync()
+    {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
+        // Uploads a file called "my_file" to the GridFS bucket and writes data to it
+        // start-open-upload-stream-with-options-async
+        var options = new GridFSUploadOptions
+        {
+            ChunkSizeBytes = 1048576 // 1 MB
+        };
+
+        using (var uploader = await bucket.OpenUploadStreamAsync("my_file", options))
+        {
+            // ASCII for "HelloWorld"
+            byte[] bytes = { 72, 101, 108, 108, 111, 87, 111, 114, 108, 100 };
+
+            for (int i = 0; i < 5; i++)
+            {
+                await uploader.WriteAsync(bytes, 0, bytes.Length);
+            }
+
+            await uploader.CloseAsync();
+        }
+        // end-open-upload-stream-with-options-async
+    }
+
     static void UploadFileWithOptions()
     {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
         // Uploads a file called "my_file" to the GridFS bucket and writes data to it
         // start-open-upload-stream-with-options
         var options = new GridFSUploadOptions
@@ -78,108 +119,271 @@ class Program
         // end-open-upload-stream-with-options
     }
 
+    static async Task UploadStreamAsync()
+    {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
+        // Uploads data to a stream, then writes the stream to a GridFS file
+        // start-upload-from-stream-async
+        using (var fileStream = new FileStream("/path/to/input_file", FileMode.Open, FileAccess.Read))
+        {
+            await bucket.UploadFromStreamAsync("new_file", fileStream);
+        }
+        // end-upload-from-stream-async
+    }
+
     static void UploadStream()
     {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
         // Uploads data to a stream, then writes the stream to a GridFS file
-        //start-upload-from-stream
+        // start-upload-from-stream
         using (var fileStream = new FileStream("/path/to/input_file", FileMode.Open, FileAccess.Read))
         {
             bucket.UploadFromStream("new_file", fileStream);
         }
-        //end-upload-from-stream
+        // end-upload-from-stream
     }
 
     static void Find()
     {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
         // Prints information about each file in the bucket
         // start-find
         var filter = Builders<GridFSFileInfo>.Filter.Empty;
 
         var files = bucket.Find(filter);
 
-        foreach (var file in files.ToList())
+        foreach (var file in files.ToEnumerable())
         {
             Console.WriteLine(file.ToJson());
         }
         // end-find
     }
 
-    static void FindAsync()
+    static async Task FindAsync()
     {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
         // Prints information about each file in the bucket
         // start-find-async
         var filter = Builders<GridFSFileInfo>.Filter.Empty;
 
         var files = await bucket.FindAsync(filter);
 
-        await files.ForEachAsync(file =>
-        {
-            Console.WriteLine(file.ToJson());
-        });
+        await files.ForEachAsync(file => { Console.WriteLine(file.ToJson()); });
         // end-find-async
     }
 
-    static async Task DownloadFile()
+    static async Task DownloadFileAsync()
     {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
         // Downloads a file from the GridFS bucket by referencing its ObjectId value
-        // start-open-download-stream
+        // start-open-download-stream-async
         var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
         var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
         var id = doc["_id"].AsObjectId;
 
+        using (var downloader = await bucket.OpenDownloadStreamAsync(id))
+        {
+            var buffer = new byte[downloader.Length];
+            await downloader.ReadAsync(buffer, 0, buffer.Length);
+
+            // Process the buffer as needed
+        }
+        // end-open-download-stream-async
+    }
+
+    static void DownloadFile()
+    {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
+        // Downloads a file from the GridFS bucket by referencing its ObjectId value
+        // start-open-download-stream
+        var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
+        var doc = database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefault();
+        var id = doc["_id"].AsObjectId;
+
         using (var downloader = bucket.OpenDownloadStream(id))
         {
-            var buffer = new byte[downloader.FileLength];
-            await downloader.ReadAsync(buffer, 0, buffer.Length);
+            var buffer = new byte[downloader.Length];
+            downloader.Read(buffer, 0, buffer.Length);
+
             // Process the buffer as needed
         }
         // end-open-download-stream
     }
 
-    static DownloadFile()
-    // Downloads a file from the GridFS bucket by referencing its ObjectId value
+    static async Task DownloadFileWithOptionsAsync()
     {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
+        // Downloads a file from the GridFS bucket by referencing its ObjectId value
+        // start-open-download-stream-async
         var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
         var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
         var id = doc["_id"].AsObjectId;
 
-        using (var downloader = bucket.OpenDownloadStream(id))
+        var options = new GridFSDownloadOptions
         {
-            var buffer = new byte[downloader.FileLength];
+            Seekable = true
+        };
+
+        using (var downloader = await bucket.OpenDownloadStreamAsync(id, options))
+        {
+            var buffer = new byte[downloader.Length];
             await downloader.ReadAsync(buffer, 0, buffer.Length);
+
             // Process the buffer as needed
+        }
+        // end-open-download-stream-async
+    }
+
+    static void DownloadFileWithOptions()
+    {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
+        // Downloads a file from the GridFS bucket by referencing its ObjectId value
+        // start-open-download-stream-with-options
+        var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
+        var doc = database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefault();
+        var id = doc["_id"].AsObjectId;
+
+        var options = new GridFSDownloadOptions
+        {
+            Seekable = true
+        };
+
+        using (var downloader = bucket.OpenDownloadStream(id, options))
+        {
+            var buffer = new byte[downloader.Length];
+            downloader.Read(buffer, 0, buffer.Length);
+
+            // Process the buffer as needed
+        }
+        // end-open-download-stream-with-options
+    }
+    static async Task DownloadStreamAsync()
+    {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
+        // Downloads an entire GridFS file to a download stream
+        // start-download-to-stream-async
+        using (var outputFile = new FileStream("/path/to/output_file", FileMode.Create, FileAccess.Write))
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
+            var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
+            var id = doc["_id"].AsObjectId;
+
+            await bucket.DownloadToStreamAsync(id, outputFile);
+        }
+        // end-download-to-stream-async
+    }
+
+    static void DownloadStream()
+    {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
+        // Downloads an entire GridFS file to a download stream
+        // start-download-to-stream
+        using (var outputFile = new FileStream("/path/to/output_file", FileMode.Create, FileAccess.Write))
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
+            var doc = database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefault();
+            var id = doc["_id"].AsObjectId;
+
+            bucket.DownloadToStream(id, outputFile);
+            // end-download-to-stream
         }
     }
 
-// Downloads an entire GridFS file to a download stream
-{
-    using (var outputFile = new FileStream("/path/to/output_file", FileMode.Create, FileAccess.Write))
+    static async Task DeleteFileAsync()
     {
-        var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
-    var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
-    var id = doc["_id"].AsObjectId;
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
 
-    await bucket.DownloadToStreamAsync(id, outputFile);
-}
-}
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
 
-    // Deletes a file from the GridFS bucket with the specified ObjectId
-    static async Task DeleteFile()
-{
-    var filter = Builders<BsonDocument>.Filter.Eq("filename", "my_file");
-    var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
-    var id = doc["_id"].AsObjectId;
+        // Deletes a file from the GridFS bucket with the specified ObjectId
+        // start-delete-file-async
+        var filter = Builders<BsonDocument>.Filter.Eq("filename", "my_file");
+        var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
+        var id = doc["_id"].AsObjectId;
 
-    await bucket.DeleteAsync(id);
-}
+        await bucket.DeleteAsync(id);
+        // end-delete-file-async
+    }
 
-// Deletes a file from the GridFS bucket with the specified ObjectId
-static void DeleteFile()
-{
-    var filter = Builders<BsonDocument>.Filter.Eq("filename", "my_file");
-    var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefault();
-    var id = doc["_id"].AsObjectId;
+    static void DeleteFile()
+    {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
 
-    bucket.Delete(id);
-}
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
+        // Deletes a file from the GridFS bucket with the specified ObjectId
+        // start-delete-file
+        var filter = Builders<BsonDocument>.Filter.Eq("filename", "my_file");
+        var doc = database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefault();
+        var id = doc["_id"].AsObjectId;
+
+        bucket.Delete(id);
+        // end-delete-file
+    }
 }

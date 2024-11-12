@@ -231,8 +231,8 @@ the ``ChunkSizeBytes`` option to specify the maximum size of each chunk:
 .. literalinclude:: /includes/code-examples/GridFS.cs
    :language: csharp
    :dedent:
-   :start-after: start-open-upload-stream-with-options
-   :end-before: end-open-upload-stream-with-options
+   :start-after: // start-open-upload-stream-with-options
+   :end-before: // end-open-upload-stream-with-options
 
 .. _gridfs-upload-from-stream:
 
@@ -278,8 +278,8 @@ following steps:
 .. literalinclude:: /includes/code-examples/GridFS.cs
    :language: csharp
    :dedent:
-   :start-after: //start-upload-from-stream
-   :end-before: //end-upload-from-stream
+   :start-after: // start-upload-from-stream
+   :end-before: // end-upload-from-stream
 
 .. _gridfs-download-files:
 
@@ -355,8 +355,8 @@ the ``Seekable`` option to ``true`` to specify that the stream is seekable:
 .. literalinclude:: /includes/code-examples/GridFS.cs
    :language: csharp
    :dedent:
-   :start-after: start-open-download-stream-with-options
-   :end-before: end-open-download-stream-with-options
+   :start-after: // start-open-download-stream-with-options
+   :end-before: // end-open-download-stream-with-options
 
 .. _gridfs-download_to_stream:
 
@@ -399,11 +399,11 @@ performing the following actions:
 - Calls the ``DownloadToStream()`` method and passes the ``_id`` value to download
   the contents of ``"new_file"`` to a stream
 
-.. literalinclude:: /includes/write/gridfs.cpp
-   :language: cpp
+.. literalinclude:: /includes/code-examples/GridFS.cs
+   :language: csharp
    :dedent:
-   :start-after: start-download-to-stream
-   :end-before: end-download-to-stream
+   :start-after: // start-download-to-stream
+   :end-before: // end-download-to-stream
 
 .. _gridfs-retrieve-file-info:
 
@@ -508,11 +508,11 @@ passing its ``_id`` value to ``delete_file()``:
 - Uses the ``Find()`` method to find the file named ``"my_file"``
 - Passes the ``_id`` value of the file to the ``Delete()`` method to delete the file
 
-.. literalinclude:: /includes/write/gridfs.cpp
-   :language: cpp
+.. literalinclude:: /includes/code-examples/GridFS.cs
+   :language: csharp
    :dedent:
-   :start-after: start-delete-files
-   :end-before: end-delete-files
+   :start-after: // start-delete-file
+   :end-before: // end-delete-file
 
 .. note:: File Revisions
 

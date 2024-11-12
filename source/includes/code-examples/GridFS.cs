@@ -31,6 +31,32 @@ class GridFS
         // end-create-custom-bucket
     }
 
+    static async Task UploadFileAsync()
+    {
+        // Initialize MongoDB client
+        var client = new MongoClient("<connection string>");
+        var database = client.GetDatabase("db");
+
+        // Creates a GridFS bucket or references an existing one
+        var bucket = new GridFSBucket(database);
+
+        // Uploads a file called "my_file" to the GridFS bucket and writes data to it
+        // start-open-upload-stream-async
+        using (var uploader = await bucket.OpenUploadStreamAsync("my_file", options))
+        {
+            // ASCII for "HelloWorld"
+            byte[] bytes = { 72, 101, 108, 108, 111, 87, 111, 114, 108, 100 };
+
+            for (int i = 0; i < 5; i++)
+            {
+                await uploader.WriteAsync(bytes, 0, bytes.Length);
+            }
+
+            await uploader.CloseAsync();
+        }
+        // end-open-upload-stream-async
+    }
+
     static void UploadFile()
     {
         // Initialize MongoDB client
@@ -256,7 +282,7 @@ class GridFS
         var bucket = new GridFSBucket(database);
 
         // Downloads a file from the GridFS bucket by referencing its ObjectId value
-        // start-open-download-stream-async
+        // start-open-download-stream-with-options-async
         var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
         var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
         var id = doc["_id"].AsObjectId;
@@ -273,7 +299,7 @@ class GridFS
 
             // Process the buffer as needed
         }
-        // end-open-download-stream-async
+        // end-open-download-stream-with-options-async
     }
 
     static void DownloadFileWithOptions()

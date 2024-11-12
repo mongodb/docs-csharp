@@ -163,7 +163,8 @@ class Program
 }
 }
 
-// Deletes a file from the GridFS bucket with the specified ObjectId
+    // Deletes a file from the GridFS bucket with the specified ObjectId
+    static async Task DeleteFile()
 {
     var filter = Builders<BsonDocument>.Filter.Eq("filename", "my_file");
     var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
@@ -171,5 +172,14 @@ class Program
 
     await bucket.DeleteAsync(id);
 }
-    }
+
+// Deletes a file from the GridFS bucket with the specified ObjectId
+static void DeleteFile()
+{
+    var filter = Builders<BsonDocument>.Filter.Eq("filename", "my_file");
+    var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefault();
+    var id = doc["_id"].AsObjectId;
+
+    bucket.Delete(id);
+}
 }

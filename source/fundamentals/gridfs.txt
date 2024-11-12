@@ -482,12 +482,31 @@ class contains the following properties:
 Delete Files
 ------------
 
-Use the ``delete_file()`` method to remove a file's collection document
-and associated chunks from your bucket. This effectively deletes the file.
-You must specify the file by its ``_id`` field rather than its file name.
+To delete files from a GridFS bucket, call the ``Delete()`` method on your ``GridFSBucket``
+instance. This method removes a file's collection document and its associated chunks from
+your bucket.
 
-The following example shows how to delete a file named ``"my_file"`` by
+The ``Delete()`` method accepts the following parameters:
+
+.. list-table::
+
+   * - Parameter
+     - Description
+   * - ``id``
+     - | The ``_id`` of the file to delete. 
+       | 
+       | **Data type**: `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
+   * - ``cancellationToken``
+     - | *Optional.* A token that you can use to cancel the operation.
+       | 
+       | **Data type**: `CancellationToken <https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken>`__
+
+The following code example shows how to delete a file named ``"my_file"``
 passing its ``_id`` value to ``delete_file()``:
+
+- Uses the ``Builders`` class to create a filter that matches the file named ``"my_file"``
+- Uses the ``Find()`` method to find the file named ``"my_file"``
+- Passes the ``_id`` value of the file to the ``Delete()`` method to delete the file
 
 .. literalinclude:: /includes/write/gridfs.cpp
    :language: cpp
@@ -497,13 +516,19 @@ passing its ``_id`` value to ``delete_file()``:
 
 .. note:: File Revisions
 
-   The ``delete_file()`` method supports deleting only one file at a time. If
+   The ``Delete()`` method supports deleting only one file at a time. If
    you want to delete each file revision, or files with different upload
    times that share the same file name, collect the ``_id`` values of each revision.
-   Then, pass each ``_id`` value in separate calls to the ``delete_file()`` method.
+   Then, pass each ``_id`` value in separate calls to the ``Delete()`` method.
 
 API Documentation
 -----------------
 
 To learn more about using the {+driver-short+} to store and retrieve large files,
 see the following API documentation:
+
+- `GridFSBucket <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.html>`__
+- `GridFSBucketOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucketOptions.html>`__
+- `GridFSDownloadOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSDownloadOptions.html>`__
+- `GridFSFindOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSFindOptions.html>`__
+- `GridFSUploadOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSUploadOptions.html>`__

@@ -233,14 +233,14 @@ method. The ``GridFSUploadOptions`` class contains the following properties:
        | **Data type**: ``int?``
 
    * - ``Metadata``
-     - | Metadata to store with the file, including the following elements:
-       |
-       |  - The ``_id`` of the file
-          - The name of the file
-          - The length and size of the file
-          - The upload date and time
-          - A ``metadata`` document in which you can store other information
-       |  
+     - Metadata to store with the file, including the following elements:
+      
+       - The ``_id`` of the file
+       - The name of the file
+       - The length and size of the file
+       - The upload date and time
+       - A ``metadata`` document in which you can store other information
+         
        | The default value is ``null``.
        | 
        | **Data type**: `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
@@ -525,6 +525,7 @@ on your ``GridFSBucket`` instance. These methods accept the following parameters
    
    * - ``filter``
      - | A query filter that specifies the entries to match in the ``files`` collection.
+       | 
        | **Data type**: ``FilterDefinition<GridFSFileInfo>``. For more information, see
          the API documentation for the
          `Find() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GridFS.GridFSBucket.Find.html>`__

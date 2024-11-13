@@ -234,12 +234,13 @@ method. The ``GridFSUploadOptions`` class contains the following properties:
 
    * - ``Metadata``
      - Metadata to store with the file, including the following elements:
+
        - The ``_id`` of the file
        - The name of the file
        - The length and size of the file
        - The upload date and time
        - A ``metadata`` document in which you can store other information
-         
+
        | The default value is ``null``.
        | 
        | **Data type**: `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__

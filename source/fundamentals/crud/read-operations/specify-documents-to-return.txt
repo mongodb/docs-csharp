@@ -21,13 +21,13 @@ Overview
 --------
 
 In this guide, you can learn how to specify which documents to return
-from a read operation by chaining the following methods to the ``find()``
+from a read operation by chaining the following methods to the ``Find()``
 method:
 
-- :ref:`limit() <csharp-return-documents-limit>`: Specifies the maximum number of documents
+- :ref:`Limit() <csharp-return-documents-limit>`: Specifies the maximum number of documents
   to return from a query
-- :ref:`sort() <csharp-return-documents-sort>`: Specifies the sort order for the returned documents
-- :ref:`skip() <csharp-return-documents-skip>`: Specifies the number of documents to skip before
+- :ref:`Sort() <csharp-return-documents-sort>`: Specifies the sort order for the returned documents
+- :ref:`Skip() <csharp-return-documents-skip>`: Specifies the number of documents to skip before
   returning query results
 
 Sample Data

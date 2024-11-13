@@ -28,7 +28,7 @@ GridFS is an abstraction that manages the operations and organization of
 the file storage. 
 
 Use GridFS if the size of your files exceeds the BSON document
-size limit of 16MB. For more detailed information about whether GridFS is
+size limit of 16 MB. For more detailed information about whether GridFS is
 suitable for your use case, see :manual:`GridFS </core/gridfs>` in the
 {+mdb-server+} manual.
 

@@ -27,10 +27,9 @@ which fields MongoDB returns from a query.
 Sample Data
 ~~~~~~~~~~~
 
-The examples in this guide use the ``restaurants`` collection in the ``sample_restaurants``
-database from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
-free MongoDB Atlas cluster and load the sample datasets, see the
-:atlas:`Get Started with Atlas </getting-started>` guide.
+The examples in this guide use the ``sample_restaurants.restaurants`` collection
+from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
+free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<csharp-quickstart>`.
 
 The examples on this page use the following ``Restaurant`` and ``Address`` classes to model
 the documents in the collection:
@@ -57,15 +56,15 @@ To remove the ``_id`` field from the returned document, you must
 Specify Fields to Include
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To specify the fields to include from the result, chain the ``Projection()`` method
-to the ``Find()`` method. When calling the ``Projection()`` method, you must pass in the
+To specify the fields to include from the result, chain the ``Project()`` method
+to the ``Find()`` method. When calling the ``Project()`` method, you must pass in the
 projection definition as a parameter. You can construct a projection definition by using
 the ``Builders<T>.Projection.Include()`` method and passing in the field name to include
 as a parameter. This method can be chained to include multiple fields in the projection.
 
 The following example uses the ``Find()`` method to find all restaurants in which the ``name``
-field value is ``"Emerald Pub"``. Then, the code calls the ``projection()`` and ``exclude()``
-methods to instruct the find operation to omit the ``name`` and ``address`` fields
+field value is ``"Emerald Pub"``. Then, the code calls the ``Project()``
+method to instruct the find operation to include the ``name`` and ``address`` fields
 in the result:
 
 .. io-code-block::
@@ -112,7 +111,7 @@ excludes the ``_id`` field from the projection:
 Specify Fields to Exclude
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To specify the fields to include from the result, chain the ``Projection()`` method
+To specify the fields to include from the result, chain the ``Project()`` method
 to the ``Find()`` method. You can exclude fields in your projection by using
 the ``Builders<T>.Projection.Exclude()`` method and passing in the field name to exclude
 as a parameter. This method can be chained to exclude multiple fields in the projection.

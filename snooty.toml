@@ -19,6 +19,7 @@ sharedinclude_root = "https://raw.githubusercontent.com/10gen/docs-shared/main/"
 [constants]
 driver-long = "MongoDB .NET/C# Driver"
 driver-short = ".NET/C# Driver"
+mdb-server = "MongoDB Server"
 lang-framework = ".NET/C#"
 framework = ".NET framework"
 framework-version = "4.8"

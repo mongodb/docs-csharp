@@ -64,7 +64,7 @@ as a parameter. This method can be chained to include multiple fields in the pro
 
 The following example uses the ``Find()`` method to find all restaurants in which the ``name``
 field value is ``"Emerald Pub"``. Then, the code calls the ``Project()``
-method to instruct the find operation to include the ``name`` and ``address`` fields
+method to instruct the find operation to include the ``name`` and ``cuisine`` fields
 in the result:
 
 .. io-code-block::
@@ -111,7 +111,7 @@ excludes the ``_id`` field from the projection:
 Specify Fields to Exclude
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To specify the fields to include from the result, chain the ``Project()`` method
+To specify the fields to exclude from the result, chain the ``Project()`` method
 to the ``Find()`` method. You can exclude fields in your projection by using
 the ``Builders<T>.Projection.Exclude()`` method and passing in the field name to exclude
 as a parameter. This method can be chained to exclude multiple fields in the projection.

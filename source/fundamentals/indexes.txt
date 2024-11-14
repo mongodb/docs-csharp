@@ -215,7 +215,7 @@ documentation.
    The Atlas Search Index management methods run asynchronously. The
    driver methods can return before confirming that they ran
    successfully. To determine the current status of the indexes, call the
-   `IMongoSearchIndexManager.List() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Search.IMongoSearchIndexManager.List.html>`__ method.
+   `IMongoSearchIndexManager.List() <{+api-root+}/MongoDB.Driver/MongoDB.Driver.Search.IMongoSearchIndexManager.List.html>`__ method.
 
 The following sections contain links to tutorials that demonstrate how to create and
 interact with Atlas Search indexes.
@@ -421,7 +421,7 @@ Server manual.
 List Indexes
 ------------
 
-You can use the `List() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoIndexManager-1.List.html>`__
+You can use the `List() <{+api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoIndexManager-1.List.html>`__
 method to retrieve a list of indexes in your collection.
 
 The following example uses the ``List()`` method to list

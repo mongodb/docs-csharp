@@ -218,10 +218,10 @@ API Documentation
 To learn more about any of the types or methods discussed in this
 guide, see the following API Documentation:
 
-- `IClientSession <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.html>`__
-- `MongoClient <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
-- `StartTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.StartTransaction.html>`__
-- `AbortTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransaction.html>`__ / `AbortTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransactionAsync.html>`__
-- `CommitTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransaction.html>`__ / `CommitTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransactionAsync.html>`__
-- `WithTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransaction.html>`__ / `WithTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransactionAsync.html>`__
-- `TransactionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html>`__
+- `IClientSession <{+api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.html>`__
+- `MongoClient <{+api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
+- `StartTransaction() <{+api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.StartTransaction.html>`__
+- `AbortTransaction() <{+api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransaction.html>`__ / `AbortTransactionAsync() <{+api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.AbortTransactionAsync.html>`__
+- `CommitTransaction() <{+api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransaction.html>`__ / `CommitTransactionAsync() <{+api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransactionAsync.html>`__
+- `WithTransaction() <{+api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransaction.html>`__ / `WithTransactionAsync() <{+api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransactionAsync.html>`__
+- `TransactionOptions <{+api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html>`__

@@ -39,9 +39,9 @@ free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<csharp-q
 Retrieve Distinct Values
 ------------------------
 
-To retrieve the distinct values for a specified field, call the ``IMongoCollection<TDocument>.Distinct()``
-or ``IMongoCollection<TDocument>.DistinctAsync()`` method and pass the name of the field
-you want to find distinct values for.
+To retrieve the distinct values for a specified field, call the ``Distinct()`` or
+``DistinctAsync()`` method of an ``IMongoCollection<TDocument>`` instance and pass the name
+of the field you want to find distinct values for.
 
 Retrieve Values Across a Collection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -49,7 +49,6 @@ Retrieve Values Across a Collection
 The following example retrieves the distinct values of the ``borough`` field in
 the ``restaurants`` collection. Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous`
 tab to see the corresponding code.
-
 
 .. tabs::
     
@@ -173,15 +172,15 @@ describes the properties you can set on a ``DistinctOptions`` instance:
 
    * - ``Collation`` 
      - | Sets the collation to use for the operation.
-       | **Parameter Type**: ``Collation``
+       | **Data type**: `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.DistinctOptions.Collation.html>`__
 
    * - ``MaxTime``
      - | Sets the maximum amount of time that the operation can run.
-       | **Parameter Type**: ``TimeSpan``
+       | **Data type**: ``TimeSpan``
 
    * - ``Comment`` 
      - | Attaches a comment to the operation.
-       | **Parameter Type**: ``BsonValue`` or ``String``
+       | **Data type**: `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__ or ``string``
 
 The following example retrieves the distinct values of the ``name`` field for
 all documents that have a ``borough`` field value of ``"Bronx"`` and a

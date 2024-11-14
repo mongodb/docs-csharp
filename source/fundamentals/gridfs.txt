@@ -26,7 +26,7 @@ splits files into chunks when storing them and reassembles those files when retr
 The driver's implementation of GridFS is an abstraction that manages the operations and
 organization of the file storage. 
 
-Use GridFS if the size of your files exceeds the BSON document
+Use GridFS if the size of any of your files exceeds the BSON document
 size limit of 16 MB. For more detailed information about whether GridFS is
 suitable for your use case, see :manual:`GridFS </core/gridfs>` in the
 {+mdb-server+} manual.
@@ -42,7 +42,7 @@ bucket contains the following collections:
 - ``files``: Stores the file metadata
 
 The driver creates the GridFS bucket, if it doesn't already exist, when you first
-write data to it. The bucket contains the preceding collections
+write data to it. The bucket contains the ``chunks`` and ``files`` collections
 prefixed with the default bucket name ``fs``, unless you specify a different
 name. To ensure efficient retrieval of the files and related metadata, the driver
 creates an index on each collection. The driver ensures that these indexes exist
@@ -91,7 +91,7 @@ Customize the Bucket
 ~~~~~~~~~~~~~~~~~~~~
 
 You can customize the GridFS bucket configuration by passing an instance
-of the ``GridFSBucketOptions class`` class to 
+of the ``GridFSBucketOptions`` class to 
 the ``GridFSBucket()`` constructor. The following table describes the properties in the
 ``GridFSBucketOptions`` class:
 
@@ -153,7 +153,7 @@ You can upload files to a GridFS bucket by using the following methods:
 - ``UploadFromStreamAsync()`` or ``UploadFromStream()``: Uploads the contents of an existing
   stream to a GridFS file
 
-The following sections describe these methods in more detail.
+The following sections describe how to use these methods.
 
 .. _csharp-gridfs-open-upload-stream:
 
@@ -183,10 +183,10 @@ stream for a given file name. These methods accept the following parameters:
         
        **Data type**: `CancellationToken <https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken>`__
 
-The following code example demonstrates how to open an upload stream by performing the
+This code example demonstrates how to open an upload stream by performing the
 following steps:
 
-- Calls the ``OpenUploadStream()`` method to open a writable GridFS stream for a new file
+- Calls the ``OpenUploadStream()`` method to open a writable GridFS stream for a file
   named ``"my_file"``
 - Calls the ``Write()`` method to write data to ``my_file``
 - Calls the ``Close()`` method to close the stream that points to ``my_file`` 
@@ -225,10 +225,10 @@ method. The ``GridFSUploadOptions`` class contains the following properties:
    * - Property
      - Description
    * - ``BatchSize``
-     - The number of chunks to upload in each batch. The default value is ``16777216``
-       divided by the value of the following property, ``ChunkSizeBytes``. 
-        
-       **Data type**: ``int?`` 
+     - | The number of chunks to upload in each batch. The default value is ``16777216``
+         divided by the value of the ``ChunkSizeBytes`` property. 
+       | 
+       | **Data type**: ``int?`` 
        
    * - ``ChunkSizeBytes``
      - The maximum size of each chunk.
@@ -307,7 +307,7 @@ contents of a stream to a new GridFS file. These methods accept the following pa
         
        **Data type**: `CancellationToken <https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken>`__
 
-The following code example demonstrates how to open an upload stream by performing the
+This code example demonstrates how to open an upload stream by performing the
 following steps:
 
 - Opens a file located at ``/path/to/input_file`` as a stream in binary read mode
@@ -553,7 +553,7 @@ on your ``GridFSBucket`` instance. These methods accept the following parameters
 The following code example shows how to retrieve and print file metadata
 from files in a GridFS bucket. The ``Find()`` method returns an
 ``IAsyncCursor<GridFSFileInfo>`` instance from
-which you can access the results.It uses a ``foreach`` loop to iterate through
+which you can access the results. It uses a ``foreach`` loop to iterate through
 the returned cursor and display the contents of the files uploaded in the
 :ref:`csharp-gridfs-upload-files` examples. 
 

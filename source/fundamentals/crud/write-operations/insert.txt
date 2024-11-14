@@ -25,7 +25,7 @@ documents to a MongoDB collection by performing insert operations.
 
 .. note:: 16 MB Size Limit
 
-   MongoDB limits BSON documents to 16 MB. If your document is larger than 16 MB,
+   MongoDB limits individual BSON documents to 16 MB. If your document is larger than 16 MB,
    use the :ref:`GridFS <csharp-gridfs>` API instead.
  
 An insert operation inserts one or more documents into a MongoDB collection.

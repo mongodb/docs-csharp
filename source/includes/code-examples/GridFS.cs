@@ -215,9 +215,7 @@ class GridFS
         // Prints information about each file in the bucket
         // start-find-async
         var filter = Builders<GridFSFileInfo>.Filter.Empty;
-
         var files = await bucket.FindAsync(filter);
-
         await files.ForEachAsync(file => { Console.WriteLine(file.ToJson()); });
         // end-find-async
     }
@@ -233,16 +231,20 @@ class GridFS
 
         // Downloads a file from the GridFS bucket by referencing its ObjectId value
         // start-open-download-stream-async
-        var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
-        var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
-        var id = doc["_id"].AsObjectId;
+        var filter = Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "new_file");
+        var cursor = await bucket.FindAsync(filter);
+        var fileInfoList = await cursor.ToListAsync();
+        var doc = fileInfoList.FirstOrDefault();
 
-        using (var downloader = await bucket.OpenDownloadStreamAsync(id))
+        if (doc != null)
         {
-            var buffer = new byte[downloader.Length];
-            await downloader.ReadAsync(buffer, 0, buffer.Length);
+            using (var downloader = await bucket.OpenDownloadStreamAsync(doc.Id))
+            {
+                var buffer = new byte[downloader.Length];
+                await downloader.ReadAsync(buffer, 0, buffer.Length);
 
-            // Process the buffer as needed
+                // Process the buffer as needed
+            }
         }
         // end-open-download-stream-async
     }
@@ -258,16 +260,18 @@ class GridFS
 
         // Downloads a file from the GridFS bucket by referencing its ObjectId value
         // start-open-download-stream
-        var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
-        var doc = database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefault();
-        var id = doc["_id"].AsObjectId;
+        var filter = Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "new_file");
+        var doc = bucket.Find(filter).FirstOrDefault();
 
-        using (var downloader = bucket.OpenDownloadStream(id))
+        if (doc != null)
         {
-            var buffer = new byte[downloader.Length];
-            downloader.Read(buffer, 0, buffer.Length);
+            using (var downloader = bucket.OpenDownloadStream(doc.Id))
+            {
+                var buffer = new byte[downloader.Length];
+                downloader.Read(buffer, 0, buffer.Length);
 
-            // Process the buffer as needed
+                // Process the buffer as needed
+            }
         }
         // end-open-download-stream
     }
@@ -283,23 +287,27 @@ class GridFS
 
         // Downloads a file from the GridFS bucket by referencing its ObjectId value
         // start-open-download-stream-with-options-async
-        var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
-        var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
-        var id = doc["_id"].AsObjectId;
+        var filter = Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "new_file");
+        var cursor = await bucket.FindAsync(filter);
+        var fileInfoList = await cursor.ToListAsync();
+        var doc = fileInfoList.FirstOrDefault();
 
-        var options = new GridFSDownloadOptions
+        if (doc != null)
         {
-            Seekable = true
-        };
+            var options = new GridFSDownloadOptions
+            {
+                Seekable = true
+            };
 
-        using (var downloader = await bucket.OpenDownloadStreamAsync(id, options))
-        {
-            var buffer = new byte[downloader.Length];
-            await downloader.ReadAsync(buffer, 0, buffer.Length);
+            using (var downloader = await bucket.OpenDownloadStreamAsync(doc.Id, options))
+            {
+                var buffer = new byte[downloader.Length];
+                await downloader.ReadAsync(buffer, 0, buffer.Length);
 
-            // Process the buffer as needed
+                // Process the buffer as needed
+            }
         }
-        // end-open-download-stream-with-options-async
+        // end-open-download-stream-with-options-async    
     }
 
     static void DownloadFileWithOptions()
@@ -313,24 +321,27 @@ class GridFS
 
         // Downloads a file from the GridFS bucket by referencing its ObjectId value
         // start-open-download-stream-with-options
-        var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
-        var doc = database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefault();
-        var id = doc["_id"].AsObjectId;
+        var filter = Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "new_file");
+        var doc = bucket.Find(filter).FirstOrDefault();
 
-        var options = new GridFSDownloadOptions
+        if (doc != null)
         {
-            Seekable = true
-        };
+            var options = new GridFSDownloadOptions
+            {
+                Seekable = true
+            };
 
-        using (var downloader = bucket.OpenDownloadStream(id, options))
-        {
-            var buffer = new byte[downloader.Length];
-            downloader.Read(buffer, 0, buffer.Length);
+            using (var downloader = bucket.OpenDownloadStream(id, options))
+            {
+                var buffer = new byte[downloader.Length];
+                downloader.Read(buffer, 0, buffer.Length);
 
-            // Process the buffer as needed
+                // Process the buffer as needed
+            }
         }
         // end-open-download-stream-with-options
     }
+
     static async Task DownloadStreamAsync()
     {
         // Initialize MongoDB client
@@ -342,13 +353,17 @@ class GridFS
 
         // Downloads an entire GridFS file to a download stream
         // start-download-to-stream-async
-        using (var outputFile = new FileStream("/path/to/output_file", FileMode.Create, FileAccess.Write))
-        {
-            var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
-            var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
-            var id = doc["_id"].AsObjectId;
+        var filter = Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "new_file");
+        var cursor = await bucket.FindAsync(filter);
+        var fileInfoList = await cursor.ToListAsync();
+        var doc = fileInfoList.FirstOrDefault();
 
-            await bucket.DownloadToStreamAsync(id, outputFile);
+        if (doc != null)
+        {
+            using (var outputFile = new FileStream("/path/to/output_file", FileMode.Create, FileAccess.Write))
+            {
+                await bucket.DownloadToStreamAsync(doc.Id, outputFile);
+            }
         }
         // end-download-to-stream-async
     }
@@ -364,13 +379,15 @@ class GridFS
 
         // Downloads an entire GridFS file to a download stream
         // start-download-to-stream
-        using (var outputFile = new FileStream("/path/to/output_file", FileMode.Create, FileAccess.Write))
-        {
-            var filter = Builders<BsonDocument>.Filter.Eq("filename", "new_file");
-            var doc = database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefault();
-            var id = doc["_id"].AsObjectId;
+        var filter = Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "new_file");
+        var doc = bucket.Find(filter).FirstOrDefault();
 
-            bucket.DownloadToStream(id, outputFile);
+        if (doc != null)
+        {
+            using (var outputFile = new FileStream("/path/to/output_file", FileMode.Create, FileAccess.Write))
+            {
+                bucket.DownloadToStream(doc.Id, outputFile);
+            }
         }
         // end-download-to-stream
     }
@@ -386,11 +403,15 @@ class GridFS
 
         // Deletes a file from the GridFS bucket with the specified ObjectId
         // start-delete-file-async
-        var filter = Builders<BsonDocument>.Filter.Eq("filename", "my_file");
-        var doc = await database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefaultAsync();
-        var id = doc["_id"].AsObjectId;
+        var filter = Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "new_file");
+        var cursor = await bucket.FindAsync(filter);
+        var fileInfoList = await cursor.ToListAsync();
+        var doc = fileInfoList.FirstOrDefault();
 
-        await bucket.DeleteAsync(id);
+        if (doc != null)
+        {
+            await bucket.DeleteAsync(doc.Id);
+        }
         // end-delete-file-async
     }
 
@@ -405,11 +426,13 @@ class GridFS
 
         // Deletes a file from the GridFS bucket with the specified ObjectId
         // start-delete-file
-        var filter = Builders<BsonDocument>.Filter.Eq("filename", "my_file");
-        var doc = database.GetCollection<BsonDocument>("fs.files").Find(filter).FirstOrDefault();
-        var id = doc["_id"].AsObjectId;
+        var filter = Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "new_file");
+        var doc = bucket.Find(filter).FirstOrDefault();
 
-        bucket.Delete(id);
+        if (doc != null)
+        {
+            bucket.Delete(doc.Id);
+        }
         // end-delete-file
     }
 }

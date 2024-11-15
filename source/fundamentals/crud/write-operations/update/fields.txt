@@ -1,8 +1,8 @@
-.. _csharp-change-guide:
+.. _csharp-update-fields:
 
-================
-Modify Documents
-================
+=============
+Update Fields
+=============
 
 .. contents:: On this page
    :local:
@@ -15,23 +15,19 @@ Modify Documents
    :values: reference
 
 .. meta::
-   :keywords: update, replace, synchronous, asynchronous, bulk
+   :keywords: synchronous, asynchronous
 
 Overview
 --------
 
 In this guide, you can learn how to use the {+driver-long+} to modify
-documents in a MongoDB collection by performing the following operations:
-
-- :ref:`Update Operations <csharp-update-operation>`
-- :ref:`Replace Operations <csharp-replace-operation>`
+documents in a MongoDB collection by performing update operations.
 
 The {+driver-short+} provides the following methods to modify documents,
 each of which has an asynchronous and synchronous version:
 
 - ``UpdateOneAsync()`` or ``UpdateOne()``
 - ``UpdateManyAsync()`` or ``UpdateMany()``
-- ``ReplaceOneAsync()`` or ``ReplaceOne()``
 
 .. tip:: Interactive Lab
    
@@ -305,210 +301,16 @@ match any existing documents.
    ``UpdateMany()``, the driver would update only the first of the
    matched documents.
 
-.. _csharp-replace-operation:
-
-Replace Operation
------------------
-
-You can perform a replace operation in MongoDB with the ``ReplaceOne()`` method. 
-This method removes all fields (except the ``_id`` field) from the first document that
-matches the search criteria, then inserts the fields and values you specify into the 
-document.
-
-Required Parameters
-~~~~~~~~~~~~~~~~~~~
-
-The ``ReplaceOne()`` method requires the following parameters:
-
-- A query filter document, which determines which record to replace. 
-- A **replacement** document, which specifies the fields and values to insert in the new 
-  document. If the documents in your collection are mapped to a {+language+} class,
-  the replacement document can be an instance of this class. 
-
-Like in an update operation, you can use the ``Builders`` class in the {+driver-short+} 
-to create a query filter. 
-The following code sample uses ``Builders`` to create a query filter that searches 
-for restaurants with a ``name`` field value of "Pizza Town". The code also creates a new 
-``Restaurant`` object that will replace the first matched document. 
-
-.. literalinclude:: /includes/code-examples/replace-one/ReplaceOne.cs
-   :language: csharp
-   :dedent:
-   :start-after: // start-replace-one
-   :end-before: // end-replace-one
-
-.. important::
-
-   The values of ``_id`` fields are immutable. If your replacement document specifies 
-   a value for the ``_id`` field, it must match the ``_id`` value of the existing document.
-
-The following code shows how to use the asynchronous ``ReplaceOneAsync()`` method 
-or the synchronous ``ReplaceOne()`` method to replace one document.
-
-.. tabs::
-
-   .. tab:: Asynchronous
-      :tabid: replace-one-async
-
-      .. code-block:: csharp
-         :copyable: true
-
-         var result = await _restaurantsCollection.ReplaceOneAsync(filter, newRestaurant);
-
-   .. tab:: Synchronous
-      :tabid: replace-one-sync
-
-      .. code-block:: csharp
-         :copyable: true
-
-         var result = _restaurantsCollection.ReplaceOne(filter, newRestaurant);
-
-.. tip::
-
-   Find runnable examples that use these methods under :ref:`Additional
-   Information <csharp-change-info>`.
-
-Customize the Replace Operation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The ``ReplaceOne()`` method optionally accepts a ``ReplaceOptions`` object as an 
-additional parameter, which represents options you can use to configure the replace 
-operation. If you don't specify any ``ReplaceOptions`` properties, the driver does
-not customize the replace operation.
-
-The ``ReplaceOptions`` type allows you to configure options with the
-following properties:
-
-.. list-table::
-   :widths: 30 70
-   :header-rows: 1
-
-   * - Property
-     - Description
-
-   * - ``BypassDocumentValidation``
-     - | Specifies whether the replace operation bypasses document validation. This lets you 
-         replace documents that don't meet the schema validation requirements, if any 
-         exist. See :manual:`the MongoDB server manual</core/schema-validation/#schema-validation>`
-         for more information on schema validation.
-
-   * - ``Collation``
-     - | Specifies the kind of language collation to use when sorting
-         results. See :manual:`the MongoDB server manual</reference/collation/#std-label-collation>`
-         for more information on collation.
-
-   * - ``Comment``
-     - | Gets or sets the user-provided comment for the operation. 
-         See :manual:`the MongoDB server manual</reference/command/update/#command-fields>`
-         for more information.
-
-   * - ``Hint``
-     - | Gets or sets the index to use to scan for documents. 
-         See :manual:`the MongoDB server manual</reference/command/update/#std-label-update-command-hint>`
-         for more information.
-
-   * - ``IsUpsert``
-     - | Specifies whether the replace operation performs an upsert operation if no 
-         documents match the query filter. 
-         See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
-         for more information.
-
-   * - ``Let``
-     - | Gets or sets the let document. 
-         See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-let-syntax>`
-         for more information.
-
-Return Value
-~~~~~~~~~~~~
-
-The ``ReplaceOne()`` method returns a ``ReplaceOneResult`` 
-object. The ``ReplaceOneResult`` type contains the following properties:
-
-.. list-table::
-   :widths: 30 70
-   :header-rows: 1
-
-   * - Property
-     - Description
-
-   * - ``IsAcknowledged``
-     - | Indicates whether the replace operation was acknowledged by MongoDB.
-
-   * - ``IsModifiedCountAvailable``
-     - | Indicates whether you can read the count of replaced records on the
-         ``ReplaceOneResult``.
-
-   * - ``MatchedCount``
-     - | The number of documents that matched the query filter, regardless of
-         whether one was replaced. 
-
-   * - ``ModifiedCount``
-     - | The number of documents replaced by the replace operation. 
-
-   * - ``UpsertedId``
-     - | The ID of the document that was upserted in the database, if the driver
-         performed an upsert.
-
-Example
-~~~~~~~
-
-The following code uses the ``ReplaceOne()`` method to find the first document where the 
-``name`` field has the value "Pizza Town", then replaces this document 
-with a new ``Restaurant`` document named "Food World". Because the ``IsUpsert`` option is 
-set to ``true``, the driver inserts a new document if the query filter doesn't 
-match any existing documents.
-
-.. io-code-block::
-   :copyable: true
-
-   .. input::
-      :language: csharp
-
-      var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Name, "Pizza Town");
-
-      Restaurant newRestaurant = new()
-      {
-          Name = "Food World",
-          Cuisine = "American",
-          Address = new BsonDocument
-          {
-              {"street", "Food St"},
-              {"zipcode", "10003"},
-          },
-          Borough = "Manhattan",
-      };
-
-      ReplaceOptions opts = new ReplaceOptions()
-      {
-          Comment = new BsonString("Restaurant replaced for {+driver-short+} Fundamentals"),
-          IsUpsert = true
-      };
-
-      Console.WriteLine("Replacing document...");
-      var result = _restaurantsCollection.ReplaceOne(filter, newRestaurant, opts);
-      
-      Console.WriteLine($"Replaced documents: {result.ModifiedCount}");
-      Console.WriteLine($"Result acknowledged? {result.IsAcknowledged}"); 
-
-   .. output::
-      :language: none
-      :visible: false
-      
-      Replacing document...
-      Replaced documents: 1
-      Result acknowledged? True
-
 .. _csharp-change-info:
 
 Additional Information
 ----------------------
 
-For runnable examples of the update and replace operations, see the following usage
+For runnable examples of the update operations, see the following usage
 examples:
 
 - :ref:`csharp-update-one`
 - :ref:`csharp-update-many`
-- :ref:`csharp-replace-one`
 
 To learn more about creating query filters, see the :ref:`csharp-specify-query` guide.
 
@@ -524,10 +326,6 @@ guide, see the following API documentation:
 * `UpdateManyAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateManyAsync.html>`__
 * `UpdateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOptions.html>`__
 * `UpdateResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateResult.html>`__
-* `ReplaceOne() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOne.html>`__
-* `ReplaceOneAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOneAsync.html>`__
-* `ReplaceOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReplaceOptions.html>`__
-* `ReplaceOneResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReplaceOneResult.html>`__
 
 .. _csharp-update-instruqt-lab:
 

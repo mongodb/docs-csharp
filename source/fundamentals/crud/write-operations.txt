@@ -11,11 +11,13 @@ Write Operations
    :caption: Write Operations
 
    Insert </fundamentals/crud/write-operations/insert>
-   Modify </fundamentals/crud/write-operations/modify>
+   Update </fundamentals/crud/write-operations/update>
+   Replace </fundamentals/crud/write-operations/replace>
    Delete </fundamentals/crud/write-operations/delete>
    Bulk Write Operations </fundamentals/crud/write-operations/bulk-write>
 
 - :ref:`csharp-insert-guide`
-- :ref:`csharp-change-guide`
+- :ref:`csharp-update-documents`
+- :ref:`csharp-replace-documents`
 - :ref:`csharp-delete-guide`
 - :ref:`csharp-bulk-write`

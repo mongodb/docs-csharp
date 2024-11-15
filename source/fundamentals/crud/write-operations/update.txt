@@ -1,0 +1,28 @@
+.. _csharp-change-guide:
+.. _csharp-update-documents:
+
+================
+Update Documents
+================
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: update, synchronous, asynchronous, bulk
+
+.. toctree::
+   :caption: Update Documents
+
+   Fields </fundamentals/crud/write-operations/update/fields>
+   Arrays </fundamentals/crud/write-operations/update/arrays>
+
+Overview
+--------

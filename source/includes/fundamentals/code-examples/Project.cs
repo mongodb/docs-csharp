@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
-public class LimitSortSkip
+public class Project
 {
     // Replace with your connection string
     private const string MongoConnectionString = "<connection string URI>";
@@ -12,12 +12,12 @@ public class LimitSortSkip
     {   
         var mongoClient = new MongoClient(MongoConnectionString);
         var database = mongoClient.GetDatabase("sample_restaurants");
-        var collection = database.GetCollection<Restaurant>("restaurants");
+        var collection = database.GetCollection<BsonDocument>("restaurants");
         
         {
             // start-project-include
-            var filter = Builders<Restaurant>.Filter.Eq("name", "Emerald Pub");
-            var projection = Builders<Restaurant>.Projection
+            var filter = Builders<BsonDocument>.Filter.Eq("name", "Emerald Pub");
+            var projection = Builders<BsonDocument>.Projection
                 .Include("name")
                 .Include("cuisine");
 
@@ -31,8 +31,8 @@ public class LimitSortSkip
 
         {
             // start-project-include-without-id
-            var filter = Builders<Restaurant>.Filter.Eq("name", "Emerald Pub");
-            var projection = Builders<Restaurant>.Projection
+            var filter = Builders<BsonDocument>.Filter.Eq("name", "Emerald Pub");
+            var projection = Builders<BsonDocument>.Projection
                 .Include("name")
                 .Include("cuisine")
                 .Exclude("_id");
@@ -47,8 +47,8 @@ public class LimitSortSkip
 
         {
             // start-project-exclude
-            var filter = Builders<Restaurant>.Filter.Eq("name", "Emerald Pub");
-            var projection = Builders<Restaurant>.Projection
+            var filter = Builders<BsonDocument>.Filter.Eq("name", "Emerald Pub");
+            var projection = Builders<BsonDocument>.Projection
                 .Exclude("cuisine");
 
             var results = collection.Find(filter).Project(projection).ToList();
@@ -61,31 +61,3 @@ public class LimitSortSkip
 
     }
 }
-
-// start-model
-public class Restaurant {
-    public ObjectId? Id { get; set; }
-
-    [BsonElement("name")]
-    public string? Name { get; set; }
-
-    [BsonElement("cuisine")]
-    public string? Cuisine { get; set; }
-
-    [BsonElement("address")]
-    public Address? Address { get; set; }
-}
-
-public class Address
-{
-    public string Building { get; set; }
-
-    [BsonElement("coord")]
-    public double[] Coordinates { get; set; }
-
-    public string Street { get; set; }
-
-    [BsonElement("zipcode")]
-    public string ZipCode { get; set; }
-}
-// end-model

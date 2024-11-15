@@ -31,14 +31,6 @@ The examples in this guide use the ``sample_restaurants.restaurants`` collection
 from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
 free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<csharp-quickstart>`.
 
-The examples on this page use the following ``Restaurant`` and ``Address`` classes to model
-the documents in the collection:
-
-.. literalinclude:: /includes/fundamentals/code-examples/Project.cs
-   :start-after: start-model
-   :end-before: end-model
-   :language: csharp
-
 Projection Types
 ----------------
 

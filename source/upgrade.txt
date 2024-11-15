@@ -10,7 +10,6 @@ Upgrade Driver Versions
    :depth: 1
    :class: singlecol
 
-
 Overview
 --------
 
@@ -132,9 +131,4 @@ Version 2.14 Release Support Changes
 
 - The v2.14 driver drops support for MongoDB Server v3.4 and earlier. To
   use any driver from v2.14 and later, your MongoDB Server must be v3.6 or
-  later. To learn how to upgrade your MongoDB Server to v3.6, follow the
-  link that corresponds to your MongoDB deployment configuration:
-
-  - :ref:`<3.6-upgrade-replica-set>`
-  - :ref:`<3.6-upgrade-standalone>`
-  - :ref:`<3.6-upgrade-sharded-cluster>`
+  later.

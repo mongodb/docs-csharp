@@ -1,5 +1,6 @@
 name = "csharp"
 title = "C#/.NET"
+eol = true
 toc_landing_pages = [
     "/fundamentals/connection",
     "/fundamentals/crud",
@@ -18,6 +19,7 @@ sharedinclude_root = "https://raw.githubusercontent.com/10gen/docs-shared/main/"
 [constants]
 driver-long = "MongoDB .NET/C# Driver"
 driver-short = ".NET/C# Driver"
+mdb-server = "MongoDB Server"
 lang-framework = ".NET/C#"
 framework = ".NET framework"
 framework-version = "4.8"
@@ -36,3 +38,10 @@ string-data-type = "``string``"
 int-data-type = "``integer``"
 not-available = "N/A"
 analyzer = "MongoDB C# Analyzer"
+
+[[banners]]
+targets = ["*"]
+variant = "info"
+value = """\
+    This version of the documentation is archived and no longer supported. View the `current documentation <https://www.mongodb.com/docs/drivers/csharp/current/>`__ to learn how to `upgrade your version of the {+driver-short+} <https://www.mongodb.com/docs/drivers/csharp/current/upgrade/>`__.\
+    """

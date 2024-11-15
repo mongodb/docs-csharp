@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
-public class LimitSortSkip
+public class Distinct
 {
     // Replace with your connection string
     private const string MongoConnectionString = "<connection string URI>>";
@@ -16,7 +16,7 @@ public class LimitSortSkip
         
         {
             // start-distinct
-            var results = collection.Distinct<string>("borough", new BsonDocument()).ToList();
+            var results = collection.Distinct<string>(r => r.Borough, Builders<Restaurant>.Filters.Empty).ToList();
             foreach (var result in results)
             {
                 Console.WriteLine(result);
@@ -26,8 +26,8 @@ public class LimitSortSkip
 
         {
             // start-distinct-with-query
-            var filter = Builders<Restaurant>.Filter.Eq("cuisine", "Italian");
-            var results = collection.Distinct<string>("borough", filter).ToList();
+            var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Italian");
+            var results = collection.Distinct<string>(r => r.Borough, filter).ToList();
             foreach (var result in results)
             {
                 Console.WriteLine(result);
@@ -37,15 +37,15 @@ public class LimitSortSkip
 
         {
             // start-distinct-with-comment
-            var cuisineFilter = Builders<Restaurant>.Filter.Eq("cuisine", "Pizza");
-            var boroughFilter = Builders<Restaurant>.Filter.Eq("borough", "Bronx");
+            var cuisineFilter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Pizza");
+            var boroughFilter = Builders<Restaurant>.Filter.Eq(r => r.Borough, "Bronx");
             var filter = Builders<Restaurant>.Filter.And(cuisineFilter, boroughFilter);
 
             var options = new DistinctOptions {
                 Comment = "Find all Italian restaurants in the Bronx"
             };
 
-            var results = collection.Distinct<string>("name", filter).ToList();
+            var results = collection.Distinct<string>(r => r.Name, filter).ToList();
             foreach (var result in results)
             {
                 Console.WriteLine(result);
@@ -58,7 +58,7 @@ public class LimitSortSkip
     private static async void DistinctAsync (IMongoCollection<Restaurant> collection)
     {
         // start-distinct-async
-        var results = await collection.DistinctAsync<string>("borough", new BsonDocument());
+        var results = await collection.DistinctAsync<string>(r => r.Borough, Builders<Restaurant>.Filters.Empty);
         await results.ForEachAsync(result => Console.WriteLine(result));
         // end-distinct-async
     }
@@ -66,8 +66,8 @@ public class LimitSortSkip
     private static async void DistinctWithQueryAsync (IMongoCollection<Restaurant> collection)
     {
         // start-distinct-with-query-async
-        var filter = Builders<Restaurant>.Filter.Eq("cuisine", "Italian");
-        var results = await collection.DistinctAsync<string>("borough", filter);
+        var filter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Italian");
+        var results = await collection.DistinctAsync<string>(r => r.Borough, filter);
         await results.ForEachAsync(result => Console.WriteLine(result));
         // end-distinct-with-query-async
     }
@@ -75,21 +75,21 @@ public class LimitSortSkip
     private static async void DistinctWithCommentAsync (IMongoCollection<Restaurant> collection)
     {
         // start-distinct-with-comment-async
-        var cuisineFilter = Builders<Restaurant>.Filter.Eq("cuisine", "Pizza");
-        var boroughFilter = Builders<Restaurant>.Filter.Eq("borough", "Bronx");
+        var cuisineFilter = Builders<Restaurant>.Filter.Eq(r => r.Cuisine, "Pizza");
+        var boroughFilter = Builders<Restaurant>.Filter.Eq(r => r.Borough, "Bronx");
         var filter = Builders<Restaurant>.Filter.And(cuisineFilter, boroughFilter);
 
         var options = new DistinctOptions {
             Comment = "Find all Italian restaurants in the Bronx"
         };
 
-        var results = await collection.DistinctAsync<string>("name", filter, options);
+        var results = await collection.DistinctAsync<string>(r => r.Name, filter, options);
         await results.ForEachAsync(result => Console.WriteLine(result));
         // end-distinct-with-comment-async
     }
 }
 
-// start-restaurant-class
+// start-model
 public class Restaurant {
     public ObjectId? Id { get; set; }
 
@@ -102,4 +102,4 @@ public class Restaurant {
     [BsonElement("borough")]
     public string? Borough { get; set; }
 }
-// end-restaurant-class
+// end-model

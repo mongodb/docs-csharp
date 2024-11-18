@@ -24,81 +24,106 @@ Overview
 In this guide, you can learn how to use the {+driver-long+} to replace
 documents in a MongoDB collection.
 
-
-
-The {+driver-short+} provides the following methods to modify documents,
-each of which has an asynchronous and synchronous version:
-
-- ``ReplaceOneAsync()`` or ``ReplaceOne()``
-
-You can perform a replace operation in MongoDB with the ``ReplaceOne()`` method. 
-This method removes all fields (except the ``_id`` field) from the first document that
-matches the search criteria, then inserts the fields and values you specify into the 
+The {+driver-short+} provides the ``ReplaceOne()`` and ``ReplaceOneAsync()`` methods.
+These methods remove all fields (except the ``_id`` field) from the first document that
+matches the search criteria, then insert the fields and values you specify into the 
 document.
 
-Required Parameters
-~~~~~~~~~~~~~~~~~~~
+Sample Data
+~~~~~~~~~~~
 
-The ``ReplaceOne()`` method requires the following parameters:
+The examples in this guide use the ``restaurants`` collection
+in the ``sample_restaurants`` database provided in the :atlas:`Atlas sample datasets </sample-data>`.
+To learn how to create a free MongoDB Atlas cluster and load the sample datasets,
+see the :ref:`<csharp-quickstart>`.
 
-- A query filter document, which determines which record to replace. 
-- A **replacement** document, which specifies the fields and values to insert in the new 
-  document. If the documents in your collection are mapped to a {+language+} class,
-  the replacement document can be an instance of this class. 
+.. include:: /includes/convention-pack-note.rst
 
-Like in an update operation, you can use the ``Builders`` class in the {+driver-short+} 
-to create a query filter. 
-The following code sample uses ``Builders`` to create a query filter that searches 
-for restaurants with a ``name`` field value of "Pizza Town". The code also creates a new 
-``Restaurant`` object that will replace the first matched document. 
+Replace Methods
+---------------
 
-.. literalinclude:: /includes/code-examples/replace-one/ReplaceOne.cs
-   :language: csharp
-   :dedent:
-   :start-after: // start-replace-one
-   :end-before: // end-replace-one
+To replace a document in a collection, call the ``ReplaceOne()`` or ``ReplaceOneAsync()``
+method. These methods accept the following parameters:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``filter``
+     - A *query filter* document that specifies the record to replace. You can use the
+       ``Builders`` class to create a query filter.
+
+       **Data Type:** `FilterDefinition <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__ ``<TDocument>`` 
+
+   * - ``replacement``
+     - A *replacement* document, which specifies the fields and values to insert in the new 
+       document. If the documents in your collection are mapped to a {+language+} class,
+       the replacement document can be an instance of this class. 
+
+       **Data Type:** ``TDocument`` 
+
+   * - ``options``
+     - *Optional.* An instance of the ``ReplaceOptions`` class that specifies the
+       configuration for the replace operation. The default value is ``null``.
+
+       **Data Type:** `ReplaceOptions <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.ReplaceOptions.html>`__
+
+   * - ``cancellationToken``
+     - *Optional.* A token that you can use to cancel the operation.
+
+       **Data type**: `CancellationToken <https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken>`__
+
+The following code example performs the following steps:
+
+1. Uses the ``Builders`` class to create a query filter. The filter matches all
+   documents where the ``cuisine`` field has the value ``"Pizza"``.
+#. Creates a new ``Restaurant`` object.
+#. Calls the ``ReplaceOne()`` method on the ``restaurants`` collection. This operation
+   find the first matching document in the collection and replaces it with the newly created
+   document.
+
+Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the
+corresponding code.
+
+.. tabs::
+
+   .. tab:: Synchronous
+      :tabid: replace-one-sync
+
+      .. literalinclude:: /includes/code-examples/replace-one/ReplaceOne.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-replace-one-sync
+         :end-before: // end-replace-one-sync
+
+   .. tab:: Asynchronous
+      :tabid: replace-one-async
+
+      .. literalinclude:: /includes/code-examples/replace-one/ReplaceOneAsync.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-replace-one-async
+         :end-before: // end-replace-one-async
 
 .. important::
 
    The values of ``_id`` fields are immutable. If your replacement document specifies 
    a value for the ``_id`` field, it must match the ``_id`` value of the existing document.
 
-The following code shows how to use the asynchronous ``ReplaceOneAsync()`` method 
-or the synchronous ``ReplaceOne()`` method to replace one document.
-
-.. tabs::
-
-   .. tab:: Asynchronous
-      :tabid: replace-one-async
-
-      .. code-block:: csharp
-         :copyable: true
-
-         var result = await _restaurantsCollection.ReplaceOneAsync(filter, newRestaurant);
-
-   .. tab:: Synchronous
-      :tabid: replace-one-sync
-
-      .. code-block:: csharp
-         :copyable: true
-
-         var result = _restaurantsCollection.ReplaceOne(filter, newRestaurant);
-
-.. tip::
-
-   Find runnable examples that use these methods under :ref:`Additional
-   Information <csharp-change-info>`.
-
 Customize the Replace Operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``ReplaceOne()`` method optionally accepts a ``ReplaceOptions`` object as an 
+The ``ReplaceOne()`` and ``ReplaceOneAsync()`` methods optionally accept a
+``ReplaceOptions`` object as an 
 additional parameter, which represents options you can use to configure the replace 
-operation. If you don't specify any ``ReplaceOptions`` properties, the driver does
-not customize the replace operation.
+operation.
 
-The ``ReplaceOptions`` type allows you to configure options with the
-following properties:
+The ``ReplaceOptions`` class contains the following properties:
 
 .. list-table::
    :widths: 30 70
@@ -108,25 +133,33 @@ following properties:
      - Description
 
    * - ``BypassDocumentValidation``
-     - | Specifies whether the replace operation bypasses document validation. This lets you 
-         replace documents that don't meet the schema validation requirements, if any 
-         exist. See :manual:`the MongoDB server manual</core/schema-validation/#schema-validation>`
-         for more information on schema validation.
+     - Specifies whether the replace operation bypasses document validation. This lets you 
+       replace documents that don't meet the schema validation requirements, if any 
+       exist. See :manual:`the MongoDB server manual</core/schema-validation/#schema-validation>`
+       for more information on schema validation.
+
+       **Data Type:** ``bool?``
 
    * - ``Collation``
-     - | Specifies the kind of language collation to use when sorting
-         results. See :manual:`the MongoDB server manual</reference/collation/#std-label-collation>`
-         for more information on collation.
+     - Specifies the kind of language collation to use when sorting
+       results. See :manual:`the MongoDB server manual</reference/collation/#std-label-collation>`
+       for more information on collation.
+
+       **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
 
    * - ``Comment``
-     - | Gets or sets the user-provided comment for the operation. 
-         See :manual:`the MongoDB server manual</reference/command/update/#command-fields>`
-         for more information.
+     - Gets or sets the user-provided comment for the operation. 
+       See :manual:`the MongoDB server manual</reference/command/update/#command-fields>`
+       for more information.
+
+       **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
 
    * - ``Hint``
-     - | Gets or sets the index to use to scan for documents. 
-         See :manual:`the MongoDB server manual</reference/command/update/#std-label-update-command-hint>`
-         for more information.
+     - Gets or sets the index to use to scan for documents. 
+       See :manual:`the MongoDB server manual</reference/command/update/#std-label-update-command-hint>`
+       for more information.
+
+       **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
 
    * - ``IsUpsert``
      - | Specifies whether the replace operation performs an upsert operation if no 
@@ -134,16 +167,48 @@ following properties:
          See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
          for more information.
 
+       **Data Type:** ``bool``
+
    * - ``Let``
-     - | Gets or sets the let document. 
-         See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-let-syntax>`
-         for more information.
+     - Gets or sets the let document. 
+       See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-let-syntax>`
+       for more information.
+
+       **Data Type:** `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
+
+The following example performs the same steps as the preceding example, but also uses
+the ``BypassDocumentValidation`` option to bypass any schema validation requirements.
+Select  the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding
+code.
+
+.. tabs::
+
+   .. tab:: Synchronous
+      :tabid: replace-one-sync-with-options
+
+      .. literalinclude:: /includes/code-examples/replace-one/ReplaceOne.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-replace-one-sync-with-options
+         :end-before: // end-replace-one-sync-with-options
+
+   .. tab:: Asynchronous
+      :tabid: replace-one-async-with-options
+
+      .. literalinclude:: /includes/code-examples/replace-one/ReplaceOneAsync.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-replace-one-async-with-options
+         :end-before: // end-replace-one-async-with-options
 
 Return Value
 ~~~~~~~~~~~~
 
 The ``ReplaceOne()`` method returns a ``ReplaceOneResult`` 
-object. The ``ReplaceOneResult`` type contains the following properties:
+object, and the ``ReplaceOneAsync()`` method returns a ``Task<ReplaceOneResult>`` object.
+The ``ReplaceOneResult`` class contains the following properties:
 
 .. list-table::
    :widths: 30 70
@@ -153,77 +218,38 @@ object. The ``ReplaceOneResult`` type contains the following properties:
      - Description
 
    * - ``IsAcknowledged``
-     - | Indicates whether the replace operation was acknowledged by MongoDB.
+     - Indicates whether the replace operation was acknowledged by MongoDB.
 
+       **Data Type:** ``bool``
+   
    * - ``IsModifiedCountAvailable``
-     - | Indicates whether you can read the count of replaced records on the
-         ``ReplaceOneResult``.
+     - Indicates whether you can read the count of replaced records on the
+       ``ReplaceOneResult``.
+
+       **Data Type:** ``bool``
 
    * - ``MatchedCount``
-     - | The number of documents that matched the query filter, regardless of
-         whether one was replaced. 
+     - The number of documents that matched the query filter, regardless of
+       whether one was replaced. 
+
+       **Data Type:** ``long``
 
    * - ``ModifiedCount``
-     - | The number of documents replaced by the replace operation. 
+     - The number of documents replaced by the replace operation. 
+
+       **Data Type:** ``long``
 
    * - ``UpsertedId``
-     - | The ID of the document that was upserted in the database, if the driver
-         performed an upsert.
+     - The ID of the document that was upserted in the database, if the driver
+       performed an upsert.
 
-Example
-~~~~~~~
-
-The following code uses the ``ReplaceOne()`` method to find the first document where the 
-``name`` field has the value "Pizza Town", then replaces this document 
-with a new ``Restaurant`` document named "Food World". Because the ``IsUpsert`` option is 
-set to ``true``, the driver inserts a new document if the query filter doesn't 
-match any existing documents.
-
-.. io-code-block::
-   :copyable: true
-
-   .. input::
-      :language: csharp
-
-      var filter = Builders<Restaurant>.Filter.Eq(restaurant => restaurant.Name, "Pizza Town");
-
-      Restaurant newRestaurant = new()
-      {
-          Name = "Food World",
-          Cuisine = "American",
-          Address = new BsonDocument
-          {
-              {"street", "Food St"},
-              {"zipcode", "10003"},
-          },
-          Borough = "Manhattan",
-      };
-
-      ReplaceOptions opts = new ReplaceOptions()
-      {
-          Comment = new BsonString("Restaurant replaced for {+driver-short+} Fundamentals"),
-          IsUpsert = true
-      };
-
-      Console.WriteLine("Replacing document...");
-      var result = _restaurantsCollection.ReplaceOne(filter, newRestaurant, opts);
-      
-      Console.WriteLine($"Replaced documents: {result.ModifiedCount}");
-      Console.WriteLine($"Result acknowledged? {result.IsAcknowledged}"); 
-
-   .. output::
-      :language: none
-      :visible: false
-      
-      Replacing document...
-      Replaced documents: 1
-      Result acknowledged? True
+      **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
 
 API Documentation
 ~~~~~~~~~~~~~~~~~
 
-To learn more about any of the methods or types discussed in this
-guide, see the following API documentation:
+To learn more about any of the methods and classes used on this page,
+see the following API documentation:
 
 * `ReplaceOne() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOne.html>`__
 * `ReplaceOneAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOneAsync.html>`__

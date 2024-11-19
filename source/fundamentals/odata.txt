@@ -118,13 +118,19 @@ Tutorial
       
       This code performs the following actions:
 
-      - Instantiates a new ``MongoClient`` and passes it to the controller.
+      - Instantiates a new ``MongoClient`` and registers it as a singleton in
+        the dependency injection container.
       - Defines the Entity Data Model (EDM) and registers ``Restaurants`` as an
         entity set with the key ``Id``.
-      - Adds the OData service and enables the ``Select()`` query capability.
+      - Adds the OData service and enables the ``Select()`` query operation.
       - Registers the route by using the ``AddRouteComponents()`` method.
       - Calls the ``UseRouting()`` and ``MapControllers()`` methods to match
         incoming HTTP requests and route them to the appropriate endpoint.
+      
+      .. note::
+
+         The {+driver-short+} does not support OData-Aggregation with the
+         ``$apply`` query operation.
 
    .. step:: Run the Application
 
@@ -201,3 +207,6 @@ Additional Information
 
 To learn more about ASP.NET Core OData, see the `Microsoft OData documentation
 <https://learn.microsoft.com/en-us/odata/webapi-8/overview>`__.
+
+To learn more about OData, see the `OData documentation
+<https://www.odata.org/documentation>`__.

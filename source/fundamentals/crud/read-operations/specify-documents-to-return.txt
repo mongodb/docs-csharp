@@ -95,7 +95,8 @@ method to modify the behavior of the operation.
 When calling ``Sort()``, you must pass in the sort definition as a parameter. You can construct a sort
 definition by using the  ``Builders<T>.Sort.Ascending()`` method to sort values from
 lowest to highest, or the ``Builders<T>.Sort.Ascending()`` method to sort them from highest
-to lowest. Both of these methods take the field name to sort by as a parameter.
+to lowest. Both of these methods take the field name to sort by as a parameter. These methods
+can be chained to sort returned documents by multiple fields.
 
 The following example returns all documents that have a ``cuisine`` field value
 of ``"Italian"``, sorted in ascending order of ``name`` field values:

@@ -15,7 +15,7 @@ Read Operations
    Count Documents </fundamentals/crud/read-operations/count>
    List Distinct Values </fundamentals/crud/read-operations/distinct>
    Monitor Data Changes </fundamentals/crud/read-operations/change-streams>
-   Limit, Sort, & Skip Results </fundamentals/crud/read-operations/specify-documents-to-return>
+   Specify Query Results </fundamentals/crud/read-operations/specify-documents-to-return>
 
 - :ref:`csharp-retrieve`
 - :ref:`csharp-project`

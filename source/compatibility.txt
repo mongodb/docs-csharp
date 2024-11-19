@@ -25,9 +25,9 @@ of the {+driver-long+} for use with a specific version of MongoDB.
 
 The first column lists the driver version.
 
-.. include:: /includes/compat-fixes/lifecycle-schedule-callout.rst
+.. include:: /includes/include-fixes/lifecycle-schedule-callout.rst
 
-.. include:: /includes/compat-fixes/compatibility-table-legend.rst
+.. include:: /includes/include-fixes/compatibility-table-legend.rst
 
 .. include:: /includes/mongodb-compatibility-table-csharp.rst
 

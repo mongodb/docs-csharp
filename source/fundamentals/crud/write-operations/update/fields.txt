@@ -20,14 +20,19 @@ Update Fields
 Overview
 --------
 
-In this guide, you can learn how to use the {+driver-long+} to modify
-documents in a MongoDB collection by performing update operations.
+.. note:: Updating Arrays
 
-The {+driver-short+} provides the following methods to modify documents,
-each of which has an asynchronous and synchronous version:
+   This page discusses how to update document fields that contain single values.
+   To learn how to update array values in MongoDB documents, see
+   :ref:`<csharp-update-arrays>`.
 
-- ``UpdateOneAsync()`` or ``UpdateOne()``
-- ``UpdateManyAsync()`` or ``UpdateMany()``
+In this guide, you can learn how to use the {+driver-long+} to update the
+values of fields in MongoDB documents.
+
+The {+driver-short+} provides the following methods to update fields:
+
+- ``UpdateOne()`` or ``UpdateOneAsync()``
+- ``UpdateMany()`` or ``UpdateManyAsync()``
 
 .. tip:: Interactive Lab
    
@@ -70,47 +75,56 @@ and load this sample data.
 
 .. _csharp-update-operation:
 
-Update Operations
------------------
+Update One Document
+-------------------
 
-You can perform update operations in MongoDB with the following methods:
+To update one or more fields in a MongoDB document, call the ``UpdateOne()`` or
+``UpdateOneAsync()`` method. These methods accept the following parameters:
 
-- ``UpdateOne()``, which updates *the first document* that matches the search criteria
-- ``UpdateMany()``, which updates *all documents* that match the search criteria
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
 
-Required Parameters
-~~~~~~~~~~~~~~~~~~~
+   * - Parameter
+     - Description
 
-Each update method requires the following parameters:
+   * - ``filter``
+     - A *query filter* that specifies the document to update. You can use the
+       ``Builders`` class to create a query filter. For more information about
+       query filters, see the
+       :manual:`{+mdb-server+} manual </core/document/#query-filter-documents>`.
 
-- A **query filter** document, which determines which records to update. See the 
-  :manual:`MongoDB server manual </core/document/#query-filter-documents>` for 
-  more information about query filters.
-- An **update** document, which specifies the **update operator** (the kind of update to
-  perform) and the fields and values that should change. See the 
-  :manual:`Field Update Operators Manual page</reference/operator/update-field/>` for a complete 
-  list of update operators and their usage. 
+       **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
 
-The {+driver-short+} provides a ``Builders`` class that simplifies the creation of both
-query filters and update documents. The following code sample uses ``Builders`` to create
-two documents for use as parameters in an update operation:
+   * - ``update``
+     - An instance of the ``UpdateDefinition`` class. This object specifies the kind of update
+       operation, the fields to update, and the new value for each field. For a complete
+       list of update operations, see
+       :manual:`Field Update Operators </reference/operator/update-field/>` in the
+       {+mdb-server+} manual. 
 
-- A query filter that searches for restaurants with a ``cuisine`` field value of "Pizza" 
-- An update document that sets the value of the ``cuisine`` field of these restaurants 
-  to "Pasta and breadsticks"
+       **Data Type:** `UpdateDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinition-1.html>`__
 
-.. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
-   :language: csharp
-   :dedent:
-   :start-after: // start-update-many
-   :end-before: // end-update-many
+   * - ``options``
+     - *Optional.* An instance of the ``UpdateOptions`` class that specifies the
+       configuration for the update operation. The default value is ``null``.
+
+       **Data Type:** `UpdateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOptions.html>`__
+
+   * - ``cancellationToken``
+     - *Optional.* A token that you can use to cancel the operation.
+
+       **Data type**: `CancellationToken <https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken>`__
+
+The following code example demonstrates how to perform an update operation. The
+code performs the following steps:
 
 .. tip:: Aggregation Pipelines in Update Operations
 
    If you are using MongoDB Version 4.2 or later, you can use aggregation
    pipelines made up of a subset of aggregation stages in update operations. For
    more information on the aggregation stages MongoDB supports in
-   aggregation pipelines used in update operations, see our tutorial on building
+   aggregation pipelines used in update operations, see the tutorial about building
    :manual:`updates with aggregation pipelines </tutorial/update-documents-with-aggregation-pipeline/>`.
 
 Update One Document

@@ -44,6 +44,10 @@ Code Placeholders
 
 The code examples on this page use the following placeholders:
 
+- ``+srv``: Include this option in your connection string prefix only if you are connecting
+  to a MongoDB Atlas cluster. To learn more about the ``+srv`` option, see
+  :manual:`Connection String Formats </reference/connection-string/#connection-string-formats>`
+  in the {+mdb-server+} manual.
 - ``<username>``: The client ID or application ID of the Azure managed identity or
   enterprise application, if authenticating against Azure IMDS.
 - ``<hostname>``: The network address of your MongoDB deployment.
@@ -102,7 +106,7 @@ see the corresponding syntax.
       .. code-block:: csharp
 
          var mongoClientSettings = MongoClientSettings.FromConnectionString(
-            "mongodb+srv://<hostname>[:<port>]");
+            "mongodb://<hostname>[:<port>]");
          mongoClientSettings.Credential = MongoCredential
             .CreateOidcCredential("azure", "<username>")
             .WithMechanismProperty("TOKEN_RESOURCE", "<audience>"); 
@@ -149,7 +153,7 @@ see the corresponding syntax.
       .. code-block:: csharp
 
          var mongoClientSettings = MongoClientSettings.FromConnectionString(
-            "mongodb+srv://<hostname>[:<port>]");
+            "mongodb://<hostname>[:<port>]");
          mongoClientSettings.Credential = MongoCredential
             .CreateOidcCredential("gcp")
             .WithMechanismProperty("TOKEN_RESOURCE", "<audience>"); 

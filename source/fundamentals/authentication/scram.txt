@@ -45,6 +45,10 @@ Code Placeholders
 
 The code examples on this page use the following placeholders:
 
+- ``+srv``: Include this option in your connection string prefix only if you are connecting
+  to a MongoDB Atlas cluster. To learn more about the ``+srv`` option, see
+  :manual:`Connection String Formats </reference/connection-string/#connection-string-formats>`
+  in the {+mdb-server+} manual.
 - ``<db_username>``: The MongoDB username of the user to authenticate.
 - ``<db_password>``: The MongoDB password of the user to authenticate.
 - ``<hostname>``: The network address of your MongoDB deployment.
@@ -74,7 +78,7 @@ see the corresponding syntax:
       .. code-block:: csharp
 
          var mongoClient = new MongoClient(
-            "mongodb://<db_username>:<db_password>@<hostname>[:<port>]/?" +
+            "mongodb[+srv]://<db_username>:<db_password>@<hostname>[:<port>]/?" +
             "authSource=<authenticationDb>");
 
    .. tab:: MongoCredential

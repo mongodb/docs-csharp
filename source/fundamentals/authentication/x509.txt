@@ -38,6 +38,10 @@ Code Placeholders
 
 The code examples on this page use the following placeholders:
 
+- ``+srv``: Include this option in your connection string prefix only if you are connecting
+  to a MongoDB Atlas cluster. To learn more about the ``+srv`` option, see
+  :manual:`Connection String Formats </reference/connection-string/#connection-string-formats>`
+  in the {+mdb-server+} manual.
 - ``<hostname>``: The network address of your MongoDB deployment.
 - ``<port>``: The port number of the MongoDB deployment. If you omit this parameter,
   the driver uses the default port number (``27017``). You don't need a port number
@@ -57,11 +61,21 @@ Using X.509 Authentication in Your Application
 To use an X.509 certificate for authentication, you must use a
 ``MongoClientSettings`` object to specify
 the path to your X.509 certificate and the password for the certificate. The certificate
-must use the :wikipedia:`PKCS #12<PKCS_12>` (``.p12``) or
-:wikipedia:`PEM<Privacy-Enhanced_Mail>` (``.pem``) format.
+must use the :wikipedia:`PKCS #12<PKCS_12>` (``.p12``) format.
 
-You must also specify ``MONGODB-X509`` as the authentication mechanism. You can specify
-this mechanism either in your connection string or by using a ``MongoCredential`` object. 
+.. tip:: Convert .pem to .p12
+   
+   If your certificate uses the :wikipedia:`PEM<Privacy-Enhanced_Mail>` (``.pem``) format,
+   you must convert it to the ``.p12`` format. To convert the certificate, use the
+   ``openssl`` command-line tool, as shown in the following code example:
+
+   .. code-block:: bash
+
+      openssl pkcs12 -export -out <.p12 file> -inkey <private key file> -in <.pem file>
+
+You must also specify ``MONGODB-X509`` as the authentication mechanism and ``$external``
+as the authentication source. You can specify
+these options either in your connection string or by using a ``MongoCredential`` object. 
 Select the :guilabel:`Connection String` or :guilabel:`MongoCredential` tab to
 see the corresponding syntax:
 
@@ -72,7 +86,7 @@ see the corresponding syntax:
 
       .. code-block:: csharp
 
-         var connectionString = "mongodb://<hostname>[:<port>]/?authMechanism=MONGODB-X509";
+         var connectionString = "mongodb[+srv]://<hostname>[:<port>]/?authSource=$external&authMechanism=MONGODB-X509";
          var settings = MongoClientSettings.FromConnectionString(connectionString);
 
          settings.UseTls = true;
@@ -89,7 +103,7 @@ see the corresponding syntax:
 
       .. code-block:: csharp
 
-         var credential = MongoCredential.CreateMongoX509Credential("<X.509 certificate username>")
+         var credential = MongoCredential.CreateMongoX509Credential("<X.509 certificate username>");
          var settings = new MongoClientSettings 
          {
              Credential =  credential,

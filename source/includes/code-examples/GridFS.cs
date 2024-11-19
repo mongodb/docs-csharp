@@ -47,11 +47,7 @@ class GridFS
             // ASCII for "HelloWorld"
             byte[] bytes = { 72, 101, 108, 108, 111, 87, 111, 114, 108, 100 };
 
-            for (int i = 0; i < 5; i++)
-            {
-                await uploader.WriteAsync(bytes, 0, bytes.Length);
-            }
-
+            await uploader.WriteAsync(bytes, 0, bytes.Length);
             await uploader.CloseAsync();
         }
         // end-open-upload-stream-async
@@ -73,11 +69,7 @@ class GridFS
             // ASCII for "HelloWorld"
             byte[] bytes = { 72, 101, 108, 108, 111, 87, 111, 114, 108, 100 };
 
-            for (int i = 0; i < 5; i++)
-            {
-                uploader.Write(bytes, 0, bytes.Length);
-            }
-
+            uploader.Write(bytes, 0, bytes.Length);
             uploader.Close();
         }
         // end-open-upload-stream
@@ -104,11 +96,7 @@ class GridFS
             // ASCII for "HelloWorld"
             byte[] bytes = { 72, 101, 108, 108, 111, 87, 111, 114, 108, 100 };
 
-            for (int i = 0; i < 5; i++)
-            {
-                await uploader.WriteAsync(bytes, 0, bytes.Length);
-            }
-
+            await uploader.WriteAsync(bytes, 0, bytes.Length);
             await uploader.CloseAsync();
         }
         // end-open-upload-stream-with-options-async
@@ -135,11 +123,7 @@ class GridFS
             // ASCII for "HelloWorld"
             byte[] bytes = { 72, 101, 108, 108, 111, 87, 111, 114, 108, 100 };
 
-            for (int i = 0; i < 5; i++)
-            {
-                uploader.Write(bytes, 0, bytes.Length);
-            }
-
+            uploader.Write(bytes, 0, bytes.Length);
             uploader.Close();
         }
         // end-open-upload-stream-with-options
@@ -216,7 +200,7 @@ class GridFS
         // start-find-async
         var filter = Builders<GridFSFileInfo>.Filter.Empty;
         var files = await bucket.FindAsync(filter);
-        await files.ForEachAsync(file => { Console.WriteLine(file.ToJson()); });
+        await files.ForEachAsync(file => Console.Out.WriteLineAsync(file.ToJson()))
         // end-find-async
     }
 

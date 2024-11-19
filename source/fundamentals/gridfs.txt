@@ -109,7 +109,7 @@ the ``GridFSBucket()`` constructor. The following table describes the properties
        **Data type**: {+string-data-type+} 
 
    * - ``ChunkSizeBytes`` 
-     - The chunk size that GridFS splits files into. The default value is ``261120``.
+     - The chunk size that GridFS splits files into. The default value is 255 KB.
        
        **Data type**: {+int-data-type+}
 
@@ -224,7 +224,7 @@ method. The ``GridFSUploadOptions`` class contains the following properties:
    * - Property
      - Description
    * - ``BatchSize``
-     - The number of chunks to upload in each batch. The default value is ``16777216``
+     - The number of chunks to upload in each batch. The default value is 16 MB
        divided by the value of the ``ChunkSizeBytes`` property. 
         
        **Data type**: ``int?`` 

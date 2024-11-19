@@ -11,16 +11,11 @@ Read Operations
    :caption: Read Operations
 
    Retrieve Data </fundamentals/crud/read-operations/retrieve>
-<<<<<<< HEAD
    Specify Fields to Return </fundamentals/crud/read-operations/project>
    Count Documents </fundamentals/crud/read-operations/count>
    List Distinct Values </fundamentals/crud/read-operations/distinct>
    Monitor Data Changes </fundamentals/crud/read-operations/change-streams>
    Specify Query Results </fundamentals/crud/read-operations/specify-documents-to-return>
-=======
-   Count Documents </fundamentals/crud/read-operations/count>
-   Monitor Data Changes </fundamentals/crud/read-operations/change-streams>
->>>>>>> c48dd6e (DOCSP-44897 TOC Relabel (#287))
 
 - :ref:`csharp-retrieve`
 - :ref:`csharp-project`

@@ -127,6 +127,40 @@ public class UpdateMany
         await _restaurantsCollection.UpdateManyAsync(filter, combinedUpdate);
         // end-combine-async
     }
+    public static void PipelineUpdate()
+    {
+        // start-pipeline-sync
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var updatePipeline = Builders<Restaurant>.Update.Pipeline(
+            PipelineDefinition<Restaurant, Restaurant>.Create(
+                new BsonDocument("$set", new BsonDocument("cuisine", "French")),
+                new BsonDocument("$unset", "borough")
+            )
+        );
+
+        _restaurantsCollection.UpdateMany(filter, updatePipeline);
+        // end-pipeline-sync
+    }
+
+    public static async Task PipelineUpdateAsync()
+    {
+        // start-pipeline-async
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var updatePipeline = Builders<Restaurant>.Update.Pipeline(
+            PipelineDefinition<Restaurant, Restaurant>.Create(
+                new BsonDocument("$set", new BsonDocument("cuisine", "French")),
+                new BsonDocument("$unset", "borough")
+            )
+        );
+
+        await _restaurantsCollection.UpdateManyAsync(filter, updatePipeline);
+        // end-pipeline-async
+    }
+
 }
 
 public class Restaurant

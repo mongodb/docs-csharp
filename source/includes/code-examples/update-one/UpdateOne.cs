@@ -121,6 +121,40 @@ public class UpdateOne
         // end-combine-async
     }
 
+    public static void PipelineUpdate()
+    {
+        // start-pipeline-sync
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var updatePipeline = Builders<Restaurant>.Update.Pipeline(
+            PipelineDefinition<Restaurant, Restaurant>.Create(
+                new BsonDocument("$set", new BsonDocument("cuisine", "French")),
+                new BsonDocument("$unset", "borough")
+            )
+        );
+
+        _restaurantsCollection.UpdateOne(filter, updatePipeline);
+        // end-pipeline-sync
+    }
+
+    public static async Task PipelineUpdateAsync()
+    {
+        // start-pipeline-async
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var updatePipeline = Builders<Restaurant>.Update.Pipeline(
+            PipelineDefinition<Restaurant, Restaurant>.Create(
+                new BsonDocument("$set", new BsonDocument("cuisine", "French")),
+                new BsonDocument("$unset", "borough")
+            )
+        );
+
+        await _restaurantsCollection.UpdateOneAsync(filter, updatePipeline);
+        // end-pipeline-async
+    }
+
     private static void Setup()
     {
         // Allows automapping of the camelCase database fields to models 

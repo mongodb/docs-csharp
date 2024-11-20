@@ -44,7 +44,7 @@ The following sections describe these methods in more detail.
    Many of the methods in this guide have multiple overloads. The examples
    in this guide use the simplest overload for demonstration purposes. For
    more information about the available overloads, see the
-   :manual:`{+new-api-root+} API documentation </api-reference>`.
+   `API documentation. {+new-api-root+}/index.html>`__
 
 .. tip:: Interactive Lab
    
@@ -73,7 +73,7 @@ methods all accept the following parameters:
      - An instance of the ``FilterDefinition`` class that specifies the documents to update.
        To learn how to create a query filter, see :ref:`csharp-specify-query`.
 
-       **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
+       **Data Type:** `FilterDefinition <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
 
    * - ``update``
      - An instance of the ``UpdateDefinition`` class. This object specifies the kind of update
@@ -99,8 +99,8 @@ Update Multiple Values
 ----------------------
 
 The ``UpdateOne()``, ``UpdateOneAsync()``, ``UpdateMany()``, and ``UpdateManyAsync()``
-methods each accept one ``UpdateDefinition`` object. The following sections describe how
-to multiple values in a single method call.
+methods each accept only one ``UpdateDefinition`` object. The following sections describe how
+to update multiple values in a single method call.
 
 Combine Update Definitions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -124,13 +124,13 @@ The ``Combine()`` method returns a single ``UpdateDefinition`` object that defin
 multiple update operations.
 
 The following code example uses the ``Combine()`` method to combine a
-:manual:`$set </reference/operator/update/set/#mongodb-update-up.-set>` operation and a
-:manual:`$pop </reference/operator/update/pop/#mongodb-update-up.-pop>`
+:manual:`$set </reference/operator/update/set/#mongodb-update-up.-set>` operation and an
+:manual:`$unset </reference/operator/update/pop/#mongodb-update-up.-unset>`
 operation:
 
 .. tabs::
 
-   .. tab:: UpdateOne (Synchronous)
+   .. tab:: UpdateOne (Sync)
       :tabid: update-one-sync
 
       .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
@@ -140,7 +140,7 @@ operation:
          :start-after: // start-combine-sync
          :end-before: // end-combine-sync
 
-   .. tab:: UpdateOne (Asynchronous)
+   .. tab:: UpdateOne (Async)
       :tabid: update-one-async
 
       .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
@@ -150,7 +150,7 @@ operation:
          :start-after: // start-combine-async
          :end-before: // end-combine-async
 
-   .. tab:: UpdateMany (Synchronous)
+   .. tab:: UpdateMany (Sync)
       :tabid: update-many-sync
 
       .. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
@@ -160,7 +160,7 @@ operation:
          :start-after: // start-combine-sync
          :end-before: // end-combine-sync
 
-   .. tab:: UpdateMany (Asynchronous)
+   .. tab:: UpdateMany (Async)
       :tabid: update-many-async
 
       .. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
@@ -173,8 +173,12 @@ operation:
 Update Pipelines
 ~~~~~~~~~~~~~~~~
 
-Builders.Update.Pipeline is used to create an update pipeline for MongoDB update operations. An update pipeline allows you to specify a sequence of update stages that modify the documents in a collection. Each stage in the pipeline is an update operation that transforms the document in some way. This is similar to the aggregation pipeline but is used specifically for updates.
-This method accepts the following parameter:
+If your application connects to {+mdb-server+} 4.2 or later, you can join
+a sequence of update operations into a single
+:manual:`aggregation pipeline. </core/aggregation-pipeline/>`
+
+To create an update pipeline, call the ``Builders.Update.Pipeline()`` method. This method
+accepts the following parameter:
 
 .. list-table::
    :widths: 30 70
@@ -184,17 +188,69 @@ This method accepts the following parameter:
      - Description
 
    * - ``pipeline``
-     - A ``PipelineDefinition`` instance that specifies the update pipeline.
+     - A ``PipelineDefinition`` instance that represents the update pipeline. To create
+       a ``PipelineDefinition`` object, create a BSON object for each update operation you
+       want to perform, then pass these objects to the ``Pipeline.Create()`` method.
 
        **Data Type:** ``PipelineDefinition<TDocument, TDocument>``
 
-.. tip:: Aggregation Pipelines in Update Operations
+The ``Pipeline()`` method returns a single ``UpdateDefinition`` object that defines
+multiple aggregation stages.
 
-   If you are using MongoDB Version 4.2 or later, you can use aggregation
-   pipelines made up of a subset of aggregation stages in update operations. For
-   more information on the aggregation stages MongoDB supports in
-   aggregation pipelines used in update operations, see the tutorial about building
-   :manual:`updates with aggregation pipelines </tutorial/update-documents-with-aggregation-pipeline/>`.
+The following code example uses the ``Pipeline()`` method to combine a
+:manual:`$set </reference/operator/update/set/#mongodb-update-up.-set>` operation and an
+:manual:`$unset </reference/operator/update/pop/#mongodb-update-up.-unset>`
+operation:
+
+.. tabs::
+
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-sync
+
+      .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-pipeline-sync
+         :end-before: // end-pipeline-sync
+
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-async
+
+      .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-pipeline-async
+         :end-before: // end-pipeline-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-sync
+
+      .. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-pipeline-sync
+         :end-before: // end-pipeline-sync
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-async
+
+      .. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-pipeline-async
+         :end-before: // end-pipeline-async
+
+.. note:: Unsupported Operations
+
+   Update pipelines don't support all update operations, but they do support certain
+   aggregation stages not found in other update definitions. For a list of
+   update operations supported by pipelines, see
+   :manual:`Updates with Aggregation Pipeline </tutorial/update-documents-with-aggregation-pipeline/>`
+   in the {+mdb-server+} manual.
 
 .. _csharp-update-options:
 

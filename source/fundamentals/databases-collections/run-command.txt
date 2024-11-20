@@ -37,7 +37,7 @@ statistics, initializing a replica set, or running an aggregation pipeline.
    
    If there are no available helpers in the driver or the shell, you
    can use the ``db.runCommand()`` shell method or the driver's
-   ``RunCommand()`` method, which is described in this
+   ``RunCommand()`` and ``RunCommandAsync()`` methods, which are described in this
    guide.
 
 Sample Data
@@ -53,12 +53,13 @@ Execute a Command
 
 To run a database command, create a ``BsonDocument`` object that specifies
 the command and pass it as a parameter to the ``RunCommand()`` or ``RunCommandAsync()`` 
-method. This method returns a ``SingleObservable`` instance, and you can subscribe
-to this observable to execute the command and access the command result.
+method. You can specify the type returned by the ``RunCommand()`` and ``RunCommandAsync()``
+methods by specifying the type parameter. You can use the ``BsonDocument`` type to return
+the command response, or you can specify your own strongly typed class to deserialize
+the command response.
 
-The following example calls the ``RunCommand()`` method on a database
-to run the ``hello`` command, which returns information about the server.
-Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous`
+The following example runs the ``hello`` command on a database, which returns information
+about the server. Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous`
 tab to see the corresponding code.
 
 .. tabs::
@@ -131,10 +132,8 @@ tab to see the corresponding code.
 Response
 --------
 
-You can specify the type returned by the ``RunCommand()`` method by specifying
-the type parameter.
-
-The raw command response document contains the following fields:
+The raw command response document returned by the ``RunCommand()`` method contains the
+following fields:
 
 .. list-table::
    :header-rows: 1
@@ -196,7 +195,7 @@ code.
          :end-before: end-print-command
 
 The output of this command includes information about the data stored in
-the database, as shown in the following code:
+the database, as shown in the result returned by the previous example:
 
 .. code-block:: none
    :copyable: false

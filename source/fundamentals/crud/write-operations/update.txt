@@ -16,7 +16,7 @@ Update Documents
    :values: reference
 
 .. meta::
-   :keywords: update, synchronous, asynchronous, bulk
+   :keywords: synchronous, asynchronous
 
 .. toctree::
    :caption: Update Documents
@@ -26,3 +26,357 @@ Update Documents
 
 Overview
 --------
+
+In this guide, you can learn how to use the {+driver-long+} to update
+values in MongoDB documents.
+
+The {+driver-short+} provides the following methods to update values:
+
+- ``UpdateOne()``: Updates one or more fields in a single document.
+- ``UpdateOneAsync()``: The asynchronous version of ``UpdateOne()``.
+- ``UpdateMany()``: Updates one or more fields in multiple documents.
+- ``UpdateManyAsync()``: The asynchronous version of ``UpdateMany()``.
+
+The following sections describe these methods in more detail.
+
+.. note:: Method Overloads
+
+   Many of the methods in this guide have multiple overloads. The examples
+   in this guide use the simplest overload for demonstration purposes. For
+   more information about the available overloads, see the
+   :manual:`{+new-api-root+} API documentation </api-reference>`.
+
+.. tip:: Interactive Lab
+   
+   This page includes a short interactive lab that demonstrates how to
+   modify data by using the ``UpdateManyAsync()`` method. You can complete this
+   lab directly in your browser window without installing MongoDB or a code editor.
+
+   To start the lab, click the :guilabel:`Open Interactive Tutorial` button at the
+   top of the page. To expand the lab to a full-screen format, click the
+   full-screen button (:guilabel:`⛶`) in the top-right corner of the lab pane.
+
+Methods and Parameters
+----------------------
+
+The ``UpdateOne()``, ``UpdateOneAsync()``, ``UpdateMany()``, and ``UpdateManyAsync()``
+methods all accept the following parameters:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``filter``
+     - An instance of the ``FilterDefinition`` class that specifies the documents to update.
+       To learn how to create a query filter, see :ref:`csharp-specify-query`.
+
+       **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
+
+   * - ``update``
+     - An instance of the ``UpdateDefinition`` class. This object specifies the kind of update
+       operation, the fields to update, and the new value for each field. To learn how to
+       create an ``UpdateDefinition`` object,
+       see :ref:`csharp-update-fields` and :ref:`csharp-update-arrays`. 
+
+       **Data Type:** `UpdateDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinition-1.html>`__
+
+   * - ``options``
+     - *Optional.* An instance of the ``UpdateOptions`` class that specifies the
+       configuration for the update operation. The default value is ``null``. To learn
+       about the available options, see :ref:`csharp-update-options`.
+
+       **Data Type:** `UpdateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOptions.html>`__
+
+   * - ``cancellationToken``
+     - *Optional.* A token that you can use to cancel the operation.
+
+       **Data type**: `CancellationToken <https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken>`__
+
+Update Multiple Values
+----------------------
+
+The ``UpdateOne()``, ``UpdateOneAsync()``, ``UpdateMany()``, and ``UpdateManyAsync()``
+methods each accept one ``UpdateDefinition`` object. The following sections describe how
+to multiple values in a single method call.
+
+Combine Update Definitions
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``Builders.Update.Combine()`` method lets you combine multiple ``UpdateDefinition``
+objects. This method accepts the following parameter:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``updates``
+     - An array of update definitions to combine.
+
+       **Data Type:** ``UpdateDefinition<TDocument>[]``
+
+The ``Combine()`` method returns a single ``UpdateDefinition`` object that defines
+multiple update operations.
+
+The following code example uses the ``Combine()`` method to combine a
+:manual:`$set </reference/operator/update/set/#mongodb-update-up.-set>` operation and a
+:manual:`$pop </reference/operator/update/pop/#mongodb-update-up.-pop>`
+operation:
+
+.. tabs::
+
+   .. tab:: UpdateOne (Synchronous)
+      :tabid: update-one-sync
+
+      .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-combine-sync
+         :end-before: // end-combine-sync
+
+   .. tab:: UpdateOne (Asynchronous)
+      :tabid: update-one-async
+
+      .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-combine-async
+         :end-before: // end-combine-async
+
+   .. tab:: UpdateMany (Synchronous)
+      :tabid: update-many-sync
+
+      .. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-combine-sync
+         :end-before: // end-combine-sync
+
+   .. tab:: UpdateMany (Asynchronous)
+      :tabid: update-many-async
+
+      .. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-combine-async
+         :end-before: // end-combine-async
+
+Update Pipelines
+~~~~~~~~~~~~~~~~
+
+Builders.Update.Pipeline is used to create an update pipeline for MongoDB update operations. An update pipeline allows you to specify a sequence of update stages that modify the documents in a collection. Each stage in the pipeline is an update operation that transforms the document in some way. This is similar to the aggregation pipeline but is used specifically for updates.
+This method accepts the following parameter:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``pipeline``
+     - A ``PipelineDefinition`` instance that specifies the update pipeline.
+
+       **Data Type:** ``PipelineDefinition<TDocument, TDocument>``
+
+.. tip:: Aggregation Pipelines in Update Operations
+
+   If you are using MongoDB Version 4.2 or later, you can use aggregation
+   pipelines made up of a subset of aggregation stages in update operations. For
+   more information on the aggregation stages MongoDB supports in
+   aggregation pipelines used in update operations, see the tutorial about building
+   :manual:`updates with aggregation pipelines </tutorial/update-documents-with-aggregation-pipeline/>`.
+
+.. _csharp-update-options:
+
+Customize the Update Operation
+------------------------------
+
+To combine multiple update definitions into one, call the ``Builders.Update.Combine()`` method.
+This method accepts the following parameter:
+
+The preceding update methods optionally accept an ``UpdateOptions`` object as an additional
+parameter. You can use this argument to configure the update operation.
+
+The ``UpdateOptions`` class contains the following properties:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Property
+     - Description
+
+   * - ``ArrayFilters``
+     - Specifies which array elements to modify for an update operation on an array field.
+       See :manual:`the MongoDB server manual</reference/command/update/#update-elements-match-arrayfilters-criteria>`
+       for more information.
+
+       **Data Type:** IEnumerable<`ArrayFilterDefinition <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.ArrayFilterDefinition.html>`__>
+
+   * - ``BypassDocumentValidation``
+     - Specifies whether the update operation bypasses document validation. This lets you 
+       update documents that don't meet the schema validation requirements, if any 
+       exist. See :manual:`the MongoDB server manual</core/schema-validation/#schema-validation>`
+       for more information on schema validation.
+
+       **Data Type:** ``bool?``
+
+   * - ``Collation``
+     - Specifies the kind of language collation to use when sorting
+       results. See :manual:`the MongoDB server manual</reference/collation/#std-label-collation>`
+       for more information on collation.
+
+       **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
+
+   * - ``Comment``
+     - Gets or sets the user-provided comment for the operation. 
+       See :manual:`the MongoDB server manual</reference/command/update/#command-fields>`
+       for more information.
+
+       **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
+
+   * - ``Hint``
+     - Gets or sets the index to use to scan for documents. 
+       See :manual:`the MongoDB server manual</reference/command/update/#std-label-update-command-hint>`
+       for more information.
+
+       **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
+
+   * - ``IsUpsert``
+     - Specifies whether the update operation performs an upsert operation if no 
+       documents match the query filter. 
+       See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
+       for more information.
+
+       **Data Type:** ``bool``
+
+   * - ``Let``
+     - Gets or sets the let document. 
+       See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-let-syntax>`
+       for more information.
+
+       **Data Type:** `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
+
+Example
+~~~~~~~
+
+The following code uses the ``UpdateMany()`` method to find all documents where the 
+``borough`` field has the value "Manhattan", then updates the ``borough``
+value in these documents to "Manhattan (north)". Because the ``IsUpsert`` option is 
+set to ``true``, the driver inserts a new document if the query filter doesn't 
+match any existing documents.
+
+.. io-code-block::
+   :copyable: true
+
+   .. input::
+      :language: csharp
+
+        var filter = Builders<Restaurant>.Filter
+            .Eq(restaurant => restaurant.Borough, "Manhattan");
+            
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Borough, "Manhattan (north)");
+
+        UpdateOptions opts = new UpdateOptions()
+        {
+            Comment = new BsonString("Borough updated for C# Driver Fundamentals"),
+            IsUpsert = true
+        };
+
+        Console.WriteLine("Updating documents...");
+        var result = _restaurantsCollection.UpdateMany(filter, update, opts);
+      
+        Console.WriteLine($"Updated documents: {result.ModifiedCount}");
+        Console.WriteLine($"Result acknowledged? {result.IsAcknowledged}");
+
+   .. output::
+      :language: none
+      :visible: false
+      
+      Updating documents...
+      Updated documents: 10259
+      Result acknowledged? True
+
+Return Value
+------------
+
+The ``UpdateOne()`` and ``UpdateMany()`` methods return an ``UpdateResult`` 
+object. The ``UpdateOneAsync()`` and ``UpdateManyAsync()`` methods return an asynchronous
+version of this type, a ``Task<UpdateResult>`` object.
+The ``UpdateResult`` class contains the following properties:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Property
+     - Description
+
+   * - ``IsAcknowledged``
+     - Indicates whether the replace operation was acknowledged by MongoDB.
+
+       **Data Type:** ``bool``
+   
+   * - ``IsModifiedCountAvailable``
+     - Indicates whether you can read the count of replaced records on the
+       ``ReplaceOneResult``.
+
+       **Data Type:** ``bool``
+
+   * - ``MatchedCount``
+     - The number of documents that matched the query filter, regardless of
+       whether one was replaced. 
+
+       **Data Type:** ``long``
+
+   * - ``ModifiedCount``
+     - The number of documents replaced by the replace operation. 
+
+       **Data Type:** ``long``
+
+   * - ``UpsertedId``
+     - The ID of the document that was upserted in the database, if the driver
+       performed an upsert.
+
+      **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
+
+Additional Information
+----------------------
+
+For runnable examples of the update operations, see the following usage
+examples:
+
+- :ref:`csharp-update-one`
+- :ref:`csharp-update-many`
+
+To learn more about creating query filters, see the :ref:`csharp-specify-query` guide.
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+To learn more about any of the methods or types discussed in this
+guide, see the following API documentation:
+
+* `UpdateOne() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateOne.html>`__
+* `UpdateOneAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateOneAsync.html>`__
+* `UpdateMany() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateMany.html>`__
+* `UpdateManyAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateManyAsync.html>`__
+* `UpdateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOptions.html>`__
+* `UpdateResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateResult.html>`__
+
+.. _csharp-update-instruqt-lab:
+
+.. instruqt:: /mongodb-docs/tracks/update-a-document---c-net-driver?token=em_69t_l-j0BC_en7Uy
+   :title: UpdateManyAsync() Lesson
+   :drawer:

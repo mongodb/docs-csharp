@@ -18,7 +18,8 @@ public class UpdateMany
 
     public static void Main(string[] args)
     {
-        try {
+        try
+        {
             Setup();
 
             // Prints extra space for console readability  
@@ -39,10 +40,12 @@ public class UpdateMany
             ResetSampleData();
             Console.WriteLine("done.");
 
-        // Prints a message if any exceptions occur during the operation    
-        } catch (MongoException me) {
+            // Prints a message if any exceptions occur during the operation    
+        }
+        catch (MongoException me)
+        {
             Console.WriteLine("Unable to update due to an error: " + me);
-        }            
+        }
     }
 
     private static UpdateResult UpdateManyRestaurants()
@@ -94,6 +97,35 @@ public class UpdateMany
             .Set(restaurant => restaurant.Cuisine, OldCuisine);
 
         _restaurantsCollection.UpdateMany(filter, update);
+    }
+    public static void CombineUpdates()
+    {
+        // start-combine-sync
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var combinedUpdate = Builders<Restaurant>.Update.Combine(
+            Builders<Restaurant>.Update.Set("cuisine", "French"),
+            Builders<Restaurant>.Update.PopLast("grades")
+        );
+
+        _restaurantsCollection.UpdateMany(filter, combinedUpdate);
+        // end-combine-sync
+    }
+
+    public static async Task CombineUpdatesAsync()
+    {
+        // start-combine-async
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var combinedUpdate = Builders<Restaurant>.Update.Combine(
+            Builders<Restaurant>.Update.Set("cuisine", "French"),
+            Builders<Restaurant>.Update.PopLast("grades")
+        );
+
+        await _restaurantsCollection.UpdateManyAsync(filter, combinedUpdate);
+        // end-combine-async
     }
 }
 

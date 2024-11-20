@@ -1,125 +1,333 @@
-Specifying Array Elements
--------------------------
+.. _csharp-update-arrays:
 
-You can specify which array elements to update using a positional
-operator. Positional operators can specify the first, all, or certain
-array elements to update. 
+=============
+Update Arrays
+=============
 
-To specify elements in an array with positional operators, use **dot
-notation**. Dot notation is a property access syntax for navigating BSON
-objects. 
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
 
-For additional information, see the Server Manual Entry on
-:manual:`dot notation </core/document/#std-label-document-dot-notation>`.
+.. facet::
+   :name: genre
+   :values: reference
 
-The First Matching Array Element
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. meta::
+   :keywords: synchronous, asynchronous
 
-Example
-```````
+Overview
+--------
 
-The following example performs these actions:
+On this page, you can learn how to use the {+driver-long+} to update array
+fields in MongoDB documents. This page describes how to create ``UpdateDefinition<TDocument>``
+objects that specify the update operations you want to perform on array fields.
+You can pass these objects to the update methods described on *this page.*
 
-- Query for a document with a ``qty`` field containing the value "18"
-- Decrement the first array value in the document that matches the query filter by "3"
+The {+driver-short+} supports the array update operators and modifiers described in the
+:manual:`{+mdb-server+} manual </reference/operator/update/#array>`.
+To specify an update operation, call the corresponding method from the ``Builders.Update``
+property. The following sections describe these methods in more detail.
 
-.. literalinclude:: /includes/fundamentals/code-snippets/UpdateArray.java
-   :language: java
+.. note:: Method Overloads
+
+   Many of the methods on this page have multiple overloads. The examples
+   in this guide show only one overload for each method.  For
+   more information about the available overloads, see the
+   :manual:`{+new-api-root+} API documentation </api-reference>`.
+
+Sample Data
+~~~~~~~~~~~
+
+The examples in this guide use the ``restaurants`` collection
+from the ``sample_restaurants`` database. The documents in this
+collection use the following ``Restaurant``, ``Address``, and ``GradeEntry`` 
+classes as models:
+
+.. literalinclude:: /includes/code-examples/Restaurant.cs
+   :language: csharp
+   :copyable:
    :dedent:
-   :start-after: begin updateValueExample
-   :end-before: end updateValueExample
 
-The preceding example updates the original document to the following state:
-
-.. code-block:: json
-   :copyable: false
-
-   { "_id": 1, "color": "green", "qty": [8, 12, 15] }
-
-For more information about the methods and operators mentioned in this section,
-see the following resources: 
-
-- :manual:`Positional $ Operator </reference/operator/update/positional>` Server Manual Entry
-- `inc() <{+api+}/apidocs/mongodb-driver-core/com/mongodb/client/model/Updates.html#inc(java.lang.String,java.lang.Number)>`__ API Documentation
-
-Matching All Array Elements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To update all elements in an array, use the all positional ``$[]`` operator. 
-
-Example
-```````
-
-The following example performs these actions: 
-
-- Query for the sample document
-- Multiply array elements matching the query filter by "2"  
-
-.. literalinclude:: /includes/fundamentals/code-snippets/UpdateArray.java
-   :language: java
+.. literalinclude:: /includes/code-examples/Address.cs
+   :language: csharp
+   :copyable:
    :dedent:
-   :start-after: begin updateAllElementsExample
-   :end-before: end updateAllElementsExample
 
-The preceding example updates the original document to the following state:
-
-.. code-block:: json
-   :copyable: false
-
-   { "_id": 1, "color": "green", "qty": [16, 24, 36] }
-
-For more information about the methods and operators mentioned in this section,
-see the following resources: 
-
-- :manual:`All Positional $[] Operator </reference/operator/update/positional-all/>` Server Manual Entry
-- `mul() <{+api+}/apidocs/mongodb-driver-core/com/mongodb/client/model/Updates.html#mul(java.lang.String,java.lang.Number)>`__ API Documentation
-
-Matching Multiple Array Elements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To update array elements that match a filter, use the
-filtered positional ``$[<identifier>]`` operator. You must include an
-array filter in your update operation to specify which array elements to
-update. 
-
-The ``<identifier>`` is the name you give your array filter. This value
-must begin with a lowercase letter and contain only alphanumeric
-characters. 
-
-Example
-```````
-
-The following example performs these actions:
-
-- Query for the sample document
-- Set an array filter to search for values less than "15"
-- Increment array elements matching the query filter by "5" 
-
-.. literalinclude:: /includes/fundamentals/code-snippets/UpdateArray.java
-   :language: java
+.. literalinclude:: /includes/code-examples/GradeEntry.cs
+   :language: csharp
+   :copyable:
    :dedent:
-   :start-after: begin updateValueOptionsExample
-   :end-before: end updateValueOptionsExample
 
-The preceding example updates the original document to the following state:
+.. include:: /includes/convention-pack-note.rst
 
-.. code-block:: json
-   :copyable: false
+This collection is from the :atlas:`sample datasets </sample-data>` provided
+by Atlas. See the :ref:`<csharp-quickstart>` to learn how to create a free MongoDB cluster
+and load this sample data.
 
-   { "_id": 1, "color": "green", "qty": [13, 17, 18] }
+Add One Value
+-------------
 
-For more information about the methods and operators mentioned in this section,
-see the following resources: 
+To add one value to the end of an array, call the ``Builders.Update.Push()`` method.
+This method accepts the following parameters:
 
-- :manual:`Filtered Positional $[\<identifier\>] Operator </reference/operator/update/positional-filtered/>` Server Manual Entry
-- `inc() <{+api+}/apidocs/mongodb-driver-core/com/mongodb/client/model/Updates.html#inc(java.lang.String,java.lang.Number)>`__ API Documentation
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
 
+   * - Parameter
+     - Description
 
+   * - ``field``
+     - An expression that specifies the array field to add a value to.
+
+       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+   * - ``value``
+     - The value to add to the end of the array field. 
+
+       **Data Type:** ``TItem`` 
+
+The following code example pushes a new ``GradeEntry`` object into the ``Grades``
+array in the matching document. Select the :guilabel:`Synchronous` or
+:guilabel:`Asynchronous` tab to see the corresponding code.
+
+.. tabs::
+
+   .. tab:: Synchronous
+      :tabid: update-one-array-sync
+
+      .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-array
+         :end-before: // end-update-one-array
+
+   .. tab:: Asynchronous
+      :tabid: update-one-array-async
+
+      .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-array-async
+         :end-before: // end-update-one-array-async
+
+To add one value to the end of an array, *but only if it doesn't already exist in the array*,
+call the ``Builders.Update.AddToSet()`` method.
+This method accepts the following parameters:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``field``
+     - An expression that specifies the array field to add to.
+
+       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+   * - ``value``
+     - The value to add to the end of the array field.
+
+       **Data Type:** ``TItem`` 
+
+The following code example pushes a new ``GradeEntry`` object into the ``Grades``
+array in the matching document. Select the :guilabel:`Synchronous` or
+:guilabel:`Asynchronous` tab to see the corresponding code.
+
+.. tip:: Specify a Position
+  
+   To add a value at a specific position in an array, call the ``PushEach()`` method.
+
+Add Multiple Values
+-------------------
+
+To add multiple values to an array, call the ``Builders.Update.PushEach()`` method.
+This method accepts the following parameters:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``field``
+     - An expression that specifies the array field to add to.
+
+       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+   * - ``values``
+     - The values to add to the array field.
+
+       **Data Type:** ``IEnumerable<TItem>``
+
+   * - ``slice``
+     - The number of elements to keep in the array. If the value is negative, the
+        method keeps the specified number of elements from the end of the array.
+
+       **Data Type:** ``int?``
+
+   * - ``position``
+     - The position in the array at which to add the values.
+
+       **Data Type:** ``int?``
+
+   * - ``sort``
+     - The values to add to the array field.
+
+      **Data Type:** `SortDefinition<TItem> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SortDefinition-1.html>`__
+
+To add multiple values to an array only if they aren't there, call the
+``Builders.Update.AddToSetEach()`` method. This method accepts the following parameters:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``field``
+     - An expression that specifies the array field to add to.
+
+       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+   * - ``values``
+     - The values to add to the array field.
+
+       **Data Type:** ``IEnumerable<TItem>``
+
+Remove Values
+-------------
+
+To remove the first value from an array, call the ``Builders.Update.PopFirst()`` method.
+This method accepts the following parameter:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``field``
+     - An expression that specifies the array field to remove the first value from.
+
+       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+To remove the last value from an array, call the ``Builders.Update.PopLast()`` method:
+This method accepts the following parameter:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``field``
+     - An expression that specifies the array field to remove the last value from.
+
+       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+To remove all instances of a specific value from an array, call the ``Builders.Update.Pull()`` method:
+This method accepts the following parameters:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``field``
+     - An expression that specifies the array field to add to.
+
+       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+   * - ``value``
+     - The value to remove from the array field.
+
+       **Data Type:** ``IEnumerable<TItem>``
+
+To remove all instances of more than one specific value from an array, call the ``Builders.Update.PullAll()`` method:
+This method accepts the following parameters:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``field``
+     - An expression that specifies the array field to add to.
+
+       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+   * - ``values``
+     - The values to remove from the array field.
+
+       **Data Type:** ``IEnumerable<TItem>``
+
+To remove all values that match a specific condition from an array, call the ``Builders.Update.PullFilter()`` method:
+This method accepts the following parameters:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``field``
+     - An expression that specifies the array field to add to.
+
+       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+   * - ``filter``
+     - A query filter that specifies the condition for values to remove.
+
+       **Data Type:** `FilterDefinition<TItem> <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
+
+Update Matching Elements
+------------------------
+
+To query and update specific elements in an array field, use
+the :manual:`positional operator </reference/operator/update/positional/#mongodb-update-up.->` (``$``)
+when you specify the field to update.
+Combined with the ``Builders.Update.Set()`` method, you can use this operator to query
+and update specific elements in an array field.
+
+To update the first array element that matches your query filter, use the
+positional ``$`` operator. The array value must appear be part of the query filter.
+
+The following code example queries the ``restaurants`` collection for a document
+that contains a grade of 2. It then updates that grade to 22 in the matching documents.
+Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code.
+
+To update all array elements in the matching documents, use the all positional operator
+(``$[]``).
+
+The following code example queries the ``restaurants`` collection for a document
+where the ``name`` is ``"Downtown Deli"``. It then updates all that grade to 22 in the matching documents.
+Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code.
+
+To update all array elements that match your query filter, use the all positional operator
+(``$[]``). The array value must appear be part of the query filter.
+
+The following code example queries the ``restaurants`` collection for a document
+that contains a grade of 2. It then updates that grade to 22 in the matching documents.
 
 
 Updating Documents with LINQ3
 -----------------------------
-
 
 LINQ syntax contains a positional operator (``$``) that you can use to update elements in an array field.
 Previous versions of the {+driver-short+} supported both the LINQ2 and LINQ3 providers.

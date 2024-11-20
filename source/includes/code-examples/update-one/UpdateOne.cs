@@ -91,6 +91,36 @@ public class UpdateOne
         // end-update-one-array-async
     }
 
+    public static void CombineUpdates()
+    {
+        // start-combine-sync
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var combinedUpdate = Builders<Restaurant>.Update.Combine(
+            Builders<Restaurant>.Update.Set("cuisine", "French"),
+            Builders<Restaurant>.Update.PopLast("grades")
+        );
+
+        _restaurantsCollection.UpdateOne(filter, combinedUpdate);
+        // end-combine-sync
+    }
+
+    public static async Task CombineUpdatesAsync()
+    {
+        // start-combine-async
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var combinedUpdate = Builders<Restaurant>.Update.Combine(
+            Builders<Restaurant>.Update.Set("cuisine", "French"),
+            Builders<Restaurant>.Update.PopLast("grades")
+        );
+
+        await _restaurantsCollection.UpdateOneAsync(filter, combinedUpdate);
+        // end-combine-async
+    }
+
     private static void Setup()
     {
         // Allows automapping of the camelCase database fields to models 

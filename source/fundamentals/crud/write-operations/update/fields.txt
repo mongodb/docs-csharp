@@ -20,12 +20,15 @@ Update Fields
 Overview
 --------
 
-In this guide, you can learn how to use the {+driver-long+} to update the
-values of fields in MongoDB documents.
+On this page, you can learn how to use the {+driver-long+} to update
+fields in MongoDB documents. This page describes how to create ``UpdateDefinition<TDocument>``
+objects that specify the update operations you want to perform on fields.
+You can pass these objects to the update methods described on *this page.*
 
-The {+driver-short+} provides the following methods to update fields:
-
-- ``UpdateOne()`` or ``UpdateOneAsync()``
+The {+driver-short+} supports the field update operators described in the
+:manual:`{+mdb-server+} manual </reference/operator/update/#fields>`. To specify an
+update operation, call the corresponding method from the ``Builders.Update`` property. 
+The following sections describe these methods in more detail.
 
 .. tip:: Interactive Lab
    
@@ -75,16 +78,8 @@ and load this sample data.
 
 .. _csharp-update-operation:
 
-Single Values
--------------
-
-The {+driver-short+} supports the field update operators described in the
-:manual:`{+mdb-server+} manual </reference/operator/update/#fields>`. To specify an
-update operation, call the corresponding method from the ``Builders.Update`` property. 
-The following sections describe these methods in more detail.
-
 Increment a Value
-~~~~~~~~~~~~~~~~~
+-----------------
 
 To increment the value of a field by a specific amount, call the ``Builders.Update.Inc()``
 method. This method accepts the following parameters:
@@ -107,7 +102,7 @@ method. This method accepts the following parameters:
        **Data Type:** ``TField``
 
 Set If Lower or Greater
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 To update the value of the field to a specified value, *but only if the specified value
 is greater than the current value of the field,* call the ``Builders.Update.Max()``
@@ -152,7 +147,7 @@ method. This method accepts the following parameters:
        **Data Type:** ``TField``
 
 Multiply a Value
-~~~~~~~~~~~~~~~~
+---------------
 
 To multiply the value of a field by a specific amount, call the ``Builders.Update.Mul()``
 method. This method accepts the following parameters:
@@ -175,7 +170,7 @@ method. This method accepts the following parameters:
        **Data Type:** ``TField``
 
 Rename a Field
-~~~~~~~~~~~~~~
+--------------
 
 To rename a field, call the ``Builders.Update.Rename()`` method. This method accepts the following parameters:
 
@@ -197,7 +192,7 @@ To rename a field, call the ``Builders.Update.Rename()`` method. This method acc
        **Data Type:** ``string``
 
 Set a Value
-~~~~~~~~~~~
+-----------
 
 To set the value of a field to a specific value, call the ``Builders.Update.Set()``
 method. This method accepts the following parameters:
@@ -220,7 +215,7 @@ method. This method accepts the following parameters:
        **Data Type:** ``TField``
 
 Unset a Field
-~~~~~~~~~~~~~
+-------------
 
 To remove a field from a document, call the ``Builders.Update.Unset()`` method. This method accepts the following parameter:
 
@@ -237,7 +232,7 @@ To remove a field from a document, call the ``Builders.Update.Unset()`` method. 
        **Data Type:** ``Expression<Func<TDocument, TField>>``
 
 Set on Insert
-~~~~~~~~~~~~~
+-------------
 
 To set the value of a field only if the document is an upsert, call the ``Builders.Update.SetOnInsert()``
 method. This method accepts the following parameters:
@@ -260,7 +255,7 @@ method. This method accepts the following parameters:
        **Data Type:** ``TField``
 
 Set the Current Date
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 To set the value of a field to the current date and time, call the ``Builders.Update.CurrentDate()``
 method. This method accepts the following parameters:

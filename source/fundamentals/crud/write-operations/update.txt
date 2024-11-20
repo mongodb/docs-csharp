@@ -125,7 +125,7 @@ multiple update operations.
 
 The following code example uses the ``Combine()`` method to combine a
 :manual:`$set </reference/operator/update/set/#mongodb-update-up.-set>` operation and an
-:manual:`$unset </reference/operator/update/pop/#mongodb-update-up.-unset>`
+:manual:`$unset </reference/operator/update/unset/#mongodb-update-up.-unset>`
 operation:
 
 .. tabs::
@@ -257,11 +257,8 @@ operation:
 Customize the Update Operation
 ------------------------------
 
-To combine multiple update definitions into one, call the ``Builders.Update.Combine()`` method.
-This method accepts the following parameter:
-
-The preceding update methods optionally accept an ``UpdateOptions`` object as an additional
-parameter. You can use this argument to configure the update operation.
+The update methods optionally accept an ``UpdateOptions`` object as a
+parameter. You can use this argument to customize the update operation.
 
 The ``UpdateOptions`` class contains the following properties:
 
@@ -278,6 +275,7 @@ The ``UpdateOptions`` class contains the following properties:
        for more information.
 
        **Data Type:** IEnumerable<`ArrayFilterDefinition <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.ArrayFilterDefinition.html>`__>
+       **Data Type**: Action<`ClusterBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.ClusterBuilder.html>`__>
 
    * - ``BypassDocumentValidation``
      - Specifies whether the update operation bypasses document validation. This lets you 

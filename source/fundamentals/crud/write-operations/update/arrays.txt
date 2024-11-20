@@ -1,77 +1,3 @@
-.. _csharp-update-arrays:
-
-=============
-Update Arrays
-=============
-
-.. contents:: On this page
-   :local:
-   :backlinks: none
-   :depth: 2
-   :class: singlecol
-
-.. facet::
-   :name: genre
-   :values: reference
-
-.. meta::
-   :keywords: synchronous, asynchronous
-
-Overview
---------
-
-In this guide, you can learn how to update arrays in a document with the
-MongoDB Java driver.
-
-To update an array, you must do the following:
-
-- Specify the update you want to perform
-- Specify what array elements to apply your update to
-- Perform an update operation using these specifications
-
-Sample Document
-~~~~~~~~~~~~~~~
-
-The following sections feature examples that update this sample
-document: 
-
-.. code-block:: json
-
-    { "_id": 1, "color": "green", "qty": [8, 12, 18] }
-
-The examples on this page use the ``findOneAndUpdate()`` method of the
-``MongoCollection`` class to retrieve and update the document. Each
-example uses an instance of the ``FindOneAndUpdateOptions`` class to
-have MongoDB retrieve the document after the update occurs. For
-more information on the ``findOneAndUpdate()`` method, see our 
-:doc:`Compound Operations guide </fundamentals/crud/compound-operations/>`. 
-
-Specifying an Update
---------------------
-
-To specify an update, use the ``Updates`` builder. The ``Updates``
-builder provides static utility methods to construct update
-specifications. For more information about using the ``Updates`` builder with
-arrays, see our :ref:`guide on the Updates builder <array_updates>`.
-
-The following example performs these actions: 
-
-- Query for the sample document
-- Append "17" to the ``qty`` array in the document that matches the query filter
-
-.. literalinclude:: /includes/fundamentals/code-snippets/UpdateArray.java
-   :language: java
-   :dedent:
-   :start-after: begin pushElementsExample
-   :end-before: end pushElementsExample
-
-The preceding example updates the original document to the following state:
-
-.. code-block:: json
-   :copyable: false
-
-   { "_id": 1, "color": "green", "qty": [8, 12, 18, 17] }
-
 Specifying Array Elements
 -------------------------
 
@@ -88,10 +14,6 @@ For additional information, see the Server Manual Entry on
 
 The First Matching Array Element
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To update the first array element that matches your query filter, use the
-positional ``$`` operator. The array field must appear as part of your
-query filter to use the positional ``$`` operator. 
 
 Example
 ```````

@@ -184,10 +184,10 @@ The ``ReplaceOptions`` class contains the following properties:
        **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
 
    * - ``IsUpsert``
-     - | Specifies whether the replace operation performs an upsert operation if no 
-         documents match the query filter. 
-         See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
-         for more information.
+     - Specifies whether the replace operation performs an upsert operation if no 
+       documents match the query filter. 
+       See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
+       for more information.
 
        **Data Type:** ``bool``
 

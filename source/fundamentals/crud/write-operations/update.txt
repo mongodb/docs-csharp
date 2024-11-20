@@ -44,7 +44,7 @@ The following sections describe these methods in more detail.
    Many of the methods in this guide have multiple overloads. The examples
    in this guide use the simplest overload for demonstration purposes. For
    more information about the available overloads, see the
-   `API documentation. {+new-api-root+}/index.html>`__
+   `API documentation. <{+new-api-root+}/index.html>`__
 
 .. tip:: Interactive Lab
    
@@ -73,7 +73,7 @@ methods all accept the following parameters:
      - An instance of the ``FilterDefinition`` class that specifies the documents to update.
        To learn how to create a query filter, see :ref:`csharp-specify-query`.
 
-       **Data Type:** `FilterDefinition <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
+       **Data Type:** `FilterDefinition <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`
 
    * - ``update``
      - An instance of the ``UpdateDefinition`` class. This object specifies the kind of update
@@ -189,8 +189,8 @@ accepts the following parameter:
 
    * - ``pipeline``
      - A ``PipelineDefinition`` instance that represents the update pipeline. To create
-       a ``PipelineDefinition`` object, create a BSON object for each update operation you
-       want to perform, then pass these objects to the ``Pipeline.Create()`` method.
+       a ``PipelineDefinition`` object, create a BSON document for each update operation you
+       want to perform, then pass these documents to the ``Pipeline.Create()`` method.
 
        **Data Type:** ``PipelineDefinition<TDocument, TDocument>``
 
@@ -274,8 +274,7 @@ The ``UpdateOptions`` class contains the following properties:
        See :manual:`the MongoDB server manual</reference/command/update/#update-elements-match-arrayfilters-criteria>`
        for more information.
 
-       **Data Type:** IEnumerable<`ArrayFilterDefinition <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.ArrayFilterDefinition.html>`__>
-       **Data Type**: Action<`ClusterBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.ClusterBuilder.html>`__>
+       **Data Type:** IEnumerable<`ArrayFilterDefinition <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ArrayFilterDefinition.html>`__>
 
    * - ``BypassDocumentValidation``
      - Specifies whether the update operation bypasses document validation. This lets you 

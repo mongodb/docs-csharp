@@ -103,8 +103,8 @@ Version 3.0 Breaking Changes
   - Queries that use client-side projections will throw an ``ExpressionNotSupportedException``
     by default with v3.0. To enable client-side projections, set the
     ``EnableClientSideProjections`` property of a ``TranslationOptions`` object to
-    ``true``. You can pass this ``TranslationOptions`` object to the
-    ``AggregateOptions`` or ``FindOptions`` objects to enable client-side projections
+    ``true``. You can pass this ``TranslationOptions`` object to an
+    ``AggregateOptions`` or ``FindOptions`` object to enable client-side projections
     for a single query, or to a ``MongoClientSettings`` object to enable client-side projections
     for all queries in an application.
 

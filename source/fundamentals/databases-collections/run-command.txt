@@ -53,10 +53,9 @@ Execute a Command
 
 To run a database command, create a ``BsonDocument`` object that specifies
 the command and pass it as a parameter to the ``RunCommand()`` or ``RunCommandAsync()`` 
-method. You can specify the type returned by the ``RunCommand()`` and ``RunCommandAsync()``
-methods by specifying the type parameter. You can use the ``BsonDocument`` type to return
-the command response, or you can specify your own strongly typed class to deserialize
-the command response.
+method. You can specify the type returned by these methods by specifying the type parameter.
+You can use the ``BsonDocument`` type to return the command response, or you can specify your
+own strongly typed class to deserialize the command response.
 
 The following example runs the ``hello`` command on a database, which returns information
 about the server. Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous`
@@ -154,11 +153,11 @@ following fields:
    * - ``$clusterTime``
      - A document that contains the signed cluster time. Cluster time is a
        logical time used for the ordering of operations. This field only
-       applies to commands run on replica sets or sharded cluster.
+       applies to commands run on replica sets or sharded clusters.
 
    * - ``operationTime``
      - The logical time of the operation execution. This field only
-       applies to commands run on replica sets or sharded cluster.
+       applies to commands run on replica sets or sharded clusters.
 
 .. tip::
 

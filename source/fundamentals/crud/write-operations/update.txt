@@ -85,8 +85,8 @@ methods all accept the following parameters:
 
    * - ``options``
      - *Optional.* An instance of the ``UpdateOptions`` class that specifies the
-       configuration for the update operation. The default value is ``null``. To learn
-       about the available options, see :ref:`csharp-update-options`.
+       configuration for the update operation. The default value is ``null``. For a list
+       of available option, see :ref:`csharp-update-options`.
 
        **Data Type:** `UpdateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOptions.html>`__
 
@@ -320,47 +320,6 @@ The ``UpdateOptions`` class contains the following properties:
 
        **Data Type:** `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
 
-Example
-~~~~~~~
-
-The following code uses the ``UpdateMany()`` method to find all documents where the 
-``borough`` field has the value "Manhattan", then updates the ``borough``
-value in these documents to "Manhattan (north)". Because the ``IsUpsert`` option is 
-set to ``true``, the driver inserts a new document if the query filter doesn't 
-match any existing documents.
-
-.. io-code-block::
-   :copyable: true
-
-   .. input::
-      :language: csharp
-
-        var filter = Builders<Restaurant>.Filter
-            .Eq(restaurant => restaurant.Borough, "Manhattan");
-            
-        var update = Builders<Restaurant>.Update
-            .Set(restaurant => restaurant.Borough, "Manhattan (north)");
-
-        UpdateOptions opts = new UpdateOptions()
-        {
-            Comment = new BsonString("Borough updated for C# Driver Fundamentals"),
-            IsUpsert = true
-        };
-
-        Console.WriteLine("Updating documents...");
-        var result = _restaurantsCollection.UpdateMany(filter, update, opts);
-      
-        Console.WriteLine($"Updated documents: {result.ModifiedCount}");
-        Console.WriteLine($"Result acknowledged? {result.IsAcknowledged}");
-
-   .. output::
-      :language: none
-      :visible: false
-      
-      Updating documents...
-      Updated documents: 10259
-      Result acknowledged? True
-
 Return Value
 ------------
 
@@ -402,7 +361,7 @@ The ``UpdateResult`` class contains the following properties:
      - The ID of the document that was upserted in the database, if the driver
        performed an upsert.
 
-      **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
+       **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
 
 Additional Information
 ----------------------

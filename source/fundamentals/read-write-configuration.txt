@@ -72,6 +72,7 @@ The following example sets the write concern to ``"majority"`` for an instance o
    :start-after: start-write-concern-client
    :end-before: end-write-concern-client
    :language: csharp
+   :dedent:
 
 The following example sets the write concern to ``"majority"`` for a collection:
 
@@ -79,6 +80,7 @@ The following example sets the write concern to ``"majority"`` for a collection:
    :start-after: start-write-concern-collection
    :end-before: end-write-concern-collection
    :language: csharp
+   :dedent:
 
 .. note:: Collections and Databases are Immutable
 
@@ -134,6 +136,7 @@ The following example sets the read concern to ``"majority"`` for an instance of
    :start-after: start-read-concern-client
    :end-before: end-read-concern-client
    :language: csharp
+   :dedent:
 
 The following example sets the read concern to ``"majority"`` for a
 collection:
@@ -142,6 +145,7 @@ collection:
    :start-after: start-read-concern-collection
    :end-before: end-read-concern-collection
    :language: csharp
+   :dedent:
 
 To learn more about read concern, see :manual:`Read Concern
 <reference/read-concern>` in the {+mdb-server+} manual.
@@ -174,6 +178,7 @@ for an instance of ``MongoClient``:
    :start-after: start-read-preference-client
    :end-before: end-read-preference-client
    :language: csharp
+   :dedent:
 
 The following example sets the read preference to ``"secondary"`` for a collection:
 
@@ -181,6 +186,7 @@ The following example sets the read preference to ``"secondary"`` for a collecti
    :start-after: start-read-preference-collection
    :end-before: end-read-preference-collection
    :language: csharp
+   :dedent:
 
 For more information about read preference, see :manual:`Read Preference
 </core/read-preference/>` in the {+mdb-server+} manual.
@@ -188,7 +194,7 @@ For more information about read preference, see :manual:`Read Preference
 API Documentation
 -----------------
 
-To learn more about any of the methods or types discussed in this
+To learn more about any of the types discussed in this
 guide, see the following API documentation:
 
 - `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__

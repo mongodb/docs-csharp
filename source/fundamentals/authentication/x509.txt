@@ -72,6 +72,9 @@ must use the :wikipedia:`PKCS #12<PKCS_12>` (``.p12``) format.
    .. code-block:: bash
 
       openssl pkcs12 -export -out <.p12 file> -inkey <private key file> -in <.pem file>
+   
+   For more information about ``openssl-pkcs12``, see the
+   `OpenSSL documentation. <https://docs.openssl.org/master/man1/openssl-pkcs12/#name>`__
 
 You must also specify ``MONGODB-X509`` as the authentication mechanism and ``$external``
 as the authentication source. You can specify

@@ -30,6 +30,7 @@ Fundamentals
    Time Series Collections </fundamentals/time-series>
    In-Use Encryption </fundamentals/encrypt-fields>
    Search Geospatially </fundamentals/geo>
+   Replica Set Operations </fundamentals/read-write-configuration>
 
 - :ref:`Connecting to MongoDB <csharp-connection>`
 - :ref:`csharp-db-coll`

@@ -65,7 +65,7 @@ using one of the following values:
 - ``WriteConcern.Unacknowledged``: The write operation returns after the primary
   node processes the write operation.
 
-The following example sets the write concern to ``"majority"`` for an instance of
+The following example sets the write concern to ``WriteConcern.WMajority`` for an instance of
 ``MongoClient``:
 
 .. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
@@ -74,7 +74,7 @@ The following example sets the write concern to ``"majority"`` for an instance o
    :language: csharp
    :dedent:
 
-The following example sets the write concern to ``"majority"`` for a collection:
+The following example sets the write concern to ``WriteConcern.WMajority`` for a collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
    :start-after: start-write-concern-collection
@@ -129,7 +129,7 @@ For more information about the read concern levels, see :manual:`Read Concern
 Levels </reference/read-concern/#read-concern-levels>` in the {+mdb-server+}
 manual.
 
-The following example sets the read concern to ``"majority"`` for an instance of
+The following example sets the read concern to ``ReadConcern.Majority`` for an instance of
 ``MongoClient``:
 
 .. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
@@ -138,7 +138,7 @@ The following example sets the read concern to ``"majority"`` for an instance of
    :language: csharp
    :dedent:
 
-The following example sets the read concern to ``"majority"`` for a
+The following example sets the read concern to ``ReadConcern.Majority`` for a
 collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
@@ -171,7 +171,7 @@ the following values:
 - ``ReadPreference.Nearest``: The query returns data from the node with the lowest
   network latency.
 
-The following example sets the read preference to ``"secondary"``
+The following example sets the read preference to ``ReadPreference.Secondary``
 for an instance of ``MongoClient``:
 
 .. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
@@ -180,7 +180,7 @@ for an instance of ``MongoClient``:
    :language: csharp
    :dedent:
 
-The following example sets the read preference to ``"secondary"`` for a collection:
+The following example sets the read preference to ``ReadPreference.Secondary`` for a collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
    :start-after: start-read-preference-collection

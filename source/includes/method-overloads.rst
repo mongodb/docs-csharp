@@ -3,4 +3,4 @@
    Many of the methods on this page have multiple overloads. The examples
    in this guide show only one overload for each method. For
    more information about the available overloads, see the
-   :manual:`{+new-api-root+} API documentation </api-reference>`.
+   `API documentation. <{+new-api-root+}/index.html>`__

@@ -23,7 +23,8 @@ Overview
 On this page, you can learn how to use the {+driver-long+} to update array
 fields in MongoDB documents. This page describes how to create ``UpdateDefinition<TDocument>``
 objects that specify the update operations you want to perform on array fields.
-You can pass these objects to the update methods described on *this page.*
+You can pass these objects to the update methods described on the
+:ref:`<csharp-update-documents>` page.
 
 The {+driver-short+} supports the array update operators and modifiers described in the
 :manual:`{+mdb-server+} manual </reference/operator/update/#array>`.
@@ -325,17 +326,17 @@ To update all array elements that match your query filter, use the all positiona
 The following code example queries the ``restaurants`` collection for a document
 that contains a grade of 2. It then updates that grade to 22 in the matching documents.
 
-
-Updating Documents with LINQ3
------------------------------
+LINQ3 Provider
+~~~~~~~~~~~~~~
 
 LINQ syntax contains a positional operator (``$``) that you can use to update elements in an array field.
 Previous versions of the {+driver-short+} supported both the LINQ2 and LINQ3 providers.
 In LINQ2, you could use ``-1`` to indicate use of the positional operator.
 
 For example, the ``Restaurant`` class contains an array field named ``Grades`` that
-contains multiple ``GradeEntry`` elements. The following code sample uses LINQ2 to update the
-``Grade`` field of the first element in the ``Grades`` array:
+contains multiple ``GradeEntry`` elements. If your application were using the LINQ2
+provider, you could use the following code sample to update the
+``Grade`` field of the first element in this array:
 
 .. code-block:: csharp
    :linenos:
@@ -372,29 +373,3 @@ contains multiple ``GradeEntry`` elements. The following code sample uses LINQ2 
       Builders<Restaurant>.Update.Set(l => l.AnArrayMember.ElementAt(-1).Deleted, true));
 
 This no longer works in LINQ3. Instead, you must use the following syntax:
-
-.. list-table::
-   :widths: 30 70
-   :header-rows: 1
-
-   * - Elements to Match
-   * - LINQ Syntax
-     - {+driver-short+} Syntax
-
-   * - First matching element
-   * - ``array.$``
-     - | Specifies the positional operator in LINQ3. 
-         See :manual:`the MongoDB server manual</reference/operator/update/positional>`
-         for more information.
-   
-   * - All elements
-   * - ``array.$[]``
-     - | Specifies the positional operator in LINQ3. 
-         See :manual:`the MongoDB server manual</reference/operator/update/positional>`
-         for more information.
-   
-   * - All matching elements
-   * - ``array.$[<identifier>]``
-     - | Specifies the positional operator in LINQ3. 
-         See :manual:`the MongoDB server manual</reference/operator/update/positional>`
-         for more information.

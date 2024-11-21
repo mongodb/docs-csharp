@@ -93,7 +93,7 @@ methods all accept the following parameters:
    * - ``cancellationToken``
      - *Optional.* A token that you can use to cancel the operation.
 
-       **Data type**: `CancellationToken <https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken>`__
+       **Data type**: ``CancellationToken``
 
 Update Multiple Values
 ----------------------
@@ -102,8 +102,8 @@ The ``UpdateOne()``, ``UpdateOneAsync()``, ``UpdateMany()``, and ``UpdateManyAsy
 methods each accept only one ``UpdateDefinition`` object. The following sections describe how
 to update multiple values in a single method call.
 
-Combine Update Definitions
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Combined Update Definitions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``Builders.Update.Combine()`` method lets you combine multiple ``UpdateDefinition``
 objects. This method accepts the following parameter:
@@ -190,7 +190,7 @@ accepts the following parameter:
    * - ``pipeline``
      - A ``PipelineDefinition`` instance that represents the update pipeline. To create
        a ``PipelineDefinition`` object, create a BSON document for each update operation you
-       want to perform, then pass these documents to the ``Pipeline.Create()`` method.
+       want to perform, then pass these documents to the ``PipelineDefinition.Create()`` method.
 
        **Data Type:** ``PipelineDefinition<TDocument, TDocument>``
 
@@ -199,7 +199,7 @@ multiple aggregation stages.
 
 The following code example uses the ``Pipeline()`` method to combine a
 :manual:`$set </reference/operator/update/set/#mongodb-update-up.-set>` operation and an
-:manual:`$unset </reference/operator/update/pop/#mongodb-update-up.-unset>`
+:manual:`$unset </reference/operator/update/unset/#mongodb-update-up.-unset>`
 operation:
 
 .. tabs::
@@ -254,11 +254,11 @@ operation:
 
 .. _csharp-update-options:
 
-Customize the Update Operation
-------------------------------
+Configuration Options
+---------------------
 
 The update methods optionally accept an ``UpdateOptions`` object as a
-parameter. You can use this argument to customize the update operation.
+parameter. You can use this argument to configure the update operation.
 
 The ``UpdateOptions`` class contains the following properties:
 

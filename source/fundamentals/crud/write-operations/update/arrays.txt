@@ -20,52 +20,22 @@ Update Arrays
 Overview
 --------
 
-On this page, you can learn how to use the {+driver-long+} to update array
-fields in MongoDB documents. This page describes how to create ``UpdateDefinition<TDocument>``
-objects that specify the update operations you want to perform on array fields.
-You can pass these objects to the update methods described on the
-:ref:`<csharp-update-documents>` page.
+On this page, you can learn how to create ``UpdateDefinition`` objects for array fields.
+An ``UpdateDefinition`` object specifies the kind of update operation to perform, the
+fields to update, and the new value for each field, if applicable.
 
 The {+driver-short+} supports the array update operators and modifiers described in the
 :manual:`{+mdb-server+} manual </reference/operator/update/#array>`.
-To specify an update operation, call the corresponding method from the ``Builders.Update``
-property. The following sections describe these methods in more detail.
+To create an ``UpdateDefinition`` object for one of these operators, call the corresponding
+method from the ``Builders.Update`` property.
+The following sections describe these methods in more detail.
 
-.. note:: Method Overloads
+After you create an ``UpdateDefinition``, pass it to one of the update methods
+described on the :ref:`<csharp-update-documents>` page.
 
-   Many of the methods on this page have multiple overloads. The examples
-   in this guide show only one overload for each method.  For
-   more information about the available overloads, see the
-   :manual:`{+new-api-root+} API documentation </api-reference>`.
+.. include:: /includes/method-overloads.rst
 
-Sample Data
-~~~~~~~~~~~
-
-The examples in this guide use the ``restaurants`` collection
-from the ``sample_restaurants`` database. The documents in this
-collection use the following ``Restaurant``, ``Address``, and ``GradeEntry`` 
-classes as models:
-
-.. literalinclude:: /includes/code-examples/Restaurant.cs
-   :language: csharp
-   :copyable:
-   :dedent:
-
-.. literalinclude:: /includes/code-examples/Address.cs
-   :language: csharp
-   :copyable:
-   :dedent:
-
-.. literalinclude:: /includes/code-examples/GradeEntry.cs
-   :language: csharp
-   :copyable:
-   :dedent:
-
-.. include:: /includes/convention-pack-note.rst
-
-This collection is from the :atlas:`sample datasets </sample-data>` provided
-by Atlas. See the :ref:`<csharp-quickstart>` to learn how to create a free MongoDB cluster
-and load this sample data.
+.. include:: /includes/atlas-sample-data.rst
 
 Add One Value
 -------------
@@ -90,35 +60,64 @@ This method accepts the following parameters:
 
        **Data Type:** ``TItem`` 
 
-The following code example pushes a new ``GradeEntry`` object into the ``Grades``
-array in the matching document. Select the :guilabel:`Synchronous` or
-:guilabel:`Asynchronous` tab to see the corresponding code.
+The following code example uses the ``Push()`` method to add a new ``GradeEntry`` object
+to the ``Grades`` array in the matching documents:
 
 .. tabs::
 
-   .. tab:: Synchronous
-      :tabid: update-one-array-sync
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-push-sync
 
-      .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
          :language: csharp
          :copyable: true
          :dedent:
-         :start-after: // start-update-one-array
-         :end-before: // end-update-one-array
+         :start-after: // start-update-one-push
+         :end-before: // end-update-one-push
 
-   .. tab:: Asynchronous
-      :tabid: update-one-array-async
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-push-async
 
-      .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
          :language: csharp
          :copyable: true
          :dedent:
-         :start-after: // start-update-one-array-async
-         :end-before: // end-update-one-array-async
+         :start-after: // start-update-one-push-async
+         :end-before: // end-update-one-push-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-push-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-push
+         :end-before: // end-update-many-push
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-push-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-push-async
+         :end-before: // end-update-many-push-async
+
+.. tip:: Configure the Push Operation
+  
+   To add a value at a specific position in an array, or to sort or slice the array after
+   updating it, call the ``PushEach()`` method instead.
+   TODO: link this
 
 To add one value to the end of an array, *but only if it doesn't already exist in the array*,
-call the ``Builders.Update.AddToSet()`` method.
-This method accepts the following parameters:
+call the ``Builders.Update.AddToSet()`` method. 
+{+mdb-server+} determines whether the value already exists in the array by
+comparing the value's BSON representation to the BSON representation of each
+other element in the array.
+
+The ``AddToSet()`` method accepts the following parameters:
 
 .. list-table::
    :widths: 30 70
@@ -137,13 +136,97 @@ This method accepts the following parameters:
 
        **Data Type:** ``TItem`` 
 
-The following code example pushes a new ``GradeEntry`` object into the ``Grades``
-array in the matching document. Select the :guilabel:`Synchronous` or
-:guilabel:`Asynchronous` tab to see the corresponding code.
+The following code example tries to use the ``AddToSet()`` method to re-add the first
+``GradeEntry`` object to the ``Grades`` array in the matching documents. Because
+the value already exists in the array, the update operation does nothing.
 
-.. tip:: Specify a Position
-  
-   To add a value at a specific position in an array, call the ``PushEach()`` method.
+.. tabs::
+
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-addtoset-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-addtoset
+         :end-before: // end-update-one-addtoset
+
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-addtoset-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-addtoset-async
+         :end-before: // end-update-one-addtoset-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-addtoset-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-addtoset
+         :end-before: // end-update-many-addtoset
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-addtoset-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-addtoset-async
+         :end-before: // end-update-many-addtoset-async
+
+The following code example uses the ``PushEach()`` method to add two new ``GradeEntry``
+objects to the start of the ``Grades`` array. It then sorts the array elements in
+descending order by the values of their ``Score`` fields.
+
+.. tabs::
+
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-pusheach-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-pusheach
+         :end-before: // end-update-one-pusheach
+
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-pusheach-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-pusheach-async
+         :end-before: // end-update-one-pusheach-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-pusheach-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-pusheach
+         :end-before: // end-update-many-pusheach
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-pusheach-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-pusheach-async
+         :end-before: // end-update-many-pusheach-async
 
 Add Multiple Values
 -------------------
@@ -169,20 +252,23 @@ This method accepts the following parameters:
        **Data Type:** ``IEnumerable<TItem>``
 
    * - ``slice``
-     - The number of elements to keep in the array. If the value is negative, the
-        method keeps the specified number of elements from the end of the array.
+     - The number of elements to keep in the array, counted from the start of the array
+       after updates. If the value is negative,
+       the method keeps the specified number of elements from the end of the array.
 
        **Data Type:** ``int?``
 
    * - ``position``
-     - The position in the array at which to add the values.
+     - The position in the array at which to add the values. By default, the method
+       adds the values to the end of the array.
 
        **Data Type:** ``int?``
 
    * - ``sort``
-     - The values to add to the array field.
+     - A ``SortDefinition`` object that specifies how the driver sorts the array elements
+       after adding the new values.
 
-      **Data Type:** `SortDefinition<TItem> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SortDefinition-1.html>`__
+       **Data Type:** `SortDefinition<TItem> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SortDefinition-1.html>`__
 
 To add multiple values to an array only if they aren't there, call the
 ``Builders.Update.AddToSetEach()`` method. This method accepts the following parameters:
@@ -203,6 +289,11 @@ To add multiple values to an array only if they aren't there, call the
      - The values to add to the array field.
 
        **Data Type:** ``IEnumerable<TItem>``
+
+.. tip:: 
+
+   If you call the ``AddToSet()`` method with more than one value, the driver automatically
+   performs the operation as if you called the ``AddToSetEach()`` method.
 
 Remove Values
 -------------

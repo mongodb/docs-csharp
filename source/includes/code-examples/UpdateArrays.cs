@@ -155,7 +155,7 @@ public static class UpdateArrays
         var update = Builders<Restaurant>.Update
             .AddToSet(restaurant => restaurant.Grades, firstGradeEntry);
 
-        var result = await _restaurantsCollection.UpdateOneAsync(filter, update);
+        var result = await _restaurantsCollection.UpdateManyAsync(filter, update);
 
         return result;
         // end-update-many-addtoset-async
@@ -193,12 +193,21 @@ public static class UpdateArrays
         var filter = Builders<Restaurant>.Filter
             .Eq("name", "Downtown Deli");
 
-        var firstGradeEntry = _restaurantsCollection.Find(filter).FirstOrDefault().Grades[0];
+        var newGrades = new List<GradeEntry>
+        {
+            new GradeEntry { Date = DateTime.Now, Grade = "A", Score = 95 },
+            new GradeEntry { Date = DateTime.Now, Grade = "B+", Score = 89,}
+        };
 
-        var update = Builders<Restaurant>.Update
-            .AddToSet(restaurant => restaurant.Grades, firstGradeEntry);
+        var scoreSort = Builders<GradeEntry>.Sort.Descending(g => g.Score);
 
-        var result = await _restaurantsCollection.UpdateOneAsync(filter, update);
+        var update = Builders<Restaurant>.Update.PushEach(
+            "Grades",
+            newGrades,
+            position: 0,
+            sort: scoreSort);
+
+        var result = _restaurantsCollection.UpdateManyAsync(filter, update);
 
         return result;
         // end-update-many-pusheach-async

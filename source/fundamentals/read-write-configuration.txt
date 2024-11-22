@@ -48,7 +48,7 @@ You can set the write concern by setting the ``WriteConcern`` option on a
 ``MongoClientSettings``, ``MongoDatabaseSettings``, or ``MongoCollectionSettings`` object,
 or by using the ``WithWriteConcern()`` method of a client, database, or collection instance.
 
-The ``WriteConcern`` option and ``WithWriteConcern()`` method both accept a
+The ``WriteConcern`` option and ``WithWriteConcern()`` method accept a
 ``WriteConcern`` instance as a parameter. You can specify the write concern by 
 using one of the following values:
 
@@ -114,7 +114,7 @@ You can set the following read concern levels:
   that the data has been written to a majority of the replica set members.
 - ``ReadConern.Available``: The query returns the instance's most recent data.
   Provides no guarantee that the data has been written to a majority of the
-  replica set members. ``ReadConcern.AVAILABLE`` is not available for use with
+  replica set members. ``ReadConcern.Available`` is not available for use with
   causally consistent sessions and transactions.
 - ``ReadConcern.Majority``: The query returns data that has been acknowledged by
   a majority of the replica set members.
@@ -148,7 +148,7 @@ collection:
    :dedent:
 
 To learn more about read concern, see :manual:`Read Concern
-<reference/read-concern>` in the {+mdb-server+} manual.
+</reference/read-concern>` in the {+mdb-server+} manual.
 
 Read Preference
 ---------------

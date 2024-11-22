@@ -182,6 +182,48 @@ the value already exists in the array, the update operation does nothing.
          :start-after: // start-update-many-addtoset-async
          :end-before: // end-update-many-addtoset-async
 
+Add Multiple Values
+-------------------
+
+To add multiple values to an array, call the ``Builders.Update.PushEach()`` method.
+This method accepts the following parameters:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``field``
+     - An expression that specifies the array field to add to.
+
+       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+   * - ``values``
+     - The values to add to the array field.
+
+       **Data Type:** ``IEnumerable<TItem>``
+
+   * - ``slice``
+     - The number of elements to keep in the array, counted from the start of the array
+       after updates. If the value is negative,
+       the method keeps the specified number of elements from the end of the array.
+
+       **Data Type:** ``int?``
+
+   * - ``position``
+     - The position in the array at which to add the values. By default, the method
+       adds the values to the end of the array.
+
+       **Data Type:** ``int?``
+
+   * - ``sort``
+     - A ``SortDefinition`` object that specifies how the driver sorts the array elements
+       after adding the new values.
+
+       **Data Type:** `SortDefinition<TItem> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SortDefinition-1.html>`__
+
 The following code example uses the ``PushEach()`` method to add two new ``GradeEntry``
 objects to the start of the ``Grades`` array. It then sorts the array elements in
 descending order by the values of their ``Score`` fields.
@@ -228,10 +270,8 @@ descending order by the values of their ``Score`` fields.
          :start-after: // start-update-many-pusheach-async
          :end-before: // end-update-many-pusheach-async
 
-Add Multiple Values
--------------------
-
-To add multiple values to an array, call the ``Builders.Update.PushEach()`` method.
+To add multiple values to an array, *but only if they don't already exist in the array*,
+call the ``Builders.Update.AddToSetEach()`` method.
 This method accepts the following parameters:
 
 .. list-table::
@@ -251,49 +291,51 @@ This method accepts the following parameters:
 
        **Data Type:** ``IEnumerable<TItem>``
 
-   * - ``slice``
-     - The number of elements to keep in the array, counted from the start of the array
-       after updates. If the value is negative,
-       the method keeps the specified number of elements from the end of the array.
+The following code example tries to use the ``AddToSetEach()`` method to re-add the first
+and second ``GradeEntry`` objects to the ``Grades`` array in the matching documents.
+Because these values already exist in the array, the update operation does nothing.
 
-       **Data Type:** ``int?``
+.. tabs::
 
-   * - ``position``
-     - The position in the array at which to add the values. By default, the method
-       adds the values to the end of the array.
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-addtoseteach-sync
 
-       **Data Type:** ``int?``
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-addtoseteach
+         :end-before: // end-update-one-addtoseteach
 
-   * - ``sort``
-     - A ``SortDefinition`` object that specifies how the driver sorts the array elements
-       after adding the new values.
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-addtoseteach-async
 
-       **Data Type:** `SortDefinition<TItem> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SortDefinition-1.html>`__
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-addtoseteach-async
+         :end-before: // end-update-one-addtoseteach-async
 
-To add multiple values to an array only if they aren't there, call the
-``Builders.Update.AddToSetEach()`` method. This method accepts the following parameters:
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-addtoset-sync
 
-.. list-table::
-   :widths: 30 70
-   :header-rows: 1
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-addtoseteach
+         :end-before: // end-update-many-addtoseteach
 
-   * - Parameter
-     - Description
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-addtoset-async
 
-   * - ``field``
-     - An expression that specifies the array field to add to.
-
-       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
-
-   * - ``values``
-     - The values to add to the array field.
-
-       **Data Type:** ``IEnumerable<TItem>``
-
-.. tip:: 
-
-   If you call the ``AddToSet()`` method with more than one value, the driver automatically
-   performs the operation as if you called the ``AddToSetEach()`` method.
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-addtoseteach-async
+         :end-before: // end-update-many-addtoseteach-async
 
 Remove Values
 -------------
@@ -313,6 +355,51 @@ This method accepts the following parameter:
 
        **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
 
+The following code example uses the ``PopFirst()`` method to remove the first ``GradeEntry``
+object from the ``Grades`` array in the matching documents:
+
+.. tabs::
+
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-popfirst-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-popfirst
+         :end-before: // end-update-one-popfirst
+
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-popfirst-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-popfirst-async
+         :end-before: // end-update-one-popfirst-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-popfirst-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-popfirst
+         :end-before: // end-update-many-popfirst
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-popfirst-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-popfirst-async
+         :end-before: // end-update-many-popfirst-async
+
 To remove the last value from an array, call the ``Builders.Update.PopLast()`` method:
 This method accepts the following parameter:
 
@@ -327,6 +414,51 @@ This method accepts the following parameter:
      - An expression that specifies the array field to remove the last value from.
 
        **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+The following code example uses the ``PopLast()`` method to remove the last ``GradeEntry``
+object from the ``Grades`` array in the matching documents:
+
+.. tabs::
+
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-poplast-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-poplast
+         :end-before: // end-update-one-poplast
+
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-poplast-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-poplast-async
+         :end-before: // end-update-one-poplast-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-poplast-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-poplast
+         :end-before: // end-update-many-poplast
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-poplast-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-poplast-async
+         :end-before: // end-update-many-poplast-async
 
 To remove all instances of a specific value from an array, call the ``Builders.Update.Pull()`` method:
 This method accepts the following parameters:
@@ -348,7 +480,53 @@ This method accepts the following parameters:
 
        **Data Type:** ``IEnumerable<TItem>``
 
-To remove all instances of more than one specific value from an array, call the ``Builders.Update.PullAll()`` method:
+The following code example uses the ``Pull()`` method to remove all instances of a
+a specific ``GradeEntry`` object from the ``Grades`` array in the matching documents:
+
+.. tabs::
+
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-pull-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-pull
+         :end-before: // end-update-one-pull
+
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-pull-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-pull-async
+         :end-before: // end-update-one-pull-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-pull-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-pull
+         :end-before: // end-update-many-pull
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-pull-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-pull-async
+         :end-before: // end-update-many-pull-async
+
+To remove all instances of more than one specific value from an array, call the
+``Builders.Update.PullAll()`` method.
 This method accepts the following parameters:
 
 .. list-table::
@@ -368,7 +546,53 @@ This method accepts the following parameters:
 
        **Data Type:** ``IEnumerable<TItem>``
 
-To remove all values that match a specific condition from an array, call the ``Builders.Update.PullFilter()`` method:
+The following code example uses the ``PullAll()`` method to remove all instances of two
+specific ``GradeEntry`` objects from the ``Grades`` array in the matching documents:
+
+.. tabs::
+
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-pullall-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-pullall
+         :end-before: // end-update-one-pullall
+
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-pullall-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-pullall-async
+         :end-before: // end-update-one-pullall-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-pullall-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-pullall
+         :end-before: // end-update-many-pullall
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-pullall-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-pullall-async
+         :end-before: // end-update-many-pullall-async
+
+To remove all values that match a specific condition from an array, call the
+``Builders.Update.PullFilter()`` method.
 This method accepts the following parameters:
 
 .. list-table::
@@ -386,7 +610,53 @@ This method accepts the following parameters:
    * - ``filter``
      - A query filter that specifies the condition for values to remove.
 
-       **Data Type:** `FilterDefinition<TItem> <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
+       **Data Type:** `FilterDefinition<TItem> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
+
+The following code example uses the ``PullFilter()`` method to remove all ``GradeEntry``
+objects where the ``Grade`` property is ``"F"`` from the ``Grades`` array in the
+matching documents:
+
+.. tabs::
+
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-pullfilter-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-pullfilter
+         :end-before: // end-update-one-pullfilter
+
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-pullfilter-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-pullfilter-async
+         :end-before: // end-update-one-pullfilter-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-pullfilter-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-pullfilter
+         :end-before: // end-update-many-pullfilter
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-pullfilter-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-pullfilter-async
+         :end-before: // end-update-many-pullfilter-async
 
 Update Matching Elements
 ------------------------

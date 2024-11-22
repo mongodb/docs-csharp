@@ -278,36 +278,3 @@ method. This method accepts the following parameters:
        enum. The default value is ``null``.
 
        **Data Type:** `UpdateDefinitionCurrentDateType? <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinitionCurrentDateType.html>`__
-
-The following code example performs these steps:
-
-1. Creates a query filter that matches documents where the value of the ``name`` field
-   is "Bagels N Buns".
-#. Creates an update definition that sets the value of the ``name`` field to "2 Bagels 2 Buns".
-#. Calls the ``UpdateOne()`` method to update the document.
-
-Select  the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding
-code.
-
-.. tabs::
-
-   .. tab:: Synchronous
-      :tabid: update-one-sync
-
-      .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
-         :language: csharp
-         :copyable: true
-         :dedent:
-         :start-after: // start-update-one
-         :end-before: // end-update-one
-
-   .. tab:: Asynchronous
-      :tabid: update-one-async
-
-      .. literalinclude:: /includes/code-examples/update-one/UpdateOneAsync.cs
-         :language: csharp
-         :copyable: true
-         :dedent:
-         :start-after: // start-update-one-async
-         :end-before: // end-update-one-async
-

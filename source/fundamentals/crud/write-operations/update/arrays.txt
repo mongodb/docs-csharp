@@ -658,17 +658,39 @@ matching documents:
          :start-after: // start-update-many-pullfilter-async
          :end-before: // end-update-many-pullfilter-async
 
-Update Matching Elements
-------------------------
+Update Matching Values
+----------------------
 
-To query and update specific elements in an array field, use
-the :manual:`positional operator </reference/operator/update/positional/#mongodb-update-up.->` (``$``)
-when you specify the field to update.
-Combined with the ``Builders.Update.Set()`` method, you can use this operator to query
-and update specific elements in an array field.
+To update a value in an array field, call the ``Builders.Update.Set()`` method.
+This method accepts the following parameters:
 
-To update the first array element that matches your query filter, use the
-positional ``$`` operator. The array value must appear be part of the query filter.
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+
+   * - ``field``
+     - An expression that specifies the array field to update.
+
+       **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
+
+   * - ``value``
+     - The new value to set in the array field.
+
+       **Data Type:** ``TItem``
+
+You can use the
+:manual:`positional operator </reference/operator/update/positional/#mongodb-update-up.->` (``$``)
+to query and update specific values in the array.
+
+.. note:: The array field must be part of the query filter.
+
+The following code example uses the ``Set()`` method and the positional operator to
+update remove all ``GradeEntry``
+objects where the ``Grade`` property is ``"F"`` from the ``Grades`` array in the
+matching documents:
 
 The following code example queries the ``restaurants`` collection for a document
 that contains a grade of 2. It then updates that grade to 22 in the matching documents.

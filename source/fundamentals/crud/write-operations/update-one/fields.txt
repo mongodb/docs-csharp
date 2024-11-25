@@ -1,4 +1,4 @@
-.. _csharp-update-fields:
+.. _csharp-update-many-fields:
 
 =============
 Update Fields

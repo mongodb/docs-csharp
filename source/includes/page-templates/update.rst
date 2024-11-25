@@ -41,7 +41,7 @@ The ``|sync-method|()`` and ``|async-method|()`` methods accept the following pa
      - An instance of the ``UpdateDefinition`` class. This object specifies the kind of update
        operation, the fields to update, and the new value for each field. To learn how to
        create an ``UpdateDefinition`` object,
-       see :ref:`csharp-update-fields` and :ref:`csharp-update-arrays`. 
+       see :ref:`csharp-|tab-id|-fields` and :ref:`csharp-|tab-id|-arrays`. 
 
        **Data Type:** `UpdateDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinition-1.html>`__
 
@@ -95,7 +95,7 @@ operation:
    .. tab:: |sync-method| (Sync)
       :tabid: |tab-id|-sync
 
-      .. literalinclude:: /includes/code-examples/update-one/|sync-method|.cs
+      .. literalinclude:: /includes/code-examples/|sync-method|Arrays.cs
          :language: csharp
          :copyable: true
          :dedent:
@@ -105,7 +105,7 @@ operation:
    .. tab:: |sync-method| (Async)
       :tabid: |tab-id|-async
 
-      .. literalinclude:: /includes/code-examples/update-one/|sync-method|.cs
+      .. literalinclude:: /includes/code-examples/|sync-method|Arrays.cs
          :language: csharp
          :copyable: true
          :dedent:
@@ -149,7 +149,7 @@ operation:
    .. tab:: |sync-method| (Sync)
       :tabid: |tab-id|-sync
 
-      .. literalinclude:: /includes/code-examples/update-one/|sync-method|.cs
+      .. literalinclude:: /includes/code-examples/|sync-method|.cs
          :language: csharp
          :copyable: true
          :dedent:
@@ -159,7 +159,7 @@ operation:
    .. tab:: |sync-method| (Async)
       :tabid: |tab-id|-async
 
-      .. literalinclude:: /includes/code-examples/update-one/|sync-method|.cs
+      .. literalinclude:: /includes/code-examples/|sync-method|.cs
          :language: csharp
          :copyable: true
          :dedent:
@@ -178,6 +178,7 @@ operation:
 
 Configuration Options
 ---------------------
+
 The ``|sync-method|()`` and ``|async-method|()`` methods optionally accept an
 ``UpdateOptions`` object as a parameter. You can use this argument to configure the
 update operation.
@@ -245,8 +246,8 @@ The ``UpdateOptions`` class contains the following properties:
 Return Value
 ------------
 
-The ``|sync-method|()`` and ``UpdateMany()`` methods return an ``UpdateResult`` 
-object. The ``|async-method|()`` and ``UpdateManyAsync()`` methods return an asynchronous
+The ``|sync-method|()`` returns an ``UpdateResult``, and the ``|async-method|()``
+method returns an asynchronous
 version of this type, a ``Task<UpdateResult>`` object.
 The ``UpdateResult`` class contains the following properties:
 
@@ -258,24 +259,24 @@ The ``UpdateResult`` class contains the following properties:
      - Description
 
    * - ``IsAcknowledged``
-     - Indicates whether the replace operation was acknowledged by MongoDB.
+     - Indicates whether the update operation was acknowledged by MongoDB.
 
        **Data Type:** ``bool``
    
    * - ``IsModifiedCountAvailable``
-     - Indicates whether you can read the count of replaced records on the
-       ``ReplaceOneResult``.
+     - Indicates whether you can read the count of update records on the
+       ``UpdateResult``.
 
        **Data Type:** ``bool``
 
    * - ``MatchedCount``
      - The number of documents that matched the query filter, regardless of
-       whether one was replaced. 
+       whether one was updated. 
 
        **Data Type:** ``long``
 
    * - ``ModifiedCount``
-     - The number of documents replaced by the replace operation. 
+     - The number of documents updated by the update operation. 
 
        **Data Type:** ``long``
 
@@ -292,7 +293,6 @@ For runnable examples of the update operations, see the following usage
 examples:
 
 - :ref:`csharp-update-one`
-- :ref:`csharp-update-many`
 
 To learn more about creating query filters, see the :ref:`csharp-specify-query` guide.
 
@@ -304,8 +304,6 @@ guide, see the following API documentation:
 
 * `|sync-method|() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.|sync-method|.html>`__
 * `|async-method|() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.|async-method|.html>`__
-* `UpdateMany() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateMany.html>`__
-* `UpdateManyAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateManyAsync.html>`__
 * `UpdateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOptions.html>`__
 * `UpdateResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateResult.html>`__
 

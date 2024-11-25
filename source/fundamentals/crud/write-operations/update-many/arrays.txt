@@ -682,32 +682,173 @@ This method accepts the following parameters:
        **Data Type:** ``TItem``
 
 You can use the
-:manual:`positional operator </reference/operator/update/positional/#mongodb-update-up.->` (``$``)
-to query and update specific values in the array.
+:manual:`positional operator </reference/operator/update/positional/#mongodb-update-up.->`
+in combination with the ``Set()`` method to query and update specific values in the array.
+The following sections describe different ways to use the positional operator.
 
-.. note:: The array field must be part of the query filter.
+First Matching Value
+~~~~~~~~~~~~~~~~~~~~
 
-The following code example uses the ``Set()`` method and the positional operator to
-update remove all ``GradeEntry``
-objects where the ``Grade`` property is ``"F"`` from the ``Grades`` array in the
-matching documents:
+To update only the first value in an array that matches a query filter, use the positional operator
+(``$``) in combination with the ``Set()`` method.
 
-The following code example queries the ``restaurants`` collection for a document
-that contains a grade of 2. It then updates that grade to 22 in the matching documents.
-Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code.
+.. note::
+  
+   To use the positional operator, the array field must be part of the query filter.
 
-To update all array elements in the matching documents, use the all positional operator
-(``$[]``).
+The following example uses the ``Set()`` method and the positional operator to
+update the ``Grades`` array in all documents that match the query filter. First,
+it finds *only the first* ``GradeEntry`` object in the ``Grades`` array where the ``Grade`` property
+has the value ``"A"``. Then, it updates the ``Score`` property of the first matching
+``GradeEntry`` object to 100.
 
-The following code example queries the ``restaurants`` collection for a document
-where the ``name`` is ``"Downtown Deli"``. It then updates all that grade to 22 in the matching documents.
-Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code.
+.. tabs::
 
-To update all array elements that match your query filter, use the all positional operator
-(``$[]``). The array value must appear be part of the query filter.
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-positional-sync
 
-The following code example queries the ``restaurants`` collection for a document
-that contains a grade of 2. It then updates that grade to 22 in the matching documents.
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-positional
+         :end-before: // end-update-one-positional
+
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-positional-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-positional-async
+         :end-before: // end-update-one-positional-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-positional-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-positional
+         :end-before: // end-update-many-positional
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-positional-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-positional-async
+         :end-before: // end-update-many-positional-async
+
+All Matching Values
+~~~~~~~~~~~~~~~~~~~
+
+To update all values in an array that match a specified condition, use the filtered
+positional operator (``$[<identifier>]``) in combination with the ``Set()`` method.
+
+The following example uses the ``Set()`` method and the filtered positional operator
+to update the ``Score`` property of all matching
+``GradeEntry`` objects in the Grades`` array to 100 in all documents that match the
+query filter.
+
+.. tabs::
+
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-allpositional-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-allpositional
+         :end-before: // end-update-one-allpositional
+
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-allpositional-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-allpositional-async
+         :end-before: // end-update-one-allpositional-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-allpositional-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-allpositional
+         :end-before: // end-update-many-allpositional
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-allpositional-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-allpositional-async
+         :end-before: // end-update-many-allpositional-async
+
+All Values
+~~~~~~~~~~
+
+To update all values in an array that match a query filter, use the all-positional operator
+(``$[]``) in combination with the ``Set()`` method.
+
+The following example uses the ``Set()`` method and the all-positional operator
+to update the ``Score`` property of all ``GradeEntry`` objects in the Grades`` array
+to 100 in all documents that match the query filter.
+
+.. tabs::
+
+   .. tab:: UpdateOne (Sync)
+      :tabid: update-one-filteredpositional-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-filteredpositional
+         :end-before: // end-update-one-filteredpositional
+
+   .. tab:: UpdateOne (Async)
+      :tabid: update-one-filteredpositional-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-one-filteredpositional-async
+         :end-before: // end-update-one-filteredpositional-async
+
+   .. tab:: UpdateMany (Sync)
+      :tabid: update-many-filteredpositional-sync
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-filteredpositional
+         :end-before: // end-update-many-filteredpositional
+
+   .. tab:: UpdateMany (Async)
+      :tabid: update-many-filteredpositional-async
+
+      .. literalinclude:: /includes/code-examples/UpdateArrays.cs
+         :language: csharp
+         :copyable: true
+         :dedent:
+         :start-after: // start-update-many-filteredpositional-async
+         :end-before: // end-update-many-filteredpositional-async
+
 
 LINQ3 Provider
 ~~~~~~~~~~~~~~

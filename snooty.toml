@@ -4,7 +4,8 @@ toc_landing_pages = [
     "/usage-examples",
     "/fundamentals",
     "/fundamentals/serialization",
-    "/fundamentals/crud/write-operations/update",
+    "/fundamentals/crud/write-operations/update-one",
+    "/fundamentals/crud/write-operations/update-many",
     "/upgrade",
 ]
 name = "csharp"

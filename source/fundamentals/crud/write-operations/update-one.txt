@@ -1,0 +1,51 @@
+.. _csharp-change-guide:
+.. _csharp-update-documents:
+
+==========
+Update One
+==========
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: synchronous, asynchronous
+
+.. toctree::
+   :caption: Update Documents
+
+   Fields </fundamentals/crud/write-operations/update-one/fields>
+   Arrays </fundamentals/crud/write-operations/update-one/arrays>
+
+.. include:: /includes/page-templates/update.rst
+
+   .. replacement:: sync-method
+
+      UpdateOne
+   
+   .. replacement:: async-method
+
+      UpdateOneAsync
+   
+   .. replacement:: document-or-documents
+
+      document
+   
+   .. replacement:: tab-id
+
+      update-one
+    
+   .. replacement:: single-or-multiple
+
+      a single document
+   
+   .. replacement:: one-or-many
+     
+      one

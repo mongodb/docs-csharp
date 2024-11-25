@@ -82,11 +82,11 @@ The following example sets the write concern to ``WriteConcern.WMajority`` for a
    :language: csharp
    :dedent:
 
-.. note:: Collections and Databases are Immutable
+.. note:: Clients, Collections, and Databases are Immutable
 
-   ``IMongoDatabase`` and ``IMongoCollection`` instances are immutable. When you
-   set the write concern on a database or collection, the method returns a new
-   instance and does not affect the original instance.
+   ``IMongoClient``, ``IMongoDatabase``, and ``IMongoCollection`` instances are immutable.
+   When you set the write concern on a client, database, or collection, the method returns a new
+   instance with the specified settings and does not affect the original instance.
 
 For more information about write concern, see :manual:`Write Concern
 </reference/write-concern/>` in the {+mdb-server+} manual.

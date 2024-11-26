@@ -124,7 +124,7 @@ The following code example uses the ``Pipeline()`` method to combine a
 :manual:`$unset </reference/operator/update/unset/#mongodb-update-up.-unset>`
 operation:
 
-|pipeline-code-example-tabs
+|pipeline-code-example-tabs|
 
 .. note:: Unsupported Operations
 

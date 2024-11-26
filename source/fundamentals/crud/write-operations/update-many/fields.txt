@@ -23,6 +23,6 @@ Update Fields
 
       multiple MongoDB documents
 
-   .. replacement:: file-folder
+   .. replacement:: update-page-link
 
-      update-many
+      :ref:`<csharp-update-many>`

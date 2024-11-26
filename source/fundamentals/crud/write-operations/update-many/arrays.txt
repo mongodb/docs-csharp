@@ -23,54 +23,298 @@ Update Arrays
 
       UpdateMany
    
-   .. replacement:: file-folder
-
-      update-many
-   
    .. replacement:: matching-document-or-documents
 
       all matching documents
    
+   .. replacement:: update-page-link
+
+      :ref:`<csharp-update-many>`
+   
    .. replacement:: push-code-example-tabs
 
-      .. tab:: UpdateMany (Sync)
-         :tabid: update-many-push-sync
+      .. tabs::
+      
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-push-sync
 
-         .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
-            :language: csharp
-            :copyable: true
-            :dedent:
-            :start-after: // start-update-many-push
-            :end-before: // end-update-many-push
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-push
+               :end-before: // end-update-many-push
 
-      .. tab:: UpdateMany (Async)
-         :tabid: update-many-push-async
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-push-async
 
-         .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
-            :language: csharp
-            :copyable: true
-            :dedent:
-            :start-after: // start-update-many-push-async
-            :end-before: // end-update-many-push-async
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-push-async
+               :end-before: // end-update-many-push-async
 
    .. replacement:: addtoset-code-example-tabs
 
-      .. tab:: UpdateMany (Sync)
-         :tabid: update-many-addtoset-sync
+      .. tabs::
+      
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-addtoset-sync
 
-         .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
-            :language: csharp
-            :copyable: true
-            :dedent:
-            :start-after: // start-update-many-addtoset
-            :end-before: // end-update-many-addtoset
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-addtoset
+               :end-before: // end-update-many-addtoset
 
-      .. tab:: UpdateMany (Async)
-         :tabid: update-many-addtoset-async
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-addtoset-async
 
-         .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
-            :language: csharp
-            :copyable: true
-            :dedent:
-            :start-after: // start-update-many-addtoset-async
-            :end-before: // end-update-many-addtoset-async
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-addtoset-async
+               :end-before: // end-update-many-addtoset-async
+
+   .. replacement:: pusheach-code-example-tabs
+
+      .. tabs::
+      
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-pusheach-sync
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-pusheach
+               :end-before: // end-update-many-pusheach
+
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-pusheach-async
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-pusheach-async
+               :end-before: // end-update-many-pusheach-async
+
+   .. replacement:: addtoseteach-code-example-tabs
+
+      .. tabs::
+
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-addtoset-sync
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-addtoseteach
+               :end-before: // end-update-many-addtoseteach
+
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-addtoset-async
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-addtoseteach-async
+               :end-before: // end-update-many-addtoseteach-async
+   
+   .. replacement:: popfirst-code-example-tabs
+
+      .. tabs::
+
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-popfirst-sync
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-popfirst
+               :end-before: // end-update-many-popfirst
+
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-popfirst-async
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-popfirst-async
+               :end-before: // end-update-many-popfirst-async
+   
+   .. replacement:: poplast-code-example-tabs
+
+      .. tabs::
+      
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-poplast-sync
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-poplast
+               :end-before: // end-update-many-poplast
+
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-poplast-async
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-poplast-async
+               :end-before: // end-update-many-poplast-async
+
+   .. replacement:: pull-code-example-tabs
+
+      .. tabs::
+      
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-pull-sync
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-pull
+               :end-before: // end-update-many-pull
+
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-pull-async
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-pull-async
+               :end-before: // end-update-many-pull-async
+
+   .. replacement:: pullall-code-example-tabs
+
+      .. tabs::
+      
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-pullall-sync
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-pullall
+               :end-before: // end-update-many-pullall
+
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-pullall-async
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-pullall-async
+               :end-before: // end-update-many-pullall-async
+
+   .. replacement:: pullfilter-code-example-tabs
+
+      .. tabs::
+      
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-pullfilter-sync
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-pullfilter
+               :end-before: // end-update-many-pullfilter
+
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-pullfilter-async
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-pullfilter-async
+               :end-before: // end-update-many-pullfilter-async
+
+   .. replacement:: positional-code-example-tabs
+
+      .. tabs::
+      
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-positional-sync
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-positional
+               :end-before: // end-update-many-positional
+
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-positional-async
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-positional-async
+               :end-before: // end-update-many-positional-async
+
+   .. replacement:: filteredpositional-code-example-tabs
+
+      .. tabs::
+      
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-filteredpositional-sync
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-filteredpositional
+               :end-before: // end-update-many-filteredpositional
+
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-filteredpositional-async
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-filteredpositional-async
+               :end-before: // end-update-many-filteredpositional-async
+
+   .. replacement:: allpositional-code-example-tabs
+
+      .. tabs::
+      
+         .. tab:: UpdateMany (Sync)
+            :tabid: update-many-allpositional-sync
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-allpositional
+               :end-before: // end-update-many-allpositional
+
+         .. tab:: UpdateMany (Async)
+            :tabid: update-many-allpositional-async
+
+            .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
+               :language: csharp
+               :copyable: true
+               :dedent:
+               :start-after: // start-update-many-allpositional-async
+               :end-before: // end-update-many-allpositional-async

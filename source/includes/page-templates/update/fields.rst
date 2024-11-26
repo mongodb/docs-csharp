@@ -4,8 +4,8 @@ Overview
 On this page, you can learn how to use the {+driver-long+} to update
 fields in |one-or-multiple|. This page describes how to create ``UpdateDefinition<TDocument>``
 objects that specify the update operations you want to perform on fields.
-You can pass these objects to the update methods described on the
-:ref:`<csharp-|file-folder|>` page.
+You can pass these objects to the update methods described on the |update-page-link|
+page.
 
 The {+driver-short+} supports the field update operators described in the
 :manual:`{+mdb-server+} manual </reference/operator/update/#fields>`. To specify an

@@ -1,4 +1,4 @@
-.. _csharp-update-many:
+.. _csharp-examples-update-many:
 
 =====================
 Update Many Documents

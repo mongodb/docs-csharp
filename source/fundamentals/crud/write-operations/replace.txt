@@ -119,8 +119,8 @@ corresponding code.
          :language: csharp
          :copyable: true
          :dedent:
-         :start-after: // start-replace-one-sync
-         :end-before: // end-replace-one-sync
+         :start-after: // start-replace-one
+         :end-before: // end-replace-one
 
    .. tab:: Asynchronous
       :tabid: replace-one-async

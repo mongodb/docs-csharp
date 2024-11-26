@@ -32,6 +32,29 @@ Fundamentals
    /fundamentals/geo
    /fundamentals/odata
 
+   Connection </fundamentals/connection>
+   Databases & Collections </fundamentals/database-collection>
+   CRUD Operations </fundamentals/crud>
+   Operations with Builders </fundamentals/builders>
+   Atlas Search </fundamentals/atlas-search>
+   Stable API </fundamentals/stable-api>
+   Authentication </fundamentals/authentication>
+   Enterprise Authentication </fundamentals/enterprise-authentication>
+   Aggregation </fundamentals/aggregation>
+   LINQ </fundamentals/linq>
+   BSON Operations </fundamentals/bson>
+   Query </fundamentals/specify-query>
+   Serialization </fundamentals/serialization>
+   Transactions </fundamentals/transactions>
+   Indexes </fundamentals/indexes>
+   Logging </fundamentals/logging>
+   Time Series Collections </fundamentals/time-series>
+   In-Use Encryption </fundamentals/encrypt-fields>
+   Search Geospatially </fundamentals/geo>
+   Replica Set Operations </fundamentals/read-write-configuration>
+   OData </fundamentals/odata>
+
+
 - :ref:`Connecting to MongoDB <csharp-connection>`
 - :ref:`csharp-db-coll`
 - :ref:`csharp-crud`
@@ -52,3 +75,4 @@ Fundamentals
 - :ref:`Encrypt Fields <csharp-fle>`
 - :ref:`csharp-geo`
 - :ref:`csharp-odata`
+- :ref:`csharp-read-write-config`

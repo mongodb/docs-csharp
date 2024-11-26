@@ -11,8 +11,8 @@ Write Operations
    :caption: Write Operations
 
    Insert </fundamentals/crud/write-operations/insert>
-   Update </fundamentals/crud/write-operations/update-one>
-   Update </fundamentals/crud/write-operations/update-many>
+   Update One </fundamentals/crud/write-operations/update-one>
+   Update Many </fundamentals/crud/write-operations/update-many>
    Replace </fundamentals/crud/write-operations/replace>
    Delete </fundamentals/crud/write-operations/delete>
    Bulk Write Operations </fundamentals/crud/write-operations/bulk-write>

@@ -352,54 +352,6 @@ to 100 in |matching-document-or-documents|:
 
 |allpositional-code-example-tabs|
 
-LINQ3 Provider
-~~~~~~~~~~~~~~
-
-LINQ syntax contains a positional operator (``$``) that you can use to update elements in an array field.
-Previous versions of the {+driver-short+} supported both the LINQ2 and LINQ3 providers.
-In LINQ2, you could use ``-1`` to indicate use of the positional operator.
-
-For example, the ``Restaurant`` class contains an array field named ``Grades`` that
-contains multiple ``GradeEntry`` elements. If your application were using the LINQ2
-provider, you could use the following code sample to update the
-``Grade`` field of the first element in this array:
-
-.. code-block:: csharp
-   :linenos:
-
-   var anArrayId = ObjectId.GenerateNewId();
-   var another = new Restaurant
-   {
-       Id = ObjectId.GenerateNewId(),
-       AnArrayMember = new List<AnArrayClass>
-       {
-           new AnArrayClass { Id = anArrayId, Deleted = false }
-       }
-   };
-
-   await collection.UpdateOneAsync(
-      r => r.Id == "targetId" && r.AnArrayMember.Any(l => l.Id == anArrayId),
-      Builders<Restaurant>.Update.Set(l => l.AnArrayMember.ElementAt(-1).Deleted, true));
-
-.. code-block:: csharp
-   :linenos:
-
-   var anArrayId = ObjectId.GenerateNewId();
-   var another = new Restaurant
-   {
-       Id = ObjectId.GenerateNewId(),
-       AnArrayMember = new List<AnArrayClass>
-       {
-           new AnArrayClass { Id = anArrayId, Deleted = false }
-       }
-   };
-
-   await collection.UpdateOneAsync(
-      r => r.Id == "targetId" && r.AnArrayMember.Any(l => l.Id == anArrayId),
-      Builders<Restaurant>.Update.Set(l => l.AnArrayMember.ElementAt(-1).Deleted, true));
-
-This no longer works in LINQ3. Instead, you must use the following syntax:
-
 API Documentation
 -----------------
 

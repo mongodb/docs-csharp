@@ -106,7 +106,7 @@ public class UpdateManyArrays
         var newGrades = new List<GradeEntry>
         {
             new GradeEntry { Date = DateTime.Now, Grade = "A", Score = 95 },
-            new GradeEntry { Date = DateTime.Now, Grade = "B+", Score = 89, }
+            new GradeEntry { Date = DateTime.Now, Grade = "B+", Score = 89,}
         };
 
         var scoreSort = Builders<GradeEntry>.Sort.Descending(g => g.Score);
@@ -132,7 +132,7 @@ public class UpdateManyArrays
         var newGrades = new List<GradeEntry>
         {
             new GradeEntry { Date = DateTime.Now, Grade = "A", Score = 95 },
-            new GradeEntry { Date = DateTime.Now, Grade = "B+", Score = 89, }
+            new GradeEntry { Date = DateTime.Now, Grade = "B+", Score = 89,}
         };
 
         var scoreSort = Builders<GradeEntry>.Sort.Descending(g => g.Score);
@@ -255,7 +255,7 @@ public class UpdateManyArrays
         var newGrades = new List<GradeEntry>
         {
             new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
-            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95, }
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95,}
         };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
@@ -281,7 +281,7 @@ public class UpdateManyArrays
         var newGrades = new List<GradeEntry>
         {
             new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
-            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95, }
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95,}
         };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
@@ -307,9 +307,9 @@ public class UpdateManyArrays
         var newGrades = new List<GradeEntry>
         {
             new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
-            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95, },
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95,},
             new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85 },
-            new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85, }
+            new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85,}
         };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
@@ -336,9 +336,9 @@ public class UpdateManyArrays
         var newGrades = new List<GradeEntry>
         {
             new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
-            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95, },
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95,},
             new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85 },
-            new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85, }
+            new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85,}
         };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
@@ -365,9 +365,9 @@ public class UpdateManyArrays
         var newGrades = new List<GradeEntry>
         {
             new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 10 },
-            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 21, },
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 21,},
             new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 47 },
-            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 6, }
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 6,}
         };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
@@ -393,9 +393,9 @@ public class UpdateManyArrays
         var newGrades = new List<GradeEntry>
         {
             new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 10 },
-            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 21, },
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 21,},
             new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 47 },
-            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 6, }
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 6,}
         };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
@@ -415,7 +415,7 @@ public class UpdateManyArrays
     {
         // start-update-many-positional
         var filter = Builders<Restaurant>.Filter
-                         .Eq("name", "Downtown Deli") &
+            .Eq("name", "Downtown Deli") &
                      Builders<Restaurant>.Filter.Eq("grades.grade", "A");
 
         // Set Score = 100 in first GradeEntry where Grade = "A"
@@ -432,7 +432,7 @@ public class UpdateManyArrays
     {
         // start-update-many-positional-linq
         var filter = Builders<Restaurant>.Filter
-                         .Eq("name", "Downtown Deli") &
+            .Eq("name", "Downtown Deli") &
                      Builders<Restaurant>.Filter.Eq("grades.grade", "A");
 
         var update = Builders<Restaurant>.Update
@@ -447,7 +447,7 @@ public class UpdateManyArrays
     {
         // start-update-many-positional-async
         var filter = Builders<Restaurant>.Filter
-                         .Eq("name", "Downtown Deli") &
+            .Eq("name", "Downtown Deli") &
                      Builders<Restaurant>.Filter
                          .Eq("grades.grade", "A");
 
@@ -465,7 +465,7 @@ public class UpdateManyArrays
     {
         // start-update-many-positional-linq-async
         var filter = Builders<Restaurant>.Filter
-                         .Eq("name", "Downtown Deli") &
+            .Eq("name", "Downtown Deli") &
                      Builders<Restaurant>.Filter.Eq("grades.grade", "A");
 
         var update = Builders<Restaurant>.Update
@@ -552,7 +552,7 @@ public class UpdateManyArrays
             new BsonDocumentArrayFilterDefinition<Restaurant>(
                 new BsonDocument
                 {
-                    { "gradeEntry.score", new BsonDocument { { "$gte", 94 } } }
+                    { "gradeEntry.score", new BsonDocument { { "$gte", 94} } }
                 })
         };
 
@@ -578,7 +578,7 @@ public class UpdateManyArrays
             new BsonDocumentArrayFilterDefinition<Restaurant>(
                 new BsonDocument
                 {
-                    { "gradeEntry.score", new BsonDocument { { "$gte", 94 } } }
+                    { "gradeEntry.score", new BsonDocument { { "$gte", 94} } }
                 })
         };
 
@@ -603,7 +603,7 @@ public class UpdateManyArrays
             new BsonDocumentArrayFilterDefinition<Restaurant>(
                 new BsonDocument
                 {
-                    { "gradeEntry.score", new BsonDocument { { "$gte", 94 } } }
+                    { "gradeEntry.score", new BsonDocument { { "$gte", 94} } }
                 })
         };
 
@@ -629,7 +629,7 @@ public class UpdateManyArrays
             new BsonDocumentArrayFilterDefinition<Restaurant>(
                 new BsonDocument
                 {
-                    { "gradeEntry.score", new BsonDocument { { "$gte", 94 } } }
+                    { "gradeEntry.score", new BsonDocument { { "$gte", 94} } }
                 })
         };
 

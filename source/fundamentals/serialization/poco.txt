@@ -259,7 +259,7 @@ The following code sample maps the ``Identifier`` property to the
 .. note:: Nested Document Ids
 
    The ``_id`` field mapping logic described in this section only applies to the
-   root document, and does not apply to nested documents.
+   root document and does not apply to nested documents.
 
 Omit Empty Fields
 ~~~~~~~~~~~~~~~~~

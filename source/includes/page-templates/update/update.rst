@@ -2,7 +2,7 @@ Overview
 --------
 
 In this guide, you can learn how to use the {+driver-long+} to update
-values in MongoDB documents.
+values in |single-or-multiple|.
 
 The {+driver-short+} provides the following methods to update values:
 
@@ -11,12 +11,9 @@ The {+driver-short+} provides the following methods to update values:
 
 The following sections describe these methods in more detail.
 
-.. note:: Method Overloads
+.. include:: /includes/method-overloads.rst
 
-   Many of the methods in this guide have multiple overloads. The examples
-   in this guide use the simplest overload for demonstration purposes. For
-   more information about the available overloads, see the
-   `API documentation. <{+new-api-root+}/index.html>`__
+.. include:: /includes/atlas-sample-data.rst
 
 Methods and Parameters
 ----------------------
@@ -248,10 +245,9 @@ The ``UpdateResult`` class contains the following properties:
 Additional Information
 ----------------------
 
-For runnable examples of the update operations, see the following usage
-examples:
+|instruqt-lab-instructions|
 
-- :ref:`csharp-update-one`
+For runnable examples of the update operations, see the |usage-examples-link| page.
 
 To learn more about creating query filters, see the :ref:`csharp-specify-query` guide.
 
@@ -261,13 +257,9 @@ API Documentation
 For more information about any of the methods or types discussed in this
 guide, see the following API documentation:
 
-* `|sync-method|() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.|sync-method|.html>`__
-* `|async-method|() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.|async-method|.html>`__
-* `UpdateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOptions.html>`__
-* `UpdateResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateResult.html>`__
+- |sync-api-link|
+- |async-api-link|
+- `UpdateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOptions.html>`__
+- `UpdateResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateResult.html>`__
 
-.. _csharp-update-instruqt-lab:
-
-.. instruqt:: /mongodb-docs/tracks/update-a-document---c-net-driver?token=em_69t_l-j0BC_en7Uy
-   :title: UpdateManyAsync() Lesson
-   :drawer:
+|instruqt-lab-component|

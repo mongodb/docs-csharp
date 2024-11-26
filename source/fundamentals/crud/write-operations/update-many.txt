@@ -48,6 +48,34 @@ Update Many
    .. replacement:: single-or-multiple
 
       multiple documents
+      
+   .. replacement:: usage-examples-link
+
+      :ref:`csharp-examples-update-many`
+   
+   .. replacement:: sync-api-link
+
+      `UpdateMany() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateMany.html>`__
+
+   .. replacement:: async-api-link
+
+      `UpdateManyAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateManyAsync.html>`__
+
+   .. replacement:: instruqt-lab-component
+
+      .. instruqt:: /mongodb-docs/tracks/update-a-document---c-net-driver?token=em_69t_l-j0BC_en7Uy
+         :title: UpdateManyAsync() Lesson
+         :drawer:
+
+   .. replacement:: instruqt-lab-instructions
+
+      This page includes a short interactive lab that demonstrates how to
+      modify data by using the ``UpdateManyAsync()`` method. You can complete this
+      lab directly in your browser window without installing MongoDB or a code editor.
+   
+      To start the lab, click the :guilabel:`Open Interactive Tutorial` button at the
+      top of the page. To expand the lab to a full-screen format, click the
+      full-screen button (:guilabel:`⛶`) in the top-right corner of the lab pane.
    
    .. replacement:: combine-code-example-tabs
 
@@ -96,3 +124,5 @@ Update Many
                :dedent:
                :start-after: // start-pipeline-async
                :end-before: // end-pipeline-async
+
+   

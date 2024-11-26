@@ -48,12 +48,28 @@ Update One
    .. replacement:: single-or-multiple
 
       a single document
+
+   .. replacement:: usage-examples-link
+
+      :ref:`csharp-examples-update-one`
+
+   .. replacement:: sync-api-link
+
+      `UpdateOne() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateOne.html>`__
+
+   .. replacement:: async-api-link
+
+      `UpdateOneAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateOneAsync.html>`__
+
+   .. replacement:: instruqt-lab-component
+
+   .. replacement:: instruqt-lab-instructions
    
    .. replacement:: combine-code-example-tabs
 
       .. tabs::
 
-         .. tab:: UpdateOne (Sync)
+         .. tab:: Synchronous
             :tabid: update-one-sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
@@ -63,7 +79,7 @@ Update One
                :start-after: // start-combine-sync
                :end-before: // end-combine-sync
 
-         .. tab:: UpdateOne (Async)
+         .. tab:: Asynchronous
             :tabid: update-one-async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
@@ -77,7 +93,7 @@ Update One
 
       .. tabs::
       
-         .. tab:: UpdateOne (Sync)
+         .. tab:: Synchronous
             :tabid: update-one-sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
@@ -87,7 +103,7 @@ Update One
                :start-after: // start-pipeline-sync
                :end-before: // end-pipeline-sync
 
-         .. tab:: UpdateOne (Async)
+         .. tab:: Asynchronous
             :tabid: update-one-async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs

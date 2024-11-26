@@ -24,7 +24,7 @@ Update Many
    Fields </fundamentals/crud/write-operations/update-many/fields>
    Arrays </fundamentals/crud/write-operations/update-many/arrays>
 
-.. include:: /includes/page-templates/update.rst
+.. include:: /includes/page-templates/update/update.rst
 
    .. replacement:: sync-method
 

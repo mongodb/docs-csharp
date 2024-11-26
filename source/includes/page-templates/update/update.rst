@@ -259,7 +259,7 @@ To learn more about creating query filters, see the :ref:`csharp-specify-query` 
 API Documentation
 ~~~~~~~~~~~~~~~~~
 
-To learn more about any of the methods or types discussed in this
+For more information about any of the methods or types discussed in this
 guide, see the following API documentation:
 
 * `|sync-method|() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.|sync-method|.html>`__

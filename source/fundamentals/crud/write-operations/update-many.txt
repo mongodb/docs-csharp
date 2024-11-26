@@ -1,4 +1,3 @@
-.. _csharp-change-guide:
 .. _csharp-update-many:
 
 ===========
@@ -38,10 +37,14 @@ Update Many
 
       documents
    
-   .. replacement:: tab-id
+   .. replacement:: fields-link
 
-      update-many
-    
+      :ref:`csharp-update-many-fields`
+
+   .. replacement:: arrays-link
+
+      :ref:`csharp-update-many-arrays`
+
    .. replacement:: single-or-multiple
 
       multiple documents

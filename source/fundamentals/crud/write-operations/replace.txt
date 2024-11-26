@@ -77,7 +77,7 @@ method. These methods accept the following parameters:
        query filters, see the
        :manual:`{+mdb-server+} manual </core/document/#query-filter-documents>`.
 
-       **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
+       **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
 
    * - ``replacement``
      - A *replacement* document, which specifies the fields and values to insert in the new 
@@ -90,7 +90,7 @@ method. These methods accept the following parameters:
      - *Optional.* An instance of the ``ReplaceOptions`` class that specifies the
        configuration for the replace operation. The default value is ``null``.
 
-       **Data Type:** `ReplaceOptions <{+new-api-root+>/MongoDB.Driver/MongoDB.Driver.ReplaceOptions.html>`__
+       **Data Type:** `ReplaceOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReplaceOptions.html>`__
 
    * - ``cancellationToken``
      - *Optional.* A token that you can use to cancel the operation.
@@ -265,7 +265,7 @@ The ``ReplaceOneResult`` class contains the following properties:
      - The ID of the document that was upserted in the database, if the driver
        performed an upsert.
 
-      **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
+       **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
 
 API Documentation
 ~~~~~~~~~~~~~~~~~

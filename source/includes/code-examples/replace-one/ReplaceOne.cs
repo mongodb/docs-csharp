@@ -47,7 +47,7 @@ public class ReplaceOne
 
     private static ReplaceOneResult ReplaceOneRestaurant()
     {
-        // start-replace-one-sync
+        // start-replace-one
         // Creates a filter for all restaurant documents that have a "cuisine" value of "Pizza"
         var filter = Builders<Restaurant>.Filter
             .Eq(r => r.Cuisine, "Pizza");
@@ -67,7 +67,7 @@ public class ReplaceOne
 
         // Replaces the existing restaurant document with the new document
         return _restaurantsCollection.ReplaceOne(filter, newPizzaRestaurant);
-        // end-replace-one-sync
+        // end-replace-one
     }
 
     private static ReplaceOneResult ReplaceOneRestaurantWithOptions()

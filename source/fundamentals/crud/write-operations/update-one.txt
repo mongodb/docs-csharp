@@ -1,4 +1,3 @@
-.. _csharp-change-guide:
 .. _csharp-update-one:
 
 ==========
@@ -38,10 +37,14 @@ Update One
 
       document
    
-   .. replacement:: tab-id
+   .. replacement:: fields-link
 
-      update-one
-    
+      :ref:`csharp-update-one-fields`
+
+   .. replacement:: arrays-link
+
+      :ref:`csharp-update-one-arrays`
+   
    .. replacement:: single-or-multiple
 
       a single document

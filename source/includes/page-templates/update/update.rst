@@ -7,7 +7,7 @@ values in MongoDB documents.
 The {+driver-short+} provides the following methods to update values:
 
 - |sync-method|: Updates one or more fields in |single-or-multiple|.
-- |async-method|: The asynchronous version of |sync-method|()``.
+- |async-method|: The asynchronous version of |sync-method|.
 
 The following sections describe these methods in more detail.
 
@@ -35,13 +35,12 @@ The |sync-method| and |async-method| methods accept the following parameters:
        to update.
        To learn how to create a query filter, see :ref:`csharp-specify-query`.
 
-       **Data Type:** `FilterDefinition <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`
+       **Data Type:** `FilterDefinition <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
 
    * - ``update``
      - An instance of the ``UpdateDefinition`` class. This object specifies the kind of update
        operation, the fields to update, and the new value for each field. To learn how to
-       create an ``UpdateDefinition`` object,
-       see :ref:`csharp-|tab-id|-fields` and :ref:`csharp-|tab-id|-arrays`. 
+       create an ``UpdateDefinition`` object, see |fields-link| and |arrays-link|.
 
        **Data Type:** `UpdateDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinition-1.html>`__
 

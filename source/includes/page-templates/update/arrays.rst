@@ -11,8 +11,8 @@ To create an ``UpdateDefinition`` object for one of these operators, call the co
 method from the ``Builders.Update`` property.
 The following sections describe these methods in more detail.
 
-After you create an ``UpdateDefinition`` object, pass it to the ``|sync-method|()``
-or ``|sync-method|Async()`` method. For more information about these methods, see
+After you create an ``UpdateDefinition`` object, pass it to the |sync-method|
+or |async-method| method. For more information about these methods, see
 the |update-page-link| page.
 
 .. include:: /includes/method-overloads.rst
@@ -305,7 +305,10 @@ This method accepts the following parameters:
 You can use the
 :manual:`positional operator </reference/operator/update/positional/#mongodb-update-up.->`
 in combination with the ``Set()`` method to query and update specific values in the array.
-The following sections describe different ways to use the positional operator.
+If you're using the LINQ3 provider, the {+driver-short+} also supports LINQ syntax in
+place of the positional operator.
+
+The following sections describe different ways to update matching values in an array field.
 
 First Matching Value
 ~~~~~~~~~~~~~~~~~~~~

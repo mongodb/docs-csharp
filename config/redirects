@@ -18,3 +18,4 @@ raw: ${prefix}/master -> ${base}/upcoming/
 [*-v2.30]: ${prefix}/${version}/upgrade/v3/ -> ${base}/${version}/upgrade/
 [*-master]: ${prefix}/${version}/fundamentals/crud/write-operations/modify/#replace-operation -> ${base}/${version}/fundamentals/crud/write-operations/replace/
 [*-master]: ${prefix}/${version}/fundamentals/crud/write-operations/modify/ -> ${base}/${version}/fundamentals/crud/write-operations/
+[*-master] ${prefix}/${version}/fundamentals/builders/#define-an-update -> ${base}/${version}/fundamentals/crud/write-operations

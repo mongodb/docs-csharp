@@ -28,11 +28,11 @@ Update Many
 
    .. replacement:: sync-method
 
-      UpdateMany
+      ``UpdateMany()``
    
    .. replacement:: async-method
 
-      UpdateManyAsync
+      ``UpdateManyAsync()``
    
    .. replacement:: document-or-documents
 

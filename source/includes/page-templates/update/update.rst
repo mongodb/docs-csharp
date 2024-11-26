@@ -6,8 +6,8 @@ values in MongoDB documents.
 
 The {+driver-short+} provides the following methods to update values:
 
-- ``|sync-method|()``: Updates one or more fields in |single-or-multiple|.
-- ``|async-method|()``: The asynchronous version of ``|sync-method|()``.
+- |sync-method|: Updates one or more fields in |single-or-multiple|.
+- |async-method|: The asynchronous version of |sync-method|()``.
 
 The following sections describe these methods in more detail.
 
@@ -21,7 +21,7 @@ The following sections describe these methods in more detail.
 Methods and Parameters
 ----------------------
 
-The ``|sync-method|()`` and ``|async-method|()`` methods accept the following parameters:
+The |sync-method| and |async-method| methods accept the following parameters:
 
 .. list-table::
    :widths: 30 70
@@ -60,7 +60,7 @@ The ``|sync-method|()`` and ``|async-method|()`` methods accept the following pa
 Update Multiple Values
 ----------------------
 
-The ``|sync-method|()`` and ``|async-method|()`` methods each accept only one
+The |sync-method| and |async-method| methods each accept only one
 ``UpdateDefinition`` object. The following sections describe how
 to update multiple values in a single method call.
 
@@ -139,7 +139,7 @@ operation:
 Configuration Options
 ---------------------
 
-The ``|sync-method|()`` and ``|async-method|()`` methods optionally accept an
+The |sync-method| and |async-method| methods optionally accept an
 ``UpdateOptions`` object as a parameter. You can use this argument to configure the
 update operation.
 
@@ -206,7 +206,7 @@ The ``UpdateOptions`` class contains the following properties:
 Return Value
 ------------
 
-The ``|sync-method|()`` returns an ``UpdateResult``, and the ``|async-method|()``
+The |sync-method| returns an ``UpdateResult``, and the |async-method|
 method returns an asynchronous
 version of this type, a ``Task<UpdateResult>`` object.
 The ``UpdateResult`` class contains the following properties:

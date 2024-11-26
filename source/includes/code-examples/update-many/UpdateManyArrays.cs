@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using WriteData.Models;
 
 namespace CSharpExamples.WriteData;
@@ -103,10 +104,10 @@ public class UpdateManyArrays
             .Eq("name", "Downtown Deli");
 
         var newGrades = new List<GradeEntry>
-            {
-                new GradeEntry { Date = DateTime.Now, Grade = "A", Score = 95 },
-                new GradeEntry { Date = DateTime.Now, Grade = "B+", Score = 89,}
-            };
+        {
+            new GradeEntry { Date = DateTime.Now, Grade = "A", Score = 95 },
+            new GradeEntry { Date = DateTime.Now, Grade = "B+", Score = 89, }
+        };
 
         var scoreSort = Builders<GradeEntry>.Sort.Descending(g => g.Score);
 
@@ -129,10 +130,10 @@ public class UpdateManyArrays
             .Eq("name", "Downtown Deli");
 
         var newGrades = new List<GradeEntry>
-            {
-                new GradeEntry { Date = DateTime.Now, Grade = "A", Score = 95 },
-                new GradeEntry { Date = DateTime.Now, Grade = "B+", Score = 89,}
-            };
+        {
+            new GradeEntry { Date = DateTime.Now, Grade = "A", Score = 95 },
+            new GradeEntry { Date = DateTime.Now, Grade = "B+", Score = 89, }
+        };
 
         var scoreSort = Builders<GradeEntry>.Sort.Descending(g => g.Score);
 
@@ -252,10 +253,10 @@ public class UpdateManyArrays
 
         // Add duplicate values to Grades array
         var newGrades = new List<GradeEntry>
-            {
-                new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
-                new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95,}
-            };
+        {
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95, }
+        };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
         _restaurantsCollection.UpdateMany(filter, addUpdate);
@@ -278,10 +279,10 @@ public class UpdateManyArrays
 
         // Add duplicate values to Grades array
         var newGrades = new List<GradeEntry>
-            {
-                new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
-                new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95,}
-            };
+        {
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95, }
+        };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
         await _restaurantsCollection.UpdateManyAsync(filter, addUpdate);
@@ -304,12 +305,12 @@ public class UpdateManyArrays
 
         // Add duplicate values to Grades array
         var newGrades = new List<GradeEntry>
-            {
-                new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
-                new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95,},
-                new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85 },
-                new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85,}
-            };
+        {
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95, },
+            new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85 },
+            new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85, }
+        };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
         _restaurantsCollection.UpdateMany(filter, addUpdate);
@@ -333,12 +334,12 @@ public class UpdateManyArrays
 
         // Add duplicate values to Grades array
         var newGrades = new List<GradeEntry>
-            {
-                new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
-                new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95,},
-                new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85 },
-                new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85,}
-            };
+        {
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95 },
+            new GradeEntry { Date = DateTime.MinValue, Grade = "A", Score = 95, },
+            new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85 },
+            new GradeEntry { Date = DateTime.MinValue, Grade = "B", Score = 85, }
+        };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
         await _restaurantsCollection.UpdateManyAsync(filter, addUpdate);
@@ -362,12 +363,12 @@ public class UpdateManyArrays
 
         // Add GradeEntry values with "Grade = F" to Grades array
         var newGrades = new List<GradeEntry>
-            {
-                new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 10 },
-                new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 21,},
-                new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 47 },
-                new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 6,}
-            };
+        {
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 10 },
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 21, },
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 47 },
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 6, }
+        };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
         _restaurantsCollection.UpdateMany(filter, addUpdate);
@@ -390,12 +391,12 @@ public class UpdateManyArrays
 
         // Add GradeEntry values with "Grade = F" to Grades array
         var newGrades = new List<GradeEntry>
-            {
-                new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 10 },
-                new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 21,},
-                new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 47 },
-                new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 6,}
-            };
+        {
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 10 },
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 21, },
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 47 },
+            new GradeEntry { Date = DateTime.Now, Grade = "F", Score = 6, }
+        };
         var addUpdate = Builders<Restaurant>.Update
             .PushEach("Grades", newGrades);
         await _restaurantsCollection.UpdateManyAsync(filter, addUpdate);
@@ -414,7 +415,7 @@ public class UpdateManyArrays
     {
         // start-update-many-positional
         var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli") &
+                         .Eq("name", "Downtown Deli") &
                      Builders<Restaurant>.Filter.Eq("grades.grade", "A");
 
         // Set Score = 100 in first GradeEntry where Grade = "A"
@@ -427,11 +428,26 @@ public class UpdateManyArrays
         // end-update-many-positional
     }
 
+    public static UpdateResult UpdateManyPositionalLinq()
+    {
+        // start-update-many-positional-linq
+        var filter = Builders<Restaurant>.Filter
+                         .Eq("name", "Downtown Deli") &
+                     Builders<Restaurant>.Filter.Eq("grades.grade", "A");
+
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.FirstMatchingElement().Score, 100);
+
+        var result = _restaurantsCollection.UpdateMany(filter, update);
+        return result;
+        // end-update-many-positional-linq
+    }
+
     public static async Task<UpdateResult> UpdateManyPositionalAsync()
     {
         // start-update-many-positional-async
         var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli") &
+                         .Eq("name", "Downtown Deli") &
                      Builders<Restaurant>.Filter
                          .Eq("grades.grade", "A");
 
@@ -443,6 +459,22 @@ public class UpdateManyArrays
 
         return result;
         // end-update-many-positional-async
+    }
+
+    public static async Task<UpdateResult> UpdateManyPositionalLinqAsync()
+    {
+        // start-update-many-positional-linq-async
+        var filter = Builders<Restaurant>.Filter
+                         .Eq("name", "Downtown Deli") &
+                     Builders<Restaurant>.Filter.Eq("grades.grade", "A");
+
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.FirstMatchingElement().Score, 100);
+
+        var result = await _restaurantsCollection.UpdateManyAsync(filter, update);
+
+        return result;
+        // end-update-many-positional-linq-async
     }
 
     public static UpdateResult UpdateManyAllPositional()
@@ -461,6 +493,22 @@ public class UpdateManyArrays
         // end-update-many-allpositional
     }
 
+    public static UpdateResult UpdateManyAllPositionalLinq()
+    {
+        // start-update-many-allpositional-linq
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        // Set Score = 100 in all GradeEntry objects
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.AllElements().Score, 100);
+
+        var result = _restaurantsCollection.UpdateMany(filter, update);
+
+        return result;
+        // end-update-many-allpositional-linq
+    }
+
     public static async Task<UpdateResult> UpdateManyAllPositionalAsync()
     {
         // start-update-many-allpositional-async
@@ -477,6 +525,22 @@ public class UpdateManyArrays
         // end-update-many-allpositional-async
     }
 
+    public static async Task<UpdateResult> UpdateManyAllPositionalLinqAsync()
+    {
+        // start-update-many-allpositional-linq-async
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        // Set Score = 100 in all GradeEntry objects
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.AllElements().Score, 100);
+
+        var result = await _restaurantsCollection.UpdateManyAsync(filter, update);
+
+        return result;
+        // end-update-many-allpositional-linq-async
+    }
+
     public static UpdateResult UpdateManyFilteredPositional()
     {
         // start-update-many-filteredpositional
@@ -484,13 +548,13 @@ public class UpdateManyArrays
             .Eq("name", "Downtown Deli");
 
         var arrayFilters = new List<ArrayFilterDefinition>
-            {
-                new BsonDocumentArrayFilterDefinition<Restaurant>(
-                    new BsonDocument
-                    {
-                        { "gradeEntry.score", new BsonDocument { { "$gte", 94} } }
-                    })
-            };
+        {
+            new BsonDocumentArrayFilterDefinition<Restaurant>(
+                new BsonDocument
+                {
+                    { "gradeEntry.score", new BsonDocument { { "$gte", 94 } } }
+                })
+        };
 
         // Set Grade = "A" in all GradeEntry objects where Score >= 94
         var update = Builders<Restaurant>.Update
@@ -503,6 +567,31 @@ public class UpdateManyArrays
         // end-update-many-filteredpositional
     }
 
+    public static UpdateResult UpdateManyFilteredPositionalLinq()
+    {
+        // start-update-many-filteredpositional-linq
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var arrayFilters = new List<ArrayFilterDefinition>
+        {
+            new BsonDocumentArrayFilterDefinition<Restaurant>(
+                new BsonDocument
+                {
+                    { "gradeEntry.score", new BsonDocument { { "$gte", 94 } } }
+                })
+        };
+
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.AllMatchingElements("gradeEntry").Score, 100);
+
+        var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
+        var result = _restaurantsCollection.UpdateMany(filter, update, updateOptions);
+
+        return result;
+        // end-update-many-filteredpositional-linq
+    }
+
     public static async Task<UpdateResult> UpdateManyFilteredPositionalAsync()
     {
         // start-update-many-filteredpositional-async
@@ -510,23 +599,48 @@ public class UpdateManyArrays
             .Eq("name", "Downtown Deli");
 
         var arrayFilters = new List<ArrayFilterDefinition>
-            {
-                new BsonDocumentArrayFilterDefinition<Restaurant>(
-                    new BsonDocument
-                    {
-                        { "gradeEntry.score", new BsonDocument { { "$gte", 94} } }
-                    })
-            };
+        {
+            new BsonDocumentArrayFilterDefinition<Restaurant>(
+                new BsonDocument
+                {
+                    { "gradeEntry.score", new BsonDocument { { "$gte", 94 } } }
+                })
+        };
 
         // Set Grade = "A" in all GradeEntry objects where Score >= 94
         var update = Builders<Restaurant>.Update
             .Set("grades.$[gradeEntry].grade", "F");
 
         var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
-        var result = await _restaurantsCollection.UpdateOneAsync(filter, update, updateOptions);
+        var result = await _restaurantsCollection.UpdateManyAsync(filter, update, updateOptions);
 
         return result;
         // end-update-many-filteredpositional-async
     }
-}
+
+    public static async Task<UpdateResult> UpdateManyFilteredPositionalLinqAsync()
+    {
+        // start-update-many-filteredpositional-linq-async
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var arrayFilters = new List<ArrayFilterDefinition>
+        {
+            new BsonDocumentArrayFilterDefinition<Restaurant>(
+                new BsonDocument
+                {
+                    { "gradeEntry.score", new BsonDocument { { "$gte", 94 } } }
+                })
+        };
+
+        // Set Grade = "A" in all GradeEntry objects where Score >= 94
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.AllMatchingElements("gradeEntry").Score, 100);
+
+        var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
+        var result = await _restaurantsCollection.UpdateManyAsync(filter, update, updateOptions);
+
+        return result;
+        // end-update-many-filteredpositional-linq-async
+    }
 }

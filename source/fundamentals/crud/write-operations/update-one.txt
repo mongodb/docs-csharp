@@ -28,11 +28,11 @@ Update One
 
    .. replacement:: sync-method
 
-      UpdateOne
+      ``UpdateOne()``
    
    .. replacement:: async-method
 
-      UpdateOneAsync
+      ``UpdateOneAsync()``
    
    .. replacement:: document-or-documents
 

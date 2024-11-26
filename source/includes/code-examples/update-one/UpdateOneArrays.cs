@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using WriteData.Models;
 
 namespace CSharpExamples.WriteData;
@@ -427,6 +428,21 @@ public static class UpdateOneArrays
         // end-update-one-positional
     }
 
+    public static UpdateResult UpdateOnePositionalLinq()
+    {
+        // start-update-one-positional-linq
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli") &
+                     Builders<Restaurant>.Filter.Eq("grades.grade", "A");
+
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.FirstMatchingElement().Score, 100);
+
+        var result = _restaurantsCollection.UpdateOne(filter, update);
+        return result;
+        // end-update-one-positional-linq
+    }
+
     public static async Task<UpdateResult> UpdateOnePositionalAsync()
     {
         // start-update-one-positional-async
@@ -445,6 +461,22 @@ public static class UpdateOneArrays
         // end-update-one-positional-async
     }
 
+    public static async Task<UpdateResult> UpdateOnePositionalLinqAsync()
+    {
+        // start-update-one-positional-linq-async
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli") &
+                     Builders<Restaurant>.Filter.Eq("grades.grade", "A");
+
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.FirstMatchingElement().Score, 100);
+
+        var result = await _restaurantsCollection.UpdateOneAsync(filter, update);
+
+        return result;
+        // end-update-one-positional-linq-async
+    }
+
     public static UpdateResult UpdateOneAllPositional()
     {
         // start-update-one-allpositional
@@ -461,6 +493,22 @@ public static class UpdateOneArrays
         // end-update-one-allpositional
     }
 
+    public static UpdateResult UpdateOneAllPositionalLinq()
+    {
+        // start-update-one-allpositional-linq
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        // Set Score = 100 in all GradeEntry objects
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.AllElements().Score, 100);
+
+        var result = _restaurantsCollection.UpdateOne(filter, update);
+
+        return result;
+        // end-update-one-allpositional-linq
+    }
+
     public static async Task<UpdateResult> UpdateOneAllPositionalAsync()
     {
         // start-update-one-allpositional-async
@@ -475,6 +523,22 @@ public static class UpdateOneArrays
 
         return result;
         // end-update-one-allpositional-async
+    }
+
+    public static async Task<UpdateResult> UpdateOneAllPositionalLinqAsync()
+    {
+        // start-update-one-allpositional-linq-async
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        // Set Score = 100 in all GradeEntry objects
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.AllElements().Score, 100);
+
+        var result = await _restaurantsCollection.UpdateOneAsync(filter, update);
+
+        return result;
+        // end-update-one-allpositional-linq-async
     }
 
     public static UpdateResult UpdateOneFilteredPositional()
@@ -503,6 +567,31 @@ public static class UpdateOneArrays
         // end-update-one-filteredpositional
     }
 
+    public static UpdateResult UpdateOneFilteredPositionalLinq()
+    {
+        // start-update-one-filteredpositional-linq
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var arrayFilters = new List<ArrayFilterDefinition>
+        {
+            new BsonDocumentArrayFilterDefinition<Restaurant>(
+                new BsonDocument
+                {
+                    { "gradeEntry.score", new BsonDocument { { "$gte", 94} } }
+                })
+        };
+
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.AllMatchingElements("gradeEntry").Score, 100);
+
+        var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
+        var result = _restaurantsCollection.UpdateOne(filter, update, updateOptions);
+
+        return result;
+        // end-update-one-filteredpositional-linq
+    }
+
     public static async Task<UpdateResult> UpdateOneFilteredPositionalAsync()
     {
         // start-update-one-filteredpositional-async
@@ -527,5 +616,31 @@ public static class UpdateOneArrays
 
         return result;
         // end-update-one-filteredpositional-async
+    }
+
+    public static async Task<UpdateResult> UpdateOneFilteredPositionalLinqAsync()
+    {
+        // start-update-one-filteredpositional-linq-async
+        var filter = Builders<Restaurant>.Filter
+            .Eq("name", "Downtown Deli");
+
+        var arrayFilters = new List<ArrayFilterDefinition>
+        {
+            new BsonDocumentArrayFilterDefinition<Restaurant>(
+                new BsonDocument
+                {
+                    { "gradeEntry.score", new BsonDocument { { "$gte", 94} } }
+                })
+        };
+
+        // Set Grade = "A" in all GradeEntry objects where Score >= 94
+        var update = Builders<Restaurant>.Update
+            .Set(restaurant => restaurant.Grades.AllMatchingElements("gradeEntry").Score, 100);
+
+        var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
+        var result = await _restaurantsCollection.UpdateOneAsync(filter, update, updateOptions);
+
+        return result;
+        // end-update-one-filteredpositional-linq-async
     }
 }

@@ -347,7 +347,7 @@ To update all values in an array that match a query filter, use the all-position
 (``$[]``) in combination with the ``Set()`` method.
 
 The following example uses the ``Set()`` method and the all-positional operator
-to update the ``Score`` property of all ``GradeEntry`` objects in the Grades`` array
+to update the ``Score`` property of all ``GradeEntry`` objects in the ``Grades`` array
 to 100 in |matching-document-or-documents|:
 
 |allpositional-code-example-tabs|

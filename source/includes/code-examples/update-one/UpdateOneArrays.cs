@@ -8,9 +8,7 @@ namespace CSharpExamples.WriteData;
 public static class UpdateOneArrays
 {
     private static IMongoCollection<Restaurant> _restaurantsCollection;
-    //private static string _mongoConnectionString = "<Your MongoDB URI>";
-    private static string _mongoConnectionString =
-       "mongodb+srv://mikewoofter:mikewoofter@cluster0.pw0q4.mongodb.net/?retryWrites=true&w=majority";
+    private static string _mongoConnectionString = "<Your MongoDB URI>";
 
     public static void Setup()
     {

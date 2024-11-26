@@ -102,7 +102,7 @@ public class UpdateMany
     {
         // start-combine-sync
         var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+            .Eq("cuisine", "Pizza");
 
         var combinedUpdate = Builders<Restaurant>.Update.Combine(
             Builders<Restaurant>.Update.Set("cuisine", "French"),
@@ -117,7 +117,7 @@ public class UpdateMany
     {
         // start-combine-async
         var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+            .Eq("cuisine", "Pizza");
 
         var combinedUpdate = Builders<Restaurant>.Update.Combine(
             Builders<Restaurant>.Update.Set("cuisine", "French"),
@@ -131,7 +131,7 @@ public class UpdateMany
     {
         // start-pipeline-sync
         var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+            .Eq("cuisine", "Pizza");
 
         var updatePipeline = Builders<Restaurant>.Update.Pipeline(
             PipelineDefinition<Restaurant, Restaurant>.Create(
@@ -148,7 +148,7 @@ public class UpdateMany
     {
         // start-pipeline-async
         var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+            .Eq("cuisine", "Pizza");
 
         var updatePipeline = Builders<Restaurant>.Update.Pipeline(
             PipelineDefinition<Restaurant, Restaurant>.Create(
@@ -163,42 +163,3 @@ public class UpdateMany
 
 }
 
-public class Restaurant
-{
-    public ObjectId Id { get; set; }
-
-    public string Name { get; set; }
-
-    [BsonElement("restaurant_id")]
-    public string RestaurantId { get; set; }
-
-    public string Cuisine { get; set; }
-
-    public Address Address { get; set; }
-
-    public string Borough { get; set; }
-
-    public List<GradeEntry> Grades { get; set; }
-}
-
-public class Address
-{
-    public string Building { get; set; }
-
-    [BsonElement("coord")]
-    public double[] Coordinates { get; set; }
-
-    public string Street { get; set; }
-
-    [BsonElement("zipcode")]
-    public string ZipCode { get; set; }
-}
-
-public class GradeEntry
-{
-    public DateTime Date { get; set; }
-
-    public string Grade { get; set; }
-
-    public float? Score { get; set; }
-}

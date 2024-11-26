@@ -46,10 +46,6 @@ Update One
 
       a single document
    
-   .. replacement:: one-or-many
-     
-      one
-
    .. replacement:: combine-code-example-tabs
 
       .. tabs::
@@ -80,17 +76,17 @@ Update One
       
          .. tab:: UpdateOne (Sync)
             :tabid: update-one-sync
-      
+
             .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
                :language: csharp
                :copyable: true
                :dedent:
                :start-after: // start-pipeline-sync
                :end-before: // end-pipeline-sync
-      
+
          .. tab:: UpdateOne (Async)
             :tabid: update-one-async
-      
+
             .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
                :language: csharp
                :copyable: true

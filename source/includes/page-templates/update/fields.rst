@@ -12,16 +12,6 @@ The {+driver-short+} supports the field update operators described in the
 update operation, call the corresponding method from the ``Builders.Update`` property. 
 The following sections describe these methods in more detail.
 
-.. tip:: Interactive Lab
-   
-   This page includes a short interactive lab that demonstrates how to
-   modify data by using the ``UpdateManyAsync()`` method. You can complete this
-   lab directly in your browser window without installing MongoDB or a code editor.
-
-   To start the lab, click the :guilabel:`Open Interactive Tutorial` button at the
-   top of the page. To expand the lab to a full-screen format, click the
-   full-screen button (:guilabel:`⛶`) in the top-right corner of the lab pane.
-
 .. include:: /includes/method-overloads.rst
 
 .. include:: /includes/atlas-sample-data.rst

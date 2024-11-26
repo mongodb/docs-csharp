@@ -116,9 +116,8 @@ Customize the Replace Operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``ReplaceOne()`` and ``ReplaceOneAsync()`` methods optionally accept a
-``ReplaceOptions`` object as an 
-additional parameter, which represents options you can use to configure the replace 
-operation.
+``ReplaceOptions`` object as a parameter, which represents options you can use to
+configure the replace operation.
 
 The ``ReplaceOptions`` class contains the following properties:
 

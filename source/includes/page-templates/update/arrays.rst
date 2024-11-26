@@ -304,7 +304,7 @@ This method accepts the following parameters:
 
 You can use the
 :manual:`positional operator </reference/operator/update/positional/#mongodb-update-up.->`
-in combination with the ``Set()`` method to query and update specific values in the array.
+with the ``Set()`` method to query and update specific values in the array.
 If you're using the LINQ3 provider, the {+driver-short+} also supports LINQ syntax in
 place of the positional operator.
 
@@ -314,7 +314,7 @@ First Matching Value
 ~~~~~~~~~~~~~~~~~~~~
 
 To update only the first value in an array that matches a query filter, use the
-positional operator (``$``) in combination with the ``Set()`` method.
+positional operator (``$``) with the ``Set()`` method.
 
 .. note::
   
@@ -332,7 +332,7 @@ All Matching Values
 ~~~~~~~~~~~~~~~~~~~
 
 To update all values in an array that match a specified condition, use the filtered
-positional operator (``$[<identifier>]``) in combination with the ``Set()`` method.
+positional operator (``$[<identifier>]``) with the ``Set()`` method.
 
 The following example uses the ``Set()`` method and the filtered positional operator
 to update the ``Score`` property of all matching
@@ -344,7 +344,7 @@ All Values
 ~~~~~~~~~~
 
 To update all values in an array that match a query filter, use the all-positional operator
-(``$[]``) in combination with the ``Set()`` method.
+(``$[]``) with the ``Set()`` method.
 
 The following example uses the ``Set()`` method and the all-positional operator
 to update the ``Score`` property of all ``GradeEntry`` objects in the ``Grades`` array

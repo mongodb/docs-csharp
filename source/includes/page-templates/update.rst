@@ -90,27 +90,7 @@ The following code example uses the ``Combine()`` method to combine a
 :manual:`$unset </reference/operator/update/unset/#mongodb-update-up.-unset>`
 operation:
 
-.. tabs::
-
-   .. tab:: |sync-method| (Sync)
-      :tabid: |tab-id|-sync
-
-      .. literalinclude:: /includes/code-examples/|sync-method|Arrays.cs
-         :language: csharp
-         :copyable: true
-         :dedent:
-         :start-after: // start-combine-sync
-         :end-before: // end-combine-sync
-
-   .. tab:: |sync-method| (Async)
-      :tabid: |tab-id|-async
-
-      .. literalinclude:: /includes/code-examples/|sync-method|Arrays.cs
-         :language: csharp
-         :copyable: true
-         :dedent:
-         :start-after: // start-combine-async
-         :end-before: // end-combine-async
+|combine-code-example-tabs|
 
 Update Pipelines
 ~~~~~~~~~~~~~~~~
@@ -144,27 +124,7 @@ The following code example uses the ``Pipeline()`` method to combine a
 :manual:`$unset </reference/operator/update/unset/#mongodb-update-up.-unset>`
 operation:
 
-.. tabs::
-
-   .. tab:: |sync-method| (Sync)
-      :tabid: |tab-id|-sync
-
-      .. literalinclude:: /includes/code-examples/|sync-method|.cs
-         :language: csharp
-         :copyable: true
-         :dedent:
-         :start-after: // start-pipeline-sync
-         :end-before: // end-pipeline-sync
-
-   .. tab:: |sync-method| (Async)
-      :tabid: |tab-id|-async
-
-      .. literalinclude:: /includes/code-examples/|sync-method|.cs
-         :language: csharp
-         :copyable: true
-         :dedent:
-         :start-after: // start-pipeline-async
-         :end-before: // end-pipeline-async
+|pipeline-code-example-tabs
 
 .. note:: Unsupported Operations
 

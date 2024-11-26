@@ -39,7 +39,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateOne (Sync)
+         .. tab:: Synchronous
             :tabid: update-one-push-sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -49,7 +49,7 @@ Update Arrays
                :start-after: // start-update-one-push
                :end-before: // end-update-one-push
 
-         .. tab:: UpdateOne (Async)
+         .. tab:: Asynchronous
             :tabid: update-one-push-async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -63,7 +63,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateOne (Sync)
+         .. tab:: Synchronous
             :tabid: update-one-addtoset-sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -73,7 +73,7 @@ Update Arrays
                :start-after: // start-update-one-addtoset
                :end-before: // end-update-one-addtoset
 
-         .. tab:: UpdateOne (Async)
+         .. tab:: Asynchronous
             :tabid: update-one-addtoset-async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -87,7 +87,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateOne (Sync)
+         .. tab:: Synchronous
             :tabid: update-one-pusheach-sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -97,7 +97,7 @@ Update Arrays
                :start-after: // start-update-one-pusheach
                :end-before: // end-update-one-pusheach
 
-         .. tab:: UpdateOne (Async)
+         .. tab:: Asynchronous
             :tabid: update-one-pusheach-async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -111,7 +111,7 @@ Update Arrays
 
       .. tabs::
 
-         .. tab:: UpdateOne (Sync)
+         .. tab:: Synchronous
             :tabid: update-one-addtoset-sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -121,7 +121,7 @@ Update Arrays
                :start-after: // start-update-one-addtoseteach
                :end-before: // end-update-one-addtoseteach
 
-         .. tab:: UpdateOne (Async)
+         .. tab:: Asynchronous
             :tabid: update-one-addtoset-async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -135,7 +135,7 @@ Update Arrays
 
       .. tabs::
 
-         .. tab:: UpdateOne (Sync)
+         .. tab:: Synchronous
             :tabid: update-one-popfirst-sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -145,7 +145,7 @@ Update Arrays
                :start-after: // start-update-one-popfirst
                :end-before: // end-update-one-popfirst
 
-         .. tab:: UpdateOne (Async)
+         .. tab:: Asynchronous
             :tabid: update-one-popfirst-async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -159,7 +159,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateOne (Sync)
+         .. tab:: Synchronous
             :tabid: update-one-poplast-sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -169,7 +169,7 @@ Update Arrays
                :start-after: // start-update-one-poplast
                :end-before: // end-update-one-poplast
 
-         .. tab:: UpdateOne (Async)
+         .. tab:: Asynchronous
             :tabid: update-one-poplast-async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -183,7 +183,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateOne (Sync)
+         .. tab:: Synchronous
             :tabid: update-one-pull-sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -193,7 +193,7 @@ Update Arrays
                :start-after: // start-update-one-pull
                :end-before: // end-update-one-pull
 
-         .. tab:: UpdateOne (Async)
+         .. tab:: Asynchronous
             :tabid: update-one-pull-async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -207,7 +207,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateOne (Sync)
+         .. tab:: Synchronous
             :tabid: update-one-pullall-sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -217,7 +217,7 @@ Update Arrays
                :start-after: // start-update-one-pullall
                :end-before: // end-update-one-pullall
 
-         .. tab:: UpdateOne (Async)
+         .. tab:: Asynchronous
             :tabid: update-one-pullall-async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -231,7 +231,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateOne (Sync)
+         .. tab:: Synchronous
             :tabid: update-one-pullfilter-sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs
@@ -241,7 +241,7 @@ Update Arrays
                :start-after: // start-update-one-pullfilter
                :end-before: // end-update-one-pullfilter
 
-         .. tab:: UpdateOne (Async)
+         .. tab:: Asynchronous
             :tabid: update-one-pullfilter-async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOneArrays.cs

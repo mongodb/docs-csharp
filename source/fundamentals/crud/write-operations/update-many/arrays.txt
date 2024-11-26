@@ -39,7 +39,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateMany (Sync)
+         .. tab:: Synchronous
             :tabid: update-many-push-sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -49,7 +49,7 @@ Update Arrays
                :start-after: // start-update-many-push
                :end-before: // end-update-many-push
 
-         .. tab:: UpdateMany (Async)
+         .. tab:: Asynchronous
             :tabid: update-many-push-async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -63,7 +63,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateMany (Sync)
+         .. tab:: Synchronous
             :tabid: update-many-addtoset-sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -73,7 +73,7 @@ Update Arrays
                :start-after: // start-update-many-addtoset
                :end-before: // end-update-many-addtoset
 
-         .. tab:: UpdateMany (Async)
+         .. tab:: Asynchronous
             :tabid: update-many-addtoset-async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -87,7 +87,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateMany (Sync)
+         .. tab:: Synchronous
             :tabid: update-many-pusheach-sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -97,7 +97,7 @@ Update Arrays
                :start-after: // start-update-many-pusheach
                :end-before: // end-update-many-pusheach
 
-         .. tab:: UpdateMany (Async)
+         .. tab:: Asynchronous
             :tabid: update-many-pusheach-async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -111,7 +111,7 @@ Update Arrays
 
       .. tabs::
 
-         .. tab:: UpdateMany (Sync)
+         .. tab:: Synchronous
             :tabid: update-many-addtoset-sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -121,7 +121,7 @@ Update Arrays
                :start-after: // start-update-many-addtoseteach
                :end-before: // end-update-many-addtoseteach
 
-         .. tab:: UpdateMany (Async)
+         .. tab:: Asynchronous
             :tabid: update-many-addtoset-async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -135,7 +135,7 @@ Update Arrays
 
       .. tabs::
 
-         .. tab:: UpdateMany (Sync)
+         .. tab:: Synchronous
             :tabid: update-many-popfirst-sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -145,7 +145,7 @@ Update Arrays
                :start-after: // start-update-many-popfirst
                :end-before: // end-update-many-popfirst
 
-         .. tab:: UpdateMany (Async)
+         .. tab:: Asynchronous
             :tabid: update-many-popfirst-async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -159,7 +159,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateMany (Sync)
+         .. tab:: Synchronous
             :tabid: update-many-poplast-sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -169,7 +169,7 @@ Update Arrays
                :start-after: // start-update-many-poplast
                :end-before: // end-update-many-poplast
 
-         .. tab:: UpdateMany (Async)
+         .. tab:: Asynchronous
             :tabid: update-many-poplast-async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -183,7 +183,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateMany (Sync)
+         .. tab:: Synchronous
             :tabid: update-many-pull-sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -193,7 +193,7 @@ Update Arrays
                :start-after: // start-update-many-pull
                :end-before: // end-update-many-pull
 
-         .. tab:: UpdateMany (Async)
+         .. tab:: Asynchronous
             :tabid: update-many-pull-async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -207,7 +207,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateMany (Sync)
+         .. tab:: Synchronous
             :tabid: update-many-pullall-sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -217,7 +217,7 @@ Update Arrays
                :start-after: // start-update-many-pullall
                :end-before: // end-update-many-pullall
 
-         .. tab:: UpdateMany (Async)
+         .. tab:: Asynchronous
             :tabid: update-many-pullall-async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -231,7 +231,7 @@ Update Arrays
 
       .. tabs::
       
-         .. tab:: UpdateMany (Sync)
+         .. tab:: Synchronous
             :tabid: update-many-pullfilter-sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
@@ -241,7 +241,7 @@ Update Arrays
                :start-after: // start-update-many-pullfilter
                :end-before: // end-update-many-pullfilter
 
-         .. tab:: UpdateMany (Async)
+         .. tab:: Asynchronous
             :tabid: update-many-pullfilter-async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs

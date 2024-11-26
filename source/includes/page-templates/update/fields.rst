@@ -231,15 +231,15 @@ method accepts the following parameter:
 API Documentation
 -----------------
 
-For more information about any of the methods or types discussed in this
+For more information about any of the methods discussed in this
 guide, see the following API documentation:
 
-- `Builders.Update.Inc() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders.Update.Inc-2.html>`__
-- `Builders.Update.Mul() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders.Update.Mul-2.html>`__
-- `Builders.Update.Rename() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders.Update.Rename-2.html>`__
-- `Builders.Update.Set() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders.Update.Set-2.html>`__
-- `Builders.Update.Max() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders.Update.Max-2.html>`__
-- `Builders.Update.Min() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders.Update.Min-2.html>`__
-- `Builders.Update.SetOnInsert() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders.Update.SetOnInsert-2.html>`__
-- `Builders.Update.CurrentDate() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders.Update.CurrentDate-2.html>`__
-- `Builders.Update.Unset() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders.Update.Unset-2.html>`__
+- `Builders.Update.Inc() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinitionBuilder-1.Inc.html>`__
+- `Builders.Update.Mul() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinitionBuilder-1.Mul.html>`__
+- `Builders.Update.Rename() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinitionBuilder-1.Rename.html>`__
+- `Builders.Update.Set() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinitionBuilder-1.Set.html>`__
+- `Builders.Update.Max() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinitionBuilder-1.Max.html>`__
+- `Builders.Update.Min() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinitionBuilder-1.Min.html>`__
+- `Builders.Update.SetOnInsert() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinitionBuilder-1.SetOnInsert.html>`__
+- `Builders.Update.CurrentDate() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinitionBuilder-1.CurrentDate.html>`__
+- `Builders.Update.Unset() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinitionBuilder-1.Unset.html>`__

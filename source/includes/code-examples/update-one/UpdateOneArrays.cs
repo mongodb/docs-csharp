@@ -26,8 +26,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOnePush()
     {
         // start-update-one-push
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var update = Builders<Restaurant>.Update
             .Push(restaurant => restaurant.Grades, new GradeEntry()
@@ -46,8 +45,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOnePushAsync()
     {
         // start-update-one-push-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var update = Builders<Restaurant>.Update
             .Push(restaurant => restaurant.Grades, new GradeEntry()
@@ -66,8 +64,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOneAddToSet()
     {
         // start-update-one-addtoset
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var firstGradeEntry = _restaurantsCollection.Find(filter).FirstOrDefault().Grades[0];
 
@@ -83,8 +80,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOneAddToSetAsync()
     {
         // start-update-one-addtoset-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var firstGradeEntry = _restaurantsCollection.Find(filter).FirstOrDefault().Grades[0];
 
@@ -100,8 +96,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOnePushEach()
     {
         // start-update-one-pusheach
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var newGrades = new List<GradeEntry>
         {
@@ -126,8 +121,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOnePushEachAsync()
     {
         // start-update-one-pusheach-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var newGrades = new List<GradeEntry>
         {
@@ -152,8 +146,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOneAddToSetEach()
     {
         // start-update-one-addtoseteach
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var doc = _restaurantsCollection.Find(filter).FirstOrDefault();
         var firstGradeEntries = new List<GradeEntry> { doc.Grades[0], doc.Grades[1] };
@@ -170,8 +163,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOneAddToSetEachAsync()
     {
         // start-update-one-addtoseteach-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var doc = _restaurantsCollection.Find(filter).FirstOrDefault();
         var firstGradeEntries = new List<GradeEntry> { doc.Grades[0], doc.Grades[1] };
@@ -188,8 +180,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOnePopFirst()
     {
         // start-update-one-popfirst
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var update = Builders<Restaurant>.Update
             .PopFirst(restaurant => restaurant.Grades);
@@ -203,8 +194,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOnePopFirstAsync()
     {
         // start-update-one-popfirst-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var update = Builders<Restaurant>.Update
             .PopFirst(restaurant => restaurant.Grades);
@@ -218,8 +208,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOnePopLast()
     {
         // start-update-one-poplast
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var update = Builders<Restaurant>.Update
             .PopLast(restaurant => restaurant.Grades);
@@ -233,8 +222,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOnePopLastAsync()
     {
         // start-update-one-poplast-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var update = Builders<Restaurant>.Update
             .PopLast(restaurant => restaurant.Grades);
@@ -248,8 +236,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOnePull()
     {
         // start-update-one-pull
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         // Add duplicate values to Grades array
         var newGrades = new List<GradeEntry>
@@ -274,8 +261,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOnePullAsync()
     {
         // start-update-one-pull-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         // Add duplicate values to Grades array
         var newGrades = new List<GradeEntry>
@@ -300,8 +286,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOnePullAll()
     {
         // start-update-one-pullall
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         // Add duplicate values to Grades array
         var newGrades = new List<GradeEntry>
@@ -329,8 +314,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOnePullAllAsync()
     {
         // start-update-one-pullall-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         // Add duplicate values to Grades array
         var newGrades = new List<GradeEntry>
@@ -358,8 +342,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOnePullFilter()
     {
         // start-update-one-pullfilter
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         // Add GradeEntry values with "Grade = F" to Grades array
         var newGrades = new List<GradeEntry>
@@ -386,8 +369,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOnePullFilterAsync()
     {
         // start-update-one-pullfilter-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         // Add GradeEntry values with "Grade = F" to Grades array
         var newGrades = new List<GradeEntry>
@@ -414,9 +396,8 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOnePositional()
     {
         // start-update-one-positional
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli") &
-                     Builders<Restaurant>.Filter.Eq("grades.grade", "A");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli") &
+                    Builders<Restaurant>.Filter.Eq("grades.grade", "A");
 
         // Set Score = 100 in first GradeEntry where Grade = "A"
         var update = Builders<Restaurant>.Update
@@ -431,9 +412,8 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOnePositionalLinq()
     {
         // start-update-one-positional-linq
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli") &
-                     Builders<Restaurant>.Filter.Eq("grades.grade", "A");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli") &
+                    Builders<Restaurant>.Filter.Eq("grades.grade", "A");
 
         var update = Builders<Restaurant>.Update
             .Set(restaurant => restaurant.Grades.FirstMatchingElement().Score, 100);
@@ -446,10 +426,8 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOnePositionalAsync()
     {
         // start-update-one-positional-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli") &
-                     Builders<Restaurant>.Filter
-                         .Eq("grades.grade", "A");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli") &
+                    Builders<Restaurant>.Filter.Eq("grades.grade", "A");
 
         // Set Score = 100 in first GradeEntry where Grade = "A"
         var update = Builders<Restaurant>.Update
@@ -464,9 +442,8 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOnePositionalLinqAsync()
     {
         // start-update-one-positional-linq-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli") &
-                     Builders<Restaurant>.Filter.Eq("grades.grade", "A");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli") &
+                    Builders<Restaurant>.Filter.Eq("grades.grade", "A");
 
         var update = Builders<Restaurant>.Update
             .Set(restaurant => restaurant.Grades.FirstMatchingElement().Score, 100);
@@ -480,8 +457,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOneAllPositional()
     {
         // start-update-one-allpositional
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         // Set Score = 100 in all GradeEntry objects
         var update = Builders<Restaurant>.Update
@@ -496,8 +472,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOneAllPositionalLinq()
     {
         // start-update-one-allpositional-linq
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         // Set Score = 100 in all GradeEntry objects
         var update = Builders<Restaurant>.Update
@@ -512,8 +487,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOneAllPositionalAsync()
     {
         // start-update-one-allpositional-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         // Set Score = 100 in all GradeEntry objects
         var update = Builders<Restaurant>.Update
@@ -528,8 +502,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOneAllPositionalLinqAsync()
     {
         // start-update-one-allpositional-linq-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         // Set Score = 100 in all GradeEntry objects
         var update = Builders<Restaurant>.Update
@@ -544,8 +517,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOneFilteredPositional()
     {
         // start-update-one-filteredpositional
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var arrayFilters = new List<ArrayFilterDefinition>
         {
@@ -570,8 +542,7 @@ public static class UpdateOneArrays
     public static UpdateResult UpdateOneFilteredPositionalLinq()
     {
         // start-update-one-filteredpositional-linq
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var arrayFilters = new List<ArrayFilterDefinition>
         {
@@ -582,6 +553,7 @@ public static class UpdateOneArrays
                 })
         };
 
+        // Set Grade = "A" in all GradeEntry objects where Score >= 94
         var update = Builders<Restaurant>.Update
             .Set(restaurant => restaurant.Grades.AllMatchingElements("gradeEntry").Score, 100);
 
@@ -595,8 +567,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOneFilteredPositionalAsync()
     {
         // start-update-one-filteredpositional-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var arrayFilters = new List<ArrayFilterDefinition>
         {
@@ -621,8 +592,7 @@ public static class UpdateOneArrays
     public static async Task<UpdateResult> UpdateOneFilteredPositionalLinqAsync()
     {
         // start-update-one-filteredpositional-linq-async
-        var filter = Builders<Restaurant>.Filter
-            .Eq("name", "Downtown Deli");
+        var filter = Builders<Restaurant>.Filter.Eq("name", "Downtown Deli");
 
         var arrayFilters = new List<ArrayFilterDefinition>
         {

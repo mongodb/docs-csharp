@@ -68,7 +68,7 @@ The ``AddToSet()`` method accepts the following parameters:
      - Description
 
    * - ``field``
-     - An expression that specifies the array field to add to.
+     - An expression that specifies the array field to add a value to.
 
        **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
 
@@ -97,7 +97,7 @@ This method accepts the following parameters:
      - Description
 
    * - ``field``
-     - An expression that specifies the array field to add to.
+     - An expression that specifies the array field to add one or more values to.
 
        **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
 
@@ -143,7 +143,7 @@ This method accepts the following parameters:
      - Description
 
    * - ``field``
-     - An expression that specifies the array field to add to.
+     - An expression that specifies the array field to add one or more values to.
 
        **Data Type:** ``Expression<Func<TDocument, IEnumerable<TItem>>>``
 
@@ -336,7 +336,7 @@ positional operator (``$[<identifier>]``) in combination with the ``Set()`` meth
 
 The following example uses the ``Set()`` method and the filtered positional operator
 to update the ``Score`` property of all matching
-``GradeEntry`` objects in the Grades`` array to 100 in |matching-document-or-documents|:
+``GradeEntry`` objects in the ``Grades`` array to 100 in |matching-document-or-documents|:
 
 |filteredpositional-code-example-tabs|
 

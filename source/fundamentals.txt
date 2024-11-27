@@ -11,6 +11,26 @@ Fundamentals
    :titlesonly:
    :maxdepth: 1
 
+   /fundamentals/connection
+   /fundamentals/database-collection
+   /fundamentals/crud
+   /fundamentals/builders
+   /fundamentals/atlas-search
+   /fundamentals/stable-api
+   /fundamentals/authentication
+   /fundamentals/aggregation
+   /fundamentals/linq
+   /fundamentals/bson
+   /fundamentals/specify-query
+   /fundamentals/serialization
+   /fundamentals/transactions
+   /fundamentals/indexes
+   /fundamentals/logging
+   /fundamentals/time-series
+   /fundamentals/encrypt-fields
+   /fundamentals/geo
+   /fundamentals/odata
+
    Connection </fundamentals/connection>
    Databases & Collections </fundamentals/database-collection>
    CRUD Operations </fundamentals/crud>
@@ -31,6 +51,8 @@ Fundamentals
    In-Use Encryption </fundamentals/encrypt-fields>
    Search Geospatially </fundamentals/geo>
    Store Large Files </fundamentals/gridfs>
+   Replica Set Operations </fundamentals/read-write-configuration>
+   OData </fundamentals/odata>
 
 - :ref:`Connecting to MongoDB <csharp-connection>`
 - :ref:`csharp-db-coll`
@@ -39,7 +61,6 @@ Fundamentals
 - :ref:`csharp-atlas-search`
 - :ref:`csharp-stable-api`
 - :ref:`csharp-authentication-mechanisms`
-- :ref:`csharp-enterprise-authentication-mechanisms`
 - :ref:`csharp-aggregation`
 - :ref:`csharp-linq`
 - :ref:`csharp-bson`
@@ -52,3 +73,5 @@ Fundamentals
 - :ref:`Encrypt Fields <csharp-fle>`
 - :ref:`csharp-geo`
 - :ref:`csharp-gridfs`
+- :ref:`csharp-read-write-config`
+- :ref:`csharp-odata`

@@ -6,7 +6,9 @@ toc_landing_pages = [
     "/usage-examples",
     "/fundamentals",
     "/fundamentals/serialization",
+    "/fundamentals/authentication",
     "/upgrade",
+    "/fundamentals/database-collection"
 ]
 
 intersphinx = [

@@ -6,8 +6,9 @@ toc_landing_pages = [
     "/usage-examples",
     "/fundamentals",
     "/fundamentals/serialization",
+    "/fundamentals/authentication",
     "/upgrade",
-    "/fundamentals/database-collection"
+    "/fundamentals/database-collection",
 ]
 
 intersphinx = [
@@ -42,3 +43,4 @@ int-data-type = "``integer``"
 not-available = "N/A"
 analyzer = "MongoDB C# Analyzer"
 analyzer-short = "C# Analzyer"
+mdb-server = "MongoDB server"

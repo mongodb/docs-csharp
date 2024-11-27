@@ -16,7 +16,7 @@ What's New
    :values: reference
 
 .. meta::
-   :keywords: update, new feature, deprecation, upgrade, driver v2.19, driver v2.20, driver v2.21, driver v2.22, driver v2.23
+   :keywords: update, new feature, deprecation, upgrade, driver v2.22, driver v2.23
 
 Learn what's new in:
 

@@ -15,16 +15,13 @@ What's New
    :values: reference
 
 .. meta::
-   :keywords: update, new feature, deprecation, upgrade, driver v2.19, driver v2.20, driver v2.21, driver v2.22, driver v2.23
+   :keywords: update, new feature, deprecation, upgrade, driver v2.22, driver v2.23
 
 Learn what's new in:
 
 * :ref:`Version 2.24 <version-2.24>`
 * :ref:`Version 2.23 <version-2.23>`
 * :ref:`Version 2.22 <version-2.22>`
-* :ref:`Version 2.21 <version-2.21>`
-* :ref:`Version 2.20 <version-2.20>`
-* :ref:`Version 2.19 <version-2.19>`
 
 .. _upcoming-breaking-changes:
 

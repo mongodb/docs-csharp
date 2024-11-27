@@ -525,7 +525,7 @@ code.
 Find Files 
 ----------
 
-To retrieve files from a GridFS bucket, call the ``Find()`` or ``FindAsync()`` method
+To find files in a GridFS bucket, call the ``Find()`` or ``FindAsync()`` method
 on your ``GridFSBucket`` instance. These methods accept the following parameters:
 
 .. list-table::

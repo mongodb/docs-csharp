@@ -21,7 +21,7 @@ Replace Documents
 Overview
 --------
 
-In this guide, you can learn how to use the {+driver-long+} to replace
+In this guide, you can learn how to use the {+driver-short+} to replace
 documents in a MongoDB collection.
 
 The {+driver-short+} provides the ``ReplaceOne()`` and ``ReplaceOneAsync()`` methods.
@@ -48,7 +48,7 @@ method. These methods accept the following parameters:
 
    * - ``filter``
      - A *query filter* that specifies the document to replace. You can use the
-       ``Builders`` class to create a query filter.For more information about
+       ``Builders`` class to create a query filter. For more information about
        query filters, see the
        :manual:`{+mdb-server+} manual </core/document/#query-filter-documents>`.
 
@@ -75,11 +75,11 @@ method. These methods accept the following parameters:
 The following code example demonstrates how to perform a replace operation. The
 code performs the following steps:
 
-1. Uses the ``Builders`` class to create a query filter. The filter matches all
+1. Creates a query filter by using the ``Builders`` class. The filter matches all
    documents where the ``cuisine`` field has the value ``"Pizza"``.
 #. Creates a new ``Restaurant`` object.
 #. Calls the ``ReplaceOne()`` method on the ``restaurants`` collection. This operation
-   find the first matching document in the collection and replaces it with the newly created
+   finds the first matching document in the collection and replaces it with the newly created
    document.
 
 Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the
@@ -131,14 +131,14 @@ The ``ReplaceOptions`` class contains the following properties:
    * - ``BypassDocumentValidation``
      - Specifies whether the replace operation bypasses document validation. This lets you 
        replace documents that don't meet the schema validation requirements, if any 
-       exist. See :manual:`the MongoDB server manual</core/schema-validation/#schema-validation>`
+       exist. See :manual:`the {+mdb-server+} manual </core/schema-validation/#schema-validation>`
        for more information on schema validation.
 
        **Data Type:** ``bool?``
 
    * - ``Collation``
      - Specifies the kind of language collation to use when sorting
-       results. See :manual:`the MongoDB server manual</reference/collation/#std-label-collation>`
+       results. See :manual:`the {+mdb-server+} manual </reference/collation/#std-label-collation>`
        for more information on collation.
 
        **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__

@@ -44,7 +44,7 @@ The |sync-method| and |async-method| methods accept the following parameters:
    * - ``options``
      - *Optional.* An instance of the ``UpdateOptions`` class that specifies the
        configuration for the update operation. The default value is ``null``. For a list
-       of available option, see :ref:`csharp-update-options`.
+       of available options, see :ref:`csharp-update-options`.
 
        **Data Type:** `UpdateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOptions.html>`__
 
@@ -202,9 +202,8 @@ The ``UpdateOptions`` class contains the following properties:
 Return Value
 ------------
 
-The |sync-method| returns an ``UpdateResult``, and the |async-method|
-method returns an asynchronous
-version of this type, a ``Task<UpdateResult>`` object.
+The |sync-method| method returns an ``UpdateResult``, and the |async-method|
+method returns a ``Task<UpdateResult>`` object.
 The ``UpdateResult`` class contains the following properties:
 
 .. list-table::

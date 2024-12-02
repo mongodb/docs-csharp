@@ -192,6 +192,7 @@ Update Arrays
                :dedent:
                :start-after: // start-update-many-pull
                :end-before: // end-update-many-pull
+               :emphasize-lines: 13-17
 
          .. tab:: Asynchronous
             :tabid: update-many-pull-async
@@ -202,6 +203,7 @@ Update Arrays
                :dedent:
                :start-after: // start-update-many-pull-async
                :end-before: // end-update-many-pull-async
+               :emphasize-lines: 13-17
 
    .. replacement:: pullall-code-example-tabs
 
@@ -216,6 +218,7 @@ Update Arrays
                :dedent:
                :start-after: // start-update-many-pullall
                :end-before: // end-update-many-pullall
+               :emphasize-lines: 15-20
 
          .. tab:: Asynchronous
             :tabid: update-many-pullall-async
@@ -226,6 +229,7 @@ Update Arrays
                :dedent:
                :start-after: // start-update-many-pullall-async
                :end-before: // end-update-many-pullall-async
+               :emphasize-lines: 15-20
 
    .. replacement:: pullfilter-code-example-tabs
 
@@ -240,6 +244,7 @@ Update Arrays
                :dedent:
                :start-after: // start-update-many-pullfilter
                :end-before: // end-update-many-pullfilter
+               :emphasize-lines: 15-19
 
          .. tab:: Asynchronous
             :tabid: update-many-pullfilter-async
@@ -250,6 +255,7 @@ Update Arrays
                :dedent:
                :start-after: // start-update-many-pullfilter-async
                :end-before: // end-update-many-pullfilter-async
+               :emphasize-lines: 15-20
 
    .. replacement:: positional-code-example-tabs
 

@@ -227,7 +227,11 @@ Version 3.0 Breaking Changes
   page to learn how to do so.
 
   Alternatively, you can check each item's type in a different way. For example, you
-  can call the item's ``GetType()`` method and compare the result to the type you're
-  looking for, as shown here: ``item.GetType() == typeof(T)``
+  can call the ``Where()`` method and pass an expression that compares the item's type
+  to the type you're looking for, as in the following example:
+
+  .. code-block:: csharp
+
+     collection.AsQueryable().Where(item => item.GetType() == typeof(T));
 
   To learn more about type discriminators, see :ref:`<csharp-polymorphism>`.

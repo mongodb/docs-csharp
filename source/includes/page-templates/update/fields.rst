@@ -108,8 +108,8 @@ method. This method accepts the following parameters:
 
        **Data Type:** ``TField``
 
-Set If Lower or Greater
------------------------
+Set by Comparison
+-----------------
 
 To update the value of the field to a specified value, but only if the specified value
 is *greater than* the current value of the field, call the ``Builders.Update.Max()``

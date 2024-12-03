@@ -106,7 +106,7 @@ public class UpdateMany
 
         var combinedUpdate = Builders<Restaurant>.Update.Combine(
             Builders<Restaurant>.Update.Set("cuisine", "French"),
-            Builders<Restaurant>.Update.PopLast("grades")
+            Builders<Restaurant>.Update.Unset("borough")
         );
 
         _restaurantsCollection.UpdateMany(filter, combinedUpdate);
@@ -121,7 +121,7 @@ public class UpdateMany
 
         var combinedUpdate = Builders<Restaurant>.Update.Combine(
             Builders<Restaurant>.Update.Set("cuisine", "French"),
-            Builders<Restaurant>.Update.PopLast("grades")
+            Builders<Restaurant>.Update.Unset("borough")
         );
 
         await _restaurantsCollection.UpdateManyAsync(filter, combinedUpdate);

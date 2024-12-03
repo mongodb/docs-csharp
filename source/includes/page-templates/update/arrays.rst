@@ -163,6 +163,11 @@ Because these values already exist in the array, the update operation does nothi
 Remove Values
 -------------
 
+The following sections explain how to remove values from an array field.
+
+First Value
+~~~~~~~~~~~
+
 To remove the first value from an array, call the ``Builders.Update.PopFirst()`` method.
 This method accepts the following parameter:
 
@@ -183,6 +188,9 @@ object from the ``Grades`` array in |matching-document-or-documents|:
 
 |popfirst-code-example-tabs| 
 
+Last Value
+~~~~~~~~~~
+
 To remove the last value from an array, call the ``Builders.Update.PopLast()`` method:
 This method accepts the following parameter:
 
@@ -202,6 +210,9 @@ The following code example uses the ``PopLast()`` method to remove the last ``Gr
 object from the ``Grades`` array in |matching-document-or-documents|:
 
 |poplast-code-example-tabs|
+
+All Instances of a Value
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 To remove all instances of a specific value from an array, call the
 ``Builders.Update.Pull()`` method. This method accepts the following parameters:
@@ -228,6 +239,9 @@ a specific ``GradeEntry`` object from the ``Grades`` array in |matching-document
 
 |pull-code-example-tabs|
 
+All Instances of Multiple Values
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 To remove all instances of more than one specific value from an array, call the
 ``Builders.Update.PullAll()`` method.
 This method accepts the following parameters:
@@ -253,6 +267,9 @@ The following code example uses the ``PullAll()`` method to remove all instances
 specific ``GradeEntry`` objects from the ``Grades`` array in |matching-document-or-documents|:
 
 |pullall-code-example-tabs|
+
+All Values That Match a Condition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To remove all values that match a specific condition from an array, call the
 ``Builders.Update.PullFilter()`` method.
@@ -315,42 +332,30 @@ The following sections describe different ways to update matching values in an a
 First Matching Value
 ~~~~~~~~~~~~~~~~~~~~
 
-To update only the first value in an array that matches a query filter, use the
-positional operator (``$``) with the ``Set()`` method.
-
-.. note::
-  
-   To use the positional operator, the array field must be part of the query filter.
-
-The following example uses the ``Set()`` method and the positional operator to
-update the ``Grades`` array in |matching-document-or-documents|. First,
-it finds *only the first* ``GradeEntry`` object in the ``Grades`` array where the ``Grade`` property
-has the value ``"A"``. Then, it updates the ``Score`` property of the first matching
-``GradeEntry`` object to 100.
+To update the first value in an array, you can use either the positional operator
+(``$``) or LINQ syntax.
+Select a :guilabel:`Positional Operator` or :guilabel:`LINQ` tab to
+see the corresponding syntax.
 
 |positional-code-example-tabs|
 
 All Matching Values
 ~~~~~~~~~~~~~~~~~~~
 
-To update all values in an array that match a specified condition, use the filtered
-positional operator (``$[<identifier>]``) with the ``Set()`` method.
-
-The following example uses the ``Set()`` method and the filtered positional operator
-to update the ``Score`` property of all matching
-``GradeEntry`` objects in the ``Grades`` array to 100 in |matching-document-or-documents|:
+To update all values in an array that match a specified condition, you can use either
+the filtered positional operator (``$[<identifier>]``) or LINQ syntax.
+Select a :guilabel:`Positional Operator` or :guilabel:`LINQ` tab to
+see the corresponding syntax.
 
 |filteredpositional-code-example-tabs|
 
 All Values
 ~~~~~~~~~~
 
-To update all values in an array that match a query filter, use the all-positional operator
-(``$[]``) with the ``Set()`` method.
-
-The following example uses the ``Set()`` method and the all-positional operator
-to update the ``Score`` property of all ``GradeEntry`` objects in the ``Grades`` array
-to 100 in |matching-document-or-documents|:
+To update all values in an array that match a query filter, you can use either the
+all-positional operator (``$[]``) or LINQ syntax.
+Select a :guilabel:`Positional Operator` or :guilabel:`LINQ` tab to
+see the corresponding syntax.
 
 |allpositional-code-example-tabs|
 

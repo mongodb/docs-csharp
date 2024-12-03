@@ -272,6 +272,8 @@ Update Arrays
          .. tab:: Positional Operator (Sync)
             :tabid: update-many-positional-sync
 
+            .. include:: /includes/update-many/positional-operator-code-intro.rst
+
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
                :copyable: true
@@ -279,9 +281,13 @@ Update Arrays
                :start-after: // start-update-many-positional
                :end-before: // end-update-many-positional
 
+            .. include:: /includes/update-arrays-positional-operator-note.rst
+         
          .. tab:: Positional Operator (Async)
             :tabid: update-many-positional-async
 
+            .. include:: /includes/update-many/positional-operator-code-intro.rst
+            
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
                :copyable: true
@@ -289,8 +295,12 @@ Update Arrays
                :start-after: // start-update-many-positional-async
                :end-before: // end-update-many-positional-async
 
+            .. include:: /includes/update-arrays-positional-operator-note.rst
+         
          .. tab:: LINQ (Sync)
             :tabid: update-many-positional-linq-sync
+
+            .. include:: /includes/update-many/positional-linq-code-intro.rst
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -302,6 +312,8 @@ Update Arrays
          .. tab:: LINQ (Async)
             :tabid: update-many-positional-linq-async
 
+            .. include:: /includes/update-many/positional-linq-code-intro.rst
+            
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
                :copyable: true
@@ -316,6 +328,8 @@ Update Arrays
          .. tab:: Positional Operator (Sync)
             :tabid: update-many-filteredpositional-sync
 
+            .. include:: /includes/update-many/filteredpositional-operator-code-intro.rst
+            
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
                :copyable: true
@@ -326,6 +340,8 @@ Update Arrays
          .. tab:: Positional Operator (Async)
             :tabid: update-many-filteredpositional-async
 
+            .. include:: /includes/update-many/filteredpositional-operator-code-intro.rst
+            
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
                :copyable: true
@@ -336,6 +352,8 @@ Update Arrays
          .. tab:: LINQ (Sync)
             :tabid: update-many-filteredpositional-linq-sync
 
+            .. include:: /includes/update-many/filteredpositional-linq-code-intro.rst
+            
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
                :copyable: true
@@ -346,6 +364,8 @@ Update Arrays
          .. tab:: LINQ (Async)
             :tabid: update-many-filteredpositional-linq-async
 
+            .. include:: /includes/update-many/filteredpositional-linq-code-intro.rst
+            
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
                :copyable: true
@@ -360,6 +380,8 @@ Update Arrays
          .. tab:: Positional Operator (Sync)
             :tabid: update-many-allpositional-sync
 
+            .. include:: /includes/update-many/allpositional-operator-code-intro.rst
+            
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
                :copyable: true
@@ -370,6 +392,8 @@ Update Arrays
          .. tab:: Positional Operator (Async)
             :tabid: update-many-allpositional-async
 
+            .. include:: /includes/update-many/allpositional-operator-code-intro.rst
+            
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
                :copyable: true
@@ -380,6 +404,8 @@ Update Arrays
          .. tab:: LINQ (Sync)
             :tabid: update-many-allpositional-linq-sync
 
+            .. include:: /includes/update-many/allpositional-linq-code-intro.rst
+            
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
                :copyable: true
@@ -390,6 +416,8 @@ Update Arrays
          .. tab:: LINQ (Async)
             :tabid: update-many-allpositional-linq-async
 
+            .. include:: /includes/update-many/allpositional-linq-code-intro.rst
+            
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
                :copyable: true

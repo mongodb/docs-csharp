@@ -205,9 +205,9 @@ Version 3.0 Breaking Changes
 - The driver removes individual cluster events from ``MongoClient.Cluster``. To listen for
   cluster events, use `ClusterBuilder.Subscribe() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.ClusterBuilder.Subscribe.html>`__.
 
-- All concrete serializers have been sealed. To implement a custom serializer, implement the
+- The driver seals all concrete serializers. To implement a custom serializer, implement the
   ``IBsonSerializer`` interface.
 
-- The ``MongoClient``, ``MongoDatabase``, and ``MongoCollection`` classes have been
-  sealed. We recommend using the ``IMongoClient``, ``IMongoDatabase``, and
-  ``IMongoCollection`` interfaces directly.
+- The driver seals the ``MongoClient``, ``MongoDatabase``, and ``MongoCollection`` classes.
+  We recommend using the ``IMongoClient``, ``IMongoDatabase``, and ``IMongoCollection``
+  interfaces directly.

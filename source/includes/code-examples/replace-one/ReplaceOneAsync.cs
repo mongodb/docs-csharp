@@ -89,8 +89,13 @@ public class ReplaceOneAsync
             Borough = "Manhattan",
         };
 
+        var options = new ReplaceOptions
+        {
+            BypassDocumentValidation = true
+        };
+
         // Asynchronously replaces the existing restaurant document with the new document
-        return await _restaurantsCollection.ReplaceOneAsync(filter, newPizzaRestaurant);
+        return await _restaurantsCollection.ReplaceOneAsync(filter, newPizzaRestaurant, options);
         // end-replace-one-async-with-options
     }
 

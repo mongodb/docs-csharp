@@ -50,7 +50,7 @@ to the ``Grades`` array in |matching-document-or-documents|:
 .. tip:: Configure the Push Operation
   
    To add a value at a specific position in an array, or to sort or slice the array after
-   updating it, call the ``PushEach()`` method instead.
+   updating it, call the |pusheach-method-link| method instead.
 
 To add one value to the end of an array, *but only if it doesn't already exist in the array*,
 call the ``Builders.Update.AddToSet()`` method. 
@@ -82,6 +82,8 @@ The following code example calls the ``AddToSet()`` method to re-add the first
 the value already exists in the array, the update operation does nothing.
 
 |addtoset-code-example-tabs|
+
+|pusheach-section-ref|
 
 Add Multiple Values
 -------------------

@@ -150,7 +150,7 @@ The ``UpdateOptions`` class contains the following properties:
 
    * - ``ArrayFilters``
      - Specifies which array elements to modify for an update operation on an array field.
-       See :manual:`the MongoDB server manual</reference/command/update/#update-elements-match-arrayfilters-criteria>`
+       See :manual:`the {+mdb-server+} manual</reference/command/update/#update-elements-match-arrayfilters-criteria>`
        for more information.
 
        **Data Type:** IEnumerable<`ArrayFilterDefinition <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ArrayFilterDefinition.html>`__>
@@ -158,28 +158,28 @@ The ``UpdateOptions`` class contains the following properties:
    * - ``BypassDocumentValidation``
      - Specifies whether the update operation bypasses document validation. This lets you 
        update documents that don't meet the schema validation requirements, if any 
-       exist. See :manual:`the MongoDB server manual</core/schema-validation/#schema-validation>`
+       exist. See :manual:`the {+mdb-server+} manual</core/schema-validation/#schema-validation>`
        for more information on schema validation.
 
        **Data Type:** ``bool?``
 
    * - ``Collation``
      - Specifies the kind of language collation to use when sorting
-       results. See :manual:`the MongoDB server manual</reference/collation/#std-label-collation>`
+       results. See :manual:`the {+mdb-server+} manual</reference/collation/#std-label-collation>`
        for more information on collation.
 
        **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
 
    * - ``Comment``
      - Gets or sets the user-provided comment for the operation. 
-       See :manual:`the MongoDB server manual</reference/command/update/#command-fields>`
+       See :manual:`the {+mdb-server+} manual</reference/command/update/#command-fields>`
        for more information.
 
        **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
 
    * - ``Hint``
      - Gets or sets the index to use to scan for documents. 
-       See :manual:`the MongoDB server manual</reference/command/update/#std-label-update-command-hint>`
+       See :manual:`the {+mdb-server+} manual</reference/command/update/#std-label-update-command-hint>`
        for more information.
 
        **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
@@ -187,14 +187,14 @@ The ``UpdateOptions`` class contains the following properties:
    * - ``IsUpsert``
      - Specifies whether the update operation performs an upsert operation if no 
        documents match the query filter. 
-       See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-command-upsert>`
+       See :manual:`the {+mdb-server+} manual </reference/command/update/#std-label-update-command-upsert>`
        for more information.
 
        **Data Type:** ``bool``
 
    * - ``Let``
      - Gets or sets the let document. 
-       See :manual:`the MongoDB server manual </reference/command/update/#std-label-update-let-syntax>`
+       See :manual:`the {+mdb-server+} manual </reference/command/update/#std-label-update-let-syntax>`
        for more information.
 
        **Data Type:** `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__

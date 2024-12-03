@@ -31,6 +31,14 @@ Update Arrays
 
       the matching document
    
+   .. replacement:: pusheach-section-ref
+
+      .. _csharp-update-one-arrays-pusheach:
+   
+   .. replacement:: pusheach-method-link
+
+      :ref:`PushEach() <csharp-update-one-arrays-pusheach>`
+   
    .. replacement:: update-page-link
 
       :ref:`<csharp-update-one>`

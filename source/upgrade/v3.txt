@@ -224,7 +224,7 @@ Version 3.0 Breaking Changes
   To use either of the preceding methods on a collection, you can apply a hierarchical
   discriminator to each class in the collection. See
   the :ref:`Polymorphic Objects <csharp-discriminator-hierarchical>`
-  page to learn how to do so.
+  page to learn how.
 
   Alternatively, you can check each item's type in a different way. For example, you
   can call the ``Where()`` method and pass an expression that compares the item's type

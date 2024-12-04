@@ -362,7 +362,7 @@ Update Arrays
                :end-before: // end-update-many-filteredpositional-linq
 
          .. tab:: LINQ (Async)
-            :tabid: async
+            :tabid: linq-async
 
             .. include:: /includes/update-many/filteredpositional-linq-code-intro.rst
             

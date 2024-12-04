@@ -70,7 +70,7 @@ Update One
       .. tabs::
 
          .. tab:: Synchronous
-            :tabid: update-one-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
                :language: csharp
@@ -80,7 +80,7 @@ Update One
                :end-before: // end-combine-sync
 
          .. tab:: Asynchronous
-            :tabid: update-one-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
                :language: csharp
@@ -94,7 +94,7 @@ Update One
       .. tabs::
       
          .. tab:: Synchronous
-            :tabid: update-one-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
                :language: csharp
@@ -104,7 +104,7 @@ Update One
                :end-before: // end-pipeline-sync
 
          .. tab:: Asynchronous
-            :tabid: update-one-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-one/UpdateOne.cs
                :language: csharp

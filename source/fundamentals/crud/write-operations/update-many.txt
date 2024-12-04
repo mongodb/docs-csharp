@@ -82,7 +82,7 @@ Update Many
       .. tabs::
 
          .. tab:: UpdateMany (Sync)
-            :tabid: update-many-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
                :language: csharp
@@ -92,7 +92,7 @@ Update Many
                :end-before: // end-combine-sync
 
          .. tab:: UpdateMany (Async)
-            :tabid: update-many-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
                :language: csharp
@@ -106,7 +106,7 @@ Update Many
       .. tabs::
       
          .. tab:: UpdateMany (Sync)
-            :tabid: update-many-sync
+            :tabid: sync
       
             .. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
                :language: csharp
@@ -116,7 +116,7 @@ Update Many
                :end-before: // end-pipeline-sync
       
          .. tab:: UpdateMany (Async)
-            :tabid: update-many-async
+            :tabid: async
       
             .. literalinclude:: /includes/code-examples/update-many/UpdateMany.cs
                :language: csharp

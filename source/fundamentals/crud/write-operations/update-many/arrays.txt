@@ -48,7 +48,7 @@ Update Arrays
       .. tabs::
       
          .. tab:: Synchronous
-            :tabid: update-many-push-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -58,7 +58,7 @@ Update Arrays
                :end-before: // end-update-many-push
 
          .. tab:: Asynchronous
-            :tabid: update-many-push-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -72,7 +72,7 @@ Update Arrays
       .. tabs::
       
          .. tab:: Synchronous
-            :tabid: update-many-addtoset-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -82,7 +82,7 @@ Update Arrays
                :end-before: // end-update-many-addtoset
 
          .. tab:: Asynchronous
-            :tabid: update-many-addtoset-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -96,7 +96,7 @@ Update Arrays
       .. tabs::
       
          .. tab:: Synchronous
-            :tabid: update-many-pusheach-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -106,7 +106,7 @@ Update Arrays
                :end-before: // end-update-many-pusheach
 
          .. tab:: Asynchronous
-            :tabid: update-many-pusheach-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -120,7 +120,7 @@ Update Arrays
       .. tabs::
 
          .. tab:: Synchronous
-            :tabid: update-many-addtoset-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -130,7 +130,7 @@ Update Arrays
                :end-before: // end-update-many-addtoseteach
 
          .. tab:: Asynchronous
-            :tabid: update-many-addtoset-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -144,7 +144,7 @@ Update Arrays
       .. tabs::
 
          .. tab:: Synchronous
-            :tabid: update-many-popfirst-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -154,7 +154,7 @@ Update Arrays
                :end-before: // end-update-many-popfirst
 
          .. tab:: Asynchronous
-            :tabid: update-many-popfirst-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -168,7 +168,7 @@ Update Arrays
       .. tabs::
       
          .. tab:: Synchronous
-            :tabid: update-many-poplast-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -178,7 +178,7 @@ Update Arrays
                :end-before: // end-update-many-poplast
 
          .. tab:: Asynchronous
-            :tabid: update-many-poplast-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -192,7 +192,7 @@ Update Arrays
       .. tabs::
       
          .. tab:: Synchronous
-            :tabid: update-many-pull-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -203,7 +203,7 @@ Update Arrays
                :emphasize-lines: 13-17
 
          .. tab:: Asynchronous
-            :tabid: update-many-pull-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -218,7 +218,7 @@ Update Arrays
       .. tabs::
       
          .. tab:: Synchronous
-            :tabid: update-many-pullall-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -229,7 +229,7 @@ Update Arrays
                :emphasize-lines: 15-20
 
          .. tab:: Asynchronous
-            :tabid: update-many-pullall-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -244,7 +244,7 @@ Update Arrays
       .. tabs::
       
          .. tab:: Synchronous
-            :tabid: update-many-pullfilter-sync
+            :tabid: sync
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -255,7 +255,7 @@ Update Arrays
                :emphasize-lines: 15-19
 
          .. tab:: Asynchronous
-            :tabid: update-many-pullfilter-async
+            :tabid: async
 
             .. literalinclude:: /includes/code-examples/update-many/UpdateManyArrays.cs
                :language: csharp
@@ -270,7 +270,7 @@ Update Arrays
       .. tabs::
       
          .. tab:: Positional Operator (Sync)
-            :tabid: update-many-positional-sync
+            :tabid: sync
 
             .. include:: /includes/update-many/positional-operator-code-intro.rst
 
@@ -284,7 +284,7 @@ Update Arrays
             .. include:: /includes/update-arrays-positional-operator-note.rst
          
          .. tab:: Positional Operator (Async)
-            :tabid: update-many-positional-async
+            :tabid: async
 
             .. include:: /includes/update-many/positional-operator-code-intro.rst
             
@@ -298,7 +298,7 @@ Update Arrays
             .. include:: /includes/update-arrays-positional-operator-note.rst
          
          .. tab:: LINQ (Sync)
-            :tabid: update-many-positional-linq-sync
+            :tabid: linq-sync
 
             .. include:: /includes/update-many/positional-linq-code-intro.rst
 
@@ -310,7 +310,7 @@ Update Arrays
                :end-before: // end-update-many-positional-linq
 
          .. tab:: LINQ (Async)
-            :tabid: update-many-positional-linq-async
+            :tabid: linq-async
 
             .. include:: /includes/update-many/positional-linq-code-intro.rst
             
@@ -326,7 +326,7 @@ Update Arrays
       .. tabs::
       
          .. tab:: Positional Operator (Sync)
-            :tabid: update-many-filteredpositional-sync
+            :tabid: sync
 
             .. include:: /includes/update-many/filteredpositional-operator-code-intro.rst
             
@@ -338,7 +338,7 @@ Update Arrays
                :end-before: // end-update-many-filteredpositional
 
          .. tab:: Positional Operator (Async)
-            :tabid: update-many-filteredpositional-async
+            :tabid: async
 
             .. include:: /includes/update-many/filteredpositional-operator-code-intro.rst
             
@@ -350,7 +350,7 @@ Update Arrays
                :end-before: // end-update-many-filteredpositional
 
          .. tab:: LINQ (Sync)
-            :tabid: update-many-filteredpositional-linq-sync
+            :tabid: linq-sync
 
             .. include:: /includes/update-many/filteredpositional-linq-code-intro.rst
             
@@ -362,7 +362,7 @@ Update Arrays
                :end-before: // end-update-many-filteredpositional-linq
 
          .. tab:: LINQ (Async)
-            :tabid: update-many-filteredpositional-linq-async
+            :tabid: async
 
             .. include:: /includes/update-many/filteredpositional-linq-code-intro.rst
             
@@ -378,7 +378,7 @@ Update Arrays
       .. tabs::
       
          .. tab:: Positional Operator (Sync)
-            :tabid: update-many-allpositional-sync
+            :tabid: sync
 
             .. include:: /includes/update-many/allpositional-operator-code-intro.rst
             
@@ -390,7 +390,7 @@ Update Arrays
                :end-before: // end-update-many-allpositional
 
          .. tab:: Positional Operator (Async)
-            :tabid: update-many-allpositional-async
+            :tabid: async
 
             .. include:: /includes/update-many/allpositional-operator-code-intro.rst
             
@@ -402,7 +402,7 @@ Update Arrays
                :end-before: // end-update-many-allpositional-async
          
          .. tab:: LINQ (Sync)
-            :tabid: update-many-allpositional-linq-sync
+            :tabid: linq-sync
 
             .. include:: /includes/update-many/allpositional-linq-code-intro.rst
             
@@ -414,7 +414,7 @@ Update Arrays
                :end-before: // end-update-many-allpositional-linq
 
          .. tab:: LINQ (Async)
-            :tabid: update-many-allpositional-linq-async
+            :tabid: linq-async
 
             .. include:: /includes/update-many/allpositional-linq-code-intro.rst
             

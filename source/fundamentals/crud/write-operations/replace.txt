@@ -88,7 +88,7 @@ corresponding code.
 .. tabs::
 
    .. tab:: Synchronous
-      :tabid: replace-one-sync
+      :tabid: sync
 
       .. literalinclude:: /includes/code-examples/replace-one/ReplaceOne.cs
          :language: csharp
@@ -98,7 +98,7 @@ corresponding code.
          :end-before: // end-replace-one
 
    .. tab:: Asynchronous
-      :tabid: replace-one-async
+      :tabid: async
 
       .. literalinclude:: /includes/code-examples/replace-one/ReplaceOneAsync.cs
          :language: csharp
@@ -180,7 +180,7 @@ code.
 .. tabs::
 
    .. tab:: Synchronous
-      :tabid: replace-one-sync-with-options
+      :tabid: sync
 
       .. literalinclude:: /includes/code-examples/replace-one/ReplaceOne.cs
          :language: csharp
@@ -190,7 +190,7 @@ code.
          :end-before: // end-replace-one-sync-with-options
 
    .. tab:: Asynchronous
-      :tabid: replace-one-async-with-options
+      :tabid: async
 
       .. literalinclude:: /includes/code-examples/replace-one/ReplaceOneAsync.cs
          :language: csharp

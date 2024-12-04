@@ -157,4 +157,3 @@ guide, see the following API documentation:
 - `SerializerRegistry <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.BsonSerializer.SerializerRegistry.html>`__
 - `BsonSerializer <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.BsonSerializer.html>`__
 - `IBsonSerializer <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.IBsonSerializer.html>`__
-- `SerializerBase<T> <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Serializers.SerializerBase-1.html>`__

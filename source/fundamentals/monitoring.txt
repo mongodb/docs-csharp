@@ -112,4 +112,4 @@ To learn more about the methods and classes used to monitor events in the driver
 following API documentation:
 
 - `MongoDB.Driver.Core.Events <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Events.html>`__
-- `Subscribe<TEvent>() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Events.ClusterBuilder.Subscribe.html>`__
+- `Subscribe<TEvent>() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.ClusterBuilder.Subscribe.html>`__

@@ -60,7 +60,7 @@ The following table describes the types of events that the driver emits:
           protects the sensitive information contained in these command events.
 
    * - Server Discovery and Monitoring (SDAM) Events
-     - Events related to changes in the state of the MongoDB instance or cluster.
+     - Events related to changes in the state of the MongoDB deployment.
 
    * - Connection Pool Events
      - Events related to the connection pool held by the driver.

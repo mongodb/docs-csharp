@@ -249,6 +249,34 @@ The result of the preceding example contains the following documents:
     { "name" : "Crystal Room", "cuisine" : "Italian" }
     { "name" : "Forlinis Restaurant", "cuisine" : "Italian" }
 
+$sample
+~~~~~~~
+
+The ``$sample`` aggregation stage returns a random sample of documents from a 
+collection. The following example shows how to generate a ``$sample`` stage using
+LINQ: 
+
+.. code-block:: csharp
+   :emphasize-lines: 4
+
+   var query = await client.GetDatabase("sample_mflix")
+       .GetCollection<BsonDocument>("movies")
+       .Aggregate()
+       .Sample(4)
+       .ToListAsync();
+
+The result of the preceding example contains the following documents:
+
+.. code-block:: json
+
+   // Results Truncated
+
+   { "title" : "State of Play", "languages" : ["English"]}
+   { "title" : "Bhopal: A Prayer for Rain", "languages" : ["English", "Hindi"] }
+   { "title" : "Dead Presidents", "languages" : ["English"]}
+   { "title" : "The Rains Came", "languages" : ["English"] }
+
+
 $skip
 ~~~~~
 

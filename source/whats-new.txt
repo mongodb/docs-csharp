@@ -15,10 +15,11 @@ What's New
    :values: reference
 
 .. meta::
-   :keywords: update, new feature, deprecation, upgrade, driver v2.19, driver v2.20, driver v2.21, driver v2.22, driver v2.23, driver v2.24, driver v2.25, driver v2.26, driver v2.27, driver v2.28, driver v3.0
+   :keywords: update, new feature, deprecation, upgrade, driver v2.22, driver v2.23, driver v2.24, driver v2.25, driver v2.26, driver v2.27, driver v2.28, driver v3.0
 
 Learn what's new in:
 
+* :ref:`Version 3.1 <csharp-version-3.1>`
 * :ref:`Version 3.0 <csharp-version-3.0>`
 * :ref:`Version 2.30 <csharp-version-2.30>`
 * :ref:`Version 2.29 <csharp-version-2.29>`
@@ -29,9 +30,41 @@ Learn what's new in:
 * :ref:`Version 2.24 <version-2.24>`
 * :ref:`Version 2.23 <version-2.23>`
 * :ref:`Version 2.22 <version-2.22>`
-* :ref:`Version 2.21 <version-2.21>`
 
 .. _upcoming-breaking-changes:
+
+.. _csharp-version-3.1:
+
+What's New in 3.1
+-----------------
+
+The 3.1 driver release includes the following new features:
+
+- Adds new default serializers for immutable collections in the
+  `System.Collections.Immutable <https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable?view=net-8.0>`__
+  namespace. The driver can now serialize ``ImmutableArray`` objects, and serialization
+  for other immutable collections is more memory efficient.
+
+- Adds support for the token field type and array field expressions with Atlas Search
+  builders for the ``equals`` operator. To learn more about using Atlas Search with the
+  {+driver-short+}, see :ref:`csharp-atlas-search`.
+
+- Adds support for sequential pagination in Atlas Search.
+
+- Adds support for valid SRV hostnames with fewer than 3 parts.
+
+- Adds support for the ``Exists``, ``IsMissing``, and ``IsNullOrMissing`` methods
+  in MongoDB Query API filters.
+
+- Adds support for Exact Nearest Neighbor (ENN) vector search. To learn more about ENN
+  Vector Search, see :atlas:`Run Vector Search Queries </atlas-vector-search/vector-search-stage>`
+  in the Atlas Search documentation.
+
+- Adds support for the ``sort`` option to be passed to update commands. To learn more about
+  using update commands with the {+driver-short+}, see :ref:`csharp-change-guide`.
+
+For more information about this release, see the :github:`v3.1 release notes
+</mongodb/mongo-csharp-driver/releases/tag/v3.1.0>`.
 
 .. _csharp-version-3.0:
 

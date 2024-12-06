@@ -31,7 +31,7 @@ subscribe to these driver events to monitor your application.
 .. note:: Event Logging
 
    This page explains how to monitor your application in code. To learn how to record
-   this information to an external log, see :ref:`Logging .<csharp-logging>`
+   this information to an external log, see :ref:`Logging. <csharp-logging>`
 
 .. _csharp-event-types:
 
@@ -42,6 +42,8 @@ The type of event that the driver emits depends on the operation being performed
 The following table describes the types of events that the driver emits:
 
 .. list-table::
+   :header-rows: 1
+   :widths: 30 70
 
    * - Event Type
      - Description
@@ -55,9 +57,7 @@ The following table describes the types of events that the driver emits:
        .. important:: Redacted Output
 
           As a security measure, the driver redacts the contents of some command events. This
-          protects the sensitive information contained in these command events. For a
-          full list of redacted command events, see the
-          :spec:`MongoDB command logging and monitoring specification </command-logging-and-monitoring/command-logging-and-monitoring.rst#security>`.
+          protects the sensitive information contained in these command events.
 
    * - Server Discovery and Monitoring (SDAM) Events
      - Events related to changes in the state of the MongoDB instance or cluster.
@@ -66,7 +66,7 @@ The following table describes the types of events that the driver emits:
      - Events related to the connection pool held by the driver.
 
 For a complete list of events the driver emits, see the API documentation for the
-`MongoDB.Driver.Core.Events <{+new-api-root+/MongoDB.Driver/MongoDB.Driver.Core.Events.html>`__
+`MongoDB.Driver.Core.Events <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Events.html>`__
 namespace.
 
 .. _csharp-monitor-events:
@@ -111,5 +111,5 @@ API Documentation
 To learn more about the methods and classes used to monitor events in the driver, see the
 following API documentation:
 
-- `MongoDB.Driver.Core.Events <{+new-api-root+/MongoDB.Driver/MongoDB.Driver.Core.Events.html>`__
-- `Subscribe<TEvent>() <{+new-api-root+/MongoDB.Driver/MongoDB.Driver.Core.Events.ClusterBuilder.Subscribe.html>`__
+- `MongoDB.Driver.Core.Events <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Events.html>`__
+- `Subscribe<TEvent>() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Events.ClusterBuilder.Subscribe.html>`__

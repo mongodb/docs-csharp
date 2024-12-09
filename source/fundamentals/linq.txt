@@ -253,17 +253,16 @@ $sample
 ~~~~~~~
 
 The ``$sample`` aggregation stage returns a random sample of documents from a 
-collection. The following example shows how to generate a ``$sample`` stage using
+collection. The following example shows how to generate a ``$sample`` stage by using
 LINQ: 
 
 .. code-block:: csharp
    :emphasize-lines: 4
 
-   var query = await client.GetDatabase("sample_mflix")
-       .GetCollection<BsonDocument>("movies")
+   var query = queryableCollection
        .Aggregate()
        .Sample(4)
-       .ToListAsync();
+       .ToList();
 
 The result of the preceding example contains the following documents:
 

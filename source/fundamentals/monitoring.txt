@@ -54,10 +54,9 @@ The following table describes the types of events that the driver emits:
        MongoDB database commands, see :manual:`Database Commands </reference/command/>`
        in the {+mdb-server+} manual.
 
-       .. important:: Redacted Output
-
-          As a security measure, the driver redacts the contents of some command events. This
-          protects the sensitive information contained in these command events.
+       As a security measure, the driver redacts the contents of some
+       command events. This protects the sensitive information contained in these command
+       events.
 
    * - Server Discovery and Monitoring (SDAM) Events
      - Events related to changes in the state of the MongoDB deployment.

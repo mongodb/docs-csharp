@@ -822,10 +822,10 @@ The following are some methods supported by the {+driver-long+} implementation o
      - Performs a left outer join to another collection in the same database
 
    * - ``IsMissing``
-     - Tests whether a field is missing
+     - Returns ``true`` if a field is missing and false otherwies
    
    * - ``IsNullOrMissing``
-     - Tests whether a field is null or missing
+     - Returns ``true`` if a field is null or missing and false otherwise
 
    * - ``Max``
      - Returns the document with the maximum specified value

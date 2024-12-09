@@ -5,7 +5,7 @@
    .. replacement:: driver-specific-content
 
 Libmongocrypt
-~~~~~~~~~~~~~
+-------------
 
 Libmongocrypt is a C library utilized by the driver for client-side encryption. 
 To enable client-side encryption, you must install the libmongocrypt library on 

@@ -391,7 +391,7 @@ The following table describes the generators available in the {+driver-short+}:
    :header-rows: 1
    :widths: 25 75
 
-   * - ``Id``  Field Data Type
+   * - Id Field Data Type
      - How to Use
 
    * - ``Guid``

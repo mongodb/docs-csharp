@@ -4,42 +4,13 @@
 
    .. replacement:: driver-specific-content
 
-Libmongocrypt
--------------
+To use CSFLE with the driver, you need to have the MongoDB.Driver.Encryption 
+nuget package. This package bundles libmongocrypt (library that manages encryption)
+libraries for various operating systems. However, on Linux systems, the bundled 
+libmongocrypt library does not use the system's native encryption providers due 
+to OpenSSL versioning issues. For high-performance applications on Linux, we 
+recommend manually installing the libmongocrypt library and specifying its path 
+to the driver using the LIBMONGOCRYPT_PATH environment variable.
 
-Libmongocrypt is a C library utilized by the driver for client-side encryption. 
-To enable client-side encryption, you must install the libmongocrypt library on 
-the machine running your application. The driver includes the MongoDB.libmongocrypt
-NuGet package, which bundles libmongocrypt libraries for various operating systems.
-However, on Linux systems, the bundled libmongocrypt library does not use the system's
-native encryption providers due to OpenSSL versioning issues. For high-performance
-applications on Linux, it is recommended to manually install the libmongocrypt
-library and specify its path to the driver using the ``LIBMONGOCRYPT_PATH``
-environment variable. This is only recommended for users on linux systems.
-
-You can download a pre-built binary libmongocrypt and manually place the required
-shared object on your computer, as follows:
-
-   * Download a tarball of all libmongocrypt variations `here <https://s3.amazonaws.com/mciuploads/libmongocrypt/all/master/latest/libmongocrypt-all.tar.gz>`_.
-   * Extract the file you downloaded. You will see a list of directories, each 
-     corresponding to an operating system. Find the directory that matches your 
-     operating system and open it.
-   * Inside that folder, open either the lib or lib64 folder, you will find the
-     libmongocrypt.so or libmongocrypt.dylib or libmongocrypt.dll file, depending
-     on your OS.
-   * Move that file to wherever you want to keep it on your machine. You may delete
-     the other files included in the tarball. 
-
-To build the binary from source:
-
-   * Follow the instructions in the README in the `libmongocrypt GitHub repo <https://github.com/mongodb/libmongocrypt>`_.
-
-Once you have the libmongocrypt binary on your machine, specify the path to the 
-binary using the ``LIBMONGOCRYPT_PATH`` environment variable. It is reccomended 
-that you add this variable to your rc files. 
-
-For example:
-
-.. code-block:: csharp
-
-   export LIBMONGOCRYPT_PATH=/absolute/path/to/your/libmongocrypt.so
+You can find the instructions for downloading a pre-built binary libmongocrypt 
+library `here <https://www.mongodb.com/docs/manual/core/queryable-encryption/reference/libmongocrypt/>`_.

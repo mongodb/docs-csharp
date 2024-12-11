@@ -4,13 +4,12 @@
 
    .. replacement:: driver-specific-content
 
-To use CSFLE with the driver, you need to have the MongoDB.Driver.Encryption 
+To use CSFLE with the driver, you need to have the `MongoDB.Driver.Encryption <https://www.nuget.org/packages/MongoDB.Driver.Encryption>`_
 nuget package. This package bundles libmongocrypt (library that manages encryption)
 libraries for various operating systems. However, on Linux systems, the bundled 
 libmongocrypt library does not use the system's native encryption providers due 
 to OpenSSL versioning issues. For high-performance applications on Linux, we 
-recommend manually installing the libmongocrypt library and specifying its path 
-to the driver using the LIBMONGOCRYPT_PATH environment variable.
+recommend manually installing the libmongocrypt library and specifying its absolute 
+path to the driver using the LIBMONGOCRYPT_PATH environment variable.
 
-You can find the instructions for downloading a pre-built binary libmongocrypt 
-library `here <https://www.mongodb.com/docs/manual/core/queryable-encryption/reference/libmongocrypt/>`_.
+You can find the instructions for downloading a libmongocrypt library `here <https://www.mongodb.com/docs/manual/core/queryable-encryption/reference/libmongocrypt/>`_.

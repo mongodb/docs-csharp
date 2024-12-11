@@ -270,11 +270,10 @@ The result of the preceding example contains the following documents:
 
    // Results Truncated
 
-   { "title" : "State of Play", "languages" : ["English"]}
-   { "title" : "Bhopal: A Prayer for Rain", "languages" : ["English", "Hindi"] }
-   { "title" : "Dead Presidents", "languages" : ["English"]}
-   { "title" : "The Rains Came", "languages" : ["English"] }
-
+   { "name" : "Von Dolhens", "cuisine" : "Ice Cream, Gelato, Yogurt, Ices" }
+   { "name" : "New York Mercantile Exchange", "cuisine" : "American" }
+   { "name" : "Michaelangelo's Restaurant", "cuisine" : "Italian" }
+   { "name" : "Charlie Palmer Steak", "cuisine" : "American" }
 
 $skip
 ~~~~~

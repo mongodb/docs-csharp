@@ -172,7 +172,7 @@ see the corresponding syntax.
       :tabid: oidc-kubernetes-connection-string
     
       The following code example shows how to specify Kubernetes OIDC authentication as
-      part of the authentication string:
+      part of the connection string:
 
       .. code-block:: csharp
 

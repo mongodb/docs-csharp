@@ -187,23 +187,6 @@ The result of the preceding example contains the following document:
    If you don't include the ``_id`` field in your LINQ projection, the {+driver-short+}
    automatically excludes it from the results.
 
-You can chain and nest
-
-``Select`` supports nested ``SelectMany`` statements. Y
-
-
-
-
-
-The following code shows
-how to nest ``Select`` and ``SelectMany`` statements:
-
-.. code-block:: csharp
-   
-   var query = queryableCollection
-      .Select(r => r.Grades.SelectMany(grade => new {
-         restaurant.Name, restaurant.Grades }));
-
 $match
 ~~~~~~
 

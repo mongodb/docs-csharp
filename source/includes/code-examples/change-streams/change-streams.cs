@@ -144,7 +144,7 @@ private static void MergeFragment<TDocument>(
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
     .ChangeStreamSplitLargeEvent();
 
-using (var cursor = await restaurantsCollection.WatchAsync(pipeline))
+using (var cursor = await _restaurantsCollection.WatchAsync(pipeline))
 {
     while (await cursor.MoveNextAsync())
     {

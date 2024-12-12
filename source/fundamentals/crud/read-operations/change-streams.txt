@@ -174,8 +174,8 @@ change stream document:
       :tabid: split-event-helpers-async
 
       .. literalinclude:: /includes/code-examples/change-streams/change-streams.cs
-         :start-after: start-change-stream-pipeline-async
-         :end-before: end-change-stream-pipeline-async
+         :start-after: start-split-event-helpers-async
+         :end-before: end-split-event-helpers-async
          :language: csharp
 
    .. tab:: Synchronous
@@ -209,7 +209,7 @@ reassemble the event fragments:
          :language: csharp
 
 To learn more about splitting large change events, see the
-:manual:`$changeStreamSplitLargeEvent </operator/aggregation/changeStreamSplitLargeEvent/>`
+:manual:`$changeStreamSplitLargeEvent </reference/operator/aggregation/changeStreamSplitLargeEvent/>`
 page in the {+mdb-server+} manual.
 
 Modify ``Watch()`` Behavior

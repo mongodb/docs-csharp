@@ -70,7 +70,6 @@ using (var cursor = _restaurantsCollection.Watch(pipeline))
 private static ChangeStreamDocument<TDocument> GetNextChangeStreamEvent<TDocument>(
     IEnumerator<ChangeStreamDocument<TDocument>> changeStreamEnumerator)
 {
-    changeStreamEnumerator.MoveNext();
     var changeStreamEvent = changeStreamEnumerator.Current;
 
     // Reassembles change event fragments if the event is split
@@ -169,7 +168,7 @@ using (var cursor = _restaurantsCollection.Watch(pipeline))
         while (enumerator.MoveNext())
         {
             var completeEvent = GetNextChangeStreamEvent(enumerator);
-            Console.WriteLine("Reassembled change event: " + completeEvent.FullDocument);
+            Console.WriteLine("Received the following change: " + completeEvent.BackingDocument);
         }
     }
 }

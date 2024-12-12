@@ -403,7 +403,7 @@ types:
    :widths: 10 10 
 
    * - ID Validation 
-     - ``IIdGenerator`` Type 
+     - IIdGenerator Type 
    * - Not null 
      - ``NullIdChecker``
    * - Not all zeroes 

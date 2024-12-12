@@ -111,7 +111,7 @@ for only specified change events. Create the pipeline by using the
 You can specify the following aggregation stages in the ``pipeline`` parameter:
 
 - ``$addFields``
-- ``$changeStreamSplitEvent``
+- ``$changeStreamSplitLargeEvent``
 - ``$match``
 - ``$project``
 - ``$replaceRoot``
@@ -161,7 +161,7 @@ Split Large Change Events Example
 
 If your application generates change events that exceed 16 MB, the
 {+driver-short+} returns an error. To avoid this error, you can use
-the ``$changeStreamSplitEvent`` pipeline stage to split the events
+the ``$changeStreamSplitLargeEvent`` pipeline stage to split the events
 into smaller fragments.
 
 After you receive the change stream event fragments, you can use the

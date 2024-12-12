@@ -187,8 +187,9 @@ change stream document:
          :language: csharp
 
 This example instructs the driver to watch for changes and split
-large change events, calling the preceding helper methods to
-reassemble the event fragments:
+change events that exceed the 16 MB limit. The code prints the
+change document for each event and calls the preceding helper methods to
+reassemble any event fragments:
 
 .. tabs::
 

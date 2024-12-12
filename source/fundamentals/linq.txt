@@ -352,6 +352,7 @@ objects. The following code shows an example of a document modeled by the
 The following code models the ``Guidebook`` class:
 
 .. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
    :start-after: start-guidebook-model
    :end-before: end-guidebook-model
 

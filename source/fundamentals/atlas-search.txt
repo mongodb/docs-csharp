@@ -54,7 +54,7 @@ The following ``Guitar`` class models the documents in this collection.
    {
        public int Id { get; set; }
        public string Make { get; set; }
-       public List<string> Colors { get; set; }
+       public List<string> Models { get; set; }
        public int EstablishedYear { get; set; }
        [BsonElement("in_stock")]
        public bool InStock { get; set; }

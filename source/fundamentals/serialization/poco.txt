@@ -337,9 +337,9 @@ MongoDB field. The following table describes the ID generators available in the
          
        To serialize the ``Id`` property as an ``ObjectId``, apply the
        ``[BsonRepresentation(BsonType.ObjectId)]`` attribute to the property, as shown
-         in the following code example. In this case, the driver uses the
-         ``ObjectIdGenerator`` type to generate a unique ``ObjectId`` value and assigns
-         it to the ``Id`` property.
+         in the following code example. In this case, if the property contains the value
+         ``null``, the driver uses the ``ObjectIdGenerator`` type to generate a unique
+         ``ObjectId`` value and assigns it to the ``Id`` property.
 
          .. code-block:: csharp
             :copyable: true

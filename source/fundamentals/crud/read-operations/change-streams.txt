@@ -111,6 +111,7 @@ for only specified change events. Create the pipeline by using the
 You can specify the following aggregation stages in the ``pipeline`` parameter:
 
 - ``$addFields``
+- ``$changeStreamSplitEvent``
 - ``$match``
 - ``$project``
 - ``$replaceRoot``
@@ -119,9 +120,19 @@ You can specify the following aggregation stages in the ``pipeline`` parameter:
 - ``$set``
 - ``$unset``
 
-To learn how to build an aggregation pipeline by using the
-``PipelineDefinitionBuilder`` class, see :ref:`csharp-builders-aggregation` in
-the Operations with Builders guide.
+.. tip::
+
+   To learn how to build an aggregation pipeline by using the
+   ``PipelineDefinitionBuilder`` class, see :ref:`csharp-builders-aggregation` in
+   the Operations with Builders guide.
+
+   To learn more about modifying your change stream output, see the
+   :manual:`Modify Change Stream Output
+   </changeStreams/#modify-change-stream-output>` section in the {+mdb-server+}
+   manual.
+
+Monitor Update Events Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following example uses the ``pipeline`` parameter to open a change stream
 that records only update operations. Select the :guilabel:`Asynchronous` or :guilabel:`Synchronous` tab to see the
@@ -145,10 +156,61 @@ corresponding code.
          :end-before: end-change-stream-pipeline
          :language: csharp
 
-To learn more about modifying your change stream output, see the
-:manual:`Modify Change Stream Output
-</changeStreams/#modify-change-stream-output>` section in the {+mdb-server+}
-manual.
+Split Large Change Events Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If your application generates change events that exceed 16 MB, the
+{+driver-short+} returns an error. To avoid this error, you can use
+the ``$changeStreamSplitEvent`` pipeline stage to split the events
+into smaller fragments.
+
+After you receive the change stream event fragments, you can use the
+following helper methods to reassemble the fragments into a single
+change stream document: 
+
+.. tabs::
+
+   .. tab:: Asynchronous
+      :tabid: split-event-helpers-async
+
+      .. literalinclude:: /includes/code-examples/change-streams/change-streams.cs
+         :start-after: start-change-stream-pipeline-async
+         :end-before: end-change-stream-pipeline-async
+         :language: csharp
+
+   .. tab:: Synchronous
+      :tabid: split-event-helpers-sync
+
+      .. literalinclude:: /includes/code-examples/change-streams/change-streams.cs
+         :start-after: start-split-event-helpers-sync
+         :end-before: end-split-event-helpers-sync
+         :language: csharp
+
+This example instructs the driver to watch for changes and split
+large change events, calling the preceding helper methods to
+reassemble the event fragments:
+
+.. tabs::
+
+   .. tab:: Asynchronous
+      :tabid: change-stream-split-async
+
+      .. literalinclude:: /includes/code-examples/change-streams/change-streams.cs
+         :start-after: start-split-change-event-async
+         :end-before: end-split-change-event-async
+         :language: csharp
+
+   .. tab:: Synchronous
+      :tabid: change-stream-split-sync
+
+      .. literalinclude:: /includes/code-examples/change-streams/change-streams.cs
+         :start-after: start-split-change-event-sync
+         :end-before: end-split-change-event-sync
+         :language: csharp
+
+To learn more about splitting large change events, see the
+:manual:`$changeStreamSplitLargeEvent </operator/aggregation/changeStreamSplitLargeEvent/>`
+page in the {+mdb-server+} manual.
 
 Modify ``Watch()`` Behavior
 ---------------------------

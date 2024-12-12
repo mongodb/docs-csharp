@@ -65,6 +65,121 @@ using (var cursor = _restaurantsCollection.Watch(pipeline))
 }
 // end-change-stream-pipeline
 
+// start-split-event-helpers-sync
+// Fetches the next complete change stream event
+private static ChangeStreamDocument<TDocument> GetNextChangeStreamEvent<TDocument>(
+    IEnumerator<ChangeStreamDocument<TDocument>> changeStreamEnumerator)
+{
+    changeStreamEnumerator.MoveNext();
+    var changeStreamEvent = changeStreamEnumerator.Current;
+
+    // Reassembles change event fragments if the event is split
+    if (changeStreamEvent.SplitEvent != null)
+    {
+        var fragment = changeStreamEvent;
+        while (fragment.SplitEvent.Fragment < fragment.SplitEvent.Of)
+        {
+            changeStreamEnumerator.MoveNext();
+            fragment = changeStreamEnumerator.Current;
+            MergeFragment(changeStreamEvent, fragment);
+        }
+    }
+    return changeStreamEvent;
+}
+
+// Merges a fragment into the base event
+private static void MergeFragment<TDocument>(
+    ChangeStreamDocument<TDocument> changeStreamEvent,
+    ChangeStreamDocument<TDocument> fragment)
+{
+    foreach (var element in fragment.BackingDocument)
+    {
+        if (element.Name != "_id" && element.Name != "splitEvent")
+        {
+            changeStreamEvent.BackingDocument[element.Name] = element.Value; 
+        }
+    }
+}
+// end-split-event-helpers-sync
+
+// start-split-event-helpers-async
+// Fetches the next complete change stream event
+private static async Task<ChangeStreamDocument<TDocument>> GetNextChangeStreamEventAsync<TDocument>(
+    IAsyncCursor<ChangeStreamDocument<TDocument>> changeStreamCursor)
+{
+    if (!await changeStreamCursor.MoveNextAsync())
+    {
+        throw new InvalidOperationException("No more change stream events available.");
+    }
+
+    var changeStreamEvent = changeStreamCursor.Current.First();
+
+    // Reassembles change event fragments if the event is split
+    if (changeStreamEvent.SplitEvent != null)
+    {
+        var fragment = changeStreamEvent;
+        while (fragment.SplitEvent.Fragment < fragment.SplitEvent.Of)
+        {
+            if (!await changeStreamCursor.MoveNextAsync())
+            {
+                throw new InvalidOperationException("Incomplete split event fragments.");
+            }
+            fragment = changeStreamCursor.Current.First();
+            MergeFragment(changeStreamEvent, fragment);
+        }
+    }
+    return changeStreamEvent;
+}
+
+// Merges a fragment into the base event
+private static void MergeFragment<TDocument>(
+    ChangeStreamDocument<TDocument> changeStreamEvent,
+    ChangeStreamDocument<TDocument> fragment)
+{
+    foreach (var element in fragment.BackingDocument)
+    {
+        if (element.Name != "_id" && element.Name != "splitEvent")
+        {
+            changeStreamEvent.BackingDocument[element.Name] = element.Value;
+        }
+    }
+}
+// end-split-event-helpers-async
+
+// start-split-change-event-async
+var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
+    .ChangeStreamSplitLargeEvent();
+
+using (var cursor = await _restaurantsCollection.WatchAsync(pipeline))
+{
+    while (await cursor.MoveNextAsync())
+    {
+        foreach (var changeStreamEvent in cursor.Current)
+        {
+            var completeEvent = await GetNextChangeStreamEventAsync(cursor);
+            Console.WriteLine("Reassembled change event: " + completeEvent.FullDocument);
+        }
+    }
+}
+// end-split-change-event-async
+
+// start-split-change-event-sync
+var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
+    .ChangeStreamSplitLargeEvent();
+
+using (var cursor = _restaurantsCollection.Watch(pipeline))
+{
+    using (var enumerator = cursor.ToEnumerable().GetEnumerator())
+    {
+        while (enumerator.MoveNext())
+        {
+            var completeEvent = GetNextChangeStreamEvent(enumerator);
+            Console.WriteLine("Reassembled change event: " + completeEvent.FullDocument);
+        }
+    }
+}
+// end-split-change-event-sync
+
 // start-change-stream-post-image
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
     .Match(change => change.OperationType == ChangeStreamOperationType.Update);

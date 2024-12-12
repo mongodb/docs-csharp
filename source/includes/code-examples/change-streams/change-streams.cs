@@ -107,11 +107,6 @@ private static void MergeFragment<TDocument>(
 private static async Task<ChangeStreamDocument<TDocument>> GetNextChangeStreamEventAsync<TDocument>(
     IAsyncCursor<ChangeStreamDocument<TDocument>> changeStreamCursor)
 {
-    if (!await changeStreamCursor.MoveNextAsync())
-    {
-        throw new InvalidOperationException("No more change stream events available.");
-    }
-
     var changeStreamEvent = changeStreamCursor.Current.First();
 
     // Reassembles change event fragments if the event is split
@@ -150,14 +145,14 @@ private static void MergeFragment<TDocument>(
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
     .ChangeStreamSplitLargeEvent();
 
-using (var cursor = await _restaurantsCollection.WatchAsync(pipeline))
+using (var cursor = await restaurantsCollection.WatchAsync(pipeline))
 {
     while (await cursor.MoveNextAsync())
     {
         foreach (var changeStreamEvent in cursor.Current)
         {
             var completeEvent = await GetNextChangeStreamEventAsync(cursor);
-            Console.WriteLine("Reassembled change event: " + completeEvent.FullDocument);
+            Console.WriteLine("Received the following change: " + completeEvent.BackingDocument);
         }
     }
 }

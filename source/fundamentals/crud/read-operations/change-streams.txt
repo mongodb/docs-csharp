@@ -160,7 +160,7 @@ Split Large Change Events Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If your application generates change events that exceed 16 MB in size, the
-{+driver-short+} returns an error. To avoid this error, you can use
+server returns a ``BSONObjectTooLarge`` error. To avoid this error, you can use
 the ``$changeStreamSplitLargeEvent`` pipeline stage to split the events
 into smaller fragments.
 
@@ -211,9 +211,9 @@ reassemble any event fragments:
 
 .. tip::
 
-   To learn more about splitting large change events, see the
+   To learn more about splitting large change events, see
    :manual:`$changeStreamSplitLargeEvent </reference/operator/aggregation/changeStreamSplitLargeEvent/>`
-   page in the {+mdb-server+} manual.
+   in the {+mdb-server+} manual.
 
 Modify ``Watch()`` Behavior
 ---------------------------

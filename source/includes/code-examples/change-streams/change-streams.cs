@@ -42,7 +42,7 @@ var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
             .Match(change => change.OperationType == ChangeStreamOperationType.Update);
 
 // Opens a change stream and prints the changes as they're received
-using (var cursor = await _restaurantsCollection.WatchAsync(pipeline))
+using (var cursor = await collection.WatchAsync(pipeline))
 {
     await cursor.ForEachAsync(change =>
     {
@@ -56,7 +56,7 @@ var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
             .Match(change => change.OperationType == ChangeStreamOperationType.Update);
 
 // Opens a change streams and print the changes as they're received
-using (var cursor = _restaurantsCollection.Watch(pipeline))
+using (var cursor = collection.Watch(pipeline))
 {
     foreach (var change in cursor.ToEnumerable())
     {
@@ -144,7 +144,7 @@ private static void MergeFragment<TDocument>(
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
     .ChangeStreamSplitLargeEvent();
 
-using (var cursor = await _restaurantsCollection.WatchAsync(pipeline))
+using (var cursor = await collection.WatchAsync(pipeline))
 {
     while (await cursor.MoveNextAsync())
     {
@@ -161,7 +161,7 @@ using (var cursor = await _restaurantsCollection.WatchAsync(pipeline))
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
     .ChangeStreamSplitLargeEvent();
 
-using (var cursor = _restaurantsCollection.Watch(pipeline))
+using (var cursor = collection.Watch(pipeline))
 {
     using (var enumerator = cursor.ToEnumerable().GetEnumerator())
     {
@@ -183,7 +183,7 @@ var options = new ChangeStreamOptions
     FullDocument = ChangeStreamFullDocumentOption.UpdateLookup,
 };
 
-using (var cursor = _restaurantsCollection.Watch(pipeline, options))
+using (var cursor = collection.Watch(pipeline, options))
 {
     foreach (var change in cursor.ToEnumerable())
     {
@@ -201,7 +201,7 @@ var options = new ChangeStreamOptions
     FullDocument = ChangeStreamFullDocumentOption.UpdateLookup,
 };
 
-using var cursor = await _restaurantsCollection.WatchAsync(pipeline, options);
+using var cursor = await collection.WatchAsync(pipeline, options);
 await cursor.ForEachAsync(change =>
 {
     Console.WriteLine(change.FullDocument.ToBsonDocument());

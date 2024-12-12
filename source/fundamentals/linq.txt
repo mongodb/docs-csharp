@@ -187,6 +187,23 @@ The result of the preceding example contains the following document:
    If you don't include the ``_id`` field in your LINQ projection, the {+driver-short+}
    automatically excludes it from the results.
 
+You can chain and nest
+
+``Select`` supports nested ``SelectMany`` statements. Y
+
+
+
+
+
+The following code shows
+how to nest ``Select`` and ``SelectMany`` statements:
+
+.. code-block:: csharp
+   
+   var query = queryableCollection
+      .Select(r => r.Grades.SelectMany(grade => new {
+         restaurant.Name, restaurant.Grades }));
+
 $match
 ~~~~~~
 
@@ -319,6 +336,70 @@ following documents:
    { "date" : ISODate("2013-11-14T00:00:00Z"), "grade" : "A", "score" : 2 }
    { "date" : ISODate("2012-12-05T00:00:00Z"), "grade" : "A", "score" : 13 }
    { "date" : ISODate("2012-05-17T00:00:00Z"), "grade" : "A", "score" : 11 }
+
+Nested Statements
++++++++++++++++++
+
+You can chain or nest ``Select`` and ``SelectMany`` statements. The examples
+in this section use the ``Guidebook`` class, which contain an array of ``Restaurant``
+objects. The following code shows an example of a document modeled by the 
+``Guidebook`` class:
+
+.. code-block:: json
+
+   { 
+      "_id": { "$oid": ... },
+      "restaurants": [
+         {
+            "_id": { ... } ,
+            "address": { ... },
+            "name": "Tov Kosher Kitchen",
+            ...
+         },
+         {
+            "_id": { ... } ,
+            "address": { ... },
+            "name": "Harriet's Kitchen",
+            ...
+         },
+         ...
+      ]
+   }
+
+The following code models the ``Guidebook`` class:
+
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :start-after: start-guidebook-model
+   :end-before: end-guidebook-model
+
+You can nest ``SelectMany`` statements within ``SelectMany`` or ``Select``
+statements. The following example nests a ``SelectMany`` statement within a
+``Select`` statement to retrieve an array of grades from all restaurants
+in a document modeled by the ``Guidebook`` class.
+
+.. io-code-block::
+   :copyable: true
+
+   .. input:: /includes/fundamentals/code-examples/linq.cs
+      :language: csharp
+      :start-after: start-nested-SelectMany
+      :end-before: end-nested-SelectMany
+
+   .. output::
+      :visible: false
+      :language: json
+
+      [
+         { "date" : ISODate("2014-11-24T00:00:00Z"), 
+            "grade" : "Z", 
+            "score" : 20.0 
+         }, 
+         { "date" : ISODate("2013-01-17T00:00:00Z"), 
+            "grade" : "A", 
+            "score" : 13.0 
+         }, 
+         ...
+      ]
 
 $group
 ~~~~~~

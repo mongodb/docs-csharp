@@ -323,10 +323,9 @@ following documents:
 Nested Statements
 +++++++++++++++++
 
-You can chain or nest ``Select`` and ``SelectMany`` statements. The examples
-in this section use the ``Guidebook`` class, which contain an array of ``Restaurant``
-objects. The following code shows an example of a document modeled by the 
-``Guidebook`` class:
+You can chain or nest ``Select`` and ``SelectMany`` statements to unwind nested
+arrays. Consider a collection that holds documents with a ``restaurants`` field.
+This field contains an array of documents that represent the ``Restaurants`` class:
 
 .. code-block:: json
 
@@ -337,29 +336,36 @@ objects. The following code shows an example of a document modeled by the
             "_id": { ... } ,
             "address": { ... },
             "name": "Tov Kosher Kitchen",
+            "grades": [
+               { 
+                  "date" : ISODate("2014-11-24T00:00:00Z"), 
+                  "grade" : "Z", 
+                  "score" : 20.0 
+               }, 
+               { 
+                  "date" : ISODate("2013-01-17T00:00:00Z"), 
+                  "grade" : "A", 
+                  "score" : 13.0 
+               },
+               ...
+            ]
             ...
          },
          {
             "_id": { ... } ,
             "address": { ... },
             "name": "Harriet's Kitchen",
+            "grades": [ ... ],
             ...
          },
          ...
       ]
    }
 
-The following code models the ``Guidebook`` class:
-
-.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
-   :language: csharp
-   :start-after: start-guidebook-model
-   :end-before: end-guidebook-model
-
 You can nest ``SelectMany`` statements within ``SelectMany`` or ``Select``
 statements. The following example nests a ``SelectMany`` statement within a
-``Select`` statement to retrieve an array of grades from all restaurants
-in a document modeled by the ``Guidebook`` class.
+``Select`` statement to retrieve an array of ``Grade`` documents from all restaurants
+in the document above.
 
 .. io-code-block::
    :copyable: true

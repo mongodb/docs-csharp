@@ -81,15 +81,6 @@ public class Ingredient
 
 // end-ingredient-model
 
-// start-guidebook-model
-
-public class Guidebook
-{
-   public List<Restaurant>? Restaurants { get; set; }
-}
-
-// end-guidebook-model
-
 // start-nested-SelectMany
 var query = queryableCollection
     .Select(r => r.Restaurants.SelectMany(r => r.Grades));

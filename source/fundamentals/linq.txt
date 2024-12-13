@@ -365,7 +365,7 @@ This field contains an array of documents that represent the ``Restaurants`` cla
 You can nest ``SelectMany`` statements within ``SelectMany`` or ``Select``
 statements. The following example nests a ``SelectMany`` statement within a
 ``Select`` statement to retrieve an array of ``Grade`` documents from all restaurants
-in the document above.
+in the preceding document.
 
 .. io-code-block::
    :copyable: true

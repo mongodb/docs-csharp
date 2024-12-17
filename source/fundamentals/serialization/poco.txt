@@ -175,8 +175,9 @@ Select Type Representation
 To serialize a {+language+} property to a specific BSON type, use the
 ``[BsonRepresentation()]`` attribute. This works only if the
 {+language+} primitive type is convertible to the BSON type you specify.
-In the following code sample, the ``YearBuilt`` property, defined as a
-``char`` in {+language+}, is serialized as a BSON ``Int32`` type:
+
+In the following code sample, the driver serializes the ``YearBuilt`` property,
+defined as a ``char`` in {+language+}, as a BSON ``Int32`` type:
 
 .. code-block:: csharp
    :copyable: true
@@ -247,7 +248,7 @@ The following code sample maps the ``Identifier`` property to the
        public string Identifier { get; set; }
    }
 
-.. warning:: Multiple Id Fields
+.. warning:: Multiple ID Fields
 
    If you identify more than one property as the ``_id`` field using the
    ``[BsonId()]`` attribute, the driver throws a
@@ -262,16 +263,18 @@ The following code sample maps the ``Identifier`` property to the
    root document and does not apply to nested documents.
 
 Specify an ID Generator
-``````````````````````
+```````````````````````
 
 Every document in a MongoDB collection must have a unique ID. When you serialize an object
-to a collection, if the ``Id`` property contains the default
+to a collection, if its ID property contains the default
 value for its data type (usually ``null``), the {+driver-short+} doesn't serialize the
-default value. Instead, the driver generates a unique ID value for the property.
+default value. Instead, the driver generates a unique ID value and assigns it to the
+property.
 
 When you apply the ``[BsonId]`` attribute to a property, you can pass the ``IdGenerator``
-argument to specify the type of ID value the driver generates for the corresponding
-MongoDB field. The following table describes the ID generators available in the
+argument to specify the type of generator that generates an ID value for the corresponding
+MongoDB field.
+The following table describes the ID generators available in the
 {+driver-short+}:
 
 .. list-table::
@@ -283,7 +286,7 @@ MongoDB field. The following table describes the ID generators available in the
 
    * - ``Guid``
      - To use the COMB algorithm to generate a unique ``Guid`` value, apply the
-       ``[BsonId(IdGenerator = typeof(CombGuidGenerator))]`` attribute to the ``Id``
+       ``[BsonId(IdGenerator = typeof(CombGuidGenerator))]`` attribute to the ID
        property, as shown in the following example:
 
        .. code-block:: csharp
@@ -296,8 +299,8 @@ MongoDB field. The following table describes the ID generators available in the
           }
 
        To generate a unique ``Guid`` value without the COMB algorithm, don't apply
-       the preceding attribute to the ``Id`` property. The driver automatically uses
-       the ``GuidGenerator`` type to generate a unique value for the ``Id`` field.
+       the preceding attribute to the ID property. The driver automatically uses
+       the ``GuidGenerator`` type to generate a unique value for the ID property.
 
        .. code-block:: csharp
           :copyable: true
@@ -308,7 +311,7 @@ MongoDB field. The following table describes the ID generators available in the
           } 
 
    * - ``ObjectId``
-     - The driver automatically uses the ``ObjectIdGenerator`` type for ``Id`` fields with
+     - The driver automatically uses the ``ObjectIdGenerator`` type for ID properties with
        the ``ObjectId`` data type, such as the one in the following code example:
 
        .. code-block:: csharp
@@ -320,11 +323,27 @@ MongoDB field. The following table describes the ID generators available in the
           } 
 
    * - ``string``
-     - To serialize the ``Id`` property as a ``string``, apply the
-       ``[BsonID(IdGenerator = typeof(StringObjectIdGenerator))]``
-       attribute to the property, as shown in the following code example. The driver
+     - If you specify that an ID property with the ``string`` data type is serialized
+       as an ``ObjectId``, the driver automatically uses the
+       ``StringObjectIdGenerator`` to generate a unique ``string`` value for the property.
+       In the following code example, the driver uses the ``StringObjectIdGenerator``
+       for the ``Id`` property:
+       
+       .. code-block:: csharp
+          :copyable: true
+   
+          public class House
+          {
+             [BsonRepresentation(BsonType.ObjectId)]
+             public string Id { get; set; }
+          } 
+       
+       To generate a unique ``string`` value for an ID property that is not serialized
+       as an ``ObjectId``, apply the
+       ``[BsonID(IdGenerator = typeof(StringObjectIdGenerator))]`` attribute to the
+       property, as shown in the following code example. The driver
        uses the ``StringObjectIdGenerator`` type to generate a unique ``ObjectId`` value,
-       convert it to a ``string``, and assign it to the ``Id`` property.
+       convert it to a ``string``, and assign it to the property.
 
        .. code-block:: csharp
           :copyable: true
@@ -335,29 +354,11 @@ MongoDB field. The following table describes the ID generators available in the
              public string Id { get; set; }
           }
          
-       To serialize the ``Id`` property as an ``ObjectId``, apply the
-       ``[BsonRepresentation(BsonType.ObjectId)]`` attribute to the property, as shown
-         in the following code example. In this case, if the property contains the value
-         ``null``, the driver uses the ``ObjectIdGenerator`` type to generate a unique
-         ``ObjectId`` value and assigns it to the ``Id`` property.
-
-         .. code-block:: csharp
-            :copyable: true
-   
-            public class House
-            {
-               [BsonRepresentation(BsonType.ObjectId)]
-               public string Id { get; set; }
-            }
-       
-       If you apply both the ``[BsonId(IdGenerator = typeof(StringObjectIdGenerator))]``
-       and ``[BsonRepresentation(BsonType.ObjectId)]`` attributes to the ``Id`` property,
-       the driver generates an ``ObjectId`` value for the field.
-
    * - ``BsonObjectId``
      - Apply the ``[BsonId(IdGenerator = typeof(BsonObjectIdGenerator))]`` attribute to the
-       ``Id`` property, as shown in the following code example. The driver uses the
-       ``BsonObjectIdGenerator`` type to generate a unique value for the ``Id`` property.
+       ID property, as shown in the following code example. The driver uses the
+       ``BsonObjectIdGenerator`` type to generate a unique ``BsonObjectId`` value for
+       the property.
 
        .. code-block:: csharp
           :copyable: true
@@ -368,7 +369,7 @@ MongoDB field. The following table describes the ID generators available in the
              public BsonObjectId Id { get; set; }
           } 
 
-Alternatively, you can specify an ``IIdGenerator`` type while registering the class map,
+Alternatively, you can specify an ``IIdGenerator`` type when you register the class map,
 as shown in the following example:
 
 .. code-block:: csharp

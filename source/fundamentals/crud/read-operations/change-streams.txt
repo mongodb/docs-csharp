@@ -162,33 +162,13 @@ Split Large Change Events Example
 If your application generates change events that exceed 16 MB in size, the
 server returns a ``BSONObjectTooLarge`` error. To avoid this error, you can use
 the ``$changeStreamSplitLargeEvent`` pipeline stage to split the events
-into smaller fragments.
-
-After you receive the change stream event fragments, you can use the
-following helper methods to reassemble the fragments into a single
-change stream document: 
-
-.. tabs::
-
-   .. tab:: Asynchronous
-      :tabid: split-event-helpers-async
-
-      .. literalinclude:: /includes/code-examples/change-streams/change-streams.cs
-         :start-after: start-split-event-helpers-async
-         :end-before: end-split-event-helpers-async
-         :language: csharp
-
-   .. tab:: Synchronous
-      :tabid: split-event-helpers-sync
-
-      .. literalinclude:: /includes/code-examples/change-streams/change-streams.cs
-         :start-after: start-split-event-helpers-sync
-         :end-before: end-split-event-helpers-sync
-         :language: csharp
+into smaller fragments. The {+driver-short+} aggregation API includes the
+``ChangeStreamSplitLargeEvent()`` method, which you can use to add the 
+``$changeStreamSplitLargeEvent`` stage to the change stream pipeline.
 
 This example instructs the driver to watch for changes and split
 change events that exceed the 16 MB limit. The code prints the
-change document for each event and calls the preceding helper methods to
+change document for each event and calls helper methods to
 reassemble any event fragments:
 
 .. tabs::
@@ -209,6 +189,28 @@ reassemble any event fragments:
          :end-before: end-split-change-event-sync
          :language: csharp
 
+The preceding example uses the ``GetNextChangeStreamEvent()`` and ``MergeFragment()``
+methods to reassemble change event fragments into a single change stream document.
+The following code defines these methods:
+
+.. tabs::
+
+   .. tab:: Asynchronous
+      :tabid: split-event-helpers-async
+
+      .. literalinclude:: /includes/code-examples/change-streams/change-streams.cs
+         :start-after: start-split-event-helpers-async
+         :end-before: end-split-event-helpers-async
+         :language: csharp
+
+   .. tab:: Synchronous
+      :tabid: split-event-helpers-sync
+
+      .. literalinclude:: /includes/code-examples/change-streams/change-streams.cs
+         :start-after: start-split-event-helpers-sync
+         :end-before: end-split-event-helpers-sync
+         :language: csharp
+         
 .. tip::
 
    To learn more about splitting large change events, see

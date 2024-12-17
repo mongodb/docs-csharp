@@ -103,7 +103,7 @@ private static void MergeFragment<TDocument>(
 
 // start-split-event-helpers-async
 // Fetches the next complete change stream event
-private static async Task<ChangeStreamDocument<TDocument>> GetNextChangeStreamEventAsync<TDocument>(
+private static async Task<ChangeStreamDocument<TDocument>> GetNextChangeStreamEvent<TDocument>(
     IAsyncCursor<ChangeStreamDocument<TDocument>> changeStreamCursor)
 {
     var changeStreamEvent = changeStreamCursor.Current.First();
@@ -150,7 +150,7 @@ using (var cursor = await collection.WatchAsync(pipeline))
     {
         foreach (var changeStreamEvent in cursor.Current)
         {
-            var completeEvent = await GetNextChangeStreamEventAsync(cursor);
+            var completeEvent = await GetNextChangeStreamEvent(cursor);
             Console.WriteLine("Received the following change: " + completeEvent.BackingDocument);
         }
     }

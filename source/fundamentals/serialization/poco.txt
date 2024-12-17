@@ -273,8 +273,7 @@ property.
 
 When you apply the ``[BsonId]`` attribute to a property, you can pass the ``IdGenerator``
 argument to specify the type of generator that generates an ID value for the corresponding
-MongoDB field.
-The following table describes the ID generators available in the
+MongoDB field. The following table describes the ID generators available in the
 {+driver-short+}:
 
 .. list-table::

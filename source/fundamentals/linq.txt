@@ -324,8 +324,11 @@ Nested Statements
 +++++++++++++++++
 
 You can chain or nest ``Select`` and ``SelectMany`` statements to unwind nested
-arrays. Consider a collection that holds documents with a ``restaurants`` field.
-This field contains an array of documents that represent the ``Restaurants`` class:
+arrays. Consider a collection that contains documents with a new schema. These
+documents contain a ``restaurants`` field, which holds an array of documents 
+that each represent the ``Restaurant`` class. These documents each have
+a ``grades`` field that holds an array of documents that each represent
+the ``Grade`` class.
 
 .. code-block:: json
 
@@ -388,6 +391,10 @@ in the preceding document.
             "grade" : "A", 
             "score" : 13.0 
          }, 
+         { "date" : ISODate("..."),
+           "grade" : ...,
+           "score" : ...
+         },
          ...
       ]
 

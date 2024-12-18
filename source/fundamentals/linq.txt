@@ -368,8 +368,8 @@ this collection:
 
 You can nest ``SelectMany`` statements within ``SelectMany`` or ``Select``
 statements. The following example nests a ``SelectMany`` statement within a
-``Select`` statement to retrieve an array of ``Grade`` documents from all restaurants
-in each document in the collection.
+``Select`` statement to retrieve an array from each document in the collection.
+Each array holds all grade objects from all restaurants in each document.
 
 .. io-code-block::
    :copyable: true

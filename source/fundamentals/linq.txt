@@ -328,7 +328,7 @@ arrays. Consider a collection that contains documents with a **new** schema. The
 documents contain a ``restaurants`` field, which holds an array of documents 
 that each represent the ``Restaurant`` class. These documents each have
 a ``grades`` field that holds an array of documents that each represent
-the ``Grade`` class.
+the ``Grade`` class. The following code models the document in this example:
 
 .. code-block:: json
 
@@ -368,7 +368,7 @@ the ``Grade`` class.
 You can nest ``SelectMany`` statements within ``SelectMany`` or ``Select``
 statements. The following example nests a ``SelectMany`` statement within a
 ``Select`` statement to retrieve an array of ``Grade`` documents from all restaurants
-in the preceding document.
+in each document in the collection.
 
 .. io-code-block::
    :copyable: true
@@ -382,6 +382,7 @@ in the preceding document.
       :visible: false
       :language: json
 
+      // output for first document in collection
       [
          { "date" : ISODate("2014-11-24T00:00:00Z"), 
             "grade" : "Z", 
@@ -395,6 +396,10 @@ in the preceding document.
            "grade" : ...,
            "score" : ...
          },
+         ...
+      ], 
+      // output for second document in collection
+      [
          ...
       ]
 

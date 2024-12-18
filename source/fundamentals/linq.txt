@@ -328,7 +328,8 @@ arrays. Consider a collection that contains documents with a **new** schema. The
 documents contain a ``restaurants`` field, which holds an array of documents 
 that each represent the ``Restaurant`` class. These documents each have
 a ``grades`` field that holds an array of documents that each represent
-the ``Grade`` class. The following code models the document in this example:
+the ``Grade`` class. The following code is an example of a single document in
+this collection:
 
 .. code-block:: json
 

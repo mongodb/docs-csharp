@@ -268,12 +268,13 @@ Specify an ID Generator
 Every document in a MongoDB collection must have a unique ID. When you serialize an object
 to a collection, if its ID property contains the default
 value for its data type (usually ``null``), the {+driver-short+} doesn't serialize the
-default value. Instead, the driver generates a unique ID value and assigns it to the
+default value. Instead, the driver tries to generate a unique ID value and assign it to the
 property.
 
-When you apply the ``[BsonId]`` attribute to a property, you can pass the ``IdGenerator``
-argument to specify the type of generator that generates an ID value for the corresponding
-MongoDB field. The following table describes the ID generators available in the
+To enable ID generation for a property, you must specify the ID generator the driver
+uses for the property. You can do so by applying the ``[BsonId]`` attribute to the property
+and passing the ``IdGenerator`` argument to specify the generator type.
+The following table describes the ID generators available in the
 {+driver-short+}:
 
 .. list-table::

@@ -326,8 +326,8 @@ Nested Statements
 You can chain or nest ``Select`` and ``SelectMany`` statements to unwind nested
 arrays. Consider a collection that contains documents with a **new** schema. These
 documents contain a ``restaurants`` field, which holds an array of documents 
-that each represent the ``Restaurant`` class. The documents within the array each have
-a ``grades`` field that holds an array of documents that each represent
+represented by the ``Restaurant`` class. The documents within the array each have
+a ``grades`` field that holds an array of documents represented by
 the ``Grade`` class. The following code is an example of a single document in
 this collection:
 
@@ -350,8 +350,7 @@ this collection:
                   "date" : ISODate("2013-01-17T00:00:00Z"), 
                   "grade" : "A", 
                   "score" : 13.0 
-               },
-               ...
+               }
             ]
             ...
          },
@@ -359,7 +358,13 @@ this collection:
             "_id": { ... } ,
             "address": { ... },
             "name": "Harriet's Kitchen",
-            "grades": [ ... ],
+            "grades": [ 
+               { 
+                  "date" : ISODate("2014-04-19T00:00:00Z"), 
+                  "grade" : "B", 
+                  "score" : 12.0 
+               }
+             ],
             ...
          },
          ...
@@ -393,9 +398,10 @@ Each array holds all grade objects from all restaurants in each document.
             "grade" : "A", 
             "score" : 13.0 
          }, 
-         { "date" : ISODate("..."),
-           "grade" : ...,
-           "score" : ...
+         { 
+            "date" : ISODate("2014-04-19T00:00:00Z"), 
+            "grade" : "B", 
+            "score" : 12.0 
          },
          ...
       ], 

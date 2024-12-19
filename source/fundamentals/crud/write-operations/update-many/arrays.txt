@@ -346,8 +346,8 @@ Update Arrays
                :language: csharp
                :copyable: true
                :dedent:
-               :start-after: // start-update-many-filteredpositional
-               :end-before: // end-update-many-filteredpositional
+               :start-after: // start-update-many-filteredpositional-async
+               :end-before: // end-update-many-filteredpositional-async
 
          .. tab:: LINQ (Sync)
             :tabid: linq-sync

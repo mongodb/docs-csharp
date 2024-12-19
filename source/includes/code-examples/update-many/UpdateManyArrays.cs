@@ -532,7 +532,7 @@ public class UpdateManyArrays
 
         // Set Grade = "A" in all GradeEntry objects where Score >= 94
         var update = Builders<Restaurant>.Update
-            .Set("grades.$[gradeEntry].grade", "F");
+            .Set("grades.$[gradeEntry].grade", "A");
 
         var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
         var result = _restaurantsCollection.UpdateMany(filter, update, updateOptions);
@@ -557,7 +557,7 @@ public class UpdateManyArrays
 
         // Set Grade = "A" in all GradeEntry objects where Score >= 94
         var update = Builders<Restaurant>.Update
-            .Set(restaurant => restaurant.Grades.AllMatchingElements("gradeEntry").Score, 100);
+            .Set(restaurant => restaurant.Grades.AllMatchingElements("gradeEntry").Grade, "A");
 
         var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
         var result = _restaurantsCollection.UpdateMany(filter, update, updateOptions);
@@ -582,7 +582,7 @@ public class UpdateManyArrays
 
         // Set Grade = "A" in all GradeEntry objects where Score >= 94
         var update = Builders<Restaurant>.Update
-            .Set("grades.$[gradeEntry].grade", "F");
+            .Set("grades.$[gradeEntry].grade", "A");
 
         var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
         var result = await _restaurantsCollection.UpdateManyAsync(filter, update, updateOptions);
@@ -607,7 +607,7 @@ public class UpdateManyArrays
 
         // Set Grade = "A" in all GradeEntry objects where Score >= 94
         var update = Builders<Restaurant>.Update
-            .Set(restaurant => restaurant.Grades.AllMatchingElements("gradeEntry").Score, 100);
+            .Set(restaurant => restaurant.Grades.AllMatchingElements("gradeEntry").Grade, "A");
 
         var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
         var result = await _restaurantsCollection.UpdateManyAsync(filter, update, updateOptions);

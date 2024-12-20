@@ -14,28 +14,35 @@ public class UpdateOneAsync
 
     public static async Task Main(string[] args)
     {
-        Setup();
+        try
+        {
+            Setup();
 
-        // Extra space for console readability 
-        Console.WriteLine();
+            // Prints extra space for console readability 
+            Console.WriteLine();
 
-        //Update one document asynchronously
-        var asyncResult = await UpdateOneRestaurantAsync();
-        Console.WriteLine($"Updated documents: {asyncResult.ModifiedCount}");
-        ResetSampleData();
+            // Updates one document asynchronously by using a helper method
+            var asyncResult = await UpdateOneRestaurantAsync();
+            Console.WriteLine($"Updated documents: {asyncResult.ModifiedCount}");
+            ResetSampleData();
+
+            // Prints a message if any exceptions occur during the operation    
+        }
+        catch (MongoException e)
+        {
+            Console.WriteLine("Unable to update due to an error: " + me);
+        }
     }
 
     private static async Task<UpdateResult> UpdateOneRestaurantAsync()
     {
         // start-update-one-async
-        const string oldValue = "Bagels N Buns";
-        const string newValue = "2 Bagels 2 Buns";
-
+        // Creates a filter for all documents with a "name" of "Bagels N Buns"
         var filter = Builders<Restaurant>.Filter
-            .Eq(restaurant => restaurant.Name, oldValue);
+            .Eq(restaurant => restaurant.Name, "Bagels N Buns");
 
         var update = Builders<Restaurant>.Update
-            .Set(restaurant => restaurant.Name, newValue);
+            .Set(restaurant => restaurant.Name, "2 Bagels 2 Buns");
 
         return await _restaurantsCollection.UpdateOneAsync(filter, update);
         // end-update-one-async

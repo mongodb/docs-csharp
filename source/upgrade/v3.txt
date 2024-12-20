@@ -98,6 +98,14 @@ Version 3.0 Breaking Changes
 
 - The LINQ2 provider has been removed from this version of the driver.
   You must use LINQ3 for all LINQ queries.
+  
+  Queries that use client-side projections will throw an ``ExpressionNotSupportedException``
+  error by default. To enable client-side projections, set the
+  ``EnableClientSideProjections`` property of a ``TranslationOptions`` object to
+  ``true``. You can pass this ``TranslationOptions`` object to an
+  ``AggregateOptions`` or ``FindOptions`` object to enable client-side projections
+  for a single query, or to a ``MongoClientSettings`` object to enable client-side projections
+  for all queries in an application.
 
 - Previous versions of the {+driver-short+} supported two GUID representation modes.
   In version 3.0, ``GuidRepresentationMode.V3`` is the only supported mode. This change
@@ -193,3 +201,47 @@ Version 3.0 Breaking Changes
     property instead. 
   - Removes the ``AsNullableDateTime`` property. Use the `AsNullableUniversalTime <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.AsNullableUniversalTime.html#MongoDB_Bson_BsonValue_AsNullableUniversalTime>`__
     property instead.
+
+- The driver removes individual cluster events from ``MongoClient.Cluster``. To listen for
+  cluster events, call the `ClusterBuilder.Subscribe() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.ClusterBuilder.Subscribe.html>`__
+  method.
+
+- If any type in a collection uses a scalar discriminator, the driver throws
+  an exception if you perform either of the following actions on the collection:
+  
+  - Call the ``Aggregate().OfType<T>()`` method, as in the following example:
+
+    .. code-block:: csharp
+
+       collection.Aggregate().OfType<T>()
+
+  - Call the ``Aggregate().Match(item => item is T)`` method, as in the following example:
+
+    .. code-block:: csharp
+
+       collection.Aggregate().Match(item => item is T)
+  
+  To use either of the preceding methods on a collection, you can apply a hierarchical
+  discriminator to each class in the collection. See
+  the :ref:`Polymorphic Objects <csharp-discriminator-hierarchical>`
+  page to learn how.
+
+  Alternatively, you can check each item's type in a different way. For example, you
+  can call the ``Where()`` method and pass an expression that compares the item's type
+  to the type you're looking for, as in the following example:
+
+  .. code-block:: csharp
+
+     collection.AsQueryable().Where(item => item.GetType() == typeof(T));
+
+  To learn more about type discriminators, see :ref:`<csharp-polymorphism>`.
+
+- The driver has sealed some types that were not designed for extension by using inheritance.
+  This includes the following changes:
+
+  - The driver seals all concrete serializers. To implement a custom serializer, implement the
+    ``IBsonSerializer`` interface.
+
+  - The driver seals the ``MongoClient``, ``MongoDatabase``, and ``MongoCollection`` classes.
+    We recommend using the ``IMongoClient``, ``IMongoDatabase``, and ``IMongoCollection``
+    interfaces directly.

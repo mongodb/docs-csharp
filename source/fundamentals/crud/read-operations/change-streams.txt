@@ -193,7 +193,7 @@ reassemble any event fragments:
 
    We recommend reassembling change event fragments, as shown in the 
    preceding example, but this step is optional. You can use the same 
-   logic to watch split events and complete change events.
+   logic to watch both split and complete change events.
 
 The preceding example uses the ``GetNextChangeStreamEvent()``,
 ``GetNextChangeStreamEventAsync()``, and ``MergeFragment()``

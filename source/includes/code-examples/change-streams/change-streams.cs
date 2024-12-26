@@ -67,25 +67,25 @@ using (var cursor = collection.Watch(pipeline))
 
 // start-split-event-helpers-sync
 // Fetches the next complete change stream event
- private static IEnumerable<ChangeStreamDocument<TDocument>> GetNextChangeStreamEvent<TDocument>(
-    IEnumerator<ChangeStreamDocument<TDocument>> changeStreamEnumerator)
- {
-     while (changeStreamEnumerator.MoveNext())
-     {
-         var changeStreamEvent = changeStreamEnumerator.Current;
-         if (changeStreamEvent.SplitEvent != null)
-         {
-             var fragment = changeStreamEvent;
-             while (fragment.SplitEvent.Fragment < fragment.SplitEvent.Of)
-             {
-                 changeStreamEnumerator.MoveNext();
-                 fragment = changeStreamEnumerator.Current;
-                 MergeFragment(changeStreamEvent, fragment);
-             }
-         }
-         yield return changeStreamEvent;
-     }
- }
+private static IEnumerable<ChangeStreamDocument<TDocument>> GetNextChangeStreamEvent<TDocument>(
+IEnumerator<ChangeStreamDocument<TDocument>> changeStreamEnumerator)
+{
+    while (changeStreamEnumerator.MoveNext())
+    {
+        var changeStreamEvent = changeStreamEnumerator.Current;
+        if (changeStreamEvent.SplitEvent != null)
+        {
+            var fragment = changeStreamEvent;
+            while (fragment.SplitEvent.Fragment < fragment.SplitEvent.Of)
+            {
+                changeStreamEnumerator.MoveNext();
+                fragment = changeStreamEnumerator.Current;
+                MergeFragment(changeStreamEvent, fragment);
+            }
+        }
+        yield return changeStreamEvent;
+    }
+}
 
 // Merges a fragment into the base event
 private static void MergeFragment<TDocument>(

@@ -189,7 +189,14 @@ reassemble any event fragments:
          :end-before: end-split-change-event-sync
          :language: csharp
 
-The preceding example uses the ``GetNextChangeStreamEvent()`` and ``MergeFragment()``
+.. note::
+
+   We recommend reassembling change event fragments, as shown in the 
+   preceding example, but this step is optional. You can use the same 
+   logic to watch split events and complete change events.
+
+The preceding example uses the ``GetNextChangeStreamEvent()``,
+``GetNextChangeStreamEventAsync()``, and ``MergeFragment()``
 methods to reassemble change event fragments into a single change stream document.
 The following code defines these methods:
 

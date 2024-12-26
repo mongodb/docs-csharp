@@ -67,24 +67,25 @@ using (var cursor = collection.Watch(pipeline))
 
 // start-split-event-helpers-sync
 // Fetches the next complete change stream event
-private static ChangeStreamDocument<TDocument> GetNextChangeStreamEvent<TDocument>(
+ private static IEnumerable<ChangeStreamDocument<TDocument>> GetNextChangeStreamEvent<TDocument>(
     IEnumerator<ChangeStreamDocument<TDocument>> changeStreamEnumerator)
-{
-    var changeStreamEvent = changeStreamEnumerator.Current;
-
-    // Reassembles change event fragments if the event is split
-    if (changeStreamEvent.SplitEvent != null)
-    {
-        var fragment = changeStreamEvent;
-        while (fragment.SplitEvent.Fragment < fragment.SplitEvent.Of)
-        {
-            changeStreamEnumerator.MoveNext();
-            fragment = changeStreamEnumerator.Current;
-            MergeFragment(changeStreamEvent, fragment);
-        }
-    }
-    return changeStreamEvent;
-}
+ {
+     while (changeStreamEnumerator.MoveNext())
+     {
+         var changeStreamEvent = changeStreamEnumerator.Current;
+         if (changeStreamEvent.SplitEvent != null)
+         {
+             var fragment = changeStreamEvent;
+             while (fragment.SplitEvent.Fragment < fragment.SplitEvent.Of)
+             {
+                 changeStreamEnumerator.MoveNext();
+                 fragment = changeStreamEnumerator.Current;
+                 MergeFragment(changeStreamEvent, fragment);
+             }
+         }
+         yield return changeStreamEvent;
+     }
+ }
 
 // Merges a fragment into the base event
 private static void MergeFragment<TDocument>(
@@ -103,26 +104,37 @@ private static void MergeFragment<TDocument>(
 
 // start-split-event-helpers-async
 // Fetches the next complete change stream event
-private static async Task<ChangeStreamDocument<TDocument>> GetNextChangeStreamEvent<TDocument>(
+private static async IAsyncEnumerable<ChangeStreamDocument<TDocument>> GetNextChangeStreamEventAsync<TDocument>(
     IAsyncCursor<ChangeStreamDocument<TDocument>> changeStreamCursor)
 {
-    var changeStreamEvent = changeStreamCursor.Current.First();
-
-    // Reassembles change event fragments if the event is split
-    if (changeStreamEvent.SplitEvent != null)
+    var changeStreamEnumerator = GetNextChangeStreamEventFragmentAsync(changeStreamCursor).GetAsyncEnumerator();
+    while (await changeStreamEnumerator.MoveNextAsync())
     {
-        var fragment = changeStreamEvent;
-        while (fragment.SplitEvent.Fragment < fragment.SplitEvent.Of)
+        var changeStreamEvent = changeStreamEnumerator.Current;
+        if (changeStreamEvent.SplitEvent != null)
         {
-            if (!await changeStreamCursor.MoveNextAsync())
+            var fragment = changeStreamEvent;
+            while (fragment.SplitEvent.Fragment < fragment.SplitEvent.Of)
             {
-                throw new InvalidOperationException("Incomplete split event fragments.");
+                await changeStreamEnumerator.MoveNextAsync();
+                fragment = changeStreamEnumerator.Current;
+                MergeFragment(changeStreamEvent, fragment);
             }
-            fragment = changeStreamCursor.Current.First();
-            MergeFragment(changeStreamEvent, fragment);
+        }
+        yield return changeStreamEvent;
+    }
+}
+
+private static async IAsyncEnumerable<ChangeStreamDocument<TDocument>> GetNextChangeStreamEventFragmentAsync<TDocument>(
+    IAsyncCursor<ChangeStreamDocument<TDocument>> changeStreamCursor)
+{
+    while (await changeStreamCursor.MoveNextAsync())
+    {
+        foreach (var changeStreamEvent in changeStreamCursor.Current)
+        {
+            yield return changeStreamEvent;
         }
     }
-    return changeStreamEvent;
 }
 
 // Merges a fragment into the base event
@@ -140,39 +152,27 @@ private static void MergeFragment<TDocument>(
 }
 // end-split-event-helpers-async
 
-// start-split-change-event-async
-var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
-    .ChangeStreamSplitLargeEvent();
-
-using (var cursor = await collection.WatchAsync(pipeline))
-{
-    while (await cursor.MoveNextAsync())
-    {
-        foreach (var changeStreamEvent in cursor.Current)
-        {
-            var completeEvent = await GetNextChangeStreamEvent(cursor);
-            Console.WriteLine("Received the following change: " + completeEvent.BackingDocument);
-        }
-    }
-}
-// end-split-change-event-async
-
 // start-split-change-event-sync
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
     .ChangeStreamSplitLargeEvent();
 
-using (var cursor = collection.Watch(pipeline))
-{
-    using (var enumerator = cursor.ToEnumerable().GetEnumerator())
-    {
-        while (enumerator.MoveNext())
-        {
-            var completeEvent = GetNextChangeStreamEvent(enumerator);
-            Console.WriteLine("Received the following change: " + completeEvent.BackingDocument);
-        }
-    }
-}
+using var cursor = collection.Watch(pipeline);
+ foreach (var completeEvent in GetNextChangeStreamEvent(cursor.ToEnumerable().GetEnumerator()))
+ {
+     Console.WriteLine("Received the following change: " + completeEvent.BackingDocument);
+ }
 // end-split-change-event-sync
+
+// start-split-change-event-async
+var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
+    .ChangeStreamSplitLargeEvent();
+
+using var cursor = await collection.WatchAsync(pipeline);
+ await foreach (var completeEvent in GetNextChangeStreamEventAsync(cursor))
+ {
+     Console.WriteLine("Received the following change: " + completeEvent.BackingDocument);
+ }
+// end-split-change-event-async
 
 // start-change-stream-post-image
 var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()

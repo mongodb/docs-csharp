@@ -157,10 +157,10 @@ var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
     .ChangeStreamSplitLargeEvent();
 
 using var cursor = collection.Watch(pipeline);
- foreach (var completeEvent in GetNextChangeStreamEvent(cursor.ToEnumerable().GetEnumerator()))
- {
-     Console.WriteLine("Received the following change: " + completeEvent.BackingDocument);
- }
+foreach (var completeEvent in GetNextChangeStreamEvent(cursor.ToEnumerable().GetEnumerator()))
+{
+    Console.WriteLine("Received the following change: " + completeEvent.BackingDocument);
+}
 // end-split-change-event-sync
 
 // start-split-change-event-async
@@ -168,10 +168,10 @@ var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Restaurant>>()
     .ChangeStreamSplitLargeEvent();
 
 using var cursor = await collection.WatchAsync(pipeline);
- await foreach (var completeEvent in GetNextChangeStreamEventAsync(cursor))
- {
-     Console.WriteLine("Received the following change: " + completeEvent.BackingDocument);
- }
+await foreach (var completeEvent in GetNextChangeStreamEventAsync(cursor))
+{
+    Console.WriteLine("Received the following change: " + completeEvent.BackingDocument);
+}
 // end-split-change-event-async
 
 // start-change-stream-post-image

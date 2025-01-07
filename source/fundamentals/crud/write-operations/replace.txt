@@ -109,8 +109,11 @@ corresponding code.
 
 .. important::
 
-   The values of ``_id`` fields are immutable. If your replacement document specifies 
-   a value for the ``_id`` field, it must match the ``_id`` value of the existing document.
+   The values of ``_id`` fields are immutable. If your replacement document
+   specifies a value for the ``_id`` field, it must match the ``_id`` value of
+   the existing document. If your replacement document does not specify a value
+   for the ``_id`` field, you must add the ``[BsonIgnoreIfDefault]`` attribute
+   to the ``_id`` field in your Plain Old CLR/Class Object (POCO).
 
 Customize the Replace Operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

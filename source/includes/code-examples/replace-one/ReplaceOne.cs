@@ -115,6 +115,8 @@ public class ReplaceOne
 
 public class Restaurant
 {
+    [BsonId]
+    [BsonIgnoreIfDefault]
     public ObjectId Id { get; set; }
 
     public string Name { get; set; }

@@ -111,9 +111,33 @@ corresponding code.
 
    The values of ``_id`` fields are immutable. If your replacement document
    specifies a value for the ``_id`` field, it must match the ``_id`` value of
-   the existing document. If your replacement document does not specify a value
+   the existing document. 
+   
+   If your replacement document does not specify a value
    for the ``_id`` field, you must add the ``[BsonIgnoreIfDefault]`` attribute
-   to the ``_id`` field in your Plain Old CLR/Class Object (POCO).
+   to the ``_id`` field in your Plain Old CLR/Class Object (POCO) like the following:
+
+   .. code-block:: csharp
+
+      public class Restaurant
+      {
+          [BsonId]
+          [BsonIgnoreIfDefault]
+          public ObjectId Id { get; set; }
+
+          public string Name { get; set; }
+
+          [BsonElement("restaurant_id")]
+          public string RestaurantId { get; set; }
+
+          public string Cuisine { get; set; }
+          
+          public Address Address { get; set; }
+
+          public string Borough { get: set; }
+
+          public List<GradeEntry> Grades { get; set; }
+      }
 
 Customize the Replace Operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

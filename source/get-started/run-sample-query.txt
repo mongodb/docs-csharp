@@ -1,0 +1,49 @@
+.. _csharp-get-started-run-sample-query:
+
+==================
+Run a Sample Query
+==================
+
+.. procedure::
+   :style: connected
+
+   .. step:: Create your {+lang-framework+} Application
+      
+      Copy and paste the following code into the ``Program.cs`` file in your application:
+      
+      .. literalinclude:: /includes/quick-start/Program.cs
+         :language: csharp
+         :dedent:
+
+   .. step:: Run your Application
+
+      In your shell, run the following command to start this application:
+      
+      .. code-block:: sh
+
+         dotnet run csharp-quickstart.csproj
+
+      The output includes details of the retrieved movie document:
+
+      .. code-block:: none
+
+         {
+           _id: ...,
+           plot: 'A young man is accidentally sent 30 years into the past...',
+           genres: [ 'Adventure', 'Comedy', 'Sci-Fi' ],
+           ...
+           title: 'Back to the Future',
+           ...
+         }
+
+      .. tip::
+
+         If you encounter an error or see no output, ensure that you specified the
+         proper connection string, and that you loaded the
+         sample data.
+
+After you complete these steps, you have a working application that
+uses the driver to connect to your MongoDB deployment, runs a query on
+the sample data, and prints out the result.
+
+.. include:: /includes/get-started/quickstart-troubleshoot.rst

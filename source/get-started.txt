@@ -1,0 +1,45 @@
+.. _csharp-get-started:
+
+============================
+Get Started with the {+driver-short+}
+============================
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: tutorial
+ 
+.. meta::
+   :description: Learn how to create an app to connect to MongoDB deployment by using the .NET/C# driver.
+   :keywords: quick start, tutorial, basics
+
+.. toctree::
+
+   Download Driver </get-started/download-driver/>
+   Deploy a Cluster </get-started/deploy-cluster/>
+   Create a Connection String </get-started/create-connection-string/>
+   Databases & Collections </get-started/databases-collections/>
+   Run a Sample Query </get-started/run-sample-query/>
+
+Overview
+--------
+
+The {+driver-short+} is a NuGet package that you can use to connect
+to and communicate with MongoDB. This guide shows you how to create an
+application that uses the {+driver-short+} to connect to a MongoDB cluster hosted on
+MongoDB Atlas.
+
+.. tip:: 
+
+   MongoDB Atlas is a fully managed cloud database service that hosts your MongoDB
+   deployments. You can create your own free (no credit card required) MongoDB Atlas 
+   deployment by following the steps in this guide.
+
+Follow this guide to connect a sample {+language+} application to a MongoDB Atlas
+deployment. If you prefer to connect to MongoDB using a different driver or
+programming language, see our :driver:`list of official drivers <>`.

@@ -12,7 +12,7 @@ MongoDB C# Driver
 .. toctree::
 
    Previous Versions </previous-versions>
-   Quick Start </quick-start>
+   Get Started </get-started>
    Quick Reference </quick-reference>
    What's New </whats-new>
    Usage Examples </usage-examples>
@@ -32,7 +32,7 @@ Introduction
 Welcome to the documentation site for the official {+driver-long+}.
 You can add the driver to your application to work with MongoDB in {+language+}.
 Download the driver using `NuGet <https://www.nuget.org/packages/MongoDB.Driver>`__, or set up a runnable
-project by following our :ref:`Quick Start guide <csharp-quickstart>`.
+project by following our :ref:`Get Started <csharp-get-started>` guide.
 
 Previous Versions
 -----------------
@@ -47,11 +47,11 @@ deployments running on one of the following hosted services or editions:
 
 .. include:: /includes/fact-environments.rst
 
-Quick Start
+Get Started
 -----------
 
 Learn how to establish a connection to MongoDB Atlas and begin
-working with data in the :ref:`csharp-quickstart` section.
+working with data in the :ref:`csharp-get-started` section.
 
 Quick Reference
 ---------------

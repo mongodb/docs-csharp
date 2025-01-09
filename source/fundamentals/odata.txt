@@ -32,7 +32,7 @@ Sample Data
 
 This tutorial uses the ``sample_restaurants.restaurants`` collection
 from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
-free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<csharp-quickstart>`.
+free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<csharp-get-started>`.
 
 Tutorial
 --------

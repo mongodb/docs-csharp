@@ -1,8 +1,8 @@
 .. _csharp-get-started:
 
-============================
+===================================
 Get Started with the {+driver-short+}
-============================
+===================================
 
 .. contents:: On this page
    :local:
@@ -20,10 +20,9 @@ Get Started with the {+driver-short+}
 
 .. toctree::
 
-   Download Driver </get-started/download-driver/>
+   Download the Driver </get-started/download-driver/>
    Deploy a Cluster </get-started/deploy-cluster/>
    Create a Connection String </get-started/create-connection-string/>
-   Databases & Collections </get-started/databases-collections/>
    Run a Sample Query </get-started/run-sample-query/>
 
 Overview

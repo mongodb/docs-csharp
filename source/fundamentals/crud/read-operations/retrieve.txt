@@ -39,7 +39,7 @@ Sample Data
 
 The examples in this guide use the ``sample_restaurants.restaurants`` collection
 from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
-free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<csharp-quickstart>`.
+free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<csharp-get-started>`.
 
 The examples on this page use the following ``Restaurant``, ``Address``, and ``GradeEntry`` 
 classes as models:

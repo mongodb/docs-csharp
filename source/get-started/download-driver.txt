@@ -19,7 +19,7 @@ Download the {+driver-short+}
          cd csharp-quickstart
          dotnet new console
 
-   .. step:: Install {+driver-short+}
+   .. step:: Install the {+driver-short+}
 
       Run the following command to install the current version of the {+driver-short+}
       as a dependency of your project:

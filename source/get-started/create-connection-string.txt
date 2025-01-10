@@ -53,7 +53,7 @@ when applicable, and connection options.
    .. step:: Update the Placeholders
 
       Paste this connection string into a file in your preferred text editor
-      and replace the ``<username>`` and ``<password>`` placeholders with
+      and replace the ``<db_username>`` and ``<db_password>`` placeholders with
       your database user's username and password.
       
       Save this file to a safe location for use in the next step.
@@ -63,7 +63,7 @@ when applicable, and connection options.
       In your shell, run the following code to save your MongoDB
       :ref:`connection string <csharp-connect-to-mongodb>` to an 
       environment variable. Replace ``<your MongoDB URI>`` with the connection
-      string that you copied in the previous step.
+      string that you saved to a file in the previous step.
 
       .. code-block:: bash
 

@@ -100,7 +100,7 @@ To perform an aggregation, pass a list of aggregation stages to the
   
   This example uses the ``sample_restaurants.restaurants`` collection
   from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
-  free MongoDB Atlas cluster and load the sample datasets, see :ref:`csharp-quickstart`.
+  free MongoDB Atlas cluster and load the sample datasets, see :ref:`csharp-get-started`.
 
 The following code example produces a count of the number of bakeries in each borough
 of New York City. To do so, it uses an aggregation pipeline that contains the following stages:

@@ -1,0 +1,34 @@
+.. _csharp-get-started-download-driver:
+
+===========================
+Download the {+driver-short+} 
+===========================
+
+.. procedure::
+   :style: connected
+
+   .. step:: Create a Project Directory
+
+      In your shell, run the following commands to create a 
+      directory called ``csharp-quickstart`` and initialize a {+framework+} project for
+      a new console application:
+
+      .. code-block:: bash
+
+         mkdir csharp-quickstart
+         cd csharp-quickstart
+         dotnet new console
+
+   .. step:: Install the {+driver-short+}
+
+      Run the following command to install the current version of the {+driver-short+}
+      as a dependency of your project:
+      
+      .. code-block:: bash
+
+         dotnet add package MongoDB.Driver
+
+After you complete these steps, you have a new {+framework+} project
+and the {+driver-short+} installed.
+
+.. include:: /includes/get-started/quickstart-troubleshoot.rst

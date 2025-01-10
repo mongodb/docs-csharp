@@ -67,7 +67,7 @@ or you can
 
 Once you have imported the dataset, you can copy and paste a usage
 example into your development environment of choice. You can follow the
-:ref:`csharp-quickstart` to learn more about getting
+:ref:`csharp-get-started` to learn more about getting
 started with the {+driver-long+}. Once you've copied a usage example,
 you'll need to edit the connection URI to get the example connected to
 your MongoDB instance:

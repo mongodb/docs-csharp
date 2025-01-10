@@ -187,7 +187,7 @@ Examples
 --------
 
 The following examples uses the MongoDB Atlas sample dataset. To obtain this sample
-dataset, see :ref:`csharp-quickstart`.
+dataset, see :ref:`csharp-get-started`.
 
 The examples use the ``theaters`` collection in the ``sample_mflix`` database
 from the sample dataset. The ``theaters`` collection contains a ``2dsphere`` index

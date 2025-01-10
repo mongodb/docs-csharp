@@ -16,7 +16,7 @@ when applicable, and connection options.
 .. tip::
    
    To connect to a self-managed (non-Atlas) deployment, see
-   :ref:`csharp-connection-targets`.
+   :ref:`csharp-connect-to-mongodb`.
 
 .. procedure::
    :style: connected

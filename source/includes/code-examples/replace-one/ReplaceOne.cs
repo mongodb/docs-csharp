@@ -52,9 +52,14 @@ public class ReplaceOne
         var filter = Builders<Restaurant>.Filter
             .Eq(r => r.Cuisine, "Pizza");
 
+        // Finds the ID of the first restaurant document that matches the filter
+        var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
+        var oldId = oldPizzaRestaurant.Id;
+
         // Generates a new restaurant document
         Restaurant newPizzaRestaurant = new()
         {
+            Id = oldId
             Name = "Mongo's Pizza",
             Cuisine = "Pizza",
             Address = new Address()
@@ -77,9 +82,14 @@ public class ReplaceOne
         var filter = Builders<Restaurant>.Filter
             .Eq(r => r.Cuisine, "Pizza");
 
+        // Finds the ID of the first restaurant document that matches the filter
+        var oldPizzaRestaurant = _restaurantsCollection.Find(filter).First();
+        var oldId = oldPizzaRestaurant.Id;
+
         // Generates a new restaurant document
         Restaurant newPizzaRestaurant = new()
         {
+            Id = oldId
             Name = "Mongo's Pizza",
             Cuisine = "Pizza",
             Address = new Address()
@@ -115,9 +125,6 @@ public class ReplaceOne
 
 public class Restaurant
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    [BsonIgnoreIfDefault]
     public ObjectId Id { get; set; }
 
     public string Name { get; set; }

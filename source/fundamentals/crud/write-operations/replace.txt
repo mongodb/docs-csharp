@@ -115,18 +115,15 @@ corresponding code.
    
    If your replacement document does not specify a value for the ``_id`` field,
    you must add the ``[BsonIgnoreIfDefault]`` attribute to the ``_id`` field in
-   your Plain Old CLR/Class Object (POCO). This prevents the {+driver-short+}
-   from serializing the default value of the ``_id``. The following example
-   shows how to add this attribute:
+   your Plain Old CLR/Class Object (POCO). The following example shows how to
+   add this attribute:
 
    .. code-block:: csharp
 
       public class Restaurant
       {
-          [BsonId]
-          [BsonRepresentation(BsonType.ObjectId)]
           [BsonIgnoreIfDefault]
-          public string Id { get; set; }
+          public ObjectId Id { get; set; }
 
           // Other properties
       }

@@ -116,7 +116,7 @@ corresponding code.
    If your replacement document does not specify a value for the ``_id`` field,
    you can add the ``[BsonIgnoreIfDefault]`` attribute to the ``_id`` field in
    your Plain Old CLR/Class Object (POCO). Use ``[BsonIgnoreIfDefault]`` if the
-   ``_id`` field is the ``ObjectId`` type.
+   ``_id`` field in your POCO is of the ``ObjectId`` type.
    
    The following example shows how to add this attribute:
 

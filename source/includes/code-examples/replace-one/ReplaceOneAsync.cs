@@ -56,7 +56,7 @@ public class ReplaceOneAsync
         // Generates a new restaurant document
         Restaurant newPizzaRestaurant = new()
         {   
-            Id = oldId
+            Id = oldId,
             Name = "Mongo's Pizza",
             Cuisine = "Pizza",
             Address = new Address()
@@ -84,7 +84,7 @@ public class ReplaceOneAsync
         // Generates a new restaurant document
         Restaurant newPizzaRestaurant = new()
         {
-            Id = oldId
+            Id = oldId,
             Name = "Mongo's Pizza",
             Cuisine = "Pizza",
             Address = new Address()

@@ -122,7 +122,7 @@ Why Does the Driver Throw a Timeout During Server Selection?
 Each driver operation requires that you choose a healthy server
 satisfying the :manual:`server selection criteria
 </core/read-preference-mechanics>`. If you do not select an appropriate
-server within the `server selection timeout <{+new-api-root+}/MongoDB.Driver.Legacy/MongoDB.Driver.MongoServerSettings.ServerSelectionTimeout.html>`__, the driver throws a
+server within the `server selection timeout <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.ServerSelectionTimeout.html>`__, the driver throws a
 server selection timeout exception. The exception looks similar to the
 following:
 
@@ -322,3 +322,7 @@ Entity Framework Core users. The provider includes features such as the followin
 - Entity-based LINQ operations
 - Entity Framework modeling and mapping with the fluent API
 - Automatic database updates through change tracking
+
+https://mongodb.github.io/mongo-csharp-driver/3.0.0/api/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.ServerSelectionTimeout.html
+
+https://mongodb.github.io/mongo-csharp-driver/3.0.0/api/MongoDB.Driver/MongoDB.Driver.MongoServerSettings.ServerSelectionTimeout.html

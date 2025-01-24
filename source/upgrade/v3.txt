@@ -251,4 +251,4 @@ Version 3.0 Breaking Changes
 
 - The driver requires applications to explicitly configure how to serialize GUIDs
   by using the ``GuidSerializationProvider`` and ``ObjectSerializer`` classes. To learn
-  more about GUID serialization, see :ref:`<csharp-guids>`.
+  more about GUID serialization, see the :ref:`csharp-guids` guide.

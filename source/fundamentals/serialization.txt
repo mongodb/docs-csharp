@@ -147,7 +147,7 @@ Convention Packs
 
 Convention packs allow you to define and apply
 **conventions** to your classes and their members during serialization.
-Conventions modify how data is mapped between your
+Conventions specify how data is mapped between your
 {+language+} objects and MongoDB documents without requiring you to decorate
 each class with attributes. 
 
@@ -157,7 +157,7 @@ built-in convention packs:
 
 .. list-table::
    :header-rows: 1
-   :widths: 30 70
+   :widths: 40 60
 
    * - Convention Pack
      - Description
@@ -176,9 +176,9 @@ built-in convention packs:
      - Specifies which types are allowed to be serialized using an object
        serializer.
 
-For a full list of available convention packs, see the `Conventions
+To view a full list of available convention packs, see the `Conventions
 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Conventions.html>`__
-page in the API Documentation.
+class reference in the API Documentation.
 
 You can register a convention pack by passing an instance of the pack to the
 ``ConventionRegistry.Register()`` method, as shown in the following example:

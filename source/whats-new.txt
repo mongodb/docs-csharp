@@ -49,7 +49,7 @@ The 3.2 driver release includes the following new features:
 - Adds a new constructor for the ``EnumRepresentationConvention`` class that
   allows you use the ``topLevelOnly`` parameter to specify whether the
   convention applies to only enum properties or to all properties that include
-  collections of enums, such as lists, arrays, and dictionaries.
+  collections of enums.
 
   You can instantiate the ``EnumRepresentationConvention`` class by using the new
   constructor as shown in the following example:

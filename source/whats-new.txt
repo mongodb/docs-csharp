@@ -19,7 +19,7 @@ What's New
 
 Learn what's new in:
 
-* :ref:`Version 3.1 <csharp-version-3.2>`
+* :ref:`Version 3.2 <csharp-version-3.2>`
 * :ref:`Version 3.1 <csharp-version-3.1>`
 * :ref:`Version 3.0 <csharp-version-3.0>`
 * :ref:`Version 2.30 <csharp-version-2.30>`

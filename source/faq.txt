@@ -192,7 +192,7 @@ If you're used to programming in {+language+}, consider using LINQ because of it
 to programming in native {+language+}. If you have prior experience with other MongoDB drivers,
 consider using builder classes because of their consistency with other drivers. BSON
 documents offer the most flexibility and can be more easily translated to other programming
-languages, but are less idiomatic to {+language+} and do not check for errors at compile time.
+languages, but are less idiomatic to {+language+} and do not check for type errors at compile time.
 
 We encourage experimenting with each approach to determine the most suitable mechanism
 for your purposes. To learn more about visualizing LINQ and builder class queries, see the

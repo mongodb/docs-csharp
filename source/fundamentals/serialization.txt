@@ -140,26 +140,26 @@ Implementing the `IBsonArraySerializer
 interface enables the driver to access serialization information for individual
 items in an array.
 
-.. _csharp-convention-packs:
+.. _csharp-conventions:
 
-Convention Packs
-----------------
+Conventions
+-----------
 
 Convention packs allow you to define and apply
-**conventions** to your classes and their members during serialization.
+**conventions** to your classes and their members that the driver uses during serialization.
 Conventions specify how data is mapped between your
 {+language+} objects and MongoDB documents without requiring you to decorate
 each class with attributes. 
 
-The {+driver-short+} provides built-in convention packs that you can use to
+The {+driver-short+} provides built-in conventions that you can use to
 customize the serialization process. The following table describes some of the
-built-in convention packs:
+built-in conventions:
 
 .. list-table::
    :header-rows: 1
    :widths: 40 60
 
-   * - Convention Pack
+   * - Convention
      - Description
 
    * - `CamelCaseElementNameConvention <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Conventions.CamelCaseElementNameConvention.html>`__
@@ -176,11 +176,12 @@ built-in convention packs:
      - Specifies which types are allowed to be serialized using an object
        serializer.
 
-To view a full list of available convention packs, see the `Conventions
+To view a full list of available conventions, see the `Conventions
 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Conventions.html>`__
 class reference in the API Documentation.
 
-You can register a convention pack by passing an instance of the pack to the
+You can register a convention by instantiating a ``ConventionPack`` with the
+specified conventions, then passing it to the
 ``ConventionRegistry.Register()`` method, as shown in the following example:
 
 .. code-block:: csharp

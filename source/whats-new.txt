@@ -41,10 +41,10 @@ What's New in 3.2
 
 The 3.2 driver release includes the following new features:
 
-- Adds a new ``ObjectSerializerAllowedTypesConvention`` convention pack that
+- Adds a new ``ObjectSerializerAllowedTypesConvention`` convention that
   allows you to specify which types are allowed to be serialized and
-  deserialized by the object serializer. To learn more about convention packs,
-  see the :ref:`csharp-convention-packs` guide.
+  deserialized by the object serializer. To learn more about conventions,
+  see the :ref:`csharp-conventions` guide.
 
 - Adds a new constructor for the ``EnumRepresentationConvention`` class that
   allows you use the ``topLevelOnly`` parameter to specify whether the

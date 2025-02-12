@@ -1,9 +1,9 @@
 .. _csharp-authentication-LDAP:
 .. _csharp-authentication-ldap:
 
-======================================
-Self-Managed LDAP PLAIN Authentication
-======================================
+===========================
+LDAP (PLAIN) Authentication
+===========================
 
 .. contents:: On this page
    :local:

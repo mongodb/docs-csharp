@@ -2,7 +2,7 @@
 .. _csharp-authentication-ldap:
 
 ======================================
-Self-Managed LDAP Proxy Authentication
+Self-Managed LDAP PLAIN Authentication
 ======================================
 
 .. contents:: On this page

@@ -1,9 +1,9 @@
 .. _csharp-authentication-LDAP:
 .. _csharp-authentication-ldap:
 
-====
-LDAP
-====
+======================================
+Self-Managed LDAP Proxy Authentication
+======================================
 
 .. contents:: On this page
    :local:

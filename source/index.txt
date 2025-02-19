@@ -51,7 +51,7 @@ Quick Start
 -----------
 
 Learn how to establish a connection to MongoDB Atlas and begin
-working with data in the :ref:`csharp-quickstart` section.
+working with data in the :ref:`csharp-quickstart` section!
 
 Quick Reference
 ---------------

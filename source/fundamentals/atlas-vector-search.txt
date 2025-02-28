@@ -1,0 +1,94 @@
+.. _csharp-atlas-vector-search:
+
+===================
+Atlas Vector Search
+===================
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: .NET, search, semantic, AI, RAG
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+You can use Atlas Vector Search to perform vector search on your data stored in
+Atlas. Vector search allows you to query your data based on semantic meaning
+rather than just keyword matches, which helps you retrieve more relevant search
+results. It enables your AI-powered applications to support use cases such as
+semantic search, hybrid search, and generative search, including RAG.
+
+By using Atlas as a vector database, you can seamlessly index vector data along
+with your other data in Atlas. This allows you to filter on fields in your
+collection and perform vector search queries against vector data. You can also
+combine vector search with full-text search queries to return the most relevant
+results for your use case. You can integrate Atlas Vector Search with popular AI
+frameworks and services to easily implement vector search in your applications.
+
+To learn more about Atlas Vector Search, see the :atlas:`Atlas Vector Search
+</atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
+documentation.
+
+Supported Vector Embedding Types
+--------------------------------
+
+:atlas:`Vector Embeddings
+</atlas-vector-search/vector-search-overview/#std-term-vector-embeddings>`
+are vectors you use to represent your data. These embeddings
+capture meaningful relationships in your data and enable tasks like semantic
+search and retrieval.
+
+The {+driver-short+} supports vector embeddings of several types. The following
+sections describe the supported vector embedding types.
+
+BsonArray Representations
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The {+driver-short+} supports the following representations of the ``BsonArray``
+type in vector embeddings:
+
+- ``BsonArray``
+- ``Memory``
+- ``ReadOnlyMemory``
+- Native arrays, such as: ``int[]``
+
+The following example shows a class with properties of the preceding types:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchExamples.cs
+   :language: csharp
+   :start-after: start-bson-arrays
+   :end-before: end-bson-arrays
+
+Binary Vector Representations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The {+driver-short+} supports the following binary vector representations in
+vector embeddings:
+
+- ``BinaryVectorFloat32`` (not supported on big-endian architectures)
+- ``BinaryVectorInt8``
+- ``BinaryVectorPackedBit``
+- ``Memory<float>``, ``Memory<byte>``, ``Memory<sbyte>``
+- ``ReadOnlyMemory<float>``, ``ReadOnlyMemory<byte>``, ``ReadOnlyMemory<sbyte>``
+- ``float[]``, ``byte[]``, ``sbyte[]``
+
+.. note::
+
+   You must use the ``BinaryVector`` attribute when specifying binary vector
+   representations of the ``Memory<T>``, ``ReadOnlyMemory<T>``, or array
+   types.
+
+The following example shows a class with properties of the preceding types:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchExamples.cs
+   :language: csharp
+   :start-after: start-binary-vectors
+   :end-before: end-binary-vectors

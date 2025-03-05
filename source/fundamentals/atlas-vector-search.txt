@@ -109,12 +109,12 @@ Vector Search Query Example
 You can perform a vector search query by calling the ``VectorSearch()`` method
 in an :ref:`aggregation pipeline <csharp-aggregation>`. To perform a vector
 search on a collection, you must first have a collection with a field that contains
-vector data and a vector search index on that field. To learn more about setting
-up a collection for vector search, see the :atlas:`Atlas Vector Search
+vector data and a vector search index that covers that field. To learn more
+about configuring a collection for vector search, see the :atlas:`Atlas Vector Search
 </atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
 documentation.
 
-The following example performs the following steps Atlas Vector Search query on a collection that
+This example performs the following steps to run an Atlas Vector Search query on a collection that
 contains vector data and a vector search index on the ``PlotEmbedding`` field:
 
 1. Creates a vector array that contains the vector data to search for
@@ -129,6 +129,7 @@ contains vector data and a vector search index on the ``PlotEmbedding`` field:
    :language: csharp
    :start-after: start-search-example
    :end-before: end-search-example
+   :emphasize-lines: 11
 
 Additional Information
 ----------------------

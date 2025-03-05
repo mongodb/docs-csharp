@@ -28,3 +28,9 @@ public class BinaryVectors
 
 }
 // end-binary-vectors
+
+// start-to-query-vector
+var binaryVector = new BinaryVectorInt8(new sbyte[] { 0, 1, 2, 3, 4 });
+
+var queryVector = binaryVector.ToQueryVector();
+// end-to-query-vector

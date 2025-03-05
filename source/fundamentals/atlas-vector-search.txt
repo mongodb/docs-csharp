@@ -92,3 +92,60 @@ The following example shows a class with properties of the preceding types:
    :language: csharp
    :start-after: start-binary-vectors
    :end-before: end-binary-vectors
+
+You can convert ``BinaryVectorFloat32``, ``BinaryVectorInt8``, and
+``BinaryVectorPackedBit`` data to the ``BsonBinaryData`` type to use in a vector
+search query by using the ``ToQueryVector()`` method. The following example
+converts ``BinaryVectorInt8`` into a ``BsonBinaryData`` object:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchExamples.cs
+   :language: csharp
+   :start-after: start-to-query-vector
+   :end-before: end-to-query-vector
+
+Vector Search Query Example
+---------------------------
+
+You can perform a vector search query by calling the ``VectorSearch()`` method
+in an :ref:`aggregation pipeline <csharp-aggregation>`. To perform a vector
+search on a collection, you must first have a collection with a field that contains
+vector data and a vector search index on that field. To learn more about setting
+up a collection for vector search, see the :atlas:`Atlas Vector Search
+</atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
+documentation.
+
+The following example performs the following steps Atlas Vector Search query on a collection that
+contains vector data and a vector search index on the ``PlotEmbedding`` field:
+
+1. Creates a vector array that contains the vector data to search for
+#. Specifies a ``VectorSearchOptions`` object that contains the name of the index
+   and the number of nearest neighbors to use during the search
+#. Creates an aggregation pipeline that uses the ``VectorSearch()`` stage to
+   perform the vector search query and a ``Project()`` stage to filter the
+   results
+#. Prints the results of the query
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchQueryExample.cs
+   :language: csharp
+   :start-after: start-search-example
+   :end-before: end-search-example
+
+Additional Information
+----------------------
+
+To learn more about Atlas Vector Search, see the :atlas:`Atlas Vector Search
+</atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
+documentation.
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+To learn more about any of the functions or types discussed in this
+guide, see the following API Documentation:
+
+- `BinaryVectorFloat32 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorFloat32.html>`__
+- `BinaryVectorInt8 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorInt8.html>`__
+- `BinaryVectorFloat32 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorPackedBit.html>`__
+- `ToQueryVector() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BinaryVectorDriverExtensions.ToQueryVector.html>`__
+- `VectorSearch() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateFluentBase-1.VectorSearch.html>`__
+- `Aggregate() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.Aggregate.html>`__

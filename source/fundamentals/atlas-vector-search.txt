@@ -49,16 +49,19 @@ search and retrieval.
 The {+driver-short+} supports vector embeddings of several types. The following
 sections describe the supported vector embedding types.
 
-BsonArray Representations
-~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The {+driver-short+} supports the following representations of the ``BsonArray``
+.. _csharp-vector-array-representation:
+
+Array Representations
+~~~~~~~~~~~~~~~~~~~~~
+
+The {+driver-short+} supports the following representations of the array
 type in vector embeddings:
 
 - ``BsonArray``
 - ``Memory``
 - ``ReadOnlyMemory``
-- Native arrays, such as: ``int[]``
+- ``float[]`` and ``double[]``
 
 The following example shows a class with properties of the preceding types:
 
@@ -66,6 +69,8 @@ The following example shows a class with properties of the preceding types:
    :language: csharp
    :start-after: start-bson-arrays
    :end-before: end-bson-arrays
+
+.. _csharp-binary-vector-representation:
 
 Binary Vector Representations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -93,6 +98,36 @@ The following example shows a class with properties of the preceding types:
    :start-after: start-binary-vectors
    :end-before: end-binary-vectors
 
+Binary Vector Data Serialization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can serialize ``Int8`` binary vector typed data as ``byte`` or ``sbyte``
+as shown in the following example:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchExamples.cs
+   :language: csharp
+   :start-after: start-binary-int-serialize
+   :end-before: end-binary-int-serialize
+
+You can deserialize ``PackedBit`` vector data to a :ref:`binary vector
+represented <csharp-binary-vector-representation>` data type only if the
+``PackedBit`` has a padding value of ``0``. If the ``PackedBit`` has a padding value not
+equal to ``0``, you can deserialize it only to a ``BsonVectorPackedBit``.
+
+Vector Search Query Example
+---------------------------
+
+You can perform a vector search query by calling the ``VectorSearch()`` method
+in an :ref:`aggregation pipeline <csharp-aggregation>`. To perform a vector
+search on a collection, you must first have a collection with a field that contains
+vector data and a vector search index that covers that field.
+
+.. tip::
+
+   To learn more about configuring a collection for vector search, see the :atlas:`Atlas Vector Search
+   </atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
+   documentation.
+
 You can convert ``BinaryVectorFloat32``, ``BinaryVectorInt8``, and
 ``BinaryVectorPackedBit`` data to the ``BsonBinaryData`` type to use in a vector
 search query by using the ``ToQueryVector()`` method. The following example
@@ -103,21 +138,25 @@ converts ``BinaryVectorInt8`` into a ``BsonBinaryData`` object:
    :start-after: start-to-query-vector
    :end-before: end-to-query-vector
 
-Vector Search Query Example
----------------------------
+You can specify your :ref:`array represented
+<csharp-vector-array-representation>` vector data as an instance of the
+``QueryVector`` class to use in a vector search query. The following example 
+creates an array of ``ReadOnlyMemory<float>`` values as a ``QueryVector`` object
+to use in a vector search query:
 
-You can perform a vector search query by calling the ``VectorSearch()`` method
-in an :ref:`aggregation pipeline <csharp-aggregation>`. To perform a vector
-search on a collection, you must first have a collection with a field that contains
-vector data and a vector search index that covers that field. To learn more
-about configuring a collection for vector search, see the :atlas:`Atlas Vector Search
-</atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
-documentation.
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchExamples.cs
+   :language: csharp
+   :start-after: start-array-query-vector
+   :end-before: end-array-query-vector
+
+Example
+~~~~~~~
 
 This example performs the following steps to run an Atlas Vector Search query on a collection that
 contains vector data and a vector search index on the ``PlotEmbedding`` field:
 
-1. Creates a vector array that contains the vector data to search for
+1. Creates an array that contains the :ref:`array represented
+   <csharp-vector-array-representation>` vector data to search for
 #. Specifies a ``VectorSearchOptions`` object that contains the name of the index
    and the number of nearest neighbors to use during the search
 #. Creates an aggregation pipeline that uses the ``VectorSearch()`` stage to

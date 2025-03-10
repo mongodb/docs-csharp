@@ -29,8 +29,20 @@ public class BinaryVectors
 }
 // end-binary-vectors
 
+// start-binary-int-serialize
+[BinaryVector(BinaryVectorDataType.Int8)]
+public Memory<byte> ValuesByte { get; set; }
+
+[BinaryVector(BinaryVectorDataType.Int8)]
+public Memory<sbyte> ValuesSByte { get; set; }
+// end-binary-int-serialize
+
 // start-to-query-vector
 var binaryVector = new BinaryVectorInt8(new sbyte[] { 0, 1, 2, 3, 4 });
 
 var queryVector = binaryVector.ToQueryVector();
 // end-to-query-vector
+
+// start-array-query-vector
+QueryVector v = new QueryVector(new ReadOnlyMemory<float>([1.2f, 2.3f]));
+// end-array-query-vector

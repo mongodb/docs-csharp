@@ -364,6 +364,43 @@ as a ``BsonDocument`` to the `AppendStage() method
 To learn more about the Aggregation Pipeline, see the
 :manual:`Aggregation Pipeline </core/aggregation-pipeline/>` server manual page.
 
+.. _csharp-builders-set:
+
+Add Fields to Collection Documents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can add new fields to existing documents in a collection 
+by creating a ``$set`` stage in your aggregation pipeline. To
+create a ``$set`` stage, call the ``Set()`` method on a
+``PipelineStageDefinitionBuilder`` object. 
+
+.. tip::
+
+   To learn more about the $set stage, see :manual:`$set </reference/operator/aggregation/set/>`
+   in the {+mdb-server+} manual.
+
+This example builds an aggregation pipeline that performs the following
+actions:
+
+- Matches all documents that have a ``Name`` field value of ``"Daffodil"``
+- Adds a ``Color`` field to matching documents and sets its value to
+  ``"Yellow"``
+
+.. code-block:: csharp
+
+   var matchFilter = Builders<Flower>.Filter.Eq(f => f.Name, "Daffodil");
+   var fields = Builders<Flower>.SetFields.Set("Color", "Yellow");
+
+   var pipeline = new EmptyPipelineDefinition<Flower>()
+      .Match(matchFilter)
+      .Set(fields);
+
+The preceding example creates the following pipeline:
+
+.. code-block:: json
+   
+   [{ "$match" : { "Name" : "Daffodil" } }, { "$set" : { "Color" : "Yellow"} }]
+
 .. _csharp-builders-out:
 
 Write Pipeline Results to a Collection

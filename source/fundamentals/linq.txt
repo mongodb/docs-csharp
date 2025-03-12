@@ -640,6 +640,8 @@ defined Atlas Vector Search index before you can perform a vector search on your
    :atlas:`Create an Atlas Vector Search Index </atlas-vector-search/create-index>` in the
    Atlas manual.
 
+.. include:: /includes/vector-search-parameters.rst
+
 Consider the ``embedded_movies`` collection in the ``sample_mflix`` database. You
 can use a ``$vectorSearch`` stage to perform a semantic search on the ``plot_embedding``
 field of the documents in the collection.

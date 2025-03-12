@@ -36,7 +36,7 @@ You can use the ``options`` parameter to configure your vector search operation.
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 80
+   :widths: 30 70
 
    * - Property
      - Description

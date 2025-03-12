@@ -1,3 +1,14 @@
+The ``$vectorSearch`` aggregation stage performs an *approximate nearest neighbor* search
+on a vector in the specified field. Your collection *must* have a
+defined Atlas Vector Search index before you can perform a vector search on your data.
+
+.. tip::
+
+   To obtain the sample dataset used in the following example, see :ref:`csharp-quickstart`.
+   To create the sample Atlas Vector Search index used in the following example, see
+   :atlas:`Create an Atlas Vector Search Index </atlas-vector-search/create-index>` in the
+   Atlas manual.
+
 To create a ``$vectorSearch`` pipeline stage, call the ``VectorSearch()`` method on a
 ``PipelineStageDefinitionBuilder`` object. The ``VectorSearch()`` method accepts the
 following parameters:
@@ -60,10 +71,27 @@ You can use the ``options`` parameter to configure your vector search operation.
      - The index to perform the vector search on.
    
        | **Data type**: {+string-data-type+}
-       | **Default**: ``null``
+       | **Default**: ``"default"``
 
    * - ``NumberOfCandidates``
      - The number of neighbors to search in the index.
    
        | **Data type**: ``int?``
        | **Default**: ``null``
+
+Consider the ``embedded_movies`` collection in the ``sample_mflix`` database.
+The following ``EmbeddedMovie`` class represents a document in this database:
+
+.. code-block:: csharp
+
+   public class EmbeddedMovie
+   {
+       [BsonElement("title")]
+       public string Title { get; set; }
+
+       [BsonElement("plot_embedding")]
+       public double[] Embedding { get; set; }
+
+       [BsonElement("score")]
+       public double Score { get; set; }
+   }

@@ -631,8 +631,9 @@ $vectorSearch
 
 .. include:: /includes/vector-search-intro.rst
 
-The following example shows how to generate a ``$vectorSearch`` stage to search
-the ``plot_embedding`` field by using vector embeddings for the string ``"time travel"``:
+   .. replacement:: mechanism 
+
+      LINQ
 
 .. code-block:: csharp
 

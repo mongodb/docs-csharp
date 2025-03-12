@@ -71,7 +71,7 @@ You can use the ``options`` parameter to configure your vector search operation.
      - The index to perform the vector search on.
    
        | **Data type**: {+string-data-type+}
-       | **Default**: ``"default"``
+       | **Default**: ``null``
 
    * - ``NumberOfCandidates``
      - The number of neighbors to search in the index.
@@ -95,3 +95,12 @@ The following ``EmbeddedMovie`` class represents a document in this database:
        [BsonElement("score")]
        public double Score { get; set; }
    }
+
+You can use a ``$vectorSearch`` stage to perform a semantic search on the ``plot_embedding``
+field of the documents in the collection.
+The following example shows how to use |mechanism| to generate an aggregation pipeline to
+perform the following operations:
+
+- Perform a vector search on the Atlas Vector Search index of the ``plot_embedding``
+  field by using vector embeddings for the string ``"time travel"``
+- Fetch the ``Title`` and ``Plot`` fields from documents found in the vector search

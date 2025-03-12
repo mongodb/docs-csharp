@@ -724,12 +724,6 @@ The ``SearchOptions`` class contains the following properties:
    * - ``Tracking`` 
      - | The options for tracking search terms.
 
-.. tip::
-
-   To view a full list of available options, see `SearchOptions Properties
-   <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Search.SearchOptions-1.html#properties>`__
-   in the API documentation.
-
 SearchAfter Example
 ~~~~~~~~~~~~~~~~~~~
 
@@ -747,7 +741,7 @@ operation by performing the following actions:
   the text ``"classic"``, applying the projection and options to the operation
 
 - Sets the ``SearchAfter`` property of the same ``SearchOptions`` instance to
-  instructs the next search to begin after the base search's first result
+  instruct the next search to begin after the base search's first result
 
 - Runs another search operation that has the same matching criteria and applies
   the search options to paginate the results

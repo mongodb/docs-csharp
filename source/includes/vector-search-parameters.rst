@@ -47,23 +47,23 @@ You can use the ``options`` parameter to configure your vector search operation.
        neighbor (ANN) algorithm. If this property is set to ``true``, the
        ``NumberOfCandidates`` property must be ``null``.
    
-       **Data type**: {+bool-data-type+}
+       | **Data type**: {+bool-data-type+}
        | **Default**: ``false``
 
    * - ``Filter``
      - Additional search criteria that the found documents must match.
    
-       **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
+       | **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
        | **Default**: ``null``
    
    * - ``IndexName``
      - The index to perform the vector search on.
    
-       **Data type**: {+string-data-type+}
+       | **Data type**: {+string-data-type+}
        | **Default**: ``null``
 
    * - ``NumberOfCandidates``
      - The number of neighbors to search in the index.
    
-       **Data type**: ``int?``
+       | **Data type**: ``int?``
        | **Default**: ``null``

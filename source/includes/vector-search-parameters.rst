@@ -17,7 +17,7 @@ following parameters:
    * - ``queryVector``
      - The encoded vector that will be matched with values from the database.
        Although the data type of this parameter is ``QueryVector``, you can also pass an
-       array of floating-point numbers.
+       array of ``float`` values.
        
        **Data type**: `QueryVector <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.QueryVector.html>`__
 

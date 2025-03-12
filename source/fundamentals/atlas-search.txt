@@ -681,7 +681,7 @@ Modify Atlas Search Behavior
 ----------------------------
 
 You can modify the behavior of the ``Search()`` method by passing
-a ``SearchOptions`` object as parameter.
+a ``SearchOptions`` object as a parameter.
 
 The ``SearchOptions`` class contains the following properties:
 
@@ -695,34 +695,61 @@ The ``SearchOptions`` class contains the following properties:
    * - ``CountOptions`` 
      - | The options for counting the search results.
 
+       | **Data type**: `SearchCountOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Search.SearchCountOptions.html>`__
+       | **Default**: ``null``
+
    * - ``Highlight`` 
      - | The options for displaying search terms in their original context.
 
+       | **Data type**: `SearchHighlightOptions<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Search.SearchHighlightOptions-1.html>`__
+       | **Default**: ``null``
+
    * - ``IndexName`` 
      - | The index to use for the search.
+
+       | **Data type**: {+string-data-type+}
+       | **Default**: ``null``
 
    * - ``ReturnStoredSource`` 
      - | A flag that specifies whether to perform a full document lookup on
          the database or to return only stored source fields directly from
          Atlas Search.
 
+       | **Data type**: {+bool-data-type+}
+       | **Default**: ``false``
+
    * - ``ScoreDetails`` 
      - | A flag that specifies whether to return detailed information about the
          score for each document in the results.
+
+       | **Data type**: {+bool-data-type+}
+       | **Default**: ``false``
 
    * - ``SearchAfter`` 
      - | The starting point for pagination. When set, the search retrieves documents
          starting immediately after the specified reference point.
 
+       | **Data type**: {+string-data-type+}
+       | **Default**: ``null``
+
    * - ``SearchBefore`` 
      - | The end point for pagination. When set, the search retrieves documents
          starting immediately before the specified reference point.
 
+       | **Data type**: {+string-data-type+}
+       | **Default**: ``null``
+
    * - ``Sort`` 
      - | The sorting criteria to apply to the results.
 
+       | **Data type**: `SortDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SortDefinition-1.html>`__
+       | **Default**: ``null``
+
    * - ``Tracking`` 
      - | The options for tracking search terms.
+
+       | **Data type**: `SearchTrackingOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Search.SearchTrackingOptions.html>`__
+       | **Default**: ``null``
 
 SearchAfter Example
 ~~~~~~~~~~~~~~~~~~~

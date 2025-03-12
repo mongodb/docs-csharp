@@ -758,7 +758,7 @@ The search returns the following documents:
 Score Documents
 ---------------
 
-Every document returned by an Atlas Search query is assigned a score based on relevance, and the documents included in a result set are returned in order from highest score to lowest. To learn more about how scores are assigned, see the :atlas:`score <atlas-search/scoring>` Atlas guide. 
+Every document returned by an Atlas Search query is assigned a score based on relevance, and the documents included in a result set are returned in order from highest score to lowest. To learn more about how scores are assigned, see the :atlas:`score </atlas-search/scoring>` Atlas guide. 
 
 The score assigned to a returned document is part of the document's metadata. You can include each returned document's score along with the result set by using a ``$project`` stage in your aggregation pipeline.
 

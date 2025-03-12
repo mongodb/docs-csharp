@@ -267,8 +267,7 @@ The following limitations apply:
 - You can run facet queries over sharded collections on clusters running MongoDB v6.0 only.
 
 The following example searches searches the ``guitars`` collection for any documents in
-which the value of the ``in_stock`` field is ``true``. The query uses the ``Facet()`` method to process the input documents
-and return the total count of documents in which the value of ``in_stock`` is ``true``.
+which the value of the ``in_stock`` field is ``true``. The query uses the ``Facet()`` method to process the input documents, with a maximum number of ``100`` facet categories to return in the results. The query returns the total count of documents in which the value of ``in_stock`` is ``true``.
 
 .. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
    :start-after: // start-facet-search

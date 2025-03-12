@@ -250,8 +250,8 @@ The search returns the following documents:
 To learn more about the ``exists`` operator, see the :atlas:`exists </atlas-search/exists>` 
 Atlas guide.
 
-Facets
-~~~~~~
+Facet
+~~~~~
 
 Use the ``Facet()`` method to group results by values or ranges in the specified faceted fields 
 and return the count for each of those groups.
@@ -281,7 +281,7 @@ The search returns the following result:
 
    4
 
-To learn more about the ``facet`` collector, see the :atlas:`facet </atlas-search/exists>` 
+To learn more about the ``facet`` collector, see the :atlas:`facet </atlas-search/facet>` 
 Atlas guide.
 
 GeoShape

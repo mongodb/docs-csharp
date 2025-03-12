@@ -322,6 +322,8 @@ public class Guitar
     [BsonElement("in_stock_location")]
     public Location InStockLocation { get; set; }
     public int? Rating { get; set; }
+    [BsonElement("paginationToken")]
+    public string PaginationToken { get; set; }
 }
 // end-guitar-class
 

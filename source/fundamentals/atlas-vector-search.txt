@@ -101,17 +101,18 @@ The following example shows a class with properties of the preceding types:
 Binary Vector Data Serialization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can serialize ``Int8`` binary vector typed data as ``byte`` or ``sbyte``
-as shown in the following example:
+You can serialize ``Int8`` binary vector typed data as ``byte`` or ``sbyte``.
+You can also serialize ``Float32`` binary vector typed data as ``float``. The
+following example serializes ``Int8`` and ``Float32`` binary vector data:
 
 .. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchExamples.cs
    :language: csharp
-   :start-after: start-binary-int-serialize
-   :end-before: end-binary-int-serialize
+   :start-after: start-binary-int-float-serialize
+   :end-before: end-binary-int-float-serialize
 
 You can deserialize ``PackedBit`` vector data to a :ref:`binary vector
-represented <csharp-binary-vector-representation>` data type only if the
-``PackedBit`` has a padding value of ``0``. If the ``PackedBit`` has a padding value not
+represented <csharp-binary-vector-representation>` ``byte`` data type only if the
+vector data has a padding value of ``0``. If the vector data has a padding value not
 equal to ``0``, you can deserialize it only to a ``BsonVectorPackedBit``.
 
 Vector Search Query Example

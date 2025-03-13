@@ -7,7 +7,7 @@ public class BsonArrayVectors
 
     public ReadOnlyMemory<float> ReadOnlyMemoryVector { get; set; }
 
-    public int[] IntArrayVector { get; set; }
+    public float[] FloatArrayVector { get; set; }
 }
 // end-bson-arrays
 
@@ -29,15 +29,18 @@ public class BinaryVectors
 }
 // end-binary-vectors
 
-// start-binary-int-serialize
+// start-binary-int-float-serialize
 [BinaryVector(BinaryVectorDataType.Int8)]
 public Memory<byte> ValuesByte { get; set; }
 
 [BinaryVector(BinaryVectorDataType.Int8)]
 public Memory<sbyte> ValuesSByte { get; set; }
-// end-binary-int-serialize
 
-// start-to-query-vector
+[BinaryVector(BinaryVectorDataType.Float32)]
+public float[] ValuesFloat { get; set; }
+// end-binary-int-float-serialize
+
+    // start-to-query-vector
 var binaryVector = new BinaryVectorInt8(new sbyte[] { 0, 1, 2, 3, 4 });
 
 var queryVector = binaryVector.ToQueryVector();

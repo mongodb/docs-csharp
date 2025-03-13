@@ -87,6 +87,19 @@ public class AtlasSearchExamples
         return result;
     }
 
+    public static int FacetSearch()
+    {
+        // start-facet-search
+        var result = guitarsCollection.Aggregate()
+            .SearchMeta(Builders<Guitar>.Search.Facet(
+                Builders<Guitar>.Search.Equals(g => g.InStock, true),
+                Builders<Guitar>.SearchFacet.String("string", g => g.Make, 100)), 
+                indexName: "guitarfacetsearch").Single().Facet["string"].Buckets.Count();
+        // end-facet-search
+
+        return result;
+    }
+
     public static List<Guitar> GeoShapeSearch()
     {
         // start-geoshape-search
@@ -263,16 +276,46 @@ public class AtlasSearchExamples
         return result;
     }
 
+    public static List<Guitar> MultipleFieldSearch()
+    {
+        // start-multiple-field-search
+        var result = guitarsCollection.Aggregate().Search(
+            Builders<Guitar>.Search.Phrase(Builders<Guitar>.SearchPath
+            .Multi(g => g.Description, g => g.Make), "classic"), indexName: "guitarmulti")
+            .ToList();
+        // end-multiple-field-search
+
+        return result;
+    }
+
+    public static List<Guitar> ScoreSearch()
+    {
+        // start-score-search
+        var regex = "[A-Za-z]{6}";
+
+        var result = guitarsCollection.Aggregate()
+            .Search(Builders<Guitar>.Search.Regex(g => g.Make, regex, allowAnalyzedField: true), indexName: "guitarscore")
+            .Project<Guitar>(Builders<Guitar>.Projection
+            .Include("Id")
+            .Include("Make")
+            .Include("Description")
+            .MetaSearchScore(g => g.Score))
+            .ToList();
+        // end-score-search
+
+        return result;
+    }
+
     private static void Setup()
     {
         // This allows automapping of the camelCase database fields to our models. 
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
-        // Establish the connection to MongoDB and get the restaurants database
+        // Establish the connection to MongoDB and get the guitars database
         var mongoClient = new MongoClient(_mongoConnectionString);
-        var restaurantsDatabase = mongoClient.GetDatabase("sample_guitars");
-        guitarsCollection = restaurantsDatabase.GetCollection<Guitar>("guitars");
+        var guitarsDatabase = mongoClient.GetDatabase("sample_guitars");
+        guitarsCollection = guitarsDatabase.GetCollection<Guitar>("guitars");
     }
 }
 
@@ -292,6 +335,7 @@ public class Guitar
     [BsonElement("in_stock_location")]
     public Location InStockLocation { get; set; }
     public int? Rating { get; set; }
+    public double Score {get; set;}
 }
 
 public class Location

@@ -553,7 +553,7 @@ The following ``Review`` class models the documents in the ``reviews`` collectio
    :start-after: start-review-model
    :end-before: end-review-model
 
-You can perform specify a ``$lookup`` stage by calling the ``Lookup()`` method
+You can specify a ``$lookup`` stage by calling the ``Lookup()`` method
 or the ``GroupJoin()`` method. The following sections show how to perform a
 ``$lookup`` by using each method.
 
@@ -590,6 +590,9 @@ field in the ``restaurants`` collection and the ``ReviewText`` field in the
       .Lookup(_reviewCollection,
          (restaurant, reviews) => reviews
             .Where(review => review.ReviewText.Contains(restaurant.Name)));
+
+To view a full list of overloads for the ``Lookup()`` method, see the `Lookup
+API documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.MongoQueryable.Lookup.html>`__.
 
 GroupJoin()
 +++++++++++

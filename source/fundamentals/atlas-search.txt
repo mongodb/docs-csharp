@@ -256,17 +256,17 @@ Facet
 Use the ``Facet()`` method to group results by values or ranges in the specified faceted fields 
 and return the count for each of those groups.
 
-You can use ``Facet()`` with both the ``$search`` and ``$searchMeta`` stages. MongoDB recommends using 
+You can use the ``Facet()`` method with both the ``$search`` and ``$searchMeta`` stages. MongoDB recommends using 
 facet with the ``$searchMeta`` stage to retrieve metadata results only for the query. 
 To retrieve metadata results and query results using the ``$search`` stage, you must use the 
-``$$SEARCH_META`` aggregation variable. See :atlas:`SEARCH_META Aggregation Variable </atlas-search/facet/#std-label-fts-facet-aggregation-variable>` to learn more.
+``$$SEARCH_META`` aggregation variable. To learn more about this variable, see the :atlas:`SEARCH_META Aggregation Variable </atlas-search/facet/#std-label-fts-facet-aggregation-variable>` Atlas guide.
 
 The following limitations apply:
 
 - You can run facet queries on a single field only. You can't run facet queries on groups of fields.
 - You can run facet queries over sharded collections on clusters running MongoDB v6.0 only.
 
-The following example searches searches the ``guitars`` collection for any documents in
+The following example searches the ``guitars`` collection for any documents in
 which the value of the ``in_stock`` field is ``true``. The query uses the ``Facet()`` method to process the input documents, with a maximum number of ``100`` facet categories to return in the results. The query returns the total count of documents in which the value of ``in_stock`` is ``true``.
 
 .. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
@@ -723,13 +723,7 @@ Search Multiple Fields
 
 The ``path`` parameter is used by the Atlas Search
 :atlas:`operators </atlas-search/query-syntax>` to specify the field or fields
-to be searched. It may contain:
-
-- A string
-- An array of strings
-- A :atlas:`multi analyzer </atlas-search/analyzers/multi>` specification
-- An array containing a combination of strings and multi analyzer
-  specifications
+to be searched. To learn more about what the ``path`` parameter may contain, see :atlas:`Construct a Query Path </atlas-search/path-construction>` in the Atlas guide.
 
 .. note::
 
@@ -737,7 +731,7 @@ to be searched. It may contain:
    documentation for each individual operator for details on what types 
    of path it supports.
 
-To search multiple indexed fields, use the ``Multi()`` method and pass in your fields. Documents which match on any of the specified fields are included in the result set. The following example searches the description and type fields.
+To search multiple indexed fields, use the ``Multi()`` method and pass in your fields. Documents which match on any of the specified fields are included in the result set.
 
 The following example searches for the string ``classic`` in either the ``make`` or the ``description`` field.
 

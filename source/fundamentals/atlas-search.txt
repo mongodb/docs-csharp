@@ -723,7 +723,7 @@ Search Multiple Fields
 
 The ``path`` parameter is used by the Atlas Search
 :atlas:`operators </atlas-search/query-syntax>` to specify the field or fields
-to be searched. To learn more about what the ``path`` parameter may contain, see :atlas:`Construct a Query Path </atlas-search/path-construction>` in the Atlas guide.
+to be searched. To learn more about what the ``path`` parameter may contain, see the :atlas:`Construct a Query Path </atlas-search/path-construction>` guide.
 
 .. note::
 

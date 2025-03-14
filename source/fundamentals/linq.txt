@@ -586,8 +586,8 @@ field in the ``restaurants`` collection and the ``ReviewText`` field in the
 
 .. code-block:: csharp
 
-   var lookupResult = _restaurantsCollection.AsQueryable()
-      .Lookup(_reviewCollection,
+   var lookupResult = restaurantsCollection.AsQueryable()
+      .Lookup(reviewCollection,
          (restaurant, reviews) => reviews
             .Where(review => review.ReviewText.Contains(restaurant.Name)));
 
@@ -597,7 +597,7 @@ API documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.MongoQuer
 GroupJoin()
 +++++++++++
 
-You can perform a ``$lookup`` stage by using the LINQ ``GroupJoin()`` method. To
+You can specify a ``$lookup`` stage by using the LINQ ``GroupJoin()`` method. To
 perform a ``GroupJoin()`` lookup, you must make both collections queryable by
 using the ``AsQueryable()`` method. To learn how to make a collection queryable,
 see :ref:`csharp-linq-queryable`.

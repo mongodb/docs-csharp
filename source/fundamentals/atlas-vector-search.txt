@@ -1,7 +1,7 @@
 .. _csharp-atlas-vector-search:
 
 ===================
-Atlas Vector Search
+{+vector-search+}
 ===================
 
 .. facet::
@@ -20,27 +20,28 @@ Atlas Vector Search
 Overview
 --------
 
-You can use Atlas Vector Search to perform vector search on your data stored in
+You can use {+vector-search+} to perform vector search on your data stored in
 Atlas. Vector search allows you to query your data based on semantic meaning
 rather than just keyword matches, which helps you retrieve more relevant search
 results. It enables your AI-powered applications to support use cases such as
-semantic search, hybrid search, and generative search, including RAG.
+semantic search, hybrid search, and generative search, including
+Retrieval-Augmented Generation (RAG).
 
 By using Atlas as a vector database, you can seamlessly index vector data along
 with your other data in Atlas. This allows you to filter on fields in your
 collection and perform vector search queries against vector data. You can also
 combine vector search with full-text search queries to return the most relevant
-results for your use case. You can integrate Atlas Vector Search with popular AI
+results for your use case. You can integrate {+vector-search+} with popular AI
 frameworks and services to easily implement vector search in your applications.
 
-To learn more about Atlas Vector Search, see the :atlas:`Atlas Vector Search
+To learn more about {+vector-search+}, see the :atlas:`{+vector-search+}
 </atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
 documentation.
 
 Supported Vector Embedding Types
 --------------------------------
 
-:atlas:`Vector Embeddings
+:atlas:`Vector embeddings
 </atlas-vector-search/vector-search-overview/#std-term-vector-embeddings>`
 are vectors you use to represent your data. These embeddings
 capture meaningful relationships in your data and enable tasks like semantic
@@ -125,7 +126,7 @@ vector data and a vector search index that covers that field.
 
 .. tip::
 
-   To learn more about configuring a collection for vector search, see the :atlas:`Atlas Vector Search
+   To learn more about configuring a collection for vector search, see the :atlas:`{+vector-search+}
    </atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
    documentation.
 
@@ -139,7 +140,7 @@ converts ``BinaryVectorInt8`` into a ``BsonBinaryData`` object:
    :start-after: start-to-query-vector
    :end-before: end-to-query-vector
 
-You can specify your :ref:`array represented
+You can specify your :ref:`array-represented
 <csharp-vector-array-representation>` vector data as an instance of the
 ``QueryVector`` class to use in a vector search query. The following example 
 creates an array of ``ReadOnlyMemory<float>`` values as a ``QueryVector`` object
@@ -153,10 +154,10 @@ to use in a vector search query:
 Example
 ~~~~~~~
 
-This example performs the following steps to run an Atlas Vector Search query on a collection that
+This example performs the following steps to run an {+vector-search+} query on a collection that
 contains vector data and a vector search index on the ``PlotEmbedding`` field:
 
-1. Creates an array that contains the :ref:`array represented
+1. Creates an array that contains the :ref:`array-represented
    <csharp-vector-array-representation>` vector data to search for
 #. Specifies a ``VectorSearchOptions`` object that contains the name of the index
    and the number of nearest neighbors to use during the search
@@ -174,7 +175,7 @@ contains vector data and a vector search index on the ``PlotEmbedding`` field:
 Additional Information
 ----------------------
 
-To learn more about Atlas Vector Search, see the :atlas:`Atlas Vector Search
+To learn more about {+vector-search+}, see the :atlas:`{+vector-search+}
 </atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
 documentation.
 

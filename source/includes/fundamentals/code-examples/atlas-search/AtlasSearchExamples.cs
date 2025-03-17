@@ -211,6 +211,16 @@ public class AtlasSearchExamples
         return result;
     }
 
+    public static List<Guitar> RangeStringSearch()
+    {
+        // start-range-string
+        var result = guitarsCollection.Aggregate()
+             .Search(Builders<Guitar>.Search
+             .Range(g => g.Make, SearchRangeV2Builder.Gte("Fender").Lte("Kiesel")))
+             .ToList();
+        // end-range-string
+    }
+
     public static List<Guitar> RegexSearch()
     {
         // start-regex-search

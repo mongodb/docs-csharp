@@ -523,12 +523,15 @@ index, you can search for documents based on a range of strings as shown in the
 following example:
 
 .. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
-   :start-after: // start-range-search
-   :end-before: // end-range-search
+   :start-after: // start-range-string
+   :end-before: // end-range-string
    :language: csharp
    :dedent:
 
-The preceding example returns the following results:
+The preceding example searches for any documents in which the string value of the
+``make`` field is greater than or equal to ``"Fender"`` and less than or equal
+to ``"Kiesel"``. The driver compares the string values in :wikipedia:`lexicographic order
+</Lexicographic_order>`.
 
 .. code-block:: text
 

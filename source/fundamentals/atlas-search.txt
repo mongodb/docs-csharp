@@ -531,7 +531,7 @@ following example:
 The preceding example searches for any documents in which the string value of the
 ``make`` field is greater than or equal to ``"Fender"`` and less than or equal
 to ``"Kiesel"``. The driver compares the string values in :wikipedia:`lexicographic order
-</Lexicographic_order>`.
+</Lexicographic_order>`. The search returns the following results:
 
 .. code-block:: text
 

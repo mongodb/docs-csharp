@@ -42,8 +42,8 @@ What's New in 3.3
 
 The 3.3 driver release includes the following new features:
 
-- Adds a new ``NamespaceType`` field to the ``ChangeStreamDocument`` class for
-  ``create`` events that indicates the type of the created object. To learn more
+- Adds a new ``NamespaceType`` field that indicates the type of the created object for
+  ``create`` events in the ``ChangeStreamDocument`` class. To learn more
   about change streams, see the :ref:`csharp-change-streams` guide.
 
 .. _csharp-version-3.2:

@@ -287,11 +287,11 @@ of ``Watch()`` and ``WatchAsync()``:
    * - ``batchSize``
      - | Specifies the maximum number of documents that a change
          stream can return in each batch, which applies to ``Watch()`` or
-         ``WatchAsync()``. By default, watch functions have an initial
-         batch size of ``101`` documents and a maximum size of 16
-         mebibytes (MiB) for each subsequent batch. This option can
+         ``WatchAsync()``. If the ``batchSize`` option is not set, watch functions have an
+         initial batch size of ``101`` documents and a maximum size of 16 mebibytes (MiB)
+         for each subsequent batch. This option can
          enforce a smaller limit than 16 MiB, but not a larger one. If
-         you set ``batchSize`` to a limit that results in batches
+         you set ``batchSize`` to a limit that result in batches
          larger than 16 MiB, this option has no effect and ``Watch()``
          or ``WatchAsync()`` uses the default batch size.
 

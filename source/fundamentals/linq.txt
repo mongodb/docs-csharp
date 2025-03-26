@@ -280,6 +280,7 @@ rest of the array:
 The results resemble the following documents:
 
 .. code-block:: json
+   :copyable: false
 
    { "name" : "Maura Day", "grades" : [92, 97] }
    { "name" : "Saul Curzon", "grades" : [100, 95, 91] }
@@ -369,6 +370,7 @@ rest of the array:
 The results resemble the following documents:
 
 .. code-block:: json
+   :copyable: false
 
    { "name" : "Maura Day", "grades" : [80, 90, 70, 83] }
    { "name" : "Saul Curzon", "grades" : [79, 100, 85, 73] }

@@ -135,7 +135,7 @@ criteria. The following example returns documents that contain the value
    include nested ``$elemMatch`` statements.
 
    The following code demonstrates how to construct a nested
-   ``$elemMatch`` query that uses both implementations of the
+   ``$elemMatch`` query that uses multiple overloads of the
    ``ElemMatch()`` method:
 
    .. code-block:: csharp

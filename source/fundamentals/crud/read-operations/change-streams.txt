@@ -66,8 +66,7 @@ classes:
 
 The following example opens a change stream on the ``restaurants`` collection
 and outputs the changes as they occur. Select the :guilabel:`Synchronous` or
-:guilabel:`Asynchronous` to see the corresponding
-code.
+:guilabel:`Asynchronous` tab to see the corresponding code.
 
 .. tabs::
 

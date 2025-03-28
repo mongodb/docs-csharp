@@ -46,6 +46,11 @@ The 3.3 driver release includes the following new features:
   ``create`` events in the ``ChangeStreamDocument`` class. To learn more
   about change streams, see the :ref:`csharp-change-streams` guide.
 
+- Supports nested ``$elemMatch`` queries by providing an overload of the
+  ``ElemMatch()`` method that takes only a filter parameter. To learn
+  more, see the :ref:`csharp-builders-array-operators` section of the
+  Builders guide.
+
 .. _csharp-version-3.2:
 
 What's New in 3.2
@@ -426,4 +431,5 @@ The 2.22 driver release includes the following new features:
 - Reduced memory allocation when using encryption.
 - Added logging messages for server discovery and monitoring (SDAM) events. For more
   information on these events, see the
-  `MongoDB SDAM Logging and Monitoring specification. <https://github.com/mongodb/specifications/blob/master/source/server-discovery-and-monitoring/server-discovery-and-monitoring-logging-and-monitoring.rst#log-messages>`__
+  `MongoDB SDAM Logging and Monitoring specification.
+  <https://github.com/mongodb/specifications/blob/master/source/server-discovery-and-monitoring/server-discovery-and-monitoring-logging-and-monitoring.rst#log-messages>`__

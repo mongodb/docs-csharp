@@ -99,6 +99,8 @@ to a LINQ query:
    var filter = builder.Lt("Price", 20) & builder.Eq("Category", "Perennial");
    var query = collection.AsQueryable().Where(f => filter.Inject());
 
+.. _csharp-builders-array-operators:
+
 Array Operators
 ~~~~~~~~~~~~~~~
 
@@ -125,6 +127,24 @@ criteria. The following example returns documents that contain the value
 
    var builder = Builders<Flower>.Filter;
    var filter = builder.ElemMatch(f => f.Season, s => s == "Summer");
+
+.. tip:: ElemMatch() Overload
+
+   The ``ElemMatch()`` method has an overload that accepts a single filter
+   parameter. You can use this overload to perform queries that
+   include nested ``$elemMatch`` statements.
+
+   The following code demonstrates how to construct a nested
+   ``$elemMatch`` query that uses multiple overloads of the
+   ``ElemMatch()`` method:
+
+   .. code-block:: csharp
+
+      // ElemMatch() with only filter parameter
+      var arrayFilter = Builders<MyEntry[]>.Filter.ElemMatch(<filter>);
+
+      // ElemMatch() with field name and filter parameters
+      var filter = Builders<MyClass>.Filter.ElemMatch(<array field name>, arrayFilter);
 
 To learn more about array operators, see the :manual:`Array Query Operators
 </reference/operator/query-array/>` guide in the {+mdb-server+} manual.
@@ -491,4 +511,5 @@ guide, see the following API Documentation:
 - `SortDefinitionBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SortDefinitionBuilder-1.html>`__
 - `UpdateDefinitionBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateDefinitionBuilder-1.html>`__
 - `IndexKeysDefinitionBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IndexKeysDefinitionBuilder-1.html>`__
-- `PipelineDefinitionBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineDefinitionBuilder.html>`__
+- `PipelineDefinitionBuilder
+  <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineDefinitionBuilder.html>`__

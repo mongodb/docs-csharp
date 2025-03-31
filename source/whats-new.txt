@@ -59,7 +59,7 @@ The 3.3 driver release includes the following new features:
   - A ``ClientEncryptionOptions`` property that configures the data-encryption
     key cache lifetime
 
-  To learn more about In-Use Encryption, see the :ref:`csharp-fle` guide.
+  To learn more about In-Use Encryption, see the :ref:`In-Use Encryption <csharp-fle>` guide.
 
 - Adds the following LINQ features:
 

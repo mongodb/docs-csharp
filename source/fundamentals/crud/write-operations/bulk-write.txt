@@ -75,7 +75,7 @@ To perform an insert operation, create an ``InsertOneModel<TDocument>``
 instance and specify the document you want to insert.
 
 The following example creates an instance of the
-``InsertOneModel<TDocument>`` class. This instance directs the driver to
+``InsertOneModel<BsonDocument>`` class. This instance directs the driver to
 insert a document in which the ``"name"`` field is ``"Mongo's Deli"``
 into the ``restaurants`` collection.
 
@@ -234,7 +234,7 @@ operation on the ``restaurants`` collection:
          :end-before: end-bulk-write-sync
          :language: csharp
          :copyable:
-         :dedent: 8
+         :dedent:
 
    .. tab:: Asynchronous
       :tabid: bulk-write-async
@@ -244,7 +244,7 @@ operation on the ``restaurants`` collection:
          :end-before: end-bulk-write-async
          :language: csharp
          :copyable:
-         :dedent: 8
+         :dedent:
 
 The preceding code examples produce the following output:
 

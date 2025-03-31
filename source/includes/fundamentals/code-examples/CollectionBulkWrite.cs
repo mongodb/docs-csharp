@@ -56,7 +56,7 @@ var deleteOneModel = new DeleteOneModel<BsonDocument>(
 
 // start-delete-many
 var deleteManyModel = new DeleteManyModel<BsonDocument>(
-    Builders<BsonDocument>.Filter.Eq("restaurant_id", "5678")
+    Builders<BsonDocument>.Filter.Eq("name", "Mongo's Deli")
 );
 // end-delete-many
 

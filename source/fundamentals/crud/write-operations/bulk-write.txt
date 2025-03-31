@@ -333,8 +333,8 @@ an unordered bulk write operation:
 Return Value
 ------------
 
-The ``BulkWrite()`` and ``BulkWriteAsync()`` methods return a ``BulkWriteResult``
-object that contains the following properties:
+The ``BulkWrite()`` and ``BulkWriteAsync()`` methods return a
+``BulkWriteResult`` object that contains the following properties:
 
 .. list-table::
    :widths: 30 70

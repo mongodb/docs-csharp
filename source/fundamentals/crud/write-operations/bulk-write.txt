@@ -102,10 +102,14 @@ Update Operations
 To update a single document, create an instance of
 ``UpdateOneModel<TDocument>`` and pass the following arguments:
 
-- **Query filter** that specifies the criteria used to match documents in your collection
-- **Update document** that describes the update to perform. To learn more about update
-  operations, see the :manual:`Field Update Operators
-  </reference/operator/update-field/>` guide in the {+mdb-server+} manual.
+- **Query filter** that specifies the criteria used to match documents
+  in your collection. To learn more about specifying a query, see
+  :manual:`Query and Projection Operators
+  </reference/operator/query/>` in the {+mdb-server+} manual.
+
+- **Update document** that describes the update to perform. To learn
+  more about specifying an update, see :manual:`Update Operators
+  </reference/operator/update/>` in the {+mdb-server+} manual.
 
 An ``UpdateOneModel<TDocument>`` instance specifies an update for *the first*
 document that matches your query filter.
@@ -128,7 +132,7 @@ the same arguments as for ``UpdateOneModel<TDocument>``. The ``UpdateManyModel<T
 class specifies updates for *all* documents that match your query
 filter.
 
-In the following code example, the ``UpdateOneModel<BsonDocument>`` object
+In the following code example, the ``UpdateManyModel<BsonDocument>`` object
 represents an update operation on the ``restaurants`` collection.
 The operation matches all documents in the collection where
 the value of the ``name`` field is ``"Mongo's Deli"``. It then updates
@@ -188,7 +192,7 @@ where the value of the ``restaurant_id`` field is ``"5678"``.
    :dedent:
 
 To delete multiple documents, create an instance of ``DeleteManyModel<TDocument>`` and pass a
-query filter specifying the document you want to delete. An instance of
+query filter specifying the documents you want to delete. An instance of
 ``DeleteManyModel<TDocument>`` provides instructions to remove *all* documents that
 match your query filter.
 
@@ -249,7 +253,8 @@ operation on the ``restaurants`` collection:
 The preceding code examples produce the following output:
 
 .. code-block:: shell
-      
+   :copyable: false
+
    MongoDB.Driver.BulkWriteResult1+Acknowledged[MongoDB.Bson.BsonDocument]
 
 .. note::
@@ -393,10 +398,10 @@ To learn how to perform individual write operations, see the following guides:
 To learn more about any of the methods or types discussed in this
 guide, see the following API documentation:
 
-- `BulkWrite() <{+new-api-root+}/MongoDB.Driver.IMongoCollection-1.BulkWrite.html>`__
+- `BulkWrite() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.BulkWrite.html>`__
 - `BulkWriteAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.BulkWriteAsync.html>`__
 - `BulkWriteOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BulkWriteOptions.-ctor.html>`__
-- `BulkWriteResult <{+new-api-root+}/MongoDB.Driver.BulkWriteResult.html>`__
+- `BulkWriteResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BulkWriteResult.html>`__
 - `InsertOneModel <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.InsertOneModel-1.html>`__
 - `UpdateOneModel <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOneModel-1.html>`__
 - `UpdateManyModel <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateManyModel-1.html>`__

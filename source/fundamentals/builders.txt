@@ -130,9 +130,10 @@ criteria. The following example returns documents that contain the value
 
 .. tip:: ElemMatch() Overload
 
-   The ``ElemMatch()`` method has an overload that accepts a single filter
-   parameter. You can use this overload to perform queries that
-   include nested ``$elemMatch`` statements.
+   The ``ElemMatch()`` method has an overload that accepts a single *filter*
+   parameter. You can use this overload to perform ``$elemMatch``
+   queries directly against values. This functionality can support
+   queries that include nested ``$elemMatch`` statements.
 
    The following code demonstrates how to construct a nested
    ``$elemMatch`` query that uses multiple overloads of the

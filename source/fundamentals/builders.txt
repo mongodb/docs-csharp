@@ -20,6 +20,8 @@ Operations with Builders
 Overview
 --------
 
+.. include:: /includes/linq-vs-builders.rst
+
 In this guide, you can learn about the helper classes, or **builders**, that
 the {+driver-short+} provides to create types used in your operations.
 Using builders helps you identify errors at compile time and avoid them
@@ -487,6 +489,11 @@ The results of the preceding example contain the following documents:
 
 To learn more about Atlas Vector Search, see :atlas:`Atlas Vector Search Overview </atlas-vector-search/vector-search-overview/>`
 in the Atlas manual.
+
+Troubleshooting
+---------------
+
+.. include:: /includes/troubleshooting/unsupported-filter-expression.rst
 
 Additional Information
 ----------------------

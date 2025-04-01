@@ -91,10 +91,13 @@ public class AtlasSearchExamples
     {
         // start-facet-search
         var result = guitarsCollection.Aggregate()
-            .SearchMeta(Builders<Guitar>.Search.Facet(
-                Builders<Guitar>.Search.Equals(g => g.InStock, true),
-                Builders<Guitar>.SearchFacet.String("string", g => g.Make, 100)), 
-                indexName: "guitarfacetsearch").Single().Facet["string"].Buckets.Count();
+            .SearchMeta(
+            	Builders<Guitar>.Search.Facet(
+            	          Builders<Guitar>.Search.Equals(g => g.InStock, true),
+            	          Builders<Guitar>.SearchFacet.String("string", g => g.Make, 100)), 
+                indexName: "guitarfacetsearch")
+             .Single()
+             .Facet["string"].Buckets.Count();
         // end-facet-search
 
         return result;
@@ -217,11 +220,22 @@ public class AtlasSearchExamples
     {
         // start-range-search
         var result = guitarsCollection.Aggregate()
-            .Search(Builders<Guitar>.Search.Range(g => g.EstablishedYear, SearchRangeBuilder.Gt(1980).Lt(2020)))
+            .Search(Builders<Guitar>.Search
+            .Range(g => g.EstablishedYear, SearchRangeBuilder.Gt(1980).Lt(2020)))
             .ToList();
         // end-range-search
 
         return result;
+    }
+
+    public static List<Guitar> RangeStringSearch()
+    {
+        // start-range-string
+        var result = guitarsCollection.Aggregate()
+             .Search(Builders<Guitar>.Search
+             .Range(g => g.Make, SearchRangeV2Builder.Gte("Fender").Lte("Kiesel")))
+             .ToList();
+        // end-range-string
     }
 
     public static List<Guitar> RegexSearch()
@@ -303,6 +317,32 @@ public class AtlasSearchExamples
             .ToList();
         // end-score-search
 
+    public static List<Guitar> SearchAfter()
+    {
+        // start-pagination-options
+        var projection = Builders<Guitar>.Projection
+            .Include(x => x.Make)
+            .MetaSearchSequenceToken(x => x.PaginationToken);
+
+        var searchDefinition = Builders<Guitar>.Search.Text(g => g.Description, "classic");
+        var searchOptions = new SearchOptions<Guitar>
+        { IndexName = "default", Sort = Builders<Guitar>.Sort.Ascending(g => g.Id) }
+
+        // Runs the base search operation
+        var baseSearchResults = guitarsCollection.Aggregate()
+            .Search(searchDefinition, searchOptions)
+            .Project<Guitar>(projection)
+            .ToList();
+        
+        // Sets the starting point for the next search
+        searchOptions.SearchAfter = baseSearchResults[0].PaginationToken;
+
+        var result = guitarsCollection.Aggregate()
+            .Search(searchDefinition, searchOptions)
+            .Project<Guitar>(projection)
+            .ToList();
+        // end-pagination-options
+
         return result;
     }
 
@@ -324,6 +364,7 @@ public class GuitarSearch
     public string Description { get; set; }
 }
 
+// start-guitar-class
 public class Guitar
 {
     public int Id { get; set; }
@@ -336,7 +377,10 @@ public class Guitar
     public Location InStockLocation { get; set; }
     public int? Rating { get; set; }
     public double Score {get; set;}
+    [BsonElement("paginationToken")]
+    public string PaginationToken { get; set; }
 }
+// end-guitar-class
 
 public class Location
 {

@@ -86,14 +86,6 @@ results. If no documents match the query filter the methods return ``null``.
 
 .. tabs::
 
-   .. tab:: Asynchronous
-      :tabid: find-one-async
-
-      .. code-block:: csharp
-         :copyable: true
-
-         var restaurants = await _restaurantsCollection.Find(filter).FirstOrDefaultAsync();
-
    .. tab:: Synchronous
       :tabid: find-one-sync
 
@@ -101,6 +93,14 @@ results. If no documents match the query filter the methods return ``null``.
          :copyable: true
 
          var restaurants = _restaurantsCollection.Find(filter).FirstOrDefault();
+
+   .. tab:: Asynchronous
+      :tabid: find-one-async
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var restaurants = await _restaurantsCollection.Find(filter).FirstOrDefaultAsync();
 
 .. tip:: First Document
 
@@ -133,14 +133,6 @@ To view a synchronous or asynchronous example, select the corresponding tab.
 
 .. tabs::
 
-   .. tab:: Asynchronous
-      :tabid: find-cursor-async
-
-      .. code-block:: csharp
-         :copyable: true
-
-         var restaurants = await _restaurantsCollection.Find(filter).ToCursorAsync();
-
    .. tab:: Synchronous
       :tabid: find-cursor-sync
 
@@ -148,6 +140,14 @@ To view a synchronous or asynchronous example, select the corresponding tab.
          :copyable: true
 
          var restaurants = _restaurantsCollection.Find(filter).ToCursor();
+
+   .. tab:: Asynchronous
+      :tabid: find-cursor-async
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var restaurants = await _restaurantsCollection.Find(filter).ToCursorAsync();
 
 If you are returning a small number of documents, or need your results returned
 as a ``List`` object, use the ``ToList()`` or ``ToListAsync()`` methods.
@@ -159,19 +159,19 @@ synchronous or asynchronous example, select the corresponding tab.
 
 .. tabs::
 
-   .. tab:: Asynchronous
-      :tabid: find-list-async
-
-      .. code-block:: csharp
-
-         var restaurants = await _restaurantsCollection.Find(filter).ToListAsync();
-
    .. tab:: Synchronous
       :tabid: find-list-sync
 
       .. code-block:: csharp
 
          var restaurants = _restaurantsCollection.Find(filter).ToList();
+
+   .. tab:: Asynchronous
+      :tabid: find-list-async
+
+      .. code-block:: csharp
+
+         var restaurants = await _restaurantsCollection.Find(filter).ToListAsync();
 
 To see a full example of using the ``Find()`` method to find multiple documents,
 see :ref:`csharp-retrieve-additional-information`.
@@ -205,7 +205,13 @@ You can configure the commonly used options with the following methods:
      - Description
 
    * - ``BatchSize`` 
-     - | Gets or sets the number of documents to hold in a cursor at a given time.
+     - | Gets or sets the maximum number of documents within each
+         batch returned in a query result. If ``batchSize`` is not set, the ``Find()``
+         method has an initial batch size of ``101`` documents and a maximum size of 16
+         mebibytes (MiB) for each subsequent batch. This option can enforce a smaller
+         limit than 16 MiB, but not a larger one. If you set ``batchSize`` to a limit that
+         results in batches larger than 16 MiB, this option has no effect and the
+         ``Find()`` method uses the default batch size.
 
    * - ``Collation`` 
      - | Sets the collation options. 

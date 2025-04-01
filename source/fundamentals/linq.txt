@@ -264,6 +264,7 @@ that contain an array field ``Grades``:
 
    public class Student
    {
+       public ObjectId Id { get; set; }
        public string Name { get; set; }
        public int[] Grades { get; set; }
    }
@@ -275,15 +276,15 @@ rest of the array:
 .. code-block:: csharp
 
    var query = queryableCollection
-       .Select(s => s.Grades.TakeWhile(g => g > 90);
+       .Select(s => s.Grades.TakeWhile(g => g > 90).ToArray());
 
-The results resemble the following documents:
+The results might resemble the following documents:
 
 .. code-block:: json
    :copyable: false
 
-   { "name" : "Maura Day", "grades" : [92, 97] }
-   { "name" : "Saul Curzon", "grades" : [100, 95, 91] }
+   [92, 97]
+   [100, 95, 91]
 
 $sample
 ~~~~~~~
@@ -354,6 +355,7 @@ that contain an array field ``Grades``:
 
    public class Student
    {
+       public ObjectId Id { get; set; }
        public string Name { get; set; }
        public int[] Grades { get; set; }
    }
@@ -365,15 +367,15 @@ rest of the array:
 .. code-block:: csharp
 
    var query = queryableCollection
-       .Select(s => s.Grades.SkipWhile(g => g < 75);
+       .Select(s => s.Grades.SkipWhile(g => g < 75).ToArray());
 
-The results resemble the following documents:
+The results might resemble the following documents:
 
 .. code-block:: json
    :copyable: false
 
-   { "name" : "Maura Day", "grades" : [80, 90, 70, 83] }
-   { "name" : "Saul Curzon", "grades" : [79, 100, 85, 73] }
+   [80, 90, 70, 83]
+   [79, 100, 85, 73]
 
 $unwind
 ~~~~~~~

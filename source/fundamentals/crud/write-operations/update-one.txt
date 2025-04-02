@@ -49,9 +49,10 @@ Update One
 
       a single document
 
-   .. replacement:: usage-examples-link
+   .. replacement:: usage-examples-links
 
-      :ref:`csharp-examples-update-one`
+      - `UpdateOne() <{+example+}/update-one/UpdateOne.cs>`__
+      - `UpdateOneAsync() <{+example+}/update-one/UpdateOneAsync.cs>`__
 
    .. replacement:: sync-api-link
 

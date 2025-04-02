@@ -61,5 +61,6 @@ public class Flower
     public List<string> Season { get; set; }
     public double Stock { get; set; }
     public string Description { get; set; }
+    public string Color { get; set; }
 }
 // end-model

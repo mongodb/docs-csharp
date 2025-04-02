@@ -21,6 +21,8 @@ LINQ
 Overview
 --------
 
+.. include:: /includes/linq-vs-builders.rst
+
 In this guide you can learn how to use
 `LINQ <https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/?redirectedfrom=MSDN>`__
 with the {+driver-long+}. LINQ allows you to construct queries against
@@ -1060,3 +1062,8 @@ uses a scalar operation, then prints the translated query:
    ``LoggedStages`` is not thread-safe. Executing a query and accessing the
    associated ``LoggedStages`` property from multiple threads might have
    non-deterministic results.
+
+Troubleshooting
+---------------
+
+.. include:: /includes/troubleshooting/unsupported-filter-expression.rst

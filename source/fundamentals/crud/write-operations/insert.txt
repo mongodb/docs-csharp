@@ -281,8 +281,10 @@ Additional Information
 For runnable examples of the insert operations, see the following usage
 examples:
 
-- :ref:`csharp-insert-one`
-- :ref:`csharp-insert-many`
+- `InsertOne() <{+example+}/insert-one/InsertOne.cs>`__
+- `InsertOneAsync() <{+example+}/insert-one/InsertOneAsync.cs>`__
+- `InsertMany() <{+example+}/insert-many/InsertMany.cs>`__
+- `InsertManyAsync() <{+example+}/insert-many/InsertManyAsync.cs>`__
 
 .. To learn more about performing the operations mentioned, see the
 .. following guides:

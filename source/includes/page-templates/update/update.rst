@@ -246,7 +246,9 @@ Additional Information
 
 |instruqt-lab-instructions|
 
-For runnable examples of the update operations, see the |usage-examples-link| page.
+For runnable examples of the update operations, see the following usage examples:
+
+|usage-examples-links|
 
 To learn more about creating query filters, see the :ref:`csharp-specify-query` guide.
 

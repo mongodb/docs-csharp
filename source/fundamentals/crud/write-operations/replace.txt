@@ -241,6 +241,15 @@ The ``ReplaceOneResult`` class contains the following properties:
 
        **Data Type:** `BsonValue <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonValue.html>`__
 
+Additional Information
+----------------------
+
+For runnable examples of the replace operation, see the following usage
+examples:
+
+- `ReplaceOne() <{+example+}/replace-one/ReplaceOne.cs>`__
+- `ReplaceOneAsync() <{+example+}/replace-one/ReplaceOneAsync.cs>`__
+
 API Documentation
 ~~~~~~~~~~~~~~~~~
 

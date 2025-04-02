@@ -272,8 +272,13 @@ To learn more about query filters, see :ref:`csharp-specify-query`.
 
 To learn how to specify queries using LINQ, see :ref:`csharp-linq`.
 
-To view runnable examples of the ``Find()`` method, see the 
-:ref:`csharp-find-one` page.
+For runnable examples of the find operations, see the following usage
+examples:
+
+- `FindOne() <{+example+}/find-one/FindOne.cs>`__
+- `FindOneAsync() <{+example+}/find-one/FindOneAsync.cs>`__
+- `FindMany() <{+example+}/find-many/FindMany.cs>`__
+- `FindManyAsync() <{+example+}/find-many/FindManyAsync.cs>`__
 
 API Documentation
 ~~~~~~~~~~~~~~~~~

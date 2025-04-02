@@ -49,9 +49,10 @@ Update Many
 
       multiple documents
       
-   .. replacement:: usage-examples-link
+   .. replacement:: usage-examples-links
 
-      :ref:`csharp-examples-update-many`
+      - `UpdateMany() <{+example+}/update-many/UpdateMany.cs>`__
+      - `UpdateManyAsync() <{+example+}/update-many/UpdateManyAsync.cs>`__
    
    .. replacement:: sync-api-link
 

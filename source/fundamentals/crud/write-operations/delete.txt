@@ -214,8 +214,10 @@ Additional Information
 For runnable examples of the delete operations, see the following usage
 examples:
 
-- :ref:`csharp-delete-one`
-- :ref:`csharp-delete-many`
+- `DeleteOne() <{+example+}/delete-one/DeleteOne.cs>`__ 
+- `DeleteOneAsync() <{+example+}/delete-one/DeleteOneAsync.cs>`__
+- `DeleteMany() <{+example+}/delete-many/DeleteMany.cs>`__
+- `DeleteManyAsync() <{+example+}/delete-many/DeleteManyAsync.cs>`__
 
 API Documentation
 ~~~~~~~~~~~~~~~~~

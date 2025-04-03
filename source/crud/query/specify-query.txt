@@ -358,3 +358,94 @@ following Server Manual Entries:
 To learn more about using Builders, see :ref:`csharp-builders`.
 
 To learn how to specify queries using LINQ, see :ref:`csharp-linq`.
+
+.. TODO: integrate into existing page
+
+Sample Class
+------------
+
+The code examples in this guide demonstrate how you can use builders to
+create types to interact with documents in the sample collection ``plants.flowers``.
+Documents in this collection are modeled by the following ``Flower`` class:
+
+.. literalinclude:: /includes/fundamentals/code-examples/builders.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-model
+   :end-before: end-model
+
+Each builder class takes a generic type parameter
+``TDocument`` which represents the type of document that you are working
+with. In this guide, the ``Flower`` class is the document type used in
+each builder class example.
+
+Construct a Filter
+------------------
+
+The ``FilterDefinitionBuilder`` class provides a type-safe interface for
+building up queries. Suppose you want to query your collection for
+documents matching the following criteria:
+
+- ``Price`` field value less than 20
+- ``Category`` field value is "Perennial"
+
+Use builders to create the filter definition with the typed variant:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Filter;
+   var filter = builder.Lt(f => f.Price, 20) & builder.Eq(f => f.Category, "Perennial");
+   
+Using the typed variant form provides compile-time safety. Additionally,
+your IDE can provide refactoring support.
+
+Alternatively, you can use string-based field names to contruct the filter:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Filter;
+   var filter = builder.Lt("Price", 20) & builder.Eq("Category", "Perennial");
+
+If you are using LINQ, you can also use the ``Inject()`` method to apply the filter
+to a LINQ query:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Filter;
+   var filter = builder.Lt("Price", 20) & builder.Eq("Category", "Perennial");
+   var query = collection.AsQueryable().Where(f => filter.Inject());
+
+Array Operators
+~~~~~~~~~~~~~~~
+
+If your document has properties or fields that serialize to arrays,
+you can use the methods beginning with ``Any``, such as ``AnyEq()`` or
+``AnyLt()``, to compare the entire array against a single item.
+
+Use builders to check which documents in the collection have a
+``Season`` array that includes "winter":
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Filter;
+   var filter = builder.AnyEq(f => f.Season, "winter");
+
+You can also call the ``ElemMatch()`` method to find documents that have an
+array field that contains at least one element that matches a specified search
+criteria. The following example returns documents that contain the value
+``"Summer"`` in their ``Season`` array:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Filter;
+   var filter = builder.ElemMatch(f => f.Season, s => s == "Summer");
+
+To learn more about array operators, see the :manual:`Array Query Operators
+</reference/operator/query-array/>` guide in the {+mdb-server+} manual.
+
+- `FilterDefinitionBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinitionBuilder-1.html>`__

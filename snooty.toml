@@ -1,7 +1,6 @@
 toc_landing_pages = [
     "/get-started",
     "/connect/connection-options",
-    "/crud",
     "/security/authentication"
 ]
 name = "csharp"

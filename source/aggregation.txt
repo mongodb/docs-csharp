@@ -219,3 +219,139 @@ following API documentation:
 - `Where() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.MongoQueryable.Where.html>`__
 - `GroupBy() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.MongoQueryable.GroupBy.html>`__
 - `Select() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.MongoQueryable.Select.html>`__
+
+.. TODO: integrate into existing page
+
+Sample Class
+------------
+
+The code examples in this guide demonstrate how you can use builders to
+create types to interact with documents in the sample collection ``plants.flowers``.
+Documents in this collection are modeled by the following ``Flower`` class:
+
+.. literalinclude:: /includes/fundamentals/code-examples/builders.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-model
+   :end-before: end-model
+
+Each builder class takes a generic type parameter
+``TDocument`` which represents the type of document that you are working
+with. In this guide, the ``Flower`` class is the document type used in
+each builder class example.
+
+.. _csharp-builders-aggregation:
+
+Build an Aggregation Pipeline
+-----------------------------
+
+The ``PipelineDefinitionBuilder`` class provides a type-safe interface for
+defining an **aggregation pipeline**. An aggregation pipeline is a series of
+stages that are used to transform a document. Suppose you want to create a
+pipeline that performs the following operations:
+
+- Matches all documents with "spring" in the ``Season`` field
+- Sorts the results by the ``Category`` field
+- Groups the documents by category and shows the average price and total
+  available for all documents in that category
+
+Use ``PipelineDefinitionBuilder`` classes to build the pipeline:
+
+.. code-block:: csharp
+
+   var sortBuilder = Builders<Flower>.Sort.Ascending(f => f.Category);
+   var matchFilter = Builders<Flower>.Filter.AnyEq(f => f.Season, "spring");
+
+   var pipeline = new EmptyPipelineDefinition<Flower>()
+       .Match(matchFilter)
+       .Sort(sortBuilder)
+       .Group(f => f.Category,
+              g => new
+                 {
+                    name = g.Key, 
+                    avgPrice = g.Average(f => f.Price), 
+                    totalAvailable = g.Sum(f => f.Stock)
+                  }
+             );   
+
+The preceding example creates the following pipeline:
+
+.. code-block:: json
+   
+   [{ "$match" : { "season" : "spring" } }, { "$sort" : { "category" : 1 } }, { "$group" : { "_id" : "$category", "avgPrice" : { "$avg" : "$price" }, "totalAvailable" : { "$sum" : "$stock" } } }]
+
+You can add stages to your pipeline that don't have corresponding type-safe
+methods in the ``PipelineDefinitionBuilder`` interface by providing your query
+as a ``BsonDocument`` to the `AppendStage() method
+<{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineDefinitionBuilder.AppendStage.html>`__.
+
+.. code-block:: csharp
+
+   var pipeline = new EmptyPipelineDefinition<BsonDocument>().AppendStage<BsonDocument, BsonDocument, BsonDocument>("{ $set: { field1: '$field2' } }");
+
+.. note:: 
+
+   When using a ``BsonDocument`` to define your pipeline stage, the driver does
+   not take into account any ``BsonClassMap``, serialization attributes or
+   serialization conventions. The field names used in the ``BsonDocument`` must
+   match those stored on the server.
+
+   For more information on providing a query as a ``BsonDocument``, see our
+   :ref:`FAQ page <csharp-faq-unsupported-expressions>`.
+
+To learn more about the Aggregation Pipeline, see the
+:manual:`Aggregation Pipeline </core/aggregation-pipeline/>` server manual page.
+
+.. _csharp-builders-out:
+
+Write Pipeline Results to a Collection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can write the documents returned from an aggregation pipeline to a
+collection by creating an ``$out`` stage at the end of your aggregation
+pipeline. To create an ``$out`` stage, call the ``Out()`` method on a
+``PipelineStageDefinitionBuilder``. The ``Out()`` method requires the name of
+the collection you want to write the documents to.
+
+The following example builds an aggregation pipeline that matches all documents
+with a ``season`` field value of ``"Spring"`` and outputs them to
+a ``springFlowers`` collection:
+
+.. code-block:: csharp
+
+   var outputCollection = database.GetCollection("springFlowers");
+   var matchFilter = Builders<Flower>.Filter.AnyEq(f => f.Season, "spring");
+
+   // Creates an aggregation pipeline and outputs resulting documents to a new collection.
+   var pipeline = new EmptyPipelineDefinition<Flower>()
+       .Match(matchFilter)
+       .Out(outputCollection);
+
+You can write the results of an aggregation pipeline to a time series collection
+by specifying a ``TimeSeriesOption`` object and passing it as the second
+parameter to the ``Out()`` method.
+
+Imagine that the documents in the ``plants.flowers`` collection contain a ``datePlanted`` field that
+holds BSON date values. You can store the documents in this collection in a time
+series collection by using the ``datePlanted`` field as the time field.
+
+The following example creates a ``TimeSeriesOptions`` object and specifies
+``datePlanted`` as the ``timeField``. It then builds an aggregation pipeline that matches all documents
+with a ``season`` field value of ``"Spring"`` and outputs them to a
+time series collection called ``springFlowerTimes``.
+
+.. code-block:: csharp
+
+   var timeSeriesOptions = new TimeSeriesOptions("datePlanted");
+   var collectionName = "springFlowerTimes"
+   var matchFilter = Builders<Flower>.Filter.AnyEq(f => f.Season, "spring");
+
+   // Creates an aggregation pipeline and outputs resulting documents to a time series collection.
+   var pipeline = new EmptyPipelineDefinition<Flower>()
+       .Match(matchFilter)
+       .Out(collectionName, timeSeriesOptions);
+
+To learn more about time series collections, see :ref:`csharp-time-series`.
+
+
+- `PipelineDefinitionBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineDefinitionBuilder.html>`__

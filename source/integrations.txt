@@ -19,7 +19,6 @@ Integrations and Tools
    :keywords: third-party
 
 .. toctree::
-   :titlesonly:
    :maxdepth: 1
 
    :ref:`OData <csharp-odata>`

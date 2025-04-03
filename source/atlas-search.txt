@@ -683,3 +683,33 @@ The search returns the following document:
 
 To learn more about the ``wildcard`` operator, see the :atlas:`wildcard </atlas-search/wildcard>` 
 Atlas guide.
+
+.. TODO: integrate into existing page
+
+Sample Class
+------------
+
+The code examples in this guide demonstrate how you can use builders to
+create types to interact with documents in the sample collection ``plants.flowers``.
+Documents in this collection are modeled by the following ``Flower`` class:
+
+.. literalinclude:: /includes/fundamentals/code-examples/builders.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-model
+   :end-before: end-model
+
+Each builder class takes a generic type parameter
+``TDocument`` which represents the type of document that you are working
+with. In this guide, the ``Flower`` class is the document type used in
+each builder class example.
+
+Build an Atlas Search Query
+---------------------------
+
+The ``Search`` class provides a type-safe interface for creating a
+:manual:`$search </reference/operator/aggregation/search/>` 
+pipeline stage. 
+
+To learn how to construct search queries with the ``Search`` class, see
+:ref:`csharp-atlas-search`.

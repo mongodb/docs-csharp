@@ -143,3 +143,89 @@ guide, see the following API Documentation:
 - `Projection <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders-1.Projection.html>`_
 - `Include() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.Include.html>`_
 - `Exclude() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.Exclude.html>`_
+
+.. TODO: integrate into existing page
+
+Sample Class
+------------
+
+The code examples in this guide demonstrate how you can use builders to
+create types to interact with documents in the sample collection ``plants.flowers``.
+Documents in this collection are modeled by the following ``Flower`` class:
+
+.. literalinclude:: /includes/fundamentals/code-examples/builders.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-model
+   :end-before: end-model
+
+Each builder class takes a generic type parameter
+``TDocument`` which represents the type of document that you are working
+with. In this guide, the ``Flower`` class is the document type used in
+each builder class example.
+
+.. _csharp-builders-projection:
+
+Create a Projection
+-------------------
+
+The ``ProjectionDefinitionBuilder`` class provides a type-safe interface for
+defining a projection. Suppose you want to create a projection on the
+``Name`` and ``Price`` fields, but exclude the ``Id`` field.
+
+Use builders to create the projection definition with the typed variant:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Projection;
+   var projection = builder.Include(f => f.Name).Include(f => f.Price).Exclude(f => f.Id);
+
+You can also use string-based field names to define the projection:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Projection;
+   var projection = builder.Include("Name").Include("Price").Exclude("Id");
+
+Finally, you can use the ``Expression()`` method to define the
+projection:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Projection;
+   var projection = builder.Expression(f => new { Name = f.Name, Price = f.Price });
+
+This definition has a return type of ``ProjectionDefinition<TDocument,
+TProjection>`` whereas the others return a
+``ProjectionDefinition<TDocument>``.
+
+Lambda Expressions
+~~~~~~~~~~~~~~~~~~
+
+The driver supports using lambda expressions to render projections. When
+you define a ``Find()`` projection with the ``Expression()`` method to
+create a lambda expression, the driver inspects the expression
+to determine which fields are referenced and automatically constructs a
+server-side projection to return only those fields.
+
+You can also use lambda expressions to create new fields by performing
+operations on values in your documents. The following example shows how
+you can use a lambda expression to project a new ``Profit`` field
+using the ``Price`` and ``Stock`` fields:
+
+.. code-block:: csharp
+   :copyable: true
+
+   var builder = Builders<Flower>.Projection;
+   var projection = builder.Expression(f => new { Profit = f.Price * f.Stock });
+
+.. note:: ``Id`` Field Exclusion
+
+   When you create a projection using a lambda expression, the output
+   automatically excludes the ``Id`` field unless you explicitly include
+   is as a projection field.
+
+- `ProjectionDefinitionBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.html>`__

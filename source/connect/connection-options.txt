@@ -17,6 +17,16 @@ Connection Options
    :depth: 2
    :class: singlecol
 
+.. toctree::
+   :caption: Specify Connection Options 
+
+   Compress Network Traffic </connect/connection-options/network-compression>
+   Customize Server Selection </connect/connection-options/server-selection>
+   Stable API </connect/connection-options/stable-api>
+   Limit Server Execution Time </connect/connection-options/csot>
+   Connection Pools </connect/connection-options/connection-pools>
+   Connect from AWS Lambda <https://www.mongodb.com/docs/atlas/manage-connections-aws-lambda/>
+
 This section describes the MongoDB connection and authentication options
 available in the {+driver-short+}. You can configure your connection using either
 the connection URI or a ``MongoClientSettings`` object.

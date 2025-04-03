@@ -1,4 +1,5 @@
 .. _csharp-crud-read-operations:
+.. _csharp-crud-query:
 
 ===============
 Read Operations
@@ -8,18 +9,13 @@ Read Operations
    :description: Learn about the commands for running MongoDB read operations by using the {+driver-long+}.
 
 .. toctree::
-   :caption: Read Operations
+   :titlesonly:
+   :maxdepth: 1
 
-   Retrieve Data </fundamentals/crud/read-operations/retrieve>
-   Specify Fields to Return </fundamentals/crud/read-operations/project>
-   Count Documents </fundamentals/crud/read-operations/count>
-   List Distinct Values </fundamentals/crud/read-operations/distinct>
-   Monitor Data Changes </fundamentals/crud/read-operations/change-streams>
-   Specify Query Results </fundamentals/crud/read-operations/specify-documents-to-return>
-
-- :ref:`csharp-retrieve`
-- :ref:`csharp-project`
-- :ref:`csharp-count-documents`
-- :ref:`csharp-distinct`
-- :ref:`csharp-change-streams`
-- :ref:`csharp-specify-documents-to-return`
+   Specify a Query </crud/query/specify-query>
+   Find Documents </crud/query/find>
+   Specify Documents to Return </crud/query/specify-documents-to-return>
+   Specify Fields to Return </crud/query/project>
+   Count Documents </crud/query/count>
+   Distinct Field Values </crud/query/distinct>
+   Access Data from a Cursor </crud/query/cursors>

@@ -8,10 +8,16 @@ CRUD Operations
    :description: Learn how to run create, read, update, delete (CRUD) MongoDB operations by using the {+driver-long+}.
 
 .. toctree::
-   :caption: CRUD Operations
+   :titlesonly:
+   :maxdepth: 1
 
-   Write </fundamentals/crud/write-operations>
-   Read </fundamentals/crud/read-operations>
-
-- :ref:`csharp-crud-read-operations`
-- :ref:`csharp-crud-write-operations`
+   Insert Documents </crud/insert>
+   Query Documents </crud/query>
+   Update Documents </crud/update>
+   Replace Documents </crud/replace>
+   Delete Documents </crud/delete>
+   Bulk Write Operations </crud/bulk-write>
+   Transactions </crud/transactions>
+   Store Large Files </crud/gridfs>
+   Configure CRUD Operations </crud/configure>
+   Geospatial Queries <crud/geo>

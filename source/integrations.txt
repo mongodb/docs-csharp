@@ -1,4 +1,4 @@
-.. _csharp-integrations::
+.. _csharp-integrations:
 
 ======================
 Integrations and Tools
@@ -22,8 +22,20 @@ Integrations and Tools
    :titlesonly:
    :maxdepth: 1
 
+   :ref:`OData <csharp-odata>`
    Entity Framework Provider <https://www.mongodb.com/docs/entity-framework/current/>
    {+analyzer-short+} <https://www.mongodb.com/docs/mongodb-analyzer/>
+
+OData
+-----
+
+OData (Open Data Protocol) is a standardized protocol for building and consuming
+RESTful APIs that allows for the querying and manipulation of data by using
+HTTP requests. It provides a uniform way to expose and interact
+with data from multiple sources.
+
+To learn how to integrate OData with your MongoDB application, see the
+:ref:`OData <csharp-odata>` tutorial.
 
 Entity Framework Provider
 -------------------------

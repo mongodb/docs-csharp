@@ -1,15 +1,7 @@
 toc_landing_pages = [
-    "/fundamentals/connection",
-    "/fundamentals/crud",
-    "/usage-examples",
-    "/fundamentals",
-    "/fundamentals/serialization",
-    "/fundamentals/crud/write-operations/update-one",
-    "/fundamentals/crud/write-operations/update-many",
-    "/fundamentals/authentication",
-    "/upgrade",
-    "/fundamentals/database-collection",
-    "/get-started"
+    "/get-started",
+    "/connect/connection-options",
+    "/crud"
 ]
 name = "csharp"
 title = "C#/.NET"

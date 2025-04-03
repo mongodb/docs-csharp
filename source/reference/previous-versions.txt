@@ -1,8 +1,8 @@
 .. _csharp-previous-versions:
 
-=================
-Previous Versions
-=================
+====================
+Versions 2.0 to 2.18
+====================
 
 The following links direct you to documentation for previous versions of the
 driver.

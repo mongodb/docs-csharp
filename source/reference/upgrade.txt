@@ -21,8 +21,8 @@ Upgrade Driver Versions
    :titlesonly:
    :maxdepth: 1
 
-   Version 2.x </upgrade/v2>
-   Version 3.0 </upgrade/v3>
+   Version 2.x </reference/upgrade/v2>
+   Version 3.0 </reference/upgrade/v3>
 
 Overview
 --------

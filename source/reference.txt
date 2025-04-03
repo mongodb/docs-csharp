@@ -16,7 +16,7 @@ Reference
    Quick Reference </reference/quick-reference>
    Compatibility </reference/compatibility>
    Upgrade </reference/upgrade>
-   Previous Versions </reference/previous-versions>
+   Versions 2.0 to 2.18 </reference/previous-versions>
 
 Previous Versions
 -----------------

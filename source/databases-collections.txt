@@ -1,4 +1,5 @@
 .. _csharp-db-coll:
+.. _csharp-databases-collections:
 
 =========================
 Databases and Collections

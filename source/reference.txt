@@ -1,0 +1,24 @@
+.. _csharp-reference:
+
+=========
+Reference
+=========
+
+.. facet::
+   :name: programming_language
+   :values: csharp
+
+.. meta::
+   :keywords: dotnet
+
+.. toctree::
+
+   Previous Versions </previous-versions>
+   Quick Reference </quick-reference>
+   Compatibility </compatibility>
+   Upgrade </upgrade>
+
+Previous Versions
+-----------------
+
+For documentation on versions of the driver v2.18 and earlier, see the :ref:`csharp-previous-versions` section.

@@ -13,10 +13,10 @@ Reference
 
 .. toctree::
 
-   Previous Versions </previous-versions>
-   Quick Reference </quick-reference>
-   Compatibility </compatibility>
-   Upgrade </upgrade>
+   Quick Reference </reference/quick-reference>
+   Compatibility </reference/compatibility>
+   Upgrade </reference/upgrade>
+   Previous Versions </reference/previous-versions>
 
 Previous Versions
 -----------------

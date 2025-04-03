@@ -278,7 +278,7 @@ rest of the array:
    var query = queryableCollection
        .Select(s => s.Grades.TakeWhile(g => g > 90).ToArray());
 
-The results might resemble the following documents:
+The results might resemble the following arrays:
 
 .. code-block:: json
    :copyable: false
@@ -369,7 +369,7 @@ rest of the array:
    var query = queryableCollection
        .Select(s => s.Grades.SkipWhile(g => g < 75).ToArray());
 
-The results might resemble the following documents:
+The results might resemble the following arrays:
 
 .. code-block:: json
    :copyable: false

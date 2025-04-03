@@ -921,6 +921,9 @@ To learn how to perform individual write operations, see the following guides:
 - :ref:`csharp-insert-guide`
 - :ref:`csharp-delete-guide`
 
+API Documentation
+~~~~~~~~~~~~~~~~~
+
 To learn more about any of the methods or types discussed in this
 guide, see the following API documentation:
 

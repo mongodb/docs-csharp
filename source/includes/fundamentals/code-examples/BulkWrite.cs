@@ -18,7 +18,7 @@ class BulkWrite
         var movieToInsert = new BulkWriteInsertOneModel<BsonDocument>(
             "sample_mflix.movies",
             new BsonDocument{
-                { "name", "Silly Days" },
+                { "title", "Silly Days" },
                 { "year", 2022 }
             }
         );
@@ -36,7 +36,7 @@ class BulkWrite
 
         var movieUpdate = new BulkWriteUpdateOneModel<BsonDocument>(
             "sample_mflix.movies",
-            Builders<BsonDocument>.Filter.Eq("name", "Carrie"),
+            Builders<BsonDocument>.Filter.Eq("title", "Carrie"),
             Builders<BsonDocument>.Update.Set("seen", True)
         );
         // end-bulk-update-one
@@ -69,7 +69,7 @@ class BulkWrite
 
         var movieReplacement = new BulkWriteReplaceOneModel<BsonDocument>(
             "sample_mflix.movies",
-            Builders<BsonDocument>.Filter.Eq("movie_id", "4004"),
+            Builders<BsonDocument>.Filter.Eq("title", "Insomnia"),
             new BsonDocument{
                 { "name", "Loving Sylvie" },
                 { "year", 1999 }
@@ -88,7 +88,7 @@ class BulkWrite
 
         var movieToDelete = new BulkWriteDeleteOneModel<BsonDocument>(
             "sample_mflix.movies",
-            Builders<BsonDocument>.Filter.Eq("movie_id", "4687")
+            Builders<BsonDocument>.Filter.Eq("title", "Mr. Nobody")
         );
         // end-bulk-delete-one
     }
@@ -135,7 +135,7 @@ class BulkWrite
             ),
             new BulkWriteDeleteOneModel<BsonDocument>(
                 movieNamespace,
-                Builders<BsonDocument>.Filter.Eq("movie_id", "7888")
+                Builders<BsonDocument>.Filter.Eq("title", "House")
             )
         };
 
@@ -175,7 +175,7 @@ class BulkWrite
             ),
             new BulkWriteDeleteOneModel<BsonDocument>(
                 movieNamespace,
-                Builders<BsonDocument>.Filter.Eq("movie_id", "7888")
+                Builders<BsonDocument>.Filter.Eq("title", "House")
             )
         };
 
@@ -201,7 +201,7 @@ class BulkWrite
             VerboseResult = true
         };
 
-        var results = client.BulkWrite(deleteOneModel, clientBulkWriteOptions);
+        var result = client.BulkWrite(deleteOneModel, clientBulkWriteOptions);
         // end-bulk-write-options-sync
     }
     static async Task BulkWriteOptionsAsync()
@@ -221,7 +221,7 @@ class BulkWrite
             VerboseResult = true
         };
 
-        var results = await client.BulkWriteAsync(deleteOneModel, clientBulkWriteOptions);
+        var result = await client.BulkWriteAsync(deleteOneModel, clientBulkWriteOptions);
         // end-bulk-write-options-async
     }
 }

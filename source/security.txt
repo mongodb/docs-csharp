@@ -1,1 +1,18 @@
 .. _csharp-security:
+
+========
+Security
+========
+
+.. facet::
+   :name: programming_language
+   :values: csharp
+
+.. meta::
+   :keywords: dotnet
+
+.. toctree::
+
+    Authentication </security/authentication>
+    In-Use Encryption </security/encryption>
+    TLS/SSL </security/tls-ssl>

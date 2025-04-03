@@ -1,7 +1,8 @@
 toc_landing_pages = [
     "/get-started",
     "/connect/connection-options",
-    "/crud"
+    "/crud",
+    "/security/authentication"
 ]
 name = "csharp"
 title = "C#/.NET"

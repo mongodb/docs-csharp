@@ -122,6 +122,13 @@ The 3.2 driver release includes the following new features:
   To learn more about Atlas Vector Search with the {+driver-short+}, see the
   :ref:`csharp-atlas-vector-search` guide.
 
+- Adds the ``DocumentFormat`` property to the ``DateOnlySerializer`` to
+  allow you to customize the way that the driver stores ``DateOnly``
+  values. This release also adds the ``[BsonDateOnlyOptions()]``
+  attribute to customize serialization behavior at the property level.
+  To learn more, see the :ref:`csharp-poco-dateonly-attr` section of the
+  Serialization guide.
+
 .. _csharp-version-3.1:
 
 What's New in 3.1

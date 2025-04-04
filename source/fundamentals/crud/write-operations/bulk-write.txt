@@ -406,7 +406,7 @@ Client Bulk Write
 
 When connecting to a deployment running {+mdb-server+} 8.0 or later,
 you can use the ``IMongoClient.BulkWrite()`` or
-``IMongoClient.BulkWriteAsync()`` method method to write 
+``IMongoClient.BulkWriteAsync()`` method to write 
 to multiple databases and collections in the same cluster. These
 methods perform all write operations in a single call.
 
@@ -422,7 +422,7 @@ the following ``BulkWriteModel`` classes:
 
 The following sections show how to create and use instances of the
 preceding classes to perform the corresponding write operation in a bulk
-write.The :ref:`csharp-client-bulkwrite-method` section  
+write. The :ref:`csharp-client-bulkwrite-method` section  
 demonstrates how to pass a list of models to the ``BulkWrite()`` or
 ``BulkWriteAsync()`` method to perform the bulk operation.
 

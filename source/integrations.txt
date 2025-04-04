@@ -21,7 +21,7 @@ Integrations and Tools
 .. toctree::
    :maxdepth: 1
 
-   :ref:`OData <csharp-odata>`
+   OData </integrations/odata>
    Entity Framework Provider <https://www.mongodb.com/docs/entity-framework/current/>
    {+analyzer-short+} <https://www.mongodb.com/docs/mongodb-analyzer/>
 

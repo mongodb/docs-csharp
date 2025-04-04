@@ -1,4 +1,21 @@
-.. TODO: integrate into existing page
+.. _csharp-atlas-vector-search:
+
+===================
+Atlas Vector Search
+===================
+
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: semantic 
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
 
 Sample Class
 ------------

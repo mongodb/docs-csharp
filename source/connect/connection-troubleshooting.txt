@@ -18,8 +18,6 @@ using the {+driver-long+} to connect to a MongoDB deployment.
    This page addresses only connection issues. If you encounter any other issues
    with MongoDB or the driver, visit the following resources:
 
-   - The :ref:`Frequently Asked Questions (FAQ) <csharp-faq>` for the
-     {+driver-short+}
    - The :ref:`Issues & Help <csharp-issues-help>` page, which has
      information about reporting bugs, contributing to the driver, and 
      finding additional resources

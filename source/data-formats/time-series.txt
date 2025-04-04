@@ -90,7 +90,7 @@ Query a Time Series Collection
 ------------------------------
 
 To query a time series collection, follow the conventions for retrieving and aggregating
-data. For more information about these conventions, see the :ref:`csharp-retrieve` and
+data. For more information about these conventions, see the :ref:`csharp-find` and
 :ref:`csharp-aggregation` guides.
 
 Additional Information

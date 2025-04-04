@@ -20,12 +20,12 @@ Authentication Mechanisms
 .. toctree::
    :caption: Authentication
 
-   SCRAM </fundamentals/authentication/scram>
-   X.509 </fundamentals/authentication/x509>
-   AWS IAM </fundamentals/authentication/aws-iam>
-   OIDC </fundamentals/authentication/oidc>
-   LDAP (PLAIN) </fundamentals/authentication/ldap>
-   Kerberos (GSSAPI) </fundamentals/authentication/kerberos>
+   SCRAM </security/authentication/scram>
+   X.509 </security/authentication/x509>
+   AWS IAM </security/authentication/aws-iam>
+   OIDC </security/authentication/oidc>
+   LDAP (PLAIN) </security/authentication/ldap>
+   Kerberos (GSSAPI) </security/authentication/kerberos>
 
 Overview
 --------

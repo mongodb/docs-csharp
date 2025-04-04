@@ -19,7 +19,7 @@ Databases and Collections
    :class: singlecol
 
 .. toctree::
-   /fundamentals/databases-collections/run-command
+   /run-command
 
 Overview
 --------

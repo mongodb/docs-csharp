@@ -239,9 +239,10 @@ and retrieves a document that matches a query.
 
 Learn more about the {+driver-short+} from the following resources:
 
-- Learn how to insert documents in the :ref:`<csharp-insert>` section.
-- Learn how to find documents in the :ref:`<csharp-query>` section.
-- Learn how to update documents in the :ref:`<csharp-update>` section.
-- Learn how to delete documents in the :ref:`<csharp-delete>` section.
+- Learn how to insert documents in the :ref:`<csharp-insert-guide>` section.
+- Learn how to find documents in the :ref:`<csharp-crud-query>` section.
+- Learn how to update documents in the :ref:`<csharp-update-one>` and
+  :ref:`<csharp-update-many>` sections.
+- Learn how to delete documents in the :ref:`<csharp-delete-guide>` section.
 
 .. include:: /includes/get-started/quickstart-troubleshoot.rst

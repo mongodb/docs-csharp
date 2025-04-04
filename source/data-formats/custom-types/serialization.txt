@@ -17,14 +17,6 @@ Serialization
    :depth: 2
    :class: singlecol
    
-.. toctree::
-   :caption: Serialization
-
-   Class Mapping </fundamentals/serialization/class-mapping>
-   POCOs </fundamentals/serialization/poco>
-   Polymorphic Objects </fundamentals/serialization/polymorphic-objects>
-   GUIDs </fundamentals/serialization/guid-serialization>
-
 Overview
 --------
 

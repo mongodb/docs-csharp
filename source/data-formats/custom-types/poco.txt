@@ -728,9 +728,6 @@ Additional Information
 For a full list of serialization-related attributes, see the
 `Serialization.Attributes API documentation <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Attributes.html>`__.
 
-For additional read and write operation examples using POCOs, see the :ref:`Usage Examples
-<csharp-usage-examples>` or the :ref:`CRUD Fundamentals Pages <csharp-crud>`.
-
 To learn more about how the driver maps BSON documents to POCOs, see
 :ref:`csharp-class-mapping`.
 

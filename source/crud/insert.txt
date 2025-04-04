@@ -228,8 +228,8 @@ The following code uses the ``InsertMany()`` method to insert five new
 
 The ``InsertMany()`` method has no return value. You can verify that
 your documents were successfully inserted by executing a ``Find()``
-operation on the collection. For an example on how to find a document,
-see :ref:`csharp-find-one`.
+operation on the collection. For an example of how to find a document,
+see :ref:`csharp-find`.
 
 .. _csharp-ordered-behavior:
 

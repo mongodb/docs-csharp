@@ -231,7 +231,6 @@ guides:
 - :ref:`csharp-specify-query`
 - :ref:`csharp-bson`
 - :ref:`csharp-guids`
-- :ref:`csharp-builders` 
 - :ref:`csharp-poco`
 
 API Documentation

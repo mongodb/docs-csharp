@@ -20,8 +20,8 @@ Update Many
 .. toctree::
    :caption: Update Documents
 
-   Fields </fundamentals/crud/write-operations/update-many/fields>
-   Arrays </fundamentals/crud/write-operations/update-many/arrays>
+   Fields </crud/update-many/fields>
+   Arrays </crud/update-many/arrays>
 
 .. include:: /includes/page-templates/update/update.rst
 

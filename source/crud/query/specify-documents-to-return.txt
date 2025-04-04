@@ -203,7 +203,7 @@ skipping the first ``10`` documents:
 Additional Information
 ----------------------
 
-For more information about retrieving documents, see the :ref:`csharp-retrieve` guide.
+For more information about retrieving documents, see the :ref:`csharp-find` guide.
 
 For more information about specifying a query, see the :ref:`csharp-specify-query` guide.
 

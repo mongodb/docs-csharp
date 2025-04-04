@@ -23,7 +23,6 @@ their related reference and API documentation.
    * - | **Find a Document**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.Find.html>`__
-       | :ref:`Usage Example <csharp-find-one>`
        | :ref:`Fundamentals <csharp-retrieve-find-one>`
 
      - .. io-code-block::
@@ -47,7 +46,6 @@ their related reference and API documentation.
    * - | **Find a Document (Async)**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.FindAsync.html>`__
-       | :ref:`Usage Example <csharp-find-one>`
        | :ref:`Fundamentals <csharp-retrieve-find-one>`
 
      - .. io-code-block::
@@ -72,7 +70,6 @@ their related reference and API documentation.
    * - | **Find Multiple Documents**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.Find.html>`__
-       | :ref:`Usage Example <csharp-find-multiple>`
        | :ref:`Fundamentals <csharp-retrieve-find-multiple>`
 
      - .. io-code-block::
@@ -100,7 +97,6 @@ their related reference and API documentation.
    * - | **Find Multiple Documents (Async)**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.Find.html>`__
-       | :ref:`Usage Example <csharp-find-multiple>`
        | :ref:`Fundamentals <csharp-retrieve-find-multiple>`
 
      - .. io-code-block::
@@ -128,7 +124,6 @@ their related reference and API documentation.
    * - | **Insert a Document**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.InsertOne.html>`__ 
-       | :ref:`Usage Example <csharp-insert-one>`
        | :ref:`Fundamentals <csharp-insert-guide>`
 
      - .. code-block:: csharp
@@ -139,7 +134,6 @@ their related reference and API documentation.
    * - | **Insert a Document (Async)**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.InsertOneAsync.html>`__
-       | :ref:`Usage Example <csharp-insert-one>`
        | :ref:`Fundamentals <csharp-insert-guide>`
 
      - .. code-block:: csharp
@@ -150,7 +144,6 @@ their related reference and API documentation.
    * - | **Insert Multiple Documents**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.InsertMany.html>`__ 
-       | :ref:`Usage Example <csharp-insert-many>`
        | :ref:`Fundamentals <csharp-insert-guide>`
 
      - .. code-block:: csharp
@@ -165,7 +158,6 @@ their related reference and API documentation.
    * - | **Insert Multiple Documents (Async)**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.InsertManyAsync.html>`__
-       | :ref:`Usage Example <csharp-insert-many>`
        | :ref:`Fundamentals <csharp-insert-guide>`
 
      - .. code-block:: csharp
@@ -180,7 +172,6 @@ their related reference and API documentation.
    * - | **Update a Document**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateOne.html>`__
-       | :ref:`Usage Example <csharp-examples-update-one>`
        | :ref:`Fundamentals <csharp-update-one>`
 
      - .. code-block:: csharp
@@ -197,7 +188,6 @@ their related reference and API documentation.
    * - | **Update a Document (Async)**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateOneAsync.html>`__
-       | :ref:`Usage Example <csharp-examples-update-one>`
        | :ref:`Fundamentals <csharp-update-one>`
 
      - .. code-block:: csharp
@@ -214,7 +204,6 @@ their related reference and API documentation.
    * - | **Update Multiple Documents**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateMany.html>`__
-       | :ref:`Usage Example <csharp-examples-update-many>`
        | :ref:`Fundamentals <csharp-update-many>`
 
      - .. code-block:: csharp
@@ -231,7 +220,6 @@ their related reference and API documentation.
    * - | **Update Multiple Documents (Async)**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.UpdateManyAsync.html>`__ 
-       | :ref:`Usage Example <csharp-examples-update-many>`
        | :ref:`Fundamentals <csharp-update-many>`
 
      - .. code-block:: csharp
@@ -270,7 +258,6 @@ their related reference and API documentation.
    * - | **Replace a Document**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOne.html>`__
-       | :ref:`Usage Example <csharp-replace-one>`
        | :ref:`Fundamentals <csharp-replace-operation>`  
 
      - .. code-block:: csharp
@@ -303,7 +290,6 @@ their related reference and API documentation.
    * - | **Replace a Document (Async)**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOneAsync.html>`__
-       | :ref:`Usage Example <csharp-replace-one>`
        | :ref:`Fundamentals <csharp-replace-operation>` 
 
      - .. code-block:: csharp
@@ -336,7 +322,6 @@ their related reference and API documentation.
    * - | **Delete a Document**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.DeleteOne.html>`__
-       | :ref:`Usage Example <csharp-delete-one>`
        | :ref:`Fundamentals <csharp-delete-guide>`
 
      - .. code-block:: csharp
@@ -350,7 +335,6 @@ their related reference and API documentation.
    * - | **Delete a Document (Async)**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.DeleteOneAsync.html>`__
-       | :ref:`Usage Example <csharp-delete-one>`
        | :ref:`Fundamentals <csharp-delete-guide>`
 
      - .. code-block:: csharp
@@ -364,7 +348,6 @@ their related reference and API documentation.
    * - | **Delete Multiple Documents**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.DeleteMany.html>`__ 
-       | :ref:`Usage Example <csharp-delete-many>`
        | :ref:`Fundamentals <csharp-delete-guide>`
 
      - .. code-block:: csharp
@@ -378,7 +361,6 @@ their related reference and API documentation.
    * - | **Delete Multiple Documents (Async)**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.DeleteManyAsync.html>`__ 
-       | :ref:`Usage Example <csharp-delete-many>`
        | :ref:`Fundamentals <csharp-delete-guide>`
 
      - .. code-block:: csharp

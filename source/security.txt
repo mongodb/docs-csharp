@@ -14,5 +14,5 @@ Security
 .. toctree::
 
     Authentication </security/authentication>
-    In-Use Encryption </security/encryption>
+    In-Use Encryption </security/in-use-encryption>
     TLS/SSL </security/tls-ssl>

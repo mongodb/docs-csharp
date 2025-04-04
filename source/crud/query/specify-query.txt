@@ -109,8 +109,6 @@ same documents as the preceding example:
 
       var result = _guitarsCollection.Find(Builders<Guitar>.Filter.Empty).ToList();
 
-To learn more about using builders, see :ref:`csharp-builders`.
-
 Comparison Operators
 --------------------
 
@@ -171,9 +169,6 @@ same documents as the preceding example:
 
       { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
 
-
-To learn more about using builders, see :ref:`csharp-builders`.
-
 Logical Operators
 -----------------
 
@@ -232,8 +227,6 @@ same documents as the preceding example:
 
       { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
 
-To learn more about using builders, see :ref:`csharp-builders`.
-
 Array Operators
 ---------------
 
@@ -285,8 +278,6 @@ documents that have 3 elements in the ``models`` field:
       { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
       { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
 
-To learn more about using builders, see :ref:`csharp-builders`.
-
 Element Operators
 -----------------
 
@@ -313,8 +304,6 @@ documents that have a ``rating`` field:
       { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
       { "_id" : 5, "make" : "Ibanez", "models" : ["RG", "AZ"], "establishedYear" : 1957, "rating" : 7 }
 
-To learn more about using builders, see :ref:`csharp-builders`.
-
 Evaluation Operators
 --------------------
 
@@ -332,7 +321,7 @@ documents that have a value in the ``make`` field that starts with the letter
 .. io-code-block::
    :copyable:
 
-   .. input:: ../../../includes/fundamentals/code-examples/specify-query/FindRegexBuilder.cs
+   .. input:: /includes/fundamentals/code-examples/specify-query/FindRegexBuilder.cs
       :language:  csharp
 
    .. output::
@@ -340,8 +329,6 @@ documents that have a value in the ``make`` field that starts with the letter
       :visible:
 
       { "_id" : 2, "make" : "Gibson", "models" : ["Les Paul", "SG", "Explorer"], "establishedYear" : 1902, "rating" : 8 }
-
-To learn more about using builders, see :ref:`csharp-builders`.
 
 Additional Information
 ----------------------
@@ -354,8 +341,6 @@ following Server Manual Entries:
 - :manual:`Array Query Operators </reference/operator/query-array/>`
 - :manual:`Element Query Operators </reference/operator/query-element/>`
 - :manual:`Evaluation Query Operators </reference/operator/query-evaluation/>`
-
-To learn more about using Builders, see :ref:`csharp-builders`.
 
 To learn how to specify queries using LINQ, see :ref:`csharp-linq`.
 

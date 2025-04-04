@@ -13,7 +13,8 @@ CRUD Operations
 
    Insert Documents </crud/insert>
    Query Documents </crud/query>
-   Update Documents </crud/update>
+   Update One Document </crud/update-one>
+   Update Many Documents </crud/update-many>
    Replace Documents </crud/replace>
    Delete Documents </crud/delete>
    Bulk Write Operations </crud/bulk-write>

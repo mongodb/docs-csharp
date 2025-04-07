@@ -627,7 +627,7 @@ the following settings:
   - ``DateTimeTicks`` (default): Document contains ``DateTime``
     (``BsonType.DateTime``) and ``Ticks`` (``BsonType.Int64``) fields
 
-  - ``DateTimeTicks``: Document contains ``Year``, ``Month``, and
+  - ``YearMonthDay``: Document contains ``Year``, ``Month``, and
     ``Day`` fields, which have ``BsonType.Int32`` values
 
 In the following code example, the ``PatientRecord`` class contains a

@@ -18,9 +18,6 @@ Databases and Collections
    :depth: 2
    :class: singlecol
 
-.. toctree::
-   /run-command
-
 Overview
 --------
 

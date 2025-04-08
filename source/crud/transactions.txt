@@ -260,3 +260,4 @@ guide, see the following API Documentation:
 - `CommitTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransaction.html>`__ / `CommitTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransactionAsync.html>`__
 - `WithTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransaction.html>`__ / `WithTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransactionAsync.html>`__
 - `TransactionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html>`__
+- `CausalConsistency <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ClientSessionOptions.CausalConsistency.html>`__

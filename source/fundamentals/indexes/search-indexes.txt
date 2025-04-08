@@ -37,7 +37,7 @@ configurations.
 
 .. note::
 
-   The Atlas Search Index management methods run asynchronously. The
+   Atlas Search index-management methods run asynchronously. The
    driver methods can return a result before the desired action
    completes on the server.
 

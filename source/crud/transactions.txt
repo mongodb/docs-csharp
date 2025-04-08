@@ -49,6 +49,35 @@ instantiating a new client each time.
    ``IClientSession`` with a different ``MongoClient`` results in operation
    errors.
 
+Causal Consistency
+~~~~~~~~~~~~~~~~~~
+
+.. sharedinclude:: dbx/causal-consistency.rst
+
+   .. replacement:: insert-one-method
+
+      ``InsertOne()``
+
+   .. replacement:: update-one-method
+
+      ``UpdateOne()``
+
+   .. replacement:: find-one-method
+
+      ``Find()``
+
+   .. replacement:: delete-one-method
+
+      ``DeleteOne()``
+
+   .. replacement:: majority-rc
+
+      ``ReadConcern.Majority``
+
+   .. replacement:: majority-wc
+
+      ``WriteConcern.WMajority``
+
 Methods
 -------
 

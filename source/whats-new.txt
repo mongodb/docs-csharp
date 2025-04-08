@@ -124,7 +124,7 @@ The 3.2 driver release includes the following new features:
 
 - Adds the ``DocumentFormat`` property to the ``DateOnlySerializer``.
   This property allows you to customize the way that the driver stores
-  ``DateOnly`` values. This release also adds the
+  ``DateOnly`` values in nested documents. This release also adds the
   ``[BsonDateOnlyOptions()]`` attribute to customize serialization
   behavior for ``DateOnly`` values at the property level. To learn more,
   see the :ref:`csharp-poco-dateonly-attr` section of the POCOs guide.

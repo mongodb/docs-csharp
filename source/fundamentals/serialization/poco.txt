@@ -621,8 +621,9 @@ the following settings:
 - ``Representation``: Set to a ``BsonType`` instance that specifies how
   the ``DateOnly`` value is stored in MongoDB.
 
-- ``DocumentFormat``: Set to one of the following
-  ``DateOnlyDocumentFormat`` enum values:
+- ``DocumentFormat``: Set only if you set the ``Representation``
+  property to ``BsonType.Document``. You can set ``DocumentFormat`` to
+  one of the following ``DateOnlyDocumentFormat`` enum values:
 
   - ``DateTimeTicks`` (default): Document contains ``DateTime``
     (``BsonType.DateTime``) and ``Ticks`` (``BsonType.Int64``) fields

@@ -192,6 +192,21 @@ The ``UpdateOptions`` class contains the following properties:
 
        **Data Type:** ``bool``
 
+   * - ``Sort``
+     - Specifies a sort order to apply to documents before the server
+       performs the update operation. To set this option, you must
+       instantiate an ``UpdateOptions<T>`` instance that uses a generic
+       type that models your data, as shown in the following code:
+
+       .. code-block:: csharp
+
+          var options = new UpdateOptions<Restaurant>
+          {
+            Sort = Builders<Restaurant>.Sort.Ascending(r => r.Name)
+          };
+
+       **Data Type:** ``SortDefinition<T>``
+
    * - ``Let``
      - Gets or sets the let document. 
        See :manual:`the {+mdb-server+} manual </reference/command/update/#std-label-update-let-syntax>`

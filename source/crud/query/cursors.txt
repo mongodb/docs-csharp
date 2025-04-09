@@ -27,8 +27,9 @@ A cursor is a mechanism that returns the results of a read operation in iterable
 batches. Because a cursor holds only a subset of documents at any given time,
 cursors reduce both memory consumption and network bandwidth usage.
 
-You can retrieve a cursor by using the ``FindSync()`` and ``FindAsync()`` methods,
-or by using the ``Find.ToCursor()`` and ``Find.ToCursorAsync()`` methods.
+You can retrieve a cursor by using the ``FindSync()`` and ``FindAsync()`` methods. You can
+also convert the results of the ``Find()`` method to a cursor by chaining the ``ToCursor()``
+or ``ToCursorAsync()`` method.
 
 Sample Data
 ~~~~~~~~~~~

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
@@ -7,7 +8,7 @@ public class Cursor
     // Replace with your connection string
     private const string MongoConnectionString = "<connection URI>";
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {   
         var mongoClient = new MongoClient(MongoConnectionString);
         var database = mongoClient.GetDatabase("sample_restaurants");
@@ -127,7 +128,7 @@ public class Cursor
 
                 using (var cursor = await collection.FindAsync(filter, options))
                 {
-                    while (cursor.MoveNext())
+                    while (await cursor.MoveNext())
                     {
                         foreach (var restaurant in cursor.Current)
                         {

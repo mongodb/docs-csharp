@@ -177,7 +177,7 @@ Update Fields in One Document
 
    .. replacement:: options-ref-link
 
-      :ref:`csharp-update-one-options`
+      :ref:`csharp-update-one-options` in the Update One guide
 
    .. replacement:: currentdate-code-example-tabs
 

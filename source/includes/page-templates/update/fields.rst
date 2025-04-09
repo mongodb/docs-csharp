@@ -229,7 +229,7 @@ The following code example uses the ``SetOnInsert()`` method to set the
    not the property names in the ``Restaurant`` class.
 
 To learn more about upserting documents, see
-|options-ref-link| in the Update One guide.
+|options-ref-link|.
 
 Set the Current Date
 --------------------

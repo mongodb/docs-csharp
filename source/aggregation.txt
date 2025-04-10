@@ -17,6 +17,12 @@ Aggregation
    :depth: 2
    :class: singlecol
 
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   Builders Syntax </aggregation/builders>
+
 Overview
 --------
 

@@ -23,11 +23,11 @@ Overview
 In this guide, you can learn how to access data from a **cursor** by using the
 {+driver-short+}.
 
-A cursor is a mechanism that returns the results of a read operation in iterable
+A cursor is a tool that returns the results of a read operation in iterable
 batches. Because a cursor holds only a subset of documents at any given time,
 cursors reduce both memory consumption and network bandwidth usage.
 
-You can retrieve a cursor by using the ``FindSync()`` and ``FindAsync()`` methods. You can
+You can retrieve a cursor by using the ``FindSync()`` or ``FindAsync()`` method. You can
 also convert the results of the ``Find()`` method to a cursor by chaining the ``ToCursor()``
 or ``ToCursorAsync()`` method.
 
@@ -107,7 +107,7 @@ Retrieve All Documents
 .. warning::
 
    If the number and size of documents returned by your query exceeds available
-   application memory, your program will crash. If you expect a large result
+   application memory, your program might crash. If you expect a large result
    set, :ref:`access your cursor iteratively <csharp-cursors-iterate>`.
 
 To retrieve all documents from a cursor, use the ``ToList()`` method, as shown in the
@@ -139,11 +139,11 @@ Tailable Cursors
 
 When querying on a :manual:`capped collection </core/capped-collections/>`, you
 can use a **tailable cursor** that remains open after the client exhausts the
-results in a cursor. To create a tailable cursor with capped collection,
-set the ``CursorType`` option of a ``FindOptions`` object to ``CursorType.TailableAwait``
-and pass this ``FindOptions`` object to the find method of your choice. The following example
-shows how to create a tailable cursor on a capped collection. Select the :guilabel:`Synchronous`
-or :guilabel:`Asynchronous` tab to see the corresponding code:
+results in a cursor. To create a tailable cursor, create a ``FindOptions`` object and set the
+``CursorType`` property to ``CursorType.TailableAwait``. Then, pass the ``FindOptions`` object
+to one of the find operation methods. The following example shows how to create a tailable
+cursor on a capped collection. Select the :guilabel:`Synchronous` or
+:guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. tabs::
 

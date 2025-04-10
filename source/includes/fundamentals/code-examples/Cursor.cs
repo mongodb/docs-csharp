@@ -16,7 +16,7 @@ public class Cursor
 
         {
             // start-cursor-iterate
-            var filter = Builders<Restaurant>.Filter.Empty;
+            var filter = Builders<Restaurant>.Filter.Eq(r => r.Name, "Starbucks");
             
             using (var cursor = collection.FindSync(filter))
             {
@@ -33,7 +33,7 @@ public class Cursor
 
         {
             // start-cursor-iterate-async
-            var filter = Builders<Restaurant>.Filter.Empty;
+            var filter = Builders<Restaurant>.Filter.Eq(r => r.Name, "Starbucks");
             
             using (var cursor = await collection.FindAsync(filter))
             {
@@ -50,7 +50,7 @@ public class Cursor
 
         {
             // start-cursor-iterate-to-cursor
-            var filter = Builders<Restaurant>.Filter.Empty;
+            var filter = Builders<Restaurant>.Filter.Eq(r => r.Name, "Starbucks");
             
             using (var cursor = collection.Find(filter).ToCursor())
             {
@@ -67,7 +67,7 @@ public class Cursor
 
         {
             // start-cursor-iterate-to-cursor-async
-            var filter = Builders<Restaurant>.Filter.Empty;
+            var filter = Builders<Restaurant>.Filter.Eq(r => r.Name, "Starbucks");
             
             using (var cursor = await collection.Find(filter).ToCursorAsync())
             {
@@ -110,7 +110,7 @@ public class Cursor
                 {
                     foreach (var restaurant in cursor.Current)
                     {
-                        // Process each restaurant
+                        Console.WriteLine(restaurant.Name);
                     }
                 }
             }
@@ -132,7 +132,7 @@ public class Cursor
                     {
                         foreach (var restaurant in cursor.Current)
                         {
-                            // Process each restaurant
+                            Console.WriteLine(restaurant.Name);
                         }
                     }
                 }

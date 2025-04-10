@@ -183,6 +183,21 @@ The ``ReplaceOptions`` class contains the following properties:
 
        **Data Type:** ``bool``
 
+   * - ``Sort``
+     - Specifies a sort order to apply to documents before the server
+       performs the replace operation. To set this option, you must
+       instantiate a ``ReplaceOptions<T>`` instance that uses a generic
+       type that models your data, as shown in the following code:
+
+       .. code-block:: csharp
+
+          var options = new ReplaceOptions<Restaurant>
+          {
+            Sort = Builders<Restaurant>.Sort.Ascending(r => r.Name)
+          };
+
+       **Data Type:** ``SortDefinition<T>``
+
    * - ``Let``
      - Gets or sets the let document. 
        See :manual:`the {+mdb-server+} manual </reference/command/update/#std-label-update-let-syntax>`
@@ -268,4 +283,5 @@ see the following API documentation:
 * `ReplaceOne() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOne.html>`__
 * `ReplaceOneAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOneAsync.html>`__
 * `ReplaceOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReplaceOptions.html>`__
-* `ReplaceOneResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReplaceOneResult.html>`__
+* `ReplaceOneResult
+  <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReplaceOneResult.html>`__

@@ -1,0 +1,51 @@
+.. _csharp-aggregation-bucketauto:
+
+==========
+BucketAuto
+==========
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+
+BucketAuto
+----------
+
+Use the ``bucketAuto()`` method to create a :manual:`$bucketAuto </reference/operator/aggregation/bucketAuto/>`
+pipeline stage that automatically determines the boundaries of each bucket
+in its attempt to distribute the documents evenly into a specified number of buckets.
+
+The following example creates a pipeline stage that will attempt to create and evenly
+distribute documents into *10* buckets using the value of their ``price`` field:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin bucketAutoBasic
+   :end-before: // end bucketAutoBasic
+   :language: csharp
+   :dedent:
+
+
+Use the ``BucketAutoOptions`` class to specify a :wikipedia:`preferred number <Preferred_number>`
+based scheme to set boundary values, and specify additional accumulators.
+
+The following example creates a pipeline stage that will attempt to create and evenly
+distribute documents into *10* buckets using the value of their ``price`` field,
+setting the bucket boundaries at powers of 2 (2, 4, 8, 16, ...). It also counts
+the number of documents in each bucket, and calculates their average ``price``
+in a new field called ``avgPrice``:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin bucketAutoOptions
+   :end-before: // end bucketAutoOptions
+   :language: csharp
+   :dedent:

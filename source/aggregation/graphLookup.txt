@@ -1,0 +1,57 @@
+.. _csharp-aggregation-graphlookup:
+
+===========
+GraphLookup
+===========
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+
+GraphLookup
+-----------
+
+Use the ``graphLookup()`` method to create a :manual:`$graphLookup </reference/operator/aggregation/graphLookup/>`
+pipeline stage that performs a recursive search on a specified collection to match
+a specified field in one document to a specified field of another document.
+
+The following example computes the social network graph for users in the
+``contacts`` collection, recursively matching the value in the ``friends`` field
+to the ``name`` field:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin graphLookupBasic
+   :end-before: // end graphLookupBasic
+   :language: csharp
+   :dedent:
+
+Using ``GraphLookupOptions``, you can specify the depth to recurse as well as
+the name of the depth field, if desired. In this example, ``$graphLookup`` will
+recurse up to two times, and create a field called ``degrees`` with the
+recursion depth information for every document.
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin graphLookupDepth
+   :end-before: // end graphLookupDepth
+   :language: csharp
+   :dedent:
+
+Using ``GraphLookupOptions``, you can specify a filter that documents must match
+in order for MongoDB to include them in your search. In this
+example, only links with "golf" in their ``hobbies`` field will be included.
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin graphLookupMatch
+   :end-before: // end graphLookupMatch
+   :language: csharp
+   :dedent:

@@ -1,0 +1,46 @@
+.. _csharp-aggregation-searchmeta:
+
+==========
+SearchMeta
+==========
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+
+Atlas Search Metadata
+---------------------
+
+Use the ``searchMeta()`` method to create a
+:manual:`$searchMeta </reference/operator/aggregation/searchMeta/>`
+pipeline stage which returns only the metadata part of the results from
+Atlas full-text search queries.
+
+.. tip:: Only Available on Atlas for MongoDB v4.4.11 and later
+
+   This aggregation pipeline operator is only available
+   on :atlas:`MongoDB Atlas </>` clusters running v4.4.11 and later. For a
+   detailed list of version availability, see the MongoDB Atlas documentation
+   on :atlas:`$searchMeta </atlas-search/query-syntax/#-searchmeta>`.
+
+The following example shows the ``count`` metadata for an Atlas search
+aggregation stage:
+
+.. literalinclude:: /includes/fundamentals/code-snippets/builders/AggregateSearchBuilderExample.java
+   :start-after: // begin atlasSearchMeta
+   :end-before: // end atlasSearchMeta
+   :language: csharp
+   :dedent:
+
+Learn more about this helper from the
+`searchMeta() API documentation <{+core-api+}/client/model/Aggregates.html#searchMeta(com.mongodb.client.model.search.SearchCollector)>`__.

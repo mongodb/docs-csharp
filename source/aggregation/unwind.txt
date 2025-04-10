@@ -1,0 +1,52 @@
+.. _csharp-aggregation-unwind:
+
+======
+Unwind
+======
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+
+Unwind
+------
+
+Use the ``unwind()`` method to create an :manual:`$unwind </reference/operator/aggregation/unwind/>`
+pipeline stage to deconstruct an array field from input documents, creating
+an output document for each array element.
+
+The following example creates a document for each element in the ``sizes`` array:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin unwindStage
+   :end-before: // end unwindStage
+   :language: csharp
+   :dedent:
+
+To preserve documents that have missing or ``null``
+values for the array field, or where array is empty:
+
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin unwindPreserve
+   :end-before: // end unwindPreserve
+   :language: csharp
+   :dedent:
+
+To include the array index, in this example in a field called ``"position"``:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin unwindIndex
+   :end-before: // end unwindIndex
+   :language: csharp
+   :dedent:

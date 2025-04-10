@@ -1,0 +1,55 @@
+.. _csharp-aggregation-project:
+
+=======
+Project
+=======
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+
+Project
+-------
+
+Use the ``project()`` method to create a :manual:`$project </reference/operator/aggregation/project/>`
+pipeline stage that project specified document fields. Field projection
+in aggregation follows the same rules as :ref:`field projection in queries <java-fundamentals-project>`.
+
+.. tip::
+
+   Though the projection can be an instance of any class that implements ``Bson``,
+   it's convenient to combine with use of :ref:`Projections <projections-builders>`.
+
+The following example creates a pipeline stage that excludes the ``_id`` field but
+includes the ``title`` and ``plot`` fields:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: begin project
+   :end-before: end project
+   :language: csharp
+   :dedent:
+
+
+Projecting Computed Fields
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``$project`` stage can project computed fields as well.
+
+The following example creates a pipeline stage that projects the ``rated`` field
+into a new field called ``rating``, effectively renaming the field.
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: begin computed
+   :end-before: end computed
+   :language: csharp
+   :dedent:

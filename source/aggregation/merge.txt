@@ -1,0 +1,49 @@
+.. _csharp-aggregation-merge:
+
+=====
+Merge
+=====
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+
+Merge
+-----
+
+Use the ``merge()`` method to create a :manual:`$merge </reference/operator/aggregation/merge/>`
+pipeline stage that merges all documents into the specified collection.
+
+.. important::
+
+   The ``$merge`` stage must be the last stage in any aggregation pipeline.
+
+The following example merges the pipeline into the ``authors`` collection using the default
+options:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin mergeStage
+   :end-before: // end mergeStage
+   :language: csharp
+   :dedent:
+
+The following example merges the pipeline into the ``customers`` collection in the
+``reporting`` database using some options that specify to replace
+the document if both ``date`` and ``customerId`` match, otherwise insert the
+document:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin mergeOptions
+   :end-before: // end mergeOptions
+   :language: csharp
+   :dedent:

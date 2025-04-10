@@ -1,0 +1,34 @@
+.. _csharp-aggregation-replaceroot:
+
+===========
+ReplaceRoot
+===========
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+
+ReplaceRoot
+-----------
+
+Use the ``replaceRoot()`` method to create a :manual:`$replaceRoot </reference/operator/aggregation/replaceRoot/>`
+pipeline stage that replaces each input document with the specified document.
+
+The following example replaces each input document with the nested document
+in the ``spanish_translation`` field:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin replaceRoot
+   :end-before: // end replaceRoot
+   :language: csharp
+   :dedent:

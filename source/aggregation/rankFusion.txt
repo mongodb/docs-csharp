@@ -1,0 +1,18 @@
+.. _csharp-aggregation-rankfusion:
+
+==========
+RankFusion
+==========
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol

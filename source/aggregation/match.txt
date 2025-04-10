@@ -1,0 +1,39 @@
+.. _csharp-aggregation-match:
+
+=====
+Match
+=====
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Match
+-----
+
+Use the ``match()`` method to create a :manual:`$match </reference/operator/aggregation/match/>`
+pipeline stage that matches incoming documents against the specified
+query filter, filtering out documents that do not match.
+
+.. tip::
+
+   The filter can be an instance of any class that implements ``Bson``, but it's
+   convenient to combine with use of the :ref:`Filters <filters-builders>` class.
+
+The following example creates a pipeline stage that matches all documents where the
+``title`` field is equal to "The Shawshank Redemption":
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: begin match
+   :end-before: end match
+   :language: csharp
+   :dedent:

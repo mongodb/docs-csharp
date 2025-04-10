@@ -1,0 +1,44 @@
+.. _csharp-aggregation-setwindowfields:
+
+===============
+SetWindowFields
+===============
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+
+.. _builders-aggregates-setWindowFields:
+
+SetWindowFields
+---------------
+
+Use the ``setWindowFields()`` method to create a :manual:`$setWindowFields </reference/operator/aggregation/setWindowFields/>`
+pipeline stage that allows using window operators to perform operations
+on a specified span of documents in a collection.
+
+.. tip:: Window Functions
+
+   The driver includes the `Windows <{+core-api+}/client/model/Windows.html>`__
+   class with static factory methods for building windowed computations.
+
+The following example creates a pipeline stage that computes the
+accumulated rainfall and the average temperature over the past month for
+each locality from more fine-grained measurements presented in the ``rainfall``
+and ``temperature`` fields:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin setWindowFields
+   :end-before: // end setWindowFields
+   :language: csharp
+   :dedent:

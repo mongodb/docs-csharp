@@ -205,10 +205,12 @@ a client:
 .. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
    :start-after: start-retry-reads-writes
    :end-before: end-retry-reads-writes
+   :emphasize-lines: 2-3
    :language: csharp
    :dedent:
 
-To learn more about supported retryable reads and retryable writes, see :manual:`Retryable Reads </core/retryable-reads/>`
+To learn more about supported retryable read and retryable write operations, see
+:manual:`Retryable Reads </core/retryable-reads/>`
 and :manual:`Retryable Writes </core/retryable-writes/>` in the {+mdb-server+} manual.
 
 API Documentation

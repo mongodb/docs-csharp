@@ -52,7 +52,7 @@ in the ``restaurants`` collection:
 Access Cursor Contents Iteratively
 ----------------------------------
 
-To iterate over the contents of a cursor, use a ``foreach`` loop inside of a ``using`` block.
+To iterate over the contents of a cursor, use a ``foreach`` loop inside a ``using`` block.
 The following example retrieves all documents from the ``restaurants`` collection and
 iterates over the results. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous`
 tab to see the corresponding code:

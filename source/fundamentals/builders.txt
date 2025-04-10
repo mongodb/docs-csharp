@@ -366,13 +366,12 @@ To learn more about the Aggregation Pipeline, see the
 
 .. _csharp-builders-set:
 
-Add Fields to Collection Documents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Add Fields to Documents
+~~~~~~~~~~~~~~~~~~~~~~~
 
-You can add new fields to existing documents in a collection 
-by creating a ``$set`` stage in your aggregation pipeline. To
-create a ``$set`` stage, call the ``Set()`` method on a
-``PipelineStageDefinitionBuilder`` object. 
+You can add new fields to documents by creating a ``$set`` stage in
+your aggregation pipeline. To create a ``$set`` stage, call the ``Set()``
+method on a ``PipelineStageDefinitionBuilder`` object. 
 
 .. tip::
 

@@ -191,6 +191,26 @@ The following example sets the read preference to ``ReadPreference.Secondary`` f
 For more information about read preference, see :manual:`Read Preference
 </core/read-preference/>` in the {+mdb-server+} manual.
 
+Retryable Reads and Writes
+--------------------------
+
+The {+driver-short+} automatically retries certain read and write operations a single time
+if they fail due to a network or server error.
+
+You can explicitly disable retryable reads or retryable writes by setting the ``RetryReads``
+or ``RetryWrites`` options on a ``MongoClientSettings`` object and passing this object to the
+``MongoClient`` constructor. The following example disables retryable reads and writes for
+a client:
+
+.. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
+   :start-after: start-retry-reads-writes
+   :end-before: end-retry-reads-writes
+   :language: csharp
+   :dedent:
+
+To learn more about supported retryable reads and retryable writes, see :manual:`Retryable Reads </core/retryable-reads/>`
+and :manual:`Retryable Writes </core/retryable-writes/>` in the {+mdb-server+} manual.
+
 API Documentation
 -----------------
 

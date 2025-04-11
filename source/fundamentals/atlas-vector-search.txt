@@ -72,6 +72,12 @@ The following example shows a class with properties of the preceding types:
    :start-after: start-bson-arrays
    :end-before: end-bson-arrays
 
+.. tip::
+
+   To learn more about using the ``Memory`` and ``ReadOnlyMemory``
+   types, see the :ref:`csharp-array-serialization` section of the
+   Serialization guide.
+
 .. _csharp-binary-vector-representation:
 
 Binary Vector Representations

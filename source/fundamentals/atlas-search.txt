@@ -97,14 +97,14 @@ field for text that starts with the string ``"Gib"``.
    :language: csharp
    :dedent:
 
-.. note:: Search Index for Autocomplete Queries
+.. note:: Index for Autocomplete Queries
    
    You must create an Atlas Search index that supports autocompletion
    to successfully perform autocomplete queries. To learn more, see
    :atlas:`How to Index Fields for Autocompletion </atlas-search/field-types/autocomplete-type/>`
    in the Atlas documentation.
 
-   After you create the Search index, you must pass the index name to
+   After you create the Atlas Search index, you must pass the index name to
    the ``Autocomplete()`` method, as shown in the preceding code.
 
 The search returns the following document:

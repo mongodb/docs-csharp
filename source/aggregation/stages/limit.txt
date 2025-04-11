@@ -1,0 +1,57 @@
+.. _csharp-aggregation-limit:
+
+=====
+Limit
+=====
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+
+Limit
+-----
+
+Use the :manual:`$limit </reference/operator/aggregation/limit/>` pipeline stage
+to limit the number of documents passed to the next stage.
+
+The following example creates a pipeline stage that limits the number of documents to ``10``:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin limit
+   :end-before: // end limit
+   :language: csharp
+   :dedent:
+
+$limit
+~~~~~~
+
+The ``$limit`` aggregation stage limits the number of documents returned by the
+query. The following example shows how to generate a ``$limit`` stage using LINQ:
+
+.. code-block:: csharp
+   :emphasize-lines: 4
+
+   var query = queryableCollection
+       .Where(r => r.Cuisine == "Italian")
+       .Select(r => new {r.Name, r.Cuisine})
+       .Take(5);
+
+The result of the preceding example contains the following documents:
+
+.. code-block:: json
+
+    { "name" : "Philadelhia Grille Express", "cuisine" : "Italian" }
+    { "name" : "Isle Of Capri Resturant", "cuisine" : "Italian" }
+    { "name" : "Marchis Restaurant", "cuisine" : "Italian" }
+    { "name" : "Crystal Room", "cuisine" : "Italian" }
+    { "name" : "Forlinis Restaurant", "cuisine" : "Italian" }

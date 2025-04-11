@@ -1,0 +1,146 @@
+.. _csharp-aggregation-lookup:
+
+======
+Lookup
+======
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, transform, pipeline
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+
+Lookup
+------
+
+Use the ``lookup()`` method to create a :manual:`$lookup </reference/operator/aggregation/lookup/>`
+pipeline stage to perform joins and uncorrelated subqueries between two collections.
+
+Left Outer Join
+~~~~~~~~~~~~~~~
+
+The following example creates a pipeline stage that performs a left outer
+join between the ``movies`` and ``comments`` collections:
+
+- It joins the ``_id`` field from ``movies`` to the ``movie_id`` field in ``comments``
+- It outputs the results in the ``joined_comments`` field:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin basic lookup
+   :end-before: // end basic lookup
+   :language: csharp
+   :dedent:
+
+Full Join and Uncorrelated Subqueries
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following example creates a pipeline stage that joins two collections, ``orders``
+and ``warehouses``, by the item and whether the available quantity is enough
+to fulfill the ordered quantity:
+
+.. literalinclude:: /includes/aggregation/Builders.cs
+   :start-after: // begin advanced lookup
+   :end-before: // end advanced lookup
+   :language: csharp
+   :dedent:
+
+$lookup
+~~~~~~~
+
+The ``$lookup`` aggregation stage joins documents from one collection to documents
+from another collection in the same database. The ``$lookup`` stage adds a new 
+array field to each input document. The new array field contains the matching
+documents from the "joined" collection.
+
+.. note:: 
+
+   To perform a lookup, you must make both collections queryable by using the
+   ``AsQueryable()`` method.
+
+   To learn how to make a collection queryable, see :ref:`csharp-linq-queryable`.
+
+Consider a second collection in the ``sample_restaurants`` database called
+``reviews`` that has restaurant reviews. You can join documents from that collection
+to documents with the same ``name`` value in the ``restaurants`` collection using
+the ``$lookup`` stage.
+
+The following ``Review`` class models the documents in the ``reviews`` collection:
+
+.. literalinclude:: /includes/fundamentals/code-examples/linq.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-review-model
+   :end-before: end-review-model
+
+Select the :guilabel:`Method Syntax` or :guilabel:`Query Syntax` tab to see how 
+to generate a ``$lookup`` stage by using LINQ:
+
+.. tabs::
+
+   .. tab:: Method Syntax
+      :tabid: method-syntax
+
+      .. code-block:: csharp
+
+         var query = queryableCollection
+             .GroupJoin(reviewCollection,
+                 restaurant => restaurant.Name,
+                 review => review.RestaurantName,
+                 (restaurant, reviews) =>
+                     new { Restaurant = restaurant, Reviews = reviews }
+             );
+
+   .. tab:: Query Syntax
+      :tabid: query-syntax
+
+      .. code-block:: csharp
+
+         var query = from restaurant in queryableCollection
+             join rv in reviewCollection on restaurant.Name equals rv.RestaurantName into reviews
+             select new { restaurant, reviews };
+
+The preceding example returns all documents from the ``restaurants`` collection. Each
+restaurant document has an added field called ``reviews``, which contains all 
+reviews for that restaurant. A review matches a restaurant if the value of the
+``name`` field in the review document matches the ``name`` field of the restaurant
+document.
+
+The following shows a subset of the returned results:
+
+.. code-block:: json
+
+   // Results Truncated
+
+   {
+      "restaurant": {
+         "_id": ObjectId("..."),
+         "name": "The Movable Feast",
+         "restaurant_id": "40361606",
+         "cuisine": "American",
+         "address": { ... },
+         "borough": "Brooklyn",
+         "grades": [ ... ]
+      },
+      "reviews": [
+         {
+            "_id": ObjectId("..."),
+            "restaurant_name": "The Movable Feast",
+            "reviewer": "Lazlo Cravensworth",
+            "review_text": "Great restaurant! 12/10 stars!"
+         },
+         {
+            "_id": ObjectId("..."),
+            "restaurant_name": "The Movable Feast",
+            "reviewer": "Michael Scarn",
+            "review_text": "It really was a feast"
+         }
+      ]
+   }

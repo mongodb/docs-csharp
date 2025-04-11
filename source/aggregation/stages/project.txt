@@ -53,3 +53,43 @@ into a new field called ``rating``, effectively renaming the field.
    :end-before: end computed
    :language: csharp
    :dedent:
+
+$project
+~~~~~~~~
+
+The ``$project`` aggregation stage returns a document containing only the specified
+fields.
+
+Select the :guilabel:`Method Syntax` or :guilabel:`Query Syntax` tab to see how 
+to generate a ``$project`` stage using LINQ:
+
+.. tabs::
+
+   .. tab:: Method Syntax
+      :tabid: method-syntax
+
+      .. code-block:: csharp
+         :emphasize-lines: 2
+
+         var query = queryableCollection
+             .Select(r => new { r.Name, r.Address });
+
+   .. tab:: Query Syntax
+      :tabid: query-syntax
+
+      .. code-block:: csharp
+         :emphasize-lines: 2
+
+         var query = from r in queryableCollection
+             select new { r.Name, r.Address };
+
+The result of the preceding example contains the following document:
+
+.. code-block:: json
+
+   { "name" : "The Movable Feast", "address" : { "building" : "284", "coord" : [-73.982923900000003, 40.6580753], "street" : "Prospect Park West", "zipcode" : "11215" } }
+
+.. note:: Excluding the ``_id`` Field
+
+   If you don't include the ``_id`` field in your LINQ projection, the {+driver-short+}
+   automatically excludes it from the results.

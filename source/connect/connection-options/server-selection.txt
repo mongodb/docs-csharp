@@ -1,3 +1,9 @@
+.. _csharp-server-selection:
+
+==========================
+Customize Server Selection
+==========================
+
 .. TODO: Server Selection page
 
 Why Does the Driver Throw a Timeout During Server Selection?

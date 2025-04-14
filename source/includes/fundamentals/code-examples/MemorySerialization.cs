@@ -4,7 +4,6 @@ using MongoDB.Driver;
 
 public class Program
 {
-
   public static void Main(string[] args)
   {
     // Replace with your connection string

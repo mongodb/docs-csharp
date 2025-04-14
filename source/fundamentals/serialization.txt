@@ -220,7 +220,7 @@ enhances speed and reduces memory usage.
    arrays.
 
 You can effect these performance improvements by storing the following
-primitive types in ``Memory<T>`` or ``ReadOnlyMemory<T>`` objects:
+primitive types in ``Memory<T>`` or ``ReadOnlyMemory<T>`` structs:
 
 - ``bool``
 - ``sbyte``
@@ -261,9 +261,9 @@ represented in MongoDB:
    :ref:`csharp-atlas-vector-search` involves creating and querying
    large numerical arrays. If your application uses
    {+vector-search+}, you might benefit from the performance
-   improvements from using ``Memory`` and ``ReadOnlyMemory`` to model
-   vector data. To learn more, see :ref:`csharp-supported-vector-types`
-   in the {+vector-search+} guide.
+   improvements from using ``Memory`` and ``ReadOnlyMemory`` to store
+   array representations of embeddings and query vectors. To learn more,
+   see :ref:`csharp-supported-vector-types` in the {+vector-search+} guide.
 
 Additional Information
 ----------------------

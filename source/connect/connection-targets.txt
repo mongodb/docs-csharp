@@ -71,7 +71,7 @@ Replica Sets
 ------------
 
 To connect to a replica set, specify the hostnames (or IP addresses) and 
-port numbers of the replica-set members in your connection string.
+port numbers of the replica set members in your connection string.
 
 The following code shows how to use {+driver-short+} to connect to a replica set
 that contains three hosts:
@@ -92,8 +92,7 @@ automatic discovery, perform one of the following actions:
 
 In the following example, the driver uses a sample connection URI to connect to the 
 MongoDB replica set ``sampleRS``, which is running on port ``27017`` of three different
-hosts, including ``host1``. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous`
-tab to see the corresponding code:
+hosts, including ``host1``:
 
 .. literalinclude:: /includes/fundamentals/code-examples/connection/ReplicaSetConnection.cs
    :language: csharp
@@ -113,14 +112,14 @@ balances operations across multiple MongoDB deployments, see the
    
    If you construct a ``MongoClient`` and immediately print the string representation
    of its ``nodes`` attribute, the list might be empty while the client connects to
-   the replica-set members.
+   the replica set members.
 
 Initialization
 ~~~~~~~~~~~~~~
 
 To initialize a replica set, you must connect directly to a single member. To do so,
 set the ``directConnection`` connection
-option to ``True``. You can do this in two ways: by passing an argument to the
+option to ``true``. You can do this in two ways: by passing an argument to the
 ``MongoClient`` constructor or through a parameter in your connection string. Select the
 :guilabel:`MongoClientSettings` or :guilabel:`Connection String` tab to see the corresponding code.
 
@@ -147,7 +146,7 @@ DNS Service Discovery
 
 To use DNS service discovery to look up the DNS SRV record of the service you're connecting to,
 specify the SRV connection format in your connection string. Additionally, if you enable
-the SRV connection format, {+driver-short+} automatically re-scans for new hosts without
+the SRV connection format, the {+driver-short+} automatically re-scans for new hosts without
 having to change the client configuration.
 
 The following code shows a connection string that uses the SRV connection format:

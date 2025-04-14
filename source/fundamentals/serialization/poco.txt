@@ -431,7 +431,7 @@ Omit Empty Fields
 ~~~~~~~~~~~~~~~~~
 
 By default, the driver serializes undefined properties to fields with ``null``
-values. To ignore undefined properties during serialization, use the ``[BsonIgnore]``
+values. To ignore undefined properties during serialization, use the ``[BsonIgnoreIfNull]``
 attribute. The following code shows how you can prevent the driver from
 serializing the ``YearBuilt`` property if it is undefined:
 
@@ -443,7 +443,7 @@ serializing the ``YearBuilt`` property if it is undefined:
    {
        public Guid Id { get; set; }
 
-       [BsonIgnore]
+       [BsonIgnoreIfNull]
        public int YearBuilt { get; set; }
        public string Style { get; set; }
    }

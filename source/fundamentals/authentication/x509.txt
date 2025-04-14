@@ -119,7 +119,7 @@ see the corresponding syntax:
              },
              UseTls = true,
              Server = new MongoServerAddress("<hostname>"[, "<port>"]),
-             Scheme = ConnectionStringScheme.MongoDBPlusSrv // Needed when connecting to MongoDB Atlas
+             Scheme = ConnectionStringScheme.MongoDBPlusSrv, // Needed when connecting to MongoDB Atlas
          };
 
 Troubleshooting

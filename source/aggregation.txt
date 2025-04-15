@@ -34,8 +34,8 @@ return computed results. The MongoDB Aggregation framework is modeled on the
 concept of data processing pipelines. Documents enter a pipeline comprised of one or
 more stages, and this pipeline transforms the documents into an aggregated result.
 
-To learn more about the Aggregation Pipeline, see the
-:manual:`Aggregation Pipeline </core/aggregation-pipeline/>` server manual page.
+To learn more about the aggregation stages supported by the {+driver-short+}, see
+:ref:`Aggregation Stages <csharp-aggregation-stages>`.
 
 Analogy
 ~~~~~~~
@@ -96,8 +96,6 @@ performing aggregation operations:
   the `AllowDiskUse <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateOptions.AllowDiskUse.html#MongoDB_Driver_AggregateOptions_AllowDiskUse>`__
   property of the ``AggregateOptions`` object that you pass to the ``Aggregate()`` method.
 
-Link to Stages page
-
 Troubleshooting
 ---------------
 
@@ -106,32 +104,9 @@ Troubleshooting
 Additional Information
 ----------------------
 
-MongoDB Server Manual
-~~~~~~~~~~~~~~~~~~~~~
-
 To view a full list of expression operators, see 
 :manual:`Aggregation Operators </reference/operator/aggregation/>`.
-
-To learn more about assembling an aggregation pipeline and view examples, see
-:manual:`Aggregation Pipeline </core/aggregation-pipeline/>`.
-
-To learn more about creating pipeline stages, see 
-:manual:`Aggregation Stages </reference/operator/aggregation-pipeline/>`.
 
 To learn about explaining MongoDB aggregation operations, see
 :manual:`Explain Results </reference/explain-results/>` and
 :manual:`Query Plans </core/query-plans/>`.
-
-API Documentation
-~~~~~~~~~~~~~~~~~
-
-For more information about the aggregation operations discussed in this guide, see the
-following API documentation:
-
-- `Aggregate() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.Aggregate.html>`__
-- `AggregateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateOptions.html>`__
-- `Group() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineStageDefinitionBuilder.Group.html>`__
-- `Match() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineStageDefinitionBuilder.Match.html>`__
-- `Where() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.MongoQueryable.Where.html>`__
-- `GroupBy() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.MongoQueryable.GroupBy.html>`__
-- `Select() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.MongoQueryable.Select.html>`__

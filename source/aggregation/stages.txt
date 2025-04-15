@@ -85,13 +85,13 @@ to construct a stage in the Query API syntax. Then, pass the BSON document to th
 ``PipelineDefinitionBuilder.AppendStage()`` method. This syntax supports all stages
 in the aggregation pipeline, but doesn't provide type hints or type safety.
 
-The following code example shows how to add ``$unset``, an aggregation
-stage without a corresponding builder method, to an empty aggregation pipeline:
+The following code example shows how to add the ``$unset`` stage to an empty aggregation
+pipeline:
 
 .. code-block:: csharp
 
    var pipeline = new EmptyPipelineDefinition<BsonDocument>()
-           .AppendStage<BsonDocument, BsonDocument, BsonDocument>("{ $unset: "field1" }");
+           .AppendStage<BsonDocument, BsonDocument, BsonDocument>("{ $unset: 'field1' }");
 
 .. important::
 
@@ -332,8 +332,7 @@ to your pipeline.
 
        This stage is available only for MongoDB Atlas clusters, and is not
        available for self-managed deployments. To learn more, see
-       :atlas:`Atlas Search Aggregation Pipeline Stages
-       </reference/atlas-search/query-syntax>` in the Atlas documentation.
+       :ref:`Atlas Vector Search <csharp-atlas-vector-search>`. 
      - :ref:`VectorSearch() <csharp-aggregation-vectorsearch>`
 
 API Documentation

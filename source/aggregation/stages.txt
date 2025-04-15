@@ -20,29 +20,32 @@ Aggregation Stages
 Overview
 --------
 
-The {+driver-short+} provides type-safe methods that you can use to create an
-aggregation pipeline. On this page, you can learn how to use these methods.
+On this page, you can learn how to create an aggregation pipeline and add stages to it
+by using methods in the {+driver-short+}. 
 
 Build an Aggregation Pipeline
 -----------------------------
 
-The following sections describe the different ways to build an aggregation
-pipeline by using the {+driver-long+}.
+You can use the {+driver-short+} to build an aggregation pipeline by using builders
+methods or BSON documents. See the following sections to learn more about each of these
+approaches.
+
+.. _csharp-aggregation-stages-builders:
 
 Builders
 ~~~~~~~~
 
-You can create an aggregation pipeline in the following ways:
+You can build a type-safe aggregation pipeline in the following ways: 
 
--  Create an ``EmptyPipelineDefinition<TDocument>`` object and chain calls to the relevant
-   aggregation methods. Then, pass the pipeline object to the ``IMongoCollection<TDocument>.Aggregate()``
-   method. as shown in the following example:
-
-- Chain aggregation methods directly from the call to the
+- Construct an ``EmptyPipelineDefinition<TDocument>`` object. Chain calls from this object
+  to the relevant aggregation methods. Then, pass the pipeline object to the
   ``IMongoCollection<TDocument>.Aggregate()`` method.
 
+- Call the ``IMongoCollection<TDocument>.Aggregate()`` method. Chain calls from this
+  method call to the relevant aggregation methods.
+
 Select the :guilabel:`EmptyPipelineDefinition` 
-or :guilabel:`Aggregate` tab to see the corresponding code:
+or :guilabel:`Aggregate` tab to see the corresponding code for each approach:
 
 .. tabs::
     
@@ -66,25 +69,52 @@ or :guilabel:`Aggregate` tab to see the corresponding code:
       .. code-block:: csharp
 
          // Defines and executes the aggregation pipeline
-         var pipeline = collection.Aggregate()
+         var results = collection.Aggregate()
             .Match(...)
             .Group(...)
             .Merge(...);
+
+.. _csharp-aggregation-stages-bsondocument:
+
+BsonDocument
+~~~~~~~~~~~~
+
+Some aggregation stages don't have corresponding methods in the {+driver-short+}.
+To add these stages to your pipeline, use ``BsonDocument`` objects or string literals
+to construct a stage in the Query API syntax. Then, pass the BSON document to the 
+`PipelineDefinitionBuilder.AppendStage() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineDefinitionBuilder.AppendStage.html>`__
+method. This syntax supports all stages in the aggregation pipeline, but doesn't provide
+type hints or type safety to your code.
+
+The following code example shows how to add ``$unset``, an aggregation
+stage without a corresponding method, to an empty aggregation pipeline:
+
+.. code-block:: csharp
+
+   var pipeline = new EmptyPipelineDefinition<BsonDocument>().AppendStage<BsonDocument, BsonDocument, BsonDocument>("{ $unset: "field1" }");
+
+.. note:: 
+
+   If you use a ``BsonDocument`` to define a pipeline stage, the driver doesn't
+   recognize any ``BsonClassMap`` attributes, serialization attributes, or
+   serialization conventions. The field names that you use in the ``BsonDocument`` must
+   match the field names stored in {+mdb-server+}.
 
 Aggregation Stage Methods
 -------------------------
 
 The following table lists the builders methods in the {+driver-short+} that correspond
-to stages in the aggregation pipeline. Because each of these methods returns a
-``PipelineDefinition`` object, you can chain method calls together.
-For more information about a method, click the
-method name.
+to stages in the aggregation pipeline. For more information about an aggregation stage,
+click the stage name. For more information about a builders method, click the
+method name. If an aggregation stage isn't in the table, you must use the
+:ref:`BsonDocument <csharp-aggregation-stages-bsondocument>` syntax to add the stage
+to your pipeline.
 
 .. list-table::
    :header-rows: 1
    :widths: 20 80
 
-  * - Stage
+  * - Aggregation Stage
     - Description
     - Builders Method
 
@@ -297,21 +327,19 @@ method name.
       :atlas:`Atlas </reference/atlas-search/query-syntax/>` collection.
     - :ref:`VectorSearch() <csharp-aggregation-vectorsearch>`
 
-You can add stages to your pipeline that don't have corresponding type-safe
-methods in the ``PipelineDefinitionBuilder`` interface by providing your query
-as a ``BsonDocument`` to the `AppendStage() method
-<{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineDefinitionBuilder.AppendStage.html>`__.
+API Documentation
+-----------------
 
-.. code-block:: csharp
+To learn more about assembling an aggregation pipeline, see
+:manual:`Aggregation Pipeline </core/aggregation-pipeline/>`.
 
-   var pipeline = new EmptyPipelineDefinition<BsonDocument>().AppendStage<BsonDocument, BsonDocument, BsonDocument>("{ $set: { field1: '$field2' } }");
+To learn more about creating pipeline stages, see 
+:manual:`Aggregation Stages </reference/operator/aggregation-pipeline/>`.
 
-.. note:: 
+For more information about the methods and classes used on this page, see the
+following API documentation:
 
-   When using a ``BsonDocument`` to define your pipeline stage, the driver does
-   not take into account any ``BsonClassMap``, serialization attributes or
-   serialization conventions. The field names used in the ``BsonDocument`` must
-   match those stored on the server.
-
-   For more information on providing a query as a ``BsonDocument``, see our
-   :ref:`FAQ page <csharp-faq-unsupported-expressions>`.
+- `Aggregate() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.Aggregate.html>`__
+- `AggregateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateOptions.html>`__
+- `EmptyPipelineDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.EmptyPipelineDefinition-1.-ctor.html>`__
+- `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__

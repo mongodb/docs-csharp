@@ -82,9 +82,8 @@ BsonDocument
 Some aggregation stages don't have corresponding methods in the {+driver-short+}.
 To add these stages to your pipeline, use ``BsonDocument`` objects or string literals
 to construct a stage in the Query API syntax. Then, pass the BSON document to the 
-`PipelineDefinitionBuilder.AppendStage() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineDefinitionBuilder.AppendStage.html>`__
-method. This syntax supports all stages in the aggregation pipeline, but doesn't provide
-type hints or type safety to your code.
+``PipelineDefinitionBuilder.AppendStage()`` method. This syntax supports all stages
+in the aggregation pipeline, but doesn't provide type hints or type safety.
 
 The following code example shows how to add ``$unset``, an aggregation
 stage without a corresponding method, to an empty aggregation pipeline:
@@ -112,7 +111,7 @@ to your pipeline.
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 80
+   :widths: 20 60 20
 
   * - Aggregation Stage
     - Description
@@ -343,3 +342,4 @@ following API documentation:
 - `AggregateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateOptions.html>`__
 - `EmptyPipelineDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.EmptyPipelineDefinition-1.-ctor.html>`__
 - `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
+- `PipelineDefinitionBuilder.AppendStage() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineDefinitionBuilder.AppendStage.html>`__

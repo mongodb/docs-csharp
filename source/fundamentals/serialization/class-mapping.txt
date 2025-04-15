@@ -98,8 +98,10 @@ Customize Class Serialization
 -----------------------------
 
 You can customize how the driver serializes and deserializes documents at the class
-level by using attributes with the class or by calling methods while registering
+level by applying attributes to the class or by calling methods while registering
 a class map.
+
+.. _csharp-class-map-omit-fields:
 
 Omit Fields
 ~~~~~~~~~~~
@@ -174,6 +176,7 @@ The following code sample maps the ``Identifier`` property to the
 ``_id`` field:
 
 .. code-block:: csharp
+   :emphasize-lines: 4
    
    BsonClassMap.RegisterClassMap<Person>(classMap => 
    {
@@ -195,11 +198,11 @@ The following example directs the driver to serialize string ID values
 as ``ObjectId`` values:
 
 .. code-block:: csharp
+   :emphasize-lines: 4
 
    BsonClassMap.RegisterClassMap<Person>(classMap => 
    {
         classMap.AutoMap();
-        classMap.MapIdMember(p => p.Identifier);
         classMap.IdMemberMap.SetSerializer(new StringSerializer(BsonType.ObjectId));
    });
 
@@ -209,6 +212,7 @@ the ``MapIdMember()`` method and pass an instance of
 ``StringObjectIdGenerator``:
 
 .. code-block:: csharp
+   :emphasize-lines: 4
 
    BsonClassMap.RegisterClassMap<Person>(classMap => 
    {
@@ -222,8 +226,9 @@ To learn more about ID generators, see the
 GUID IDs
 ````````
 
-You can use GUIDs instead of ``ObjectId`` values to represent your
-document IDs in MongoDB. By default, the driver uses the
+If your application uses GUIDs as unique identifiers in your documents,
+you can register a class map to specify how ``Guid`` values are
+serialized. By default, the driver uses the
 ``GuidGenerator`` type to generate a unique value for the ID property.
 You must specify the GUID representation by initializing a
 ``GuidSerializer``.
@@ -232,6 +237,7 @@ The following code specifies the ``Standard`` GUID representation when
 registering the class map:
 
 .. code-block:: csharp
+   :emphasize-lines: 4
 
    BsonClassMap.RegisterClassMap<Person>(classMap => 
    {

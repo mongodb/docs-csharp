@@ -454,8 +454,15 @@ you can prevent the driver from serializing the ``YearBuilt`` property:
        public string Style { get; set; }
    }
 
-Even if you specify a value for the ``YearBuilt`` property, the field is
+Even if you define the ``YearBuilt`` property, the field is
 not saved in MongoDB.
+
+.. note::
+
+   You can define a class map to prevent specific fields from being
+   serialized. To learn more and view an example, see the
+   :ref:`csharp-class-map-omit-fields` section of the Class Mapping
+   guide.
 
 Omit Empty Fields
 ~~~~~~~~~~~~~~~~~
@@ -484,6 +491,7 @@ following example:
 
 .. code-block:: csharp
    :copyable: true
+   :emphasize-lines: 4
 
    BsonClassMap.RegisterClassMap<House>(classMap => 
    {
@@ -495,7 +503,7 @@ following example:
 
    You cannot use the ``[BsonIgnoreIfNull]`` attribute or
    ``SetIgnoreIfNull()`` method to prevent undefined numerical
-   properties from being serialized, unless you set the properties as
+   properties from being serialized unless you mark the properties as
    nullable. Instead, use the ``[BsonIgnoreIfDefault]`` attribute or
    ``SetIgnoreIfDefault()`` class map method, which are described in the
    :ref:`csharp-poco-default-values` section of this guide.

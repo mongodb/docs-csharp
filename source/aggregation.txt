@@ -21,7 +21,7 @@ Aggregation Operations
    :titlesonly:
    :maxdepth: 1
 
-   Stages </aggregation/stages>
+   Pipeline Stages </aggregation/stages>
 
 Overview
 --------

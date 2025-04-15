@@ -1,8 +1,8 @@
 .. _csharp-aggregation-stages:
 
-==================
-Aggregation Stages
-==================
+===========================
+Aggregation Pipeline Stages
+===========================
 
 .. facet::
    :name: genre
@@ -20,20 +20,20 @@ Aggregation Stages
 Overview
 --------
 
-On this page, you can learn how to create an aggregation pipeline and add stages to it
+On this page, you can learn how to create an aggregation pipeline and pipeline stages  
 by using methods in the {+driver-short+}.
 
 Build an Aggregation Pipeline
 -----------------------------
 
-You can use the {+driver-short+} to build an aggregation pipeline by using builders
+You can use the {+driver-short+} to build an aggregation pipeline by using builder
 methods or BSON documents. See the following sections to learn more about each of these
 approaches.
 
-.. _csharp-aggregation-stages-builders:
+.. _csharp-aggregation-stages-builder:
 
-Builders
-~~~~~~~~
+Builder Methods
+~~~~~~~~~~~~~~~
 
 You can build a type-safe aggregation pipeline in the following ways:
 
@@ -61,7 +61,7 @@ or :guilabel:`Aggregate` tab to see the corresponding code for each approach:
             .Merge(...);
 
          // Executes the aggregation pipeline
-         var results = collection.Aggregate(pipeline).ToList();
+         var results = collection.Aggregate(pipeline);
 
    .. tab:: Aggregate
       :tabid: aggregate
@@ -86,13 +86,14 @@ to construct a stage in the Query API syntax. Then, pass the BSON document to th
 in the aggregation pipeline, but doesn't provide type hints or type safety.
 
 The following code example shows how to add ``$unset``, an aggregation
-stage without a corresponding method, to an empty aggregation pipeline:
+stage without a corresponding builder method, to an empty aggregation pipeline:
 
 .. code-block:: csharp
 
-   var pipeline = new EmptyPipelineDefinition<BsonDocument>().AppendStage<BsonDocument, BsonDocument, BsonDocument>("{ $unset: "field1" }");
+   var pipeline = new EmptyPipelineDefinition<BsonDocument>()
+           .AppendStage<BsonDocument, BsonDocument, BsonDocument>("{ $unset: "field1" }");
 
-.. note::
+.. important::
 
    If you use a ``BsonDocument`` to define a pipeline stage, the driver doesn't
    recognize any ``BsonClassMap`` attributes, serialization attributes, or
@@ -102,10 +103,14 @@ stage without a corresponding method, to an empty aggregation pipeline:
 Aggregation Stage Methods
 -------------------------
 
-The following table lists the builders methods in the {+driver-short+} that correspond
-to stages in the aggregation pipeline. For more information about an aggregation stage,
-click the stage name. For more information about a builders method, click the
-method name. If an aggregation stage isn't in the table, you must use the
+The following table lists the builder methods in the {+driver-short+} that correspond
+to stages in the aggregation pipeline. To learn more about an aggregation stage,
+follow the link from the method name to its reference page in the {+mdb-server+} manual.
+To learn more about a builder method, follow the link from the method name to its
+dedicated page.
+
+If an aggregation stage isn't in the table, the driver doesn't provide a builder method for
+it. In this case, you must use the
 :ref:`BsonDocument <csharp-aggregation-stages-bsondocument>` syntax to add the stage
 to your pipeline.
 
@@ -115,7 +120,7 @@ to your pipeline.
 
    * - Aggregation Stage
      - Description
-     - Builders Method
+     - Builder Method
 
    * - :manual:`$bucket </reference/operator/aggregation/bucket/>`
      - Categorizes incoming documents into groups, called buckets,
@@ -166,8 +171,8 @@ to your pipeline.
      - :ref:`Facet() <csharp-aggregation-facet>`
 
    * - :manual:`$graphLookup </reference/operator/aggregation/graphLookup/>`
-     - Performs a recursive search on a collection. To each output
-       document, adds a new array field that contains the traversal
+     - Performs a recursive search on a collection. This method adds  
+       a new array field to each output document that contains the traversal  
        results of the recursive search for that document.
      - :ref:`GraphLookup() <csharp-aggregation-graphlookup>`
 
@@ -324,16 +329,23 @@ to your pipeline.
        :abbr:`ENN (Exact Nearest Neighbor)` search on a
        vector in the specified field of an
        :atlas:`Atlas </reference/atlas-search/query-syntax/>` collection.
+
+       This stage is available only for MongoDB Atlas clusters, and is not
+       available for self-managed deployments. To learn more, see
+       :atlas:`Atlas Search Aggregation Pipeline Stages
+       </reference/atlas-search/query-syntax>` in the Atlas documentation.
      - :ref:`VectorSearch() <csharp-aggregation-vectorsearch>`
 
 API Documentation
 -----------------
 
 To learn more about assembling an aggregation pipeline, see
-:manual:`Aggregation Pipeline </core/aggregation-pipeline/>`.
+:manual:`Aggregation Pipeline </core/aggregation-pipeline/>` in the {+mdb-server+}
+manual.
 
 To learn more about creating pipeline stages, see
-:manual:`Aggregation Stages </reference/operator/aggregation-pipeline/>`.
+:manual:`Aggregation Stages </reference/operator/aggregation-pipeline/>` in the
+{+mdb-server+} manual.
 
 For more information about the methods and classes used on this page, see the
 following API documentation:

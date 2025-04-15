@@ -111,7 +111,7 @@ to your pipeline.
 
 .. list-table::
    :header-rows: 1
-   :widths: 30 40 30
+   :widths: 28 44 28
 
    * - Aggregation Stage
      - Description

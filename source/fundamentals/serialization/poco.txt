@@ -266,6 +266,8 @@ The following code sample maps the ``Identifier`` property to the
    The ``_id`` field mapping logic described in this section only applies to the
    root document and does not apply to nested documents.
 
+.. _csharp-poco-specify-id-gen:
+
 Specify an ID Generator
 ```````````````````````
 
@@ -312,7 +314,9 @@ The following table describes the ID generators available in the
           public class House
           {
              public Guid Id { get; set; }
-          } 
+          }
+
+       To learn more, see the :ref:`csharp-guids` guide.
 
    * - ``ObjectId``
      - The driver automatically uses the ``ObjectIdGenerator`` type for ID properties with
@@ -427,13 +431,39 @@ the default value (``null``), the driver throws an exception:
        public Guid Id { get; set; }
    }
 
+.. _csharp-poco-omit-fields:
+
+Omit Fields
+~~~~~~~~~~~
+
+By default, the driver serializes all fields in your POCOS, whether you
+define them or not. To prevent the driver from serializing a specified
+field, use the ``[BsonIgnore]`` attribute. The following code shows how
+you can prevent the driver from serializing the ``YearBuilt`` property:
+
+.. code-block:: csharp
+   :copyable: true
+   :emphasize-lines: 5
+
+   public class House
+   {
+       public Guid Id { get; set; }
+
+       [BsonIgnore]
+       public int YearBuilt { get; set; }
+       public string Style { get; set; }
+   }
+
+Even if you specify a value for the ``YearBuilt`` property, the field is
+not saved in MongoDB.
+
 Omit Empty Fields
 ~~~~~~~~~~~~~~~~~
 
 By default, the driver serializes undefined properties to fields with ``null``
 values. To ignore undefined properties during serialization, use the ``[BsonIgnoreIfNull]``
 attribute. The following code shows how you can prevent the driver from
-serializing the ``YearBuilt`` property if it is undefined:
+serializing the ``Style`` property if it is undefined:
 
 .. code-block:: csharp
    :copyable: true
@@ -444,9 +474,33 @@ serializing the ``YearBuilt`` property if it is undefined:
        public Guid Id { get; set; }
 
        [BsonIgnoreIfNull]
-       public int YearBuilt { get; set; }
        public string Style { get; set; }
+       public int YearBuilt { get; set; }
    }
+
+You can also instruct the driver to ignore a property that contains a
+``null`` value when you register the class map, as shown in the
+following example:
+
+.. code-block:: csharp
+   :copyable: true
+
+   BsonClassMap.RegisterClassMap<House>(classMap => 
+   {
+      classMap.AutoMap();
+      classMap.MapMember(h => h.Style).SetIgnoreIfNull(true);
+   });
+
+.. note:: Numerical Properties
+
+   You cannot use the ``[BsonIgnoreIfNull]`` attribute or
+   ``SetIgnoreIfNull()`` method to prevent undefined numerical
+   properties from being serialized, unless you set the properties as
+   nullable. Instead, use the ``[BsonIgnoreIfDefault]`` attribute or
+   ``SetIgnoreIfDefault()`` class map method, which are described in the
+   :ref:`csharp-poco-default-values` section of this guide.
+
+.. _csharp-poco-default-values:
 
 Customize Default Values
 ~~~~~~~~~~~~~~~~~~~~~~~~

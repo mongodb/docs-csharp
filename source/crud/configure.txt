@@ -199,8 +199,12 @@ if they fail due to a network or server error.
 
 You can explicitly disable retryable reads or retryable writes by setting the ``RetryReads``
 or ``RetryWrites`` options on a ``MongoClientSettings`` object and passing this object to the
-``MongoClient`` constructor. The following example disables retryable reads and writes for
-a client:
+``MongoClient`` constructor. You can also set the ``retryReads`` or ``retryWrites`` options
+in a connection string.
+
+The following example disables retryable reads and writes for
+a client. Select the :guilabel:`MongoClientSettings` or :guilabel:`Connection String`
+tab to see the corresponding code.
 
 .. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
    :start-after: start-retry-reads-writes
@@ -208,6 +212,28 @@ a client:
    :emphasize-lines: 2-3
    :language: csharp
    :dedent:
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongoclientsettings
+
+      .. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
+         :start-after: start-retry-reads-writes
+         :end-before: end-retry-reads-writes
+         :emphasize-lines: 2-3
+         :language: csharp
+         :dedent:
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
+         :start-after: start-retry-reads-writes
+         :end-before: end-retry-reads-writes
+         :emphasize-lines: 1
+         :language: csharp
+         :dedent:
 
 To learn more about supported retryable read and retryable write operations, see
 :manual:`Retryable Reads </core/retryable-reads/>`

@@ -62,5 +62,13 @@ public class ReplicaSetConfigs
             var mongoClient = new MongoClient(mongoClientSettings);
             // end-retry-reads-writes
         }
+
+        {
+            // start-retry-reads-writes-connection-string
+            var connectionString = "mongodb://localhost:27017/?retryReads=false&retryWrites=false";
+            var mongoClientSettings = MongoClientSettings.FromConnectionString(connectionString);
+            var mongoClient = new MongoClient(mongoClientSettings);
+            // end-retry-reads-writes-connection-string
+        }
     }
 }

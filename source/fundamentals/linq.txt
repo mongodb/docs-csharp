@@ -623,7 +623,7 @@ The ``Convert()`` method takes the following parameters:
 
 - Value to convert.
 - ``ConvertOptions<Tto>`` instance that specifies the type to convert to
-  and options. Some conversions require certain options to be set, but
+  and options. Some conversions require you to specify certain options, but
   you can also set options to handle errors or null values.
 
 The following code converts the ``RestaurantId`` string values to
@@ -634,8 +634,8 @@ The following code converts the ``RestaurantId`` string values to
    var query = queryableCollection
        .Select(r => Mql.Convert(r.RestaurantId, new ConvertOptions<int>()));
 
-The converted values in the output documents are stored under the original
-field name.
+The driver stores the converted values under the original field name in
+the output documents.
 
 $lookup
 ~~~~~~~

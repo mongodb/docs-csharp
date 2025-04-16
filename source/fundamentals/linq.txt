@@ -1030,7 +1030,8 @@ the :ref:`<csharp-builders-out>` section.
 Supported Methods
 -----------------
 
-The following are some methods supported by the {+driver-long+} implementation of LINQ:
+The following table describes some methods supported by the
+{+driver-long+} implementation of LINQ:
 
 .. list-table::
    :header-rows: 1
@@ -1051,7 +1052,7 @@ The following are some methods supported by the {+driver-long+} implementation o
    * - ``LongCount``
      - Returns an ``Int64`` that represents the number of documents that match the specified criteria
 
-   * - ``Convert`` (only in ``Select`` projections)
+   * - ``Convert``
      - Converts a value from one type to a different specified type
 
    * - ``DateFromString``

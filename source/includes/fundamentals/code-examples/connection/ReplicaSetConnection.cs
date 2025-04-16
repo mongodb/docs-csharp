@@ -13,7 +13,7 @@ var client = new MongoClient(connectionUri);
 // start-replica-set-connection-list
 using MongoDB.Driver;
 
-// Sets the connection URI than includes the replica set name
+// Sets the connection URI than includes the list of hosts in the replica set
 const string connectionUri = "mongodb://host1:27017,host2:27017,host3:27017";
 
 // Creates a new client and connects to the server

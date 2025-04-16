@@ -135,7 +135,6 @@ You can print the results of the preceding example as follows:
 
       var results = query.ToCursor();
 
-
 Supported Aggregation Stages
 ----------------------------
 
@@ -519,7 +518,7 @@ The ``$group`` aggregation stage separates documents into groups according to
 the criteria you specify.
 
 Select the :guilabel:`Method Syntax` or :guilabel:`Query Syntax` tab to see how 
-to generate an ``$group`` stage using LINQ:
+to generate a ``$group`` stage using LINQ:
 
 .. tabs::
 
@@ -570,7 +569,7 @@ The ``$sort`` aggregation stage returns the results of your query in the order
 that you specify.
 
 Select the :guilabel:`Method Syntax` or :guilabel:`Query Syntax` tab to see how 
-to generate an ``$sort`` stage using LINQ:
+to generate a ``$sort`` stage using LINQ:
 
 .. tabs::
 
@@ -608,6 +607,35 @@ The following is a subset of the documents contained in the returned results:
    { "_id" : ObjectId(...), "name" : "Abacky Potluck", "restaurant_id" : "50011222", "cuisine" : "Asian", "address" : { ... }, "borough" : "Manhattan", "grades" : [...] }
    { "_id" : ObjectId(...), "name" : "Abaleh", "restaurant_id" : "50009096", "cuisine" : "Mediterranean", "address" : { ... }, "borough" : "Manhattan", "grades" : [...] }
    ...
+
+.. _csharp-linq-convert:
+
+$convert
+~~~~~~~~
+
+You can use the ``Mql.Convert()`` method in a ``Select()`` projection to
+convert a value from one type to a different specified type. You can
+use To learn more about conversion behavior and permitted conversions,
+see the :manual:`$convert reference
+</reference/operator/aggregation/convert/>` in the {+mdb-server+} manual.
+
+The ``Convert()`` method takes the following parameters:
+
+- Value to convert.
+- ``ConvertOptions<Tto>`` instance that specifies the type to convert to
+  and options. Some conversions require certain options to be set, but
+  you can also set options to handle errors or null values.
+
+The following code converts the ``RestaurantId`` string values to
+``int`` values in a projection by using LINQ:
+
+.. code-block:: csharp
+   
+   var query = queryableCollection
+       .Select(r => Mql.Convert(r.RestaurantId, new ConvertOptions<int>()));
+
+The converted values in the output documents are stored under the original
+field name.
 
 $lookup
 ~~~~~~~
@@ -967,7 +995,6 @@ The result contains the following values:
    0
    1
 
-
 Unsupported Aggregation Stages
 ------------------------------
 
@@ -1004,6 +1031,9 @@ The following are some methods supported by the {+driver-long+} implementation o
 
    * - ``LongCount``
      - Returns an ``Int64`` that represents the number of documents that match the specified criteria
+
+   * - ``Convert`` (only in ``Select`` projections)
+     - Converts a value from one type to a different specified type
 
    * - ``DateFromString``
      - Converts a ``string`` to a ``DateTime`` object

@@ -206,13 +206,6 @@ The following example disables retryable reads and writes for
 a client. Select the :guilabel:`MongoClientSettings` or :guilabel:`Connection String`
 tab to see the corresponding code.
 
-.. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
-   :start-after: start-retry-reads-writes
-   :end-before: end-retry-reads-writes
-   :emphasize-lines: 2-3
-   :language: csharp
-   :dedent:
-
 .. tabs::
 
    .. tab:: MongoClientSettings
@@ -229,8 +222,8 @@ tab to see the corresponding code.
       :tabid: connectionstring
 
       .. literalinclude:: /includes/fundamentals/code-examples/ReplicaSetConfigs.cs
-         :start-after: start-retry-reads-writes
-         :end-before: end-retry-reads-writes
+         :start-after: start-retry-reads-writes-connection-string
+         :end-before: end-retry-reads-writes-connection-string
          :emphasize-lines: 1
          :language: csharp
          :dedent:

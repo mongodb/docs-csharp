@@ -614,10 +614,10 @@ $convert
 ~~~~~~~~
 
 You can use the ``Mql.Convert()`` method in a ``Select()`` projection to
-convert a value from one type to a different specified type. You can
-use To learn more about conversion behavior and permitted conversions,
-see the :manual:`$convert reference
-</reference/operator/aggregation/convert/>` in the {+mdb-server+} manual.
+convert a value from one type to a different specified type. To learn
+more about conversion behavior and permitted conversions, see the
+:manual:`$convert reference </reference/operator/aggregation/convert/>`
+in the {+mdb-server+} manual.
 
 The ``Convert()`` method takes the following parameters:
 

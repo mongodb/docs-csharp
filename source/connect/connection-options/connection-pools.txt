@@ -9,6 +9,9 @@ Connection Pools
    :name: genre
    :values: reference
 
+.. meta::
+   :keywords: connection, client, latency
+
 .. contents:: On this page
    :local:
    :backlinks: none
@@ -48,7 +51,7 @@ your connection URI:
      - Description
 
    * - ``ConnectTimeout``
-     - | The time that the {+driver-short+} waits when establishing a new
+     - | The maximum amount of time that the {+driver-short+} waits when establishing a new
          connection before timing out.
        |
        | **Data Type**: ``TimeSpan``

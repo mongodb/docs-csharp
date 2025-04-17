@@ -1009,7 +1009,7 @@ The following code performs the following actions by using LINQ methods:
 .. code-block:: csharp
    
    var query = queryableCollection
-       .Select(r => Mql.Convert(r.RestaurantId, new ConvertOptions<int>( OnError = -1, OnNull = 0 )));
+       .Select(r => Mql.Convert(r.RestaurantId, new ConvertOptions<int> { OnError = -1, OnNull = 0 }));
 
 The driver stores the converted values under the original field name in
 the output documents.

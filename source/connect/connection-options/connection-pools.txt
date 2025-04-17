@@ -74,8 +74,8 @@ your connection URI:
        | **Connection URI Example**: ``maxIdleTimeMS=60000``
 
    * - ``MaxConnectionLifeTime``
-     - The maximum time that a connection can be pooled. When a connection exceeds this
-       limit, the {+driver-short+} closes the connection and removes it from the pool.
+     - | The maximum time that a connection can be pooled. When a connection exceeds this
+         limit, the {+driver-short+} closes the connection and removes it from the pool.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 30 minutes

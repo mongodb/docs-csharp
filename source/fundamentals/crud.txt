@@ -12,6 +12,8 @@ CRUD Operations
 
    Write </fundamentals/crud/write-operations>
    Read </fundamentals/crud/read-operations>
+   Create a RESTful API with the .NET/C# Driver </fundamentals/crud/restful-api-tutorial>
 
 - :ref:`csharp-crud-read-operations`
 - :ref:`csharp-crud-write-operations`
+- :ref:`csharp-crud-restful-api-tutorial`

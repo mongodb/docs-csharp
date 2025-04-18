@@ -1,0 +1,181 @@
+.. _csharp-crud-restful-api-tutorial:
+
+============================================
+Create a RESTful API with the .NET/C# Driver
+============================================
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: crud, code example, tutorial
+   :description: Learn how to use the .NET/C# Driver to create a RESTful API for your application.
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this tutorial, you will learn how to create a RESTful API with endpoints that
+perform basic create, read, update, and delete (CRUD) operations across MongoDB
+Atlas.
+
+Prequisites
+-----------
+
+To complete this tutorial, you must have the following:
+
+- An `Atlas account
+  <https://account.mongodb.com/account/register?tck=docs_atlas>`__ with a
+  deployed and configured MongoDB Atlas cluster that is M0 or higher.
+
+- .NET 6.0 or higher `installed <https://dotnet.microsoft.com/en-us/download>`__ on your machine.
+
+To learn how to get started with MongoDB Atlas and how to load sample data, see the
+:atlas:`Get Started with Atlas Guide </getting-started>`. 
+
+This tutorial uses .NET Core 8.0, but you can use any version later than .NET 6.0.
+
+Set Up Your Project
+-------------------
+
+You can create a new .NET Core project using the web application template that
+Microsoft offers. To do this, run the following commands in your terminal:
+
+.. code-block:: bash
+
+   dotnet new webapi -o MongoExample
+   cd MongoExample
+
+To add the {+driver-short+} to your project as a dependency, run the following command:
+
+.. code-block:: bash
+   dotnet add package MongoDB.Driver
+
+The preceding commands create a new web application project for .NET core named
+``MongoExample`` and install the latest {+driver-short+}. The template project
+includes some boilerplate files. During this tutorial, you will add to these
+files and remove some of the boilerplate code to create a RESTful API. 
+
+Design a Document Model and Database Service
+--------------------------------------------
+
+In this section, you will create and configure your MongoDB service and define
+the data model for your RESTful API.
+
+.. procedure:: Create a MongoDB Service
+   :style: connected
+
+   .. step:: Create the MongoDBSettings class
+
+      Your MongoDB service will be responisble for establishing a connection and
+      directly working with documents within MongoDB. In your project, create a
+      folder named ``Models``. In the ``Models`` folder, create a new file named
+      ``MongoDBSettings.cs``. In this file, add the following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/MongoDBSettingsSetup.cs
+         :language: csharp
+         :dedent:
+
+      The precedeing code defines a class named ``MongoDBSettings`` that
+      contains information about your connection, the database name, and the
+      collection name.
+
+   .. step:: Update the appsettings.json file
+
+      The data that will be stored in the class fields defined in the
+      ``MongoDBSettings`` class is found in the projects' ``appsettings.json``
+      file. Open this file and add the following:
+
+      .. code-block:: json
+         :copyable: true
+
+         {
+            "Logging": {
+               "LogLevel": {
+               "Default": "Information",
+               "Microsoft.AspNetCore": "Warning"
+               }
+            },
+         "AllowedHosts": "*",
+         "MongoDB": {
+            "ConnectionURI": "ATLAS_URI_HERE",
+            "DatabaseName": "sample_mflix",
+            "CollectionName": "playlist"
+            }
+         }
+
+      Note the ``MongoDB`` field. This tutorial uses the ``sample_mflix``
+      database and the ``playlist`` collection. Replace the ``ATLAS_URI_HERE``
+      placeholder with your MongoDB Atlas connection string. For more
+      information on how to find your connection string, see the
+      :ref:`csharp-quickstart` guide.
+
+   .. step:: Create the service
+
+      In your project, create a folder named ``Services``. In the ``Services``
+      folder, create a new file named ``MongoDBService.cs`` and add the
+      following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/MongoDBServiceSetup.cs
+         :language: csharp
+         :dedent:
+      
+      The preceding code defines a class named ``MongoDBService`` that includes
+      empty asynchronous functions. In this tutorial, you will add code to these
+      functions as you create your endpoints. The passed settings from the
+      ``appsettings.json`` file are set to veriables.
+
+   .. step:: Connect the service to the application
+
+      Open the ``Program.cs`` file and add the following code to the top of the file:
+
+      .. code-block:: csharp
+         :copyable: true
+
+         using MongoExample.Models;
+         using MongoExample.Services;
+
+         var builder = WebApplication.CreateBuilder(args);
+
+         builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
+         builder.Services.AddSingleton<MongoDBService>();
+
+      In the preceding code, the ``GetSection`` function pulls your settings
+      from the ``MongoDB`` field in the ``appsettings.json`` file. 
+      
+      .. tip::
+         
+         If your boilerplate code already has the ``builder`` variable, don't add it twice. 
+
+   .. step:: Create the document model
+
+      Now that the service is set up, you can create a data model for your collection.
+
+      In the ``Models`` folder, create a new file named ``Playlist.cs`` and add
+      the following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/PlaylistSetup.cs
+         :language: csharp
+         :dedent:
+
+      In the preceding code, the ``Id`` field is represented as an ``ObjectId``
+      in BSON and the ``_id`` fild within MongoDB. When you work with this
+      locally in your application, it is a string.
+
+      The ``movieIds`` field will be known as ``items``. When sending or
+      receiving JSON, the field will also be known as ``items`` instead of
+      ``movieIds``.
+
+      If you plan to have your local class field match the document field
+      directly, you don't need to define custom mappings. For example, the
+      ``username`` field in the preceding code has no custom mappings. It will
+      be ``username`` in C#, in JSON, and in MongoDB.
+
+You now have a MongoDB service and document model for your collection to work
+with for .NET Core.

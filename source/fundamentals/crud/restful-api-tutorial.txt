@@ -189,6 +189,10 @@ different files within the project. In this section, you can learn how to define
 the endpoint within a controller and update the corresponding work within the
 service.
 
+.. note::
+
+   In this example project, there is no data validation for the HTTP requests.
+
 .. procedure:: Build endpoints to interact with MongoDB
    :style: connected
 
@@ -206,6 +210,111 @@ service.
       access to your singleton service class. Then, there is a series of
       endpoints for this controller.
 
-   .. step:: Add data through the POST endpoing
+   .. step:: Add data through the POST endpoint
 
-      Navigate to ``Services/MongoDBService.cs`` and add the following code:
+      Go to ``Services/MongoDBService.cs`` and update the ``CreateAsync``
+      function to use the following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/MongoDBServiceComplete.cs
+         :language: csharp
+         :start-after: start-create-async
+         :end-before: end-create-async
+         :dedent:
+
+      The preceding code sets the ``_playlistCollection`` in the constructor
+      method of the service. This lets your application use the
+      ``InsertOneAsync`` method, which takes a passed ``Playlist`` variable and
+      inserts it.
+
+      To complete the creation of the POST endpoint, go to the
+      ``Controllers/PlaylistController.cs`` file and update the ``Post`` method
+      to use the following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/PlaylistControllerComplete.cs
+         :language: csharp
+         :start-after: start-post
+         :end-before: end-post
+         :dedent:
+
+      When the ``POST`` endpoint executes, the application takes the
+      ``Playlist`` object from the ``request``, which .NET Core parses, and
+      passes it to the ``CreateAsync`` function in the service. After the
+      insert, the code returns some information about the interaction.
+
+   .. step:: Read data through the GET endpoint
+
+      Go to ``Services/MongoDBService.cs`` and update the ``GetAsync`` function to
+      use the following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/MongoDBServiceComplete.cs
+         :language: csharp
+         :start-after: start-get-async
+         :end-before: end-get-async
+         :dedent:
+
+      The ``Find`` operation in the preceding code returns all documents that
+      exist in the collection. 
+
+      To complete the creation of the GET endpoint, go to the
+      ``Controllers/PlaylistController.cs`` file and update the ``Get`` method to
+      use the following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/PlaylistControllerComplete.cs
+         :language: csharp
+         :start-after: start-get
+         :end-before: end-get
+         :dedent:
+      
+   .. step:: Update data using the PUT endpoint
+
+      Go to ``Services/MongoDBService.cs`` and update the ``AddToPlaylistAsync``
+      function to use the following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/MongoDBServiceComplete.cs
+         :language: csharp
+         :start-after: start-add-to-playlist-async
+         :end-before: end-add-to-playlist-async
+         :dedent:
+
+      The preceding code sets up a match filter to determine which document or
+      documents receive an update, in this case adding an item to your playlist.
+      The code matches based on the ``Id`` field, which is unique. Then, the
+      code defines the update critera, which is an ``AddtoSet`` operation that
+      only adds an item to the array if it doesn't already exist in the array.
+
+      The ``UpdateOneAsync`` methods only updates on document even if the match
+      filter returns more than one match.
+
+      To complete the creation of the PUT endpoint, go to the
+      ``Controllers/PlaylistController.cs`` file and update the
+      ``AddToPlaylist`` function to use the following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/PlaylistControllerComplete.cs
+         :language: csharp
+         :start-after: start-put
+         :end-before: end-put
+         :dedent:
+   
+   .. step:: Delete data using the DELETE endpoint
+
+      Go to ``Services/MongoDBService.cs`` and update the ``DeleteAsync`` function to
+      use the following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/MongoDBServiceComplete.cs
+         :language: csharp
+         :start-after: start-delete-async
+         :end-before: end-delete-async
+         :dedent:
+
+      The preceding code deletes a single document based on the filter criteria,
+      which matches the unique value of the ``Id`` field.
+
+      To complete the creation of the DELETE endpoint, go to the
+      ``Controllers/PlaylistController.cs`` file and update the
+      ``Delete`` function to use the following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/PlaylistControllerComplete.cs
+         :language: csharp
+         :start-after: start-delete
+         :end-before: end-delete
+         :dedent:

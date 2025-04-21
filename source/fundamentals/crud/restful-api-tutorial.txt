@@ -55,6 +55,7 @@ Microsoft offers. To do this, run the following commands in your terminal:
 To add the {+driver-short+} to your project as a dependency, run the following command:
 
 .. code-block:: bash
+
    dotnet add package MongoDB.Driver
 
 The preceding commands create a new web application project for .NET core named
@@ -82,7 +83,7 @@ the data model for your RESTful API.
          :language: csharp
          :dedent:
 
-      The precedeing code defines a class named ``MongoDBSettings`` that
+      The preceding code defines a class named ``MongoDBSettings`` that
       contains information about your connection, the database name, and the
       collection name.
 
@@ -179,3 +180,32 @@ the data model for your RESTful API.
 
 You now have a MongoDB service and document model for your collection to work
 with for .NET Core.
+
+Build CRUD Endpoints
+--------------------
+
+To create the CRUD endpoints for this application, you need to update two
+different files within the project. In this section, you can learn how to define
+the endpoint within a controller and update the corresponding work within the
+service.
+
+.. procedure:: Build endpoints to interact with MongoDB
+   :style: connected
+
+   .. step:: Create a controller
+
+      In your project, create a folder named ``Controllers``. In the
+      ``Controllers`` folder, create a new file named ``PlaylistController.cs``
+      and add the following code:
+
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/PlaylistControllerSetup.cs
+         :language: csharp
+         :dedent:
+
+      The ``PlaylistController`` class contains a constructor method that gains
+      access to your singleton service class. Then, there is a series of
+      endpoints for this controller.
+
+   .. step:: Add data through the POST endpoing
+
+      Navigate to ``Services/MongoDBService.cs`` and add the following code:

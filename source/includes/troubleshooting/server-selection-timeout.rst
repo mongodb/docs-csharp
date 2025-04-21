@@ -47,7 +47,7 @@ The error message consists of multiple parts:
    The following heartbeat exceptions are common:
    
    * ``No connection could be made because the target machine actively
-     refused it``: The driver cannot see this cluster node. This can be
+     refused it``: The driver cannot see this cluster node. This might be
      because the cluster node has crashed, a firewall is preventing
      network traffic from reaching the cluster node or port, or some other
      network error is preventing traffic from being successfully routed to
@@ -57,7 +57,7 @@ The error message consists of multiple parts:
      network error, misconfigured firewall, or other network issue. To
      address this exception, ensure that all cluster nodes are reachable.
      This error commonly occurs when the client machine’s IP address is
-     not configured in the Atlas IPs Access List, which can be found under
+     not configured in the Atlas IPs Access List, which you can find under
      the :guilabel:`Network Access` tab for your Atlas Project.
    * ``The remote certificate is invalid according to the validation
      procedure``: This error typically indicates a TLS/SSL-related problem

@@ -1,8 +1,8 @@
 .. _csharp-crud-restful-api-tutorial:
 
-============================================
-Create a RESTful API with the C#/.NET Driver
-============================================
+=====================================================================
+Tutorial: Create a RESTful API with the {+driver-short+} Driver
+=====================================================================
 
 .. facet::
    :name: genre
@@ -374,5 +374,10 @@ endpoint to see the data you just inserted. You can also test the ``PUT`` and
 Next Steps
 ----------
 
-To learn nmore about the operations discussed in this tutorial, see the following
+To learn more about the operations discussed in this tutorial, see the following
 guides:
+
+- :ref:`csharp-insert-guide`
+- :ref:`csharp-retrieve`
+- :ref:`csharp-update-one`
+- :ref:`csharp-delete-guide`

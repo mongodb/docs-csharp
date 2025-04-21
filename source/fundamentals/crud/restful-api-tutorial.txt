@@ -1,7 +1,7 @@
 .. _csharp-crud-restful-api-tutorial:
 
 ============================================
-Create a RESTful API with the .NET/C# Driver
+Create a RESTful API with the C#/.NET Driver
 ============================================
 
 .. facet::
@@ -352,7 +352,7 @@ localhost URL to access the Swagger UI, for example
 
    The Swagger UI for the RESTful API.
 
-You can test the application by clicking on the ``Try it out`` button on each
+You can test the application by clicking the ``Try it out`` button on each
 endpoint. To get started, go to the ``/api/Playlist`` ``POST`` endpoint
 to add some data to the database. Add the following as dummy data:
 
@@ -373,3 +373,6 @@ endpoint to see the data you just inserted. You can also test the ``PUT`` and
 
 Next Steps
 ----------
+
+To learn nmore about the operations discussed in this tutorial, see the following
+guides:

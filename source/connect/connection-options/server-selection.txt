@@ -188,6 +188,7 @@ documentation:
 
 - `MongoClient <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
 - `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
-- `ServerSelector <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Clusters.ServerSelectors.html>`__
+- `ClusterConfigurator <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.ClusterConfigurator.html>`__
+- `ServerSelectors <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Clusters.ServerSelectors.html>`__
 - `IServerSelector <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector.html>`__
 - `SelectServer() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Clusters.ServerSelectors.IServerSelector.SelectServers.html>`__

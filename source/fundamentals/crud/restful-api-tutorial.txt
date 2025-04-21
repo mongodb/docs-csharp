@@ -318,3 +318,58 @@ service.
          :start-after: start-delete
          :end-before: end-delete
          :dedent:
+
+You now have a complete set of CRUD endpoints for your RESTful API.
+
+Test Your API Endpoints
+-----------------------
+
+With the endpoints created, you can test them using the Swagger UI that is
+built-in to the boilerplate .NET Core application. To do this, update your
+``Program.cs`` file to include the following code:
+
+.. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/MongoDBExampleProgram.cs
+   :language: csharp
+   :dedent:
+   :start-after: start-program-example
+   :end-before: end-program-example
+
+You can replace any repetitive code in the boilerplate with the preceding code.
+
+Execute the following command to run your application:
+
+.. code-block:: bash
+
+   dotnet run
+
+After the application starts, open your browser and go to your configured
+localhost URL to access the Swagger UI, for example
+``http://localhost:5000/swagger``. The Swagger UI looks like the following:
+
+.. figure:: /includes/figures/restful-api-tutorial-swagger-ui.jpg
+   :alt: Swagger UI
+   :align: center
+
+   The Swagger UI for the RESTful API.
+
+You can test the application by clicking on the ``Try it out`` button on each
+endpoint. To get started, go to the ``/api/Playlist`` ``POST`` endpoint
+to add some data to the database. Add the following as dummy data:
+
+.. code-block:: json
+   :copyable: true
+
+   {
+      "username": "testuser",
+      "items": [
+         "1234",
+         "5678"
+      ]
+   }
+
+Run this request to insert data into the database. You can then go to the ``GET``
+endpoint to see the data you just inserted. You can also test the ``PUT`` and
+``DELETE`` endpoints to update and delete data.
+
+Next Steps
+----------

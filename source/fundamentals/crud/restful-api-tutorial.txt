@@ -15,7 +15,7 @@ Tutorial: Create a RESTful API with the {+driver-short+} Driver
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 2
+   :depth: 1
    :class: singlecol
 
 Overview
@@ -325,8 +325,9 @@ Test Your API Endpoints
 -----------------------
 
 With the endpoints created, you can test them using the Swagger UI that is
-built-in to the boilerplate .NET Core application. To do this, update your
-``Program.cs`` file to include the following code:
+built-in to the boilerplate .NET Core application. To do this, go to
+``Program.cs`` file and remove any code from the template project related to
+``WeatherForecast`` and similar. Update the file to include the following code:
 
 .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/MongoDBExampleProgram.cs
    :language: csharp

@@ -106,10 +106,8 @@ a class map.
 Omit Fields
 ~~~~~~~~~~~
 
-By default, the driver serializes all fields in your POCOS, whether you
-define them or not. You can prevent specified fields from being
-serialized by using the ``UnmapMember()`` method when registering a
-class map.
+You can prevent specified fields from being serialized by using the
+``UnmapMember()`` method when registering a class map.
 
 The following example shows how to create a class map to prevent the
 ``Age`` property from being serialized:

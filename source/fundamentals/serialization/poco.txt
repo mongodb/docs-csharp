@@ -436,10 +436,9 @@ the default value (``null``), the driver throws an exception:
 Omit Fields
 ~~~~~~~~~~~
 
-By default, the driver serializes all fields in your POCOS, whether you
-define them or not. To prevent the driver from serializing a specified
-field, use the ``[BsonIgnore]`` attribute. The following code shows how
-you can prevent the driver from serializing the ``YearBuilt`` property:
+To prevent the driver from serializing a specified field, use the
+``[BsonIgnore]`` attribute. The following code shows how you can prevent
+the driver from serializing the ``YearBuilt`` property:
 
 .. code-block:: csharp
    :copyable: true
@@ -467,10 +466,10 @@ not saved in MongoDB.
 Omit Empty Fields
 ~~~~~~~~~~~~~~~~~
 
-By default, the driver serializes undefined properties to fields with ``null``
-values. To ignore undefined properties during serialization, use the ``[BsonIgnoreIfNull]``
+By default, the driver serializes uninitialized properties with ``null``
+values. To ignore empty properties during serialization, use the ``[BsonIgnoreIfNull]``
 attribute. The following code shows how you can prevent the driver from
-serializing the ``Style`` property if it is undefined:
+serializing the ``Style`` property if it is uninitialized:
 
 .. code-block:: csharp
    :copyable: true
@@ -502,7 +501,7 @@ following example:
 .. note:: Numerical Properties
 
    You cannot use the ``[BsonIgnoreIfNull]`` attribute or
-   ``SetIgnoreIfNull()`` method to prevent undefined numerical
+   ``SetIgnoreIfNull()`` method to prevent uninitialized numerical
    properties from being serialized unless you mark the properties as
    nullable. Instead, use the ``[BsonIgnoreIfDefault]`` attribute or
    ``SetIgnoreIfDefault()`` class map method, which are described in the

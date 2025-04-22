@@ -167,9 +167,11 @@ The 3.1 driver release includes the following new features:
   Vector Search, see :atlas:`Run Vector Search Queries </atlas-vector-search/vector-search-stage>`
   in the Atlas Search documentation.
 
-- Adds support for the ``sort`` option to be passed to update commands. To learn more about
-  using update commands with the {+driver-short+}, see :ref:`csharp-update-one` and
-  :ref:`csharp-update-many`.
+- Adds a sort option for update and replace operations. This change
+  allows you to set a sort order if multiple documents match your
+  filter when attempting to update or replace a single document. To
+  learn more, see the :ref:`csharp-update-one` and
+  :ref:`csharp-replace-operation` guides.
 
 For more information about this release, see the :github:`v3.1 release notes
 </mongodb/mongo-csharp-driver/releases/tag/v3.1.0>`.
@@ -393,7 +395,8 @@ The 2.26 driver release includes the following new features:
 - Enabled use of native ``crypto`` in ``libmongocrypt`` bindings.
 
 - Added support for serialization of ``Memory`` and ``ReadOnlyMemory``
-  structs.
+  structs. To learn more about implementing these types, see the
+  :ref:`csharp-array-serialization` section of the Serialization guide.
 
 - Added support for the GCP Identity Provider when using the
   ``MONGODB-OIDC`` authentication mechanism. To learn more, see

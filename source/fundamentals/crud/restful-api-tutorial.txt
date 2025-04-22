@@ -226,7 +226,7 @@ service.
       ``InsertOneAsync`` method, which takes a passed ``Playlist`` variable and
       inserts it.
 
-      To complete the creation of the POST endpoint, go to the
+      To complete the creation of the ``POST`` endpoint, go to the
       ``Controllers/PlaylistController.cs`` file and update the ``Post`` method
       to use the following code:
 
@@ -255,7 +255,7 @@ service.
       The ``Find`` operation in the preceding code returns all documents that
       exist in the collection. 
 
-      To complete the creation of the GET endpoint, go to the
+      To complete the creation of the ``GET`` endpoint, go to the
       ``Controllers/PlaylistController.cs`` file and update the ``Get`` method to
       use the following code:
 
@@ -354,7 +354,7 @@ localhost URL to access the Swagger UI, for example
    The Swagger UI for the RESTful API.
 
 You can test the application by clicking the ``Try it out`` button on each
-endpoint. To get started, go to the ``/api/Playlist`` ``POST`` endpoint
+endpoint. To get started, go to the ``/api/playlists`` ``POST`` endpoint
 to add some data to the database. Add the following as dummy data:
 
 .. code-block:: json

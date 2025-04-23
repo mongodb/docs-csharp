@@ -177,8 +177,8 @@ property:
 
    .. input:: /includes/fundamentals/code-examples/ExtendedJson.cs
       :language: csharp
-      :start-after: start-read-ejson
-      :end-before: end-read-ejson
+      :start-after: start-write-ejson
+      :end-before: end-write-ejson
       :dedent:
 
    .. output::

@@ -498,10 +498,10 @@ following example:
       classMap.MapMember(h => h.Style).SetIgnoreIfNull(true);
    });
 
-.. note:: Numerical Properties
+.. note:: Value Type Properties
 
    You cannot use the ``[BsonIgnoreIfNull]`` attribute or
-   ``SetIgnoreIfNull()`` method to prevent uninitialized numerical
+   ``SetIgnoreIfNull()`` method to prevent uninitialized value type
    properties from being serialized unless you mark the properties as
    nullable. Instead, use the ``[BsonIgnoreIfDefault]`` attribute or
    ``SetIgnoreIfDefault()`` class map method, which are described in the

@@ -1,9 +1,5 @@
 using MongoDB.Bson;
 using MongoDB.Bson.IO;
-using MongoDB.Driver;
-using MongoDB.Driver.Core.Clusters;
-using MongoDB.Driver.Core.Clusters.ServerSelectors;
-using MongoDB.Driver.Core.Servers;
 using MongoDB.Bson.Serialization;
 
 public class ExtendedJson

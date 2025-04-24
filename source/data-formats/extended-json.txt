@@ -195,4 +195,8 @@ documentation:
 - `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
 - `BsonSerializer <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.BsonSerializer.html>`__
 - `ToJson() <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonExtensionMethods.ToJson.html>`__
+- `JsonWriter <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonWriter.html>`__
+- `JsonReader <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonReader.html>`__
 - `JsonWriterSettings <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonWriterSettings.html>`__
+- `JsonReaderSettings <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonReaderSettings.html>`__
+- `JsonOutputMode <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonOutputMode.html>`__

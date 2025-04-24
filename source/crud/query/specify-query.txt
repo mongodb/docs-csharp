@@ -228,44 +228,110 @@ Array operators match documents based on the value or quantity of elements in an
 field. The following is a list of builder methods that use array operators:
 
 .. list-table::
-   :widths: 40 60
+   :widths: 20 60 20
    :header-rows: 1
 
-   * - Operator
+   * - {+driver-short+} Method
      - Description
+     - {+mdb-server+} Operator
 
    * - ``All()``
-     - Matches documents where the array field contains all elements specified in
-       the query.
+     - Matches documents where the value of the field matches all values specified in the
+       query.
+     - :manual:`$all </reference/operator/query/all/>`
 
    * - ``AnyEq()``
-     - Matches documents where any element in the array field matches the specified
-       query filter.
+     - Matches documents where any element in the specified array field matches the specified
+       query value.
+     - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
    
    * - ``AnyGt()``
-     - Matches documents where any element in the array field is greater than the specified
-       query filter.
+     - Matches documents where any element in the specified array field is greater than the specified
+       query value.
+     - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
    
    * - ``AnyGte()``
-     - Matches documents where any element in the array field is greater than or equal to
-       the specified query filter.
+     - Matches documents where any element in the specified array field is greater than or equal to
+       the specified query value.
+     - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
    
    * - ``AnyIn()``
-     - Matches documents where any element in the array field is greater than or equal to
-       the specified query filter.
+     - Matches documents where any element in the specified array field matches any value in
+       the specified query array.
+     - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
 
+   * - ``AnyLt()``
+     - Matches documents where any element in the specified array field is less than the specified
+       query value.
+     - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
+   
+   * - ``AnyLte()``
+     - Matches documents where any element in the specified array field is less than or equal to
+       the specified query value.
+     - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
+   
+   * - ``AnyNe()``
+     - Matches documents where any element in the specified array field is not equal to
+       the specified query value.
+     - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
+   
+   * - ``AnyNin()``
+     - Matches documents where none of the elements in the specified array field match any of the 
+       values in the specified query array. This method also matches documents where the
+       specified field doesn't exist.
+     - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
+
+   * - ``AnyStringIn()``
+     - Matches documents where any string element in the specified array field matches any
+       string value in the specified query array.
+     - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
+   
+   * - ``AnyStringNin()``
+     - Matches documents where none of the string elements in the specified array field
+       matches any of the values in the specified query filter. This method also matches
+       documents where the specified field doesn't exist.
+     - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
+   
+   * - ``ElemMatch()``
+     - Matches documents where any element in the specified array field matches the
+       specified query criteria. 
+     - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
+   
+   * - ``In()``
+     - Matches documents where the value of the specified field matches any value in the
+       specified query array. 
+     - :manual:`$in </reference/operator/query/in/>`
+   
    * - ``Size()``
-     - Matches documents if the array field is a specified size.
+     - Matches documents where the specified array field is the specified size.
+     - :manual:`$size </reference/operator/query/size/>`
+   
+   * - ``SizeGt()``
+     - Matches documents where the specified array field is larger than the specified size.
+     - :manual:`$size </reference/operator/query/size/>`
+   
+   * - ``SizeGte()``
+     - Matches documents where the specified array field is larger than or equal to the specified size.
+     - :manual:`$size </reference/operator/query/size/>`
+   
+   * - ``SizeLt()``
+     - Matches documents where the specified array field is smaller than the specified size.
+     - :manual:`$size </reference/operator/query/size/>`
+   
+   * - ``SizeLte()``
+     - Matches documents where the array field is smaller than or equal to the specified size.
+     - :manual:`$size </reference/operator/query/size/>`
 
-.. note:: 
-
-   The ``Any()`` builder uses the ``$elemMatch`` query operator.
-
-   To learn more about the ``$elemMatch`` query selector, see
-   :manual:`$elemMatch </reference/operator/query/elemMatch/#mongodb-query-op.-elemMatch>`.
-
-For more information on the array operators, see the :manual:`Array
-Query Operators </reference/operator/query-array/>` page.
+   * - ``StringIn()``
+     - Matches documents where the string value of the specified field matches any string value in the
+       specified query array. 
+     - :manual:`$in </reference/operator/query/in/>`
+   
+   * - ``StringNin()``
+     - Matches documents where the string value of the specified field matches none of the
+       string values in the specified query array.
+       the specified query filter. 
+     - :manual:`$in </reference/operator/query/in/>`
 
 The following example uses builders to create a query filter that matches all
 documents that have 3 elements in the ``models`` field:

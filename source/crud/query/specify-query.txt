@@ -19,12 +19,6 @@ You can narrow the set of matched documents returned by your query by creating a
 **query filter**. A query filter is an expression that specifies the documents you 
 want to match in a read, update, or delete operation.
 
-.. note:: Using LINQ
-
-   This guide shows how to specify queries using query filters. You can also
-   specify queries using LINQ. To learn more about using LINQ, see
-   :ref:`csharp-linq`.
-
 The examples in this guide use the following documents in a collection called
 ``guitars``:
 
@@ -241,12 +235,24 @@ field. The following is a list of builder methods that use array operators:
      - Description
 
    * - ``All()``
-     - Matches documents if the array field contains all elements specified in
+     - Matches documents where the array field contains all elements specified in
        the query.
 
-   * - ``Any()``
-     - Matches documents if any element in the array field matches the specified
+   * - ``AnyEq()``
+     - Matches documents where any element in the array field matches the specified
        query filter.
+   
+   * - ``AnyGt()``
+     - Matches documents where any element in the array field is greater than the specified
+       query filter.
+   
+   * - ``AnyGte()``
+     - Matches documents where any element in the array field is greater than or equal to
+       the specified query filter.
+   
+   * - ``AnyIn()``
+     - Matches documents where any element in the array field is greater than or equal to
+       the specified query filter.
 
    * - ``Size()``
      - Matches documents if the array field is a specified size.
@@ -345,24 +351,6 @@ following Server Manual Entries:
 To learn how to specify queries using LINQ, see :ref:`csharp-linq`.
 
 .. TODO: integrate into existing page
-
-Sample Class
-------------
-
-The code examples in this guide demonstrate how you can use builders to
-create types to interact with documents in the sample collection ``plants.flowers``.
-Documents in this collection are modeled by the following ``Flower`` class:
-
-.. literalinclude:: /includes/fundamentals/code-examples/builders.cs
-   :language: csharp
-   :dedent:
-   :start-after: start-model
-   :end-before: end-model
-
-Each builder class takes a generic type parameter
-``TDocument`` which represents the type of document that you are working
-with. In this guide, the ``Flower`` class is the document type used in
-each builder class example.
 
 Construct a Filter
 ------------------

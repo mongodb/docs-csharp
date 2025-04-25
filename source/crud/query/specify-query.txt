@@ -1,8 +1,9 @@
 .. _csharp-specify-query:
+.. _csharp-create-query-filter:
 
-===============
-Specify a Query
-===============
+=====================
+Create a Query Filter
+=====================
 
 .. contents:: On this page
    :local:
@@ -10,14 +11,26 @@ Specify a Query
    :depth: 1
    :class: singlecol
 
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: search, read, update, delete
+
 Overview
 --------
 
-In this guide, you can learn how to specify a query using the {+driver-long+}.
+In this guide, you can learn how to use the {+driver-long+} to create a **query filter**.
+A query filter is an expression that specifies the documents to read, update, or delete
+in a CRUD operation. You can use builder methods, available from the
+``Builders<TDocument>.Filter`` static property, to create query filters and add
+operations to them.
 
-You can narrow the set of matched documents returned by your query by creating a
-**query filter**. A query filter is an expression that specifies the documents you 
-want to match in a read, update, or delete operation.
+.. include:: /includes/method-overloads.rst
+
+Sample Data
+~~~~~~~~~~~
 
 The examples in this guide use the following documents in a collection called
 ``guitars``:
@@ -31,12 +44,20 @@ The examples in this guide use the following documents in a collection called
    { "_id": 5, "make": "Ibanez", "models": ["RG", "AZ"], "establishedYear": 1957, "rating": 7 }
    { "_id": 6, "make": "Strandberg", "models": ["Boden", "Salen"], "establishedYear": 1982 }
 
-The following ``Guitar`` class models the documents in this collection.
+The following ``Guitar`` class models the documents in this collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/specify-query/Guitar.cs
    :language: csharp
    :copyable:
    :dedent:
+
+To run the code examples on this page, you must obtain a reference to the ``guitars``
+collection, as shown in the following example: 
+
+.. code-block:: csharp
+
+   var client = new MongoClient("localhost://27017");
+   var guitarCollection = client.GetDatabase("example").GetCollection<Guitar>("guitars");
 
 .. note::
 
@@ -45,92 +66,110 @@ The following ``Guitar`` class models the documents in this collection.
    to deserialize the fields in the collection into Pascal case and map them to
    the properties in the ``Guitar`` class.
 
-   To learn more about custom serialization, see :ref:`csharp-custom-serialization`.
+   To learn more creating and serializing custom classes, see the following pages:
+   
+   - :ref:`csharp-poco`
+   - :ref:`csharp-class-mapping`
+   - :ref:`csharp-serialization`
+   - :ref:`csharp-polymorphism`
 
-To learn more about class mapping, see :ref:`csharp-class-mapping`.
+Find All Documents
+------------------
 
-The following code instantiates the ``_guitarsCollection`` object using the 
-``Guitar`` class as a type parameter. This type parameter causes the driver to 
-automatically serialize and deserialize the documents it sends to and receives
-from MongoDB to instances of the ``Guitar`` class:
+An empty query filter matches all documents in a collection. The following example shows
+how to create an empty query filter: 
 
 .. code-block:: csharp
 
-   private static IMongoCollection<Guitar> _guitarsCollection;
-
-Literal Values
---------------
-
-Literal value queries return documents with an exact match to your query filter.
-
-The following example specifies a query filter as a parameter to the ``Find()`` 
-method. The query matches all documents where the
-``make`` field equals "Fender".
-
-.. io-code-block::
-   :copyable:
-
-   .. input:: /includes/fundamentals/code-examples/specify-query/FindEqPOCO.cs
-      :language:  csharp
-
-   .. output:: 
-      :language: json
-      :visible:
-
-      { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
-
-The following example uses builders to create a query filter that matches the
-same documents as the preceding example:
-
-.. io-code-block::
-   :copyable:
-
-   .. input:: /includes/fundamentals/code-examples/specify-query/FindEqBuilder.cs
-      :language:  csharp
-
-   .. output:: 
-      :language: json
-      :visible:
-
-      { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
-
-.. tip:: Find All Documents
-
-   Use an empty query filter to match all documents in the collection. Create
-   an empty query filter with builders as follows:
-
-   .. code-block:: csharp
-
-      var result = _guitarsCollection.Find(Builders<Guitar>.Filter.Empty).ToList();
+   var filter = Builders<Guitar>.Filter.Empty;
 
 Comparison Operators
 --------------------
 
-Comparison operators analyze the value in a document against the specified value
-in your query filter. Common comparison operators include:
+Comparison operators compare the query value to the value in a specified field. Some of
+these methods have alternative syntax that you can use in place of the method, as shown
+in the following example:
+
+.. code-block:: csharp
+
+   var filter = Builders<Guitar>.Filter.Eq(g => g.Make, "Fender");
+   var results = guitarCollection.Find(filter).ToList();
+
+   // Alternative syntax
+   var results = guitarCollection.Find(g => g.Make == "Fender").ToList();;
+
+The following table lists the {+driver-short+} methods for comparison operations
+and the equivalent {+mdb-server+} operators:
 
 .. list-table::
-   :widths: 30 30 40
+   :widths: 20 20 40 20
    :header-rows: 1
 
-   * - Operator
-     - Builder
+   * - {+driver-short+} Method
+     - Alternative Syntax
      - Description
+     - {+mdb-server+} Operator
 
-   * - ``>``
-     - ``Gt()``
-     - Greater than
+   * - ``Eq()``
+     - ``==``
+     - Matches documents where the value of the specified field is equal to the query value.
+     - :manual:`$eq </reference/operator/query/eq/>`
 
-   * - ``<=``
-     - ``Lte()``
-     - Less than or equal to
+   * - ``Gt()``
+     - ``>``
+     - Matches documents where the value of the specified field is greater than the query value.
+     - :manual:`$gt </reference/operator/query/gt/>`
+   
+   * - ``Gte()``
+     - ``>=``
+     - Matches documents where any element in the specified array field is greater than or
+       equal to the query value.
+     - :manual:`$gte </reference/operator/query/gte/>`
+   
+   * - ``In()``
+     - N/A 
+     - Matches documents where any element in the specified array field matches any value in
+       the query array.
+     - :manual:`$in </reference/operator/query/in/>`
 
-   * - ``!=``
-     - ``Ne()``
-     - Not equal to
+   * - ``Lt()``
+     - ``<``
+     - Matches documents where any element in the specified array field is less than the
+       query value.
+     - :manual:`$lt </reference/operator/query/lt/>`
+   
+   * - ``Lte()``
+     - ``<=``
+     - Matches documents where any element in the specified array field is less than or equal
+       to the query value.
+     - :manual:`$lte </reference/operator/query/lte/>`
+   
+   * - ``Ne()``
+     - ``!=``
+     - Matches documents where any element in the specified array field is not equal to
+       the query value.
+     - :manual:`$ne </reference/operator/query/ne/>`
+   
+   * - ``Nin()``
+     - N/A 
+     - Matches documents where one of the following is true:
+     
+       - None of the elements in the specified array field matches any of the values in the
+         query array.
+       - The specified field doesn't exist.
+     - :manual:`$nin </reference/operator/query/nin/>`
 
-For a full list of comparison operators, see the :manual:`Comparison
-Query Operators </reference/operator/query-comparison/>` page.
+   * - ``StringIn()``
+     - N/A 
+     - Matches documents where the string value of the specified field matches any string
+       value in the query array. 
+     - :manual:`$in </reference/operator/query/in/>`
+   
+   * - ``StringNin()``
+     - N/A 
+     - Matches documents where the string value of the specified field doesn't match any
+       of the string values in the query array.
+     - :manual:`$in </reference/operator/query/in/>`
 
 The following example specifies a query filter as a parameter to the ``Find()``
 method. The query matches all documents where the ``establishedYear`` field is
@@ -163,31 +202,81 @@ same documents as the preceding example:
 
       { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
 
+The following example specifies a query filter as a parameter to the ``Find()`` 
+method. The query matches all documents where the
+``make`` field equals "Fender".
+
+.. io-code-block::
+   :copyable:
+
+   .. input:: /includes/fundamentals/code-examples/specify-query/FindEqPOCO.cs
+      :language:  csharp
+
+   .. output:: 
+      :language: json
+      :visible:
+
+      { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
+
+The following example uses builders to create a query filter that matches the
+same documents as the preceding example:
+
+.. io-code-block::
+   :copyable:
+
+   .. input:: /includes/fundamentals/code-examples/specify-query/FindEqBuilder.cs
+      :language:  csharp
+
+   .. output:: 
+      :language: json
+      :visible:
+
+      { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
+
 Logical Operators
 -----------------
 
-Logical operators match documents using logic applied to the results of two or more
-sets of expressions. The following is a list of some logical operators:
+Logical operators combine two or more expressions and return results based on the results
+of those expressions. These methods have alternative syntax that you can use in place of
+the method, as shown in the following example:
+
+.. code-block:: csharp
+
+   var builder = Builders<Guitar>.Filter;
+   var filter = builder.And(
+      builder.Gte(g => g.EstablishedYear, 1985),
+      builder.Ne(r => r.Make, "Kiesel"));
+   
+   var results = guitarCollection.Find(filter).ToList();
+
+   // Alternative syntax
+   var results = guitarCollection.Find(
+      g => g.EstablishedYear >= 1985
+      && g.Make != "Kiesel")
+   .ToList();
+
+The following table lists the {+driver-short+} methods for logical operations
+and the equivalent {+mdb-server+} operators:
 
 .. list-table::
-   :widths: 30 30 40
+   :widths: 20 20 40 20
    :header-rows: 1
 
-   * - Operator
-     - Builder
+   * - {+driver-short+} Method
+     - Alternative Syntax
      - Description
+     - {+mdb-server+} Operator
 
-   * - ``&&``
-     - ``And()``
-     - All expressions must evaluate to true.
+   * - ``And()``
+     - ``&&``
+     - Matches documents where all expressions evaluate to true.
+     - :manual:`$and </reference/operator/query/and/>`
 
-   * - ``||``
-     - ``Or()``
-     - At least one expression must evaluate to true.
-
-For a full list of logical operators, see the :manual:`Logical
-Query Operators </reference/operator/query-logical/>` page. 
-
+   * - ``Or()``
+     - ``||``
+     - Matches documents where one or more expressions evaluates to true.
+     - :manual:`$or </reference/operator/query/or/>`
+   
 The following example specifies a query filter as a parameter to the ``Find()`` 
 method. The query matches all documents where the
 ``establishedYear`` field is greater than or equal to ``1985``, and the ``make``
@@ -204,7 +293,6 @@ field is not equal to "Kiesel".
       :visible:
 
       { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
-
 
 The following example uses builders to create a query filter that matches the
 same documents as the preceding example:
@@ -355,8 +443,23 @@ Element Operators
 
 Element operators query data based on the presence or type of a field.
 
-For a full list of element operators, see the :manual:`Element
-Query Operators </reference/operator/query-element/>` page.
+.. list-table::
+   :widths: 20 60 20
+   :header-rows: 1
+
+   * - {+driver-short+} Method
+     - Description
+     - {+mdb-server+} Operator
+
+   * - ``Exists()``
+     - Matches documents that contain or do not contain a specified field, including
+       documents where the field value is ``null``.
+     - :manual:`$exists </reference/operator/query/exists/>`
+   
+   * - ``Type()``
+     - Matches documents where the value of the specified field is an instance of the
+       specified BSON types.
+     - :manual:`$type </reference/operator/query/type/>`
 
 The following example uses builders to create a query filter that matches all
 documents that have a ``rating`` field:
@@ -380,11 +483,34 @@ Evaluation Operators
 --------------------
 
 Evaluation operators analyze data on individual fields, or on the entire collection's
-documents. Some builder methods that use evaluation operators include ``Regex()``
-and ``Text()``.
+documents.
 
-For a full list of evaluation operators, see the :manual:`Evaluation
-Query Operators </reference/operator/query-evaluation/>` page.
+.. list-table::
+   :widths: 20 60 20
+   :header-rows: 1
+
+   * - {+driver-short+} Method
+     - Description
+     - {+mdb-server+} Operator
+
+   * - ``JsonSchema()``
+     - Matches documents that satisfy the specified JSON schema.
+     - :manual:`$jsonSchema </reference/operator/query/jsonSchema/>`
+   
+   * - ``Mod()``
+     - Matches documents where the value of the specified field divided by a divisor has the
+       specified remainder (modulo).
+     - :manual:`$mod </reference/operator/query/mod/>`
+    
+   * - ``RegEx()``
+     - Matches documents where the value of the specified field matches a specified regular
+       expression. 
+     - :manual:`$regex </reference/operator/query/regex/>`
+
+   * - ``Where()``
+     - Use to pass either a string containing a JavaScript expression or a full JavaScript
+       function to the query system.
+     - :manual:`$where </reference/operator/query/where/>`
 
 The following example uses builders to create a query filter that matches all
 documents that have a value in the ``make`` field that starts with the letter 
@@ -402,19 +528,110 @@ documents that have a value in the ``make`` field that starts with the letter
 
       { "_id" : 2, "make" : "Gibson", "models" : ["Les Paul", "SG", "Explorer"], "establishedYear" : 1902, "rating" : 8 }
 
+Geospatial Operators
+--------------------
+
+Geospatial operators return data based on geospatial expression conditions.
+
+.. list-table::
+   :widths: 20 60 20
+   :header-rows: 1
+
+   * - {+driver-short+} Method
+     - Description
+     - {+mdb-server+} Operator
+
+   * - ``GeoIntersects()``
+     - MAtches documents whose geospatial data intersects with a specified
+       `GeoJsonObject <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GeoJsonObjectModel.GeoJsonObject-1.html>`__.
+     - :manual:`$geoIntersects </reference/operator/query/geoIntersects/>`
+   
+   * - ``GeoWithin()``
+     - Matches documents with geospatial data entirely within the specified shape.
+     - :manual:`$geoWithin </reference/operator/query/geoWithin/>`
+   
+   * - ``GeoWithinBox()``
+     - Matches documents with geospatial data entirely within the specified box.
+     - :manual:`$geoWithin </reference/operator/query/geoWithin/>`, :manual:`$box </reference/operator/query/box/>`
+
+   * - ``GeoWithinCenter()``
+     - Matches documents with geospatial data entirely within the specified circle.
+     - :manual:`$geoWithin </reference/operator/query/geoWithin/>`, :manual:`$center </reference/operator/query/center/>`
+
+   * - ``GeoWithinCenterSphere()``
+     - Matches documents with geospatial data entirely within the specified sphere.
+     - :manual:`$geoWithin </reference/operator/query/geoWithin/>`, :manual:`$centerSphere </reference/operator/query/centerSphere/>`
+
+   * - ``GeoWithinPolygon()``
+     - Matches documents with geospatial data entirely within the specified polygon.
+     - :manual:`$geoWithin </reference/operator/query/geoWithin/>`, :manual:`$polygon </reference/operator/query/polygon/>`
+
+   * - ``Near()``
+     - Specifies a point for which a geospatial query returns the documents from nearest to
+       farthest. 
+     - :manual:`$near </reference/operator/query/near/>`
+
+   * - ``NearSphere()``
+     - Specifies a point for which a geospatial query returns the documents from nearest to
+       farthest in spherical geometry. 
+     - :manual:`$nearSphere </reference/operator/query/nearSphere/>`
+
+Bitwise Operators
+-----------------
+
+Bitwise operators return data based on bit-position conditions.
+
+.. list-table::
+   :widths: 20 60 20
+   :header-rows: 1
+
+   * - {+driver-short+} Method
+     - Description
+     - {+mdb-server+} Operator
+
+   * - ``BitsAllClear()``
+     - Matches documents where all of the specified bit positions are clear (``0``) in
+       the specified field.
+     - :manual:`$bitsAllClear </reference/operator/query/bitsAllClear/>`
+   
+   * - ``bitsAllSet()``
+     - Matches documents where all of the specified bit positions are set (``1``) in
+       the specified field.
+     - :manual:`$bitsAllSet </reference/operator/query/bitsAllSet/>`
+
+   * - ``bitsAnyClear()``
+     - Matches documents where any of the specified bit positions are clear (``0``) in
+       the specified field.
+     - :manual:`$bitsAnyClear </reference/operator/query/bitsAnyClear/>`   
+
+   * - ``bitsAnySet()``
+     - Matches documents where any of the specified bit positions are set (``1``) in
+       the specified field.
+     - :manual:`$bitsAnySet </reference/operator/query/bitsAnySet/>`   
+   
+Other Operators
+---------------
+
+The {+driver-short+} also provides the following methods that create filter definitions:
+
+.. list-table::
+   :widths: 40 60
+   :header-rows: 1
+
+   * - {+driver-short+} Method
+     - Description
+
+   * - ``OfType()``
+     - Matches documents of a type derived from the specified type. You can use overloads
+       of this method to specify additional query criteria.
+
+   * - ``Text()``
+     - Matches documents with a field that contains the specified string.
+
 Additional Information
 ----------------------
 
-For more information about the operators mentioned in this guide, see the 
-following Server Manual Entries:
 
-- :manual:`Comparison Query Operators </reference/operator/query-comparison/>`
-- :manual:`Logical Query Operators </reference/operator/query-logical/>`
-- :manual:`Array Query Operators </reference/operator/query-array/>`
-- :manual:`Element Query Operators </reference/operator/query-element/>`
-- :manual:`Evaluation Query Operators </reference/operator/query-evaluation/>`
-
-To learn how to specify queries using LINQ, see :ref:`csharp-linq`.
 
 .. TODO: integrate into existing page
 
@@ -428,24 +645,7 @@ documents matching the following criteria:
 - ``Price`` field value less than 20
 - ``Category`` field value is "Perennial"
 
-Use builders to create the filter definition with the typed variant:
 
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<Flower>.Filter;
-   var filter = builder.Lt(f => f.Price, 20) & builder.Eq(f => f.Category, "Perennial");
-   
-Using the typed variant form provides compile-time safety. Additionally,
-your IDE can provide refactoring support.
-
-Alternatively, you can use string-based field names to contruct the filter:
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<Flower>.Filter;
-   var filter = builder.Lt("Price", 20) & builder.Eq("Category", "Perennial");
 
 If you are using LINQ, you can also use the ``Inject()`` method to apply the filter
 to a LINQ query:
@@ -457,34 +657,6 @@ to a LINQ query:
    var filter = builder.Lt("Price", 20) & builder.Eq("Category", "Perennial");
    var query = collection.AsQueryable().Where(f => filter.Inject());
 
-Array Operators
-~~~~~~~~~~~~~~~
 
-If your document has properties or fields that serialize to arrays,
-you can use the methods beginning with ``Any``, such as ``AnyEq()`` or
-``AnyLt()``, to compare the entire array against a single item.
-
-Use builders to check which documents in the collection have a
-``Season`` array that includes "winter":
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<Flower>.Filter;
-   var filter = builder.AnyEq(f => f.Season, "winter");
-
-You can also call the ``ElemMatch()`` method to find documents that have an
-array field that contains at least one element that matches a specified search
-criteria. The following example returns documents that contain the value
-``"Summer"`` in their ``Season`` array:
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<Flower>.Filter;
-   var filter = builder.ElemMatch(f => f.Season, s => s == "Summer");
-
-To learn more about array operators, see the :manual:`Array Query Operators
-</reference/operator/query-array/>` guide in the {+mdb-server+} manual.
 
 - `FilterDefinitionBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinitionBuilder-1.html>`__

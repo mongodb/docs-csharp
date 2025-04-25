@@ -1,3 +1,4 @@
+// start-program-setup
 using MongoExample.Models;
 using MongoExample.Services;
 
@@ -5,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
 builder.Services.AddSingleton<MongoDBService>();
+// end-program-setup
 
 // start-program-example
 // Adds services to the container to configure Swagger/OpenAPI

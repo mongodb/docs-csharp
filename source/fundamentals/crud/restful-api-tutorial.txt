@@ -21,31 +21,30 @@ Tutorial: Create a RESTful API with the {+driver-short+} Driver
 Overview
 --------
 
-In this tutorial, you will learn how to create a RESTful API with endpoints that
-perform basic create, read, update, and delete (CRUD) operations across MongoDB
-Atlas.
+In this tutorial, you can learn how to create a RESTful API with endpoints that
+perform basic create, read, update, and delete (CRUD) operations across
+collections in a MongoDB Atlas cluster.
 
 Prequisites
 -----------
 
-To complete this tutorial, you must have the following:
+Before you start this tutorial, perform the following actions:
 
-- An `Atlas account
-  <https://account.mongodb.com/account/register?tck=docs_atlas>`__ with a
-  deployed and configured MongoDB Atlas cluster that is M0 or higher.
+- Set up a MongoDB Atlas account and deploy and configure a cluster that is M0
+  or higher. To view instructions, see the :atlas:`Get Started with Atlas </getting-started>` guide.
 
-- .NET 6.0 or higher `installed <https://dotnet.microsoft.com/en-us/download>`__ on your machine.
+- Install .NET 6.0 or later on your machine. To install .NET, visit the
+  `Microsoft .NET download page <https://dotnet.microsoft.com/en-us/download>`__.
 
-To learn how to get started with MongoDB Atlas and how to load sample data, see the
-:atlas:`Get Started with Atlas Guide </getting-started>`. 
-
-This tutorial uses .NET Core 8.0, but you can use any version later than .NET 6.0.
+.. note:: 
+   
+   This tutorial uses .NET Core 8.0, but you can use any version later than .NET 6.0.
 
 Set Up Your Project
 -------------------
 
-You can create a new .NET Core project using the web application template that
-Microsoft offers. To do this, run the following commands in your terminal:
+Run the following commands in your terminal to create a new .NET Core project
+that uses a web application template:
 
 .. code-block:: bash
 
@@ -60,13 +59,12 @@ To add the {+driver-short+} to your project as a dependency, run the following c
 
 The preceding commands create a new web application project for .NET core named
 ``MongoExample`` and install the latest {+driver-short+}. The template project
-includes some boilerplate files. During this tutorial, you will add to these
-files and remove some of the boilerplate code to create a RESTful API. 
+includes some boilerplate files that you modify to implement a RESTful API.
 
 Design a Document Model and Database Service
 --------------------------------------------
 
-In this section, you will create and configure your MongoDB service and define
+In this section, you can create and configure your MongoDB service and define
 the data model for your RESTful API.
 
 .. procedure:: Create a MongoDB Service
@@ -74,7 +72,7 @@ the data model for your RESTful API.
 
    .. step:: Create the MongoDBSettings class
 
-      Your MongoDB service will be responisble for establishing a connection and
+      Your MongoDB service is responsible for establishing a connection and
       directly working with documents within MongoDB. In your project, create a
       folder named ``Models``. In the ``Models`` folder, create a new file named
       ``MongoDBSettings.cs``. In this file, add the following code:
@@ -91,7 +89,7 @@ the data model for your RESTful API.
 
       The data that will be stored in the class fields defined in the
       ``MongoDBSettings`` class is found in the projects' ``appsettings.json``
-      file. Open this file and add the following:
+      file. Open this file and add the following configuration:
 
       .. code-block:: json
          :copyable: true
@@ -105,17 +103,16 @@ the data model for your RESTful API.
             },
          "AllowedHosts": "*",
          "MongoDB": {
-            "ConnectionURI": "ATLAS_URI_HERE",
+            "ConnectionURI": "<Atlas connection string>",
             "DatabaseName": "sample_mflix",
             "CollectionName": "playlist"
             }
          }
 
-      Note the ``MongoDB`` field. This tutorial uses the ``sample_mflix``
-      database and the ``playlist`` collection. Replace the ``ATLAS_URI_HERE``
-      placeholder with your MongoDB Atlas connection string. For more
-      information on how to find your connection string, see the
-      :ref:`csharp-quickstart` guide.
+      This tutorial uses the ``sample_mflix`` database and the ``playlist``
+      collection. Replace the ``<Atlas connection string>`` placeholder with
+      your MongoDB Atlas connection string. For more information on how to find
+      your connection string, see the :atlas:`Connect to Your Cluster </connect-to-your-cluster>` tutorial.
 
    .. step:: Create the service
 
@@ -128,31 +125,26 @@ the data model for your RESTful API.
          :dedent:
       
       The preceding code defines a class named ``MongoDBService`` that includes
-      empty asynchronous functions. In this tutorial, you will add code to these
-      functions as you create your endpoints. The passed settings from the
-      ``appsettings.json`` file are set to veriables.
+      empty asynchronous functions. Throughout this tutorial, you add code to these
+      functions as you create your endpoints. The settings you configured in the
+      ``appsettings.json`` file are set to variables.
 
    .. step:: Connect the service to the application
 
       Open the ``Program.cs`` file and add the following code to the top of the file:
 
-      .. code-block:: csharp
-         :copyable: true
+      .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/MongoDBExampleProgram.cs
+         :language: csharp
+         :dedent:
+         :start-after: start-program-setup
+         :end-before: end-program-setup
 
-         using MongoExample.Models;
-         using MongoExample.Services;
-
-         var builder = WebApplication.CreateBuilder(args);
-
-         builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
-         builder.Services.AddSingleton<MongoDBService>();
-
-      In the preceding code, the ``GetSection`` function pulls your settings
+      In the preceding code, the ``GetSection()`` function pulls your settings
       from the ``MongoDB`` field in the ``appsettings.json`` file. 
       
       .. tip::
          
-         If your boilerplate code already has the ``builder`` variable, don't add it twice. 
+         If the template code already has the ``builder`` variable, don't add it twice. 
 
    .. step:: Create the document model
 
@@ -179,7 +171,7 @@ the data model for your RESTful API.
       be ``username`` in C#, in JSON, and in MongoDB.
 
 You now have a MongoDB service and document model for your collection to work
-with for .NET Core.
+with .NET Core.
 
 Build CRUD Endpoints
 --------------------
@@ -295,7 +287,7 @@ service.
          :end-before: end-put
          :dedent:
    
-   .. step:: Delete data using the DELETE endpoint
+   .. step:: Delete data by using the DELETE endpoint
 
       Go to ``Services/MongoDBService.cs`` and update the ``DeleteAsync`` function to
       use the following code:
@@ -325,9 +317,9 @@ Test Your API Endpoints
 -----------------------
 
 With the endpoints created, you can test them using the Swagger UI that is
-built-in to the boilerplate .NET Core application. To do this, go to
-``Program.cs`` file and remove any code from the template project related to
-``WeatherForecast`` and similar. Update the file to include the following code:
+included with the template .NET Core application. To do this, go to the
+``Program.cs`` file and remove any code from the template project related to the
+``WeatherForecast`` class. Update the file to include the following code:
 
 .. literalinclude:: /includes/fundamentals/code-examples/restful-api-tutorial/MongoDBExampleProgram.cs
    :language: csharp
@@ -345,7 +337,8 @@ Execute the following command to run your application:
 
 After the application starts, open your browser and go to your configured
 localhost URL to access the Swagger UI, for example
-``http://localhost:5000/swagger``. The Swagger UI looks like the following:
+``http://localhost:5000/swagger``. The following image shows how the Swagger UI
+appears:
 
 .. figure:: /includes/figures/restful-api-tutorial-swagger-ui.jpg
    :alt: Swagger UI
@@ -353,9 +346,9 @@ localhost URL to access the Swagger UI, for example
 
    The Swagger UI for the RESTful API.
 
-You can test the application by clicking the ``Try it out`` button on each
+You can test the application by clicking the :guilabel:`Try it out` button on each
 endpoint. To get started, go to the ``/api/playlists`` ``POST`` endpoint
-to add some data to the database. Add the following as dummy data:
+to add some data to the database. Add the following sample data:
 
 .. code-block:: json
    :copyable: true

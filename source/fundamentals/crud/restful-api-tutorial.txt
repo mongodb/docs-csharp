@@ -57,7 +57,7 @@ To add the {+driver-short+} to your project as a dependency, run the following c
 
    dotnet add package MongoDB.Driver
 
-The preceding commands create a new web application project for .NET core named
+The preceding commands create a new web application project for .NET Core named
 ``MongoExample`` and install the latest {+driver-short+}. The template project
 includes some boilerplate files that you modify to implement a RESTful API.
 
@@ -112,7 +112,7 @@ the data model for your RESTful API.
       This tutorial uses the ``sample_mflix`` database and the ``playlist``
       collection. Replace the ``<Atlas connection string>`` placeholder with
       your MongoDB Atlas connection string. For more information on how to find
-      your connection string, see the :atlas:`Connect to Your Cluster </connect-to-your-cluster>` tutorial.
+      your connection string, see the :atlas:`Connect to Your Cluster </tutorial/connect-to-your-cluster>` tutorial.
 
    .. step:: Create the service
 
@@ -327,7 +327,7 @@ included with the template .NET Core application. To do this, go to the
    :start-after: start-program-example
    :end-before: end-program-example
 
-You can replace any repetitive code in the boilerplate with the preceding code.
+You can replace any repetitive code from the project template with the preceding code.
 
 Execute the following command to run your application:
 

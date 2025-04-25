@@ -166,7 +166,7 @@ the data model for your RESTful API.
       ``movieIds``.
 
       If you plan to have your local class field match the document field
-      directly, you don't need to define custom mappings. For example, the
+      directly, it isn't necessary to define custom mappings. For example, the
       ``username`` field in the preceding code has no custom mappings. It will
       be ``username`` in C#, in JSON, and in MongoDB.
 
@@ -176,7 +176,7 @@ with .NET Core.
 Build CRUD Endpoints
 --------------------
 
-To create the CRUD endpoints for this application, you need to update two
+To create the CRUD endpoints for this application, you must update two
 different files within the project. In this section, you can learn how to define
 the endpoint within a controller and update the corresponding work within the
 service.

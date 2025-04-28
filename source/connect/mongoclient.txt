@@ -11,6 +11,7 @@ Create a MongoClient
 
 .. meta::
    :keywords: connection string, URI, server, Atlas, settings
+   :description: Learn how to create a `MongoClient` to connect to a MongoDB deployment using a connection URI and customize connection behavior.
 
 .. contents:: On this page
    :local:
@@ -21,20 +22,32 @@ Create a MongoClient
 This guide shows you how to connect to a MongoDB instance or replica set
 deployment by using the {+driver-short+}.
 
-.. _csharp_connection_uri:
+Overview
+--------
+
+To connect to a MongoDB deployment, you need two things:
+
+- A **connection URI**, also known as a *connection string*, which tells the {+driver-short+}
+  which MongoDB deployment to connect to.
+- A **MongoClient** object, which creates the connection to the MongoDB deployment
+  and lets you perform operations on it.
+
+You can also use either of these components to customize the way {+driver-short+} behaves
+while connected to MongoDB.
+
+This guide shows you how to create a connection URI and use a ``MongoClient`` object
+to connect to MongoDB.
 
 Connection URI
 --------------
 
-A **connection URI**, also known as a *connection string*, tells the driver how to connect to a MongoDB deployment and how to behave while connected.
-
-A standard connection string includes the following pieces:
+A standard connection URI includes the following components:
 
 .. list-table::
    :widths: 20 80
    :header-rows: 1
 
-   * - Piece
+   * - Component
      - Description
 
    * - ``mongodb://``
@@ -42,20 +55,24 @@ A standard connection string includes the following pieces:
      - Required. A prefix that identifies this as a string in the
        standard connection format.
 
-   * - ``username:password@``
+   * - ``username:password``
 
-     - Optional. Authentication credentials. If you include these, the client will authenticate the user against the database specified in ``authSource``. 
+     - Optional. Authentication credentials. If you include these, the client
+       authenticates the user against the database specified in ``authSource``.
+       For more information about authentication settings, see
+       :ref:`csharp-authentication-mechanisms`. 
 
    * - ``host[:port]``
 
-     - Required. The host and optional port number where MongoDB is running. If you don't include the port number, the driver will use the default port, ``27017``.
+     - Required. The host and optional port number where MongoDB is running. If you don't
+       include the port number, the driver uses the default port, ``27017``.
 
    * - ``/defaultauthdb``
      
      - Optional. The authentication database to use if the
        connection string includes ``username:password@``
        authentication credentials but not the ``authSource`` option. If you don't include 
-       this piece, the client will authenticate the user against the ``admin`` database.
+       this component, the client authenticates the user against the ``admin`` database.
 
    * - ``?<options>``
 
@@ -64,94 +81,44 @@ A standard connection string includes the following pieces:
        :ref:`csharp-connection-options` for a full description of
        these options.
 
-To use a connection URI, pass it as a string to the ``MongoClient`` constructor. In the 
-following example, the driver uses a sample connection URI to connect to a MongoDB 
-instance on port ``27017`` of ``localhost``: 
+For more information about creating a connection string, see
+:manual:`Connection Strings </reference/connection-string?tck=docs_driver_csharp>` in the
+MongoDB Server documentation.
 
-.. literalinclude:: /includes/fundamentals/code-examples/connection/LocalConnection.cs
-   :language: csharp
-   :start-after: // start local connection
-   :end-before: // end local connection
+MongoClient
+-----------
 
-.. tip:: Reuse Your Client
+To create a connection to MongoDB, pass a connection URI to the
+``MongoClient`` constructor. In the following example, the driver uses a sample
+connection URI to connect to a MongoDB deployment running on port ``27017`` of ``localhost``:abbreviation:
 
-   Because each ``MongoClient`` represents a pool of connections to the
-   database, most applications require only a single instance of
-   ``MongoClient``, even across multiple requests. To learn more about
-   how connection pools work in the driver, see the :ref:`FAQ page
-   <csharp-faq-connection-pool>`.
+.. code-block:: csharp
 
-See :manual:`the MongoDB Manual </reference/connection-string>` for more information about creating a connection string.
+   const string connectionUri = "mongodb://localhost:27017/";
+   var client = new MongoClient(connectionUri);
 
-MongoClientSettings
--------------------
+Configuring the MongoClient
+---------------------------
 
-You can use a ``MongoClientSettings`` object to configure the connection in code
-rather than in a connection URI. To use a ``MongoClientSettings`` object, create an 
-instance of the class and pass it as an argument to the ``MongoClient`` constructor. 
+You can configure settings for the ``MongoClient`` object by passing a
+``MongoClientSettings`` object to the constructor. The following example creates a
+``MongoClient`` object and sets the ``UseTls`` property to ``true``:
 
-In the following example, the driver uses a ``MongoClientSettings`` object to connect to a 
-MongoDB instance on port ``27017`` of ``localhost``:
+.. code-block:: csharp
 
-.. literalinclude:: /includes/fundamentals/code-examples/connection/MongoClientSettings.cs
-   :language: csharp
-   :dedent:
-   :start-after: // start mongo client settings
-   :end-before: // end mongo client settings
+   var mongoClientSettings = MongoClientSettings.FromConnectionString("mongodb://localhost:27017/");
+   mongoClientSettings.UseTls = true;
+   var client = new MongoClient(mongoClientSettings);
 
-Other Connection Targets
-------------------------
+For a full list of the settings you can configure, see the
+`MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`_
+API documentation.
 
-Connect to Atlas
-~~~~~~~~~~~~~~~~
+API Documentation
+-----------------
 
-To connect to a MongoDB deployment on Atlas, create a client. You can
-create a client that uses your connection string and other 
-client options by passing a ``MongoClientSettings`` object to the ``MongoClient``
-constructor.
+To learn more about creating a ``MongoClient`` object with the {+driver-short+},
+see the following API documentation:
 
-To specify your connection URI, pass it to the ``FromConnectionString()``
-method, which returns a new ``MongoClientSettings`` instance. To specify any other
-client options, set the relevant fields of the ``MongoClientSettings`` object.
-
-You can set the {+stable-api+} version as a client option to avoid
-breaking changes when you upgrade to a new server version. To 
-learn more about the {+stable-api+} feature, see the :ref:`{+stable-api+} page
-<csharp-stable-api>`.
-
-The following code shows how you can specify the connection string and
-the {+stable-api+} client option when connecting to a MongoDB
-deployment and verify that the connection is successful:
-
-.. literalinclude:: /includes/fundamentals/code-examples/connection/AtlasConnection.cs
-   :language: csharp
-   :start-after: // start atlas connection
-   :end-before: // end atlas connection
-
-.. tip::
-
-   Follow the :atlas:`Atlas driver connection guide </driver-connection?tck=docs_driver_nodejs>`
-   to retrieve your connection string.
-
-Connect to a Replica Set
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-To connect to a replica set deployment, specify the hostnames (or IP addresses) and 
-port numbers of the members of the replica set.
-
-If you aren't able to provide a full list of hosts in the replica set, you can 
-specify one or more of the hosts in the replica set and instruct the driver to 
-perform automatic discovery in one of the following ways:
-
-- Specify the name of the replica set as the value of the ``replicaSet`` parameter.
-- Specify ``false`` as the value of the ``directConnection`` parameter.
-- Specify more than one host in the replica set.
-
-In the following example, the driver uses a sample connection URI to connect to the 
-MongoDB replica set ``sampleRS``, which is running on port ``27017`` of three different
-hosts, including ``sample.host1``:
-
-.. literalinclude:: /includes/fundamentals/code-examples/connection/ReplicaSetConnection.cs
-   :language: csharp
-   :start-after: // start replica set connection
-   :end-before: // end replica set connection
+- `MongoClient <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClient.html>`__
+- `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__

@@ -14,7 +14,7 @@ Create a Query Filter
 .. facet::
    :name: genre
    :values: reference
- 
+
 .. meta::
    :keywords: search, read, update, delete
 
@@ -36,7 +36,7 @@ The examples in this guide use the following documents in a collection called
 ``guitars``:
 
 .. code-block:: json
- 
+
    { "_id": 1, "make": "Fender", "models": ["Stratocaster", "Telecaster"], "establishedYear": 1946, "rating": 9 }
    { "_id": 2, "make": "Gibson", "models": ["Les Paul", "SG", "Explorer"], "establishedYear": 1902, "rating": 8 }
    { "_id": 3, "make": "PRS", "models": ["Silver Sky", "SE", "Custom"], "establishedYear": 1985, "rating": 9 }
@@ -52,7 +52,7 @@ The following ``Guitar`` class models the documents in this collection:
    :dedent:
 
 To run the code examples on this page, you must obtain a reference to the ``guitars``
-collection, as shown in the following example: 
+collection, as shown in the following example:
 
 .. code-block:: csharp
 
@@ -67,7 +67,7 @@ collection, as shown in the following example:
    the properties in the ``Guitar`` class.
 
    To learn more creating and serializing custom classes, see the following pages:
-   
+
    - :ref:`csharp-poco`
    - :ref:`csharp-class-mapping`
    - :ref:`csharp-serialization`
@@ -77,7 +77,7 @@ Find All Documents
 ------------------
 
 An empty query filter matches all documents in a collection. The following example shows
-how to create an empty query filter: 
+how to create an empty query filter:
 
 .. code-block:: csharp
 
@@ -119,15 +119,15 @@ and the equivalent {+mdb-server+} operators:
      - ``>``
      - Matches documents where the value of the specified field is greater than the query value.
      - :manual:`$gt </reference/operator/query/gt/>`
-   
+
    * - ``Gte()``
      - ``>=``
      - Matches documents where any element in the specified array field is greater than or
        equal to the query value.
      - :manual:`$gte </reference/operator/query/gte/>`
-   
+
    * - ``In()``
-     - N/A 
+     - N/A
      - Matches documents where any element in the specified array field matches any value in
        the query array.
      - :manual:`$in </reference/operator/query/in/>`
@@ -137,36 +137,36 @@ and the equivalent {+mdb-server+} operators:
      - Matches documents where any element in the specified array field is less than the
        query value.
      - :manual:`$lt </reference/operator/query/lt/>`
-   
+
    * - ``Lte()``
      - ``<=``
      - Matches documents where any element in the specified array field is less than or equal
        to the query value.
      - :manual:`$lte </reference/operator/query/lte/>`
-   
+
    * - ``Ne()``
      - ``!=``
      - Matches documents where any element in the specified array field is not equal to
        the query value.
      - :manual:`$ne </reference/operator/query/ne/>`
-   
+
    * - ``Nin()``
-     - N/A 
+     - N/A
      - Matches documents where one of the following is true:
-     
+
        - None of the elements in the specified array field matches any of the values in the
          query array.
        - The specified field doesn't exist.
      - :manual:`$nin </reference/operator/query/nin/>`
 
    * - ``StringIn()``
-     - N/A 
+     - N/A
      - Matches documents where the string value of the specified field matches any string
-       value in the query array. 
+       value in the query array.
      - :manual:`$in </reference/operator/query/in/>`
-   
+
    * - ``StringNin()``
-     - N/A 
+     - N/A
      - Matches documents where the string value of the specified field doesn't match any
        of the string values in the query array.
      - :manual:`$in </reference/operator/query/in/>`
@@ -196,13 +196,13 @@ same documents as the preceding example:
    .. input:: /includes/fundamentals/code-examples/specify-query/FindGtBuilder.cs
       :language:  csharp
 
-   .. output:: 
+   .. output::
       :language: json
       :visible:
 
       { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
 
-The following example specifies a query filter as a parameter to the ``Find()`` 
+The following example specifies a query filter as a parameter to the ``Find()``
 method. The query matches all documents where the
 ``make`` field equals "Fender".
 
@@ -212,7 +212,7 @@ method. The query matches all documents where the
    .. input:: /includes/fundamentals/code-examples/specify-query/FindEqPOCO.cs
       :language:  csharp
 
-   .. output:: 
+   .. output::
       :language: json
       :visible:
 
@@ -227,7 +227,7 @@ same documents as the preceding example:
    .. input:: /includes/fundamentals/code-examples/specify-query/FindEqBuilder.cs
       :language:  csharp
 
-   .. output:: 
+   .. output::
       :language: json
       :visible:
 
@@ -246,7 +246,7 @@ the method, as shown in the following example:
    var filter = builder.And(
       builder.Gte(g => g.EstablishedYear, 1985),
       builder.Ne(r => r.Make, "Kiesel"));
-   
+
    var results = guitarCollection.Find(filter).ToList();
 
    // Alternative syntax
@@ -276,8 +276,8 @@ and the equivalent {+mdb-server+} operators:
      - ``||``
      - Matches documents where one or more expressions evaluates to true.
      - :manual:`$or </reference/operator/query/or/>`
-   
-The following example specifies a query filter as a parameter to the ``Find()`` 
+
+The following example specifies a query filter as a parameter to the ``Find()``
 method. The query matches all documents where the
 ``establishedYear`` field is greater than or equal to ``1985``, and the ``make``
 field is not equal to "Kiesel".
@@ -303,7 +303,7 @@ same documents as the preceding example:
    .. input:: /includes/fundamentals/code-examples/specify-query/FindAndBuilder.cs
       :language:  csharp
 
-   .. output:: 
+   .. output::
       :language: json
       :visible:
 
@@ -313,7 +313,8 @@ Array Operators
 ---------------
 
 Array operators match documents based on the value or quantity of elements in an array
-field. The following is a list of builder methods that use array operators:
+field. The following table lists the {+driver-short+} methods for array operations
+and the equivalent {+mdb-server+} operators:
 
 .. list-table::
    :widths: 20 60 20
@@ -324,105 +325,93 @@ field. The following is a list of builder methods that use array operators:
      - {+mdb-server+} Operator
 
    * - ``All()``
-     - Matches documents where the value of the field matches all values specified in the
-       query.
+     - Matches documents where the values in the specified array field match all query
+       values.
      - :manual:`$all </reference/operator/query/all/>`
 
    * - ``AnyEq()``
-     - Matches documents where any element in the specified array field matches the specified
+     - Matches documents where any element in the specified array field matches the
        query value.
      - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
-   
+
    * - ``AnyGt()``
-     - Matches documents where any element in the specified array field is greater than the specified
+     - Matches documents where any element in the specified array field is greater than the
        query value.
      - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
-   
+
    * - ``AnyGte()``
-     - Matches documents where any element in the specified array field is greater than or equal to
-       the specified query value.
+     - Matches documents where any element in the specified array field is greater than or
+       equal to the query value.
      - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
-   
+
    * - ``AnyIn()``
      - Matches documents where any element in the specified array field matches any value in
-       the specified query array.
+       the query array.
      - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
 
    * - ``AnyLt()``
-     - Matches documents where any element in the specified array field is less than the specified
+     - Matches documents where any element in the specified array field is less than the
        query value.
      - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
-   
+
    * - ``AnyLte()``
-     - Matches documents where any element in the specified array field is less than or equal to
-       the specified query value.
+     - Matches documents where any element in the specified array field is less than or
+       equal to the query value.
      - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
-   
+
    * - ``AnyNe()``
      - Matches documents where any element in the specified array field is not equal to
-       the specified query value.
+       the query value.
      - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
-   
+
    * - ``AnyNin()``
-     - Matches documents where none of the elements in the specified array field match any of the 
-       values in the specified query array. This method also matches documents where the
-       specified field doesn't exist.
+     - Matches documents where one of the following is true:
+
+       - Any element in the specified array field isn't in the query array.
+       - The specified field doesn't exist.
      - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
 
    * - ``AnyStringIn()``
      - Matches documents where any string element in the specified array field matches any
-       string value in the specified query array.
+       string value in the query array.
      - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
-   
+
    * - ``AnyStringNin()``
-     - Matches documents where none of the string elements in the specified array field
-       matches any of the values in the specified query filter. This method also matches
-       documents where the specified field doesn't exist.
+     - Matches documents where one of the following is true:
+
+       - Any string element in the specified array field isn't in the query array.
+       - The specified field doesn't exist.
      - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
-   
+
    * - ``ElemMatch()``
      - Matches documents where any element in the specified array field matches the
-       specified query criteria. 
+       query criteria.
      - :manual:`$elemMatch </reference/operator/query/elemMatch/>`
-   
-   * - ``In()``
-     - Matches documents where the value of the specified field matches any value in the
-       specified query array. 
-     - :manual:`$in </reference/operator/query/in/>`
-   
+
    * - ``Size()``
      - Matches documents where the specified array field is the specified size.
      - :manual:`$size </reference/operator/query/size/>`
-   
+
    * - ``SizeGt()``
      - Matches documents where the specified array field is larger than the specified size.
      - :manual:`$size </reference/operator/query/size/>`
-   
+
    * - ``SizeGte()``
-     - Matches documents where the specified array field is larger than or equal to the specified size.
+     - Matches documents where the specified array field is larger than or equal to the
+       specified size.
      - :manual:`$size </reference/operator/query/size/>`
-   
+
    * - ``SizeLt()``
      - Matches documents where the specified array field is smaller than the specified size.
      - :manual:`$size </reference/operator/query/size/>`
-   
+
    * - ``SizeLte()``
-     - Matches documents where the array field is smaller than or equal to the specified size.
+     - Matches documents where the specified array field is smaller than or equal to the
+       specified size.
      - :manual:`$size </reference/operator/query/size/>`
 
-   * - ``StringIn()``
-     - Matches documents where the string value of the specified field matches any string value in the
-       specified query array. 
-     - :manual:`$in </reference/operator/query/in/>`
-   
-   * - ``StringNin()``
-     - Matches documents where the string value of the specified field matches none of the
-       string values in the specified query array.
-       the specified query filter. 
-     - :manual:`$in </reference/operator/query/in/>`
-
 The following example uses builders to create a query filter that matches all
-documents that have 3 elements in the ``models`` field:
+documents that have three elements in the ``models`` field:
 
 .. io-code-block::
    :copyable:
@@ -441,7 +430,9 @@ documents that have 3 elements in the ``models`` field:
 Element Operators
 -----------------
 
-Element operators query data based on the presence or type of a field.
+Element operators match document query data based on the presence or type of a field.
+The following table lists the {+driver-short+} methods for element operations
+and the equivalent {+mdb-server+} operators:
 
 .. list-table::
    :widths: 20 60 20
@@ -452,10 +443,10 @@ Element operators query data based on the presence or type of a field.
      - {+mdb-server+} Operator
 
    * - ``Exists()``
-     - Matches documents that contain or do not contain a specified field, including
+     - Matches documents that contain or don't contain a specified field, including
        documents where the field value is ``null``.
      - :manual:`$exists </reference/operator/query/exists/>`
-   
+
    * - ``Type()``
      - Matches documents where the value of the specified field is an instance of the
        specified BSON types.
@@ -482,8 +473,9 @@ documents that have a ``rating`` field:
 Evaluation Operators
 --------------------
 
-Evaluation operators analyze data on individual fields, or on the entire collection's
-documents.
+Evaluation operators analyze data in individual fields or all documents in the collection.
+The following table lists the {+driver-short+} methods for
+evaluation operations and the equivalent {+mdb-server+} operators:
 
 .. list-table::
    :widths: 20 60 20
@@ -496,15 +488,15 @@ documents.
    * - ``JsonSchema()``
      - Matches documents that satisfy the specified JSON schema.
      - :manual:`$jsonSchema </reference/operator/query/jsonSchema/>`
-   
+
    * - ``Mod()``
      - Matches documents where the value of the specified field divided by a divisor has the
        specified remainder (modulo).
      - :manual:`$mod </reference/operator/query/mod/>`
-    
+
    * - ``RegEx()``
      - Matches documents where the value of the specified field matches a specified regular
-       expression. 
+       expression.
      - :manual:`$regex </reference/operator/query/regex/>`
 
    * - ``Where()``
@@ -513,7 +505,7 @@ documents.
      - :manual:`$where </reference/operator/query/where/>`
 
 The following example uses builders to create a query filter that matches all
-documents that have a value in the ``make`` field that starts with the letter 
+documents that have a value in the ``make`` field that starts with the letter
 "G":
 
 .. io-code-block::
@@ -532,6 +524,8 @@ Geospatial Operators
 --------------------
 
 Geospatial operators return data based on geospatial expression conditions.
+The following table lists the {+driver-short+} methods for
+geospatial operations and the equivalent {+mdb-server+} operators:
 
 .. list-table::
    :widths: 20 60 20
@@ -542,44 +536,46 @@ Geospatial operators return data based on geospatial expression conditions.
      - {+mdb-server+} Operator
 
    * - ``GeoIntersects()``
-     - MAtches documents whose geospatial data intersects with a specified
+     - Matches documents whose geospatial data intersects with a specified
        `GeoJsonObject <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.GeoJsonObjectModel.GeoJsonObject-1.html>`__.
      - :manual:`$geoIntersects </reference/operator/query/geoIntersects/>`
-   
+
    * - ``GeoWithin()``
-     - Matches documents with geospatial data entirely within the specified shape.
+     - Matches documents whose geospatial data is entirely within the specified shape.
      - :manual:`$geoWithin </reference/operator/query/geoWithin/>`
-   
+
    * - ``GeoWithinBox()``
-     - Matches documents with geospatial data entirely within the specified box.
+     - Matches documents whose geospatial data is entirely within the specified box.
      - :manual:`$geoWithin </reference/operator/query/geoWithin/>`, :manual:`$box </reference/operator/query/box/>`
 
    * - ``GeoWithinCenter()``
-     - Matches documents with geospatial data entirely within the specified circle.
+     - Matches documents whose geospatial data is entirely within the specified circle.
      - :manual:`$geoWithin </reference/operator/query/geoWithin/>`, :manual:`$center </reference/operator/query/center/>`
 
    * - ``GeoWithinCenterSphere()``
-     - Matches documents with geospatial data entirely within the specified sphere.
+     - Matches documents whose geospatial data is entirely within the specified sphere.
      - :manual:`$geoWithin </reference/operator/query/geoWithin/>`, :manual:`$centerSphere </reference/operator/query/centerSphere/>`
 
    * - ``GeoWithinPolygon()``
-     - Matches documents with geospatial data entirely within the specified polygon.
+     - Matches documents whose geospatial data is entirely within the specified polygon.
      - :manual:`$geoWithin </reference/operator/query/geoWithin/>`, :manual:`$polygon </reference/operator/query/polygon/>`
 
    * - ``Near()``
      - Specifies a point for which a geospatial query returns the documents from nearest to
-       farthest. 
+       farthest.
      - :manual:`$near </reference/operator/query/near/>`
 
    * - ``NearSphere()``
      - Specifies a point for which a geospatial query returns the documents from nearest to
-       farthest in spherical geometry. 
+       farthest in spherical geometry.
      - :manual:`$nearSphere </reference/operator/query/nearSphere/>`
 
 Bitwise Operators
 -----------------
 
-Bitwise operators return data based on bit-position conditions.
+Bitwise operators matches documents based on bit-position conditions.
+The following table lists the {+driver-short+} methods for
+bitwise operations and the equivalent {+mdb-server+} operators:
 
 .. list-table::
    :widths: 20 60 20
@@ -593,7 +589,7 @@ Bitwise operators return data based on bit-position conditions.
      - Matches documents where all of the specified bit positions are clear (``0``) in
        the specified field.
      - :manual:`$bitsAllClear </reference/operator/query/bitsAllClear/>`
-   
+
    * - ``bitsAllSet()``
      - Matches documents where all of the specified bit positions are set (``1``) in
        the specified field.
@@ -602,13 +598,13 @@ Bitwise operators return data based on bit-position conditions.
    * - ``bitsAnyClear()``
      - Matches documents where any of the specified bit positions are clear (``0``) in
        the specified field.
-     - :manual:`$bitsAnyClear </reference/operator/query/bitsAnyClear/>`   
+     - :manual:`$bitsAnyClear </reference/operator/query/bitsAnyClear/>`
 
    * - ``bitsAnySet()``
      - Matches documents where any of the specified bit positions are set (``1``) in
        the specified field.
-     - :manual:`$bitsAnySet </reference/operator/query/bitsAnySet/>`   
-   
+     - :manual:`$bitsAnySet </reference/operator/query/bitsAnySet/>`
+
 Other Operators
 ---------------
 
@@ -631,32 +627,7 @@ The {+driver-short+} also provides the following methods that create filter defi
 Additional Information
 ----------------------
 
-
-
-.. TODO: integrate into existing page
-
-Construct a Filter
-------------------
-
-The ``FilterDefinitionBuilder`` class provides a type-safe interface for
-building up queries. Suppose you want to query your collection for
-documents matching the following criteria:
-
-- ``Price`` field value less than 20
-- ``Category`` field value is "Perennial"
-
-
-
-If you are using LINQ, you can also use the ``Inject()`` method to apply the filter
-to a LINQ query:
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<Flower>.Filter;
-   var filter = builder.Lt("Price", 20) & builder.Eq("Category", "Perennial");
-   var query = collection.AsQueryable().Where(f => filter.Inject());
-
-
-
-- `FilterDefinitionBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinitionBuilder-1.html>`__
+For more information about any of the driver methods on this page, see the
+API documentation for the
+`FilterDefinitionBuilder<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinitionBuilder-1.html>`__
+class.

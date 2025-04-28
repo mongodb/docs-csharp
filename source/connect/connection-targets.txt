@@ -87,7 +87,8 @@ perform automatic discovery to find the others. To instruct the driver to perfor
 automatic discovery, perform one of the following actions:
 
 - Specify the name of the replica set as the value of the ``replicaSet`` parameter.
-- Specify ``false`` as the value of the ``directConnection`` parameter.
+- Specify ``false`` as the value of the ``directConnection`` parameter. You can also omit
+  this parameter, as it defaults to ``false``.
 - Specify more than one host in the replica set.
 
 In the following example, the driver uses a sample connection URI to connect to the 
@@ -114,13 +115,12 @@ balances operations across multiple MongoDB deployments, see the
    of its ``nodes`` attribute, the list might be empty while the client connects to
    the replica set members.
 
-Initialization
-~~~~~~~~~~~~~~
+Connect to a Single Server
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To initialize a replica set, you must connect directly to a single member. To do so,
-set the ``directConnection`` connection
-option to ``true``. You can do this in two ways: by passing an argument to the
-``MongoClient`` constructor or through a parameter in your connection string. Select the
+To connect to a single server in a replica set rather than the entire replica set, specify
+``false`` as the value of the ``directConnection`` connection option. You can do this in two ways: by passing
+an argument to the ``MongoClient`` constructor or through a parameter in your connection string. Select the
 :guilabel:`MongoClientSettings` or :guilabel:`Connection String` tab to see the corresponding code.
 
 .. tabs::

@@ -102,7 +102,7 @@ The following table lists the {+driver-short+} methods for comparison operations
 and the equivalent {+mdb-server+} operators:
 
 .. list-table::
-   :widths: 10 10 70 10
+   :widths: 20 20 40 20
    :header-rows: 1
 
    * - {+driver-short+} Method

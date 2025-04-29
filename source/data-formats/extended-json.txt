@@ -19,6 +19,11 @@ Extended JSON
 
 .. sharedinclude:: dbx/extended-json.rst
 
+   .. replacement:: default-text
+
+      The {+driver-short+} uses Relaxed mode by default.
+
+
 Read Extended JSON
 ------------------
 

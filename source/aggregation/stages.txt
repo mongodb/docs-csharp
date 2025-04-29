@@ -1,4 +1,6 @@
 .. _csharp-aggregation-stages:
+.. _csharp-builders-aggregation:
+.. _csharp-linq:
 
 ===========================
 Aggregation Pipeline Stages

@@ -104,10 +104,9 @@ Aggregation Stage Methods
 -------------------------
 
 The following table lists the builder methods in the {+driver-short+} that correspond
-to stages in the aggregation pipeline. To learn more about an aggregation stage,
-follow the link from the method name to its reference page in the {+mdb-server+} manual.
-To learn more about a builder method, follow the link from the method name to its
-dedicated page.
+to stages in the aggregation pipeline. To learn more about an aggregation stage and
+see a code example for the equivalent C# method, follow the link from the stage name
+to its reference page in the {+mdb-server+} manual.
 
 If an aggregation stage isn't in the table, the driver doesn't provide a builder method for
 it. In this case, you must use the
@@ -125,7 +124,7 @@ to your pipeline.
    * - :manual:`$bucket </reference/operator/aggregation/bucket/>`
      - Categorizes incoming documents into groups, called buckets,
        based on a specified expression and bucket boundaries.
-     - :ref:`Bucket() <csharp-aggregation-bucket>`
+     - ``Bucket()``
 
    * - :manual:`$bucketAuto </reference/operator/aggregation/bucketAuto/>`
      - Categorizes incoming documents into a specific number of
@@ -133,13 +132,13 @@ to your pipeline.
        Bucket boundaries are automatically determined in an attempt
        to evenly distribute the documents into the specified number
        of buckets.
-     - :ref:`BucketAuto() <csharp-aggregation-bucketauto>`
+     - ``BucketAuto()``
 
    * - :manual:`$changeStream </reference/operator/aggregation/changeStream/>`
      - Returns a change stream cursor for the
        collection. This stage can occur only once in an aggregation
        pipeline and it must occur as the first stage.
-     - :ref:`ChangeStream() <csharp-aggregation-changestream>`
+     - ``ChangeStream()``
 
    * - :manual:`$changeStreamSplitLargeEvent </reference/operator/aggregation/changeStreamSplitLargeEvent/>`
      - Splits large change stream events that exceed 16 MB into smaller fragments returned
@@ -147,20 +146,20 @@ to your pipeline.
 
        You can use ``$changeStreamSplitLargeEvent`` only in a ``$changeStream`` pipeline, and
        it must be the final stage in the pipeline.
-     - :ref:`ChangeStreamSplitLargeEvent() <csharp-aggregation-changestreamsplitlargeevent>`
+     - ``ChangeStreamSplitLargeEvent()``
 
    * - :manual:`$count </reference/operator/aggregation/count/>`
      - Returns a count of the number of documents at this stage of
        the aggregation pipeline.
-     - :ref:`Count() <csharp-aggregation-count>`
+     - ``Count()``
 
    * - :manual:`$densify </reference/operator/aggregation/densify/>`
      - Creates new documents in a sequence of documents where certain values in a field are missing.
-     - :ref:`Densify() <csharp-aggregation-densify>`
+     - ``Densify()``
 
    * - :manual:`$documents </reference/operator/aggregation/documents/>`
      - Returns literal documents from input expressions.
-     - :ref:`Documents() <csharp-aggregation-documents>`
+     - ``Documents()``
 
    * - :manual:`$facet </reference/operator/aggregation/facet/>`
      - Processes multiple aggregation pipelines
@@ -168,13 +167,13 @@ to your pipeline.
        of input documents. Enables the creation of multi-faceted
        aggregations capable of characterizing data across multiple
        dimensions, or facets, in a single stage.
-     - :ref:`Facet() <csharp-aggregation-facet>`
+     - ``Facet()``
 
    * - :manual:`$graphLookup </reference/operator/aggregation/graphLookup/>`
      - Performs a recursive search on a collection. This method adds  
        a new array field to each output document that contains the traversal  
        results of the recursive search for that document.
-     - :ref:`GraphLookup() <csharp-aggregation-graphlookup>`
+     - ``GraphLookup()``
 
    * - :manual:`$group </reference/operator/aggregation/group/>`
      - Groups input documents by a specified identifier expression
@@ -183,27 +182,27 @@ to your pipeline.
        document per each distinct group. The output documents
        contain only the identifier field and, if specified, accumulated
        fields.
-     - :ref:`Group() <csharp-aggregation-group>`
+     - ``Group()``
 
    * - :manual:`$limit </reference/operator/aggregation/limit/>`
      - Passes the first *n* documents unmodified to the pipeline,
        where *n* is the specified limit. For each input document,
        outputs either one document (for the first *n* documents) or
        zero documents (after the first *n* documents).
-     - :ref:`Limit() <csharp-aggregation-limit>`
+     - ``Limit()``
 
    * - :manual:`$lookup </reference/operator/aggregation/facet/>`
      - Performs a left outer join to another collection in the
        *same* database to filter in documents from the "joined"
        collection for processing.
-     - :ref:`Lookup() <csharp-aggregation-lookup>`
+     - ``Lookup()``
 
    * - :manual:`$match </reference/operator/aggregation/match/>`
      - Filters the document stream to allow only matching documents
        to pass unmodified into the next pipeline stage.
        For each input document, outputs either one document (a match) or zero
        documents (no match).
-     - :ref:`Match() <csharp-aggregation-match>`
+     - ``Match()``
 
    * - :manual:`$merge </reference/operator/aggregation/merge/>`
      - Writes the resulting documents of the aggregation pipeline to
@@ -213,24 +212,24 @@ to your pipeline.
        custom update pipeline) the results into an output
        collection. To use this stage, it must be
        the last stage in the pipeline.
-     - :ref:`Merge() <csharp-aggregation-merge>`
+     - ``Merge()``
 
    * - :manual:`$out </reference/operator/aggregation/out/>`
      - Writes the resulting documents of the aggregation pipeline to
        a collection. To use this stage, it must be
        the last stage in the pipeline.
-     - :ref:`Out() <csharp-aggregation-out>`
+     - ``Out()``
 
    * - :manual:`$project </reference/operator/aggregation/project/>`
      - Reshapes each document in the stream, such as by adding new
        fields or removing existing fields. For each input document,
        outputs one document.
-     - :ref:`Project() <csharp-aggregation-project>`
+     - ``Project()``
 
    * - :manual:`$rankFusion </reference/operator/aggregation/rankFusion/>`
      - Uses a rank fusion algorithm to combine results from a Vector Search
        query and an Atlas Search query.
-     - :ref:`RankFusion() <csharp-aggregation-rankfusion>`
+     - ``RankFusion()``
 
    * - :manual:`$replaceRoot </reference/operator/aggregation/replaceRoot/>`
      - Replaces a document with the specified embedded document. The
@@ -240,7 +239,7 @@ to your pipeline.
        top level.
 
        The ``$replaceWith`` stage is an alias for the ``$replaceRoot`` stage.
-     - :ref:`ReplaceRoot() <csharp-aggregation-replaceroot>`
+     - ``ReplaceRoot()``
 
    * - :manual:`$replaceWith </reference/operator/aggregation/replaceWith/>`
      - Replaces a document with the specified embedded document.
@@ -249,12 +248,12 @@ to your pipeline.
        the embedded document to the top level.
 
        The ``$replaceWith`` stage is an alias for the ``$replaceRoot`` stage.
-     - :ref:`ReplaceWith() <csharp-aggregation-replacewith>`
+     - ``ReplaceWith()``
 
    * - :manual:`$sample </reference/operator/aggregation/sample/>`
      - Randomly selects the specified number of documents from its
        input.
-     - :ref:`Sample() <csharp-aggregation-sample>`
+     - ``Sample()``
 
    * - :manual:`$search </reference/operator/aggregation/search/>`
      - Performs a full-text search of the field or fields in an
@@ -265,7 +264,7 @@ to your pipeline.
        available for self-managed deployments. To learn more, see
        :atlas:`Atlas Search Aggregation Pipeline Stages
        </reference/atlas-search/query-syntax>` in the Atlas documentation.
-     - :ref:`Search() <csharp-aggregation-search>`
+     - ``Search()``
 
    * - :manual:`$searchMeta </reference/operator/aggregation/searchMeta/>`
      - Returns different types of metadata result documents for the
@@ -277,7 +276,7 @@ to your pipeline.
        and is not available for self-managed deployments. To learn
        more, see :atlas:`Atlas Search Aggregation Pipeline Stages
        </reference/atlas-search/query-syntax>` in the Atlas documentation.
-     - :ref:`SearchMeta() <csharp-aggregation-searchmeta>`
+     - ``SearchMeta()``
 
    * - :manual:`$set </reference/operator/aggregation/set/>`
      - Adds new fields to documents. Like the ``Project()`` method,
@@ -285,12 +284,12 @@ to your pipeline.
        document in the stream by adding new fields to
        output documents that contain both the existing fields
        from the input documents and the newly added fields.
-     - :ref:`Set() <csharp-aggregation-set>`
+     - ``Set()``
 
    * - :manual:`$setWindowFields </reference/operator/aggregation/setWindowFields/>`
      - Groups documents into windows and applies one or more
        operators to the documents in each window.
-     - :ref:`SetWindowFields() <csharp-aggregation-setwindowfields>`
+     - ``SetWindowFields()``
 
    * - :manual:`$skip </reference/operator/aggregation/skip/>`
      - Skips the first *n* documents, where *n* is the specified skip
@@ -298,23 +297,23 @@ to your pipeline.
        pipeline. For each input document, outputs either zero
        documents (for the first *n* documents) or one document (if
        after the first *n* documents).
-     - :ref:`Skip() <csharp-aggregation-skip>`
+     - ``Skip()``
 
    * - :manual:`$sort </reference/operator/aggregation/sort/>`
      - Reorders the document stream by a specified sort key. The documents remain unmodified.
        For each input document, outputs one document.
-     - :ref:`Sort() <csharp-aggregation-sort>`
+     - ``Sort()``
 
    * - :manual:`$sortByCount </reference/operator/aggregation/sortByCount/>`
      - Groups incoming documents based on the value of a specified
        expression, then computes the count of documents in each
        distinct group.
-     - :ref:`SortByCount() <csharp-aggregation-sortbycount>`
+     - ``SortByCount()``
 
    * - :manual:`$unionWith </reference/operator/aggregation/unionWith/>`
      - Combines pipeline results from two collections into a single
        result set.
-     - :ref:`UnionWith() <csharp-aggregation-unionwith>`
+     - ``UnionWith()``
 
    * - :manual:`$unwind </reference/operator/aggregation/unwind/>`
      - Deconstructs an array field from the input documents to
@@ -322,7 +321,7 @@ to your pipeline.
        replaces the array with an element value. For each input
        document, outputs *n* Documents, where *n* is the number of
        array elements. *n* can be zero for an empty array.
-     - :ref:`Unwind() <csharp-aggregation-unwind>`
+     - ``Unwind()``
 
    * - :manual:`$vectorSearch </reference/operator/aggregation/vectorSearch/>`
      - Performs an :abbr:`ANN (Approximate Nearest Neighbor)` or
@@ -333,7 +332,7 @@ to your pipeline.
        This stage is available only for MongoDB Atlas clusters, and is not
        available for self-managed deployments. To learn more, see
        :ref:`Atlas Vector Search <csharp-atlas-vector-search>`. 
-     - :ref:`VectorSearch() <csharp-aggregation-vectorsearch>`
+     - ``VectorSearch()``
 
 API Documentation
 -----------------

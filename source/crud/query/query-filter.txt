@@ -183,7 +183,7 @@ greater than ``1985``.
 
    .. output::
       :language: json
-      :visible:
+      :visible: false
 
       { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
 
@@ -198,7 +198,7 @@ same documents as the preceding example:
 
    .. output::
       :language: json
-      :visible:
+      :visible: false
 
       { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
 
@@ -214,7 +214,7 @@ method. The query matches all documents where the
 
    .. output::
       :language: json
-      :visible:
+      :visible: false
 
       { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
 
@@ -229,7 +229,7 @@ same documents as the preceding example:
 
    .. output::
       :language: json
-      :visible:
+      :visible: false
 
       { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
 
@@ -290,7 +290,7 @@ field is not equal to "Kiesel".
 
    .. output::
       :language: json
-      :visible:
+      :visible: false
 
       { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
 
@@ -305,7 +305,7 @@ same documents as the preceding example:
 
    .. output::
       :language: json
-      :visible:
+      :visible: false
 
       { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
 
@@ -411,7 +411,7 @@ and the equivalent {+mdb-server+} operators:
      - :manual:`$size </reference/operator/query/size/>`
 
 The following example uses builders to create a query filter that matches all
-documents that have three elements in the ``models`` field:
+documents that have exactly three elements in the ``models`` field:
 
 .. io-code-block::
    :copyable:
@@ -421,7 +421,7 @@ documents that have three elements in the ``models`` field:
 
    .. output::
       :language: json
-      :visible:
+      :visible: false
 
       { "_id" : 2, "make" : "Gibson", "models" : ["Les Paul", "SG", "Explorer"], "establishedYear" : 1902, "rating" : 8 }
       { "_id" : 3, "make" : "PRS", "models" : ["Silver Sky", "SE", "Custom"], "establishedYear" : 1985, "rating" : 9 }
@@ -463,7 +463,7 @@ documents that have a ``rating`` field:
 
    .. output::
       :language: json
-      :visible:
+      :visible: false
 
       { "_id" : 1, "make" : "Fender", "models" : ["Stratocaster", "Telecaster"], "establishedYear" : 1946, "rating" : 9 }
       { "_id" : 2, "make" : "Gibson", "models" : ["Les Paul", "SG", "Explorer"], "establishedYear" : 1902, "rating" : 8 }
@@ -516,7 +516,7 @@ documents that have a value in the ``make`` field that starts with the letter
 
    .. output::
       :language: json
-      :visible:
+      :visible: false
 
       { "_id" : 2, "make" : "Gibson", "models" : ["Les Paul", "SG", "Explorer"], "establishedYear" : 1902, "rating" : 8 }
 

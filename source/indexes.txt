@@ -1,8 +1,8 @@
 .. _csharp-indexes:
 
-=======
-Indexes
-=======
+=========================
+Create and Manage Indexes
+=========================
 
 .. facet::
    :name: genre

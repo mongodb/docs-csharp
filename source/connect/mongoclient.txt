@@ -11,7 +11,7 @@ Create a MongoClient
 
 .. meta::
    :keywords: connection string, URI, server, Atlas, settings
-   :description: Learn how to create a `MongoClient` to connect to a MongoDB deployment using a connection URI and customize connection behavior.
+   :description: Learn how to create a MongoClient to connect to a MongoDB deployment URI and customize connection behavior.
 
 .. contents:: On this page
    :local:
@@ -25,15 +25,15 @@ deployment by using the {+driver-short+}.
 Overview
 --------
 
-To connect to a MongoDB deployment, you need two things:
+Connecting to a MongoDB deployment requires the following components:
 
-- A **connection URI**, also known as a *connection string*, which tells the {+driver-short+}
+- **Connection URI**, also known as a *connection string*, which tells the {+driver-short+}
   which MongoDB deployment to connect to.
-- A **MongoClient** object, which creates the connection to the MongoDB deployment
-  and lets you perform operations on it.
+- **MongoClient** object, which creates and sustains the connection to the MongoDB deployment
+  and lets you perform data operations.
 
-You can also use either of these components to customize the way {+driver-short+} behaves
-while connected to MongoDB.
+You can also specify connection settings in either of these components to customize the way
+the {+driver-short+} behaves while connected to MongoDB.
 
 This guide shows you how to create a connection URI and use a ``MongoClient`` object
 to connect to MongoDB.
@@ -65,7 +65,7 @@ A standard connection URI includes the following components:
    * - ``host[:port]``
 
      - Required. The host and optional port number where MongoDB is running. If you don't
-       include the port number, the driver uses the default port, ``27017``.
+       include the port number, the driver uses the default port ``27017``.
 
    * - ``/defaultauthdb``
      
@@ -90,15 +90,15 @@ MongoClient
 
 To create a connection to MongoDB, pass a connection URI to the
 ``MongoClient`` constructor. In the following example, the driver uses a sample
-connection URI to connect to a MongoDB deployment running on port ``27017`` of ``localhost``:abbreviation:
+connection URI to connect to a MongoDB deployment running on port ``27017`` of ``localhost``:
 
 .. code-block:: csharp
 
-   const string connectionUri = "mongodb://localhost:27017/";
-   var client = new MongoClient(connectionUri);
+   const string uri = "mongodb://localhost:27017/";
+   var client = new MongoClient(uri);
 
-Configuring the MongoClient
----------------------------
+Configure the MongoClient
+-------------------------
 
 You can configure settings for the ``MongoClient`` object by passing a
 ``MongoClientSettings`` object to the constructor. The following example creates a
@@ -108,12 +108,11 @@ You can configure settings for the ``MongoClient`` object by passing a
 
    var mongoClientSettings = MongoClientSettings
        .FromConnectionString("mongodb://localhost:27017/");
-   mongoClientSettings.UseTls = true;
+       .UseTls = true;
    var client = new MongoClient(mongoClientSettings);
 
 For a full list of the settings you can configure, see the
-`MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`_
-API documentation.
+:ref:`csharp-connection-options` guide.
 
 API Documentation
 -----------------

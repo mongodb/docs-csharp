@@ -1,9 +1,9 @@
 .. _csharp-mongodb-aws:
 .. _csharp-authentication-aws:
 
-=================================================
-AWS Identity and Access Management Authentication
-=================================================
+======================
+AWS IAM Authentication
+======================
 
 .. contents:: On this page
    :local:

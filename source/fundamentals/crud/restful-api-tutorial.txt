@@ -1,8 +1,8 @@
 .. _csharp-crud-restful-api-tutorial:
 
-=====================================================================
-Tutorial: Create a RESTful API with the {+driver-short+} Driver
-=====================================================================
+============================================================
+Tutorial: Create a RESTful API by Using the {+driver-short+}
+============================================================
 
 .. facet::
    :name: genre
@@ -36,7 +36,7 @@ Before you start this tutorial, perform the following actions:
 - Install .NET 6.0 or later on your machine. To install .NET, visit the
   `Microsoft .NET download page <https://dotnet.microsoft.com/en-us/download>`__.
 
-.. note:: 
+.. note:: Language Compatibility
    
    This tutorial uses .NET Core 8.0, but you can use any version later than .NET 6.0.
 
@@ -87,8 +87,8 @@ the data model for your RESTful API.
 
    .. step:: Update the appsettings.json file
 
-      The data that will be stored in the class fields defined in the
-      ``MongoDBSettings`` class is found in the projects' ``appsettings.json``
+      You can find the data that is stored in the class fields defined in the
+      ``MongoDBSettings`` class in the projects' ``appsettings.json``
       file. Open this file and add the following configuration:
 
       .. code-block:: json
@@ -101,18 +101,19 @@ the data model for your RESTful API.
                "Microsoft.AspNetCore": "Warning"
                }
             },
-         "AllowedHosts": "*",
-         "MongoDB": {
-            "ConnectionURI": "<Atlas connection string>",
-            "DatabaseName": "sample_mflix",
-            "CollectionName": "playlist"
-            }
+            "AllowedHosts": "*",
+            "MongoDB": {
+               "ConnectionURI": "<Atlas connection string>",
+               "DatabaseName": "sample_mflix",
+               "CollectionName": "playlist"
+               }
          }
 
       This tutorial uses the ``sample_mflix`` database and the ``playlist``
       collection. Replace the ``<Atlas connection string>`` placeholder with
       your MongoDB Atlas connection string. For more information on how to find
-      your connection string, see the :atlas:`Connect to Your Cluster </tutorial/connect-to-your-cluster>` tutorial.
+      your connection string, see the :atlas:`Connect to Your Cluster </tutorial/connect-to-your-cluster>`
+      tutorial in the Atlas documentation.
 
    .. step:: Create the service
 
@@ -157,20 +158,19 @@ the data model for your RESTful API.
          :language: csharp
          :dedent:
 
-      In the preceding code, the ``Id`` field is represented as an ``ObjectId``
-      in BSON and the ``_id`` fild within MongoDB. When you work with this
-      locally in your application, it is a string.
+      In the preceding code, the ``Id`` field is serialized as an ``ObjectId``
+      in the ``_id`` field. The field is represented as a string in your application.
 
-      The ``movieIds`` field will be known as ``items``. When sending or
-      receiving JSON, the field will also be known as ``items`` instead of
+      The ``movieIds`` field is serialized as ``items``. When you send or
+      receive JSON values, the field is also named ``items`` instead of
       ``movieIds``.
 
       If you plan to have your local class field match the document field
       directly, it isn't necessary to define custom mappings. For example, the
-      ``username`` field in the preceding code has no custom mappings. It will
+      ``username`` field in the preceding code has no custom mappings. It is called
       be ``username`` in C#, in JSON, and in MongoDB.
 
-You now have a MongoDB service and document model for your collection to work
+After this step, you have a MongoDB service and document model for your collection to work
 with .NET Core.
 
 Build CRUD Endpoints
@@ -181,7 +181,7 @@ different files within the project. In this section, you can learn how to define
 the endpoint within a controller and update the corresponding work within the
 service.
 
-.. note::
+.. note:: Data Validation
 
    In this example project, there is no data validation for the HTTP requests.
 
@@ -231,7 +231,7 @@ service.
       When the ``POST`` endpoint executes, the application takes the
       ``Playlist`` object from the ``request``, which .NET Core parses, and
       passes it to the ``CreateAsync`` function in the service. After the
-      insert, the code returns some information about the interaction.
+      insert, the code returns information about the interaction.
 
    .. step:: Read data through the GET endpoint
 
@@ -311,7 +311,7 @@ service.
          :end-before: end-delete
          :dedent:
 
-You now have a complete set of CRUD endpoints for your RESTful API.
+After this step, you have a complete set of CRUD endpoints for your RESTful API.
 
 Test Your API Endpoints
 -----------------------

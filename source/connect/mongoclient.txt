@@ -106,12 +106,11 @@ You can configure settings for the ``MongoClient`` object by passing a
 
 .. code-block:: csharp
 
-   var mongoClientSettings = MongoClientSettings
-       .FromConnectionString("mongodb://localhost:27017/");
-       .UseTls = true;
-   var client = new MongoClient(mongoClientSettings);
+   var connectionString = "mongodb://localhost:27017/"
+   var settings = MongoClientSettings.FromConnectionString(connectionString);
+   settings.UseTls = true;
 
-For a full list of the settings you can configure, see the
+To view a full list of the settings you can configure, see the
 :ref:`csharp-connection-options` guide.
 
 API Documentation

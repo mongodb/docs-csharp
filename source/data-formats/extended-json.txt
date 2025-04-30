@@ -19,7 +19,7 @@ Extended JSON
 
 .. sharedinclude:: dbx/extended-json.rst
 
-   .. replacement:: default-text
+   .. replacement:: driver-specific-text-relaxed
 
       The {+driver-short+} uses Relaxed mode by default.
 

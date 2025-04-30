@@ -100,6 +100,13 @@ hosts, including ``host1``:
    :start-after: // start-replica-set-connection-rs-name
    :end-before: // end-replica-set-connection-rs-name
 
+.. note:: Specifying the Replica Set Name
+
+   Although the driver can automatically discover replica set members without specifying
+   the hostnames of all members or the replica set name, we recommend specifying the
+   replica set name to avoid corner cases where the replica set will not initialize
+   correctly.
+
 The {+driver-short+} evenly load balances operations across deployments that are reachable
 within the client's ``localThresholdMS`` value. To learn more about how the {+driver-short+} load
 balances operations across multiple MongoDB deployments, see the

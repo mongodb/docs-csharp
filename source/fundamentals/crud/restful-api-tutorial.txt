@@ -25,8 +25,8 @@ In this tutorial, you can learn how to create a RESTful API with endpoints that
 perform basic create, read, update, and delete (CRUD) operations across
 collections in a MongoDB Atlas cluster.
 
-Prequisites
------------
+Prerequisites
+-------------
 
 Before you start this tutorial, perform the following actions:
 

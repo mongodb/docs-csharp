@@ -72,14 +72,14 @@ Index Types
 MongoDB provides several different index types to support querying
 your data. The following steps describe the process for creating an index:
 
-- Use the ``IndexKeysDefinitionBuilder<TDocument>`` class, accessible through the
-  ``Builders<TDocument>.IndexKeys`` property, to create one or more
-  ``IndexKeysDefinition<TDocument>`` objects. These key definitions describe the type
-  of index to create and the index's other properties.
-- Create a new ``CreateIndexModel<TDocument>`` object. Pass the key definitions from the
-  previous step to the constructor.
-- Call the ``CreateOne()`` method on your collection's ``Indexes`` property. Pass
-  the ``CreateIndexModel<TDocument>`` object from the previous step.
+1. Use the ``IndexKeysDefinitionBuilder<TDocument>`` class, which you can access through the
+   ``Builders<TDocument>.IndexKeys`` property, to create one or more
+   ``IndexKeysDefinition<TDocument>`` objects. These key definitions describe the type
+   of index to create and the index's other properties.
+#. Create a new ``CreateIndexModel<TDocument>`` object. Pass the key definitions from the
+   previous step to the constructor.
+#. Call the ``CreateOne()`` method on your collection's ``Indexes`` property. Pass
+   the ``CreateIndexModel<TDocument>`` object from the previous step.
 
 The following sections describe the most common index types
 and provide sample code for creating each index type.

@@ -1,9 +1,9 @@
 .. _csharp-kerberos:
 .. _csharp-authentication-kerberos:
 
-=================
-Kerberos (GSSAPI)
-=================
+================================
+Kerberos (GSSAPI) Authentication
+================================
 
 .. contents:: On this page
    :local:

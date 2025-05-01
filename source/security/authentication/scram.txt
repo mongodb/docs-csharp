@@ -1,8 +1,8 @@
 .. _csharp-authentication-scram:
 
-=====
-SCRAM
-=====
+============================================
+SCRAM-SHA-1 and SCRAM-SHA-256 Authentication
+============================================
 
 .. contents:: On this page
    :local:

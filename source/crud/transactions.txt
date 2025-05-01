@@ -49,6 +49,35 @@ instantiating a new client each time.
    ``IClientSession`` with a different ``MongoClient`` results in operation
    errors.
 
+Causal Consistency
+~~~~~~~~~~~~~~~~~~
+
+.. sharedinclude:: dbx/causal-consistency.rst
+
+   .. replacement:: insert-one-method
+
+      ``InsertOne()``
+
+   .. replacement:: update-one-method
+
+      ``UpdateOne()``
+
+   .. replacement:: find-one-method
+
+      ``Find()``
+
+   .. replacement:: delete-one-method
+
+      ``DeleteOne()``
+
+   .. replacement:: majority-rc
+
+      ``ReadConcern.Majority``
+
+   .. replacement:: majority-wc
+
+      ``WriteConcern.WMajority``
+
 Methods
 -------
 
@@ -231,3 +260,4 @@ guide, see the following API Documentation:
 - `CommitTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransaction.html>`__ / `CommitTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.CommitTransactionAsync.html>`__
 - `WithTransaction() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransaction.html>`__ / `WithTransactionAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IClientSession.WithTransactionAsync.html>`__
 - `TransactionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html>`__
+- `CausalConsistency <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ClientSessionOptions.CausalConsistency.html>`__

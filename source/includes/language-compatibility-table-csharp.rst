@@ -60,4 +60,4 @@
      - ✓
      - ✓
 
-.. [#2.14-note] {+driver-short+} versions 2.14 or later requires .NET Framework 4.7.2 or later.
+.. [#2.14-note] {+driver-short+} versions 2.14 and later require .NET Framework 4.7.2 or later.

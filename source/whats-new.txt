@@ -66,7 +66,7 @@ improvements, and fixes:
 
 - Adds the following options for Atlas Search queries:
 
-  - ``MatchCriteria`` in ``SearchTextOptions`` to set match critera for
+  - ``MatchCriteria`` in ``SearchTextOptions`` to set match criteria for
     terms passed to the ``Text()`` operator method.
 
   - ``Synonyms`` in ``SearchPhraseOptions`` to set the name of the
@@ -80,12 +80,12 @@ improvements, and fixes:
   ``IQueryable<Base>``.
 
 - Corrects Atlas Search operator behavior to use registered serializers
-  instead of predefined serializers. To implement the previous
+  instead of predefined serializers. To use the previous
   behavior, set the following option: 
 
   .. code-block:: csharp
 
-     SearchDefinition.UseConfiguredSerializers(false)
+     SearchDefinition.UseConfiguredSerializers(false);
 
 For more information about this release, see the :github:`v3.4 release notes
 </mongodb/mongo-csharp-driver/releases/tag/v3.4.0>` on GitHub.

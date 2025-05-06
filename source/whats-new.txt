@@ -62,7 +62,8 @@ improvements, and fixes:
 - Supports casting from an interface to a type that implements that
   interface in LINQ queries.
 
-- Supports the ``Dictionary`` constructor in LINQ.
+- Supports the ``Dictionary(IEnumerable<KeyValuePair<TKey, TValue>>
+  collection)`` constructor in LINQ.
 
 - Adds the following options for Atlas Search queries:
 
@@ -79,7 +80,7 @@ improvements, and fixes:
 - Supports LINQ queries after casting ``IQueryable<Derived>`` objects to
   ``IQueryable<Base>``.
 
-- Corrects Atlas Search operator behavior to use registered serializers
+- Corrects Atlas Search operator behavior to use configured serializers
   instead of predefined serializers. To use the previous
   behavior, set the following option: 
 

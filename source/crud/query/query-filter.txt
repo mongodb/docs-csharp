@@ -171,9 +171,9 @@ and the equivalent {+mdb-server+} operators:
        of the string values in the query array.
      - :manual:`$in </reference/operator/query/in/>`
 
-The following example specifies a query filter as a parameter to the ``Find()``
-method. The query matches all documents where the ``establishedYear`` field is
-greater than ``1985``.
+The following example calls the ``Find()`` method and passes a lambda filter, which
+the driver translates to a query filter. The query matches all documents where the
+``establishedYear`` field is greater than ``1985``.
 
 .. io-code-block::
    :copyable:
@@ -202,8 +202,8 @@ same documents as the preceding example:
 
       { "_id" : 4, "make" : "Kiesel", "models" : ["Ares", "Vader", "Solo"], "establishedYear" : 2015, "rating" : null }
 
-The following example specifies a query filter as a parameter to the ``Find()``
-method. The query matches all documents where the
+The following example calls the ``Find()`` method and passes a lambda expression, which
+the driver translates to a query filter. The query matches all documents where the
 ``make`` field equals "Fender".
 
 .. io-code-block::
@@ -277,8 +277,8 @@ and the equivalent {+mdb-server+} operators:
      - Matches documents where one or more expressions evaluates to true.
      - :manual:`$or </reference/operator/query/or/>`
 
-The following example specifies a query filter as a parameter to the ``Find()``
-method. The query matches all documents where the
+The following example calls the ``Find()`` method and passes a lambda expression,
+which the driver translates to a query filter. The query matches all documents where the
 ``establishedYear`` field is greater than or equal to ``1985``, and the ``make``
 field is not equal to "Kiesel".
 
@@ -590,17 +590,17 @@ bitwise operations and the equivalent {+mdb-server+} operators:
        the specified field.
      - :manual:`$bitsAllClear </reference/operator/query/bitsAllClear/>`
 
-   * - ``bitsAllSet()``
+   * - ``BitsAllSet()``
      - Matches documents where all of the specified bit positions are set (``1``) in
        the specified field.
      - :manual:`$bitsAllSet </reference/operator/query/bitsAllSet/>`
 
-   * - ``bitsAnyClear()``
+   * - ``BitsAnyClear()``
      - Matches documents where any of the specified bit positions are clear (``0``) in
        the specified field.
      - :manual:`$bitsAnyClear </reference/operator/query/bitsAnyClear/>`
 
-   * - ``bitsAnySet()``
+   * - ``BitsAnySet()``
      - Matches documents where any of the specified bit positions are set (``1``) in
        the specified field.
      - :manual:`$bitsAnySet </reference/operator/query/bitsAnySet/>`

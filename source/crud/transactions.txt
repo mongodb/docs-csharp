@@ -69,31 +69,31 @@ You can customize the behavior of your session by passing an instance of the
 describes the properties that you can set on a ``ClientSessionOptions`` object:
 
 .. list-table::
-   :widths: 20 80
+   :widths: 40 60
    :header-rows: 1
 
    * - Property
      - Description
 
    * - ``CausalConsistency``
-     - Specifies whether the session is causally consistent. In a causally consistent session,
-       the driver executes operations in the order they were issued. To learn more, see
-       :ref:`<csharp-causal-consistency>`.
+     - | Specifies whether the session is causally consistent. In a causally consistent session,
+         the driver executes operations in the order they were issued. To learn more, see
+         :ref:`<csharp-causal-consistency>`.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``true``
 
    * - ``DefaultTransactionOptions``
-     - Specifies the default transaction options for the session. This includes the maximum commit
-       time, read concern, read preference, and write concern.
+     - | Specifies the default transaction options for the session. This includes the maximum commit
+         time, read concern, read preference, and write concern.
        |
        | **Data Type**: `TransactionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html>`__ 
        | **Default**: ``null``
    
    * - ``Snapshot``
-     - Specifies whether the driver performs snapshot reads. To learn more about snapshot
-       reads, see :manual:`Read Concern "snapshot" </reference/read-concern-snapshot/>`
-       in the {+mdb-server+} manual.
+     - | Specifies whether the driver performs snapshot reads. To learn more about snapshot
+         reads, see :manual:`Read Concern "snapshot" </reference/read-concern-snapshot/>`
+         in the {+mdb-server+} manual.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``

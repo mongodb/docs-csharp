@@ -48,8 +48,8 @@ instantiating a new client each time.
 The following example shows how to create a session by calling the ``StartSession()``
 method:
 
-.. code-block::
-   :language: csharp
+.. code-block:: csharp
+   :copyable: true
 
    var client = new MongoClient("mongodb://localhost:27017");
    var session = client.StartSession();
@@ -100,8 +100,8 @@ describes the properties that you can set on a ``ClientSessionOptions`` object:
 
 The following code example shows how to create a session with custom options:
 
-.. code-block::
-   :language: csharp
+.. code-block:: csharp
+   :copyable: true
 
    var client = new MongoClient("mongodb://localhost:27017");
    var sessionOptions = new ClientSessionOptions

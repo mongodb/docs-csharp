@@ -161,7 +161,7 @@ tabs to learn about the methods to manage your transaction:
         :tabid: synchronous-methods
 
         .. list-table::
-            :widths: 40 60
+            :widths: 30 70
             :header-rows: 1
 
             * - Method

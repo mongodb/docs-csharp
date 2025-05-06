@@ -1,15 +1,15 @@
 .. _csharp-transactions:
 
-============
-Transactions
-============
+================================
+Batch Operations in Transactions
+================================
 
 .. facet::
    :name: genre
    :values: reference
 
 .. meta::
-   :keywords: code example, multi-document
+   :keywords: code example, multi-document, atomic, acid
 
 .. contents:: On this page
    :local:

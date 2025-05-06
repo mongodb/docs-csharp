@@ -49,6 +49,7 @@ The following example shows how to create a session by calling the ``StartSessio
 method:
 
 .. code-block::
+   :language: csharp
 
    var client = new MongoClient("mongodb://localhost:27017");
    var session = client.StartSession();
@@ -83,7 +84,7 @@ describes the properties that you can set on a ``ClientSessionOptions`` object:
        | **Default**: ``true``
 
    * - ``DefaultTransactionOptions``
-     - The default transaction options for the session. This includes the maximum commit
+     - Specifies the default transaction options for the session. This includes the maximum commit
        time, read concern, read preference, and write concern.
        |
        | **Data Type**: `TransactionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.TransactionOptions.html>`__ 
@@ -100,6 +101,7 @@ describes the properties that you can set on a ``ClientSessionOptions`` object:
 The following code example shows how to create a session with custom options:
 
 .. code-block::
+   :language: csharp
 
    var client = new MongoClient("mongodb://localhost:27017");
    var sessionOptions = new ClientSessionOptions

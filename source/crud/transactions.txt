@@ -69,7 +69,7 @@ You can customize the behavior of your session by passing an instance of the
 describes the properties that you can set on a ``ClientSessionOptions`` object:
 
 .. list-table::
-   :widths: 40 60
+   :widths: 35 65
    :header-rows: 1
 
    * - Property

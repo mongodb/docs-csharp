@@ -7,7 +7,7 @@ setting's value.
 
 .. list-table::
    :header-rows: 1
-   :widths: 30 40 30
+   :widths: 20 60 20
 
    * - Parameter
      - Description
@@ -99,8 +99,8 @@ setting's value.
      - ``NumericOrdering``
 
    * - ``strength``
-     - Optional. Specifies the level of comparison to perform, as defined in the
-       `ICU documentation <https://unicode-org.github.io/icu/userguide/collation/concepts.html#comparison-levels>`__.
+     - | Optional. Specifies the level of comparison to perform, as defined in the
+         `ICU documentation <https://unicode-org.github.io/icu/userguide/collation/concepts.html#comparison-levels>`__.
        |
        | **Data Type**: `CollationStrength <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CollationStrength.html>`__
        | **Default**: ``CollationStrength.Tertiary``

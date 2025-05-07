@@ -208,7 +208,8 @@ You can configure the commonly used options with the following methods:
      - | Gets or sets the number of documents to hold in a cursor at a given time.
 
    * - ``Collation`` 
-     - | Sets the collation options. 
+     - | Sets the collation options. See the
+         :ref:`<csharp-find-collation>` section of this page for more information.
 
    * - ``Comment`` 
      - | Sets the comment to the query. To learn more about query comments, 
@@ -222,6 +223,13 @@ You can configure the commonly used options with the following methods:
 
 To see a full list of available options, see 
 `FindOptions Properties <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FindOptions.html>`__.
+
+.. _csharp-find-collation:
+
+Collation
+~~~~~~~~~
+
+.. include:: /includes/collation.rst
 
 Example
 ~~~~~~~

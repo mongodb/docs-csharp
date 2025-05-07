@@ -16,7 +16,7 @@ setting's value.
    * - ``locale``
      - | Specifies the International Components for Unicode (ICU) locale. For a list of
          supported locales,
-         see :manual:`Collation Locales and Default Parameters </reference/collation-locales-defaults/#supported-languages-and-locales>`.
+         see :manual:`Collation Locales and Default Parameters </reference/collation-locales-defaults/#supported-languages-and-locales>`
          in the {+mdb-server+} Manual.
        |
        | If you want to use simple binary comparison, use the ``Collation.Simple`` static
@@ -54,13 +54,13 @@ setting's value.
        |
        | When this argument is ``true``:
        |
-       | - If ``Strength`` is ``CollationStrength.Primary``, the driver compares base
+       | - If the strength is ``Primary``, the driver compares base
            characters and case.
-       | - If ``Strength`` is ``CollationStrength.Secondary``, the driver compares base
+       | - If the strength is ``Secondary``, the driver compares base
            characters, diacritics, other secondary differences, and case.
        |
        | When this argument is ``false``, the driver doesn't include case comparison at
-         strength level 1 or 2.
+         strength level ``Primary`` or ``Secondary``.
        |
        | **Data Type**: {+bool-data-type+} 
        | **Default**: ``false``
@@ -80,7 +80,7 @@ setting's value.
        |
        | Most text doesn't require normalization.
        |
-       | **Data Type**: ``{+bool-data-type+}``
+       | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
      - ``Normalization``
 
@@ -91,10 +91,10 @@ setting's value.
          For example, "10" is greater than "2". If this argument is ``false`` or excluded,
          the driver compares numeric strings as strings. For example, "10" is less than "2".
        |
-       | For more information, see :manual:`Collation </reference/collation/#restrictions>`
+       | For more information, see :manual:`Collation Restrictions </reference/collation/#restrictions>`
          in the {+mdb-server+} manual.
        |
-       | **Data Type**: ``{+bool-data-type+}``
+       | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
      - ``NumericOrdering``
 

@@ -12,7 +12,7 @@ Read Operations
    :titlesonly:
    :maxdepth: 1
 
-   Specify a Query </crud/query/specify-query>
+   Specify a Query </crud/query/query-filter>
    Find Documents </crud/query/find>
    Specify Documents to Return </crud/query/specify-documents-to-return>
    Specify Fields to Return </crud/query/project>

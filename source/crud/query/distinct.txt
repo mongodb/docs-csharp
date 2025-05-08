@@ -180,7 +180,9 @@ describes the properties you can set on a ``DistinctOptions`` instance:
      - Description
 
    * - ``Collation`` 
-     - | Sets the collation to use for the operation.
+     - | Sets the collation to use for the operation. See the
+         :ref:`<csharp-distinct-collation>` section of this page for more information. 
+       | Default: ``null``
        | **Data type**: `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.DistinctOptions.Collation.html>`__
 
    * - ``MaxTime``
@@ -248,6 +250,13 @@ corresponding code.
             Amici Pizza And Pasta
             Angie'S Cafe Pizza
             ...
+
+.. _csharp-distinct-collation:
+
+Collation
+~~~~~~~~~
+
+.. include:: /includes/collation.rst
 
 API Documentation
 -----------------

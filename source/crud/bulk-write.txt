@@ -133,8 +133,7 @@ parameters:
 
    * - ``collation``
      - | *Optional.* The language collation to use when sorting results. See the
-         :manual:`{+mdb+server+} manual</reference/command/delete/#std-label-deletes-array-collation>`
-         for more information.
+         :ref:`<csharp-bulk-write-collation>` section of this page for more information.
        |
        | **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
        | **Default:** ``null``
@@ -228,9 +227,8 @@ constructor accepts the following parameters:
        | **Data Type:** ``TDocument``
 
    * - ``collation``
-     - | *Optional.* The language collation to use when sorting results. See
-         the :manual:`{+mdb-server+} manual</reference/command/delete/#std-label-deletes-array-collation>`
-         for more information.
+     - | *Optional.* The language collation to use when sorting results. See the
+         :ref:`<csharp-bulk-write-collation>` section of this page for more information.
        |
        | **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
        | **Default:** ``null``
@@ -298,9 +296,8 @@ parameters:
        | **Data Type:** `FilterDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.FilterDefinition-1.html>`__
 
    * - ``collation``
-     - | *Optional.* The language collation to use when sorting results. See
-         the :manual:`{+mdb-server+} manual</reference/command/delete/#std-label-deletes-array-collation>`
-         for more information.
+     - | *Optional.* The language collation to use when sorting results. See the
+         :ref:`<csharp-bulk-write-collation>` section of this page for more information.
        |
        | **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
        | **Default:** ``null``
@@ -469,6 +466,13 @@ a delete operation:
         :language: csharp
         :copyable:
         :dedent: 8
+
+.. _csharp-bulk-write-collation:
+
+Collation
+~~~~~~~~~
+
+.. include:: /includes/collation.rst
 
 Return Value
 ------------

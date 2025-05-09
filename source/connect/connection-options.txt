@@ -120,35 +120,85 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
 Replica Set Options
 ~~~~~~~~~~~~~~~~~~~
 
-DirectConnection
-````````````````
-Specifies whether to force dispatch **all** operations to the host.
-If you specify this option, the driver doesn't accept the
-:manual:`DNS seed list connection format. </reference/connection-string/#std-label-connections-dns-seedlist>`
-You must use the :manual:`standard connection URI format </reference/connection-string/#standard-connection-string-format/>`
-instead. The default value is ``false``.
+.. tabs::
 
-This property must be set to ``false`` if you specify more than one
-host name.
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
 
-.. list-table::
-   :header-rows: 1
-   :widths: 40 40 20
+      ReplicaSetName
+      ``````````````
 
-   * - ``MongoClientSettings``
-     - ``MongoUrlBuilder``
-     - Connection URI
+      .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
+      
+      .. code-block:: none
+         :copyable: true
 
-   * - ``settings.DirectConnection = true;``
-     - ``builder.DirectConnection = true;``
-     - ``directConnection=true``
+         var settings = new MongoClientSettings();
+          settings.ReplicaSetName = "yourReplicaSet";
+
+      DirectConnection
+      ````````````````
+      
+      .. include:: /includes/fundamentals/connection-options/directConnection.rst
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var settings = new MongoClientSettings();
+         settings.DirectConnection = true;
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      ReplicaSetName
+      ``````````````
+
+      .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
+      
+      .. code-block:: none
+         :copyable: true
+
+          var builder = new MongoUrlBuilder();
+          builder.ReplicaSetName = "yourReplicaSet";
+
+      DirectConnection
+      ````````````````
+      
+      .. include:: /includes/fundamentals/connection-options/directConnection.rst
+      
+      .. code-block:: csharp
+         :copyable: true
+
+         var builder = new MongoUrlBuilder();
+         builder.DirectConnection = true;
+   
+   .. tab:: Connection URI
+      :tabid: connection-uri
+
+      replicaSet
+      ``````````
+
+      .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
+      
+      .. code-block:: none
+         :copyable: true
+
+         mongodb://localhost:27017/?replicaSet=yourReplicaSet
+
+      directConnection
+      ````````````````
+
+      .. include:: /includes/fundamentals/connection-options/directConnection.rst
+      
+      .. code-block:: none
+         :copyable: true
+
+         mongodb://localhost:27017/?directConnection=true
 
    * - **ReplicaSetName**
-     - | The name of the replica set to connect to.
+     - | 
        |
        | **Data Type**: {+string-data-type+}
-       | **Default**: ``null``
-       | **Connection URI Example**: ``replicaSet=yourReplicaSet``
 
    * - ``AllowInsecureTls``
      - ``AllowInsecureTls``

@@ -119,7 +119,7 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 20 60
+   :widths: 25 20 55
 
    * - ``MongoClientSettings`` Property
      - ``MongoUrlBuilder`` Property
@@ -147,10 +147,6 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
        | **Data Type**: {+string-data-type+}
        | **Default**: ``null``
        | **Connection URI Example**: ``appName=yourApp``
-
-
-
-
 
    * - ``AutoEncryptionOptions``
      - {+not-available+}
@@ -190,10 +186,10 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
    * - | ``Credential``
        |
        | **Data Type**: `MongoCredential <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
-     - | - ``AuthenticationMechanism`` 
-       | - - **Data Type**: {+string-data-type+}
-       | - ``AuthenticationMechanismProperties``
-       | - - **Data Type**: ``IEnumerable<KeyValuePair<string, string>>`` 
+     - - ``AuthenticationMechanism`` 
+       - - **Data Type**: {+string-data-type+}
+       - ``AuthenticationMechanismProperties``
+       - - **Data Type**: ``IEnumerable<KeyValuePair<string, string>>`` 
      - | Settings for how the driver authenticates to the server. This includes
        | authentication credentials, mechanism, source, and other settings.
        |

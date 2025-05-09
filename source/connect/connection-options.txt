@@ -68,6 +68,26 @@ its properties, and pass it as an argument to the ``MongoClient`` constructor:
    :start-after: // start mongo client settings config
    :end-before: // end mongo client settings config
 
+.. _csharp-mongo-url-builder:
+
+---------------------
+Using MongoUrlBuilder
+---------------------
+
+You can use a ``MongoUrlBuilder`` object to configure connection settings in code
+rather than in a connection URI. Configuring the connection this way makes it easier to
+change settings at runtime, helps you catch errors during compilation, and provides
+more configuration options than the connection URI.
+
+To use a ``MongoUrlBuilder`` object, create an instance of the class, set
+its properties, and pass it as an argument to the ``MongoClient`` constructor:
+
+.. literalinclude:: /includes/fundamentals/code-examples/connection/MongoClientSettingsConfig.cs
+   :language: csharp
+   :dedent:
+   :start-after: // start mongo client settings config
+   :end-before: // end mongo client settings config
+
 .. _csharp-replica-set-options:
 
 Replica Set Options
@@ -97,38 +117,13 @@ is no replica set.
 
          builder.ReplicaSetName = "yourReplicaSet";
 
-   .. tab:: ConnectionString
-      :tabid: connection-string-object
-
-      .. code-block:: csharp
-         :copyable: true
-
-         connString.ReplicaSetName = "yourReplicaSet";
-
    .. tab:: Connection String
       :tabid: connection-string
 
-      ``replicaSet=yourReplicaSet``
-
-.. _csharp-mongo-url-builder:
-
----------------------
-Using MongoUrlBuilder
--------------------
-
-You can use a ``MongoUrlBuilder`` object to configure connection settings in code
-rather than in a connection URI. Configuring the connection this way makes it easier to
-change settings at runtime, helps you catch errors during compilation, and provides
-more configuration options than the connection URI.
-
-To use a ``MongoUrlBuilder`` object, create an instance of the class, set
-its properties, and pass it as an argument to the ``MongoClient`` constructor:
-
-.. literalinclude:: /includes/fundamentals/code-examples/connection/MongoClientSettingsConfig.cs
-   :language: csharp
-   :dedent:
-   :start-after: // start mongo client settings config
-   :end-before: // end mongo client settings config
+      .. code-block:: csharp
+         :copyable: true
+    
+         replicaSet=yourReplicaSet
 
 Connection Options
 ------------------
@@ -139,9 +134,9 @@ connection string. If a ``MongoClientSettings`` property maps to more than one
 option in the connection string, the **Connection URI Example** shows all
 relevant options.
 
-If you use your connection URI to create a ``MongoUrl`` object, you can use the object's
-read-only properties to access the values of the connection options. These properties are listed
-in the ``MongoUrl`` column of the table.
+If you use your connection URI to create a ``MongoUrl`` or ``ConnectionString`` object,
+you can use the object's read-only properties to access the values of the connection
+options. These properties are listed in the ``MongoUrl`` column of the table.
 
 .. note::
 
@@ -152,15 +147,15 @@ in the ``MongoUrl`` column of the table.
 
 .. list-table::
    :header-rows: 1
-   :widths: 30 60 10
+   :widths: 20 20 50 10
 
    * - ``MongoClientSettings`` Property
-     - Description
      - ``MongoUrlBuilder`` Property
+     - Description
      - Connection String
-     - ``ConnectionString`` property
 
    * - ``AllowInsecureTls``
+     - ``AllowInsecureTls``
      - | Specifies whether to relax TLS constraints as much as possible. This can include
        | allowing invalid certificates or hostname mismatches.
        |
@@ -169,8 +164,7 @@ in the ``MongoUrl`` column of the table.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
-     - ``AllowInsecureTls``
-       | **Connection URI Example**: ``tlsInsecure=true``
+     - ``tlsInsecure=true``
 
    * - ``ApplicationName``
      - | The app name the driver passes to the server in the client metadata as part of

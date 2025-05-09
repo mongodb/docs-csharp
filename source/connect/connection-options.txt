@@ -118,7 +118,7 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
    ``TimeSpan`` value.
 
 Replica Set Options
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 .. tabs::
 
@@ -126,7 +126,7 @@ Replica Set Options
       :tabid: mongo-client-settings
 
       ReplicaSetName
-      ``````````````
+      ~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
       
@@ -137,7 +137,7 @@ Replica Set Options
           settings.ReplicaSetName = "yourReplicaSet";
 
       DirectConnection
-      ````````````````
+      ~~~~~~~~~~~~~~~~
       
       .. include:: /includes/fundamentals/connection-options/directConnection.rst
 
@@ -151,7 +151,7 @@ Replica Set Options
       :tabid: mongo-url-builder
 
       ReplicaSetName
-      ``````````````
+      ~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
       
@@ -162,7 +162,7 @@ Replica Set Options
           builder.ReplicaSetName = "yourReplicaSet";
 
       DirectConnection
-      ````````````````
+      ~~~~~~~~~~~~~~~~
       
       .. include:: /includes/fundamentals/connection-options/directConnection.rst
       
@@ -176,7 +176,7 @@ Replica Set Options
       :tabid: connection-uri
 
       replicaSet
-      ``````````
+      ~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
       
@@ -186,7 +186,7 @@ Replica Set Options
          mongodb://localhost:27017/?replicaSet=yourReplicaSet
 
       directConnection
-      ````````````````
+      ~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/directConnection.rst
       
@@ -195,22 +195,51 @@ Replica Set Options
 
          mongodb://localhost:27017/?directConnection=true
 
-   * - **ReplicaSetName**
-     - | 
-       |
-       | **Data Type**: {+string-data-type+}
+TLS Options
+-----------
 
-   * - ``AllowInsecureTls``
-     - ``AllowInsecureTls``
-     - | Specifies whether to relax TLS constraints as much as possible. This can include
-       | allowing invalid certificates or hostname mismatches.
-       |
-       | If this property is set to ``true`` and ``SslSettings.CheckCertificateRevocation``
-       | is set to ``false``, the {+driver-short+} will throw an exception.
-       |
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``false``
-       | **Connection URI Example**: ``tlsInsecure=true``
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      AllowInsecureTls
+      ~~~~~~~~~~~~~~~~
+
+      .. include:: /includes/fundamentals/connection-options/allowInsecureTls.rst
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var settings = new MongoClientSettings();
+         settings.AllowInsecureTls = true;
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      AllowInsecureTls
+      ~~~~~~~~~~~~~~~~
+      
+      .. include:: /includes/fundamentals/connection-options/allowInsecureTls.rst
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var builder = new MongoUrlBuilder();
+         builder.AllowInsecureTls = true;
+
+   .. tab:: Connection URI
+      :tabid: connection-uri
+
+      tlsInsecure
+      ~~~~~~~~~~~
+      
+      .. include:: /includes/fundamentals/connection-options/allowInsecureTls.rst
+
+      .. code-block:: none
+         :copyable: true
+
+         mongodb://localhost:27017/?tlsInsecure=true
 
    * - ``ApplicationName``
      - ``ApplicationName``

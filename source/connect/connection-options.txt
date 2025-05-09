@@ -48,6 +48,9 @@ and the ``tls`` option with a value of ``true``:
    :start-after: // start local connection config
    :end-before: // end local connection config
 
+To learn more about the options that you can specify in a connection URI, see
+:manual:`</reference/connection-string-options>` in the {+mdb-server+} manual.
+
 .. _csharp-mongo-client-settings:
 
 -----------------------------
@@ -120,15 +123,15 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
 Replica Set Options
 -------------------
 
+ReplicaSetName
+~~~~~~~~~~~~~~
+
+.. include:: /includes/fundamentals/connection-options/replicaSetName.rst
+
 .. tabs::
 
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
-
-      ReplicaSetName
-      ~~~~~~~~~~~~~~
-
-      .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
       
       .. code-block:: none
          :copyable: true
@@ -136,11 +139,25 @@ Replica Set Options
          var settings = new MongoClientSettings();
           settings.ReplicaSetName = "yourReplicaSet";
 
-      DirectConnection
-      ~~~~~~~~~~~~~~~~
-      
-      .. include:: /includes/fundamentals/connection-options/directConnection.rst
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
 
+      .. code-block:: none
+         :copyable: true
+
+          var builder = new MongoUrlBuilder();
+          builder.ReplicaSetName = "yourReplicaSet";
+
+DirectConnection
+~~~~~~~~~~~~~~~~
+      
+.. include:: /includes/fundamentals/connection-options/directConnection.rst
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+      
       .. code-block:: csharp
          :copyable: true
 
@@ -150,51 +167,12 @@ Replica Set Options
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
 
-      ReplicaSetName
-      ~~~~~~~~~~~~~~
-
-      .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
-      
-      .. code-block:: none
-         :copyable: true
-
-          var builder = new MongoUrlBuilder();
-          builder.ReplicaSetName = "yourReplicaSet";
-
-      DirectConnection
-      ~~~~~~~~~~~~~~~~
-      
-      .. include:: /includes/fundamentals/connection-options/directConnection.rst
-      
       .. code-block:: csharp
          :copyable: true
 
          var builder = new MongoUrlBuilder();
          builder.DirectConnection = true;
    
-   .. tab:: Connection URI
-      :tabid: connection-uri
-
-      replicaSet
-      ~~~~~~~~~~
-
-      .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
-      
-      .. code-block:: none
-         :copyable: true
-
-         mongodb://localhost:27017/?replicaSet=yourReplicaSet
-
-      directConnection
-      ~~~~~~~~~~~~~~~~
-
-      .. include:: /includes/fundamentals/connection-options/directConnection.rst
-      
-      .. code-block:: none
-         :copyable: true
-
-         mongodb://localhost:27017/?directConnection=true
-
 TLS Options
 -----------
 

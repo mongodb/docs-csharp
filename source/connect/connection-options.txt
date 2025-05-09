@@ -117,13 +117,38 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
    using a ``MongoClientSettings`` object for a time duration, use the appropriate
    ``TimeSpan`` value.
 
+Replica Set Options
+~~~~~~~~~~~~~~~~~~~
+
+DirectConnection
+````````````````
+Specifies whether to force dispatch **all** operations to the host.
+If you specify this option, the driver doesn't accept the
+:manual:`DNS seed list connection format. </reference/connection-string/#std-label-connections-dns-seedlist>`
+You must use the :manual:`standard connection URI format </reference/connection-string/#standard-connection-string-format/>`
+instead. The default value is ``false``.
+
+This property must be set to ``false`` if you specify more than one
+host name.
+
 .. list-table::
    :header-rows: 1
-   :widths: 25 20 55
+   :widths: 40 40 20
 
-   * - ``MongoClientSettings`` Property
-     - ``MongoUrlBuilder`` Property
-     - Description
+   * - ``MongoClientSettings``
+     - ``MongoUrlBuilder``
+     - Connection URI
+
+   * - ``settings.DirectConnection = true;``
+     - ``builder.DirectConnection = true;``
+     - ``directConnection=true``
+
+   * - **ReplicaSetName**
+     - | The name of the replica set to connect to.
+       |
+       | **Data Type**: {+string-data-type+}
+       | **Default**: ``null``
+       | **Connection URI Example**: ``replicaSet=yourReplicaSet``
 
    * - ``AllowInsecureTls``
      - ``AllowInsecureTls``
@@ -208,21 +233,7 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
           &authMechanismProperties=SERVICE_NAME:other,REALM:otherrealm
           &authSource=$external
 
-   * - ``DirectConnection``
-     - ``DirectConnection``
-     - | Specifies whether to force dispatch **all** operations to the host.
-       |
-       | If you specify this option, the driver doesn't accept the
-       | :manual:`DNS seed list connection format. </reference/connection-string/#std-label-connections-dns-seedlist>`
-       | You must use the :manual:`standard connection URI format </reference/connection-string/#standard-connection-string-format/>`
-       | instead.
-       |
-       | This property must be set to ``false`` if you specify more than one
-       | host name.
-       |
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``false``
-       | **Connection URI Example**: ``directConnection=true``
+
 
    * - ``HeartbeatInterval``
      - ``HeartbeatInterval``

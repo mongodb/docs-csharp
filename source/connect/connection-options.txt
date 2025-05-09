@@ -88,42 +88,14 @@ its properties, and pass it as an argument to the ``MongoClient`` constructor:
    :start-after: // start mongo client settings config
    :end-before: // end mongo client settings config
 
+.. tip:: Other MongoUrl Members
+  
+   The ``MongoUrl`` class contains other methods and read-only properties that you can
+   use to retrieve information about your connection. For a full list, see
+   `MongoUrl <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoUrl.html>`__ in the
+   API documentation.
+
 .. _csharp-replica-set-options:
-
-Replica Set Options
--------------------
-
-ReplicaSetName
-~~~~~~~~~~~~~~
-
-The name of the replica set to connect to, as a {+string-data-type+}. The default value
-is no replica set.
-
-.. tabs::
-
-   .. tab:: MongoClientSettings
-      :tabid: mongo-client-settings
-
-      .. code-block:: csharp
-         :copyable: true
-
-         settings.ReplicaSetName = "yourReplicaSet";
-
-   .. tab:: MongoUrlBuilder
-      :tabid: mongo-url-builder
-
-      .. code-block:: csharp
-         :copyable: true
-
-         builder.ReplicaSetName = "yourReplicaSet";
-
-   .. tab:: Connection String
-      :tabid: connection-string
-
-      .. code-block:: csharp
-         :copyable: true
-    
-         replicaSet=yourReplicaSet
 
 Connection Options
 ------------------
@@ -147,12 +119,11 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 20 50 10
+   :widths: 20 20 60
 
    * - ``MongoClientSettings`` Property
      - ``MongoUrlBuilder`` Property
      - Description
-     - Connection String
 
    * - ``AllowInsecureTls``
      - ``AllowInsecureTls``
@@ -164,9 +135,10 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
-     - ``tlsInsecure=true``
+       | **Connection URI Example**: ``tlsInsecure=true``
 
    * - ``ApplicationName``
+     - ``ApplicationName``
      - | The app name the driver passes to the server in the client metadata as part of
        | the connection handshake. The server prints this value to the MongoDB logs once
        | the connection is established. The value is also recorded in the slow query logs
@@ -174,45 +146,54 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
        |
        | **Data Type**: {+string-data-type+}
        | **Default**: ``null``
-     - ``ApplicationName``
        | **Connection URI Example**: ``appName=yourApp``
 
+
+
+
+
    * - ``AutoEncryptionOptions``
+     - {+not-available+}
      - | Settings for automatic client-side encryption.
        |
        | **Data Type**: `AutoEncryptionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Encryption.AutoEncryptionOptions.html>`__
        | **Default**: ``null``
-     - {+not-available+}
        | **Connection URI Example**: {+not-available+}
 
    * - ``ClusterConfigurator``
+     - {+not-available+}
      - | Low-level configuration options for sockets, TLS, cluster, and others.
        |
        | **Data Type**: Action<`ClusterBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.ClusterBuilder.html>`__>
        | **Default**: ``null``
-     - {+not-available+}
        | **Connection URI Example**: {+not-available+}
 
    * - ``Compressors``
+     - ``Compressors``
      - | The preferred compression types, in order, for wire-protocol messages sent to
        | or received from the server. The driver uses the first of these compression types
        | that the server supports.
        |
        | **Data Type**: `CompressorConfiguration <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.CompressorConfiguration.html>`__
        | **Default**: ``null``
-     - ``Compressors``
        | **Connection URI Example**: ``compressors=snappy,zstd``
 
    * - ``ConnectTimeout``
+     - ``ConnectTimeout``
      - | The length of time the driver tries to establish a single TCP socket connection
        | to the server before timing out.
        |
        | **DataType**: ``TimeSpan``
        | **Default**: 30 seconds
-     - ``ConnectTimeout``
        | **Connection URI Example**: ``connectTimeoutMS=0``
 
-   * - ``Credential``
+   * - | ``Credential``
+       |
+       | **Data Type**: `MongoCredential <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
+     - | - ``AuthenticationMechanism`` 
+       | - - **Data Type**: {+string-data-type+}
+       | - ``AuthenticationMechanismProperties``
+       | - - **Data Type**: ``IEnumerable<KeyValuePair<string, string>>`` 
      - | Settings for how the driver authenticates to the server. This includes
        | authentication credentials, mechanism, source, and other settings.
        |
@@ -221,9 +202,7 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
        | :ref:`authentication mechanisms <csharp-authentication-mechanisms>` for available
        | authentication mechanisms.
        |
-       | **Data Type**: `MongoCredential <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
        | **Default**: ``null``
-     - ``GetCredential()``
        | **Connection URI Example**:
 
        .. code-block:: none
@@ -234,6 +213,7 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
           &authSource=$external
 
    * - ``DirectConnection``
+     - ``DirectConnection``
      - | Specifies whether to force dispatch **all** operations to the host.
        |
        | If you specify this option, the driver doesn't accept the
@@ -246,44 +226,44 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
-     - ``DirectConnection``
        | **Connection URI Example**: ``directConnection=true``
 
    * - ``HeartbeatInterval``
+     - ``HeartbeatInterval``
      - | The interval between regular server-monitoring checks. Must be greater than or
        | equal to 500 milliseconds.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 10 seconds
-     - ``HeartbeatInterval``
        | **Connection URI Example**: ``heartbeatFrequencyMS=5000``
 
    * - ``HeartbeatTimeout``
+     - ``HeartbeatTimeout``
      - | The length of time a monitoring socket can be idle before timing out.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: Same value as ``ConnectTimeout``
-     - ``HeartbeatTimeout``
        | **Connection URI Example**: ``heartbeatTimeoutMS=5000``
 
    * - ``IPv6``
+     - ``IPv6``
      - | Specifies whether the host address is in IPv6 format.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
-     - ``IPv6``
        | **Connection URI Example**: ``ipv6=true``
 
    * - ``IsFrozen``
+     - {+not-available+}
      - | Indicates whether the settings have been frozen. Frozen settings can't be changed.
        | This option is read-only.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
-     - {+not-available+}
        | **Connection URI Example**: {+not-available+}
 
    * - ``LoadBalanced``
+     - ``LoadBalanced``
      - | Specifies whether the driver is connecting to a load balancer. You can set this
        | property to ``true`` only if:
 
@@ -294,91 +274,91 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
 
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
-     - ``LoadBalanced``
        | **Connection URI Example**: ``loadBalanced=true``
 
    * - ``LocalThreshold``
+     - ``LocalThreshold``
      - | The latency window for server eligibility. If a server's round trip takes longer
        | than the fastest server's round-trip time plus this value, the server isn't
        | eligible for selection.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 15 milliseconds
-     - ``LocalThreshold``
        | **Connection URI Example**: ``localThresholdMS=0``
 
    * - ``LoggingSettings``
+     - {+not-available+}
      - | The settings used for :ref:`logging. <csharp-logging>`
        |
        | **Data Type**: `LoggingSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.LoggingSettings.html>`__
        | **Default**: ``null``
-     - {+not-available+}
        | **Connection URI Example**: {+not-available+}
 
    * - ``MaxConnecting``
+     - ``MaxConnecting``
      - | The greatest number of connections a driver's connection pool may be
        | establishing concurrently.
        |
        | **Data Type**: {+int-data-type+}
        | **Default**: ``2``
-     - ``MaxConnecting``
        | **Connection URI Example**: ``maxConnecting=3``
 
    * - ``MaxConnectionIdleTime``
+     - ``MaxConnectionIdleTime``
      - | The length of time a connection can be idle before the driver closes it.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 10 minutes
-     - ``MaxConnectionIdleTime``
        | **Connection URI Example**: ``maxIdleTimeMS=300000``
 
    * - ``MaxConnectionLifeTime``
+     - ``MaxConnectionLifeTime``
      - | The length of time a connection can be pooled before expiring.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 30 minutes
-     - ``MaxConnectionLifeTime``
        | **Connection URI Example**: ``maxLifetimeMS=50000``
 
    * - ``MaxConnectionPoolSize``
+     - ``MaxConnectionPoolSize``
      - | The greatest number of clients or connections the driver can create in its
        | connection pool. This count includes connections in use.
        |
        | **Data Type**: {+int-data-type+}
        | **Default**: ``100``
-     - ``MaxConnectionPoolSize``
        | **Connection URI Example**: ``maxPoolSize=150``
 
    * - ``MinConnectionPoolSize``
+     - ``MinConnectionPoolSize``
      - | The number of connections the driver should create and keep in the connection
        | pool even when no operations are occurring. This count includes connections
        | in use.
        |
        | **Data Type**: {+int-data-type+}
        | **Default**: ``0``
-     - ``MinConnectionPoolSize``
        | **Connection URI Example**: ``minPoolSize=1``
 
    * - ``ReadConcern``
+     - {+not-available+}
      - | The client's default read concern.
        | See :ref:`read concern <read-concern>` for more information.
        |
        | **Data Type**: `ReadConcern <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadConcern.html>`__
        | **Default**: ``ReadConcern.Default``
-     - {+not-available+}
        | **Connection URI Example**: ``readConcernLevel=local``
 
    * - ``ReadEncoding``
+     - {+not-available+}
      - | The UTF-8 encoding to use for string deserialization.
        | Strict encoding will throw an exception when an invalid UTF-8 byte sequence
        | is encountered.
        |
        | **Data Type**: ``UTF8Encoding``
        | **Default**: Strict encoding
-     - {+not-available+}
        | **Connection URI Example**: {+not-available+}
 
    * - ``ReadPreference``
+     - ``ReadPreference``
      - | The client's default read-preference settings. ``MaxStaleness`` represents the
        | longest replication lag, in wall-clock time, that a secondary can experience and
        | still be eligible for server selection. Specifying ``-1`` means no maximum.
@@ -386,7 +366,6 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
        |
        | **Data Type**: `ReadPreference <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadPreference.html>`__
        | **Default**: ``ReadPreference.Primary``
-     - ``ReadPreference``
        | **Connection URI Example**:
 
        .. code-block:: none
@@ -401,25 +380,24 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
          The order of the tags in the URI determines the order for read preference. You can
          use this parameter only if the read-preference mode is not ``primary``.
 
-
-
    * - ``RetryReads``
+     - ``RetryReads``
      - | Enables retryable reads.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``true``
-     - ``RetryReads``
        | **Connection URI Example**: ``retryReads=false``
 
    * - ``RetryWrites``
+     - ``RetryWrites``
      - | Enables retryable writes.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``true``
-     - ``RetryWrites``
        | **Connection URI Example**: ``retryWrites=false``
 
    * - ``Scheme``
+     - ``Scheme``
      - | Specifies whether to use the standard connection string format (``MongoDB``)
        | or the DNS seed list format (``MongoDBPlusSrv``).
        | See :manual:`the MongoDB Manual</reference/connection-string/>` for more
@@ -431,28 +409,28 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
        |
        | **Data Type**: `ConnectionStringScheme <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.ConnectionStringScheme.html>`__
        | **Default**: ``ConnectionStringScheme.MongoDB``
-     - ``Scheme``
        | **Connection URI Example**: ``mongodb+srv://``
 
    * - ``Server``
+     - ``Server``
      - | The host and port number where MongoDB is running.
        |
        | **Data Type**: `MongoServerAddress <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoServerAddress.html>`__
        | **Default**: ``localhost:27017``
-     - ``Server``
        | **Connection URI Example**: ``mongodb://sample.host:27017``
 
    * - ``ServerApi``
+     - {+not-available+}
      - | Allows opting into Stable API versioning. See
        | :manual:`the MongoDB Manual</reference/stable-api>` for more information about
        | Stable API versioning.
        |
        | **Data Type**: `ServerApi <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ServerApi.html>`__
        | **Default**: ``null``
-     - {+not-available+}
        | **Connection URI Example**: {+not-available+}
 
    * - ``ServerMonitoringMode``
+     - ``ServerMonitoringMode``
      - | Specifies the server monitoring protocol to use. When
        | this option is set to ``Auto``, the monitoring mode is determined
        | by the environment in which the driver is running. The driver
@@ -461,35 +439,35 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
        | 
        | **Data Type**: `ServerMonitoringMode <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Servers.ServerMonitoringMode.html>`__
        | **Default**: ``Auto``
-     - ``ServerMonitoringMode``
        | **Connection URI Example**: ``serverMonitoringMode=poll``
 
    * - ``Servers``
+     - ``Servers``
      - | The cluster members where MongoDB is running.
        |
        | **Data Type**: IEnumerable<`MongoServerAddress <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoServerAddress.html>`__>
        | **Default**: ``localhost:27017``
-     - ``Servers``
        | **Connection URI Example**: ``mongodb://sample.host1:27017,sample.host2:27017``
 
    * - ``ServerSelectionTimeout``
+     - ``ServerSelectionTimeout``
      - | The length of time the driver tries to select a server before timing out.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 30 seconds
-     - ``ServerSelectionTimeout``
        | **Connection URI Example**: ``serverSelectionTimeoutMS=15000``
 
    * - ``SocketTimeout``
+     - ``SocketTimeout``
      - | The length of time the driver tries to send or receive on a socket before
        | timing out.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: OS default
-     - ``SocketTimeout``
        | **Connection URI Example**: ``socketTimeoutMS=0``
 
    * - ``SrvMaxHosts``
+     - ``SrvMaxHosts``
      - | The greatest number of SRV results to randomly select when initially populating
        | the seedlist or, during SRV polling, adding new hosts to the topology.
        |
@@ -499,10 +477,10 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
        |
        | **Data Type**: {+int-data-type+}
        | **Default**: ``0``
-     - ``SrvMaxHosts``
        | **Connection URI Example**: ``srvMaxHosts=3``
 
    * - ``SslSettings``
+     - {+not-available+}
      - | TLS/SSL options, including client certificates, revocation handling, and
        | enabled and disabled TLS/SSL protocols.
        |
@@ -512,60 +490,53 @@ options. These properties are listed in the ``MongoUrl`` column of the table.
        |
        | **Data Type**: `SslSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SslSettings.html>`__
        | **Default**: ``null``
-     - {+not-available+}
        | **Connection URI Example**: ``tlsDisableCertificateRevocationCheck=false``
 
    * - ``TranslationOptions``
+     - {+not-available+}
      - | Specifies options, such as the {+mdb-server+} version, for translating LINQ
        | queries to the Query API.
        |
        | **Data Type**: `ExpressionTranslationOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ExpressionTranslationOptions.html>`__
        | **Default**: ``null``
-     - {+not-available+}
        | **Connection URI Example**: {+not-available+}
 
    * - ``UseTls``
+     - ``UseTls``
      - | Specifies whether to require TLS for connections to the server. If you use
        | a scheme of ``"mongodb+srv"`` or specify other TLS options,
        | this option defaults to ``true``.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``false``
-     - ``UseTls``
        | **Connection URI Example**: ``tls=true``
 
    * - ``WaitQueueTimeout``
+     - ``WaitQueueTimeout``
      - | The length of time the driver tries to check out a connection from a
        | server's connection pool before timing out.
        |
        | **Data Type**: ``TimeSpan``
        | **Default**: 2 minutes
-     - ``WaitQueueTimeout``
        | **Connection URI Example**: ``waitQueueTimeoutMS=0``
 
    * - ``WriteConcern``
+     - ``GetWriteConcern(bool)``
      - | The default write-concern settings, including write timeout and
        | journaling, for the client.
        | See :ref:`write concern <wc-j>` for more information.
        |
        | **Data Type**: `WriteConcern <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.WriteConcern.html>`__
        | **Default**: ``WriteConcern.Acknowledged``
-     - ``GetWriteConcern(bool)``
        | **Connection URI Example**: ``w=majority&wTimeoutMS=0&journal=true``
 
    * - ``WriteEncoding``
+     - {+not-available+}
      - | Specifies whether UTF-8 string serialization is strict or lenient. With strict
        | encoding, the driver will throw an exception when it encounters an invalid
        | UTF-8 byte sequence.
        |
        | **Data Type**: ``UTF8Encoding``
        | **Default**: Strict encoding
-     - {+not-available+}
        | **Connection URI Example**: {+not-available+}
 
-.. tip:: Other MongoUrl Members
-  
-   The ``MongoUrl`` class contains other methods and read-only properties that you can
-   use to retrieve information about your connection. For a full list, see
-   `MongoUrl <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoUrl.html>`__ in the
-   API documentation.

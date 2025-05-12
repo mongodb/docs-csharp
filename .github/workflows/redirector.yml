@@ -31,11 +31,11 @@ jobs:
           for file in $RENAMED_FILES; do
             old=$(echo "$file" | cut -d',' -f1)
             old="${old#source}"
-            old="${old%.txt}"
+            old="${old%.txt}/"
             new=$(echo "$file" | cut -d',' -f2)
             new="${new#source}"
-            new="${new%.txt}"
-            new_redirects+="<li>[*-master]: \$\{prefix\}/\$\{version\}$old -> \$\{base\}/\$\{version\}$new</li>"
+            new="${new%.txt}/"
+            new_redirects+="<li>[*-master]: ${prefix}/\$\{version\}$old -> \$\{base\}/\$\{version\}$new</li>"
           done
           echo $new_redirects
         #echo "staging_links=${new_links}" >> "$GITHUB_OUTPUT"

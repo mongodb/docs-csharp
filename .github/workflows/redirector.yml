@@ -27,5 +27,10 @@ jobs:
         env:
           RENAMED_FILES: ${{ steps.changed-files.outputs.all_old_new_renamed_files }}
         run: |
-          echo "Changed files: "
-          echo "${{ steps.changed-files.outputs.all_old_new_renamed_files }}"
+          for file in $$RENAMED_FILES; do
+            old=$(echo "$file" | cut -d',' -f1)
+            new=$(echo "$file" | cut -d',' -f2)
+            echo "Old: $old"
+            echo "New: $new"
+
+        #  source/fundamentals/authentication/aws-iam.txt,source/fundamentals/authentication/something-else.txt source/fundamentals/indexes/search-indexes.txt,source/fundamentals/indexes/search-indexes-testing.txt

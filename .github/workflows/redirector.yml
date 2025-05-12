@@ -8,10 +8,11 @@ jobs:
     name: Get Renamed Files
     runs-on: ubuntu-latest
     permissions:
-      issues: write
-      contents: write
-      pull-requests: write
-      repository-projects: write
+      write-all
+      #issues: write
+      #contents: write
+      #pull-requests: write
+      #repository-projects: write
     steps:
       - uses: actions/checkout@v4
       - name: Get changed files

@@ -85,6 +85,18 @@ For more information about creating a connection string, see
 :manual:`Connection Strings </reference/connection-string?tck=docs_driver_csharp>` in the
 MongoDB Server documentation.
 
+Formats
+~~~~~~~
+
+The {+driver-short+} provides the following classes for representing connection strings:
+
+A ``MongoURl`` object represents an immutable connection string. You can construct one
+by calling the ``MongoUrl`` constructor and passing a connection string, or by
+MongoUrlBuilder
+- MongoUrl
+- ConnectionString
+
+You can also just leave it as a string.
 MongoClient
 -----------
 

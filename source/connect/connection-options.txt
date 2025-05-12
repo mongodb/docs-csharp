@@ -529,7 +529,6 @@ Write Concern Options
 
      - ``GetWriteConcern(bool)``
 
-
 Read Concern Options
 --------------------
 
@@ -538,77 +537,94 @@ Read Concern Options
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
     
+      ReadConcern
+      ~~~~~~~~~~~
+
+      The client's default read concern. The default value is ``ReadConcern.Default``.
+      For more information, see :ref:`read concern <read-concern>`.
+
+      .. code-block:: csharp
+         :copyable: true
+
+         var settings = new MongoClientSettings();
+         settings.ReadConcern = new ReadConcern(ReadConcernLevel.Local); 
+   
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
-      ReadConcern
-     - {+not-available+}
-     - | The client's default read concern.
-       | See :ref:`read concern <read-concern>` for more information.
-       |
-       | **Data Type**: `ReadConcern <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadConcern.html>`__
-       | **Default**: ``ReadConcern.Default``
-       | **Connection URI Example**: ``readConcernLevel=local``
 
 Read Preference Options
 -----------------------
+
 .. tabs::
 
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
     
+    ReadPreference
+    ~~~~~~~~~~~~~~
+
+    .. include:: /includes/fundamentals/connection-options/readPreference.rst
+
+    .. code-block:: csharp
+       :copyable: true
+
+       var settings = new MongoClientSettings();
+       settings.ReadPreference = ReadPreference.SecondaryPreferred;
+
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
-    ReadPreference
-     - ``ReadPreference``
-     - | The client's default read-preference settings. ``MaxStaleness`` represents the
-       | longest replication lag, in wall-clock time, that a secondary can experience and
-       | still be eligible for server selection. Specifying ``-1`` means no maximum.
-       | See :ref:`read preference <read-preference>` for more information.
-       |
-       | **Data Type**: `ReadPreference <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadPreference.html>`__
-       | **Default**: ``ReadPreference.Primary``
-       | **Connection URI Example**:
 
-       .. code-block:: none
-          :copyable: false
+    .. include:: /includes/fundamentals/connection-options/readPreference.rst
 
-          readPreference=primaryPreferred
-          &maxStalenessSeconds=90
-          &readPreferenceTags=dc:ny,rack:1
+    .. code-block:: csharp
+       :copyable: true
+
+       var settings = new MongoClientSettings();
+       settings.ReadPreference = ReadPreference.SecondaryPreferred;
        
-       | You can include the ``readPreferenceTags`` parameter in the connection URI more
-         than once. If you do, the client treats each instance as a separate tag set.
-         The order of the tags in the URI determines the order for read preference. You can
-         use this parameter only if the read-preference mode is not ``primary``.
-
 Authentication Options
 ----------------------
+
 .. tabs::
 
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
     
+      Credential
+      ~~~~~~~~~~
+
+      Settings for how the driver authenticates to the server. This includes
+      authentication credentials, mechanism, source, and other settings. The default
+      value is ``null``.
+      
+      f you don't specify an authentication mechanism, the driver uses either
+      ``SCRAM-SHA-1`` or ``SCRAM-SHA-256``, depending on the server version. See
+      :ref:`authentication mechanisms <csharp-authentication-mechanisms>` for available
+      authentication mechanisms.
+      
+      .. code-block:: csharp
+         :copyable: true
+
+         var settings = new MongoClientSettings();
+         settings.Credential = MongoCredential.CreateScramSha256Credential(
+             source: "admin",
+             username: "user",
+             password: "password"
+         );
+      
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
- * - | ``Credential``
        |
        | **Data Type**: `MongoCredential <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
      - - ``AuthenticationMechanism`` 
        - - **Data Type**: {+string-data-type+}
        - ``AuthenticationMechanismProperties``
        - - **Data Type**: ``IEnumerable<KeyValuePair<string, string>>`` 
-     - | Settings for how the driver authenticates to the server. This includes
-       | authentication credentials, mechanism, source, and other settings.
-       |
-       | If you don't specify an authentication mechanism, the driver uses either
-       | ``SCRAM-SHA-1`` or ``SCRAM-SHA-256``, depending on the server version. See
-       | :ref:`authentication mechanisms <csharp-authentication-mechanisms>` for available
-       | authentication mechanisms.
-       |
-       | **Default**: ``null``
+     
 
 Server Selection and Discovery Options
 --------------------------------------
+
 .. tabs::
 
    .. tab:: MongoClientSettings
@@ -653,6 +669,7 @@ Server Selection and Discovery Options
 
 Miscellaneous Options
 ---------------------
+
 .. tabs::
 
    .. tab:: MongoClientSettings

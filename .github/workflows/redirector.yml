@@ -8,11 +8,10 @@ jobs:
     name: Get Renamed Files
     runs-on: ubuntu-latest
     permissions:
-      write-all
-      #issues: write
-      #contents: write
-      #pull-requests: write
-      #repository-projects: write
+      issues: write
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - uses: actions/checkout@v4
       - name: Get changed files
@@ -45,5 +44,8 @@ jobs:
       - name: Update PR Description
         uses: MongoCaleb/pr-description-action@master
         with:
-          content: " ${{ steps.renamed-files.outputs.redirects_list }}"
+          regex: "<!-- start insert-links -->.*<!-- end insert-links -->"
+          appendContentOnMatchOnly: true
+          regexFlags: is
+          content: "${{ steps.renamed-files.outputs.redirects_list }}"
           token: ${{ secrets.GITHUB_TOKEN }}

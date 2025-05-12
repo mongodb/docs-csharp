@@ -44,8 +44,5 @@ jobs:
       - name: Update PR Description
         uses: MongoCaleb/pr-description-action@master
         with:
-          regex: "<!-- start insert-links -->.*<!-- end insert-links -->"
-          appendContentOnMatchOnly: true
-          regexFlags: is
           content: "${{ steps.renamed-files.outputs.redirects_list }}"
           token: ${{ secrets.GITHUB_TOKEN }}

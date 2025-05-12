@@ -44,5 +44,5 @@ jobs:
       - name: Update PR Description
         uses: MongoCaleb/pr-description-action@master
         with:
-          content: "${{ steps.renamed-files.outputs.redirects_list }}"
+          content: "Content: ${{ steps.renamed-files.outputs.redirects_list }}"
           token: ${{ secrets.GITHUB_TOKEN }}

@@ -27,7 +27,7 @@ jobs:
         env:
           RENAMED_FILES: ${{ steps.changed-files.outputs.all_old_new_renamed_files }}
         run: |
-          for file in $$RENAMED_FILES; do
+          for file in $RENAMED_FILES; do
             old=$(echo "$file" | cut -d',' -f1)
             new=$(echo "$file" | cut -d',' -f2)
             echo "Old: $old"

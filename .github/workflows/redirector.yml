@@ -1,0 +1,31 @@
+name: add-redirects
+on:
+  pull_request:
+    paths:
+      - "source/**"
+jobs:
+  get-redirects-renamed:
+    name: Get Renamed Files
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get renamed files
+        id: changed-files
+        # pin to a specific commit to ensure stability
+        uses: tj-actions/changed-files@c65cd883420fd2eb864698a825fc4162dd94482c
+        with:
+          include_all_old_new_renamed_files: true
+
+      - name: Parse renamed files
+        id: renamed-files
+        if: steps.changed-files.outputs.renamed_files_count > 0
+        env:
+          RENAMED_FILES: ${{ steps.changed-files.outputs.all_old_new_renamed_files }}
+        run: |
+          echo "Changed files: "
+          echo "${{ steps.changed-files.outputs.all_old_new_renamed_files }}"

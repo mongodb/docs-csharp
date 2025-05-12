@@ -32,5 +32,6 @@ jobs:
             new=$(echo "$file" | cut -d',' -f2)
             echo "Old: $old"
             echo "New: $new"
+          done
 
         #  source/fundamentals/authentication/aws-iam.txt,source/fundamentals/authentication/something-else.txt source/fundamentals/indexes/search-indexes.txt,source/fundamentals/indexes/search-indexes-testing.txt

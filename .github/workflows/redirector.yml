@@ -40,3 +40,9 @@ jobs:
           done
           echo $new_redirects
           echo "redirects_list=${new_redirects}" >> "$GITHUB_OUTPUT"
+
+      - name: Update PR Description
+        uses: MongoCaleb/pr-description-action@master
+        with:
+          content: " ${{ steps.renamed-files.outputs.redirects_list }}"
+          token: ${{ secrets.GITHUB_TOKEN }}

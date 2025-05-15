@@ -131,16 +131,13 @@ jobs:
 
       - name: Check for duplicates in redirects file
         run: |
-          # Specify the file to check  
-          file="$REDIRECTS_FILE"
-
-          if [[ -f "$file" ]]; then  
-            duplicates=$(sort "$file" | uniq -d)  
+          if [[ -f "$REDIRECTS_FILE" ]]; then  
+            duplicates=$(sort "$REDIRECTS_FILE" | uniq -d)  
             if [[ -n "$duplicates" ]]; then  
-              echo "Duplicate lines found in $file:"  
+              echo "Duplicate lines found in $REDIRECTS_FILE:" 
               echo "$duplicates"  
               exit 1 # error
             fi
           else  
-            echo "File $file does not exist. Skipping duplicate check."  
+            echo "Redirects file doesn't exist. Skipping duplicate check."  
           fi

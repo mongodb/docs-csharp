@@ -108,26 +108,27 @@ jobs:
           redirect_html=""
           
           combined_redirect_string="${RENAMED_REDIRECTS},${DELETED_REDIRECTS}"
-          IFS=','
-          for redirect in $combined_redirect_string; do
-            if [[ ! -z "$redirect" ]]; then  
-              redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"  
-            fi  
-          done
 
-          echo "redirect_html=- [ ] Did you add redirects?
-          *Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):*
-          $redirect_html
-          " >> "$GITHUB_OUTPUT"
+          # count number of values and add intro text if there are any to show
+          if [[ $(( $(grep -o "," <<< "$combined_redirect_string" | wc -l) )) > 1 ]]; then
+            redirect_html="*Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):*"
+            IFS=','
+            for redirect in $combined_redirect_string; do
+              if [[ ! -z "$redirect" ]]; then  
+                redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"  
+              fi  
+            done
+          fi
+          
+          echo "redirect_html=${redirect_html}" >> "$GITHUB_OUTPUT"
 
       - name: Update PR Description
-        if: steps.build-redirect-html.outputs.redirect_html
         uses: MongoCaleb/pr-description-action@4bdfe35b98f64532b419ad20b350a92546cd3aa1
         with:
           regex: "- \\[ \\] Did you add redirects\\?.*"
           appendContentOnMatchOnly: false
           regexFlags: is
-          content: ${{ steps.build-redirect-html.outputs.redirect_html }}
+          content: "- [ ] Did you add redirects?\n ${{ steps.build-redirect-html.outputs.redirect_html }}"
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check for duplicates in redirects file

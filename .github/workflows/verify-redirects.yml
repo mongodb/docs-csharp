@@ -60,8 +60,9 @@ jobs:
               renamed_redirects+=("$renamed_redirect")
             fi
           done
-          echo "redirects=${renamed_redirects}" >> "$GITHUB_OUTPUT"
-          cat "$REDIRECTS_FILE"
+
+          IFS=',' # Set the delimiter to export as a string
+          echo "redirects=${renamed_redirects[*]}" >> "$GITHUB_OUTPUT"  
 
       - name: Find Missing Redirects for Deleted Files
         id: deleted-files
@@ -89,9 +90,10 @@ jobs:
             if ! grep -q "$deleted_redirect" $REDIRECTS_FILE; then 
               deleted_redirects+=("$deleted_redirect")
             fi
-
           done
-          echo "redirects=${deleted_redirects}" >> "$GITHUB_OUTPUT"
+
+          IFS=',' # Set the delimiter to export as a string
+          echo "redirects=${deleted_redirects[*]}" >> "$GITHUB_OUTPUT"  
 
       - name: Build Redirect HTML
         id: build-redirect-html
@@ -102,13 +104,15 @@ jobs:
           # empty string that stays empty if there are no redirects to suggest
           redirect_html=""
 
-          echo "renamed array length: ${#RENAMED_REDIRECTS[@]}"
-          echo "deleted array length: ${#DELETED_REDIRECTS[@]}"
+          # convert exported strings back to arrays
+          combined_redirect_string="${RENAMED_REDIRECTS},${DELETED_REDIRECTS}"
+          IFS=','
+          read -ra combined_redirect_array <<< "$combined_redirect_string" # Split the string into an array 
 
-          for redirect in "${{ steps.renamed-files.outputs.redirects[@] }}"; do
+          for redirect in "${combined_redirect_array[@]}"; do
             redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"
           done
-          echo "$redirect_html"
+          
           echo "redirect_html=${redirect_html}" >> "$GITHUB_OUTPUT"
 
       - name: Update PR Description

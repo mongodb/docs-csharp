@@ -37,7 +37,7 @@ jobs:
         run: |
           renamed_redirects=()
           for file in $RENAMED_FILES; do
-
+            echo "iteration"
             # only run for .txt files
             if [[ ! "$file" == *.txt ]]; then
               continue
@@ -56,6 +56,7 @@ jobs:
 
             # if redirect not already in file, add to array to add to PR description
             if ! grep -q "$renamed_redirect" $REDIRECTS_FILE; then
+              echo "adding string $renamed_direct to array"
               renamed_redirects+=("$renamed_redirect")
             fi
           done

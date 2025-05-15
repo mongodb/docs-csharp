@@ -114,8 +114,8 @@ jobs:
               redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"  
             fi  
           done
-          
-          echo "redirect_html=${redirect_html}" >> "$GITHUB_OUTPUT"
+
+          echo "redirect_html=- [ ] Did you add redirects?\n *Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):*\n$redirect_html\n" >> "$GITHUB_OUTPUT"
 
       - name: Update PR Description
         if: steps.build-redirect-html.outputs.redirect_html
@@ -124,7 +124,7 @@ jobs:
           regex: "- \\[ \\] Did you add redirects\\?.*"
           appendContentOnMatchOnly: false
           regexFlags: is
-          content: "- [ ] Did you add redirects?\n *Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):*\n${{ steps.build-redirect-html.outputs.redirect_html }}\n"
+          content: ${{ steps.build-redirect-html.outputs.redirect_html }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check for duplicates in redirects file

@@ -11,6 +11,7 @@ jobs:
       REDIRECTS_FILE: "pr/config/redirects"
     permissions:
       pull-requests: write
+      contents: read
     steps:
       - name: Check Out Base Branch
         uses: actions/checkout@v4

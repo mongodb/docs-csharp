@@ -70,6 +70,7 @@ jobs:
           DELETED_FILES: ${{ steps.changed-files.outputs.deleted_files }}
         run: |
           deleted_redirects=()
+          echo "first length: ${#renamed_redirects[@]}"
           for file in $DELETED_FILES; do
 
             # only run for .txt files
@@ -91,6 +92,7 @@ jobs:
             fi
 
           done
+          echo "second length: ${#renamed_redirects[@]}"
           echo "redirects=${deleted_redirects}" >> "$GITHUB_OUTPUT"
 
       - name: Build Redirect HTML

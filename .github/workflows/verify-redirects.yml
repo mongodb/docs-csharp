@@ -36,7 +36,6 @@ jobs:
           RENAMED_FILES: ${{ steps.changed-files.outputs.all_old_new_renamed_files }}
         run: |
           renamed_redirects=()
-          echo "first length: ${#renamed_redirects[@]}"
           for file in $RENAMED_FILES; do
 
             # only run for .txt files
@@ -60,7 +59,6 @@ jobs:
               renamed_redirects+=("$renamed_redirect")
             fi
           done
-          echo "second length: ${#renamed_redirects[@]}"
           echo "redirects=${renamed_redirects}" >> "$GITHUB_OUTPUT"
 
       - name: Find Missing Redirects for Deleted Files
@@ -70,7 +68,6 @@ jobs:
           DELETED_FILES: ${{ steps.changed-files.outputs.deleted_files }}
         run: |
           deleted_redirects=()
-          echo "first length: ${#renamed_redirects[@]}"
           for file in $DELETED_FILES; do
 
             # only run for .txt files
@@ -88,12 +85,10 @@ jobs:
                        
             # if redirect not already in file, add to array to add to PR description
             if ! grep -q "$deleted_redirect" $REDIRECTS_FILE; then 
-              echo "adding $deleted_redirect"
               deleted_redirects+=("$deleted_redirect")
             fi
 
           done
-          echo "second length: ${#deleted_redirects[@]}"
           echo "redirects=${deleted_redirects}" >> "$GITHUB_OUTPUT"
 
       - name: Build Redirect HTML
@@ -105,7 +100,9 @@ jobs:
           # empty string that stays empty if there are no redirects to suggest
           redirect_html=""
           combined_redirect_array=("${RENAMED_REDIRECTS[@]}" "${DELETED_REDIRECTS[@]}")
-          echo "array length: ${#combined_redirect_array[@]}"
+          echo "renamed array length: ${#RENAMED_REDIRECTS[@]}"
+          echo "deleted array length: ${#DELETED_REDIRECTS[@]}"
+          echo "combined array length: ${#combined_redirect_array[@]}"
           for redirect in "${combined_redirect_array[@]}"; do
             redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"
           done

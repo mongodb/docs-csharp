@@ -87,7 +87,7 @@ jobs:
             # single quotes = ${var} rendered literally; double quotes = $var interpreted
             redirect='${prefix}/${version}'"$old"'/ -> ${base}/${version}/'
                        
-            # if redirect not already in file, add to array to add to PR description
+            # if redirect not already in file, add to string to add to PR description
             if ! grep -q "$redirect" $REDIRECTS_FILE; then 
               deleted_redirects+="$redirect,"
             fi
@@ -109,7 +109,6 @@ jobs:
           
           combined_redirect_string="${RENAMED_REDIRECTS},${DELETED_REDIRECTS}"
 
-          IFS=','
           for redirect in $combined_redirect_string; do
             if [[ ! -z "$redirect" ]]; then
               if [[ redirect_html="" ]]; then

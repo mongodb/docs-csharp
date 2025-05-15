@@ -51,6 +51,7 @@ jobs:
               renamed_redirects+=("$renamed_redirect")
             fi
 
+            cat "$REDIRECTS_FILE"
             if grep -q "/fundamentals/renamed/" $REDIRECTS_FILE; then
               echo "found"
             fi

@@ -8,22 +8,13 @@ jobs:
     name: Verifying Redirects
     runs-on: ubuntu-latest
     env:
-      REDIRECTS_FILE: "pr/config/redirects"
+      REDIRECTS_FILE: "config/redirects"
     permissions:
       pull-requests: write
       contents: read
     steps:
       - name: Check Out Base Branch
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.base.ref }}
-          path: base
-
-      - name: Check Out PR Branch
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          path: pr
 
       - name: Get Changed Files
         id: changed-files
@@ -61,12 +52,6 @@ jobs:
             if ! grep -q "$renamed_redirect" $REDIRECTS_FILE; then
               renamed_redirects+=("$renamed_redirect")
             fi
-
-            cat "$REDIRECTS_FILE"
-            if grep -q "/fundamentals/renamed/" $REDIRECTS_FILE; then
-              echo "found"
-            fi
-              
           done
           echo "redirects=${renamed_redirects}" >> "$GITHUB_OUTPUT"
 

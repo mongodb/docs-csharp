@@ -94,7 +94,7 @@ jobs:
           done
           
           # cut trailing comma
-          deleted_redirects="${renamed_redirects%,}"
+          deleted_redirects="${deleted_redirects%,}"
           echo "$deleted_redirects"
           echo "redirects=${deleted_redirects}" >> "$GITHUB_OUTPUT"  
 
@@ -113,6 +113,7 @@ jobs:
           read -ra combined_redirect_array <<< "$combined_redirect_string" # Split the string into an array 
 
           for redirect in "${combined_redirect_array[@]}"; do
+            echo "adding html for $redirect now"
             redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"
           done
           

@@ -27,8 +27,6 @@ jobs:
         env:
           RENAMED_FILES: ${{ steps.changed-files.outputs.all_old_new_renamed_files }}
         run: |
-          echo "renamed files: $RENAMED_FILES"
-          echo "output: ${{ steps.changed-files.outputs.all_old_new_renamed_files }}"
           renamed_redirects=()
           for file in $RENAMED_FILES; do
 

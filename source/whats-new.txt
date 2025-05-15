@@ -50,12 +50,6 @@ What's New in 3.4
 The 3.4 driver release includes the following new features,
 improvements, and fixes:
 
-- Adds the ``Mql.Convert()`` LINQ method to convert between types when
-  performing aggregations. To learn more, see the
-  :ref:`csharp-linq-convert` section of the LINQ guide.
-
-- Adds support for the ``KeyValuePair.Create()`` LINQ method.
-
 - Adds the ``GeoNear()`` aggregation builder method to construct a
   ``$geoNear`` aggregation stage. 
 

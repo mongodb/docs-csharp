@@ -47,11 +47,12 @@ jobs:
             renamed_redirect='${prefix}/${version}'"$old"'/ -> ${base}/${version}'"$new"'/'
 
             # if redirect not already in file, add to array to add to PR description
-            if ! grep -q "${renamed_redirect//\$\\\$}" $REDIRECTS_FILE; then
-              echo "Target file: $REDIRECTS_FILE"
-              echo "Target string: $renamed_redirect"
-              grep "$renamed_redirect" $REDIRECTS_FILE
+            if ! grep -q "$renamed_redirect" $REDIRECTS_FILE; then
               renamed_redirects+=("$renamed_redirect")
+            fi
+
+            if grep -q "/fundamentals/renamed/" $REDIRECTS_FILE; then
+              echo "found"
             fi
               
           done

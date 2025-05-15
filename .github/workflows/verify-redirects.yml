@@ -37,7 +37,7 @@ jobs:
         run: |
           renamed_redirects=()
           for file in $RENAMED_FILES; do
-            echo "iteration"
+
             # only run for .txt files
             if [[ ! "$file" == *.txt ]]; then
               continue
@@ -56,7 +56,6 @@ jobs:
 
             # if redirect not already in file, add to array to add to PR description
             if ! grep -q "$renamed_redirect" $REDIRECTS_FILE; then
-              echo "adding string $renamed_direct to array"
               renamed_redirects+=("$renamed_redirect")
             fi
           done
@@ -100,13 +99,11 @@ jobs:
         run: |
           # empty string that stays empty if there are no redirects to suggest
           redirect_html=""
+          combined_redirect_array=("${RENAMED_REDIRECTS[@]}" "${DELETED_REDIRECTS[@]}")
 
-          for renamed_redirect in "${RENAMED_REDIRECTS[@]}"; do
-            redirect_html+="<li>[&lt;v&gt;-*]: $renamed_redirect</li>"
-          done
-
-          for deleted_redirect in "${DELETED_REDIRECTS[@]}"; do
-            redirect_html+="<li>[&lt;v&gt;-*]: $deleted_redirect</li>"
+          for redirect in "${combined_redirect_array[@]}"; do
+            echo "adding"
+            redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"
           done
 
           echo "redirect_html=${redirect_html}" >> "$GITHUB_OUTPUT"

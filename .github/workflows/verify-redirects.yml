@@ -8,7 +8,7 @@ jobs:
     name: Verifying Redirects
     runs-on: ubuntu-latest
     env:
-      REDIRECTS_FILE: "source/config/redirects"
+      REDIRECTS_FILE: "config/redirects"
     permissions:
       pull-requests: write
     steps:

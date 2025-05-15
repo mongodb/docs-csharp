@@ -87,12 +87,13 @@ jobs:
             deleted_redirect='${prefix}/${version}'"$old"'/ -> ${base}/${version}/'
                        
             # if redirect not already in file, add to array to add to PR description
-            if ! grep -q "$deleted_redirect" $REDIRECTS_FILE; then  
+            if ! grep -q "$deleted_redirect" $REDIRECTS_FILE; then 
+              echo "adding $deleted_redirect"
               deleted_redirects+=("$deleted_redirect")
             fi
 
           done
-          echo "second length: ${#renamed_redirects[@]}"
+          echo "second length: ${#deleted_redirects[@]}"
           echo "redirects=${deleted_redirects}" >> "$GITHUB_OUTPUT"
 
       - name: Build Redirect HTML

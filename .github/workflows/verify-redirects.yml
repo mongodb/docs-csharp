@@ -1,4 +1,4 @@
-name: Redirector
+name: Verify Redirects
 
 on:
   pull_request_target:
@@ -11,7 +11,6 @@ jobs:
       REDIRECTS_FILE: "config/redirects"
     permissions:
       pull-requests: write
-      contents: read
     steps:
       - name: Check Out Base Branch
         uses: actions/checkout@v4
@@ -21,7 +20,6 @@ jobs:
         uses: tj-actions/changed-files@c65cd883420fd2eb864698a825fc4162dd94482c
         with:
           include_all_old_new_renamed_files: true
-          path: pr
 
       - name: Find Missing Redirects for Renamed Files
         id: renamed-files
@@ -93,8 +91,6 @@ jobs:
         run: |
           # empty string that stays empty if there are no redirects to suggest
           redirect_html=""
-          echo "RENAMED_REDIRECTS: $RENAMED_REDIRECTS"
-          echo "renamed output: ${{ steps.renamed-files.outputs.redirects }}"
 
           for renamed_redirect in "${RENAMED_REDIRECTS[@]}"; do
             redirect_html+="<li>[&lt;v&gt;-*]: $renamed_redirect</li>"

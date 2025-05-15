@@ -114,6 +114,7 @@ jobs:
           IFS=','
           echo "combined string: $combined_redirect_string"
           for redirect in "$combined_redirect_string"; do
+            echo "redirect in loop: $redirect"
             if [[ ! -z "$redirect" ]]; then  
               redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"  
             fi  

@@ -101,6 +101,7 @@ jobs:
         run: |
           # empty string that stays empty if there are no redirects to suggest
           redirect_html=""
+          echo "length of init value: ${{ steps.renamed-files.outputs.redirects }}"
           combined_redirect_array=("${RENAMED_REDIRECTS[@]}" "${DELETED_REDIRECTS[@]}")
           echo "renamed array length: ${#RENAMED_REDIRECTS[@]}"
           echo "deleted array length: ${#DELETED_REDIRECTS[@]}"

@@ -8,18 +8,28 @@ jobs:
     name: Verifying Redirects
     runs-on: ubuntu-latest
     env:
-      REDIRECTS_FILE: "config/redirects"
+      REDIRECTS_FILE: "pr/config/redirects"
     permissions:
       pull-requests: write
     steps:
-      - name: Check Out Code
+      - name: Check Out Base Branch
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          path: base
+
+      - name: Check Out PR Branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          path: pr
 
       - name: Get Changed Files
         id: changed-files
         uses: tj-actions/changed-files@c65cd883420fd2eb864698a825fc4162dd94482c
         with:
           include_all_old_new_renamed_files: true
+          path: pr
 
       - name: Find Missing Redirects for Renamed Files
         id: renamed-files

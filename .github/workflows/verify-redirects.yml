@@ -100,9 +100,8 @@ jobs:
           # empty string that stays empty if there are no redirects to suggest
           redirect_html=""
           combined_redirect_array=("${RENAMED_REDIRECTS[@]}" "${DELETED_REDIRECTS[@]}")
-
+          echo "array length: ${#combined_redirect_array[@]}"
           for redirect in "${combined_redirect_array[@]}"; do
-            echo "adding"
             redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"
           done
 

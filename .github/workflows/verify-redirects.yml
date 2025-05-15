@@ -115,7 +115,7 @@ jobs:
             fi  
           done
 
-          echo "redirect_html=- [ ] Did you add redirects?\n *Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):*\n$redirect_html\n" >> "$GITHUB_OUTPUT"
+          echo "redirect_html=- [ ] Did you add redirects?\\n *Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):*\\n$redirect_html\\n" >> "$GITHUB_OUTPUT"
 
       - name: Update PR Description
         if: steps.build-redirect-html.outputs.redirect_html

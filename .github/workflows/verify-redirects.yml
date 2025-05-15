@@ -107,6 +107,9 @@ jobs:
           # empty string that stays empty if there are no redirects to suggest
           redirect_html=""
 
+          echo "renamed: $RENAMED_REDIRECTS"
+          echo "deleted: $DELETED_REDIRECTS"
+
           combined_redirect_string="${RENAMED_REDIRECTS},${DELETED_REDIRECTS}"
           IFS=','
           echo "combined string: $combined_redirect_string"

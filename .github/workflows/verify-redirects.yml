@@ -106,22 +106,16 @@ jobs:
         run: |
           # empty string that stays empty if there are no redirects to suggest
           redirect_html=""
-
-          echo "renamed: $RENAMED_REDIRECTS"
-          echo "deleted: $DELETED_REDIRECTS"
-
+          
           combined_redirect_string="${RENAMED_REDIRECTS},${DELETED_REDIRECTS}"
           IFS=','
-          echo "combined string: $combined_redirect_string"
-          for redirect in "$combined_redirect_string"; do
-            echo "redirect in loop: $redirect"
+          for redirect in $combined_redirect_string; do
             if [[ ! -z "$redirect" ]]; then  
               redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"  
             fi  
           done
           
           echo "redirect_html=${redirect_html}" >> "$GITHUB_OUTPUT"
-          echo "$redirect_html"
 
       - name: Update PR Description
         if: steps.build-redirect-html.outputs.redirect_html

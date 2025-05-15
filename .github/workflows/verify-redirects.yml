@@ -62,7 +62,7 @@ jobs:
 
           # cut trailing comma
           renamed_redirects="${renamed_redirects%,}"
-          echo "$renamed_redirects"
+
           echo "redirects=${renamed_redirects}" >> "$GITHUB_OUTPUT"  
 
       - name: Find Missing Redirects for Deleted Files
@@ -95,7 +95,7 @@ jobs:
           
           # cut trailing comma
           deleted_redirects="${deleted_redirects%,}"
-          echo "$deleted_redirects"
+
           echo "redirects=${deleted_redirects}" >> "$GITHUB_OUTPUT"  
 
       - name: Build Redirect HTML

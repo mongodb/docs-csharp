@@ -56,10 +56,12 @@ jobs:
 
             # if redirect not already in file, add to array to add to PR description
             if ! grep -q "$renamed_redirect" $REDIRECTS_FILE; then
+              echo "adding $renamed_direct to redirects array"
               renamed_redirects+=("$renamed_redirect")
             fi
           done
           echo "redirects=${renamed_redirects}" >> "$GITHUB_OUTPUT"
+          cat "$REDIRECTS_FILE"
 
       - name: Find Missing Redirects for Deleted Files
         id: deleted-files

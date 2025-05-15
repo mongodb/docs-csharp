@@ -109,16 +109,15 @@ jobs:
           
           combined_redirect_string="${RENAMED_REDIRECTS},${DELETED_REDIRECTS}"
 
-          # count number of values and add intro text if there are any to show
-          if [[ $(( $(grep -o "," <<< "$combined_redirect_string" | wc -l) )) > 1 ]]; then
-            redirect_html="*Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):*"
-            IFS=','
-            for redirect in $combined_redirect_string; do
-              if [[ ! -z "$redirect" ]]; then  
-                redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"  
-              fi  
-            done
-          fi
+          IFS=','
+          for redirect in $combined_redirect_string; do
+            if [[ ! -z "$redirect" ]]; then
+              if [[ redirect_html="" ]]; then
+                redirect_html="*Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):*"
+              fi
+              redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"  
+            fi  
+          done
           
           echo "redirect_html=${redirect_html}" >> "$GITHUB_OUTPUT"
 

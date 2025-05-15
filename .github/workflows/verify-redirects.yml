@@ -36,6 +36,7 @@ jobs:
           RENAMED_FILES: ${{ steps.changed-files.outputs.all_old_new_renamed_files }}
         run: |
           renamed_redirects=()
+          echo "first length: ${#renamed_redirects[@]}"
           for file in $RENAMED_FILES; do
 
             # only run for .txt files
@@ -59,6 +60,7 @@ jobs:
               renamed_redirects+=("$renamed_redirect")
             fi
           done
+          echo "second length: ${#renamed_redirects[@]}"
           echo "redirects=${renamed_redirects}" >> "$GITHUB_OUTPUT"
 
       - name: Find Missing Redirects for Deleted Files

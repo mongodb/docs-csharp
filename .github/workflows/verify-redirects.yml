@@ -52,17 +52,13 @@ jobs:
             new="${new#source}"
             new="${new%.txt}"
             
-            # single quotes = ${var} rendered literally; double quotes = $var interpreted
             redirect='${prefix}/${version}'"$old"'/ -> ${base}/${version}'"$new"'/'
 
             # if redirect not already in file, add to string to add to PR description
             if ! grep -qx "$redirect" $REDIRECTS_FILE; then
-              renamed_redirects+="$redirect,"
+              renamed_redirects+="<li>[&lt;v&gt;-*]: $redirect</li>"
             fi
           done
-
-          # cut trailing comma
-          renamed_redirects="${renamed_redirects%,}"
 
           echo "redirects=${renamed_redirects}" >> "$GITHUB_OUTPUT"  
 
@@ -86,18 +82,14 @@ jobs:
             old="${old#source}"
             old="${old%.txt}"
             
-            # single quotes = ${var} rendered literally; double quotes = $var interpreted
             redirect='${prefix}/${version}'"$old"'/ -> ${base}/${version}/'
                        
             # if redirect not already in file, add to string to add to PR description
             if ! grep -qx "$redirect" $REDIRECTS_FILE; then 
-              deleted_redirects+="$redirect,"
+              deleted_redirects+="<li>[&lt;v&gt;-*]: $redirect</li>"
             fi
           done
           
-          # cut trailing comma
-          deleted_redirects="${deleted_redirects%,}"
-
           echo "redirects=${deleted_redirects}" >> "$GITHUB_OUTPUT"  
 
       - name: Build Redirect HTML
@@ -106,20 +98,12 @@ jobs:
           RENAMED_REDIRECTS: ${{ steps.renamed-files.outputs.redirects }}
           DELETED_REDIRECTS: ${{ steps.deleted-files.outputs.redirects }}
         run: |
-          # empty string that stays empty if there are no redirects to suggest
-          redirect_html=""
-          
-          combined_redirect_string="${RENAMED_REDIRECTS},${DELETED_REDIRECTS}"
+          redirect_html=''
+          combined_redirects="${RENAMED_REDIRECTS}${DELETED_REDIRECTS}"
 
-          IFS=','
-          for redirect in $combined_redirect_string; do
-            if [[ ! -z "$redirect" ]]; then
-              if [[ -z "$redirect_html" ]]; then
-                redirect_html="<i>Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):</i>"
-              fi
-              redirect_html+="<li>[&lt;v&gt;-\*]: $redirect</li>"  
-            fi  
-          done
+          if [ -n "$combined_redirects" ]; then
+            redirect_html="<h4>Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):</h4>$combined_redirects"
+          fi
 
           echo "redirect_html=${redirect_html}" >> "$GITHUB_OUTPUT"
 

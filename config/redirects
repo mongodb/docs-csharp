@@ -23,4 +23,4 @@ raw: ${prefix}/master -> ${base}/upcoming/
 [*-v2.30]: ${prefix}/${version}/fundamentals/odata/ -> ${base}/${version}/
 [*-v2.30]: ${prefix}/${version}/fundamentals/crud/write-operations/bulk-write/ -> ${base}/${version}/fundamentals/crud/write-operations/
 [v2.22-v2.24]: ${prefix}/${version}/fundamentals/authentication/oidc/ -> ${base}/${version}/fundamentals/authentication/
-[master-*]: ${prefix}/${version}/fundamentals/database-collection/ -> ${base}/${version}/fundamentals/renamed/
+[*-master]: ${prefix}/${version}/fundamentals/connection/connect/ -> ${base}/${version}/fundamentals/connection/renamed/

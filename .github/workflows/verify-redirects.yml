@@ -116,7 +116,7 @@ jobs:
           for redirect in $combined_redirect_string; do
             echo "running one iteration of the loop"
             if [[ ! -z "$redirect" ]]; then
-              if [[ redirect_html="" ]]; then
+              if [[ -z "$redirect_html" ]]; then
                 echo "adding redirect intro text"
                 redirect_html="*Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):*"
               fi

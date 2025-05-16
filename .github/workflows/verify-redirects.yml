@@ -119,10 +119,10 @@ jobs:
             if [[ ! -z "$redirect" ]]; then
               if [[ -z "$redirect_html" ]]; then
                 echo "adding redirect intro text"
-                redirect_html="*Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):*"
+                redirect_html="<i>Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):</i>"
               fi
               echo "adding $redirect to redirect_html variable"
-              redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"  
+              redirect_html+="<li>[&lt;v&gt;-\*]: $redirect</li>"  
             fi  
           done
 

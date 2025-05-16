@@ -10,7 +10,7 @@ namespace CSharpExamples.UsageExamples.DeleteMany;
 public class DeleteMany
 {
     private static IMongoCollection<Restaurant> _restaurantsCollection;
-    private const string MongoConnectionString = "<connection string>";
+    private const string MongoConnectionString = "mongodb://realUsername:realPassword@<hostname>[:<port>]/?authSource=<authenticationDb>&authMechanism=PLAIN";
 
     public static void Main(string[] args)
     {

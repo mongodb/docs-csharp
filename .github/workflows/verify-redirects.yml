@@ -36,6 +36,7 @@ jobs:
           RENAMED_FILES: ${{ steps.changed-files.outputs.all_old_new_renamed_files }}
         run: |
           renamed_redirects=""
+          echo "changed-files renamed list: $RENAMED_FILES"
           for file in $RENAMED_FILES; do
 
             # only run for .txt files
@@ -56,13 +57,14 @@ jobs:
 
             # if redirect not already in file, add to string to add to PR description
             if ! grep -q "$redirect" $REDIRECTS_FILE; then
+              echo "adding $redirect to renamed_redirects variable"
               renamed_redirects+="$redirect,"
             fi
           done
 
           # cut trailing comma
           renamed_redirects="${renamed_redirects%,}"
-
+          echo "passing $renamed_redirects to github output"
           echo "redirects=${renamed_redirects}" >> "$GITHUB_OUTPUT"  
 
       - name: Find Missing Redirects for Deleted Files
@@ -72,6 +74,7 @@ jobs:
           DELETED_FILES: ${{ steps.changed-files.outputs.deleted_files }}
         run: |
           deleted_redirects=""
+          echo "changed-files deleted list: $DELETED_FILES"
           for file in $DELETED_FILES; do
 
             # only run for .txt files
@@ -89,13 +92,14 @@ jobs:
                        
             # if redirect not already in file, add to string to add to PR description
             if ! grep -q "$redirect" $REDIRECTS_FILE; then 
+              echo "adding $redirect to deleted_redirects variable"
               deleted_redirects+="$redirect,"
             fi
           done
           
           # cut trailing comma
           deleted_redirects="${deleted_redirects%,}"
-
+          echo "passing $deleted_redirects to github output"
           echo "redirects=${deleted_redirects}" >> "$GITHUB_OUTPUT"  
 
       - name: Build Redirect HTML
@@ -108,7 +112,7 @@ jobs:
           redirect_html=""
           
           combined_redirect_string="${RENAMED_REDIRECTS},${DELETED_REDIRECTS}"
-
+          echo "combined-redirect-string: $combined_redirect_string"
           for redirect in $combined_redirect_string; do
             if [[ ! -z "$redirect" ]]; then
               if [[ redirect_html="" ]]; then
@@ -117,7 +121,8 @@ jobs:
               redirect_html+="<li>[&lt;v&gt;-*]: $redirect</li>"  
             fi  
           done
-          
+
+          echo "redirect html: $redirect_html"
           echo "redirect_html=${redirect_html}" >> "$GITHUB_OUTPUT"
 
       - name: Update PR Description

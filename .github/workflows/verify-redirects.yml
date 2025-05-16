@@ -113,6 +113,7 @@ jobs:
           
           combined_redirect_string="${RENAMED_REDIRECTS},${DELETED_REDIRECTS}"
           echo "combined-redirect-string: $combined_redirect_string"
+          IFS=','
           for redirect in $combined_redirect_string; do
             echo "running one iteration of the loop"
             if [[ ! -z "$redirect" ]]; then

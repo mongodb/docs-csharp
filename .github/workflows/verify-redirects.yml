@@ -113,10 +113,10 @@ jobs:
       - name: Update PR Description
         uses: MongoCaleb/pr-description-action@4bdfe35b98f64532b419ad20b350a92546cd3aa1
         with:
-          regex: "- \\[ \\] Did you add redirects\\?.*"
+          regex: "- \\[ \\] If you moved or deleted files.*"
           appendContentOnMatchOnly: false
           regexFlags: is
-          content: "- [ ] Did you add redirects?\n ${{ steps.build-redirect-html.outputs.redirect_html }}"
+          content: "- [ ] If you moved or deleted files, did you add forward and backward redirects?\n ${{ steps.build-redirect-html.outputs.redirect_html }}"
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check for duplicates in redirects file

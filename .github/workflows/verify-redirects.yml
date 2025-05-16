@@ -55,7 +55,7 @@ jobs:
             redirect='${prefix}/${version}'"$old"'/ -> ${base}/${version}'"$new"'/'
 
             # if redirect not already in file, add to string to add to PR description
-            if ! grep -qx "$redirect" $REDIRECTS_FILE; then
+            if ! grep -q "$redirect" $REDIRECTS_FILE; then
               renamed_redirects+="<li>[&lt;v&gt;-*]: $redirect</li>"
             fi
           done
@@ -83,9 +83,12 @@ jobs:
             old="${old%.txt}"
             
             redirect='${prefix}/${version}'"$old"'/ -> ${base}/${version}/'
-                       
+            
+            # escape special characters before searching for string           
+            escaped_redirect=$(printf '%s\n' "$redirect" | sed 's/[[*${}|\\]/\\&/g')
+
             # if redirect not already in file, add to string to add to PR description
-            if ! grep -qx "$redirect" $REDIRECTS_FILE; then 
+            if ! grep -qE "${escaped_redirect}$" $REDIRECTS_FILE; then
               deleted_redirects+="<li>[&lt;v&gt;-*]: $redirect</li>"
             fi
           done
@@ -102,7 +105,7 @@ jobs:
           combined_redirects="${RENAMED_REDIRECTS}${DELETED_REDIRECTS}"
 
           if [ -n "$combined_redirects" ]; then
-            redirect_html="<h4>Suggested redirects for moved/deleted files (replace &lt;v&gt; with earliest backport target version):</h4>$combined_redirects"
+            redirect_html="<h3>Suggested redirects for moved, renamed, and deleted files:</h3><p><em>Replace &lt;v&gt; with the earliest backport target version</p></em>$combined_redirects"
           fi
 
           echo "redirect_html=${redirect_html}" >> "$GITHUB_OUTPUT"

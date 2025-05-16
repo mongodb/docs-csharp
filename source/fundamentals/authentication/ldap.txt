@@ -63,7 +63,7 @@ see the corresponding syntax:
       .. code-block:: csharp
 
          var mongoClient = new MongoClient(
-            "mongodb://<username>:<password>@<hostname>[:<port>]/?authSource=<authenticationDb>" +
+            "mongodb://realUsername:realPassword@<hostname>[:<port>]/?authSource=<authenticationDb>" +
             "&authMechanism=PLAIN");
 
    .. tab:: MongoCredential

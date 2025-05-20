@@ -44,6 +44,23 @@ Extended JSON document into a ``BsonDocument`` object:
 
       { "_id" : { "$oid" : "573a1391f29313caabcd9637" }, "createdAt" : { "$date" : "1970-01-19T12:51:39.609Z" }, "numViews" : 36520312 }
 
+Alternatively, you can use the ``JsonReader`` class to read Extended JSON documents. The
+following example reads uses the ``JsonReader`` class to read the same Extended JSON document
+as the preceding example into a ``BsonDocument`` object:
+
+.. io-code-block::
+
+   .. input:: /includes/fundamentals/code-examples/ExtendedJson.cs
+      :language: csharp
+      :start-after: start-read-ejson-reader
+      :end-before: end-read-ejson-reader
+      :dedent:
+
+   .. output::
+      :visible: false
+
+      { "_id" : { "$oid" : "573a1391f29313caabcd9637" }, "createdAt" : { "$date" : "1970-01-19T12:51:39.609Z" }, "numViews" : 36520312 }
+
 Write Extended JSON
 -------------------
 
@@ -87,5 +104,4 @@ documentation:
 - `JsonWriter <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonWriter.html>`__
 - `JsonReader <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonReader.html>`__
 - `JsonWriterSettings <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonWriterSettings.html>`__
-- `JsonReaderSettings <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonReaderSettings.html>`__
 - `JsonOutputMode <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonOutputMode.html>`__

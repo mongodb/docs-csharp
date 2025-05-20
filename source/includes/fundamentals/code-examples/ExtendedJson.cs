@@ -16,7 +16,7 @@ public class ExtendedJson
         }
         
         {
-            // start-read-json-reader
+            // start-read-ejson-reader
             var ejson = "{\n\"_id\": { \"$oid\": \"573a1391f29313caabcd9637\" },\n  \"createdAt\": { \"$date\": { \"$numberLong\": \"1601499609\" }},\n\"numViews\": { \"$numberLong\": \"36520312\" }\n}\n\n";
             var subject = new BsonDocumentSerializer();
             using (var reader = new JsonReader(ejson))
@@ -25,7 +25,7 @@ public class ExtendedJson
                 var document = subject.Deserialize<BsonDocument>(context);
                 Console.WriteLine(document.ToJson());
             }
-            // end-read-json-reader
+            // end-read-ejson-reader
         }
 
         {

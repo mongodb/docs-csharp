@@ -44,9 +44,8 @@ Extended JSON document into a ``BsonDocument`` object:
 
       { "_id" : { "$oid" : "573a1391f29313caabcd9637" }, "createdAt" : { "$date" : "1970-01-19T12:51:39.609Z" }, "numViews" : 36520312 }
 
-Alternatively, you can use the ``JsonReader`` class to read Extended JSON documents. The
-following example reads uses the ``JsonReader`` class to read the same Extended JSON document
-as the preceding example into a ``BsonDocument`` object:
+Alternatively, you can use the ``JsonReader`` class to read Extended JSON documents
+into other formats such as ``BsonDocument``, as shown in the following example:
 
 .. io-code-block::
 

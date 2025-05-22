@@ -165,8 +165,8 @@ The ``UpdateOptions`` class contains the following properties:
 
    * - ``Collation``
      - Specifies the kind of language collation to use when sorting
-       results. See :manual:`the {+mdb-server+} manual</reference/collation/#std-label-collation>`
-       for more information on collation.
+       results. See the
+       :ref:`<csharp-find-collation>` section of this page for more information.
 
        **Data Type:** `Collation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Collation.html>`__
 
@@ -198,6 +198,13 @@ The ``UpdateOptions`` class contains the following properties:
        for more information.
 
        **Data Type:** `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
+
+.. _csharp-update-collation:
+
+Collation
+~~~~~~~~~
+
+.. include:: /includes/collation.rst
 
 Return Value
 ------------

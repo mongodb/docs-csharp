@@ -28,7 +28,7 @@ Read Extended JSON
 ------------------
 
 You can read an Extended JSON documents into a {+language+} object by using the
-``BsonSerializer.Deserialize<T>()`` method. The following example reads an
+``BsonDocument.Parse()`` method. The following example reads an
 Extended JSON document into a ``BsonDocument`` object:
 
 .. io-code-block::
@@ -37,22 +37,6 @@ Extended JSON document into a ``BsonDocument`` object:
       :language: csharp
       :start-after: start-read-ejson
       :end-before: end-read-ejson
-      :dedent:
-
-   .. output::
-      :visible: false
-
-      { "_id" : { "$oid" : "573a1391f29313caabcd9637" }, "createdAt" : { "$date" : "1970-01-19T12:51:39.609Z" }, "numViews" : 36520312 }
-
-Alternatively, you can use the ``JsonReader`` class to read Extended JSON documents
-into other formats such as ``BsonDocument``, as shown in the following example:
-
-.. io-code-block::
-
-   .. input:: /includes/fundamentals/code-examples/ExtendedJson.cs
-      :language: csharp
-      :start-after: start-read-ejson-reader
-      :end-before: end-read-ejson-reader
       :dedent:
 
    .. output::
@@ -94,7 +78,7 @@ property:
 API Documentation
 -----------------
 
-To learn more about the methods and classes used on this page, see the following API
+To learn more about the methods and classes you can use to work with JSON documents, see the following API
 documentation:
 
 - `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__

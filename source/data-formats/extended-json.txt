@@ -28,7 +28,7 @@ Read Extended JSON
 ------------------
 
 You can read an Extended JSON documents into a {+language+} object by using the
-``BsonSerializer.Deserialize<T>()`` method. The following example reads an
+``BsonDocument.Parse()`` method. The following example reads an
 Extended JSON document into a ``BsonDocument`` object:
 
 .. io-code-block::
@@ -78,7 +78,7 @@ property:
 API Documentation
 -----------------
 
-To learn more about the methods and classes used on this page, see the following API
+To learn more about the methods and classes you can use to work with JSON documents, see the following API
 documentation:
 
 - `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
@@ -87,5 +87,4 @@ documentation:
 - `JsonWriter <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonWriter.html>`__
 - `JsonReader <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonReader.html>`__
 - `JsonWriterSettings <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonWriterSettings.html>`__
-- `JsonReaderSettings <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonReaderSettings.html>`__
 - `JsonOutputMode <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.JsonOutputMode.html>`__

@@ -1,6 +1,4 @@
 using MongoDB.Bson;
-using MongoDB.Bson.IO;
-using MongoDB.Bson.Serialization;
 
 public class ExtendedJson
 {
@@ -10,11 +8,11 @@ public class ExtendedJson
             // start-read-ejson
             var ejson = "{\n\"_id\": { \"$oid\": \"573a1391f29313caabcd9637\" },\n  \"createdAt\": { \"$date\": { \"$numberLong\": \"1601499609\" }},\n\"numViews\": { \"$numberLong\": \"36520312\" }\n}\n\n";
             
-            var document = BsonSerializer.Deserialize<BsonDocument>(ejson);
+            var document = BsonDocument.Parse(ejson);
             Console.WriteLine(document.ToJson());
             // end-read-ejson
         }
-
+        
         {
             // start-write-ejson
             var document = new MyDocument();

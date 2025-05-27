@@ -18,7 +18,7 @@ Connection Options
    :class: singlecol
 
 .. toctree::
-   :caption: Specify Connection Options 
+   :caption: Specify Connection Options
 
    Compress Network Traffic </connect/connection-options/network-compression>
    Customize Server Selection </connect/connection-options/server-selection>
@@ -92,7 +92,7 @@ its properties, and pass it as an argument to the ``MongoClient`` constructor:
    :end-before: // end mongo client settings config
 
 .. tip:: Other MongoUrl Members
-  
+
    The ``MongoUrl`` class contains other methods and read-only properties that you can
    use to retrieve information about your connection. For a full list, see
    `MongoUrl <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoUrl.html>`__ in the
@@ -127,26 +127,30 @@ Replica Set Options
 
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
-    
+
       ReplicaSetName
       ~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
-      
-      .. code-block:: none
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-replica-set-name
+         :end-before: // end-settings-replica-set-name
 
       DirectConnection
       ~~~~~~~~~~~~~~~~
-      
+
       .. include:: /includes/fundamentals/connection-options/directConnection.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-direct-connection
+         :end-before: // end-settings-direct-connection
 
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
@@ -155,22 +159,26 @@ Replica Set Options
       ~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
-      
-      .. code-block:: none
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-builder-replica-set-name
+         :end-before: // end-builder-replica-set-name
 
       DirectConnection
       ~~~~~~~~~~~~~~~~
-      
+
       .. include:: /includes/fundamentals/connection-options/directConnection.rst
-      
-      .. code-block:: csharp
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-direct-connection
+         :end-before: // end-builder-direct-connection
 
-
-   
 TLS Options
 -----------
 
@@ -184,67 +192,68 @@ TLS Options
 
       .. include:: /includes/fundamentals/connection-options/allowInsecureTls.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-allow-insecure-tls
+         :end-before: // end-settings-allow-insecure-tls
 
       SslSettings
       ~~~~~~~~~~~
 
       TLS/SSL options, including client certificates, revocation handling, and
       enabled and disabled TLS/SSL protocols. The default value is ``null``.
-     
+
       If ``SslSettings.CheckCertificateRevocation`` is set to ``false`` and
       ``AllowInsecureTls`` is set to ``true``, the {+driver-short+} throws
       an exception.
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-ssl-settings
+         :end-before: // end-settings-ssl-settings
 
-         var settings = new MongoClientSettings();
-         settings.SslSettings = new SslSettings()
-         {
-             CheckCertificateRevocation = false,
-             ClientCertificateCollection = new X509CertificateCollection() { ... },
-             ClientCertificateSelectionCallback = new LocalCertificateSelectionCallback() { ... },
-             ClientCertificates = new List<X509Certificate>() { ... },
-             EnabledSslProtocols = SslProtocols.Tls13,
-             ServerCertificateValidationCallback = new RemoteCertificateValidationCallback() { ... }
-         };
-   
       UseTls
       ~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/useTls.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-use-tls
+         :end-before: // end-settings-use-tls
 
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
 
       AllowInsecureTls
       ~~~~~~~~~~~~~~~~
-      
+
       .. include:: /includes/fundamentals/connection-options/allowInsecureTls.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-builder-allow-insecure-tls
+         :end-before: // end-builder-allow-insecure-tls
 
       UseTls
       ~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/useTls.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-builder-use-tls
+         :end-before: // end-builder-use-tls
 
 Timeout Options
 ---------------
@@ -253,26 +262,30 @@ Timeout Options
 
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
-    
+
       ConnectTimeout
       ~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/connectTimeout.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-connect-timeout
+         :end-before: // end-settings-connect-timeout
 
       SocketTimeout
       ~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/socketTimeout.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-connect-timeout
+         :end-before: // end-settings-connect-timeout
 
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
@@ -282,20 +295,24 @@ Timeout Options
 
       .. include:: /includes/fundamentals/connection-options/connectTimeout.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-builder-connect-timeout
+         :end-before: // end-builder-connect-timeout
 
       SocketTimeout
       ~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/socketTimeout.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-builder-socket-timeout
+         :end-before: // end-builder-socket-timeout
 
 Compression Options
 -------------------
@@ -304,16 +321,18 @@ Compression Options
 
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
-    
+
       Compressors
       ~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/compressors.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-compressors
+         :end-before: // end-settings-compressors
 
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
@@ -323,9 +342,12 @@ Compression Options
 
       .. include:: /includes/fundamentals/connection-options/compressors.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-compressors
+         :end-before: // end-builder-compressors
 
 Connection Pool Options
 -----------------------
@@ -334,62 +356,79 @@ Connection Pool Options
 
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
-    
+
       MaxConnecting
       ~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/maxConnecting.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-max-connecting
+         :end-before: // end-settings-max-connecting
 
       MaxConnectionIdleTime
       ~~~~~~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/maxConnectionIdleTime.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-max-connection-idle-time
+         :end-before: // end-settings-max-connection-idle-time
 
       MaxConnectionLifeTime
       ~~~~~~~~~~~~~~~~~~~~~
 
-      .. include:: /includes/fundamentals/connection-options/maxConnectionLifeTime.rst
+      .. include:: /includes/fundamentals/connection-options/maxConnectionLifetime.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-max-connection-life-time
+         :end-before: // end-settings-max-connection-life-time
 
       MaxConnectionPoolSize
       ~~~~~~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/maxConnectionPoolSize.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-max-connection-pool-size
+         :end-before: // end-settings-max-connection-pool-size
 
       MinConnectionPoolSize
       ~~~~~~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/minConnectionPoolSize.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-min-connection-pool-size
+         :end-before: // end-settings-min-connection-pool-size
 
       WaitQueueTimeout
       ~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/waitQueueTimeout.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-wait-queue-timeout
+         :end-before: // end-settings-wait-queue-timeout
 
-
-   
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
 
@@ -398,54 +437,72 @@ Connection Pool Options
 
       .. include:: /includes/fundamentals/connection-options/maxConnecting.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-max-connecting
+         :end-before: // end-builder-max-connecting
 
       MaxConnectionIdleTime
       ~~~~~~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/maxConnectionIdleTime.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-max-connection-idle-time
+         :end-before: // end-builder-max-connection-idle-time
 
       MaxConnectionLifeTime
       ~~~~~~~~~~~~~~~~~~~~~
 
-      .. include:: /includes/fundamentals/connection-options/maxConnectionLifeTime.rst
+      .. include:: /includes/fundamentals/connection-options/maxConnectionLifetime.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-max-connection-life-time
+         :end-before: // end-builder-max-connection-life-time
 
       MaxConnectionPoolSize
       ~~~~~~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/maxConnectionPoolSize.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-max-connection-pool-size
+         :end-before: // end-builder-max-connection-pool-size
 
       MinConnectionPoolSize
       ~~~~~~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/minConnectionPoolSize.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-min-connection-pool-size
+         :end-before: // end-builder-min-connection-pool-size
 
       WaitQueueTimeout
       ~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/waitQueueTimeout.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-wait-queue-timeout
+         :end-before: // end-builder-wait-queue-timeout
 
 Write Concern Options
 ---------------------
@@ -462,20 +519,13 @@ Write Concern Options
       journaling, for the client. The default value is ``WriteConcern.Acknowledged``.
       See :ref:`write concern <wc-j>` for more information.
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-write-concern
+         :end-before: // end-settings-write-concern
 
-         public void WriteConcern()
-         {
-            var settings = new MongoClientSettings();
-            settings.WriteConcern = new WriteConcern(
-              w: 1,
-              wTimeout: new TimeSpan(0, 0, 0, 30, 0),
-              fsync: true,
-              journal: true
-          );
-        }
-   
 Read Concern Options
 --------------------
 
@@ -483,31 +533,35 @@ Read Concern Options
 
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
-    
+
       ReadConcern
       ~~~~~~~~~~~
 
-      The client's default read concern. The default value is ``ReadConcern.Default``.
+      The client's read concern. The default value is ``ReadConcern.Default``.
       For more information, see :ref:`read concern <read-concern>`.
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-read-concern
+         :end-before: // end-settings-read-concern
 
-
-   
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
 
       ReadConcernLevel
       ~~~~~~~~~~~~~~~~
 
-      TODO:
-      The client's default read concern. The default value is ``ReadConcern.Default``.
+      The client's read concern level. The default value is ``ReadConcern.Local``.
       For more information, see :ref:`read concern <read-concern>`.
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-read-concern-level
+         :end-before: // end-builder-read-concern-level
 
 Read Preference Options
 -----------------------
@@ -516,25 +570,31 @@ Read Preference Options
 
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
-    
+
       ReadPreference
       ~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/readPreference.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-read-preference
+         :end-before: // end-settings-read-preference
 
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
 
       .. include:: /includes/fundamentals/connection-options/readPreference.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-       
+         :dedent: 8
+         :start-after: // start-builder-read-preference
+         :end-before: // end-builder-read-preference
+
 Authentication Options
 ----------------------
 
@@ -542,23 +602,26 @@ Authentication Options
 
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
-    
+
       Credential
       ~~~~~~~~~~
 
       Settings for how the driver authenticates to the server. This includes
       authentication credentials, mechanism, source, and other settings. The default
       value is ``null``.
-      
+
       f you don't specify an authentication mechanism, the driver uses either
       ``SCRAM-SHA-1`` or ``SCRAM-SHA-256``, depending on the server version. See
       :ref:`authentication mechanisms <csharp-authentication-mechanisms>` for available
       authentication mechanisms.
-      
-      .. code-block:: csharp
-         :copyable: true
 
-      
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-credential
+         :end-before: // end-settings-credential
+
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
 
@@ -571,9 +634,13 @@ Authentication Options
       :ref:`authentication mechanisms <csharp-authentication-mechanisms>` for available
       authentication mechanisms.
 
-      .. code-block:: csharp
-
-
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-authentication
+         :end-before: // end-builder-authentication
+         :emphasize-lines: 3
 
       AuthenticationMechanismProperties
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -581,16 +648,26 @@ Authentication Options
       Configuration settings for the authentication mechanism specified in the
       ``AuthenticationMechanism`` property.
 
-      .. code-block:: csharp
-
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-authentication
+         :end-before: // end-builder-authentication
+         :emphasize-lines: 4-8
 
       AuthenticationSource
       ~~~~~~~~~~~~~~~~~~~~
 
       The source to authenticate the client against.
 
-      .. code-block:: csharp
-
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-authentication
+         :end-before: // end-builder-authentication
+         :emphasize-lines: 9
 
 Server Selection and Discovery Options
 --------------------------------------
@@ -605,38 +682,48 @@ Server Selection and Discovery Options
 
       .. include:: /includes/fundamentals/connection-options/heartbeatInterval.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-heartbeat-interval
+         :end-before: // end-settings-heartbeat-interval
 
       HeartbeatTimeout
       ~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/heartbeatTimeout.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-heartbeat-timeout
+         :end-before: // end-settings-heartbeat-timeout
 
       LocalThreshold
       ~~~~~~~~~~~~~~
-    
+
       .. include:: /includes/fundamentals/connection-options/localThreshold.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-local-threshold
+         :end-before: // end-settings-local-threshold
 
       ServerSelectionTimeout
       ~~~~~~~~~~~~~~~~~~~~~~
-   
+
       .. include:: /includes/fundamentals/connection-options/localThreshold.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-server-selection-timeout
+         :end-before: // end-settings-server-selection-timeout
 
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
@@ -646,36 +733,48 @@ Server Selection and Discovery Options
 
       .. include:: /includes/fundamentals/connection-options/heartbeatInterval.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-heartbeat-interval
+         :end-before: // end-builder-heartbeat-interval
 
       HeartbeatTimeout
       ~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/heartbeatTimeout.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-heartbeat-timeout
+         :end-before: // end-builder-heartbeat-timeout
 
       LocalThreshold
       ~~~~~~~~~~~~~~
-    
+
       .. include:: /includes/fundamentals/connection-options/localThreshold.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-local-threshold
+         :end-before: // end-builder-local-threshold
 
       ServerSelectionTimeout
       ~~~~~~~~~~~~~~~~~~~~~~
-   
+
       .. include:: /includes/fundamentals/connection-options/localThreshold.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-server-selection-timeout
+         :end-before: // end-builder-server-selection-timeout
 
 Miscellaneous Options
 ---------------------
@@ -684,24 +783,30 @@ Miscellaneous Options
 
    .. tab:: MongoClientSettings
       :tabid: mongo-client-settings
-    
+
       ApplicationName
       ~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/applicationName.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-application-name
+         :end-before: // end-settings-application-name
 
       AutoEncryptionOptions
       ~~~~~~~~~~~~~~~~~~~~~
 
       Settings for automatic client-side encryption. The default value is ``null``.
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-auto-encryption-options
+         :end-before: // end-settings-auto-encryption-options
 
       ClusterConfigurator
       ~~~~~~~~~~~~~~~~~~~
@@ -709,18 +814,24 @@ Miscellaneous Options
       Low-level configuration options for sockets, TLS, cluster, and others. The default
       value is ``null``.
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-      
-  
+         :dedent: 8
+         :start-after: // start-settings-cluster-configurator
+         :end-before: // end-settings-cluster-configurator
+
       IPv6
       ~~~~
 
       .. include:: /includes/fundamentals/connection-options/ipv6.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-ipv6
+         :end-before: // end-settings-ipv6
 
       IsFrozen
       ~~~~~~~~
@@ -728,31 +839,37 @@ Miscellaneous Options
       Indicates whether the settings have been frozen. Frozen settings can't be changed.
       This option is read-only. The default value is ``false``.
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-is-frozen
+         :end-before: // end-settings-is-frozen
 
       LoadBalanced
       ~~~~~~~~~~~~
-      
+
       .. include:: /includes/fundamentals/connection-options/loadBalanced.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-         var settings = new MongoClientSettings();
-         settings.LoadBalanced = true;
+         :dedent: 8
+         :start-after: // start-settings-load-balanced
+         :end-before: // end-settings-load-balanced
 
       LoggingSettings
       ~~~~~~~~~~~~~~~
 
       The settings used for :ref:`logging. <csharp-logging>` The default value is ``null``.
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-logging-settings
+         :end-before: // end-settings-logging-settings
 
-
-     
       ReadEncoding
       ~~~~~~~~~~~~
 
@@ -760,46 +877,60 @@ Miscellaneous Options
       strict encoding, where the driver throws an exception when it encounters an invalid
       UTF-8 byte sequence.
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-read-encoding
+         :end-before: // end-settings-read-encoding
 
       RetryReads
       ~~~~~~~~~~
-      
+
       .. include:: /includes/fundamentals/connection-options/retryReads.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-retry-reads
+         :end-before: // end-settings-retry-reads
 
       RetryWrites
       ~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/retryWrites.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-retry-writes
+         :end-before: // end-settings-retry-writes
 
       Scheme
       ~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/scheme.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-scheme
+         :end-before: // end-settings-scheme
 
       Server
       ~~~~~~
-    
+
       .. include:: /includes/fundamentals/connection-options/server.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
-
+         :dedent: 8
+         :start-after: // start-settings-server
+         :end-before: // end-settings-server
 
       ServerApi
       ~~~~~~~~~
@@ -808,36 +939,48 @@ Miscellaneous Options
       :manual:`the MongoDB Manual</reference/stable-api>` for more information about
       Stable API versioning.
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-server-api
+         :end-before: // end-settings-server-api
 
       ServerMonitoringMode
       ~~~~~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/serverMonitoringMode.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-server-monitoring-mode
+         :end-before: // end-settings-server-monitoring-mode
 
       Servers
       ~~~~~~~
-      
+
       .. include:: /includes/fundamentals/connection-options/servers.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-servers
+         :end-before: // end-settings-servers
 
-     
       SrvMaxHosts
       ~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/srvMaxHosts.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-settings-srv-max-hosts
+         :end-before: // end-settings-srv-max-hosts
 
       TranslationOptions
       ~~~~~~~~~~~~~~~~~~
@@ -845,99 +988,132 @@ Miscellaneous Options
       Specifies options, such as the {+mdb-server+} version, for translating LINQ
       queries to the Query API. The default value is ``null``.
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-translation-options
+         :end-before: // end-settings-translation-options
 
-
- 
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
- 
+
       ApplicationName
       ~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/applicationName.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-application-name
+         :end-before: // end-builder-application-name
 
       IPv6
       ~~~~
 
       .. include:: /includes/fundamentals/connection-options/ipv6.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-ipv6
+         :end-before: // end-builder-ipv6
 
       LoadBalanced
       ~~~~~~~~~~~~
-      
+
       .. include:: /includes/fundamentals/connection-options/loadBalanced.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-load-balanced
+         :end-before: // end-builder-load-balanced
 
-     
       RetryReads
       ~~~~~~~~~~
-      
+
       .. include:: /includes/fundamentals/connection-options/retryReads.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-retry-reads
+         :end-before: // end-builder-retry-reads
 
       RetryWrites
       ~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/retryWrites.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-retry-writes
+         :end-before: // end-builder-retry-writes
 
       Scheme
       ~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/scheme.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-scheme
+         :end-before: // end-builder-scheme
 
       Server
       ~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/server.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-server
+         :end-before: // end-builder-server
 
       ServerMonitoringMode
       ~~~~~~~~~~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/serverMonitoringMode.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
-
+         :dedent: 8
+         :start-after: // start-builder-server-monitoring-mode
+         :end-before: // end-builder-server-monitoring-mode
 
       Servers
       ~~~~~~~
-      
+
       .. include:: /includes/fundamentals/connection-options/servers.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-servers
+         :end-before: // end-builder-servers
 
-     
       SrvMaxHosts
       ~~~~~~~~~~~
 
       .. include:: /includes/fundamentals/connection-options/srvMaxHosts.rst
 
-      .. code-block:: csharp
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
          :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-srv-max-hosts
+         :end-before: // end-builder-srv-max-hosts

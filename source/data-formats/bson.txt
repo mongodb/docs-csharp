@@ -216,8 +216,8 @@ BSON document stored in ``myFile.bson``:
    ``System.IO.Stream`` object. This means that you can read or write any location 
    that can be accessed by a stream.
 
-Implementing a Custom BSON Reader and Writer
---------------------------------------------
+Implement a Custom BSON Reader and Writer
+-----------------------------------------
 
 The preceding examples show how to read and write BSON documents by using the
 ``BsonBinaryReader`` and ``BsonBinaryWriter`` classes. However, you can also implement a
@@ -225,6 +225,26 @@ custom reader and writer by implementing the
 ``IBsonReader`` and ``IBsonWriter`` interfaces. This is useful when you want to define
 a custom serializer or if you want to directly read or write BSON or JSON data without
 interacting with a MongoDB deployment.
+
+The following code sample shows a custom reader that inherits from the
+``IBsonReader`` interface:
+
+.. code-block:: csharp
+
+   public class CustomReader : IBsonReader
+   {
+      public CustomReader(Stream stream)
+      {
+          _reader = new BinaryReader(stream);
+      }
+
+      public void ReadStartDocument()
+      {
+          // Implement logic to read the start of a BSON document here
+      }
+
+      // Implement other methods from the IBsonReader interface here
+   }
 
 To learn more about serialization and deserialization in the {+driver-short+}, see the
 :ref:`csharp-serialization` guide.

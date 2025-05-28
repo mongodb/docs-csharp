@@ -226,7 +226,7 @@ custom reader and writer by implementing the
 a custom serializer or if you want to directly read or write BSON or JSON data without
 interacting with a MongoDB deployment.
 
-To learn more about serialization and deserialization in {+language+}, see the
+To learn more about serialization and deserialization in the {+driver-short+}, see the
 :ref:`csharp-serialization` guide.
 
 .. _csharp-bson-api:

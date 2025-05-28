@@ -233,6 +233,8 @@ The following code sample shows a custom reader that inherits from the
 
    public class CustomReader : IBsonReader
    {
+      private readonly BinaryReader _reader;
+
       public CustomReader(Stream stream)
       {
           _reader = new BinaryReader(stream);

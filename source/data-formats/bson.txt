@@ -6,6 +6,9 @@ BSON Operations
 
 .. default-domain:: mongodb
 
+.. meta::
+   :keywords: document, BSON, serializer
+
 .. contents:: On this page
    :local:
    :backlinks: none
@@ -44,7 +47,8 @@ The code samples in this guide use the following BSON document as an example:
 Create a BSON Document
 ----------------------
 
-To build a BSON document in {+language+}, create an instance of the ``BsonDocument`` class.
+To build a representation of a BSON document in {+language+}, create an instance of the
+``BsonDocument`` class.
 The ``BsonDocument`` constructor accepts ``BsonElement`` arguments that map to the fields
 and values in the document. Each ``BsonElement`` can be either an instance of the 
 ``BsonElement`` class or a field-value pair inside curly braces ( ``{}`` ).
@@ -212,6 +216,19 @@ BSON document stored in ``myFile.bson``:
    ``System.IO.Stream`` object. This means that you can read or write any location 
    that can be accessed by a stream.
 
+Implementing a Custom BSON Reader and Writer
+--------------------------------------------
+
+The preceding examples show how to read and write BSON documents by using the
+``BsonBinaryReader`` and ``BsonBinaryWriter`` classes. However, you can also implement a
+custom reader and writer by implementing the
+``IBsonReader`` and ``IBsonWriter`` interfaces. This is useful when you want to define
+a custom serializer or if you want to directly read or write BSON or JSON data without
+interacting with a MongoDB deployment.
+
+To learn more about serialization and deserialization in {+language+}, see the
+:ref:`csharp-serialization` guide.
+
 .. _csharp-bson-api:
 
 API Documentation
@@ -224,3 +241,5 @@ guide, see the following API documentation:
 - `BsonElement <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonElement.html>`__
 - `BsonBinaryReader <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.BsonBinaryReader.html>`__
 - `BsonBinaryWriter <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.BsonBinaryWriter.html>`__
+- `IBsonReader <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.IBsonReader.html>`__
+- `IBsonWriter <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.IBsonWriter.html>`__

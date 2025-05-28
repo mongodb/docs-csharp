@@ -12,6 +12,65 @@ namespace Connection;
 
 public class ConnectionOptions
 {
+    public void ConnectionUriExample()
+    {
+        // start-connection-uri
+        const string connectionUri = "mongodb+srv:/localhost:27017/?connectTimeoutMS=60000&tls=true";
+        // end-connection-uri
+    }
+
+    public void MongoClientSettingsExample()
+    {
+        // start-mongo-client-settings
+        var settings = new MongoClientSettings()
+        {
+            Scheme = ConnectionStringScheme.MongoDBPlusSrv,
+            Server = new MongoServerAddress("localhost", 27017),
+            ConnectTimeout = TimeSpan.FromMilliseconds(60000),
+            UseTls = true
+        };
+
+        var client = new MongoClient(settings);
+        // end-mongo-client-settings
+    }
+
+    public void FromConnectionStringExample()
+    {
+        // start-from-connection-string
+        const string connectionUri = "mongodb+srv://localhost:27017/?connectTimeoutMS=60000&tls=true";
+        var settings = MongoClientSettings.FromConnectionString(connectionUri);
+        settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+        
+        var client = new MongoClient(settings);
+        // end-from-connection-string
+    }
+
+    public void FromUrlExample()
+    {
+        // start-from-url
+        const string connectionUri = "mongodb+srv://localhost:27017/?connectTimeoutMS=60000&tls=true";
+        var url = new MongoUrl(connectionUri);
+        var settings = MongoClientSettings.FromUrl(url);
+        settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+        
+        var client = new MongoClient(settings);
+        // end-from-url
+    }
+    
+    public void MongoUrlBuilderExample()
+    {
+        // start-mongo-url-builder
+        const string connectionUri = "mongodb+srv://localhost:27017/?connectTimeoutMS=60000&tls=true";
+        var builder = new MongoUrlBuilder(connectionUri)
+        {
+            ServerMonitoringMode = MongoDB.Driver.Core.Servers.ServerMonitoringMode.Stream
+        };
+        var url = builder.ToMongoUrl();
+        
+        var client = new MongoClient(url);
+        // end-mongo-url-builder
+    }
+    
     public void ReplicaSetName()
     {
         // start-settings-replica-set-name
@@ -554,6 +613,93 @@ public class ConnectionOptions
         // end-builder-srv-max-hosts
     }
 
+    public void Journal()
+    {
+        // start-builder-journal
+        var builder = new MongoUrlBuilder
+        {
+            Journal = true 
+        };
+        // end-builder-journal
+    }
+    
+    public void TlsDisableCertificateRevocationCheck()
+    {
+        // start-builder-tls-disable
+        var builder = new MongoUrlBuilder
+        {
+            TlsDisableCertificateRevocationCheck = true
+        };
+        // end-builder-tls-disable
+    }
+    
+    public void W()
+    {
+        // start-builder-w
+        var builder = new MongoUrlBuilder
+        {
+            W = 2 
+        };
+        // end-builder-w
+    }
+    
+    public void WTimeout()
+    {
+        // start-builder-w-timeout
+        var builder = new MongoUrlBuilder
+        {
+            WTimeout = TimeSpan.FromSeconds(5)
+        };
+        // end-builder-w-timeout
+    }
+    
+    public void UsernamePassword()
+    {
+        // start-builder-username-password
+        var builder = new MongoUrlBuilder
+        {
+            Username = "user",
+            Password = "password"
+        };
+        // end-builder-username-password
+    }
+    
+    public void FSync()
+    {
+        // start-builder-fsync
+        var builder = new MongoUrlBuilder
+        {
+            FSync = true 
+        };
+        // end-builder-fsync
+    }
+    
+    public void DatabaseName()
+    {
+        // start-builder-database-name
+        var builder = new MongoUrlBuilder
+        {
+            DatabaseName = "test_database"
+        };
+        // end-builder-database-name
+    }
+    
+    public void SrvServiceName()
+    {
+        // start-settings-srv-service-name
+        var settings = new MongoClientSettings
+        {
+            SrvServiceName = "yourServiceName"
+        };
+        // end-settings-srv-service-name
+
+        // start-builder-srv-service-name
+        var builder = new MongoUrlBuilder
+        {
+            SrvServiceName = "yourServiceName"
+        };
+        // end-builder-srv-service-name
+    }
     public void TranslationOptions()
     {
         // start-settings-translation-options
@@ -605,6 +751,18 @@ public class ConnectionOptions
         // end-settings-read-encoding
     }
 
+    public void WriteEncoding()
+    {
+        // start-settings-write-encoding
+        var settings = new MongoClientSettings
+        {
+            WriteEncoding = new UTF8Encoding(
+                encoderShouldEmitUTF8Identifier: false,
+                throwOnInvalidBytes: true)
+        };
+        // end-settings-write-encoding
+    }
+    
     public void AutoEncryptionOptions()
     {
         // start-settings-auto-encryption-options

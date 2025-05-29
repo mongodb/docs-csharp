@@ -49,11 +49,12 @@ and the ``tls`` option with a value of ``true``:
 .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
    :language: csharp
    :dedent:
-   :start-after: // start-connection-uri 
+   :start-after: // start-connection-uri
    :end-before: // end-connection-uri
 
 To learn more about the options that you can specify in a connection URI, see
-:manual:`</reference/connection-string-options>` in the {+mdb-server+} manual.
+:manual:`Connection String Options </reference/connection-string-options>` in the
++mdb-server+} manual.
 
 .. _csharp-mongo-client-settings:
 
@@ -72,7 +73,7 @@ its properties, and pass it as an argument to the ``MongoClient`` constructor:
    :language: csharp
    :dedent:
    :start-after: // start-mongo-client-settings
-   :end-before: // end-mongo-client-settings 
+   :end-before: // end-mongo-client-settings
 
 You can also create a ``MongoClientSettings`` object from a connection string by calling the
 ``MongoClientSettings.FromConnectionString()`` method and passing the connection string,
@@ -84,7 +85,7 @@ that aren't available in the connection string.
    :language: csharp
    :dedent:
    :start-after: // start-mongo-client-settings
-   :end-before: // end-mongo-client-settings 
+   :end-before: // end-mongo-client-settings
 
 Alternatively, you can create a ``MongoClientSettings`` object from a ``MongoUrl`` object
 by calling the ``MongoClientSettings.FromUrl()`` method and passing the ``MongoUrl``
@@ -252,7 +253,7 @@ TLS Options
 
       TlsDisableCertificateRevocationCheck
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      
+
       Whether to disable certificate revocation checking during the TLS handshake. The
       default value is ``false``.
 
@@ -537,7 +538,8 @@ Write Concern Options
 
       The default write-concern settings, including write timeout and
       journaling, for the client. The default value is ``WriteConcern.Acknowledged``.
-      See :ref:`write concern <wc-j>` for more information.
+      See :manual:`Write Concern <reference/write-concern/>` in the
+      {+mdb-server+} manual for more information.
 
       .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
          :language: csharp
@@ -548,7 +550,7 @@ Write Concern Options
 
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
-   
+
       FSync
       ~~~~~
 
@@ -622,7 +624,8 @@ Read Concern Options
       ~~~~~~~~~~~
 
       The client's read concern. The default value is ``ReadConcern.Default``.
-      For more information, see :ref:`read concern <read-concern>`.
+      For more information, see :manual:`Read Concern </reference/read-concern/>` in the
+      {+mdb-server+} manual.
 
       .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
          :language: csharp
@@ -696,7 +699,7 @@ Authentication Options
 
       f you don't specify an authentication mechanism, the driver uses either
       ``SCRAM-SHA-1`` or ``SCRAM-SHA-256``, depending on the server version. See
-      :ref:`authentication mechanisms <csharp-authentication-mechanisms>` for available
+      :ref:`Authentication Mechanisms <csharp-authentication-mechanisms>` for available
       authentication mechanisms.
 
       .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
@@ -955,7 +958,7 @@ Miscellaneous Options
          :dedent: 8
          :start-after: // start-settings-is-frozen
          :end-before: // end-settings-is-frozen
-      
+
       .. tip:: Freeze Settings
 
          You can freeze the settings on a ``MongoClientSettings`` object by calling its
@@ -1055,8 +1058,8 @@ Miscellaneous Options
       ~~~~~~~~~
 
       Allows opting into Stable API versioning. The default value is ``null``. See
-      :manual:`the MongoDB Manual</reference/stable-api>` for more information about
-      Stable API versioning.
+      :manual:`Stable API </reference/stable-api>` in the {+mdb-server+} manual for more
+      information about Stable API versioning.
 
       .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
          :language: csharp
@@ -1294,29 +1297,29 @@ Additional Information
 For more information about the types used on this page, see the
 following API documentation:
 
-- `MongoClientSettings <{+new-api-root+}/MongoDB.Driver.MongoClientSettings.html>`__
-- `MongoUrl <{+new-api-root+}/MongoDB.Driver.MongoUrl.html>`__
-- `MongoUrlBuilder <{+new-api-root+}/MongoDB.Driver.MongoUrlBuilder.html>`__
-- `AutoEncryptionOptions <{+new-api-root+}/MongoDB.Driver.AutoEncryptionOptions.html>`__
-- `ClusterDescriptionChangedEvent <{+new-api-root+}/MongoDB.Driver.Events.ClusterDescriptionChangedEvent.html>`__
-- `ClusterOpenedEvent <{+new-api-root+}/MongoDB.Driver.Events.ClusterOpenedEvent.html>`__
-- `CollectionNamespace <{+new-api-root+}/MongoDB.Driver.CollectionNamespace.html>`__
-- `CompressorConfiguration <{+new-api-root+}/MongoDB.Driver.CompressorConfiguration.html>`__
-- `CompressorType <{+new-api-root+}/MongoDB.Driver.CompressorType.html>`__
-- `ConnectionStringScheme <{+new-api-root+}/MongoDB.Driver.connectionStringScheme.html>`__
-- `ExpressionTranslationOptions <{+new-api-root+}/MongoDB.Driver.ExpressionTranslationOptions.html>`__
-- `LocalCertificateSelectionCallback <{+new-api-root+}/MongoDB.Driver.LocalCertificateSelectionCallback.html>`__
-- `LoggerFactory <{+new-api-root+}/MongoDB.Driver.LoggerFactory.Create.html>`__
-- `LoggingSettings <{+new-api-root+}/MongoDB.Driver.LoggingSettings.html>`__
-- `MongoCredential <{+new-api-root+}/MongoDB.Driver.CreatePlainCredential.html>`__
-- `MongoServerAddress <{+new-api-root+}/MongoDB.Driver.MongoServerAddress.html>`__
-- `ReadConcern <{+new-api-root+}/MongoDB.Driver.ReadConcern.html>`__
-- `ReadConcernLevel <{+new-api-root+}/MongoDB.Driver.ReadConcernLevel.html>`__
-- `ReadPreference <{+new-api-root+}/MongoDB.Driver.ReadPreference.html>`__
-- `RemoteCertificateValidationCallback <{+new-api-root+}/MongoDB.Driver.RemoteCertificateValidationCallback.html>`__
-- `ServerApi <{+new-api-root+}/MongoDB.Driver.ServerApi.html>`__
-- `ServerMonitoringMode <{+new-api-root+}/MongoDB.Driver.ServerMonitoringMode.html>`__
-- `SslSettings <{+new-api-root+}/MongoDB.Driver.SslSettings.html>`__
-- `UTF8Encoding <{+new-api-root+}/System.Text.UTF8Encoding.html>`__
-- `WriteConcern <{+new-api-root+}/MongoDB.Driver.WriteConcern.html>`__
-- `X509Certificate <{+new-api-root+}/System.Security.Cryptography.X509Certificates.X509Certificate.html>`__
+- `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
+- `MongoUrl <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoUrl.html>`__
+- `MongoUrlBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoUrlBuilder.html>`__
+- `AutoEncryptionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AutoEncryptionOptions.html>`__
+- `ClusterDescriptionChangedEvent <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Events.ClusterDescriptionChangedEvent.html>`__
+- `ClusterOpenedEvent <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Events.ClusterOpenedEvent.html>`__
+- `CollectionNamespace <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CollectionNamespace.html>`__
+- `CompressorConfiguration <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CompressorConfiguration.html>`__
+- `CompressorType <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CompressorType.html>`__
+- `ConnectionStringScheme <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.connectionStringScheme.html>`__
+- `ExpressionTranslationOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ExpressionTranslationOptions.html>`__
+- `LocalCertificateSelectionCallback <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.LocalCertificateSelectionCallback.html>`__
+- `LoggerFactory <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.LoggerFactory.Create.html>`__
+- `LoggingSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.LoggingSettings.html>`__
+- `MongoCredential <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CreatePlainCredential.html>`__
+- `MongoServerAddress <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoServerAddress.html>`__
+- `ReadConcern <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadConcern.html>`__
+- `ReadConcernLevel <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadConcernLevel.html>`__
+- `ReadPreference <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadPreference.html>`__
+- `RemoteCertificateValidationCallback <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.RemoteCertificateValidationCallback.html>`__
+- `ServerApi <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ServerApi.html>`__
+- `ServerMonitoringMode <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ServerMonitoringMode.html>`__
+- `SslSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SslSettings.html>`__
+- `UTF8Encoding <{+new-api-root+}/MongoDB.Driver/System.Text.UTF8Encoding.html>`__
+- `WriteConcern <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.WriteConcern.html>`__
+- `X509Certificate <{+new-api-root+}/MongoDB.Driver/System.Security.Cryptography.X509Certificates.X509Certificate.html>`__

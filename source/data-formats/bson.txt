@@ -225,9 +225,9 @@ The preceding examples show how to read and write BSON data by using the
 the {+driver-short+} provides the following alternative implementations of the ``IBsonReader``
 and ``IBsonWriter`` interfaces:
 
-- ``JsonReader`` and ``JsonWriter``: Read and write JSON data
+- ``JsonReader`` and ``JsonWriter``: Read and write JSON data.
 - ``BsonDocumentReader`` and ``BsonDocumentWriter``: Read and write BSON data
-contained in a ``BsonDocument`` object
+  contained in a ``BsonDocument`` object.
 
 Because these classes implement the same interfaces, you can call their methods in the same way
 as the preceding ``BsonBinaryReader`` and ``BsonBinaryWriter`` examples.

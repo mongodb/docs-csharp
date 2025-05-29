@@ -216,40 +216,21 @@ BSON document stored in ``myFile.bson``:
    ``System.IO.Stream`` object. This means that you can read or write any location 
    that can be accessed by a stream.
 
-Implement a Custom BSON Reader and Writer
------------------------------------------
+Read and Write Other Formats
+----------------------------
 
-The preceding examples show how to read and write BSON documents by using the
-``BsonBinaryReader`` and ``BsonBinaryWriter`` classes. However, you can also implement a
-custom reader and writer by implementing the
-``IBsonReader`` and ``IBsonWriter`` interfaces. This is useful when you want to define
-a custom serializer or if you want to directly read or write BSON or JSON data without
-interacting with a MongoDB deployment.
+The preceding examples show how to read and write BSON data by using the
+``BsonBinaryReader`` and ``BsonBinaryWriter`` classes. These classes implement the 
+``IBsonReader`` and ``IBsonWriter`` interfaces. To read and write data in other formats,
+the {+driver-short+} provides the following alternative implementations of the ``IBsonReader``
+and ``IBsonWriter`` interfaces:
 
-The following code sample shows a custom reader that inherits from the
-``IBsonReader`` interface:
+- ``JsonReader`` and ``JsonWriter``: Read and write JSON data
+- ``BsonDocumentReader`` and ``BsonDocumentWriter``: Read and write BSON data
+contained in a ``BsonDocument`` object
 
-.. code-block:: csharp
-
-   public class CustomReader : IBsonReader
-   {
-      private readonly BinaryReader _reader;
-
-      public CustomReader(Stream stream)
-      {
-          _reader = new BinaryReader(stream);
-      }
-
-      public void ReadStartDocument()
-      {
-          // Implement logic to read the start of a BSON document here
-      }
-
-      // Implement other methods from the IBsonReader interface here
-   }
-
-To learn more about serialization and deserialization in the {+driver-short+}, see the
-:ref:`csharp-serialization` guide.
+Because these classes implement the same interfaces, you can call their methods in the same way
+as the preceding ``BsonBinaryReader`` and ``BsonBinaryWriter`` examples.
 
 .. _csharp-bson-api:
 

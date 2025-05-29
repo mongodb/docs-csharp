@@ -700,6 +700,17 @@ public class ConnectionOptions
         };
         // end-builder-srv-service-name
     }
+
+    public void LibraryInfo()
+    {
+        // start-settings-library-info
+        var settings = new MongoClientSettings
+        {
+            LibraryInfo = new LibraryInfo("customLibraryName", "1.0.0")
+        };
+        // end-settings-library-info
+    }
+    
     public void TranslationOptions()
     {
         // start-settings-translation-options

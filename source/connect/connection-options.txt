@@ -968,6 +968,19 @@ Miscellaneous Options
          Alternatively, you can call the `FrozenCopy() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.FrozenCopy.html>`__
          method to create a new ``MongoClientSettings`` object with the current settings frozen.
 
+      LibraryInfo
+      ~~~~~~~~~~~
+
+      The name and version of a custom library built on the {+driver-short+}. The driver
+      sends this information to the server.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-library-info
+         :end-before: // end-settings-library-info
+      
       LoadBalanced
       ~~~~~~~~~~~~
 

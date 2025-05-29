@@ -85,18 +85,6 @@ For more information about creating a connection string, see
 :manual:`Connection Strings </reference/connection-string?tck=docs_driver_csharp>` in the
 MongoDB Server documentation.
 
-Formats
-~~~~~~~
-
-The {+driver-short+} provides the following classes for representing connection strings:
-
-A ``MongoURl`` object represents an immutable connection string. You can construct one
-by calling the ``MongoUrl`` constructor and passing a connection string, or by
-MongoUrlBuilder
-- MongoUrl
-- ConnectionString
-
-You can also just leave it as a string.
 MongoClient
 -----------
 
@@ -109,20 +97,15 @@ connection URI to connect to a MongoDB deployment running on port ``27017`` of `
    const string uri = "mongodb://localhost:27017/";
    var client = new MongoClient(uri);
 
-Configure the MongoClient
--------------------------
+Configure the Connection
+-----------------------
 
-You can configure settings for the ``MongoClient`` object by passing a
-``MongoClientSettings`` object to the constructor. The following example creates a
-``MongoClient`` object and sets the ``UseTls`` property to ``true``:
+You can configure your connection in the following ways:
 
-.. code-block:: csharp
+- Specifying parameters in the connection URI
+- Specifying settings on a ``MongoClientSettings`` or ``MongoUrlBuilder`` object
 
-   var connectionString = "mongodb://localhost:27017/"
-   var settings = MongoClientSettings.FromConnectionString(connectionString);
-   settings.UseTls = true;
-
-To view a full list of the settings you can configure, see the
+To learn more about configuring your connection, see the
 :ref:`csharp-connection-options` guide.
 
 API Documentation

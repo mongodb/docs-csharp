@@ -959,10 +959,11 @@ Miscellaneous Options
       .. tip:: Freeze Settings
 
          You can freeze the settings on a ``MongoClientSettings`` object by calling its
-         ``Freeze()`` method. This prevents any further changes to the settings.
+         `Freeze() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.Freeze.html>`__
+         method. This prevents any further changes to the settings.
 
-         Alternatively, you can call the ``FrozenCopy()`` method to create a new
-         ``MongoClientSettings`` object with the current settings frozen.
+         Alternatively, you can call the `FrozenCopy() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.FrozenCopy.html>`__
+         method to create a new ``MongoClientSettings`` object with the current settings frozen.
 
       LoadBalanced
       ~~~~~~~~~~~~

@@ -27,6 +27,10 @@ Connection Options
    Connection Pools </connect/connection-options/connection-pools>
    Connect from AWS Lambda <https://www.mongodb.com/docs/atlas/manage-connections-aws-lambda/>
 
+--------
+Overview
+--------
+
 This page describes the MongoDB connection and authentication options
 available in the {+driver-short+}.
 
@@ -54,7 +58,7 @@ and the ``tls`` option with a value of ``true``:
 
 To learn more about the options that you can specify in a connection URI, see
 :manual:`Connection String Options </reference/connection-string-options>` in the
-+mdb-server+} manual.
+{+mdb-server+} manual.
 
 .. _csharp-mongo-client-settings:
 
@@ -66,8 +70,14 @@ rather than in a connection URI. Configuring the connection this way makes it ea
 change settings at runtime, helps you catch errors during compilation, and provides
 more configuration options than the connection URI.
 
-To use a ``MongoClientSettings`` object, create an instance of the class, set
-its properties, and pass it as an argument to the ``MongoClient`` constructor:
+To set connection options in a ``MongoClientSettings`` object, perform the
+following steps:
+
+1. Create an instance of the ``MongoClientSettings`` class
+#. Set properties on the instance to configure the connection
+#. Pass the instance to the ``MongoClient`` constructor.
+
+The following code example shows how to perform the preceding steps:
 
 .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
    :language: csharp
@@ -78,19 +88,19 @@ its properties, and pass it as an argument to the ``MongoClient`` constructor:
 You can also create a ``MongoClientSettings`` object from a connection string by calling the
 ``MongoClientSettings.FromConnectionString()`` method and passing the connection string,
 as shown in the following example. This is useful if you already have a connection string
-but want to modify some of the settings programmatically, or if you need to specify settings
+but want to modify some settings programmatically, or if you want to specify settings
 that aren't available in the connection string.
 
 .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
    :language: csharp
    :dedent:
-   :start-after: // start-mongo-client-settings
-   :end-before: // end-mongo-client-settings
+   :start-after: // start-from-connection-string
+   :end-before: // end-from-connection-string
 
 Alternatively, you can create a ``MongoClientSettings`` object from a ``MongoUrl`` object
 by calling the ``MongoClientSettings.FromUrl()`` method and passing the ``MongoUrl``
 object, as shown in the following example. This is useful if you already have a ``MongoUrl``
-object but need to specify settings that aren't available in the ``MongoUrl`` class.
+object but want to specify settings that aren't available in the ``MongoUrl`` class.
 
 .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
    :language: csharp
@@ -115,9 +125,9 @@ this process:
 
 .. literalinclude:: /includes/fundamentals/code-examples/connection/MongoClientSettingsConfig.cs
    :language: csharp
-   :dedent:
-   :start-after: // start mongo client settings config
-   :end-before: // end mongo client settings config
+   :dedent: 8
+   :start-after: // start-mongo-url-builder
+   :end-before: // end-mongo-url-builder
 
 ------------------
 Connection Options
@@ -889,6 +899,123 @@ Server Selection and Discovery Options
          :start-after: // start-builder-server-selection-timeout
          :end-before: // end-builder-server-selection-timeout
 
+Encoding Options
+----------------
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      ReadEncoding
+      ~~~~~~~~~~~~
+
+      The UTF-8 encoding to use for string deserialization. The default value is
+      strict encoding, where the driver throws an exception when it encounters an invalid
+      UTF-8 byte sequence.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-read-encoding
+         :end-before: // end-settings-read-encoding
+
+      WriteEncoding
+      ~~~~~~~~~~~~~
+
+      The UTF-8 encoding to use for string serialization. The default value is
+      strict encoding, where the driver throws an exception when it encounters an invalid
+      UTF-8 byte sequence.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-write-encoding
+         :end-before: // end-settings-write-encoding
+
+Stable API
+----------
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      ServerApi
+      ~~~~~~~~~
+
+      Allows opting into Stable API versioning. The default value is ``null``. See
+      :manual:`Stable API </reference/stable-api>` in the {+mdb-server+} manual for more
+      information about Stable API versioning.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-server-api
+         :end-before: // end-settings-server-api
+
+Retry Options
+-------------
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      RetryReads
+      ~~~~~~~~~~
+
+      .. include:: /includes/fundamentals/connection-options/retryReads.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-retry-reads
+         :end-before: // end-settings-retry-reads
+
+      RetryWrites
+      ~~~~~~~~~~~
+
+      .. include:: /includes/fundamentals/connection-options/retryWrites.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-retry-writes
+         :end-before: // end-settings-retry-writes
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      RetryReads
+      ~~~~~~~~~~
+
+      .. include:: /includes/fundamentals/connection-options/retryReads.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-retry-reads
+         :end-before: // end-builder-retry-reads
+
+      RetryWrites
+      ~~~~~~~~~~~
+
+      .. include:: /includes/fundamentals/connection-options/retryWrites.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-retry-writes
+         :end-before: // end-builder-retry-writes
+
 Miscellaneous Options
 ---------------------
 
@@ -912,7 +1039,9 @@ Miscellaneous Options
       AutoEncryptionOptions
       ~~~~~~~~~~~~~~~~~~~~~
 
-      Settings for automatic client-side encryption. The default value is ``null``.
+      Settings for automatic client-side encryption. The default value is ``null``. To
+      learn more about client-side encryption, see
+      :ref:`In-Use Encryption <csharp-in-use-encryption>`.
 
       .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
          :language: csharp
@@ -980,7 +1109,7 @@ Miscellaneous Options
          :dedent: 8
          :start-after: // start-settings-library-info
          :end-before: // end-settings-library-info
-      
+
       LoadBalanced
       ~~~~~~~~~~~~
 
@@ -1005,44 +1134,6 @@ Miscellaneous Options
          :start-after: // start-settings-logging-settings
          :end-before: // end-settings-logging-settings
 
-      ReadEncoding
-      ~~~~~~~~~~~~
-
-      The UTF-8 encoding to use for string deserialization. The default value is
-      strict encoding, where the driver throws an exception when it encounters an invalid
-      UTF-8 byte sequence.
-
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
-         :language: csharp
-         :copyable: true
-         :dedent: 8
-         :start-after: // start-settings-read-encoding
-         :end-before: // end-settings-read-encoding
-
-      RetryReads
-      ~~~~~~~~~~
-
-      .. include:: /includes/fundamentals/connection-options/retryReads.rst
-
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
-         :language: csharp
-         :copyable: true
-         :dedent: 8
-         :start-after: // start-settings-retry-reads
-         :end-before: // end-settings-retry-reads
-
-      RetryWrites
-      ~~~~~~~~~~~
-
-      .. include:: /includes/fundamentals/connection-options/retryWrites.rst
-
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
-         :language: csharp
-         :copyable: true
-         :dedent: 8
-         :start-after: // start-settings-retry-writes
-         :end-before: // end-settings-retry-writes
-
       Scheme
       ~~~~~~
 
@@ -1066,20 +1157,6 @@ Miscellaneous Options
          :dedent: 8
          :start-after: // start-settings-server
          :end-before: // end-settings-server
-
-      ServerApi
-      ~~~~~~~~~
-
-      Allows opting into Stable API versioning. The default value is ``null``. See
-      :manual:`Stable API </reference/stable-api>` in the {+mdb-server+} manual for more
-      information about Stable API versioning.
-
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
-         :language: csharp
-         :copyable: true
-         :dedent: 8
-         :start-after: // start-settings-server-api
-         :end-before: // end-settings-server-api
 
       ServerMonitoringMode
       ~~~~~~~~~~~~~~~~~~~~
@@ -1142,20 +1219,6 @@ Miscellaneous Options
          :start-after: // start-settings-translation-options
          :end-before: // end-settings-translation-options
 
-      WriteEncoding
-      ~~~~~~~~~~~~~
-
-      The UTF-8 encoding to use for string serialization. The default value is
-      strict encoding, where the driver throws an exception when it encounters an invalid
-      UTF-8 byte sequence.
-
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
-         :language: csharp
-         :copyable: true
-         :dedent: 8
-         :start-after: // start-settings-write-encoding
-         :end-before: // end-settings-write-encoding
-
    .. tab:: MongoUrlBuilder
       :tabid: mongo-url-builder
 
@@ -1206,30 +1269,6 @@ Miscellaneous Options
          :dedent: 8
          :start-after: // start-builder-load-balanced
          :end-before: // end-builder-load-balanced
-
-      RetryReads
-      ~~~~~~~~~~
-
-      .. include:: /includes/fundamentals/connection-options/retryReads.rst
-
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
-         :language: csharp
-         :copyable: true
-         :dedent: 8
-         :start-after: // start-builder-retry-reads
-         :end-before: // end-builder-retry-reads
-
-      RetryWrites
-      ~~~~~~~~~~~
-
-      .. include:: /includes/fundamentals/connection-options/retryWrites.rst
-
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
-         :language: csharp
-         :copyable: true
-         :dedent: 8
-         :start-after: // start-builder-retry-writes
-         :end-before: // end-builder-retry-writes
 
       Scheme
       ~~~~~~

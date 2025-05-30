@@ -133,7 +133,7 @@ this process:
 Connection Options
 ------------------
 
-The following table lists each connection option available in the
+The following sections describe each connection option available in the
 ``MongoClientSettings`` and ``MongoUrlBuilder`` classes.
 
 .. _csharp-replica-set-options:
@@ -902,60 +902,58 @@ Server Selection and Discovery Options
 Encoding Options
 ----------------
 
-.. tabs::
+ReadEncoding
+~~~~~~~~~~~
 
-   .. tab:: MongoClientSettings
-      :tabid: mongo-client-settings
+The UTF-8 encoding to use for string deserialization. The default value is
+strict encoding, where the driver throws an exception when it encounters an invalid
+UTF-8 byte sequence
 
-      ReadEncoding
-      ~~~~~~~~~~~~
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+   :language: csharp
+   :copyable: true
+   :dedent: 8
+   :start-after: // start-settings-read-encoding
+   :end-before: // end-settings-read-encodin
 
-      The UTF-8 encoding to use for string deserialization. The default value is
-      strict encoding, where the driver throws an exception when it encounters an invalid
-      UTF-8 byte sequence.
+WriteEncoding
+~~~~~~~~~~~~
+The UTF-8 encoding to use for string serialization. The default value is
+strict encoding, where the driver throws an exception when it encounters an invalid
+UTF-8 byte sequence
 
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
-         :language: csharp
-         :copyable: true
-         :dedent: 8
-         :start-after: // start-settings-read-encoding
-         :end-before: // end-settings-read-encoding
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+   :language: csharp
+   :copyable: true
+   :dedent: 8
+   :start-after: // start-settings-write-encoding
+   :end-before: // end-settings-write-encoding
 
-      WriteEncoding
-      ~~~~~~~~~~~~~
+.. note:: MongoClientSettings Only
 
-      The UTF-8 encoding to use for string serialization. The default value is
-      strict encoding, where the driver throws an exception when it encounters an invalid
-      UTF-8 byte sequence.
-
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
-         :language: csharp
-         :copyable: true
-         :dedent: 8
-         :start-after: // start-settings-write-encoding
-         :end-before: // end-settings-write-encoding
+   The ``ReadEncoding`` and ``WriteEncoding`` properties are available only in the
+   ``MongoClientSettings`` class.
 
 Stable API
 ----------
 
-.. tabs::
+ServerApi
+~~~~~~~~
 
-   .. tab:: MongoClientSettings
-      :tabid: mongo-client-settings
+Allows opting into Stable API versioning. The default value is ``null``. See
+:manual:`Stable API </reference/stable-api>` in the {+mdb-server+} manual for more
+information about Stable API versioning.
 
-      ServerApi
-      ~~~~~~~~~
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+   :language: csharp
+   :copyable: true
+   :dedent: 8
+   :start-after: // start-settings-server-api
+   :end-before: // end-settings-server-api
 
-      Allows opting into Stable API versioning. The default value is ``null``. See
-      :manual:`Stable API </reference/stable-api>` in the {+mdb-server+} manual for more
-      information about Stable API versioning.
+.. note:: MongoClientSettings Only
 
-      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
-         :language: csharp
-         :copyable: true
-         :dedent: 8
-         :start-after: // start-settings-server-api
-         :end-before: // end-settings-server-api
+   The ``ServerApi`` property is available only in the ``MongoClientSettings`` class.
 
 Retry Options
 -------------

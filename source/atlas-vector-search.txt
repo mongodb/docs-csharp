@@ -175,6 +175,7 @@ contains vector data and a vector search index on the ``PlotEmbedding`` field:
 
 .. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchQueryExample.cs
    :language: csharp
+   :dedent:
    :start-after: start-search-example
    :end-before: end-search-example
    :emphasize-lines: 11

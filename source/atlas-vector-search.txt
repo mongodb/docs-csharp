@@ -244,3 +244,5 @@ guide, see the following API Documentation:
 - `Aggregate()
   <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.Aggregate.html>`__
 - `MongoQueryable.VectorSearch() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.MongoQueryable.VectorSearch.html>`__
+- `PipelineStageDefinitionBuilder.VectorSearch()
+  <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineStageDefinitionBuilder.VectorSearch.html>`__

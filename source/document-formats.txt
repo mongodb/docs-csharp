@@ -22,3 +22,8 @@ Document Formats
 
    BSON </document-formats/bson>
    Extended JSON </document-formats/extended-json>
+
+Learn about using different document formats with the {+driver-short+} in the following guides:
+
+- :ref:`csharp-bson`
+- :ref:`csharp-extended-json`

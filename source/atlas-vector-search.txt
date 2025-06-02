@@ -45,7 +45,7 @@ The examples in this guide use the ``sample_mflix.embedded_movies`` collection
 in the ``sample_mflix`` database. To obtain the sample dataset for this collection,
 see :ref:`csharp-get-started`.
 
-The examples in this guide uses the following sample class to model documents in the
+The examples in this guide use the following sample class to model documents in the
 ``sample_mflix.embedded_movies`` collection:
 
 .. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchQueryExample.cs
@@ -202,6 +202,7 @@ The following code sample performs the same vector search query as the preceding
 the LINQ syntax instead of the aggregation pipeline syntax:
 
 .. code-block:: csharp
+   :emphasize-lines: 2
 
    var results = collection.AsQueryable()
        .VectorSearch(m => m.PlotEmbedding, vector, 10, options)
@@ -214,6 +215,7 @@ The following code sample performs the same vector search query as the preceding
 but uses builder classes to construct the aggregation pipeline stages:
 
 .. code-block:: csharp
+   :emphasize-lines: 2
 
    var pipeline = new EmptyPipelineDefinition<Movie>()
        .VectorSearch(m => m.PlotEmbedding, vector, 10, options)

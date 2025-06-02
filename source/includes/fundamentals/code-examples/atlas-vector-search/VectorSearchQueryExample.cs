@@ -53,6 +53,7 @@ public class VectorSearchQuery
     }
 }
 
+// start-sample-class
 [BsonIgnoreExtraElements]
 public class Movie
 {
@@ -62,3 +63,4 @@ public class Movie
     [BsonElement("plot_embedding")]
     public float[] PlotEmbedding { get; set; }
 }
+// end-sample-class

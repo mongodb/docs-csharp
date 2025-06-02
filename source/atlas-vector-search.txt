@@ -38,6 +38,21 @@ To learn more about {+vector-search+}, see the :atlas:`{+vector-search+}
 </atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
 documentation.
 
+Sample Data
+~~~~~~~~~~~
+
+The examples in this guide use the ``sample_mflix.embedded_movies`` collection
+in the ``sample_mflix`` database. To obtain the sample dataset for this collection,
+see :ref:`csharp-get-started`.
+
+The examples in this guide uses the following sample class to model documents in the
+``sample_mflix.embedded_movies`` collection:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchQueryExample.cs
+   :language: csharp
+   :start-after: start-sample-class
+   :end-before: end-sample-class
+
 .. _csharp-supported-vector-types:
 
 Supported Vector Embedding Types
@@ -158,8 +173,8 @@ to use in a vector search query:
    :start-after: start-array-query-vector
    :end-before: end-array-query-vector
 
-Example
-~~~~~~~
+Aggregation Pipeline Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This example performs the following steps to run an {+vector-search+} query on a collection that
 contains vector data and a vector search index on the ``PlotEmbedding`` field:
@@ -180,6 +195,33 @@ contains vector data and a vector search index on the ``PlotEmbedding`` field:
    :end-before: end-search-example
    :emphasize-lines: 11
 
+LINQ Example
+~~~~~~~~~~~~
+
+The following code sample performs the same vector search query as the preceding example, but uses
+the LINQ syntax instead of the aggregation pipeline syntax:
+
+.. code-block:: csharp
+
+   var results = collection.AsQueryable()
+       .VectorSearch(m => m.PlotEmbedding, vector, 10, options)
+       .Select(m => new { m.Title, m.Plot });
+
+Builders Example
+~~~~~~~~~~~~~~~~
+
+The following code sample performs the same vector search query as the preceding example,
+but uses builder classes to construct the aggregation pipeline stages:
+
+.. code-block:: csharp
+
+   var pipeline = new EmptyPipelineDefinition<Movie>()
+       .VectorSearch(m => m.PlotEmbedding, vector, 10, options)
+       .Project(Builders<Movie>.Projection
+           .Include(m => m.Title)
+           .Include(m => m.Plot));
+
+
 Additional Information
 ----------------------
 
@@ -196,7 +238,9 @@ guide, see the following API Documentation:
 - `BinaryVectorFloat32 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorFloat32.html>`__
 - `BinaryVectorInt8 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorInt8.html>`__
 - `BinaryVectorFloat32 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorPackedBit.html>`__
+- `QueryVector <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.QueryVector.html>`__
 - `ToQueryVector() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BinaryVectorDriverExtensions.ToQueryVector.html>`__
-- `VectorSearch() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateFluentBase-1.VectorSearch.html>`__
+- `IAggregateFluentExtensions.VectorSearch() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IAggregateFluentExtensions.VectorSearch.html>`__
 - `Aggregate()
   <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.Aggregate.html>`__
+- `MongoQueryable.VectorSearch() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.MongoQueryable.VectorSearch.html>`__

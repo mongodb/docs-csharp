@@ -24,7 +24,7 @@ public class VectorSearchQuery
             NumberOfCandidates = 150
         };
 
-        // run query
+        // Run vector search query
         var results = collection.Aggregate()
               .VectorSearch(movie => movie.PlotEmbedding, vector, 10, options)
               .Project(Builders<Movie>.Projection
@@ -32,7 +32,7 @@ public class VectorSearchQuery
                 .Include(movie => movie.Plot))
               .ToList();
 
-        // print results
+        // Print the results
         foreach (var movie in results)
         {
             Console.WriteLine(movie.ToJson());
@@ -50,6 +50,26 @@ public class VectorSearchQuery
         var mongoClient = new MongoClient(_mongoConnectionString);
         var restaurantsDatabase = mongoClient.GetDatabase("sample_mflix");
         collection = restaurantsDatabase.GetCollection<Movie>("embedded_movies");
+    }
+
+    private static void BuilderExample()
+    {
+        // start-builder-example
+        var pipeline = new EmptyPipelineDefinition<Movie>()
+            .VectorSearch(m => m.PlotEmbedding, vector, 10, options)
+            .Project(Builders<Movie>.Projection
+                .Include(m => m.Title)
+                .Include(m => m.Plot));
+        // end-builder-example
+    }
+
+    private static void LinqExample()
+    {
+        // start-linq-example
+        var results = collection.AsQueryable()
+            .VectorSearch(m => m.PlotEmbedding, vector, 10, options)
+            .Select(m => new { m.Title, m.Plot });
+        // end-linq-example
     }
 }
 

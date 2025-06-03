@@ -1,8 +1,8 @@
 .. _csharp-atlas-vector-search:
 
-===================
-{+vector-search+}
-===================
+================================
+Run an Atlas Vector Search Query
+================================
 
 .. facet::
    :name: genre
@@ -20,7 +20,7 @@
 Overview
 --------
 
-You can use {+vector-search+} to perform vector search on your data stored in
+You can use {+avs+} to perform vector search on your data stored in
 Atlas. Vector search allows you to query your data based on semantic meaning
 rather than just keyword matches, which helps you retrieve more relevant search
 results. It enables your AI-powered applications to support use cases such as
@@ -31,10 +31,10 @@ By using Atlas as a vector database, you can seamlessly index vector data along
 with your other data in Atlas. This allows you to filter on fields in your
 collection and perform vector search queries against vector data. You can also
 combine vector search with full-text search queries to return the most relevant
-results for your use case. You can integrate {+vector-search+} with popular AI
+results for your use case. You can integrate {+avs+} with popular AI
 frameworks and services to easily implement vector search in your applications.
 
-To learn more about {+vector-search+}, see the :atlas:`{+vector-search+}
+To learn more about {+avs+}, see the :atlas:`{+avs+}
 </atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
 documentation.
 
@@ -148,7 +148,7 @@ vector data and a vector search index that covers that field.
 
 .. tip::
 
-   To learn more about configuring a collection for vector search, see the :atlas:`{+vector-search+}
+   To learn more about configuring a collection for vector search, see the :atlas:`{+avs+}
    </atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
    documentation.
 
@@ -176,7 +176,7 @@ to use in a vector search query:
 Aggregation Pipeline Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This example performs the following steps to run an {+vector-search+} query on a collection that
+This example performs the following steps to run an {+avs+} query on a collection that
 contains vector data and a vector search index on the ``PlotEmbedding`` field:
 
 1. Creates an array that contains the :ref:`array-represented
@@ -201,12 +201,12 @@ LINQ Example
 The following code sample performs the same vector search query as the preceding example, but uses
 the LINQ syntax instead of the aggregation pipeline syntax:
 
-.. code-block:: csharp
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchQueryExample.cs
+   :language: csharp
+   :start-after: start-linq-example
+   :end-before: end-linq-example
+   :dedent:
    :emphasize-lines: 2
-
-   var results = collection.AsQueryable()
-       .VectorSearch(m => m.PlotEmbedding, vector, 10, options)
-       .Select(m => new { m.Title, m.Plot });
 
 Builders Example
 ~~~~~~~~~~~~~~~~
@@ -214,20 +214,17 @@ Builders Example
 The following code sample performs the same vector search query as the preceding example,
 but uses builder classes to construct the aggregation pipeline stages:
 
-.. code-block:: csharp
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchQueryExample.cs
+   :language: csharp
+   :start-after: start-builders-example
+   :end-before: end-builders-example
+   :dedent:
    :emphasize-lines: 2
-
-   var pipeline = new EmptyPipelineDefinition<Movie>()
-       .VectorSearch(m => m.PlotEmbedding, vector, 10, options)
-       .Project(Builders<Movie>.Projection
-           .Include(m => m.Title)
-           .Include(m => m.Plot));
-
 
 Additional Information
 ----------------------
 
-To learn more about {+vector-search+}, see the :atlas:`{+vector-search+}
+To learn more about {+avs+}, see the :atlas:`{+avs+}
 </atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
 documentation.
 
@@ -239,7 +236,7 @@ guide, see the following API Documentation:
 
 - `BinaryVectorFloat32 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorFloat32.html>`__
 - `BinaryVectorInt8 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorInt8.html>`__
-- `BinaryVectorFloat32 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorPackedBit.html>`__
+- `BinaryVectorPackedBit <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorPackedBit.html>`__
 - `QueryVector <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.QueryVector.html>`__
 - `ToQueryVector() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BinaryVectorDriverExtensions.ToQueryVector.html>`__
 - `IAggregateFluentExtensions.VectorSearch() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IAggregateFluentExtensions.VectorSearch.html>`__

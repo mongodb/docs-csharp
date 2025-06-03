@@ -52,15 +52,15 @@ public class VectorSearchQuery
         collection = restaurantsDatabase.GetCollection<Movie>("embedded_movies");
     }
 
-    private static void BuilderExample()
+    private static void BuildersExample()
     {
-        // start-builder-example
+        // start-builders-example
         var pipeline = new EmptyPipelineDefinition<Movie>()
             .VectorSearch(m => m.PlotEmbedding, vector, 10, options)
             .Project(Builders<Movie>.Projection
                 .Include(m => m.Title)
                 .Include(m => m.Plot));
-        // end-builder-example
+        // end-builders-example
     }
 
     private static void LinqExample()

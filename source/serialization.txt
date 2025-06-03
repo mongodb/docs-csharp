@@ -184,7 +184,7 @@ Implementing the `IBsonArraySerializer
 interface enables the driver to access serialization information for individual
 items in an array.
 
-.. _csharp-array-serialization:Add commentMore actions
+.. _csharp-array-serialization:
 
 Improve Array Serialization Performance
 ---------------------------------------

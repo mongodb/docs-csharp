@@ -46,10 +46,10 @@ public class VectorSearchQuery
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
-        // Establish the connection to MongoDB and get the restaurants database
+        // Establish the connection to MongoDB and get the embedded_movies database
         var mongoClient = new MongoClient(_mongoConnectionString);
-        var restaurantsDatabase = mongoClient.GetDatabase("sample_mflix");
-        collection = restaurantsDatabase.GetCollection<Movie>("embedded_movies");
+        var movieDatabase = mongoClient.GetDatabase("sample_mflix");
+        collection = movieDatabase.GetCollection<Movie>("embedded_movies");
     }
 
     private static void BuildersExample()

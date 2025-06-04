@@ -86,7 +86,7 @@ and provide sample code for creating each index type.
 
 .. note::
   
-  These example uses the ``sample_mflix.movies`` and ``sample_mflix.theaters`` collections
+  The examples on this page use the ``sample_mflix.movies`` and ``sample_mflix.theaters`` collections
   from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
   free MongoDB Atlas cluster and load the sample datasets, see :ref:`csharp-get-started`.
 

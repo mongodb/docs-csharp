@@ -3,7 +3,8 @@ toc_landing_pages = [
     "/connect/connection-options",
     "/security/authentication",
     "/aggregation",
-    "/aggregation/stages"
+    "/aggregation/stages",
+    "/serialization"
 ]
 name = "csharp"
 title = "C#/.NET"

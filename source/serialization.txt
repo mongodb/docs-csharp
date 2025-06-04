@@ -16,7 +16,15 @@ Serialization
    :backlinks: none
    :depth: 2
    :class: singlecol
-   
+
+.. toctree::
+   :caption: Custom Types
+
+   Class Mapping </serialization/class-mapping>
+   POCOs </serialization/custom-types/poco>
+   Polymorphic Objects </serialization/polymorphic-objects>
+   GUIDs </serialization/guids>
+
 Overview
 --------
 

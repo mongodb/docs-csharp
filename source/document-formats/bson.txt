@@ -6,6 +6,9 @@ BSON Operations
 
 .. default-domain:: mongodb
 
+.. meta::
+   :keywords: document, BSON, serializer
+
 .. contents:: On this page
    :local:
    :backlinks: none
@@ -44,7 +47,8 @@ The code samples in this guide use the following BSON document as an example:
 Create a BSON Document
 ----------------------
 
-To build a BSON document in {+language+}, create an instance of the ``BsonDocument`` class.
+To build a representation of a BSON document in {+language+}, create an instance of the
+``BsonDocument`` class.
 The ``BsonDocument`` constructor accepts ``BsonElement`` arguments that map to the fields
 and values in the document. Each ``BsonElement`` can be either an instance of the 
 ``BsonElement`` class or a field-value pair inside curly braces ( ``{}`` ).
@@ -212,6 +216,22 @@ BSON document stored in ``myFile.bson``:
    ``System.IO.Stream`` object. This means that you can read or write any location 
    that can be accessed by a stream.
 
+Read and Write Other Formats
+----------------------------
+
+The preceding examples show how to read and write BSON data by using the
+``BsonBinaryReader`` and ``BsonBinaryWriter`` classes. These classes implement the 
+``IBsonReader`` and ``IBsonWriter`` interfaces. To read and write data in other formats,
+the {+driver-short+} provides the following alternative implementations of the ``IBsonReader``
+and ``IBsonWriter`` interfaces:
+
+- ``JsonReader`` and ``JsonWriter``: Read and write JSON data
+- ``BsonDocumentReader`` and ``BsonDocumentWriter``: Read and write BSON data
+  contained in a ``BsonDocument`` object
+
+Because these classes implement the same interfaces, you can call their methods in the same way
+as the preceding ``BsonBinaryReader`` and ``BsonBinaryWriter`` examples.
+
 .. _csharp-bson-api:
 
 API Documentation
@@ -224,3 +244,5 @@ guide, see the following API documentation:
 - `BsonElement <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonElement.html>`__
 - `BsonBinaryReader <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.BsonBinaryReader.html>`__
 - `BsonBinaryWriter <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.BsonBinaryWriter.html>`__
+- `IBsonReader <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.IBsonReader.html>`__
+- `IBsonWriter <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.IO.IBsonWriter.html>`__

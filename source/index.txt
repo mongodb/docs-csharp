@@ -18,13 +18,15 @@ MongoDB C# Driver
    Databases & Collections </databases-collections>
    CRUD Operations </crud>
    Aggregation </aggregation>
-   Data Formats </data-formats>
    Indexes </indexes>
    Run a Database Command </run-command>
    Atlas Search </atlas-search>
    Atlas Vector Search </atlas-vector-search>
+   Time Series </time-series>
    Logging and Monitoring </logging-and-monitoring>
    Security </security>
+   Serialization </serialization>
+   Document Formats </document-formats>
    Integrations </integrations>
    Reference </reference>
    API Documentation <{+api-root+}>
@@ -65,12 +67,6 @@ Transform Your Data with Aggregation
 Learn how to use the {+driver-short+} to perform aggregation operations in the
 :ref:`csharp-aggregation` section.
 
-Data Formats
-------------
-
-Learn how to work with specialized data formats and custom types in the
-:ref:`csharp-data-formats` section.
-
 Optimize Queries with Indexes
 -----------------------------
 
@@ -96,6 +92,11 @@ rather than keyword matches in the
 `Atlas Vector Search <https://www.mongodb.com/docs/atlas/atlas-search/tutorial/>`__
 documentation.
 
+Time Series
+-----------
+
+Learn how to work with time series collections in the :ref:`csharp-time-series` section.
+
 Logging and Monitoring
 ----------------------
 
@@ -107,6 +108,16 @@ Secure Your Data
 
 Learn about ways you can authenticate your application and encrypt your data in
 the :ref:`csharp-security` section.
+
+Serialization
+-------------
+
+Learn how to serialize and deserialize data in the :ref:`csharp-serialization` section.
+
+Document Formats
+----------------
+
+Learn about different notations you can use to read and write data in the :ref:`csharp-document-formats` section.
 
 Reference
 ---------

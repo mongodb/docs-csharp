@@ -7,9 +7,9 @@ Atlas Vector Search
 .. facet::
    :name: genre
    :values: reference
- 
+
 .. meta::
-   :keywords: semantic 
+   :keywords: semantic
 
 .. contents:: On this page
    :local:
@@ -78,22 +78,23 @@ perform the following operations:
       .VectorSearch(m => m.Embedding, vector, 10, options)
       .Project(Builders<EmbeddedMovie>.Projection
          .Include(m => m.Title)
-         .Include(m => m.Plot));
+         .Include(m => m.Plot)
+         .MetaVectorSearchScore(m => m.Score);
 
 The results of the preceding example contain the following documents:
 
 .. code-block:: json
 
-   { "_id" : ObjectId("573a13a0f29313caabd04a4f"), "plot" : "A reporter, learning of time travelers visiting 20th century disasters, tries to change the history they know by averting upcoming disasters.", "title" : "Thrill Seekers" }
-   { "_id" : ObjectId("573a13d8f29313caabda6557"), "plot" : "At the age of 21, Tim discovers he can travel in time and change what happens and has happened in his own life. His decision to make his world a better place by getting a girlfriend turns out not to be as easy as you might think.", "title" : "About Time" }
-   { "_id" : ObjectId("573a13a5f29313caabd13b4b"), "plot" : "Hoping to alter the events of the past, a 19th century inventor instead travels 800,000 years into the future, where he finds humankind divided into two warring races.", "title" : "The Time Machine" }
-   { "_id" : ObjectId("573a13aef29313caabd2e2d7"), "plot" : "After using his mother's newly built time machine, Dolf gets stuck involuntary in the year 1212. He ends up in a children's crusade where he confronts his new friends with modern techniques...", "title" : "Crusade in Jeans" }
-   { "_id" : ObjectId("573a1399f29313caabceec0e"), "plot" : "An officer for a security agency that regulates time travel, must fend for his life against a shady politician who has a tie to his past.", "title" : "Timecop" }
-   { "_id" : ObjectId("573a1399f29313caabcee36f"), "plot" : "A time-travel experiment in which a robot probe is sent from the year 2073 to the year 1973 goes terribly wrong thrusting one of the project scientists, a man named Nicholas Sinclair into a...", "title" : "A.P.E.X." }
-   { "_id" : ObjectId("573a13c6f29313caabd715d3"), "plot" : "Agent J travels in time to M.I.B.'s early days in 1969 to stop an alien from assassinating his friend Agent K and changing history.", "title" : "Men in Black 3" }
-   { "_id" : ObjectId("573a13d4f29313caabd98c13"), "plot" : "Bound by a shared destiny, a teen bursting with scientific curiosity and a former boy-genius inventor embark on a mission to unearth the secrets of a place somewhere in time and space that exists in their collective memory.", "title" : "Tomorrowland" }
-   { "_id" : ObjectId("573a13b6f29313caabd477fa"), "plot" : "With the help of his uncle, a man travels to the future to try and bring his girlfriend back to life.", "title" : "Love Story 2050" }
-   { "_id" : ObjectId("573a13e5f29313caabdc40c9"), "plot" : "A dimension-traveling wizard gets stuck in the 21st century because cell-phone radiation interferes with his magic. With his home world on the brink of war, he seeks help from a jaded ...", "title" : "The Portal" }
+   { "_id" : { "$oid" : "573a13a0f29313caabd04a4f" }, "plot" : "A reporter, learning of time travelers visiting 20th century disasters, tries to change the history they know by averting upcoming disasters.", "title" : "Thrill Seekers", "score" : 0.926971435546875 }
+   { "_id" : { "$oid" : "573a13d8f29313caabda6557" }, "plot" : "At the age of 21, Tim discovers he can travel in  time and change what happens and has happened in his own life. His decision to make his world a better place    by getting a girlfriend turns out not to be as easy as you might think.", "title" : "About Time", "score" : 0. 9267120361328125 }
+   { "_id" : { "$oid" : "573a1399f29313caabceec0e" }, "plot" : "An officer for a security agency that regulates   time travel, must fend for his life against a shady politician who has a tie to his past.", "title" :   "Timecop", "score" : 0.9235687255859375 }
+   { "_id" : { "$oid" : "573a13a5f29313caabd13b4b" }, "plot" : "Hoping to alter the events of the past, a 19th    century inventor instead travels 800,000 years into the future, where he finds humankind divided into two   warring races.", "title" : "The Time Machine", "score" : 0.9228668212890625 }
+   { "_id" : { "$oid" : "573a13aef29313caabd2e2d7" }, "plot" : "After using his mother's newly built time   machine, Dolf gets stuck involuntary in the year 1212. He ends up in a children's crusade where he confronts  his new friends with modern techniques...", "title" : "Crusade in Jeans", "score" : 0.9228515625 }
+   { "_id" : { "$oid" : "573a1399f29313caabcee36f" }, "plot" : "A time-travel experiment in which a robot probe   is sent from the year 2073 to the year 1973 goes terribly wrong thrusting one of the project scientists, a    man named Nicholas Sinclair into a...", "title" : "A.P.E.X.", "score" : 0.9199066162109375 }
+   { "_id" : { "$oid" : "573a13c6f29313caabd715d3" }, "plot" : "Agent J travels in time to M.I.B.'s early days    in 1969 to stop an alien from assassinating his friend Agent K and changing history.", "title" : "Men in    Black 3", "score" : 0.919403076171875 }
+   { "_id" : { "$oid" : "573a13d4f29313caabd98c13" }, "plot" : "Bound by a shared destiny, a teen bursting with   scientific curiosity and a former boy-genius inventor embark on a mission to unearth the secrets of a place   somewhere in time and space that exists in their collective memory.", "title" : "Tomorrowland", "score" : 0.  9191131591796875 }
+   { "_id" : { "$oid" : "573a13b6f29313caabd477fa" }, "plot" : "With the help of his uncle, a man travels to the  future to try and bring his girlfriend back to life.", "title" : "Love Story 2050", "score" : 0. 917755126953125 }
+   { "_id" : { "$oid" : "573a13b3f29313caabd3ebd4" }, "plot" : "A romantic drama about a Chicago librarian with   a gene that causes him to involuntarily time travel, and the complications it creates for his marriage.",  "title" : "The Time Traveler's Wife", "score" : 0.9172210693359375 }
 
 To learn more about Atlas Vector Search, see :atlas:`Atlas Vector Search Overview </atlas-vector-search/vector-search-overview/>`
 in the Atlas manual.

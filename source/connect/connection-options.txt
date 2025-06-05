@@ -1,8 +1,8 @@
 .. _csharp-connection-options:
 
-==================
-Connection Options
-==================
+==============================
+Configure a MongoDB Connection
+==============================
 
 .. facet::
    :name: genre

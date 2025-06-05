@@ -98,7 +98,7 @@ connection URI to connect to a MongoDB deployment running on port ``27017`` of `
    var client = new MongoClient(uri);
 
 Configure the Connection
------------------------
+------------------------
 
 You can configure your connection in the following ways:
 

@@ -27,23 +27,21 @@ Connection Options
    Connection Pools </connect/connection-options/connection-pools>
    Connect from AWS Lambda <https://www.mongodb.com/docs/atlas/manage-connections-aws-lambda/>
 
---------
 Overview
 --------
 
 This page describes the MongoDB connection and authentication options
 available in the {+driver-short+}.
 
----------------------------------
-How to Specify Connection Options
----------------------------------
+Specify Connection Options
+--------------------------
 
 The following sections describe the ways in which you can specify connection options.
 
 .. _csharp-connection-uri:
 
 Using the Connection URI
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you pass a connection URI to the ``MongoClient`` constructor, you can include
 connection options in the string as ``<name>=<value>`` pairs. In the following example,
@@ -63,7 +61,7 @@ To learn more about the options that you can specify in a connection URI, see
 .. _csharp-mongo-client-settings:
 
 Using MongoClientSettings
--------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use a ``MongoClientSettings`` object to configure connection settings in code
 rather than in a connection URI. Configuring the connection this way makes it easier to
@@ -111,11 +109,14 @@ object but want to specify settings that aren't available in the ``MongoUrl`` cl
 .. _csharp-mongo-url-builder:
 
 Using MongoUrlBuilder
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 You can use a ``MongoUrlBuilder`` object to create and configure connection settings on
-a ``MongoUrl`` object. This has many of the same advantages as using a ``MongoClientSettings``
-object, although the two classes contain different properties and methods.
+a ``MongoUrl`` object. A ``MongoUrl`` is a strongly typed representation of a
+connection URI, and is useful when reading a connection URI directly from
+another source. Using a ``MongoUrl`` object has many of the same advantages as using
+a ``MongoClientSettings`` object, although the two classes contain different properties
+and methods.
 
 To use a ``MongoUrlBuilder`` object, create an instance of the class and set the
 necessary configuration properties. To create a ``MongoUrl`` object from the
@@ -123,15 +124,11 @@ necessary configuration properties. To create a ``MongoUrl`` object from the
 ``MongoUrl`` object to the ``MongoClient`` constructor. The following code example shows
 this process:
 
-.. literalinclude:: /includes/fundamentals/code-examples/connection/MongoClientSettingsConfig.cs
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
    :language: csharp
    :dedent: 8
    :start-after: // start-mongo-url-builder
    :end-before: // end-mongo-url-builder
-
-------------------
-Connection Options
-------------------
 
 The following sections describe each connection option available in the
 ``MongoClientSettings`` and ``MongoUrlBuilder`` classes.
@@ -707,7 +704,7 @@ Authentication Options
       authentication credentials, mechanism, source, and other settings. The default
       value is ``null``.
 
-      f you don't specify an authentication mechanism, the driver uses either
+      If you don't specify an authentication mechanism, the driver uses either
       ``SCRAM-SHA-1`` or ``SCRAM-SHA-256``, depending on the server version. See
       :ref:`Authentication Mechanisms <csharp-authentication-mechanisms>` for available
       authentication mechanisms.
@@ -914,10 +911,11 @@ UTF-8 byte sequence
    :copyable: true
    :dedent: 8
    :start-after: // start-settings-read-encoding
-   :end-before: // end-settings-read-encodin
+   :end-before: // end-settings-read-encoding
 
 WriteEncoding
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
+
 The UTF-8 encoding to use for string serialization. The default value is
 strict encoding, where the driver throws an exception when it encounters an invalid
 UTF-8 byte sequence
@@ -1076,8 +1074,8 @@ Miscellaneous Options
       IsFrozen
       ~~~~~~~~
 
-      Indicates whether the settings have been frozen. Frozen settings can't be changed.
-      This option is read-only. The default value is ``false``.
+      A read-only option that indicates whether the settings have been frozen. You can't
+      change frozen settings. The default value is ``false``.
 
       .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
          :language: csharp
@@ -1092,7 +1090,8 @@ Miscellaneous Options
          `Freeze() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.Freeze.html>`__
          method. This prevents any further changes to the settings.
 
-         Alternatively, you can call the `FrozenCopy() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.FrozenCopy.html>`__
+         Alternatively, you can call the `FrozenCopy()
+         <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.FrozenCopy.html>`__
          method to create a new ``MongoClientSettings`` object with the current settings frozen.
 
       LibraryInfo
@@ -1340,9 +1339,8 @@ Miscellaneous Options
          :start-after: // start-builder-srv-service-name
          :end-before: // end-builder-srv-service-name
 
-======================
 Additional Information
-======================
+----------------------
 
 For more information about the types used on this page, see the
 following API documentation:

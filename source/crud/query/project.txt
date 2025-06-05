@@ -13,7 +13,7 @@ Specify Fields To Return
 .. facet::
    :name: genre
    :values: reference
- 
+
 .. meta::
    :keywords: read, filter, project, select
 
@@ -34,17 +34,18 @@ free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<csharp-g
 The following class represents the documents in the ``sample_mflix.movies`` collection:
 
 .. literalinclude:: /includes/code-examples/projection/Movie.cs
+   :language: csharp
 
 .. _csharp-projection-methods:
 
-Projection Methods
-------------------
+Create a Projection
+-------------------
 
 To create a projection, perform the following steps:
 
 1. Use the ``Builders<TDocument>.Projection`` static property to create a
-   ``ProjectionDefinitionBuilder<TDocument> object. The ``ProjectionDefinitionBuilder`` class
-   provides a type-safe interface for defining a projection.``TDocument`` represents the 
+   ``ProjectionDefinitionBuilder<TDocument>`` object. The ``ProjectionDefinitionBuilder`` class
+   provides a type-safe interface for defining a projection. ``TDocument`` represents the
    C# class that the collection's documents map to.
 
 #. Chain projection methods from the ``ProjectionDefinitionBuilder<TDocument>``
@@ -57,6 +58,12 @@ To create a projection, perform the following steps:
 
 The following sections describe the methods that you can chain from your
 ``ProjectionDefinitionBuilder<TDocument>`` object.
+
+Field Projection Methods
+------------------------
+
+The following methods let you specify which fields to include or exclude from the returned
+documents.
 
 ElemMatch
 ~~~~~~~~~
@@ -112,6 +119,102 @@ This is equivalent to including a field in the ``$project`` aggregation stage in
 For a code example that uses the ``Include()`` method, see
 :manual:`$project </reference/operator/aggregation/project/>` in the {+mdb-server+} manual.
 
+Slice
+~~~~~
+
+The ``Slice()`` method specifies the number of elements in an array to return in the query
+result. This is equivalent to using the ``$slice`` operator in the {+query-api+}.
+
+The following code example uses the ``Slice()`` method to return the first three elements
+of the ``cast`` array in the returned document:
+
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/SliceExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start first three
+      :end-before: // end first three
+
+   .. output::
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a1398f29313caabceb500"
+        },
+        "title": "Back to the Future Part II",
+        "cast": [
+          "Michael J. Fox",
+          "Christopher Lloyd",
+          "Lea Thompson"
+        ]
+      }
+
+To return elements from the end of an array, pass a negative integer to the ``Slice()``
+method. The method returns the specified number of elements from the end of the array.
+The following code example returns the last three elements of the ``cast`` array in the
+returned document:
+
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/SliceExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start last three
+      :end-before: // end last three
+
+   .. output::
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a1398f29313caabceb500"
+        },
+        "title": "Back to the Future Part II",
+        "cast": [
+          "Lea Thompson",
+          "Thomas F. Wilson"
+        ]
+      }
+
+To skip a specified number of elements in the array, pass the number of elements to skip
+as the first parameter and the number of elements to return as the second
+parameter. The following code example skips the first element in the
+``cast`` array and returns the next three elements:
+
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/SliceExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start skip first limit three
+      :end-before: // end skip first limit three
+
+   .. output::
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a1398f29313caabceb500"
+        },
+        "title": "Back to the Future Part II",
+        "cast": [
+          "Christopher Lloyd",
+          "Lea Thompson",
+          "Thomas F. Wilson"
+        ]
+      }
+
+To learn more about the ``$slice`` operator, see
+:manual:`$slice </reference/operator/projection/slice/>` in the {+mdb-server+} manual.
+
+Metadata Projection Methods
+---------------------------
+
+The following methods let you specify which metadata fields to include or exclude
+from the returned documents. Metadata fields are hidden by default.
+
 Meta
 ~~~~
 
@@ -120,13 +223,27 @@ documents. This is equivalent to including a metadata field by using the
 :manual:`$meta </reference/operator/aggregation/meta/>` operator in the {+query-api+}.
 
 The following code example adds the ``textScore`` metadata field to the returned
-documents as a field named ``searchScore``:
+documents as a field named ``score``:
 
-.. literalinclude:: /includes/code-examples/projection/MetaExamples.cs
-   :language: csharp
-   :dedent: 8
-   :start-after: start meta
-   :end-before: end meta
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/MetaExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start meta
+      :end-before: // end meta
+
+   .. output::
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "..."
+        },
+        "plot": "...",
+        "title": "...",
+        "score": "..."
+      }
 
 MetaSearchHighlights
 ~~~~~~~~~~~~~~~~~~~~
@@ -142,11 +259,44 @@ specifies the search field, and then pass this object to the ``Search()`` method
 The following code example retrieves search highlights for the ``plot`` field, then
 includes these highlights in a property named ``Highlights`` in the returned documents:
 
-.. literalinclude:: /includes/code-examples/projection/MetaExamples.cs
-   :language: csharp
-   :dedent: 8
-   :start-after: start metaSearchHighlights
-   :end-before: end metaSearchHighlights
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/MetaExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start metaSearchHighlights
+      :end-before: // end metaSearchHighlights
+
+   .. output::
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a13def29313caabdb5661"
+        },
+        "plot": "She Can See Her Future, But Can't Escape Her Past.",
+        "title": "West",
+        "highlights": [
+          {
+            "score": 1.286744475364685,
+            "path": "plot",
+            "texts": [
+              {
+                "value": "She Can See Her ",
+                "type": "text"
+              },
+              {
+                "value": "Future",
+                "type": "hit"
+              },
+              {
+                "value": ", But Can't Escape Her Past.",
+                "type": "text"
+              }
+            ]
+          }
+        ]
+      }
 
 To learn more about search highlights, see
 :atlas:`Highlight Search Terms in Results </atlas-search/highlighting/>`
@@ -164,11 +314,25 @@ by using a ``{ "$meta": "searchScore" }`` object in the {+query-api+}.
 The following code example projects each document's search score in a property named
 ``Score``:
 
-.. literalinclude:: /includes/code-examples/projection/MetaExamples.cs
-   :language: csharp
-   :dedent: 8
-   :start-after: start metaSearchScore
-   :end-before: end metaSearchScore
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/MetaExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start metaSearchScore
+      :end-before: // end metaSearchScore
+
+   .. output::
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a13def29313caabdb5661"
+        },
+        "plot": "She Can See Her Future, But Can't Escape Her Past.",
+        "title": "West",
+        "score": 2.8259084224700928
+      }
 
 To learn more about search scores, see
 :atlas:`Score the Documents in the Returned Documents </atlas-search/scoring/>`.
@@ -187,11 +351,32 @@ To retrieve score details, you must create a ``SearchOptions`` object that, set 
 The following code example shows this process by projecting each document's search score
 details in a property named ``ScoreDetails``:
 
-.. literalinclude:: /includes/code-examples/projection/MetaExamples.cs
-   :language: csharp
-   :dedent: 8
-   :start-after: start metaSearchScoreDetails
-   :end-before: end metaSearchScoreDetails
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/MetaExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start metaSearchScoreDetails
+      :end-before: // end metaSearchScoreDetails
+
+   .. output::
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a13def29313caabdb5661"
+        },
+        ...
+        "scoreDetails": {
+          "value": 2.8259084224700928,
+          "description": "$type:string/plot:future [BM25Similarity], result of:",
+          "details": [
+            {
+              "value": 2.8259084224700928,
+              "description": "score(freq=1.0), computed as boost * idf * tf from:",
+              "details": [
+               ...
+      }
 
 To learn more about search score details, see
 :atlas:`Return the Score Details </atlas/atlas-search/scoring/>`
@@ -211,11 +396,25 @@ specified point.
 The following code example projects each document's search sequence token in a property
 named ``PaginationToken``:
 
-.. literalinclude:: /includes/code-examples/projection/MetaExamples.cs
-   :language: csharp
-   :dedent: 8
-   :start-after: start metaSearchSequenceToken
-   :end-before: end metaSearchSequenceToken
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/MetaExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start metaSearchSequenceToken
+      :end-before: // end metaSearchSequenceToken
+
+   .. output::
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a13def29313caabdb5661"
+        },
+        "plot": "She Can See Her Future, But Can't Escape Her Past.",
+        "title": "West",
+        "paginationToken": "CIeaARWv2zRAIg5aDFc6E97ykxPKq9tWYQ=="
+      }
 
 To learn more about search sequence tokens, see
 :atlas:`Paginate Search Results </atlas-search/paginate-results/>`
@@ -228,7 +427,7 @@ This is equivalent to projecting the text search score by using a
 ``{ "$meta": "textScore" }`` object in the {+query-api+}.
 
 For a code example that uses the ``MetaTextScore()`` method, see
-:manual:`$meta </reference/operator/aggregation/meta/>` 
+:manual:`$meta </reference/operator/aggregation/meta/>`
 in the {+mdb-server+} manual.
 
 MetaVectorSearchScore
@@ -268,82 +467,6 @@ documentation:
 
 - :atlas:`$searchMeta </atlas-search/aggregation-stages/searchMeta/>`
 - :atlas:`$search with $$SEARCH_META </atlas-search/facet/#std-label-fts-facet-aggregation-variable>`
-
-Slice
-~~~~~
-
-The ``Slice()`` method specifies the number of elements in an array to return in the query
-result. This is equivalent to using the ``$slice`` operator in the {+query-api+}.
-
-The following code example uses the ``Slice()`` method to return the first three elements
-of the ``cast`` array in the returned document:
-
-.. io-code-block::
-
-   .. input::
-      :language: csharp
-
-      .. literalinclude:: /includes/code-examples/projection/SliceExamples.cs
-         :language: csharp
-         :dedent: 8
-         :start-after: // start first three
-         :end-before: // end first three
-
-   .. output::
-      :language: json
-
-      { "_id" : { "$oid" : "573a1398f29313caabceb500" },
-        "title" : "Back to the Future Part II",
-        "cast" : ["Michael J. Fox", "Christopher Lloyd", "Lea Thompson"] }
-
-To return elements from the end of an array, pass a negative integer to the ``Slice()``
-method. The method returns the specified number of elements from the end of the array.
-The following code example returns the last three elements of the ``cast`` array in the
-returned document:
-
-.. io-code-block::
-
-   .. input::
-      :language: csharp
-
-      .. literalinclude:: /includes/code-examples/projection/SliceExamples.cs
-         :language: csharp
-         :dedent: 8
-         :start-after: // start last three
-         :end-before: // end last three
-
-   .. output::
-      :language: json
-
-      { "_id" : { "$oid" : "573a1398f29313caabceb500" },
-        "title" : "Back to the Future Part II",
-        "cast" : ["Lea Thompson", "Thomas F. Wilson"] }
-
-To skip a specified number of elements in the array, pass the number of elements to skip
-as the first parameter and the number of elements to return as the second
-parameter. The following code example skips the first element in the
-``cast`` array and returns the next three elements:
-
-.. io-code-block::
-
-   .. input::
-      :language: csharp
-
-      .. literalinclude:: /includes/code-examples/projection/SliceExamples.cs
-         :language: csharp
-         :dedent: 8
-         :start-after: // start skip first limit three
-         :end-before: // end skip first limit three 
-
-   .. output::
-      :language: json
-
-      { "_id" : { "$oid" : "573a1398f29313caabceb500" },
-        "title" : "Back to the Future Part II",
-        "cast" : ["Christopher Lloyd", "Lea Thompson", "Thomas F. Wilson"] }
-
-To learn more about the ``$slice`` operator, see 
-:manual:`$slice </reference/operator/projection/slice/>` in the {+mdb-server+} manual.
 
 API Documentation
 -----------------

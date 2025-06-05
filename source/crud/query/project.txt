@@ -137,6 +137,7 @@ of the ``cast`` array in the returned document:
       :end-before: // end first three
 
    .. output::
+      :visible: false
       :language: json
 
       {
@@ -165,6 +166,7 @@ returned document:
       :end-before: // end last three
 
    .. output::
+      :visible: false
       :language: json
 
       {
@@ -192,6 +194,7 @@ parameter. The following code example skips the first element in the
       :end-before: // end skip first limit three
 
    .. output::
+      :visible: false
       :language: json
 
       {
@@ -234,6 +237,7 @@ documents as a field named ``score``:
       :end-before: // end meta
 
    .. output::
+      :visible: false
       :language: json
 
       {
@@ -268,6 +272,7 @@ includes these highlights in a property named ``Highlights`` in the returned doc
       :end-before: // end metaSearchHighlights
 
    .. output::
+      :visible: false
       :language: json
 
       {
@@ -323,6 +328,7 @@ The following code example projects each document's search score in a property n
       :end-before: // end metaSearchScore
 
    .. output::
+      :visible: false
       :language: json
 
       {
@@ -360,6 +366,7 @@ details in a property named ``ScoreDetails``:
       :end-before: // end metaSearchScoreDetails
 
    .. output::
+      :visible: false
       :language: json
 
       {
@@ -405,6 +412,7 @@ named ``PaginationToken``:
       :end-before: // end metaSearchSequenceToken
 
    .. output::
+      :visible: false
       :language: json
 
       {

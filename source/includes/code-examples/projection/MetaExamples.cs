@@ -16,20 +16,14 @@ public class MetaExamples
         .GetDatabase("sample_mflix")
         .GetCollection<Movie>("embedded_movies");
     
-    public static void CreateIndex()
-    {
-        // start createIndex
-        var indexModel = new CreateIndexModel<Movie>(
-            Builders<Movie>.IndexKeys.Text(m => m.Title));
-        movieCollection.Indexes.CreateOne(indexModel);
-        // end createIndex
-    }
-
     public static List<BsonDocument> MetaTextScoreExample()
     {
         // start metaTextScore
         var filter = Builders<Movie>.Filter.Text("future");
-        var projection = Builders<Movie>.Projection.MetaTextScore("score");
+        var projection = Builders<Movie>.Projection
+            .Include(m => m.Title)
+            .Include(m => m.Plot)
+            .MetaTextScore("score");
 
         var results = movieCollection.Find(filter)
             .Project(projection)
@@ -44,9 +38,10 @@ public class MetaExamples
     {
         // start meta
         var filter = Builders<Movie>.Filter.Text("future");
-        var projection = Builders<Movie>.Projection.Meta(
-            field: "searchScore",
-            metaFieldName: "textScore");
+        var projection = Builders<Movie>.Projection
+            .Include(m => m.Title)
+            .Include(m => m.Plot)
+            .Meta(field: "score", metaFieldName: "textScore");
 
         var results = movieCollection.Find(filter)
             .Project(projection)
@@ -61,7 +56,10 @@ public class MetaExamples
     {
         // start metaScore
         var filter = Builders<Movie>.Search.Text(m => m.Title, "future");
-        var projection = Builders<Movie>.Projection.MetaScore("scoreDetails");
+        var projection = Builders<Movie>.Projection
+            .Include(m => m.Title)
+            .Include(m => m.Plot)
+            .MetaScore(m => m.ScoreDetails);
 
         var results = movieCollection
             .Aggregate()
@@ -78,7 +76,10 @@ public class MetaExamples
     {
         // start metaScoreDetails
         var filter = Builders<Movie>.Filter.Text("future");
-        var projection = Builders<Movie>.Projection.MetaScoreDetails("detailsOfTheScore");
+        var projection = Builders<Movie>.Projection
+            .Include(m => m.Title)
+            .Include(m => m.Plot)
+            .MetaScoreDetails(m => m.ScoreDetails);
 
         var results = movieCollection.Find(filter)
             .Project(projection)
@@ -92,8 +93,10 @@ public class MetaExamples
     public static List<BsonDocument> MetaSearchHighlightsExample()
     {
         // start metaSearchHighlights
-        var filter = Builders<Movie>.Search.Phrase(m => m.Plot, "future");
+        var filter = Builders<Movie>.Search.Text(path: m => m.Plot, query: "future");
         var projection = Builders<Movie>.Projection
+            .Include(m => m.Title)
+            .Include(m => m.Plot)
             .MetaSearchHighlights(m => m.Highlights);
 
         var results = movieCollection
@@ -110,7 +113,7 @@ public class MetaExamples
     public static List<BsonDocument> MetaSearchScoreExample()
     {
         // start metaSearchScore
-        var filter = Builders<Movie>.Search.Phrase(m => m.Plot, "future");
+        var filter = Builders<Movie>.Search.Text(m => m.Plot, "future");
         var projection = Builders<Movie>.Projection
             .Include(m => m.Title)
             .Include(m => m.Plot)
@@ -130,7 +133,7 @@ public class MetaExamples
     public static List<BsonDocument> MetaSearchScoreDetailsExample()
     {
         // start metaSearchScoreDetails
-        var filter = Builders<Movie>.Search.Phrase(m => m.Plot, "future");
+        var filter = Builders<Movie>.Search.Text(m => m.Plot, "future");
         var projection = Builders<Movie>.Projection
             .Include(m => m.Title)
             .Include(m => m.Plot)
@@ -151,7 +154,7 @@ public class MetaExamples
     public static List<BsonDocument> MetaSearchSequenceTokenExample()
     {
         // start metaSearchSequenceToken
-        var filter = Builders<Movie>.Search.Phrase(m => m.Plot, "future");
+        var filter = Builders<Movie>.Search.Text(m => m.Plot, "future");
         var projection = Builders<Movie>.Projection
             .Include(m => m.Title)
             .Include(m => m.Plot)
@@ -188,7 +191,6 @@ public class MetaExamples
                 .Include(movie => movie.Plot)
                 .MetaVectorSearchScore(m => m.Score))
               .ToList();
-        
         // end metaVectorSearchScore
         
         return results;

@@ -30,7 +30,8 @@ Specify Connection Options
 Overview
 --------
 
-This page describes the MongoDB connection options available in the {+driver-short+}.
+This page describes the connection options available in the {+driver-short+} and
+explains how to apply them to your MongoDB connection.
 
 How to Specify Connection Options
 ---------------------------------
@@ -72,7 +73,7 @@ following steps:
 
 1. Create an instance of the ``MongoClientSettings`` class
 #. Set properties on the instance to configure the connection
-#. Pass the instance to the ``MongoClient`` constructor.
+#. Pass the instance to the ``MongoClient`` constructor
 
 The following code example shows how to perform the preceding steps:
 
@@ -896,7 +897,7 @@ Encoding Options
 ----------------
 
 ReadEncoding
-~~~~~~~~~~~
+~~~~~~~~~~~~
 
 The UTF-8 encoding to use for string deserialization. The default value is
 strict encoding, where the driver throws an exception when it encounters an invalid
@@ -932,7 +933,7 @@ Stable API
 ----------
 
 ServerApi
-~~~~~~~~
+~~~~~~~~~
 
 Allows opting into Stable API versioning. The default value is ``null``. See
 :manual:`Stable API </reference/stable-api>` in the {+mdb-server+} manual for more

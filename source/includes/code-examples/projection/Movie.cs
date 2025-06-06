@@ -17,6 +17,9 @@ public class Movie
     [BsonElement("scoreDetails")]
     public SearchScoreDetails ScoreDetails { get; set; }
     
+    [BsonElement("searchScoreDetails")]
+    public SearchScoreDetails SearchScoreDetails { get; set; } 
+    
     [BsonElement("paginationToken")]
     public string PaginationToken { get; set; }
     

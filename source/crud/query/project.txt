@@ -44,9 +44,9 @@ Create a Projection
 To create a projection, perform the following steps:
 
 1. Use the ``Builders<TDocument>.Projection`` static property to create a
-   ``ProjectionDefinitionBuilder<TDocument>`` object. The ``ProjectionDefinitionBuilder`` class
-   provides a type-safe interface for defining a projection. ``TDocument`` represents the
-   C# class that the collection's documents map to.
+   ``ProjectionDefinitionBuilder<TDocument>`` object, where ``TDocument`` represents the
+   C# class that the collection's documents map to. The ``ProjectionDefinitionBuilder`` class
+   provides a type-safe interface for defining a projection.
 
 #. Chain projection methods from the ``ProjectionDefinitionBuilder<TDocument>``
    object to specify which fields to include or exclude from the returned documents.
@@ -122,11 +122,11 @@ For a code example that uses the ``Include()`` method, see
 Slice
 ~~~~~
 
-The ``Slice()`` method specifies the number of elements in an array to return in the query
-result. This is equivalent to using the ``$slice`` operator in the {+query-api+}.
+The ``Slice()`` method specifies the number of elements of a list or array to return in the query
+result field. This is equivalent to using the ``$slice`` operator in the {+query-api+}.
 
 The following code example uses the ``Slice()`` method to return the first three elements
-of the ``cast`` array in the returned document:
+of the ``Cast`` list in the returned document's ``cast`` array:
 
 .. io-code-block::
 
@@ -152,10 +152,9 @@ of the ``cast`` array in the returned document:
         ]
       }
 
-To return elements from the end of an array, pass a negative integer to the ``Slice()``
-method. The method returns the specified number of elements from the end of the array.
-The following code example returns the last three elements of the ``cast`` array in the
-returned document:
+To return elements from the end of a collection, pass a negative integer to the ``Slice()``
+method. The following code example returns the last three elements of the ``Cast`` list in
+the returned document's ``cast`` array:
 
 .. io-code-block::
 
@@ -180,10 +179,10 @@ returned document:
         ]
       }
 
-To skip a specified number of elements in the array, pass the number of elements to skip
+To skip a specified number of elements in a collection, pass the number of elements to skip
 as the first parameter and the number of elements to return as the second
 parameter. The following code example skips the first element in the
-``cast`` array and returns the next three elements:
+``Cast`` list and returns the next three elements in the ``cast`` array:
 
 .. io-code-block::
 
@@ -316,8 +315,8 @@ The ``MetaSearchScore()`` method includes search scores in the returned
 documents. This is equivalent to projecting search scores
 by using a ``{ "$meta": "searchScore" }`` object in the {+query-api+}.
 
-The following code example projects each document's search score in a property named
-``Score``:
+The following code example projects each document's search score in a field named
+``score``:
 
 .. io-code-block::
 
@@ -352,10 +351,10 @@ The ``MetaSearchScoreDetails()`` includes details about the search scores
 in the returned documents. This is equivalent to projecting search score details
 by using a ``{ "$meta": "searchScoreDetails" }`` object in the {+query-api+}.
 
-To retrieve score details, you must create a ``SearchOptions`` object that, set its
-``ScoreDetails`` property to ``true``, and then pass this object to the ``Search()`` method.
+To retrieve score details, create a ``SearchOptions`` object with its
+``ScoreDetails`` property set to ``true``, and then pass this object to the ``Search()`` method.
 The following code example shows this process by projecting each document's search score
-details in a property named ``ScoreDetails``:
+details in a field named ``searchScoreDetails``:
 
 .. io-code-block::
 

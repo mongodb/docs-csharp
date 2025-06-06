@@ -138,7 +138,7 @@ public class MetaExamples
             .Include(m => m.Title)
             .Include(m => m.Plot)
             .MetaSearchScore(m => m.Score)
-            .MetaSearchScoreDetails(m => m.ScoreDetails);
+            .MetaSearchScoreDetails(m => m.SearchScoreDetails);
 
         var results = movieCollection
             .Aggregate()

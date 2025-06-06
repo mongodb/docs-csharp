@@ -1,8 +1,8 @@
 .. _csharp-connection-options:
 
-==============================
-Configure a MongoDB Connection
-==============================
+==========================
+Specify Connection Options
+==========================
 
 .. facet::
    :name: genre
@@ -30,11 +30,10 @@ Configure a MongoDB Connection
 Overview
 --------
 
-This page describes the MongoDB connection and authentication options
-available in the {+driver-short+}.
+This page describes the MongoDB connection options available in the {+driver-short+}.
 
-Specify Connection Options
---------------------------
+How to Specify Connection Options
+---------------------------------
 
 The following sections describe the ways in which you can specify connection options.
 
@@ -129,9 +128,6 @@ this process:
    :dedent: 8
    :start-after: // start-mongo-url-builder
    :end-before: // end-mongo-url-builder
-
-The following sections describe each connection option available in the
-``MongoClientSettings`` and ``MongoUrlBuilder`` classes.
 
 .. _csharp-replica-set-options:
 

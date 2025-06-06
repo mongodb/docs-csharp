@@ -22,6 +22,7 @@ Aggregation Operations
    :maxdepth: 1
 
    Pipeline Stages </aggregation/stages>
+   LINQ </aggregation/linq>
 
 Overview
 --------

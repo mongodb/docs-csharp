@@ -24,5 +24,5 @@ Connect to MongoDB
 
    Create a MongoClient </connect/mongoclient>
    Choose a Connection Target </connect/connection-targets>
-   Configure a Connection </connect/connection-options>
+   Specify Connection Options </connect/connection-options>
    Connection Troubleshooting </connect/connection-troubleshooting>

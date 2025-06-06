@@ -586,12 +586,12 @@ bitwise operations and the equivalent {+mdb-server+} operators:
      - {+mdb-server+} Operator
 
    * - ``BitsAllClear()``
-     - Matches documents where all of the specified bit positions are clear (``0``) in
+     - Matches documents where all the specified bit positions are clear (``0``) in
        the specified field.
      - :manual:`$bitsAllClear </reference/operator/query/bitsAllClear/>`
 
    * - ``BitsAllSet()``
-     - Matches documents where all of the specified bit positions are set (``1``) in
+     - Matches documents where all the specified bit positions are set (``1``) in
        the specified field.
      - :manual:`$bitsAllSet </reference/operator/query/bitsAllSet/>`
 

@@ -15,7 +15,7 @@ public class ConnectionOptions
     public void ConnectionUriExample()
     {
         // start-connection-uri
-        const string connectionUri = "mongodb+srv:/localhost:27017/?connectTimeoutMS=60000&tls=true";
+        const string uri = "mongodb+srv:/localhost:27017/?connectTimeoutMS=60000&tls=true";
         // end-connection-uri
     }
 

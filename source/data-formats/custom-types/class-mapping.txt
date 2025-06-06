@@ -21,8 +21,8 @@ Overview
 --------
 
 In this guide, you can learn how to customize the way the {+driver-long+}
-maps BSON documents to and from {+language+} classes. You should read this page
-to learn more about the default class mapping behavior, or if you need to
+maps BSON documents to and from {+language+} classes. Read this page
+to learn more about the default class mapping behavior, or if you must 
 customize the way the driver serializes or deserializes your data.
 
 Automatic Class Mapping
@@ -35,7 +35,7 @@ the name of the field in the document to the name of the property in the class.
 
 .. important::
 
-   The type of the property in your class should match the type of the field in
+   Match the type of the property in your class to the type of the field in
    the document. The {+driver-short+} instantiates a serializer based on the
    type of the property in your class. If the types don't match when the driver
    attempts to deserialize the data, the serializer throws an exception.
@@ -72,7 +72,7 @@ class:
 .. important::
 
    You must register a class map *before* it's needed in your code. We recommend
-   registering class maps prior to initializing a connection with MongoDB.
+   registering class maps before initializing a connection with MongoDB.
 
 You can also manually map a subset of class properties, while still
 allowing the driver to automatically map the remaining properties. To do this, 
@@ -241,11 +241,11 @@ You can also support extra elements when initializing a class map as follows:
 Dynamically Serialize Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use a method to determine whether or not to serialize a property. For
+You can use a method to determine whether to serialize a property. For
 the driver to automatically use the method when serializing, you must prefix the
 method name with ``ShouldSerialize`` followed by the name of the property that
 the method applies to. When the driver sees a method with this naming
-convention, it uses that method to determine whether or not to serialize
+convention, it uses that method to determine whether to serialize
 properties that have the provided property name.
 
 The following example creates a method that only serializes the ``Age`` property

@@ -86,7 +86,7 @@ The following code example shows how to perform the preceding steps:
 You can also create a ``MongoClientSettings`` object from a connection string by calling the
 ``MongoClientSettings.FromConnectionString()`` method and passing the connection string,
 as shown in the following example. This is useful if you already have a connection string
-but want to modify some settings programmatically, or if you want to specify settings
+but want to modify some settings programmatically, or if you must specify settings
 that aren't available in the connection string.
 
 .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
@@ -132,6 +132,10 @@ this process:
 
 Connection Options
 ------------------
+
+The following sections describe the connection options available in the
+{+driver-short+} and how to specify them by using a ``MongoClientSettings`` or
+``MongoUrlBuilder`` object.
 
 .. _csharp-replica-set-options:
 

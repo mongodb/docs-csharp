@@ -130,10 +130,13 @@ this process:
    :start-after: // start-mongo-url-builder
    :end-before: // end-mongo-url-builder
 
+Connection Options
+------------------
+
 .. _csharp-replica-set-options:
 
 Replica Set Options
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -141,7 +144,7 @@ Replica Set Options
       :tabid: mongo-client-settings
 
       DirectConnection
-      ~~~~~~~~~~~~~~~~
+      ````````````````
 
       .. include:: /includes/fundamentals/connection-options/directConnection.rst
 
@@ -153,7 +156,7 @@ Replica Set Options
          :end-before: // end-settings-direct-connection
 
       ReplicaSetName
-      ~~~~~~~~~~~~~~
+      ``````````````
 
       .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
 
@@ -168,7 +171,7 @@ Replica Set Options
       :tabid: mongo-url-builder
 
       DirectConnection
-      ~~~~~~~~~~~~~~~~
+      ````````````````
 
       .. include:: /includes/fundamentals/connection-options/directConnection.rst
 
@@ -180,7 +183,7 @@ Replica Set Options
          :end-before: // end-builder-direct-connection
 
       ReplicaSetName
-      ~~~~~~~~~~~~~~
+      ``````````````
 
       .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
 
@@ -192,7 +195,7 @@ Replica Set Options
          :end-before: // end-builder-replica-set-name
 
 TLS Options
------------
+~~~~~~~~~~~
 
 .. tabs::
 
@@ -200,7 +203,7 @@ TLS Options
       :tabid: mongo-client-settings
 
       AllowInsecureTls
-      ~~~~~~~~~~~~~~~~
+      ````````````````
 
       .. include:: /includes/fundamentals/connection-options/allowInsecureTls.rst
 
@@ -212,7 +215,7 @@ TLS Options
          :end-before: // end-settings-allow-insecure-tls
 
       SslSettings
-      ~~~~~~~~~~~
+      ```````````
 
       TLS/SSL options, including client certificates, revocation handling, and
       enabled and disabled TLS/SSL protocols. The default value is ``null``.
@@ -229,7 +232,7 @@ TLS Options
          :end-before: // end-settings-ssl-settings
 
       UseTls
-      ~~~~~~
+      ``````
 
       .. include:: /includes/fundamentals/connection-options/useTls.rst
 
@@ -244,7 +247,7 @@ TLS Options
       :tabid: mongo-url-builder
 
       AllowInsecureTls
-      ~~~~~~~~~~~~~~~~
+      ````````````````
 
       .. include:: /includes/fundamentals/connection-options/allowInsecureTls.rst
 
@@ -256,7 +259,7 @@ TLS Options
          :end-before: // end-builder-allow-insecure-tls
 
       TlsDisableCertificateRevocationCheck
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      ````````````````````````````````````
 
       Whether to disable certificate revocation checking during the TLS handshake. The
       default value is ``false``.
@@ -269,7 +272,7 @@ TLS Options
          :end-before: // end-builder-tls-disable
 
       UseTls
-      ~~~~~~
+      ``````
 
       .. include:: /includes/fundamentals/connection-options/useTls.rst
 
@@ -281,7 +284,7 @@ TLS Options
          :end-before: // end-builder-use-tls
 
 Timeout Options
----------------
+~~~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -289,7 +292,7 @@ Timeout Options
       :tabid: mongo-client-settings
 
       ConnectTimeout
-      ~~~~~~~~~~~~~~
+      ``````````````
 
       .. include:: /includes/fundamentals/connection-options/connectTimeout.rst
 
@@ -301,7 +304,7 @@ Timeout Options
          :end-before: // end-settings-connect-timeout
 
       SocketTimeout
-      ~~~~~~~~~~~~~
+      `````````````
 
       .. include:: /includes/fundamentals/connection-options/socketTimeout.rst
 
@@ -316,7 +319,7 @@ Timeout Options
       :tabid: mongo-url-builder
 
       ConnectTimeout
-      ~~~~~~~~~~~~~~
+      ``````````````
 
       .. include:: /includes/fundamentals/connection-options/connectTimeout.rst
 
@@ -328,7 +331,7 @@ Timeout Options
          :end-before: // end-builder-connect-timeout
 
       SocketTimeout
-      ~~~~~~~~~~~~~
+      `````````````
 
       .. include:: /includes/fundamentals/connection-options/socketTimeout.rst
 
@@ -340,7 +343,7 @@ Timeout Options
          :end-before: // end-builder-socket-timeout
 
 Compression Options
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -348,7 +351,7 @@ Compression Options
       :tabid: mongo-client-settings
 
       Compressors
-      ~~~~~~~~~~~
+      ```````````
 
       .. include:: /includes/fundamentals/connection-options/compressors.rst
 
@@ -363,7 +366,7 @@ Compression Options
       :tabid: mongo-url-builder
 
       Compressors
-      ~~~~~~~~~~~
+      ```````````
 
       .. include:: /includes/fundamentals/connection-options/compressors.rst
 
@@ -375,7 +378,7 @@ Compression Options
          :end-before: // end-builder-compressors
 
 Connection Pool Options
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -383,7 +386,7 @@ Connection Pool Options
       :tabid: mongo-client-settings
 
       MaxConnecting
-      ~~~~~~~~~~~~~
+      `````````````
 
       .. include:: /includes/fundamentals/connection-options/maxConnecting.rst
 
@@ -395,7 +398,7 @@ Connection Pool Options
          :end-before: // end-settings-max-connecting
 
       MaxConnectionIdleTime
-      ~~~~~~~~~~~~~~~~~~~~~
+      `````````````````````
 
       .. include:: /includes/fundamentals/connection-options/maxConnectionIdleTime.rst
 
@@ -407,7 +410,7 @@ Connection Pool Options
          :end-before: // end-settings-max-connection-idle-time
 
       MaxConnectionLifeTime
-      ~~~~~~~~~~~~~~~~~~~~~
+      `````````````````````
 
       .. include:: /includes/fundamentals/connection-options/maxConnectionLifetime.rst
 
@@ -419,7 +422,7 @@ Connection Pool Options
          :end-before: // end-settings-max-connection-life-time
 
       MaxConnectionPoolSize
-      ~~~~~~~~~~~~~~~~~~~~~
+      `````````````````````
 
       .. include:: /includes/fundamentals/connection-options/maxConnectionPoolSize.rst
 
@@ -431,7 +434,7 @@ Connection Pool Options
          :end-before: // end-settings-max-connection-pool-size
 
       MinConnectionPoolSize
-      ~~~~~~~~~~~~~~~~~~~~~
+      `````````````````````
 
       .. include:: /includes/fundamentals/connection-options/minConnectionPoolSize.rst
 
@@ -443,7 +446,7 @@ Connection Pool Options
          :end-before: // end-settings-min-connection-pool-size
 
       WaitQueueTimeout
-      ~~~~~~~~~~~~~~~~
+      ````````````````
 
       .. include:: /includes/fundamentals/connection-options/waitQueueTimeout.rst
 
@@ -458,7 +461,7 @@ Connection Pool Options
       :tabid: mongo-url-builder
 
       MaxConnecting
-      ~~~~~~~~~~~~~
+      `````````````
 
       .. include:: /includes/fundamentals/connection-options/maxConnecting.rst
 
@@ -470,7 +473,7 @@ Connection Pool Options
          :end-before: // end-builder-max-connecting
 
       MaxConnectionIdleTime
-      ~~~~~~~~~~~~~~~~~~~~~
+      `````````````````````
 
       .. include:: /includes/fundamentals/connection-options/maxConnectionIdleTime.rst
 
@@ -482,7 +485,7 @@ Connection Pool Options
          :end-before: // end-builder-max-connection-idle-time
 
       MaxConnectionLifeTime
-      ~~~~~~~~~~~~~~~~~~~~~
+      `````````````````````
 
       .. include:: /includes/fundamentals/connection-options/maxConnectionLifetime.rst
 
@@ -494,7 +497,7 @@ Connection Pool Options
          :end-before: // end-builder-max-connection-life-time
 
       MaxConnectionPoolSize
-      ~~~~~~~~~~~~~~~~~~~~~
+      `````````````````````
 
       .. include:: /includes/fundamentals/connection-options/maxConnectionPoolSize.rst
 
@@ -506,7 +509,7 @@ Connection Pool Options
          :end-before: // end-builder-max-connection-pool-size
 
       MinConnectionPoolSize
-      ~~~~~~~~~~~~~~~~~~~~~
+      `````````````````````
 
       .. include:: /includes/fundamentals/connection-options/minConnectionPoolSize.rst
 
@@ -518,7 +521,7 @@ Connection Pool Options
          :end-before: // end-builder-min-connection-pool-size
 
       WaitQueueTimeout
-      ~~~~~~~~~~~~~~~~
+      ````````````````
 
       .. include:: /includes/fundamentals/connection-options/waitQueueTimeout.rst
 
@@ -530,7 +533,7 @@ Connection Pool Options
          :end-before: // end-builder-wait-queue-timeout
 
 Write Concern Options
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -538,7 +541,7 @@ Write Concern Options
       :tabid: mongo-client-settings
 
       WriteConcern
-      ~~~~~~~~~~~~
+      ````````````
 
       The default write-concern settings, including write timeout and
       journaling, for the client. The default value is ``WriteConcern.Acknowledged``.
@@ -556,7 +559,7 @@ Write Concern Options
       :tabid: mongo-url-builder
 
       FSync
-      ~~~~~
+      `````
 
       The FSync component of the write concern. The default value is ``false``. To learn
       more about the ``fsync`` command, see :manual:`fsync </reference/command/fsync/>`
@@ -570,7 +573,7 @@ Write Concern Options
          :end-before: // end-builder-fsync
 
       Journal
-      ~~~~~~~
+      ```````
 
       The ``j`` component of the write concern, which requests acknowledgment that the
       MongoDB instances have written to the on-disk journal. The default value depends on
@@ -586,7 +589,7 @@ Write Concern Options
          :end-before: // end-builder-journal
 
       W
-      ~
+      ``
 
       The ``w`` component of the write concern, which requests acknowledgment that the write
       operation has propagated to a specified number of MongoDB instances. The default
@@ -602,7 +605,7 @@ Write Concern Options
          :end-before: // end-builder-w
 
       WTimeout
-      ~~~~~~~~
+      ````````
 
       The ``wtimeout`` component of the write concern, which specifies a time limit for the
       write concern. To learn more about the ``wtimeout`` option, see
@@ -617,7 +620,7 @@ Write Concern Options
          :end-before: // end-builder-w-timeout
 
 Read Concern Options
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -625,7 +628,7 @@ Read Concern Options
       :tabid: mongo-client-settings
 
       ReadConcern
-      ~~~~~~~~~~~
+      ```````````
 
       The client's read concern. The default value is ``ReadConcern.Default``.
       For more information, see :manual:`Read Concern </reference/read-concern/>` in the
@@ -642,7 +645,7 @@ Read Concern Options
       :tabid: mongo-url-builder
 
       ReadConcernLevel
-      ~~~~~~~~~~~~~~~~
+      ````````````````
 
       The client's read concern level. The default value is ``ReadConcern.Local``.
       For more information, see :ref:`read concern <read-concern>`.
@@ -655,7 +658,7 @@ Read Concern Options
          :end-before: // end-builder-read-concern-level
 
 Read Preference Options
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -663,7 +666,7 @@ Read Preference Options
       :tabid: mongo-client-settings
 
       ReadPreference
-      ~~~~~~~~~~~~~~
+      ``````````````
 
       .. include:: /includes/fundamentals/connection-options/readPreference.rst
 
@@ -687,7 +690,7 @@ Read Preference Options
          :end-before: // end-builder-read-preference
 
 Authentication Options
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -695,7 +698,7 @@ Authentication Options
       :tabid: mongo-client-settings
 
       Credential
-      ~~~~~~~~~~
+      ``````````
 
       Settings for how the driver authenticates to the server. This includes
       authentication credentials, mechanism, source, and other settings. The default
@@ -717,7 +720,7 @@ Authentication Options
       :tabid: mongo-url-builder
 
       AuthenticationMechanism
-      ~~~~~~~~~~~~~~~~~~~~~~~
+      ```````````````````````
 
       The mechanism that the driver uses to authenticate to {+mdb-server+}.
       If you don't specify an authentication mechanism, the driver uses either
@@ -734,7 +737,7 @@ Authentication Options
          :emphasize-lines: 3
 
       AuthenticationMechanismProperties
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      `````````````````````````````````
 
       Configuration settings for the authentication mechanism specified in the
       ``AuthenticationMechanism`` property.
@@ -748,7 +751,7 @@ Authentication Options
          :emphasize-lines: 4-8
 
       AuthenticationSource
-      ~~~~~~~~~~~~~~~~~~~~
+      ````````````````````
 
       The source to authenticate the client against.
 
@@ -761,7 +764,7 @@ Authentication Options
          :emphasize-lines: 9
 
       Password
-      ~~~~~~~~
+      ````````
 
       The password to use for authentication.
 
@@ -774,7 +777,7 @@ Authentication Options
          :emphasize-lines: 4
 
       Username
-      ~~~~~~~~
+      ````````
 
       The username to use for authentication.
 
@@ -787,7 +790,7 @@ Authentication Options
          :emphasize-lines: 3
 
 Server Selection and Discovery Options
---------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -795,7 +798,7 @@ Server Selection and Discovery Options
       :tabid: mongo-client-settings
 
       HeartbeatInterval
-      ~~~~~~~~~~~~~~~~~
+      `````````````````
 
       .. include:: /includes/fundamentals/connection-options/heartbeatInterval.rst
 
@@ -807,7 +810,7 @@ Server Selection and Discovery Options
          :end-before: // end-settings-heartbeat-interval
 
       HeartbeatTimeout
-      ~~~~~~~~~~~~~~~~
+      ````````````````
 
       .. include:: /includes/fundamentals/connection-options/heartbeatTimeout.rst
 
@@ -819,7 +822,7 @@ Server Selection and Discovery Options
          :end-before: // end-settings-heartbeat-timeout
 
       LocalThreshold
-      ~~~~~~~~~~~~~~
+      ``````````````
 
       .. include:: /includes/fundamentals/connection-options/localThreshold.rst
 
@@ -831,7 +834,7 @@ Server Selection and Discovery Options
          :end-before: // end-settings-local-threshold
 
       ServerSelectionTimeout
-      ~~~~~~~~~~~~~~~~~~~~~~
+      ``````````````````````
 
       .. include:: /includes/fundamentals/connection-options/localThreshold.rst
 
@@ -846,7 +849,7 @@ Server Selection and Discovery Options
       :tabid: mongo-url-builder
 
       HeartbeatInterval
-      ~~~~~~~~~~~~~~~~~
+      `````````````````
 
       .. include:: /includes/fundamentals/connection-options/heartbeatInterval.rst
 
@@ -858,7 +861,7 @@ Server Selection and Discovery Options
          :end-before: // end-builder-heartbeat-interval
 
       HeartbeatTimeout
-      ~~~~~~~~~~~~~~~~
+      ````````````````
 
       .. include:: /includes/fundamentals/connection-options/heartbeatTimeout.rst
 
@@ -870,7 +873,7 @@ Server Selection and Discovery Options
          :end-before: // end-builder-heartbeat-timeout
 
       LocalThreshold
-      ~~~~~~~~~~~~~~
+      ``````````````
 
       .. include:: /includes/fundamentals/connection-options/localThreshold.rst
 
@@ -882,7 +885,7 @@ Server Selection and Discovery Options
          :end-before: // end-builder-local-threshold
 
       ServerSelectionTimeout
-      ~~~~~~~~~~~~~~~~~~~~~~
+      ``````````````````````
 
       .. include:: /includes/fundamentals/connection-options/localThreshold.rst
 
@@ -894,10 +897,10 @@ Server Selection and Discovery Options
          :end-before: // end-builder-server-selection-timeout
 
 Encoding Options
-----------------
+~~~~~~~~~~~~~~~~
 
 ReadEncoding
-~~~~~~~~~~~~
+````````````
 
 The UTF-8 encoding to use for string deserialization. The default value is
 strict encoding, where the driver throws an exception when it encounters an invalid
@@ -911,7 +914,7 @@ UTF-8 byte sequence
    :end-before: // end-settings-read-encoding
 
 WriteEncoding
-~~~~~~~~~~~~~
+`````````````
 
 The UTF-8 encoding to use for string serialization. The default value is
 strict encoding, where the driver throws an exception when it encounters an invalid
@@ -930,10 +933,10 @@ UTF-8 byte sequence
    ``MongoClientSettings`` class.
 
 Stable API
-----------
+~~~~~~~~~~
 
 ServerApi
-~~~~~~~~~
+`````````
 
 Allows opting into Stable API versioning. The default value is ``null``. See
 :manual:`Stable API </reference/stable-api>` in the {+mdb-server+} manual for more
@@ -951,7 +954,7 @@ information about Stable API versioning.
    The ``ServerApi`` property is available only in the ``MongoClientSettings`` class.
 
 Retry Options
--------------
+~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -959,8 +962,8 @@ Retry Options
       :tabid: mongo-client-settings
 
       RetryReads
-      ~~~~~~~~~~
-
+      ``````````
+      
       .. include:: /includes/fundamentals/connection-options/retryReads.rst
 
       .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
@@ -971,8 +974,8 @@ Retry Options
          :end-before: // end-settings-retry-reads
 
       RetryWrites
-      ~~~~~~~~~~~
-
+      ```````````
+      
       .. include:: /includes/fundamentals/connection-options/retryWrites.rst
 
       .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
@@ -986,8 +989,8 @@ Retry Options
       :tabid: mongo-url-builder
 
       RetryReads
-      ~~~~~~~~~~
-
+      ``````````
+      
       .. include:: /includes/fundamentals/connection-options/retryReads.rst
 
       .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
@@ -998,7 +1001,7 @@ Retry Options
          :end-before: // end-builder-retry-reads
 
       RetryWrites
-      ~~~~~~~~~~~
+      ```````````
 
       .. include:: /includes/fundamentals/connection-options/retryWrites.rst
 
@@ -1010,7 +1013,7 @@ Retry Options
          :end-before: // end-builder-retry-writes
 
 Miscellaneous Options
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -1018,7 +1021,7 @@ Miscellaneous Options
       :tabid: mongo-client-settings
 
       ApplicationName
-      ~~~~~~~~~~~~~~~
+      ```````````````
 
       .. include:: /includes/fundamentals/connection-options/applicationName.rst
 
@@ -1030,7 +1033,7 @@ Miscellaneous Options
          :end-before: // end-settings-application-name
 
       AutoEncryptionOptions
-      ~~~~~~~~~~~~~~~~~~~~~
+      `````````````````````
 
       Settings for automatic client-side encryption. The default value is ``null``. To
       learn more about client-side encryption, see
@@ -1044,7 +1047,7 @@ Miscellaneous Options
          :end-before: // end-settings-auto-encryption-options
 
       ClusterConfigurator
-      ~~~~~~~~~~~~~~~~~~~
+      ```````````````````
 
       Low-level configuration options for sockets, TLS, cluster, and others. The default
       value is ``null``.
@@ -1057,7 +1060,7 @@ Miscellaneous Options
          :end-before: // end-settings-cluster-configurator
 
       IPv6
-      ~~~~
+      ````
 
       .. include:: /includes/fundamentals/connection-options/ipv6.rst
 
@@ -1069,7 +1072,7 @@ Miscellaneous Options
          :end-before: // end-settings-ipv6
 
       IsFrozen
-      ~~~~~~~~
+      ````````
 
       A read-only option that indicates whether the settings have been frozen. You can't
       change frozen settings. The default value is ``false``.
@@ -1092,7 +1095,7 @@ Miscellaneous Options
          method to create a new ``MongoClientSettings`` object with the current settings frozen.
 
       LibraryInfo
-      ~~~~~~~~~~~
+      ```````````
 
       The name and version of a custom library built on the {+driver-short+}. The driver
       sends this information to the server.
@@ -1105,7 +1108,7 @@ Miscellaneous Options
          :end-before: // end-settings-library-info
 
       LoadBalanced
-      ~~~~~~~~~~~~
+      ````````````
 
       .. include:: /includes/fundamentals/connection-options/loadBalanced.rst
 
@@ -1117,7 +1120,7 @@ Miscellaneous Options
          :end-before: // end-settings-load-balanced
 
       LoggingSettings
-      ~~~~~~~~~~~~~~~
+      ```````````````
 
       The settings used for :ref:`logging. <csharp-logging>` The default value is ``null``.
 
@@ -1129,7 +1132,7 @@ Miscellaneous Options
          :end-before: // end-settings-logging-settings
 
       Scheme
-      ~~~~~~
+      ``````
 
       .. include:: /includes/fundamentals/connection-options/scheme.rst
 
@@ -1141,7 +1144,7 @@ Miscellaneous Options
          :end-before: // end-settings-scheme
 
       Server
-      ~~~~~~
+      ``````
 
       .. include:: /includes/fundamentals/connection-options/server.rst
 
@@ -1153,7 +1156,7 @@ Miscellaneous Options
          :end-before: // end-settings-server
 
       ServerMonitoringMode
-      ~~~~~~~~~~~~~~~~~~~~
+      ````````````````````
 
       .. include:: /includes/fundamentals/connection-options/serverMonitoringMode.rst
 
@@ -1165,7 +1168,7 @@ Miscellaneous Options
          :end-before: // end-settings-server-monitoring-mode
 
       Servers
-      ~~~~~~~
+      ```````
 
       .. include:: /includes/fundamentals/connection-options/servers.rst
 
@@ -1177,7 +1180,7 @@ Miscellaneous Options
          :end-before: // end-settings-servers
 
       SrvMaxHosts
-      ~~~~~~~~~~~
+      ```````````
 
       .. include:: /includes/fundamentals/connection-options/srvMaxHosts.rst
 
@@ -1189,7 +1192,7 @@ Miscellaneous Options
          :end-before: // end-settings-srv-max-hosts
 
       SrvServiceName
-      ~~~~~~~~~~~~~~
+      ``````````````
 
       .. include:: /includes/fundamentals/connection-options/srvServiceName.rst
 
@@ -1201,7 +1204,7 @@ Miscellaneous Options
          :end-before: // end-settings-srv-service-name
 
       TranslationOptions
-      ~~~~~~~~~~~~~~~~~~
+      ``````````````````
 
       Specifies options, such as the {+mdb-server+} version, for translating LINQ
       queries to the Query API. The default value is ``null``.
@@ -1217,7 +1220,7 @@ Miscellaneous Options
       :tabid: mongo-url-builder
 
       ApplicationName
-      ~~~~~~~~~~~~~~~
+      ```````````````
 
       .. include:: /includes/fundamentals/connection-options/applicationName.rst
 
@@ -1229,7 +1232,7 @@ Miscellaneous Options
          :end-before: // end-builder-application-name
 
       DatabaseName
-      ~~~~~~~~~~~~
+      ````````````
 
       The name of the database that the client connects to.
 
@@ -1241,7 +1244,7 @@ Miscellaneous Options
          :end-before: // end-builder-database-name
 
       IPv6
-      ~~~~
+      ````
 
       .. include:: /includes/fundamentals/connection-options/ipv6.rst
 
@@ -1253,7 +1256,7 @@ Miscellaneous Options
          :end-before: // end-builder-ipv6
 
       LoadBalanced
-      ~~~~~~~~~~~~
+      ````````````
 
       .. include:: /includes/fundamentals/connection-options/loadBalanced.rst
 
@@ -1265,7 +1268,7 @@ Miscellaneous Options
          :end-before: // end-builder-load-balanced
 
       Scheme
-      ~~~~~~
+      ``````
 
       .. include:: /includes/fundamentals/connection-options/scheme.rst
 
@@ -1277,7 +1280,7 @@ Miscellaneous Options
          :end-before: // end-builder-scheme
 
       Server
-      ~~~~~~
+      ``````
 
       .. include:: /includes/fundamentals/connection-options/server.rst
 
@@ -1289,7 +1292,7 @@ Miscellaneous Options
          :end-before: // end-builder-server
 
       ServerMonitoringMode
-      ~~~~~~~~~~~~~~~~~~~~
+      ````````````````````
 
       .. include:: /includes/fundamentals/connection-options/serverMonitoringMode.rst
 
@@ -1301,7 +1304,7 @@ Miscellaneous Options
          :end-before: // end-builder-server-monitoring-mode
 
       Servers
-      ~~~~~~~
+      ```````
 
       .. include:: /includes/fundamentals/connection-options/servers.rst
 
@@ -1313,7 +1316,7 @@ Miscellaneous Options
          :end-before: // end-builder-servers
 
       SrvMaxHosts
-      ~~~~~~~~~~~
+      ```````````
 
       .. include:: /includes/fundamentals/connection-options/srvMaxHosts.rst
 
@@ -1325,7 +1328,7 @@ Miscellaneous Options
          :end-before: // end-builder-srv-max-hosts
 
       SrvServiceName
-      ~~~~~~~~~~~~~~
+      ``````````````
 
       .. include:: /includes/fundamentals/connection-options/srvServiceName.rst
 

@@ -124,7 +124,7 @@ The ``CSharpLegacy``, ``JavaLegacy``, and ``PythonLegacy`` GUID
 representations are all equivalent to ``BsonBinaryData`` subtype 3, but
 use different byte orders.
 
-.. _csharp-guid-query:
+.. _csharp-guid-legacy-construct:
 
 .. note:: Construct Legacy GUIDs
 

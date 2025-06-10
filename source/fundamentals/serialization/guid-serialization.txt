@@ -120,10 +120,26 @@ members and the corresponding ``BsonBinaryData`` subtypes:
    * - ``Unspecified``
      - N/A
 
-.. note::
+The ``CSharpLegacy``, ``JavaLegacy``, and ``PythonLegacy`` GUID
+representations are all equivalent to ``BsonBinaryData`` subtype 3, but
+use different byte orders.
+
+.. _csharp-guid-query:
+
+.. note:: Construct Legacy GUIDs
+
+   To construct legacy (subtype 3) GUID values, you must use the
+   ``BsonBinaryData()`` constructor to explicitly specify the legacy GUID
+   type by passing the ``GuidRepresentation.CSharpLegacy`` parameter. The
+   following code demonstrates how to create a legacy GUID to use in a
+   query filter:
    
-   The ``CSharpLegacy``, ``JavaLegacy``, and ``PythonLegacy`` GUID representations are
-   all equivalent to ``BsonBinaryData`` subtype 3, but use different byte orders.
+   .. code-block:: csharp
+      :emphasize-lines: 2
+   
+      var guid = new Guid("00112233-4455-6677-8899-aabbccddeeff");
+      var legacyGuid = new BsonBinaryData(guid, GuidRepresentation.CSharpLegacy);
+      var filter = new BsonDocument("legacyGuidField", legacyGuid);
 
 The following sections describe the ways in which you can configure GUID representation
 in your application.
@@ -218,35 +234,6 @@ method:
    var objectSerializer = new ObjectSerializer(objectDiscriminatorConvention, GuidRepresentation.Standard);
    BsonSerializer.RegisterSerializer(objectSerializer);
 
-.. _csharp-guid-query:
-
-Query GUIDs
------------
-
-You can query on standard (subtype 4) GUID values by using the
-``BsonValue.Create()`` method. First, create a GUID value by using the
-``Guid()`` constructor. Then, pass the GUID to the
-``BsonValue.Create()`` method to instantiate a ``BsonValue`` to use in
-your query filter, as shown in the following code:
-
-.. code-block:: csharp
-
-   var guid = new Guid("33221100-5544-7766-8899-aabbccddeeff");
-   var filter = new BsonDocument("guidField", BsonValue.Create(guid)); 
-
-To query on legacy (subtype 3) GUID values, you must use the
-``BsonBinaryData()`` constructor to explicitly specify the legacy GUID
-type by passing the ``GuidRepresentation.CSharpLegacy`` parameter. The
-following code demonstrates how to create a legacy GUID to use in a
-query filter:
-
-.. code-block:: csharp
-   :emphasize-lines: 2
-
-   var guid = new Guid("00112233-4455-6677-8899-aabbccddeeff");
-   var legacyGuid = new BsonBinaryData(guid, GuidRepresentation.CSharpLegacy);
-   var filter = new BsonDocument("legacyGuidField", legacyGuid); 
-
 Additional Information
 ----------------------
 
@@ -257,5 +244,4 @@ guide, see the following API documentation:
 - `BsonGuidRepresentation <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Attributes.BsonGuidRepresentationAttribute.html>`__
 - `GuidSerializer <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Serializers.GuidSerializer.html>`__
 - `ObjectSerializer <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Serializers.ObjectSerializer.html>`__
-- `GuidRepresentation
-  <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.GuidRepresentation.html>`__
+- `GuidRepresentation <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.GuidRepresentation.html>`__

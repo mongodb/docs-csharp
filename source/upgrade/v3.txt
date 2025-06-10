@@ -114,7 +114,8 @@ Version 3.0 Breaking Changes
   - The ``BsonBinaryData(Guid)`` constructor has been removed. To
     construct a ``BsonBinaryData`` object from a GUID, use the
     ``BsonBinaryData.Create(Guid, GuidRepresentation)`` constructor. To
-    view an example, see :ref:`csharp-guid-query` in the GUIDs guide.
+    view an example, see the :ref:`Construct Legacy GUIDs
+    <csharp-guid-query>` note in the GUID Serialization guide.
   - The ``BsonBinaryData.GuidRepresentation`` property has been removed.
   - You can call the ``BsonBinaryData.ToGuid()`` method only on ``BsonBinaryData``
     objects of subtype 4. If the object has any other subtype, you must call the

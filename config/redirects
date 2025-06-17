@@ -61,8 +61,8 @@ raw: ${prefix}/master -> ${base}/upcoming/
 [*-master]: ${prefix}/${version}/fundamentals/gridfs/ -> ${base}/${version}/crud/gridfs/
 [*-master]: ${prefix}/${version}/fundamentals/specify-query/ -> ${base}/${version}/crud/query/specify-query/
 [*-master]: ${prefix}/${version}/fundamentals/transactions/ -> ${base}/${version}/crud/transactions/
-[*-master]: ${prefix}/${version}/fundamentals/bson/ -> ${base}/${version}/data-formats/bson/
-[*-master]: ${prefix}/${version}/fundamentals/time-series/ -> ${base}/${version}/data-formats/time-series/
+[*-master]: ${prefix}/${version}/fundamentals/bson/ -> ${base}/${version}/document-formats/bson/
+[*-master]: ${prefix}/${version}/fundamentals/time-series/ -> ${base}/${version}/time-series/
 [*-master]: ${prefix}/${version}/fundamentals/logging/ -> ${base}/${version}/logging-and-monitoring/logging/
 [*-master]: ${prefix}/${version}/fundamentals/monitoring/ -> ${base}/${version}/logging-and-monitoring/monitoring/
 [*-master]: ${prefix}/${version}/fundamentals/database-collection/ -> ${base}/${version}/databases-collections/
@@ -82,10 +82,10 @@ raw: ${prefix}/master -> ${base}/upcoming/
 [*-master]: ${prefix}/${version}/fundamentals/crud/write-operations/update-one/ -> ${base}/${version}/crud/update-one/
 [*-master]: ${prefix}/${version}/fundamentals/crud/write-operations/update-one/arrays/ -> ${base}/${version}/crud/update-one/arrays/
 [*-master]: ${prefix}/${version}/fundamentals/crud/write-operations/update-one/fields/ -> ${base}/${version}/crud/update-one/fields/
-[*-master]: ${prefix}/${version}/fundamentals/serialization/class-mapping/ -> ${base}/${version}/data-formats/custom-types/class-mapping/
-[*-master]: ${prefix}/${version}/fundamentals/serialization/poco/ -> ${base}/${version}/data-formats/custom-types/poco/
-[*-master]: ${prefix}/${version}/fundamentals/serialization/polymorphic-objects/ -> ${base}/${version}/data-formats/custom-types/polymorphic-objects/
-[*-master]: ${prefix}/${version}/fundamentals/serialization/ -> ${base}/${version}/data-formats/custom-types/serialization/
+[*-master]: ${prefix}/${version}/fundamentals/serialization/class-mapping/ -> ${base}/${version}/serialization/class-mapping/
+[*-master]: ${prefix}/${version}/fundamentals/serialization/poco/ -> ${base}/${version}/serialization/poco/
+[*-master]: ${prefix}/${version}/fundamentals/serialization/polymorphic-objects/ -> ${base}/${version}/serialization/polymorphic-objects/
+[*-master]: ${prefix}/${version}/fundamentals/serialization/ -> ${base}/${version}/serialization/
 [*-master]: ${prefix}/${version}/fundamentals/databases-collections/run-command/ -> ${base}/${version}/run-command/
 [*-master]: ${prefix}/${version}/fundamentals/authentication/ -> ${base}/${version}/security/authentication/
 [*-master]: ${prefix}/${version}/fundamentals/authentication/aws-iam/ -> ${base}/${version}/security/authentication/aws-iam/

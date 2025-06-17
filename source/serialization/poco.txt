@@ -27,8 +27,8 @@ features from any framework-specific base classes or interfaces. We recommend
 using POCOs in your {+language+} code to adhere to idiomatic driver usage and
 achieve the best performance.
 
-You should read this guide if you want to learn more about how to use
-POCOs with the {+driver-short+} or if you need to adjust the driver's default
+Read this guide if you want to learn more about how to use
+POCOs with the {+driver-short+} or if you must adjust the driver's default
 field mapping behavior.
 
 Create a POCO
@@ -84,8 +84,7 @@ Custom Serialization
 If the default field mapping behavior does not meet your needs, you can
 specify custom behavior using serialization-related attributes. These
 attributes change the way that the driver serializes each property of
-your POCO. This section describes some of the common
-serialization-related attributes.
+your POCO. This section describes some common serialization-related attributes.
 
 Serialize Read-Only Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -99,8 +99,8 @@ write to a file, perform the following steps:
 #. For each BSON document and subdocument you want to create, call 
    ``WriteStartDocument()``.
 #. Within each BSON document and subdocument, call ``WriteName()`` to set the field
-   name and the appropriate ``Write*`` method to set its value. Each data type has a 
-   dedicated ``Write*`` method that you should use.
+   name and the appropriate ``Write*`` method to set its value. Use the
+   dedicated ``Write*`` method that corresponds to each data type.
 #. To start and end arrays, use ``WriteStartArray()`` and ``WriteEndArray()``.
 #. At the end of each document and subdocument, call ``WriteEndDocument()``. 
 

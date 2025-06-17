@@ -1,8 +1,8 @@
 .. _csharp-connection-options:
 
-==================
-Connection Options
-==================
+==========================
+Specify Connection Options
+==========================
 
 .. facet::
    :name: genre
@@ -18,7 +18,7 @@ Connection Options
    :class: singlecol
 
 .. toctree::
-   :caption: Specify Connection Options 
+   :caption: Specify Connection Options
 
    Compress Network Traffic </connect/connection-options/network-compression>
    Customize Server Selection </connect/connection-options/server-selection>
@@ -27,441 +27,1344 @@ Connection Options
    Connection Pools </connect/connection-options/connection-pools>
    Connect from AWS Lambda <https://www.mongodb.com/docs/atlas/manage-connections-aws-lambda/>
 
-This section describes the MongoDB connection and authentication options
-available in the {+driver-short+}. You can configure your connection using either
-the connection URI or a ``MongoClientSettings`` object.
+Overview
+--------
+
+This page describes the connection options available in the {+driver-short+} and
+explains how to apply them to your MongoDB connection.
+
+How to Specify Connection Options
+---------------------------------
+
+The following sections describe the ways in which you can specify connection options.
 
 .. _csharp-connection-uri:
 
-------------------------
 Using the Connection URI
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you pass a connection URI to the ``MongoClient`` constructor, you can include
 connection options in the string as ``<name>=<value>`` pairs. In the following example,
 the connection URI contains the ``connectTimeoutMS`` option with a value of ``60000``
 and the ``tls`` option with a value of ``true``:
 
-.. literalinclude:: /includes/fundamentals/code-examples/connection/LocalConnectionConfig.cs
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
    :language: csharp
    :dedent:
-   :start-after: // start local connection config
-   :end-before: // end local connection config
+   :start-after: // start-connection-uri
+   :end-before: // end-connection-uri
+
+To learn more about the options that you can specify in a connection URI, see
+:manual:`Connection String Options </reference/connection-string-options>` in the
+{+mdb-server+} manual.
 
 .. _csharp-mongo-client-settings:
 
------------------------------
-Using ``MongoClientSettings``
------------------------------
+Using MongoClientSettings
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use a ``MongoClientSettings`` object to configure connection settings in code
 rather than in a connection URI. Configuring the connection this way makes it easier to
 change settings at runtime, helps you catch errors during compilation, and provides
 more configuration options than the connection URI.
 
-To use a ``MongoClientSettings`` object, create an instance of the class, set
-its properties, and pass it as an argument to the ``MongoClient`` constructor:
+To set connection options in a ``MongoClientSettings`` object, perform the
+following steps:
 
-.. literalinclude:: /includes/fundamentals/code-examples/connection/MongoClientSettingsConfig.cs
+1. Create an instance of the ``MongoClientSettings`` class
+#. Set properties on the instance to configure the connection
+#. Pass the instance to the ``MongoClient`` constructor
+
+The following code example shows how to perform the preceding steps:
+
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
    :language: csharp
    :dedent:
-   :start-after: // start mongo client settings config
-   :end-before: // end mongo client settings config
+   :start-after: // start-mongo-client-settings
+   :end-before: // end-mongo-client-settings
+
+You can also create a ``MongoClientSettings`` object from a connection string by calling the
+``MongoClientSettings.FromConnectionString()`` method and passing the connection string,
+as shown in the following example. This is useful if you already have a connection string
+but want to modify some settings programmatically, or if you must specify settings
+that aren't available in the connection string.
+
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+   :language: csharp
+   :dedent:
+   :start-after: // start-from-connection-string
+   :end-before: // end-from-connection-string
+
+Alternatively, you can create a ``MongoClientSettings`` object from a ``MongoUrl`` object
+by calling the ``MongoClientSettings.FromUrl()`` method and passing the ``MongoUrl``
+object, as shown in the following example. This is useful if you already have a ``MongoUrl``
+object but want to specify settings that aren't available in the ``MongoUrl`` class.
+
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+   :language: csharp
+   :dedent:
+   :start-after: // start-from-url
+   :end-before: // end-from-url
+
+.. _csharp-mongo-url-builder:
+
+Using MongoUrlBuilder
+~~~~~~~~~~~~~~~~~~~~~
+
+You can use a ``MongoUrlBuilder`` object to create and configure connection settings on
+a ``MongoUrl`` object. A ``MongoUrl`` is a strongly typed representation of a
+connection URI, and is useful when reading a connection URI directly from
+another source. Using a ``MongoUrl`` object has many of the same advantages as using
+a ``MongoClientSettings`` object, although the two classes contain different properties
+and methods.
+
+To use a ``MongoUrlBuilder`` object, create an instance of the class and set the
+necessary configuration properties. To create a ``MongoUrl`` object from the
+``MongoUrlBuilder``, call the ``MongoUrlBuilder.ToMongoUrl()`` method. You can pass the
+``MongoUrl`` object to the ``MongoClient`` constructor. The following code example shows
+this process:
+
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+   :language: csharp
+   :dedent: 8
+   :start-after: // start-mongo-url-builder
+   :end-before: // end-mongo-url-builder
 
 Connection Options
 ------------------
 
-The following table lists each connection option available in the
-``MongoClientSettings`` class and, if possible, how to achieve the same result in
-the connection string. If a ``MongoClientSettings`` property maps to more than one
-option in the connection string, the **Connection URI Example** shows all
-relevant options.
+The following sections describe the connection options available in the
+{+driver-short+} and how to specify them by using a ``MongoClientSettings`` or
+``MongoUrlBuilder`` object.
 
-.. note::
+.. _csharp-replica-set-options:
 
-   If you're using a query parameter for a time duration, the value must be in
-   milliseconds. For example, to specify 60 seconds, use the value ``60000``. If you're
-   using a ``MongoClientSettings`` object for a time duration, use the appropriate
-   ``TimeSpan`` value.
+Replica Set Options
+~~~~~~~~~~~~~~~~~~~
 
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
+.. tabs::
 
-   * - **MongoClientSettings** Property
-     - Description
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
 
-   * - **AllowInsecureTls**
-     - | Specifies whether to relax TLS constraints as much as possible. This can include
-       | allowing invalid certificates or hostname mismatches.
-       |
-       | If this property is set to ``true`` and ``SslSettings.CheckCertificateRevocation``
-       | is set to ``false``, the {+driver-short+} will throw an exception.
-       |
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``false``
-       | **Connection URI Example**: ``tlsInsecure=true``
+      DirectConnection
+      ````````````````
 
-   * - **ApplicationName**
-     - | The app name the driver passes to the server in the client metadata as part of
-       | the connection handshake. The server prints this value to the MongoDB logs once
-       | the connection is established. The value is also recorded in the slow query logs
-       | and profile collections.
-       |
-       | **Data Type**: {+string-data-type+}
-       | **Default**: ``null``
-       | **Connection URI Example**: ``appName=yourApp``
+      .. include:: /includes/fundamentals/connection-options/directConnection.rst
 
-   * - **AutoEncryptionOptions**
-     - | Settings for automatic client-side encryption.
-       |
-       | **Data Type**: `AutoEncryptionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Encryption.AutoEncryptionOptions.html>`__
-       | **Default**: ``null``
-       | **Connection URI Example**: {+not-available+}
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-direct-connection
+         :end-before: // end-settings-direct-connection
 
-   * - **ClusterConfigurator**
-     - | Low-level configuration options for sockets, TLS, cluster, and others.
-       |
-       | **Data Type**: Action<`ClusterBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.ClusterBuilder.html>`__>
-       | **Default**: ``null``
-       | **Connection URI Example**: {+not-available+}
+      ReplicaSetName
+      ``````````````
 
-   * - **Compressors**
-     - | The preferred compression types, in order, for wire-protocol messages sent to
-       | or received from the server. The driver uses the first of these compression types
-       | that the server supports.
-       |
-       | **Data Type**: `CompressorConfiguration <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.CompressorConfiguration.html>`__
-       | **Default**: ``null``
-       | **Connection URI Example**: ``compressors=snappy,zstd``
+      .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
 
-   * - **ConnectTimeout**
-     - | The length of time the driver tries to establish a single TCP socket connection
-       | to the server before timing out.
-       |
-       | **DataType**: ``TimeSpan``
-       | **Default**: 30 seconds
-       | **Connection URI Example**: ``connectTimeoutMS=0``
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-replica-set-name
+         :end-before: // end-settings-replica-set-name
 
-   * - **Credential**
-     - | Settings for how the driver authenticates to the server. This includes
-       | authentication credentials, mechanism, source, and other settings.
-       |
-       | If you don't specify an authentication mechanism, the driver uses either
-       | ``SCRAM-SHA-1`` or ``SCRAM-SHA-256``, depending on the server version. See
-       | :ref:`authentication mechanisms <csharp-authentication-mechanisms>` for available
-       | authentication mechanisms.
-       |
-       | **Data Type**: `MongoCredential <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoCredential.html>`__
-       | **Default**: ``null``
-       | **Connection URI Example**:
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
 
-       .. code-block:: none
-          :copyable: false
+      DirectConnection
+      ````````````````
 
-          mongodb://user1:password1&authMechanism=GSSAPI
-          &authMechanismProperties=SERVICE_NAME:other,REALM:otherrealm
-          &authSource=$external
+      .. include:: /includes/fundamentals/connection-options/directConnection.rst
 
-   * - **DirectConnection**
-     - | Specifies whether to force dispatch **all** operations to the host.
-       |
-       | If you specify this option, the driver doesn't accept the
-       | :manual:`DNS seed list connection format. </reference/connection-string/#std-label-connections-dns-seedlist>`
-       | You must use the :manual:`standard connection URI format </reference/connection-string/#standard-connection-string-format/>`
-       | instead.
-       |
-       | This property must be set to ``false`` if you specify more than one
-       | host name.
-       |
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``false``
-       | **Connection URI Example**: ``directConnection=true``
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-direct-connection
+         :end-before: // end-builder-direct-connection
 
-   * - **HeartbeatInterval**
-     - | The interval between regular server-monitoring checks. Must be greater than or
-       | equal to 500 milliseconds.
-       |
-       | **Data Type**: ``TimeSpan``
-       | **Default**: 10 seconds
-       | **Connection URI Example**: ``heartbeatFrequencyMS=5000``
+      ReplicaSetName
+      ``````````````
 
-   * - **HeartbeatTimeout**
-     - | The length of time a monitoring socket can be idle before timing out.
-       |
-       | **Data Type**: ``TimeSpan``
-       | **Default**: Same value as ``ConnectTimeout``
-       | **Connection URI Example**: ``heartbeatTimeoutMS=5000``
+      .. include:: /includes/fundamentals/connection-options/replicaSetName.rst
 
-   * - **IPv6**
-     - | Specifies whether the host address is in IPv6 format.
-       |
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``false``
-       | **Connection URI Example**: ``ipv6=true``
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-replica-set-name
+         :end-before: // end-builder-replica-set-name
 
-   * - **IsFrozen**
-     - | Indicates whether the settings have been frozen. Frozen settings can't be changed.
-       | This option is read-only.
-       |
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``false``
-       | **Connection URI Example**: {+not-available+}
+TLS Options
+~~~~~~~~~~~
 
-   * - **LoadBalanced**
-     - | Specifies whether the driver is connecting to a load balancer. You can set this
-       | property to ``true`` only if:
+.. tabs::
 
-       - You specify just one host name.
-       - You're not connecting to a replica set.
-       - You're not using the ``SrvMaxHosts`` property.
-       - You're not using the ``DirectConnection`` property.
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
 
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``false``
-       | **Connection URI Example**: ``loadBalanced=true``
+      AllowInsecureTls
+      ````````````````
 
-   * - **LocalThreshold**
-     - | The latency window for server eligibility. If a server's round trip takes longer
-       | than the fastest server's round-trip time plus this value, the server isn't
-       | eligible for selection.
-       |
-       | **Data Type**: ``TimeSpan``
-       | **Default**: 15 milliseconds
-       | **Connection URI Example**: ``localThresholdMS=0``
+      .. include:: /includes/fundamentals/connection-options/allowInsecureTls.rst
 
-   * - **LoggingSettings**
-     - | The settings used for :ref:`logging. <csharp-logging>`
-       |
-       | **Data Type**: `LoggingSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.LoggingSettings.html>`__
-       | **Default**: ``null``
-       | **Connection URI Example**: {+not-available+}
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-allow-insecure-tls
+         :end-before: // end-settings-allow-insecure-tls
 
-   * - **MaxConnecting**
-     - | The greatest number of connections a driver's connection pool may be
-       | establishing concurrently.
-       |
-       | **Data Type**: {+int-data-type+}
-       | **Default**: ``2``
-       | **Connection URI Example**: ``maxConnecting=3``
+      SslSettings
+      ```````````
 
-   * - **MaxConnectionIdleTime**
-     - | The length of time a connection can be idle before the driver closes it.
-       |
-       | **Data Type**: ``TimeSpan``
-       | **Default**: 10 minutes
-       | **Connection URI Example**: ``maxIdleTimeMS=300000``
+      TLS/SSL options, including client certificates, revocation handling, and
+      enabled and disabled TLS/SSL protocols. The default value is ``null``.
 
-   * - **MaxConnectionLifeTime**
-     - | The length of time a connection can be pooled before expiring.
-       |
-       | **Data Type**: ``TimeSpan``
-       | **Default**: 30 minutes
-       | **Connection URI Example**: ``maxLifetimeMS=50000``
+      If ``SslSettings.CheckCertificateRevocation`` is set to ``false`` and
+      ``AllowInsecureTls`` is set to ``true``, the {+driver-short+} throws
+      an exception.
 
-   * - **MaxConnectionPoolSize**
-     - | The greatest number of clients or connections the driver can create in its
-       | connection pool. This count includes connections in use.
-       |
-       | **Data Type**: {+int-data-type+}
-       | **Default**: ``100``
-       | **Connection URI Example**: ``maxPoolSize=150``
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-ssl-settings
+         :end-before: // end-settings-ssl-settings
 
-   * - **MinConnectionPoolSize**
-     - | The number of connections the driver should create and keep in the connection
-       | pool even when no operations are occurring. This count includes connections
-       | in use.
-       |
-       | **Data Type**: {+int-data-type+}
-       | **Default**: ``0``
-       | **Connection URI Example**: ``minPoolSize=1``
+      UseTls
+      ``````
 
-   * - **ReadConcern**
-     - | The client's default read concern.
-       | See :ref:`read concern <read-concern>` for more information.
-       |
-       | **Data Type**: `ReadConcern <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadConcern.html>`__
-       | **Default**: ``ReadConcern.Default``
-       | **Connection URI Example**: ``readConcernLevel=local``
+      .. include:: /includes/fundamentals/connection-options/useTls.rst
 
-   * - **ReadEncoding**
-     - | The UTF-8 encoding to use for string deserialization.
-       | Strict encoding will throw an exception when an invalid UTF-8 byte sequence
-       | is encountered.
-       |
-       | **Data Type**: ``UTF8Encoding``
-       | **Default**: Strict encoding
-       | **Connection URI Example**: {+not-available+}
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-use-tls
+         :end-before: // end-settings-use-tls
 
-   * - **ReadPreference**
-     - | The client's default read-preference settings. ``MaxStaleness`` represents the
-       | longest replication lag, in wall-clock time, that a secondary can experience and
-       | still be eligible for server selection. Specifying ``-1`` means no maximum.
-       | See :ref:`read preference <read-preference>` for more information.
-       |
-       | **Data Type**: `ReadPreference <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadPreference.html>`__
-       | **Default**: ``ReadPreference.Primary``
-       | **Connection URI Example**:
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
 
-       .. code-block:: none
-          :copyable: false
+      AllowInsecureTls
+      ````````````````
 
-          readPreference=primaryPreferred
-          &maxStalenessSeconds=90
-          &readPreferenceTags=dc:ny,rack:1
-       
-       | You can include the ``readPreferenceTags`` parameter in the connection URI more
-         than once. If you do, the client treats each instance as a separate tag set.
-         The order of the tags in the URI determines the order for read preference. You can
-         use this parameter only if the read-preference mode is not ``primary``.
+      .. include:: /includes/fundamentals/connection-options/allowInsecureTls.rst
 
-   * - **ReplicaSetName**
-     - | The name of the replica set to connect to.
-       |
-       | **Data Type**: {+string-data-type+}
-       | **Default**: ``null``
-       | **Connection URI Example**: ``replicaSet=yourReplicaSet``
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-allow-insecure-tls
+         :end-before: // end-builder-allow-insecure-tls
 
-   * - **RetryReads**
-     - | Enables retryable reads.
-       |
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``true``
-       | **Connection URI Example**: ``retryReads=false``
+      TlsDisableCertificateRevocationCheck
+      ````````````````````````````````````
 
-   * - **RetryWrites**
-     - | Enables retryable writes.
-       |
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``true``
-       | **Connection URI Example**: ``retryWrites=false``
+      Whether to disable certificate revocation checking during the TLS handshake. The
+      default value is ``false``.
 
-   * - **Scheme**
-     - | Specifies whether to use the standard connection string format (``MongoDB``)
-       | or the DNS seed list format (``MongoDBPlusSrv``).
-       | See :manual:`the MongoDB Manual</reference/connection-string/>` for more
-       | information about connection string formats.
-       |
-       | If the ``DirectConnection`` property is set to ``true`` and you
-       | try to use the DNS seed list format, the {+driver-short+} will throw an
-       | exception.
-       |
-       | **Data Type**: `ConnectionStringScheme <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.ConnectionStringScheme.html>`__
-       | **Default**: ``ConnectionStringScheme.MongoDB``
-       | **Connection URI Example**: ``mongodb+srv://``
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-tls-disable
+         :end-before: // end-builder-tls-disable
 
-   * - **Server**
-     - | The host and port number where MongoDB is running.
-       |
-       | **Data Type**: `MongoServerAddress <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoServerAddress.html>`__
-       | **Default**: ``localhost:27017``
-       | **Connection URI Example**: ``mongodb://sample.host:27017``
+      UseTls
+      ``````
 
-   * - **ServerApi**
-     - | Allows opting into Stable API versioning. See
-       | :manual:`the MongoDB Manual</reference/stable-api>` for more information about
-       | Stable API versioning.
-       |
-       | **Data Type**: `ServerApi <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ServerApi.html>`__
-       | **Default**: ``null``
-       | **Connection URI Example**: {+not-available+}
+      .. include:: /includes/fundamentals/connection-options/useTls.rst
 
-   * - **ServerMonitoringMode**
-     - | Specifies the server monitoring protocol to use. When
-       | this option is set to ``Auto``, the monitoring mode is determined
-       | by the environment in which the driver is running. The driver
-       | uses polling mode in function-as-a-service (FaaS) environments,
-       | such as AWS Lambda, and the streaming mode in other environments.
-       | 
-       | **Data Type**: `ServerMonitoringMode <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Servers.ServerMonitoringMode.html>`__
-       | **Default**: ``Auto``
-       | **Connection URI Example**: ``serverMonitoringMode=poll``
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-use-tls
+         :end-before: // end-builder-use-tls
 
-   * - **Servers**
-     - | The cluster members where MongoDB is running.
-       |
-       | **Data Type**: IEnumerable<`MongoServerAddress <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoServerAddress.html>`__>
-       | **Default**: ``localhost:27017``
-       | **Connection URI Example**: ``mongodb://sample.host1:27017,sample.host2:27017``
+Timeout Options
+~~~~~~~~~~~~~~~
 
-   * - **ServerSelectionTimeout**
-     - | The length of time the driver tries to select a server before timing out.
-       |
-       | **Data Type**: ``TimeSpan``
-       | **Default**: 30 seconds
-       | **Connection URI Example**: ``serverSelectionTimeoutMS=15000``
+.. tabs::
 
-   * - **SocketTimeout**
-     - | The length of time the driver tries to send or receive on a socket before
-       | timing out.
-       |
-       | **Data Type**: ``TimeSpan``
-       | **Default**: OS default
-       | **Connection URI Example**: ``socketTimeoutMS=0``
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
 
-   * - **SrvMaxHosts**
-     - | The greatest number of SRV results to randomly select when initially populating
-       | the seedlist or, during SRV polling, adding new hosts to the topology.
-       |
-       | You can use this property only if the connection-string scheme is set
-       | to ``ConnectionStringScheme.MongoDBPlusSrv``. You cannot use it when connecting
-       | to a replica set.
-       |
-       | **Data Type**: {+int-data-type+}
-       | **Default**: ``0``
-       | **Connection URI Example**: ``srvMaxHosts=3``
+      ConnectTimeout
+      ``````````````
 
-   * - **SslSettings**
-     - | TLS/SSL options, including client certificates, revocation handling, and
-       | enabled and disabled TLS/SSL protocols.
-       |
-       | If ``SslSettings.CheckCertificateRevocation`` is set to ``false`` and
-       | ``AllowInsecureTls`` is set to ``true``, the {+driver-short+} will throw
-       | an exception.
-       |
-       | **Data Type**: `SslSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SslSettings.html>`__
-       | **Default**: ``null``
-       | **Connection URI Example**: ``tlsDisableCertificateRevocationCheck=false``
+      .. include:: /includes/fundamentals/connection-options/connectTimeout.rst
 
-   * - **TranslationOptions**
-     - | Specifies options, such as the {+mdb-server+} version, for translating LINQ
-       | queries to the Query API.
-       |
-       | **Data Type**: `ExpressionTranslationOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ExpressionTranslationOptions.html>`__
-       | **Default**: ``null``
-       | **Connection URI Example**: {+not-available+}
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-connect-timeout
+         :end-before: // end-settings-connect-timeout
 
-   * - **UseTls**
-     - | Specifies whether to require TLS for connections to the server. If you use
-       | a scheme of ``"mongodb+srv"`` or specify other TLS options,
-       | this option defaults to ``true``.
-       |
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``false``
-       | **Connection URI Example**: ``tls=true``
+      SocketTimeout
+      `````````````
 
-   * - **WaitQueueTimeout**
-     - | The length of time the driver tries to check out a connection from a
-       | server's connection pool before timing out.
-       |
-       | **Data Type**: ``TimeSpan``
-       | **Default**: 2 minutes
-       | **Connection URI Example**: ``waitQueueTimeoutMS=0``
+      .. include:: /includes/fundamentals/connection-options/socketTimeout.rst
 
-   * - **WriteConcern**
-     - | The default write-concern settings, including write timeout and
-       | journaling, for the client.
-       | See :ref:`write concern <wc-j>` for more information.
-       |
-       | **Data Type**: `WriteConcern <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.WriteConcern.html>`__
-       | **Default**: ``WriteConcern.Acknowledged``
-       | **Connection URI Example**: ``w=majority&wTimeoutMS=0&journal=true``
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-connect-timeout
+         :end-before: // end-settings-connect-timeout
 
-   * - **WriteEncoding**
-     - | Specifies whether UTF-8 string serialization is strict or lenient. With strict
-       | encoding, the driver will throw an exception when it encounters an invalid
-       | UTF-8 byte sequence.
-       |
-       | **Data Type**: ``UTF8Encoding``
-       | **Default**: Strict encoding
-       | **Connection URI Example**: {+not-available+}
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      ConnectTimeout
+      ``````````````
+
+      .. include:: /includes/fundamentals/connection-options/connectTimeout.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-connect-timeout
+         :end-before: // end-builder-connect-timeout
+
+      SocketTimeout
+      `````````````
+
+      .. include:: /includes/fundamentals/connection-options/socketTimeout.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-socket-timeout
+         :end-before: // end-builder-socket-timeout
+
+Compression Options
+~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      Compressors
+      ```````````
+
+      .. include:: /includes/fundamentals/connection-options/compressors.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-compressors
+         :end-before: // end-settings-compressors
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      Compressors
+      ```````````
+
+      .. include:: /includes/fundamentals/connection-options/compressors.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-compressors
+         :end-before: // end-builder-compressors
+
+Connection Pool Options
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      MaxConnecting
+      `````````````
+
+      .. include:: /includes/fundamentals/connection-options/maxConnecting.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-max-connecting
+         :end-before: // end-settings-max-connecting
+
+      MaxConnectionIdleTime
+      `````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/maxConnectionIdleTime.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-max-connection-idle-time
+         :end-before: // end-settings-max-connection-idle-time
+
+      MaxConnectionLifeTime
+      `````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/maxConnectionLifetime.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-max-connection-life-time
+         :end-before: // end-settings-max-connection-life-time
+
+      MaxConnectionPoolSize
+      `````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/maxConnectionPoolSize.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-max-connection-pool-size
+         :end-before: // end-settings-max-connection-pool-size
+
+      MinConnectionPoolSize
+      `````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/minConnectionPoolSize.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-min-connection-pool-size
+         :end-before: // end-settings-min-connection-pool-size
+
+      WaitQueueTimeout
+      ````````````````
+
+      .. include:: /includes/fundamentals/connection-options/waitQueueTimeout.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-wait-queue-timeout
+         :end-before: // end-settings-wait-queue-timeout
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      MaxConnecting
+      `````````````
+
+      .. include:: /includes/fundamentals/connection-options/maxConnecting.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-max-connecting
+         :end-before: // end-builder-max-connecting
+
+      MaxConnectionIdleTime
+      `````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/maxConnectionIdleTime.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-max-connection-idle-time
+         :end-before: // end-builder-max-connection-idle-time
+
+      MaxConnectionLifeTime
+      `````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/maxConnectionLifetime.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-max-connection-life-time
+         :end-before: // end-builder-max-connection-life-time
+
+      MaxConnectionPoolSize
+      `````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/maxConnectionPoolSize.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-max-connection-pool-size
+         :end-before: // end-builder-max-connection-pool-size
+
+      MinConnectionPoolSize
+      `````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/minConnectionPoolSize.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-min-connection-pool-size
+         :end-before: // end-builder-min-connection-pool-size
+
+      WaitQueueTimeout
+      ````````````````
+
+      .. include:: /includes/fundamentals/connection-options/waitQueueTimeout.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-wait-queue-timeout
+         :end-before: // end-builder-wait-queue-timeout
+
+Write Concern Options
+~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      WriteConcern
+      ````````````
+
+      The default write-concern settings, including write timeout and
+      journaling, for the client. The default value is ``WriteConcern.Acknowledged``.
+      See :manual:`Write Concern <reference/write-concern/>` in the
+      {+mdb-server+} manual for more information.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-write-concern
+         :end-before: // end-settings-write-concern
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      FSync
+      `````
+
+      The FSync component of the write concern. The default value is ``false``. To learn
+      more about the ``fsync`` command, see :manual:`fsync </reference/command/fsync/>`
+      in the {+mdb-server+} manual.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-fsync
+         :end-before: // end-builder-fsync
+
+      Journal
+      ```````
+
+      The ``j`` component of the write concern, which requests acknowledgment that the
+      MongoDB instances have written to the on-disk journal. The default value depends on
+      the value in the ``writeConcernMajorityJournalDefault`` setting. To learn more about the
+      ``j`` option, see :manual:`Write Concern </reference/write-concern/#j-option>`
+      in the {+mdb-server+} manual.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-journal
+         :end-before: // end-builder-journal
+
+      W
+      ``
+
+      The ``w`` component of the write concern, which requests acknowledgment that the write
+      operation has propagated to a specified number of MongoDB instances. The default
+      value is ``"majority"`` or ``1``, depending on the number of arbiters and voting nodes.
+      To learn more about the ``w`` option, see :manual:`Write Concern </reference/write-concern/#std-label-wc-w>`
+      in the {+mdb-server+} manual.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-w
+         :end-before: // end-builder-w
+
+      WTimeout
+      ````````
+
+      The ``wtimeout`` component of the write concern, which specifies a time limit for the
+      write concern. To learn more about the ``wtimeout`` option, see
+      :manual:`Write Concern </reference/write-concern/#wtimeout>`
+      in the {+mdb-server+} manual.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-w-timeout
+         :end-before: // end-builder-w-timeout
+
+Read Concern Options
+~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      ReadConcern
+      ```````````
+
+      The client's read concern. The default value is ``ReadConcern.Default``.
+      For more information, see :manual:`Read Concern </reference/read-concern/>` in the
+      {+mdb-server+} manual.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-read-concern
+         :end-before: // end-settings-read-concern
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      ReadConcernLevel
+      ````````````````
+
+      The client's read concern level. The default value is ``ReadConcern.Local``.
+      For more information, see :ref:`read concern <read-concern>`.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-read-concern-level
+         :end-before: // end-builder-read-concern-level
+
+Read Preference Options
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      ReadPreference
+      ``````````````
+
+      .. include:: /includes/fundamentals/connection-options/readPreference.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-read-preference
+         :end-before: // end-settings-read-preference
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      .. include:: /includes/fundamentals/connection-options/readPreference.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-read-preference
+         :end-before: // end-builder-read-preference
+
+Authentication Options
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      Credential
+      ``````````
+
+      Settings for how the driver authenticates to the server. This includes
+      authentication credentials, mechanism, source, and other settings. The default
+      value is ``null``.
+
+      If you don't specify an authentication mechanism, the driver uses either
+      ``SCRAM-SHA-1`` or ``SCRAM-SHA-256``, depending on the server version. See
+      :ref:`Authentication Mechanisms <csharp-authentication-mechanisms>` for available
+      authentication mechanisms.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-credential
+         :end-before: // end-settings-credential
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      AuthenticationMechanism
+      ```````````````````````
+
+      The mechanism that the driver uses to authenticate to {+mdb-server+}.
+      If you don't specify an authentication mechanism, the driver uses either
+      ``SCRAM-SHA-1`` or ``SCRAM-SHA-256``, depending on the server version. See
+      :ref:`authentication mechanisms <csharp-authentication-mechanisms>` for available
+      authentication mechanisms.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-authentication
+         :end-before: // end-builder-authentication
+         :emphasize-lines: 3
+
+      AuthenticationMechanismProperties
+      `````````````````````````````````
+
+      Configuration settings for the authentication mechanism specified in the
+      ``AuthenticationMechanism`` property.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-authentication
+         :end-before: // end-builder-authentication
+         :emphasize-lines: 4-8
+
+      AuthenticationSource
+      ````````````````````
+
+      The source to authenticate the client against.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-authentication
+         :end-before: // end-builder-authentication
+         :emphasize-lines: 9
+
+      Password
+      ````````
+
+      The password to use for authentication.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-username-password
+         :end-before: // end-builder-username-password
+         :emphasize-lines: 4
+
+      Username
+      ````````
+
+      The username to use for authentication.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-username-password
+         :end-before: // end-builder-username-password
+         :emphasize-lines: 3
+
+Server Selection and Discovery Options
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      HeartbeatInterval
+      `````````````````
+
+      .. include:: /includes/fundamentals/connection-options/heartbeatInterval.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-heartbeat-interval
+         :end-before: // end-settings-heartbeat-interval
+
+      HeartbeatTimeout
+      ````````````````
+
+      .. include:: /includes/fundamentals/connection-options/heartbeatTimeout.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-heartbeat-timeout
+         :end-before: // end-settings-heartbeat-timeout
+
+      LocalThreshold
+      ``````````````
+
+      .. include:: /includes/fundamentals/connection-options/localThreshold.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-local-threshold
+         :end-before: // end-settings-local-threshold
+
+      ServerSelectionTimeout
+      ``````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/localThreshold.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-server-selection-timeout
+         :end-before: // end-settings-server-selection-timeout
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      HeartbeatInterval
+      `````````````````
+
+      .. include:: /includes/fundamentals/connection-options/heartbeatInterval.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-heartbeat-interval
+         :end-before: // end-builder-heartbeat-interval
+
+      HeartbeatTimeout
+      ````````````````
+
+      .. include:: /includes/fundamentals/connection-options/heartbeatTimeout.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-heartbeat-timeout
+         :end-before: // end-builder-heartbeat-timeout
+
+      LocalThreshold
+      ``````````````
+
+      .. include:: /includes/fundamentals/connection-options/localThreshold.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-local-threshold
+         :end-before: // end-builder-local-threshold
+
+      ServerSelectionTimeout
+      ``````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/localThreshold.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-server-selection-timeout
+         :end-before: // end-builder-server-selection-timeout
+
+Encoding Options
+~~~~~~~~~~~~~~~~
+
+ReadEncoding
+````````````
+
+The UTF-8 encoding to use for string deserialization. The default value is
+strict encoding, where the driver throws an exception when it encounters an invalid
+UTF-8 byte sequence
+
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+   :language: csharp
+   :copyable: true
+   :dedent: 8
+   :start-after: // start-settings-read-encoding
+   :end-before: // end-settings-read-encoding
+
+WriteEncoding
+`````````````
+
+The UTF-8 encoding to use for string serialization. The default value is
+strict encoding, where the driver throws an exception when it encounters an invalid
+UTF-8 byte sequence
+
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+   :language: csharp
+   :copyable: true
+   :dedent: 8
+   :start-after: // start-settings-write-encoding
+   :end-before: // end-settings-write-encoding
+
+.. note:: MongoClientSettings Only
+
+   The ``ReadEncoding`` and ``WriteEncoding`` properties are available only in the
+   ``MongoClientSettings`` class.
+
+Stable API
+~~~~~~~~~~
+
+ServerApi
+`````````
+
+Allows opting into Stable API versioning. The default value is ``null``. See
+:manual:`Stable API </reference/stable-api>` in the {+mdb-server+} manual for more
+information about Stable API versioning.
+
+.. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+   :language: csharp
+   :copyable: true
+   :dedent: 8
+   :start-after: // start-settings-server-api
+   :end-before: // end-settings-server-api
+
+.. note:: MongoClientSettings Only
+
+   The ``ServerApi`` property is available only in the ``MongoClientSettings`` class.
+
+Retry Options
+~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      RetryReads
+      ``````````
+      
+      .. include:: /includes/fundamentals/connection-options/retryReads.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-retry-reads
+         :end-before: // end-settings-retry-reads
+
+      RetryWrites
+      ```````````
+      
+      .. include:: /includes/fundamentals/connection-options/retryWrites.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-retry-writes
+         :end-before: // end-settings-retry-writes
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      RetryReads
+      ``````````
+      
+      .. include:: /includes/fundamentals/connection-options/retryReads.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-retry-reads
+         :end-before: // end-builder-retry-reads
+
+      RetryWrites
+      ```````````
+
+      .. include:: /includes/fundamentals/connection-options/retryWrites.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-retry-writes
+         :end-before: // end-builder-retry-writes
+
+Miscellaneous Options
+~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClientSettings
+      :tabid: mongo-client-settings
+
+      ApplicationName
+      ```````````````
+
+      .. include:: /includes/fundamentals/connection-options/applicationName.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-application-name
+         :end-before: // end-settings-application-name
+
+      AutoEncryptionOptions
+      `````````````````````
+
+      Settings for automatic client-side encryption. The default value is ``null``. To
+      learn more about client-side encryption, see
+      :ref:`In-Use Encryption <csharp-in-use-encryption>`.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-auto-encryption-options
+         :end-before: // end-settings-auto-encryption-options
+
+      ClusterConfigurator
+      ```````````````````
+
+      Low-level configuration options for sockets, TLS, cluster, and others. The default
+      value is ``null``.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-cluster-configurator
+         :end-before: // end-settings-cluster-configurator
+
+      IPv6
+      ````
+
+      .. include:: /includes/fundamentals/connection-options/ipv6.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-ipv6
+         :end-before: // end-settings-ipv6
+
+      IsFrozen
+      ````````
+
+      A read-only option that indicates whether the settings have been frozen. You can't
+      change frozen settings. The default value is ``false``.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-is-frozen
+         :end-before: // end-settings-is-frozen
+
+      .. tip:: Freeze Settings
+
+         You can freeze the settings on a ``MongoClientSettings`` object by calling its
+         `Freeze() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.Freeze.html>`__
+         method. This prevents any further changes to the settings.
+
+         Alternatively, you can call the `FrozenCopy()
+         <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.FrozenCopy.html>`__
+         method to create a new ``MongoClientSettings`` object with the current settings frozen.
+
+      LibraryInfo
+      ```````````
+
+      The name and version of a custom library built on the {+driver-short+}. The driver
+      sends this information to the server.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-library-info
+         :end-before: // end-settings-library-info
+
+      LoadBalanced
+      ````````````
+
+      .. include:: /includes/fundamentals/connection-options/loadBalanced.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-load-balanced
+         :end-before: // end-settings-load-balanced
+
+      LoggingSettings
+      ```````````````
+
+      The settings used for :ref:`logging. <csharp-logging>` The default value is ``null``.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-logging-settings
+         :end-before: // end-settings-logging-settings
+
+      Scheme
+      ``````
+
+      .. include:: /includes/fundamentals/connection-options/scheme.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-scheme
+         :end-before: // end-settings-scheme
+
+      Server
+      ``````
+
+      .. include:: /includes/fundamentals/connection-options/server.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-server
+         :end-before: // end-settings-server
+
+      ServerMonitoringMode
+      ````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/serverMonitoringMode.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-server-monitoring-mode
+         :end-before: // end-settings-server-monitoring-mode
+
+      Servers
+      ```````
+
+      .. include:: /includes/fundamentals/connection-options/servers.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-servers
+         :end-before: // end-settings-servers
+
+      SrvMaxHosts
+      ```````````
+
+      .. include:: /includes/fundamentals/connection-options/srvMaxHosts.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-srv-max-hosts
+         :end-before: // end-settings-srv-max-hosts
+
+      SrvServiceName
+      ``````````````
+
+      .. include:: /includes/fundamentals/connection-options/srvServiceName.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-srv-service-name
+         :end-before: // end-settings-srv-service-name
+
+      TranslationOptions
+      ``````````````````
+
+      Specifies options, such as the {+mdb-server+} version, for translating LINQ
+      queries to the Query API. The default value is ``null``.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-settings-translation-options
+         :end-before: // end-settings-translation-options
+
+   .. tab:: MongoUrlBuilder
+      :tabid: mongo-url-builder
+
+      ApplicationName
+      ```````````````
+
+      .. include:: /includes/fundamentals/connection-options/applicationName.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-application-name
+         :end-before: // end-builder-application-name
+
+      DatabaseName
+      ````````````
+
+      The name of the database that the client connects to.
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-database-name
+         :end-before: // end-builder-database-name
+
+      IPv6
+      ````
+
+      .. include:: /includes/fundamentals/connection-options/ipv6.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-ipv6
+         :end-before: // end-builder-ipv6
+
+      LoadBalanced
+      ````````````
+
+      .. include:: /includes/fundamentals/connection-options/loadBalanced.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-load-balanced
+         :end-before: // end-builder-load-balanced
+
+      Scheme
+      ``````
+
+      .. include:: /includes/fundamentals/connection-options/scheme.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-scheme
+         :end-before: // end-builder-scheme
+
+      Server
+      ``````
+
+      .. include:: /includes/fundamentals/connection-options/server.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-server
+         :end-before: // end-builder-server
+
+      ServerMonitoringMode
+      ````````````````````
+
+      .. include:: /includes/fundamentals/connection-options/serverMonitoringMode.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-server-monitoring-mode
+         :end-before: // end-builder-server-monitoring-mode
+
+      Servers
+      ```````
+
+      .. include:: /includes/fundamentals/connection-options/servers.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-servers
+         :end-before: // end-builder-servers
+
+      SrvMaxHosts
+      ```````````
+
+      .. include:: /includes/fundamentals/connection-options/srvMaxHosts.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-srv-max-hosts
+         :end-before: // end-builder-srv-max-hosts
+
+      SrvServiceName
+      ``````````````
+
+      .. include:: /includes/fundamentals/connection-options/srvServiceName.rst
+
+      .. literalinclude:: /includes/fundamentals/code-examples/connection/ConnectionOptions.cs
+         :language: csharp
+         :copyable: true
+         :dedent: 8
+         :start-after: // start-builder-srv-service-name
+         :end-before: // end-builder-srv-service-name
+
+Additional Information
+----------------------
+
+For more information about the types used on this page, see the
+following API documentation:
+
+- `MongoClientSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoClientSettings.html>`__
+- `MongoUrl <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoUrl.html>`__
+- `MongoUrlBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoUrlBuilder.html>`__
+- `AutoEncryptionOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AutoEncryptionOptions.html>`__
+- `ClusterDescriptionChangedEvent <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Events.ClusterDescriptionChangedEvent.html>`__
+- `ClusterOpenedEvent <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Events.ClusterOpenedEvent.html>`__
+- `CollectionNamespace <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CollectionNamespace.html>`__
+- `CompressorConfiguration <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.CompressorConfiguration.html>`__
+- `CompressorType <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Compression.CompressorType.html>`__
+- `ConnectionStringScheme <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.ConnectionStringScheme.html>`__
+- `ExpressionTranslationOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ExpressionTranslationOptions.html>`__
+- `LoggingSettings <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Core.Configuration.LoggingSettings.html>`__
+- `MongoCredential <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Credential.html>`__
+- `MongoServerAddress <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.MongoServerAddress.html>`__
+- `ReadConcern <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadConcern.html>`__
+- `ReadConcernLevel <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadConcernLevel.html>`__
+- `ReadPreference <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReadPreference.html>`__
+- `ServerApi <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ServerApi.html>`__
+- `WriteConcern <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.WriteConcern.html>`__

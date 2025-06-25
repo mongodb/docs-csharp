@@ -12,6 +12,7 @@ toc_landing_pages = [
 ]
 name = "csharp"
 title = "C#/.NET Driver"
+eol = true
 
 intersphinx = [
     "https://www.mongodb.com/docs/manual/objects.inv",
@@ -47,3 +48,10 @@ not-available = "N/A"
 analyzer = "MongoDB C# Analyzer"
 analyzer-short = "C# Analyzer"
 query-api = "MongoDB Query API"
+
+[[banners]]
+targets = ["*"]
+variant = "info"
+value = """\
+    This version of the documentation is archived and no longer supported. View the `current documentation <https://www.mongodb.com/docs/drivers/csharp/current/>`__ to learn how to `upgrade your version of the {+driver-short+} <https://www.mongodb.com/docs/drivers/csharp/current/upgrade/>`__.\
+    """

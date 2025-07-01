@@ -528,7 +528,7 @@ their related reference and API documentation.
    * - | **Project Document Fields When Retrieving Them**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.html>`__
-       | :ref:`Fundamentals <csharp-builders-projection>`
+       | :ref:`Fundamentals <csharp-project>`
 
      - .. io-code-block::
           :copyable: true

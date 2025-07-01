@@ -674,7 +674,7 @@ serialization-related attributes:
 - ``[BsonDateTimeOptions(DateOnly = true)]``, which specifies that the ``DateTime`` property
   represents only a date value, with no associated time
 
-.. literalinclude:: ../../includes/fundamentals/code-examples/Clothing.cs
+.. literalinclude:: /includes/fundamentals/code-examples/Clothing.cs
    :start-after: start-model
    :end-before: end-model
    :language:  csharp

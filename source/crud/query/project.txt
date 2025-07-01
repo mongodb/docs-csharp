@@ -13,7 +13,7 @@ Specify Fields To Return
 .. facet::
    :name: genre
    :values: reference
- 
+
 .. meta::
    :keywords: read, filter, project, select
 
@@ -27,205 +27,484 @@ which fields MongoDB returns from a query.
 Sample Data
 ~~~~~~~~~~~
 
-The examples in this guide use the ``sample_restaurants.restaurants`` collection
+The examples on this page use the ``sample_mflix.movies`` collection
 from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
 free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<csharp-get-started>`.
 
-Projection Types
-----------------
+The following class represents the documents in the ``sample_mflix.movies`` collection:
 
-You can use a projection to specify which fields to include in a return
-document, or to specify which fields to exclude.
-
-When specifying certain fields to include in a projection, all other fields are implicitly
-excluded (except the ``_id`` field, which is included by default). You cannot combine
-inclusion and exclusion statements in a single projection, unless you are excluding the
-``_id`` field.
-
-To remove the ``_id`` field from the returned document, you must
-:ref:`explicitly exclude it <csharp-project-exclude-id>`.
-
-Specify Fields to Include
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To specify the fields to include from the result, chain the ``Project()`` method
-to the ``Find()`` method. When calling the ``Project()`` method, you must pass in the
-projection definition as a parameter. You can construct a projection definition by using
-the ``Builders<T>.Projection.Include()`` method and passing in the field name to include
-as a parameter. This method can be chained to include multiple fields in the projection.
-
-The following example uses the ``Find()`` method to find all restaurants in which the ``name``
-field value is ``"Emerald Pub"``. Then, the code calls the ``Project()``
-method to instruct the find operation to include the ``name`` and ``cuisine`` fields
-in the result:
-
-.. io-code-block::
-   :copyable: true
-
-   .. input:: /includes/fundamentals/code-examples/Project.cs
-      :start-after: start-project-include
-      :end-before: end-project-include
-      :language: csharp
-      :dedent:
-
-   .. output::
-      :visible: false
-
-      { "_id" : ObjectId("..."), "cuisine" : "American", "name" : "Emerald Pub" }
-      { "_id" : ObjectId("..."), "cuisine" : "American", "name" : "Emerald Pub" }
-
-.. _csharp-project-exclude-id:
-
-Exclude the ``_id`` Field
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-When specifying fields to include, you can also exclude the ``_id`` field from
-the returned document.
-
-The following example runs the same query as the preceding example, but
-excludes the ``_id`` field from the projection:
-
-.. io-code-block::
-   :copyable: true
-
-   .. input:: /includes/fundamentals/code-examples/Project.cs
-      :start-after: start-project-include-without-id
-      :end-before: end-project-include-without-id
-      :language: csharp
-      :dedent:
-
-   .. output::
-      :visible: false
-
-      { "cuisine" : "American", "name" : "Emerald Pub" }
-      { "cuisine" : "American", "name" : "Emerald Pub" }
-
-Specify Fields to Exclude
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To specify the fields to exclude from the result, chain the ``Project()`` method
-to the ``Find()`` method. You can exclude fields in your projection by using
-the ``Builders<T>.Projection.Exclude()`` method and passing in the field name to exclude
-as a parameter. This method can be chained to exclude multiple fields in the projection.
-
-The following example uses the ``Find()`` method to find all restaurants in which the ``name``
-field value is ``"Emerald Pub"``. It then uses a projection to exclude the ``cuisine``
-field from the returned documents:
-
-.. io-code-block::
-   :copyable: true
-
-   .. input:: /includes/fundamentals/code-examples/Project.cs
-      :start-after: start-project-exclude
-      :end-before: end-project-exclude
-      :language: csharp
-      :dedent:
-
-   .. output::
-      :visible: false
-
-      { "_id" : ObjectId("..."), "address" : { "building" : "308", "coord" : [-74.008493599999994, 40.725807199999998], "street" : "Spring Street", "zipcode" : "10013" }, "borough" : "Manhattan", "grades" : [{ "date" : ISODate("2014-02-24T00:00:00Z"), "grade" : "A", "score" : 5 }, { "date" : ISODate("2013-08-26T00:00:00Z"), "grade" : "A", "score" : 13 }, { "date" : ISODate("2013-03-04T00:00:00Z"), "grade" : "A", "score" : 12 }, { "date" : ISODate("2012-06-25T00:00:00Z"), "grade" : "A", "score" : 10 }, { "date" : ISODate("2011-12-23T00:00:00Z"), "grade" : "A", "score" : 10 }, { "date" : ISODate("2011-07-26T00:00:00Z"), "grade" : "C", "score" : 32 }], "name" : "Emerald Pub", "restaurant_id" : "40367329" }
-      { "_id" : ObjectId("..."), "address" : { "building" : "18301", "coord" : [-73.791184999999999, 40.740119999999997], "street" : "Horace Harding Expressway", "zipcode" : "11365" }, "borough" : "Queens", "grades" : [{ "date" : ISODate("2014-05-07T00:00:00Z"), "grade" : "A", "score" : 12 }, { "date" : ISODate("2013-04-30T00:00:00Z"), "grade" : "A", "score" : 9 }, { "date" : ISODate("2012-03-01T00:00:00Z"), "grade" : "A", "score" : 13 }], "name" : "Emerald Pub", "restaurant_id" : "40668598" }
-
-Additional Information
-----------------------
-
-To learn more about projections, see the :manual:`Project Fields guide
-</tutorial/project-fields-from-query-results/>` in the {+mdb-server+} manual.
-
-API Documentation
-~~~~~~~~~~~~~~~~~
-
-To learn more about any of the functions or types discussed in this
-guide, see the following API Documentation:
-
-- `Find() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.Find.html>`_
-- `Projection <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders-1.Projection.html>`_
-- `Include() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.Include.html>`_
-- `Exclude() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.Exclude.html>`_
-
-.. TODO: integrate into existing page
-
-Sample Class
-------------
-
-The code examples in this guide demonstrate how you can use builders to
-create types to interact with documents in the sample collection ``plants.flowers``.
-Documents in this collection are modeled by the following ``Flower`` class:
-
-.. literalinclude:: /includes/fundamentals/code-examples/builders.cs
+.. literalinclude:: /includes/code-examples/projection/Movie.cs
    :language: csharp
-   :dedent:
-   :start-after: start-model
-   :end-before: end-model
 
-Each builder class takes a generic type parameter
-``TDocument`` which represents the type of document that you are working
-with. In this guide, the ``Flower`` class is the document type used in
-each builder class example.
+.. note:: ConventionPack for Pascal Case
+   
+   The properties in the preceding class are named in Pascal case, but the
+   field names in the MongoDB collection use camel case. To account for this difference,
+   you can use the following code to register a ``ConventionPack`` when your
+   application starts:
 
-.. _csharp-builders-projection:
+   .. code-block:: csharp
+
+      var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
+      ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
+
+.. _csharp-projection-methods:
 
 Create a Projection
 -------------------
 
-The ``ProjectionDefinitionBuilder`` class provides a type-safe interface for
-defining a projection. Suppose you want to create a projection on the
-``Name`` and ``Price`` fields, but exclude the ``Id`` field.
+To create a projection, perform the following steps:
 
-Use builders to create the projection definition with the typed variant:
+1. Use the ``Builders<TDocument>.Projection`` static property to create a
+   ``ProjectionDefinitionBuilder<TDocument>`` object, where ``TDocument`` represents the
+   C# class that the collection's documents map to. The ``ProjectionDefinitionBuilder`` class
+   provides a type-safe interface for defining a projection.
 
-.. code-block:: csharp
-   :copyable: true
+#. Chain projection methods from the ``ProjectionDefinitionBuilder<TDocument>``
+   object to specify which fields to include or exclude from the returned documents.
 
-   var builder = Builders<Flower>.Projection;
-   var projection = builder.Include(f => f.Name).Include(f => f.Price).Exclude(f => f.Id);
+#. Store the resulting ``ProjectionDefinition<TDocument>`` object in a variable.
 
-You can also use string-based field names to define the projection:
+#. Pass the variable to the ``Project()`` method after performing the find or aggregation
+   operation.
 
-.. code-block:: csharp
-   :copyable: true
+The following sections describe the methods that you can chain from your
+``ProjectionDefinitionBuilder<TDocument>`` object.
 
-   var builder = Builders<Flower>.Projection;
-   var projection = builder.Include("Name").Include("Price").Exclude("Id");
+Field Projection Methods
+------------------------
 
-Finally, you can use the ``Expression()`` method to define the
-projection:
+The following methods let you specify which fields to include or exclude from the returned
+documents.
 
-.. code-block:: csharp
-   :copyable: true
+ElemMatch
+~~~~~~~~~
 
-   var builder = Builders<Flower>.Projection;
-   var projection = builder.Expression(f => new { Name = f.Name, Price = f.Price });
+The ``ElemMatch()`` method limits the contents of an array field from the query results to
+contain only the first element matching a specified condition. This is equivalent to projecting
+an array element by using the ``$elemMatch`` operator in the {+query-api+}.
 
-This definition has a return type of ``ProjectionDefinition<TDocument,
-TProjection>`` whereas the others return a
-``ProjectionDefinition<TDocument>``.
+For a code example that uses the ``ElemMatch()`` method, see
+:manual:`$elemMatch </reference/operator/projection/elemMatch/>`
+in the {+mdb-server+} manual.
 
-Lambda Expressions
-~~~~~~~~~~~~~~~~~~
+Expression
+~~~~~~~~~~
 
-The driver supports using lambda expressions to render projections. When
-you define a ``Find()`` projection with the ``Expression()`` method to
-create a lambda expression, the driver inspects the expression
-to determine which fields are referenced and automatically constructs a
-server-side projection to return only those fields.
+The ``Expression()`` method lets you specify the structure of the returned documents
+by using a lambda expression. This is equivalent to specifying the structure of the
+returned documents in the ``$project`` aggregation stage in the {+query-api+}.
 
-You can also use lambda expressions to create new fields by performing
-operations on values in your documents. The following example shows how
-you can use a lambda expression to project a new ``Profit`` field
-using the ``Price`` and ``Stock`` fields:
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<Flower>.Projection;
-   var projection = builder.Expression(f => new { Profit = f.Price * f.Stock });
+For a code example that uses the ``Expression()`` method, see
+:manual:`$project </reference/operator/aggregation/project/>` in the {+mdb-server+} manual.
 
 .. note:: ``Id`` Field Exclusion
 
-   When you create a projection using a lambda expression, the output
+   When you use a lambda expression to create a projection, the output
    automatically excludes the ``Id`` field unless you explicitly include
-   is as a projection field.
+   it.
 
+Exclude
+~~~~~~~
+
+The ``Exclude()`` method lets you specify a field to exclude from the returned documents.
+This is equivalent to excluding a field in the ``$project`` aggregation stage in the
+{+query-api+}. You cannot combine inclusion and exclusion statements in a single
+projection unless you are excluding the ``_id`` field.
+
+For a code example that uses the ``Exclude()`` method, see
+:manual:`$project </reference/operator/aggregation/project/>` in the {+mdb-server+} manual.
+
+.. note:: Explicitly Exclude ``_id`` Field
+
+   Returned documents include the ``_id`` field unless you explicitly exclude it. The
+   only exception to this is when you use the ``Expression()`` method to create a
+   projection.
+
+Include
+~~~~~~~
+
+The ``Include()`` method lets you specify a field to include in the returned documents.
+This is equivalent to including a field in the ``$project`` aggregation stage in the
+{+query-api+}.
+
+For a code example that uses the ``Include()`` method, see
+:manual:`$project </reference/operator/aggregation/project/>` in the {+mdb-server+} manual.
+
+Slice
+~~~~~
+
+The ``Slice()`` method specifies the number of elements of a list or array to return in the query
+result field. This is equivalent to using the ``$slice`` operator in the {+query-api+}.
+
+The following code example uses the ``Slice()`` method to return the first three elements
+of the ``Cast`` list in the returned document's ``cast`` array:
+
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/SliceExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start first three
+      :end-before: // end first three
+
+   .. output::
+      :visible: false
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a1398f29313caabceb500"
+        },
+        "title": "Back to the Future Part II",
+        "cast": [
+          "Michael J. Fox",
+          "Christopher Lloyd",
+          "Lea Thompson"
+        ]
+      }
+
+To return elements from the end of a collection, pass a negative integer to the ``Slice()``
+method. The following code example returns the last three elements of the ``Cast`` list in
+the returned document's ``cast`` array:
+
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/SliceExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start last three
+      :end-before: // end last three
+
+   .. output::
+      :visible: false
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a1398f29313caabceb500"
+        },
+        "title": "Back to the Future Part II",
+        "cast": [
+          "Lea Thompson",
+          "Thomas F. Wilson"
+        ]
+      }
+
+To skip a specified number of elements in a collection, pass the number of elements to skip
+as the first parameter and the number of elements to return as the second
+parameter. The following code example skips the first element in the
+``Cast`` list and returns the next three elements in the ``cast`` array:
+
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/SliceExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start skip first limit three
+      :end-before: // end skip first limit three
+
+   .. output::
+      :visible: false
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a1398f29313caabceb500"
+        },
+        "title": "Back to the Future Part II",
+        "cast": [
+          "Christopher Lloyd",
+          "Lea Thompson",
+          "Thomas F. Wilson"
+        ]
+      }
+
+To learn more about the ``$slice`` operator, see
+:manual:`$slice </reference/operator/projection/slice/>` in the {+mdb-server+} manual.
+
+Metadata Projection Methods
+---------------------------
+
+The following methods let you specify which metadata fields to include or exclude
+from the returned documents. Metadata fields are hidden by default.
+
+Meta
+~~~~
+
+The ``Meta()`` method lets you specify a metadata field to include in the returned
+documents. This is equivalent to including a metadata field by using the
+:manual:`$meta </reference/operator/aggregation/meta/>` operator in the {+query-api+}.
+
+The following code example adds the ``textScore`` metadata field to the returned
+documents as a field named ``score``:
+
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/MetaExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start meta
+      :end-before: // end meta
+
+   .. output::
+      :visible: false
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "..."
+        },
+        "plot": "...",
+        "title": "...",
+        "score": "..."
+      }
+
+MetaSearchHighlights
+~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/project/atlas-only-note.rst
+
+The ``MetaSearchHighlights()`` includes search highlights
+in the returned documents. This is equivalent to projecting search highlights
+by using a ``{ "$meta": "searchHighlights" }`` object in the {+query-api+}.
+To retrieve search highlights, you must create a ``SearchHighlightOptions`` object that
+specifies the search field, and then pass this object to the ``Search()`` method.
+
+The following code example retrieves search highlights for the ``plot`` field, then
+includes these highlights in a property named ``Highlights`` in the returned documents:
+
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/MetaExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start metaSearchHighlights
+      :end-before: // end metaSearchHighlights
+
+   .. output::
+      :visible: false
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a13def29313caabdb5661"
+        },
+        "plot": "She Can See Her Future, But Can't Escape Her Past.",
+        "title": "West",
+        "highlights": [
+          {
+            "score": 1.286744475364685,
+            "path": "plot",
+            "texts": [
+              {
+                "value": "She Can See Her ",
+                "type": "text"
+              },
+              {
+                "value": "Future",
+                "type": "hit"
+              },
+              {
+                "value": ", But Can't Escape Her Past.",
+                "type": "text"
+              }
+            ]
+          }
+        ]
+      }
+
+To learn more about search highlights, see
+:atlas:`Highlight Search Terms in Results </atlas-search/highlighting/>`
+in the Atlas documentation.
+
+MetaSearchScore
+~~~~~~~~~~~~~~~
+
+.. include:: /includes/project/atlas-only-note.rst
+
+The ``MetaSearchScore()`` method includes search scores in the returned
+documents. This is equivalent to projecting search scores
+by using a ``{ "$meta": "searchScore" }`` object in the {+query-api+}.
+
+The following code example projects each document's search score in a field named
+``score``:
+
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/MetaExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start metaSearchScore
+      :end-before: // end metaSearchScore
+
+   .. output::
+      :visible: false
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a13def29313caabdb5661"
+        },
+        "plot": "She Can See Her Future, But Can't Escape Her Past.",
+        "title": "West",
+        "score": 2.8259084224700928
+      }
+
+To learn more about search scores, see
+:atlas:`Score the Documents in the Returned Documents </atlas-search/scoring/>`.
+
+MetaSearchScoreDetails
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/project/atlas-only-note.rst
+
+The ``MetaSearchScoreDetails()`` includes details about the search scores
+in the returned documents. This is equivalent to projecting search score details
+by using a ``{ "$meta": "searchScoreDetails" }`` object in the {+query-api+}.
+
+To retrieve score details, create a ``SearchOptions`` object with its
+``ScoreDetails`` property set to ``true``, and then pass this object to the ``Search()`` method.
+The following code example shows this process by projecting each document's search score
+details in a field named ``searchScoreDetails``:
+
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/MetaExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start metaSearchScoreDetails
+      :end-before: // end metaSearchScoreDetails
+
+   .. output::
+      :visible: false
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a13def29313caabdb5661"
+        },
+        ...
+        "scoreDetails": {
+          "value": 2.8259084224700928,
+          "description": "$type:string/plot:future [BM25Similarity], result of:",
+          "details": [
+            {
+              "value": 2.8259084224700928,
+              "description": "score(freq=1.0), computed as boost * idf * tf from:",
+              "details": [
+               ...
+      }
+
+To learn more about search score details, see
+:atlas:`Return the Score Details </atlas/atlas-search/scoring/>`
+in the Atlas documentation.
+
+MetaSearchSequenceToken
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/project/atlas-only-note.rst
+
+The ``MetaSearchSequenceToken()`` method includes a token in the returned documents
+that represents a point in the search sequence. This is equivalent to projecting the search
+sequence token by using a ``{ "$meta": "searchSequenceToken" }`` object in the
+{+query-api+}. You can use this token to perform additional searches before or after the
+specified point.
+
+The following code example projects each document's search sequence token in a property
+named ``PaginationToken``:
+
+.. io-code-block::
+
+   .. input:: /includes/code-examples/projection/MetaExamples.cs
+      :language: csharp
+      :dedent: 8
+      :start-after: // start metaSearchSequenceToken
+      :end-before: // end metaSearchSequenceToken
+
+   .. output::
+      :visible: false
+      :language: json
+
+      {
+        "_id": {
+          "$oid": "573a13def29313caabdb5661"
+        },
+        "plot": "She Can See Her Future, But Can't Escape Her Past.",
+        "title": "West",
+        "paginationToken": "CIeaARWv2zRAIg5aDFc6E97ykxPKq9tWYQ=="
+      }
+
+To learn more about search sequence tokens, see
+:atlas:`Paginate Search Results </atlas-search/paginate-results/>`
+
+MetaTextScore
+~~~~~~~~~~~~~
+
+The ``MetaTextScore()`` method includes the ``$text`` search scores in the returned documents.
+This is equivalent to projecting the text search score by using a
+``{ "$meta": "textScore" }`` object in the {+query-api+}.
+
+For a code example that uses the ``MetaTextScore()`` method, see
+:manual:`$meta </reference/operator/aggregation/meta/>`
+in the {+mdb-server+} manual.
+
+MetaVectorSearchScore
+~~~~~~~~~~~~~~~~~~~~~
+
+.. note:: Atlas Vector Search Only
+
+   This method is available only when projecting the results of an Atlas Vector Search.
+
+The ``MetaVectorSearchScore()`` method includes the Atlas Vector Search scores in the
+returned documents. This is equivalent to projecting the Vector Search score by using a
+``{ "$meta": "vectorSearchScore" }`` object in the {+query-api+}.
+
+For a code example that uses the ``MetaVectorSearchScore()`` method, see
+:ref:`Atlas Vector Search <csharp-atlas-vector-search>`.
+
+To learn more about Atlas Vector Search scores, see
+:atlas:`Score the Documents in the Returned Documents </atlas-search/scoring/>`
+in the Atlas documentation.
+
+SearchMeta
+~~~~~~~~~~
+
+.. include:: /includes/project/atlas-only-note.rst
+
+The ``SearchMeta()`` method includes a metadata results document. The structure of this
+document depends on the type of the results. This is equivalent to projecting the
+metadata results document by using the ``$searchMeta`` aggregation stage or the
+``$$SEARCH_META`` aggregation variable in the {+query-api+}.
+
+For a code example that uses the ``SearchMeta()`` method, see
+:atlas:`How to Use Facets with Atlas Search </atlas-search/tutorial/facet-tutorial/>`
+in the Atlas documentation.
+
+To learn more about ``$searchMeta`` and ``$$SEARCH_META``, see the following Atlas
+documentation:
+
+- :atlas:`$searchMeta </atlas-search/aggregation-stages/searchMeta/>`
+- :atlas:`$search with $$SEARCH_META </atlas-search/facet/#std-label-fts-facet-aggregation-variable>`
+
+API Documentation
+-----------------
+
+To learn more about any of the methods or types discussed in this
+guide, see the following API documentation:
+
+- `Projection <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Builders-1.Projection.html>`_
 - `ProjectionDefinitionBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.html>`__
+- `ElemMatch() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.ElemMatch.html>`__
+- `Exclude() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.Exclude.html>`__
+- `Expression() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.Expression.html>`__
+- `Include() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.Include.html>`__
+- `Meta() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.Meta.html>`__
+- `MetaSearchHighlights <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.MetaSearchHighlights.html>`__
+- `MetaSearchScore() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.MetaSearchScore.html>`__
+- `MetaSearchScoreDetails() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.MetaSearchScoreDetails.html>`__
+- `MetaSearchSequenceToken() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.MetaSearchSequenceToken.html>`__
+- `MetaTextScore() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.MetaTextScore.html>`__
+- `MetaVectorSearchScore() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.MetaVectorSearchScore.html>`__
+- `SearchMeta() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.SearchMeta.html>`__
+- `Slice() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.Slice.html>`__

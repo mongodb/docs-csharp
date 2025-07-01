@@ -36,7 +36,7 @@ The {+driver-short+} automatically translates LINQ queries into
 The examples in this guide use the ``restaurants`` collection
 in the ``sample_restaurants`` database provided in the :atlas:`Atlas sample datasets </sample-data>`.
 To learn how to create a free MongoDB Atlas cluster and load the sample datasets,
-see the :ref:`<csharp-quickstart>`.
+see :ref:`<csharp-get-started>`.
 
 The following ``Restaurant``, ``Address`` and ``GradeEntry`` classes model the
 documents in this collection:
@@ -1025,7 +1025,7 @@ aggregation stages:
 - ``$out``
 
 To learn how to create an aggregation pipeline with the ``$out`` stage by using Builders, see
-the :ref:`<csharp-builders-out>` section.
+:ref:`<csharp-aggregation-stages>`.
 
 Supported Methods
 -----------------

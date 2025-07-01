@@ -38,7 +38,7 @@ The examples in this guide use the following documents in a collection called
 ``guitars``:
 
 .. code-block:: json
- 
+
    { "_id": 1, "make": "Fender", "description": "Classic guitars known for their versatility.", "establishedYear": 1946, "in_stock": true, "rating": 9 }
    { "_id": 2, "make": "Gibson", "description": "Classic guitars known for their rich, full tones.", "establishedYear": 1902, "in_stock": true, "rating": 8 }
    { "_id": 3, "make": "PRS", "description": "High-end guitars known for their quality.", "establishedYear": 1985, "in_stock": true, "rating": 9 }
@@ -75,7 +75,7 @@ Create an Atlas Search Index
 
 Before you can perform a search on an Atlas collection, you must first create an **Atlas
 Search index** on the collection. An Atlas Search index is a data structure that
-categorizes data in a searchable format. 
+categorizes data in a searchable format.
 
 To learn how to create an Atlas Search Index see the
 :atlas:`Create an Atlas Search Index </atlas-search/create-index>` Atlas guide.
@@ -103,7 +103,7 @@ collection using the string "Gib" in the ``make`` field.
    :dedent:
 
 .. note::
-   
+
    If the field you are searching on is indexed by a search index, you must pass the index name to the ``Autocomplete`` call. If a search index does not exist, the default index is used.
 
 The search returns the following document:
@@ -112,7 +112,7 @@ The search returns the following document:
 
     { "_id" : 2, "make" : "Gibson", "description" : "Classic guitars known for their rich, full tones.", "establishedYear" : 1902, "in_stock" : true, "rating" : 8 }
 
-To learn more about the ``autocomplete`` operator, see the :atlas:`autocomplete </atlas-search/autocomplete>` 
+To learn more about the ``autocomplete`` operator, see the :atlas:`autocomplete </atlas-search/autocomplete>`
 Atlas guide.
 
 Compound
@@ -122,7 +122,7 @@ Use the ``Compound()`` method to combine two or more operators into a single
 search.
 
 The following example searches the ``guitars`` collection for any documents
-that match all of the following criteria:
+that match all the following criteria:
 
 - The ``rating`` field exists on the document
 - The ``in_stock`` field is not ``false``
@@ -142,7 +142,7 @@ The search returns the following documents:
    { "_id" : 3, "make" : "PRS", "description" : "...", "establishedYear" : 1985, "in_stock" : true, "rating" : 9 }
    { "_id" : 5, "make" : "Ibanez", "description" : "...", "establishedYear" : 1957, "in_stock" : true, "rating" : 7 }
 
-To learn more about the ``compound`` operator, see the :atlas:`compound </atlas-search/compound>` 
+To learn more about the ``compound`` operator, see the :atlas:`compound </atlas-search/compound>`
 Atlas guide.
 
 EmbeddedDocument
@@ -153,7 +153,7 @@ within a field's array value.
 
 .. note::
 
-   To search on embedded documents, you must create an 
+   To search on embedded documents, you must create an
    ``embeddedDocument`` index on the array field.
 
    To learn how to define an ``embeddedDocument`` index, see
@@ -218,7 +218,7 @@ The search returns the following documents:
    { "_id" : 5, "make" : "Ibanez", "description" : "...", "establishedYear" : 1957, "in_stock" : true, "rating" : 7 }
 
 
-To learn more about the ``equals`` operator, see the :atlas:`equals </atlas-search/equals>` 
+To learn more about the ``equals`` operator, see the :atlas:`equals </atlas-search/equals>`
 Atlas guide.
 
 Exists
@@ -246,8 +246,7 @@ The search returns the following documents:
    { "_id" : 3, "make" : "PRS", "description" : "...", "establishedYear" : 1985, "in_stock" : true, "rating" : 9 }
    { "_id" : 5, "make" : "Ibanez", "description" : "...", "establishedYear" : 1957, "in_stock" : true, "rating" : 7 }
 
-
-To learn more about the ``exists`` operator, see the :atlas:`exists </atlas-search/exists>` 
+To learn more about the ``exists`` operator, see the :atlas:`exists </atlas-search/exists>`
 Atlas guide.
 
 GeoShape
@@ -266,7 +265,7 @@ Consider some documents in the ``guitars`` collection have added an
 follows:
 
 .. code-block:: json
- 
+
    { "_id": 1, "make": "Fender", "description": "...", "establishedYear": 1946, "in_stock": true, "in_stock_location":  { "type": "Point", "coordinates": [ -73.93615, 40.69791 ]}, "rating": 9 }
    { "_id": 2, "make": "Gibson", "description": "...", "establishedYear": 1902, "in_stock": true, "in_stock_location":  { "type": "Point", "coordinates": [ 47.6062, 122.321 ]}, "rating": 8 }
 
@@ -286,7 +285,7 @@ The search returns the following document:
 
    { "_id" : 1, "make" : "Fender", "description" : "...", "establishedYear" : 1946, "in_stock" : true, "in_stock_location" : { "type" : "Point", "coordinates" : ["-73.93615", "40.69791"] }, "rating" : 9 }
 
-To learn more about the ``geoShape`` operator, see the :atlas:`geoShape </atlas-search/geoShape>` 
+To learn more about the ``geoShape`` operator, see the :atlas:`geoShape </atlas-search/geoShape>`
 Atlas guide.
 
 GeoWithin
@@ -312,13 +311,13 @@ Consider some documents in the ``guitars`` collection have added an
 follows:
 
 .. code-block:: json
- 
+
    { "_id": 1, "make": "Fender", "description": "...", "establishedYear": 1946, "in_stock": true, "in_stock_location":  { "type": "Point", "coordinates": [ -73.93615, 40.69791 ]}, "rating": 9 }
    { "_id": 2, "make": "Gibson", "description": "...", "establishedYear": 1902, "in_stock": true, "in_stock_location":  { "type": "Point", "coordinates": [ 47.6062, 122.321 ]}, "rating": 8 }
 
 The following example searches for all documents in which the
 coordinates in the ``in_stock_location`` field falls within a specified
-polygon: 
+polygon:
 
 .. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
    :start-after: // start-geowithin-search
@@ -332,7 +331,7 @@ The search returns the following document:
 
    { "_id" : 1, "make" : "Fender", "description" : "Classic guitars known for their versatility.", "establishedYear" : 1946, "in_stock" : true, "in_stock_location" : { "type" : "Point", "coordinates" : ["-73.93615", "40.69791"] }, "rating" : 9 }
 
-To learn more about the ``geoWithin`` operator, see the :atlas:`geoWithin </atlas-search/geoWithin>` 
+To learn more about the ``geoWithin`` operator, see the :atlas:`geoWithin </atlas-search/geoWithin>`
 Atlas guide.
 
 In
@@ -381,7 +380,7 @@ The search returns the following documents:
    { "_id" : 4, "make" : "Kiesel", "description" : "Quality guitars made only for custom orders.", "establishedYear" : 2015, "in_stock" : false, "rating" : null }
 
 
-To learn more about the ``moreLikeThis`` operator, see the :atlas:`moreLikeThis </atlas-search/morelikethis>` 
+To learn more about the ``moreLikeThis`` operator, see the :atlas:`moreLikeThis </atlas-search/morelikethis>`
 Atlas guide.
 
 Near
@@ -414,7 +413,7 @@ The search returns the following documents:
    { "_id" : 5, "make" : "Ibanez", "description" : "...", "establishedYear" : 1957, "in_stock" : true, "rating" : 7 }
 
 
-To learn more about the ``near`` operator, see the :atlas:`near </atlas-search/near>` 
+To learn more about the ``near`` operator, see the :atlas:`near </atlas-search/near>`
 Atlas guide.
 
 Phrase
@@ -456,7 +455,7 @@ This search returns the following documents:
    { "_id" : 4, "make" : "Kiesel", "description" : "Quality guitars made only for custom orders.", "establishedYear" : 2015, "in_stock" : false, "rating" : null }
    { "_id" : 2, "make" : "Gibson", "description" : "Classic guitars known for their rich, full tones.", "establishedYear" : 1902, "in_stock" : true, "rating" : 8 }
 
-To learn more about the ``phrase`` operator, see the :atlas:`phrase </atlas-search/phrase>` 
+To learn more about the ``phrase`` operator, see the :atlas:`phrase </atlas-search/phrase>`
 Atlas guide.
 
 QueryString
@@ -466,7 +465,7 @@ Use the ``QueryString()`` method to search for documents using a string with
 the following operators and delimiters:
 
 - ``AND``
-- ``OR`` 
+- ``OR``
 - ``NOT``
 - ``()``
 
@@ -490,7 +489,7 @@ The search returns the following documents:
    { "_id" : 3, "make" : "PRS", "description" : "High-end guitars known for their quality.", "establishedYear" : 1985, "in_stock" : true, "rating" : 9 }
    { "_id" : 2, "make" : "Gibson", "description" : "Classic guitars known for their rich, full tones.", "establishedYear" : 1902, "in_stock" : true, "rating" : 8 }
 
-To learn more about the ``queryString`` operator, see the :atlas:`queryString </atlas-search/queryString>` 
+To learn more about the ``queryString`` operator, see the :atlas:`queryString </atlas-search/queryString>`
 Atlas guide.
 
 Range
@@ -516,7 +515,7 @@ The search returns the following results:
    { "_id" : 4, "make" : "Kiesel", "description" : "Quality guitars made only for custom orders.", "establishedYear" : 2015, "in_stock" : false, "rating" : null }
    { "_id" : 6, "make" : "Strandberg", "description" : "Modern guitars known for their headless models.", "establishedYear" : 1982, "in_stock" : false, "rating" : null }
 
-To learn more about the ``range`` operator, see the :atlas:`range </atlas-search/range>` 
+To learn more about the ``range`` operator, see the :atlas:`range </atlas-search/range>`
 Atlas guide.
 
 Regex
@@ -558,7 +557,7 @@ The search returns the following results:
    search results. To learn more, see :atlas:`regex Behavior
    </atlas-search/regex/#behavior>`.
 
-To learn more about the ``regex`` operator, see the :atlas:`regex </atlas-search/regex>` 
+To learn more about the ``regex`` operator, see the :atlas:`regex </atlas-search/regex>`
 Atlas guide.
 
 Span
@@ -593,7 +592,7 @@ Although the document with ``_id: 3`` contains the strings "guitars" and
 "quality", they are separated by more than one word, so the search omits this
 document from the results.
 
-To learn more about the ``span`` operator, see the :atlas:`span </atlas-search/span>` 
+To learn more about the ``span`` operator, see the :atlas:`span </atlas-search/span>`
 Atlas guide.
 
 Text
@@ -624,7 +623,7 @@ The search returns the following document:
    If your search string contains multiple terms, the method also looks for a match
    for each term in the string separately.
 
-To learn more about the ``text`` operator, see the :atlas:`text </atlas-search/text>` 
+To learn more about the ``text`` operator, see the :atlas:`text </atlas-search/text>`
 Atlas guide.
 
 Wildcard
@@ -640,7 +639,7 @@ characters in your search:
 
    * - Character
      - Description
-   
+
    * - ``?``
      - Matches any single character
 
@@ -681,35 +680,5 @@ The search returns the following document:
    search results. To learn more, see :atlas:`wildcard Behavior
    </atlas-search/wildcard/#behavior>`.
 
-To learn more about the ``wildcard`` operator, see the :atlas:`wildcard </atlas-search/wildcard>` 
+To learn more about the ``wildcard`` operator, see the :atlas:`wildcard </atlas-search/wildcard>`
 Atlas guide.
-
-.. TODO: integrate into existing page
-
-Sample Class
-------------
-
-The code examples in this guide demonstrate how you can use builders to
-create types to interact with documents in the sample collection ``plants.flowers``.
-Documents in this collection are modeled by the following ``Flower`` class:
-
-.. literalinclude:: /includes/fundamentals/code-examples/builders.cs
-   :language: csharp
-   :dedent:
-   :start-after: start-model
-   :end-before: end-model
-
-Each builder class takes a generic type parameter
-``TDocument`` which represents the type of document that you are working
-with. In this guide, the ``Flower`` class is the document type used in
-each builder class example.
-
-Build an Atlas Search Query
----------------------------
-
-The ``Search`` class provides a type-safe interface for creating a
-:manual:`$search </reference/operator/aggregation/search/>` 
-pipeline stage. 
-
-To learn how to construct search queries with the ``Search`` class, see
-:ref:`csharp-atlas-search`.

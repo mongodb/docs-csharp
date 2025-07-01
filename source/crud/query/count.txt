@@ -98,7 +98,8 @@ You can set the following properties in a ``CountOptions`` object:
      - Description
 
    * - ``Collation``
-     - | The type of language collation to use when sorting results.  
+     - | The type of language collation to use when sorting results. See the
+         :ref:`<csharp-count-collation>` section of this page for more information. 
        | Default: ``null``
 
    * - ``Hint`` 
@@ -131,6 +132,13 @@ You can set the following properties in a ``CountOptions`` object:
       var filter = Builders<Student>.Filter.Empty;
       CountOptions opts = new CountOptions(){Hint = "_id_"};
       var count = collection.CountDocuments(filter, opts);
+
+.. _csharp-count-collation:
+
+Collation
+~~~~~~~~~
+
+.. include:: /includes/collation.rst
 
 .. _csharp-estimated-count:
 

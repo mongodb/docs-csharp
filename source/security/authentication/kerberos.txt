@@ -1,9 +1,9 @@
 .. _csharp-kerberos:
 .. _csharp-authentication-kerberos:
 
-=================
-Kerberos (GSSAPI)
-=================
+================================
+Kerberos (GSSAPI) Authentication
+================================
 
 .. contents:: On this page
    :local:
@@ -76,7 +76,7 @@ see the corresponding syntax:
    - On Windows, the process owner running the application is the same as the
      user needing authentication.
 
-   - On Linux, the user has initialized their keytab via ``kinit username@REALM.COM``.
+   - On Linux, the user has initialized their keytab by using ``kinit username@REALM.COM``.
   
 Additional Properties
 ~~~~~~~~~~~~~~~~~~~~~

@@ -151,7 +151,7 @@ You can allow insecure TLS in two different ways: using a property on a
 Check Certificate Revocation
 ----------------------------
 
-When an X.509 certificate should no longer be trusted--for example, if its private key
+When an X.509 certificate is no longer trusted--for example, if its private key
 has been compromised--the certificate authority will revoke the certificate. 
 
 By default, the {+driver-short+} doesn't check whether a server's certificate has been
@@ -205,7 +205,7 @@ Windows, macOS, and Linux:
 - :wikipedia:`Online Certificate Status Protocol (OCSP) <Online_Certificate_Status_Protocol>`,
   a common mechanism for checking revocation 
 - :wikipedia:`OCSP stapling <OCSP_stapling>`, a mechanism in which the server 
-  includes a time-stamped OCSP response to the client along with the certificate
+  includes a time-stamped OCSP response to the client with the certificate
 - :wikipedia:`Certificate revocation lists (CRLs), <Certificate_revocation_list>`,
   an alternative to OCSP
 

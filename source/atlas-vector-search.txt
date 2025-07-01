@@ -1,15 +1,15 @@
 .. _csharp-atlas-vector-search:
 
-===================
-Atlas Vector Search
-===================
+================================
+Run an Atlas Vector Search Query
+================================
 
 .. facet::
    :name: genre
    :values: reference
- 
+
 .. meta::
-   :keywords: semantic 
+   :keywords: .NET, search, semantic, AI, RAG
 
 .. contents:: On this page
    :local:
@@ -17,30 +17,164 @@ Atlas Vector Search
    :depth: 2
    :class: singlecol
 
-Sample Class
-------------
+Overview
+--------
 
-The code examples in this guide demonstrate how you can use builders to
-create types to interact with documents in the sample collection ``plants.flowers``.
-Documents in this collection are modeled by the following ``Flower`` class:
+You can use {+avs+} to perform vector search on your data stored in
+Atlas. Vector search allows you to query your data based on semantic meaning
+rather than just keyword matches, which helps you retrieve more relevant search
+results. It enables your AI-powered applications to support use cases such as
+semantic search, hybrid search, and generative search, including
+Retrieval-Augmented Generation (RAG).
 
-.. literalinclude:: /includes/fundamentals/code-examples/builders.cs
+By using Atlas as a vector database, you can seamlessly index vector data along
+with your other data in Atlas. This allows you to filter on fields in your
+collection and perform vector search queries against vector data. You can also
+combine vector search with full-text search queries to return the most relevant
+results for your use case. You can integrate {+avs+} with popular AI
+frameworks and services to easily implement vector search in your applications.
+
+To learn more about {+avs+}, see the :atlas:`{+avs+}
+</atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
+documentation.
+
+Sample Data
+~~~~~~~~~~~
+
+The examples in this guide use the ``sample_mflix.embedded_movies`` collection
+in the ``sample_mflix`` database. To obtain the sample dataset for this collection,
+see :ref:`csharp-get-started`.
+
+The examples in this guide use the following sample class to model documents in the
+``sample_mflix.embedded_movies`` collection:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchQueryExample.cs
    :language: csharp
-   :dedent:
-   :start-after: start-model
-   :end-before: end-model
+   :start-after: start-sample-class
+   :end-before: end-sample-class
 
-Each builder class takes a generic type parameter
-``TDocument`` which represents the type of document that you are working
-with. In this guide, the ``Flower`` class is the document type used in
-each builder class example.
+.. _csharp-supported-vector-types:
 
-Perform an Atlas Vector Search
-------------------------------
+Supported Vector Embedding Types
+--------------------------------
 
-You can use builders to create a ``$vectorSearch`` aggregation pipeline stage to perform an
-approximate nearest neighbor search on a vector in the specified field. Your collection *must*
-have a defined Atlas Vector Search index before you can perform a vector search on your data.
+:atlas:`Vector embeddings
+</atlas-vector-search/vector-search-overview/#std-term-vector-embeddings>`
+are vectors you use to represent your data. These embeddings
+capture meaningful relationships in your data and enable tasks like semantic
+search and retrieval.
+
+The {+driver-short+} supports vector embeddings of several types. The following
+sections describe the supported vector embedding types.
+
+.. _csharp-vector-array-representation:
+
+Array Representations
+~~~~~~~~~~~~~~~~~~~~~
+
+The {+driver-short+} supports the following representations of the array
+type in vector embeddings:
+
+- ``BsonArray``
+- ``Memory``
+- ``ReadOnlyMemory``
+- ``float[]`` and ``double[]``
+
+The following example shows a class with properties of the preceding types:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchExamples.cs
+   :language: csharp
+   :start-after: start-bson-arrays
+   :end-before: end-bson-arrays
+
+.. tip::
+
+   To learn more about using the ``Memory`` and ``ReadOnlyMemory``
+   types, see the :ref:`csharp-array-serialization` section of the
+   Serialization guide.
+
+.. _csharp-binary-vector-representation:
+
+Binary Vector Representations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The {+driver-short+} supports the following binary vector representations in
+vector embeddings:
+
+- ``BinaryVectorFloat32`` (not supported on big-endian architectures)
+- ``BinaryVectorInt8``
+- ``BinaryVectorPackedBit``
+- ``Memory<float>``, ``Memory<byte>``, ``Memory<sbyte>``
+- ``ReadOnlyMemory<float>``, ``ReadOnlyMemory<byte>``, ``ReadOnlyMemory<sbyte>``
+- ``float[]``, ``byte[]``, ``sbyte[]``
+
+.. note::
+
+   You must use the ``BinaryVector`` attribute when specifying binary vector
+   representations of the ``Memory<T>``, ``ReadOnlyMemory<T>``, or array
+   types.
+
+The following example shows a class with properties of the preceding types:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchExamples.cs
+   :language: csharp
+   :start-after: start-binary-vectors
+   :end-before: end-binary-vectors
+
+Binary Vector Data Serialization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can serialize ``Int8`` binary vector typed data as ``byte`` or ``sbyte``.
+You can also serialize ``Float32`` binary vector typed data as ``float``. The
+following example serializes ``Int8`` and ``Float32`` binary vector data:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchExamples.cs
+   :language: csharp
+   :start-after: start-binary-int-float-serialize
+   :end-before: end-binary-int-float-serialize
+
+You can deserialize ``PackedBit`` vector data to a :ref:`binary vector
+represented <csharp-binary-vector-representation>` ``byte`` data type only if the
+vector data has a padding value of ``0``. If the vector data has a padding value not
+equal to ``0``, you can deserialize it only to a ``BsonVectorPackedBit``.
+
+Vector Search Query Example
+---------------------------
+
+You can perform a vector search query by calling the ``VectorSearch()`` method.
+To perform a vector search on a collection, you must first have a collection with a field that contains
+vector data and a vector search index that covers that field.
+
+To learn more about configuring a collection for vector search, see the :atlas:`{+avs+}
+</atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
+documentation.
+
+You can convert ``BinaryVectorFloat32``, ``BinaryVectorInt8``, and
+``BinaryVectorPackedBit`` data to the ``BsonBinaryData`` type to use in a vector
+search query by using the ``ToQueryVector()`` method. The following example
+converts ``BinaryVectorInt8`` into a ``BsonBinaryData`` object:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchExamples.cs
+   :language: csharp
+   :start-after: start-to-query-vector
+   :end-before: end-to-query-vector
+
+You can specify your :ref:`array-represented
+<csharp-vector-array-representation>` vector data as an instance of the
+``QueryVector`` class to use in a vector search query. The following example 
+creates an array of ``ReadOnlyMemory<float>`` values as a ``QueryVector`` object
+to use in a vector search query:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchExamples.cs
+   :language: csharp
+   :start-after: start-array-query-vector
+   :end-before: end-array-query-vector
+   
+Consider the ``embedded_movies`` collection in the ``sample_mflix`` database. You
+can use a ``$vectorSearch`` stage to perform a semantic search on the ``plot_embedding``
+field of the documents in the collection.
+The following sections describe different methods for performing Atlas Vector Search operations
+on this collection.
 
 .. tip::
 
@@ -49,15 +183,20 @@ have a defined Atlas Vector Search index before you can perform a vector search 
    :atlas:`Create an Atlas Vector Search Index </atlas-vector-search/create-index>` in the
    Atlas manual.
 
-Consider the ``embedded_movies`` collection in the ``sample_mflix`` database. You
-can use a ``$vectorSearch`` stage to perform a semantic search on the ``plot_embedding``
-field of the documents in the collection.
+Aggregation Pipeline Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example shows how to use builders to generate an aggregation pipeline to
-perform the following operations:
+This example performs the following steps to run an {+avs+} query on a collection that
+contains vector data and a vector search index on the ``PlotEmbedding`` field:
 
-- Performs a vector search on the Atlas Vector Search index of the ``plot_embedding`` field using vector embeddings for the string ``"time travel"``
-- Fetches the ``Title`` and ``Plot`` fields from documents found in the vector search
+1. Creates an array that contains the :ref:`array-represented
+   <csharp-vector-array-representation>` vector data to search for
+#. Specifies a ``VectorSearchOptions`` object that contains the name of the index
+   and the number of nearest neighbors to use during the search
+#. Creates an aggregation pipeline that uses the ``VectorSearch()`` stage to
+   perform the vector search query and a ``Project()`` stage to display only
+   the ``Title``, ``Plot``, and ``Score`` fields
+#. Prints the results of the query
 
 .. code-block:: csharp
 
@@ -75,25 +214,61 @@ perform the following operations:
    // Builds aggregation pipeline and specifies that the $vectorSearch stage
    // returns 10 results
    var pipeline = new EmptyPipelineDefinition<EmbeddedMovie>()
-      .VectorSearch(m => m.Embedding, vector, 10, options)
+      .VectorSearch(m => m.PlotEmbedding, vector, 10, options)
       .Project(Builders<EmbeddedMovie>.Projection
          .Include(m => m.Title)
-         .Include(m => m.Plot));
+         .Include(m => m.Plot)
+         .MetaVectorSearchScore(m => m.Score);
 
 The results of the preceding example contain the following documents:
 
 .. code-block:: json
 
-   { "_id" : ObjectId("573a13a0f29313caabd04a4f"), "plot" : "A reporter, learning of time travelers visiting 20th century disasters, tries to change the history they know by averting upcoming disasters.", "title" : "Thrill Seekers" }
-   { "_id" : ObjectId("573a13d8f29313caabda6557"), "plot" : "At the age of 21, Tim discovers he can travel in time and change what happens and has happened in his own life. His decision to make his world a better place by getting a girlfriend turns out not to be as easy as you might think.", "title" : "About Time" }
-   { "_id" : ObjectId("573a13a5f29313caabd13b4b"), "plot" : "Hoping to alter the events of the past, a 19th century inventor instead travels 800,000 years into the future, where he finds humankind divided into two warring races.", "title" : "The Time Machine" }
-   { "_id" : ObjectId("573a13aef29313caabd2e2d7"), "plot" : "After using his mother's newly built time machine, Dolf gets stuck involuntary in the year 1212. He ends up in a children's crusade where he confronts his new friends with modern techniques...", "title" : "Crusade in Jeans" }
-   { "_id" : ObjectId("573a1399f29313caabceec0e"), "plot" : "An officer for a security agency that regulates time travel, must fend for his life against a shady politician who has a tie to his past.", "title" : "Timecop" }
-   { "_id" : ObjectId("573a1399f29313caabcee36f"), "plot" : "A time-travel experiment in which a robot probe is sent from the year 2073 to the year 1973 goes terribly wrong thrusting one of the project scientists, a man named Nicholas Sinclair into a...", "title" : "A.P.E.X." }
-   { "_id" : ObjectId("573a13c6f29313caabd715d3"), "plot" : "Agent J travels in time to M.I.B.'s early days in 1969 to stop an alien from assassinating his friend Agent K and changing history.", "title" : "Men in Black 3" }
-   { "_id" : ObjectId("573a13d4f29313caabd98c13"), "plot" : "Bound by a shared destiny, a teen bursting with scientific curiosity and a former boy-genius inventor embark on a mission to unearth the secrets of a place somewhere in time and space that exists in their collective memory.", "title" : "Tomorrowland" }
-   { "_id" : ObjectId("573a13b6f29313caabd477fa"), "plot" : "With the help of his uncle, a man travels to the future to try and bring his girlfriend back to life.", "title" : "Love Story 2050" }
-   { "_id" : ObjectId("573a13e5f29313caabdc40c9"), "plot" : "A dimension-traveling wizard gets stuck in the 21st century because cell-phone radiation interferes with his magic. With his home world on the brink of war, he seeks help from a jaded ...", "title" : "The Portal" }
+   { "_id" : { "$oid" : "573a13a0f29313caabd04a4f" }, "plot" : "A reporter, learning of time travelers visiting 20th century disasters, tries to change the history they know by averting upcoming disasters.", "title" : "Thrill Seekers", "score" : 0.926971435546875 }
+   { "_id" : { "$oid" : "573a13d8f29313caabda6557" }, "plot" : "At the age of 21, Tim discovers he can travel in time and change what happens and has happened in his own life. His decision to make his world a better place by getting a girlfriend turns out not to be as easy as you might think.", "title" : "About Time", "score" : 0. 9267120361328125 }
+   { "_id" : { "$oid" : "573a1399f29313caabceec0e" }, "plot" : "An officer for a security agency that regulates time travel, must fend for his life against a shady politician who has a tie to his past.", "title" : "Timecop", "score" : 0.9235687255859375 }
+   { "_id" : { "$oid" : "573a13a5f29313caabd13b4b" }, "plot" : "Hoping to alter the events of the past, a 19th century inventor instead travels 800,000 years into the future, where he finds humankind divided into two warring races.", "title" : "The Time Machine", "score" : 0.9228668212890625 }
+   { "_id" : { "$oid" : "573a13aef29313caabd2e2d7" }, "plot" : "After using his mother's newly built time machine, Dolf gets stuck involuntary in the year 1212. He ends up in a children's crusade where he confronts his new friends with modern techniques...", "title" : "Crusade in Jeans", "score" : 0.9228515625 }
+   { "_id" : { "$oid" : "573a1399f29313caabcee36f" }, "plot" : "A time-travel experiment in which a robot probe is sent from the year 2073 to the year 1973 goes terribly wrong thrusting one of the project scientists, a man named Nicholas Sinclair into a...", "title" : "A.P.E.X.", "score" : 0.9199066162109375 }
+   { "_id" : { "$oid" : "573a13c6f29313caabd715d3" }, "plot" : "Agent J travels in time to M.I.B.'s early days in 1969 to stop an alien from assassinating his friend Agent K and changing history.", "title" : "Men in Black 3", "score" : 0.919403076171875 }
+   { "_id" : { "$oid" : "573a13d4f29313caabd98c13" }, "plot" : "Bound by a shared destiny, a teen bursting with scientific curiosity and a former boy-genius inventor embark on a mission to unearth the secrets of a place somewhere in time and space that exists in their collective memory.", "title" : "Tomorrowland", "score" : 0.9191131591796875 }
+   { "_id" : { "$oid" : "573a13b6f29313caabd477fa" }, "plot" : "With the help of his uncle, a man travels to the future to try and bring his girlfriend back to life.", "title" : "Love Story 2050", "score" : 0. 917755126953125 }
+   { "_id" : { "$oid" : "573a13b3f29313caabd3ebd4" }, "plot" : "A romantic drama about a Chicago librarian with a gene that causes him to involuntarily time travel, and the complications it creates for his marriage.", "title" : "The Time Traveler's Wife", "score" : 0.9172210693359375 }
 
-To learn more about Atlas Vector Search, see :atlas:`Atlas Vector Search Overview </atlas-vector-search/vector-search-overview/>`
-in the Atlas manual.
+LINQ Example
+~~~~~~~~~~~~
+
+The following code sample performs the same vector search query as the preceding example, but uses
+the LINQ syntax instead of the aggregation pipeline syntax:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-vector-search/VectorSearchQueryExample.cs
+   :language: csharp
+   :start-after: start-linq-example
+   :end-before: end-linq-example
+   :dedent:
+   :emphasize-lines: 2
+
+Additional Information
+----------------------
+
+To learn more about {+avs+}, see the :atlas:`{+avs+}
+</atlas-vector-search/vector-search-overview/>` guide in the MongoDB Atlas
+documentation.
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+To learn more about any of the functions or types discussed in this
+guide, see the following API Documentation:
+
+- `BinaryVectorFloat32 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorFloat32.html>`__
+- `BinaryVectorInt8 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorInt8.html>`__
+- `BinaryVectorPackedBit <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BinaryVectorPackedBit.html>`__
+- `QueryVector <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.QueryVector.html>`__
+- `ToQueryVector() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.BinaryVectorDriverExtensions.ToQueryVector.html>`__
+- `IAggregateFluentExtensions.VectorSearch() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IAggregateFluentExtensions.VectorSearch.html>`__
+- `Aggregate()
+  <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollectionExtensions.Aggregate.html>`__
+- `MongoQueryable.VectorSearch() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Linq.MongoQueryable.VectorSearch.html>`__
+- `PipelineStageDefinitionBuilder.VectorSearch()
+  <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineStageDefinitionBuilder.VectorSearch.html>`__

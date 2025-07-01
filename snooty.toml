@@ -1,7 +1,10 @@
 toc_landing_pages = [
     "/get-started",
     "/connect/connection-options",
-    "/security/authentication"
+    "/security/authentication",
+    "/aggregation",
+    "/aggregation/stages",
+    "/serialization"
 ]
 name = "csharp"
 title = "C#/.NET"
@@ -41,3 +44,4 @@ not-available = "N/A"
 analyzer = "MongoDB C# Analyzer"
 analyzer-short = "C# Analyzer"
 query-api = "MongoDB Query API"
+avs = "Atlas Vector Search"

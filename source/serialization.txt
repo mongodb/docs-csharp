@@ -16,7 +16,15 @@ Serialization
    :backlinks: none
    :depth: 2
    :class: singlecol
-   
+
+.. toctree::
+   :caption: Custom Types
+
+   Class Mapping </serialization/class-mapping>
+   POCOs </serialization/poco>
+   Polymorphic Objects </serialization/polymorphic-objects>
+   GUIDs </serialization/guids>
+
 Overview
 --------
 
@@ -53,8 +61,8 @@ you can pass in a delegate of type ``Func<Type, bool>``. This delegate
 accepts an object type and returns a boolean value indicating whether the
 type is safe for serialization.
 
-In most cases, you should pass in the ``ObjectSerializer.DefaultAllowedTypes()``
-delegate. This method returns true for a number of well-known
+In most cases, pass in the ``ObjectSerializer.DefaultAllowedTypes()``
+delegate. This method returns true for several well-known
 framework types that we have deemed safe. To serialize custom types,
 create a boolean expression that evaluates to ``true`` for the
 types you want to include. Then, add this expression to the end of the 
@@ -81,7 +89,7 @@ as shown in the following example:
        || type.FullName.StartsWith("<>f__AnonymousType"));
    BsonSerializer.RegisterSerializer(objectSerializer);
 
-You should create and register your ``ObjectSerializer`` at the start of your program,
+Create and register your ``ObjectSerializer`` at the start of your program,
 before doing anything else.
 
 Serializer Registry
@@ -175,6 +183,71 @@ Implementing the `IBsonArraySerializer
 <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.IBsonArraySerializer.html>`__
 interface enables the driver to access serialization information for individual
 items in an array.
+
+.. _csharp-array-serialization:
+
+Improve Array Serialization Performance
+---------------------------------------
+
+You can improve your application's performance by representing
+arrays of primitives as `Memory<T> <https://learn.microsoft.com/en-us/dotnet/api/system.memory-1?view=net-8.0>`__
+and `ReadOnlyMemory<T> <https://learn.microsoft.com/en-us/dotnet/api/system.readonlymemory-1?view=net-8.0>`__
+structs instead of by using types such as standard {+language+} arrays or
+``BsonArray`` objects. The driver implements fast serialization and
+deserialization paths for ``Memory<T>`` and ``ReadOnlyMemory<T>``, which
+enhances speed and reduces memory usage.
+
+.. note::
+
+   Truncation and overflow checks are not supported for ``Memory<T>`` or
+   ``ReadOnlyMemory<T>``, but these checks are implemented for standard
+   arrays.
+
+You can effect these performance improvements by storing the following
+primitive types in ``Memory<T>`` or ``ReadOnlyMemory<T>`` structs:
+
+- ``bool``
+- ``sbyte``
+- ``byte``
+- ``char``
+- ``short``
+- ``ushort``
+- ``int``
+- ``uint``
+- ``long``
+- ``ulong``
+- ``float``
+- ``double``
+- ``decimal``
+
+The following example defines a ``Line`` POCO that contains array fields
+modeled by ``Memory`` and ``ReadOnlyMemory`` structs:
+
+.. literalinclude:: /includes/fundamentals/code-examples/MemorySerialization.cs
+   :start-after: start-line-class
+   :end-before: end-line-class
+   :language: csharp
+   :dedent:
+
+The following document represents how a sample ``Line`` object is
+represented in MongoDB:
+
+.. code-block:: json
+
+   {
+     "_id": ...,
+     "X": [ 1, 2, 3, 4, 5 ],
+     "Y": [ 1, 1.409999966621399, 1.7300000190734863, 2, 2.240000009536743 ]
+   }
+
+.. tip:: Model Vectors
+
+   :ref:`csharp-atlas-vector-search` involves creating and querying
+   large numerical arrays. If your application uses
+   {+avs+}, you might benefit from the performance
+   improvements from using ``Memory`` and ``ReadOnlyMemory`` to store
+   array representations of embeddings and query vectors. To learn more,
+   see :ref:`csharp-supported-vector-types` in the {+avs+} guide.
 
 Additional Information
 ----------------------

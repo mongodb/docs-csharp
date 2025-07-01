@@ -1,8 +1,8 @@
 .. _csharp-indexes:
 
-=======
-Indexes
-=======
+=========================
+Create and Manage Indexes
+=========================
 
 .. facet::
    :name: genre
@@ -70,12 +70,23 @@ Index Types
 -----------
 
 MongoDB provides several different index types to support querying
-your data. The following sections describe the most common index types
+your data. The following steps describe the process for creating an index:
+
+1. Use the ``IndexKeysDefinitionBuilder<TDocument>`` class, which you can access through the
+   ``Builders<TDocument>.IndexKeys`` property, to create one or more
+   ``IndexKeysDefinition<TDocument>`` objects. These key definitions describe the type
+   of index to create and the index's other properties.
+#. Create a new ``CreateIndexModel<TDocument>`` object. Pass the key definitions from the
+   previous step to the constructor.
+#. Call the ``CreateOne()`` method on your collection's ``Indexes`` property. Pass
+   the ``CreateIndexModel<TDocument>`` object from the previous step.
+
+The following sections describe the most common index types
 and provide sample code for creating each index type.
 
 .. note::
   
-  These example uses the ``sample_mflix.movies`` and ``sample_mflix.theaters`` collections
+  The examples on this page use the ``sample_mflix.movies`` and ``sample_mflix.theaters`` collections
   from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
   free MongoDB Atlas cluster and load the sample datasets, see :ref:`csharp-get-started`.
 
@@ -174,8 +185,7 @@ Clustered Indexes
 To create a clustered index, specify the clustered index
 option with the ``_id`` field as the key and the ``Unique`` property as
 ``true`` when you create your collection. A collection can only contain a single clustered
-index. If you want to create a clustered index, then it must be specified when you create
-a collection.
+index. To create a clustered index, specify it when you create a collection.
 
 The following example creates a clustered index on the ``_id`` field while creating a new
 ``sample_mflix.reviews`` collection:
@@ -290,7 +300,7 @@ The following query uses the text index created in the preceding code snippet:
 Multiple Fields
 +++++++++++++++
 
-A collection can only contain one text index. If you want to create a
+A collection can only contain one text index. To create a
 text index for multiple text fields, you must create a compound
 index. A text search runs on all the text fields within the compound
 index.
@@ -313,9 +323,15 @@ and :manual:`Text Indexes </core/index-text>` in the Server manual.
 Geospatial Indexes
 ~~~~~~~~~~~~~~~~~~
 
-MongoDB supports queries of geospatial coordinate data using **2dsphere
-indexes**. With a 2dsphere index, you can query the geospatial data for
-inclusion, intersection, and proximity.
+You can query geospatial coordinate data in MongoDB by using **2d** or
+**2dsphere indexes**.
+
+2dsphere Indexes
+++++++++++++++++
+
+2dsphere indexes support geospatial queries on an earth-like sphere. By using a 2dsphere
+index, you can query the geospatial data For inclusion, intersection, and proximity.
+The indexed field must be either GeoJSON objects or legacy coordinate pairs.
 
 To create a 2dsphere index, you must specify a field that contains
 only **GeoJSON objects**. For more details about this type, see :manual:`GeoJSON objects </reference/geojson>`
@@ -367,7 +383,11 @@ The following is an example of a geospatial query using the "location.geo" index
    :end-before: end-geospatial-query
    :dedent:
 
-MongoDB also supports ``2d`` indexes for calculating distances on a Euclidean plane and
+2d Indexes
+++++++++++
+
+The {+driver-short+} also includes a ``Geo2D`` method for creating 2d indexes.
+You can use these indexes to calculate distances on a Euclidean plane and
 for working with the "legacy coordinate pairs" syntax used in MongoDB 2.2 and earlier.
 To learn more, see :manual:`Geospatial Queries </geospatial-queries>` in the Server manual.
 
@@ -433,81 +453,12 @@ all indexes in a collection:
    :end-before: end-list-indexes
    :dedent:
 
-.. TODO: integrate into existing page
+Additional Information
+----------------------
 
-Sample Class
-------------
+For more information about the classes and methods used on this page, see the following
+API documentation:
 
-The code examples in this guide demonstrate how you can use builders to
-create types to interact with documents in the sample collection ``plants.flowers``.
-Documents in this collection are modeled by the following ``Flower`` class:
-
-.. literalinclude:: /includes/fundamentals/code-examples/builders.cs
-   :language: csharp
-   :dedent:
-   :start-after: start-model
-   :end-before: end-model
-
-Each builder class takes a generic type parameter
-``TDocument`` which represents the type of document that you are working
-with. In this guide, the ``Flower`` class is the document type used in
-each builder class example.
-
-.. _csharp-builders-indexes:
-
-Define Index Keys
------------------
-
-The ``IndexKeysDefinitionBuilder`` class provides a type-safe interface for
-defining index keys. Suppose you want to select ``Category`` as an
-ascending index key.
-
-Use builders to select the index key with the typed variant:
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<Flower>.IndexKeys;
-   var keys = builder.Ascending(f => f.Category);
-
-Alternatively, you can use string-based field names to select the index key:
-
-.. code-block:: csharp
-   :copyable: true
-
-   var builder = Builders<BsonDocument>.IndexKeys;
-   var keys = builder.Ascending("Category");
-
-The ``IndexKeysDefinitionBuilder`` class also provides methods to build
-a wildcard index. You can create a wildcard index using ``All field paths`` or ``A
-single field path``, in this case using ``Category``:
-
-.. tabs::
-
-   .. tab:: ``All field paths``
-      :tabid: all-wildcard-index
-
-      .. code-block:: csharp
-         :copyable: true
-
-         var builder = Builders<Flower>.IndexKeys;
-         var keys = builder.Wildcard();
-
-   .. tab:: ``A single field path``
-      :tabid: single-wildcard-index
-
-      .. code-block:: csharp
-         :copyable: true
-
-         var builder = Builders<Flower>.IndexKeys;
-
-         // Using the typed variant
-         var keys = builder.Wildcard(f => f.Category);
-
-         // Using string-based field names
-         var keys = builder.Wildcard("Category");
-
-For more information about how to use wildcard indexes, see 
-:manual:`Wildcard Indexes </core/indexes/index-types/index-wildcard>`.
-
+- `CreateOne() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoIndexManager-1.CreateOne.html>`__
+- `CreateIndexModel<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.CreateIndexModel-1.html>`__
 - `IndexKeysDefinitionBuilder <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IndexKeysDefinitionBuilder-1.html>`__

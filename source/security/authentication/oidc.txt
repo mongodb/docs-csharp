@@ -1,9 +1,9 @@
 .. _csharp-mongodb-oidc:
 .. _csharp-authentication-oidc:
 
-===================================
-OIDC (Workload Identity Federation)
-===================================
+==================================================
+OIDC (Workload Identity Federation) Authentication
+==================================================
 
 .. contents:: On this page
    :local:

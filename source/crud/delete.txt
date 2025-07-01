@@ -139,9 +139,8 @@ following properties:
 
    * - ``Collation``
      - | Gets or sets the type of language collation to use when sorting
-         results. See :manual:`the delete
-         statements</reference/command/delete/#std-label-deletes-array-collation>`
-         for more information.
+         results. See the :ref:`<csharp-delete-collation>` section of this page for more
+         information.
 
    * - ``Comment``
      - | Gets or sets the comment for the operation. See :manual:`the delete command
@@ -157,6 +156,13 @@ following properties:
      - | Gets or sets the let document. See :manual:`the delete command
          fields</reference/command/delete/#command-fields>`
          for more information.
+
+.. _csharp-delete-collation:
+
+Collation
+~~~~~~~~~
+
+.. include:: /includes/collation.rst
 
 Example
 ~~~~~~~

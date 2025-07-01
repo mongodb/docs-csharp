@@ -528,7 +528,7 @@ their related reference and API documentation.
    * - | **Project Document Fields When Retrieving Them**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ProjectionDefinitionBuilder-1.html>`__
-       | :ref:`Fundamentals <csharp-builders-projection>`
+       | :ref:`Fundamentals <csharp-project>`
 
      - .. io-code-block::
           :copyable: true
@@ -561,7 +561,7 @@ their related reference and API documentation.
    * - | **Create an Index**
        |
        | `API Documentation <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoIndexManager-1.CreateOne.html>`__
-       | :ref:`Fundamentals <csharp-builders-indexes>`
+       | :ref:`Fundamentals <csharp-indexes>`
 
      - .. code-block:: csharp
           :copyable: true

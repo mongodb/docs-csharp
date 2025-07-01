@@ -289,10 +289,18 @@ of ``Watch()`` and ``WatchAsync()``:
          response from the MongoDB cluster.
 
    * - ``Collation``
-     - | Specifies the collation to use for the change stream cursor.
+     - | Specifies the collation to use for the change stream cursor. See the
+         :ref:`<csharp-change-stream-collation>` section of this page for more information.
 
    * - ``Comment``
      - | Attaches a comment to the operation.
+
+.. _csharp-change-stream-collation:
+
+Collation
+~~~~~~~~~
+
+.. include:: /includes/collation.rst
 
 .. _csharp-change-stream-pre-post-image:
 

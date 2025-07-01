@@ -94,4 +94,5 @@ raw: ${prefix}/master -> ${base}/upcoming/
 [*-master]: ${prefix}/${version}/fundamentals/authentication/oidc/ -> ${base}/${version}/security/authentication/oidc/
 [*-master]: ${prefix}/${version}/fundamentals/authentication/scram/ -> ${base}/${version}/security/authentication/scram/
 [*-master]: ${prefix}/${version}/fundamentals/authentication/x509/ -> ${base}/${version}/security/authentication/x509/
+[*-master]: ${prefix}/${version}/crud/query/specify-documents-to-return/ -> ${base}/${version}/crud/query/specify-documents/
 [*-master]: ${prefix}/${version}/crud/query/specify-query/ -> ${base}/${version}/crud/query/query-filter/

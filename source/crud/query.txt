@@ -14,7 +14,7 @@ Read Operations
 
    Specify a Query </crud/query/query-filter>
    Find Documents </crud/query/find>
-   Specify Documents to Return </crud/query/specify-documents-to-return>
+   Specify Documents to Return </crud/query/specify-documents>
    Specify Fields to Return </crud/query/project>
    Count Documents </crud/query/count>
    Distinct Field Values </crud/query/distinct>

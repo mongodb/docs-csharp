@@ -168,7 +168,7 @@ You can also set configuration settings by creating a ``MongoClientSettings``
 object and passing that to the ``MongoClient`` constructor. You can use the
 ``Credential`` property to set the login credentials including specifying the
 authentication database. For more information about using ``MongoClientSettings``
-as well as some examples, see
+and to see some examples, see
 :ref:`Using MongoClientSettings <csharp-mongo-client-settings>`.
 
 You can check if this is the issue by attempting to connect to a MongoDB
@@ -249,7 +249,7 @@ The following section describes a method that may help resolve the issue.
 Check the Number of Connections
 -------------------------------
 
-If you need to create more open connections, increase ``MaxConnectionPoolSize``. For more
+If you must create more open connections, increase ``MaxConnectionPoolSize``. For more
 information about checking the number of connections, see
 :ref:`Check the Number of Connections <csharp-troubleshooting-connection-number-connections>`
 in the Error Sending Message section.
@@ -279,7 +279,7 @@ time the driver spends attempting to establish the connection by using the
 :manual:`Timeout Options </reference/connection-string/#timeout-options>` in
 the Server manual.
 
-You should ensure the ``connectTimeoutMS`` setting is not lower than
+Ensure the ``connectTimeoutMS`` setting is not lower than
 the highest network latency you have to a member of the set. If one of the
 secondary members has a latency of 10000 milliseconds, setting the
 ``connectTimeoutMS`` to 9000 prevents the driver from ever connecting to that
@@ -301,7 +301,7 @@ You can set this option on the connection string. The following example sets
 
 You can also set configuration settings by creating a ``MongoClientSettings``
 object and passing that to the ``MongoClient`` constructor. For more information
-about using ``MongoClientSettings`` as well as some examples, see
+about using ``MongoClientSettings`` and to see some examples, see
 :ref:`Using MongoClientSettings <csharp-mongo-client-settings>`.
 
 Check the Number of Connections

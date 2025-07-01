@@ -38,6 +38,12 @@ more stages, and this pipeline transforms the documents into an aggregated resul
 To learn more about the aggregation stages supported by the {+driver-short+}, see
 :ref:`Aggregation Stages <csharp-aggregation-stages>`.
 
+.. sharedinclude:: dbx/agg-tutorials-manual-tip.rst
+
+   .. replacement:: language
+
+      :guilabel:`{+language+}`
+
 Analogy
 ~~~~~~~
 

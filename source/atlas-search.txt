@@ -122,7 +122,7 @@ Use the ``Compound()`` method to combine two or more operators into a single
 search.
 
 The following example searches the ``guitars`` collection for any documents
-that match all of the following criteria:
+that match all the following criteria:
 
 - The ``rating`` field exists on the document
 - The ``in_stock`` field is not ``false``

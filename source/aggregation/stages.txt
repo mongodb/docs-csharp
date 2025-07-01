@@ -170,6 +170,12 @@ to your pipeline.
        dimensions, or facets, in a single stage.
      - ``Facet()``
 
+   * - :manual:`$geoNear </reference/operator/aggregation/geoNear/>`
+     - Returns documents in order of nearest to farthest from a
+       specified point. This method adds a field to output documents
+       that contains the distance from the specified point.
+     - ``GeoNear()``
+
    * - :manual:`$graphLookup </reference/operator/aggregation/graphLookup/>`
      - Performs a recursive search on a collection. This method adds  
        a new array field to each output document that contains the traversal  
@@ -353,4 +359,5 @@ following API documentation:
 - `AggregateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.AggregateOptions.html>`__
 - `EmptyPipelineDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.EmptyPipelineDefinition-1.-ctor.html>`__
 - `BsonDocument <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.BsonDocument.html>`__
-- `PipelineDefinitionBuilder.AppendStage() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineDefinitionBuilder.AppendStage.html>`__
+- `PipelineDefinitionBuilder.AppendStage()
+  <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.PipelineDefinitionBuilder.AppendStage.html>`__

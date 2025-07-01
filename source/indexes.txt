@@ -86,7 +86,7 @@ and provide sample code for creating each index type.
 
 .. note::
   
-  These example uses the ``sample_mflix.movies`` and ``sample_mflix.theaters`` collections
+  The examples on this page use the ``sample_mflix.movies`` and ``sample_mflix.theaters`` collections
   from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
   free MongoDB Atlas cluster and load the sample datasets, see :ref:`csharp-get-started`.
 
@@ -185,8 +185,7 @@ Clustered Indexes
 To create a clustered index, specify the clustered index
 option with the ``_id`` field as the key and the ``Unique`` property as
 ``true`` when you create your collection. A collection can only contain a single clustered
-index. If you want to create a clustered index, then it must be specified when you create
-a collection.
+index. To create a clustered index, specify it when you create a collection.
 
 The following example creates a clustered index on the ``_id`` field while creating a new
 ``sample_mflix.reviews`` collection:
@@ -301,7 +300,7 @@ The following query uses the text index created in the preceding code snippet:
 Multiple Fields
 +++++++++++++++
 
-A collection can only contain one text index. If you want to create a
+A collection can only contain one text index. To create a
 text index for multiple text fields, you must create a compound
 index. A text search runs on all the text fields within the compound
 index.

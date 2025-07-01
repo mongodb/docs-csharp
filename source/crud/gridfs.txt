@@ -690,7 +690,7 @@ code.
 .. note:: File Revisions
 
    The ``Delete()`` and ``DeleteAsync()`` methods support deleting only one file at a time.
-   If you want to delete each file revision, or files with different upload
+   To delete each file revision, or files with different upload
    times that share the same file name, collect the ``_id`` values of each revision.
    Then, pass each ``_id`` value in separate calls to the ``Delete()`` or ``DeleteAsync()``
    method.

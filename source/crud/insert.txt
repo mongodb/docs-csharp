@@ -248,10 +248,8 @@ Assume you want to insert the following documents:
 
 If you attempt to insert these documents with default
 ``InsertManyOptions``, the driver throws a ``MongoBulkWriteException`` at the third
-document because of the repeated ``_id`` value, but the documents before
-the error-producing document are still inserted into your collection.
-
-If you look inside your collection, you should be able to see the following documents:
+document because of the repeated ``_id`` value. The operation adds only the first two documents
+to the collection:
 
 .. code-block:: json
    :copyable: false
@@ -262,9 +260,7 @@ If you look inside your collection, you should be able to see the following docu
 If you set ``IsOrdered`` to ``false`` in your insert operation, the driver will
 continue to insert your documents even if some documents produce errors.
 With this modified insert behavior, the driver throws an exception but inserts all documents
-that do not produce errors.
-
-If you look inside your collection, you should be able to see the following documents:
+that do not produce errors:
 
 .. code-block:: json
    :copyable: false

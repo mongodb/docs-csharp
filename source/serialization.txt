@@ -48,8 +48,6 @@ primitive types, collection types, and custom classes.
 For a full list of available serializers, see the
 `Serializers namespace API documentation <{+new-api-root+}/MongoDB.Bson/MongoDB.Bson.Serialization.Serializers.html>`__.
 
-.. TODO: Revisit this page
-
 .. _csharp-faq-object-serializer:
 
 ObjectSerializer

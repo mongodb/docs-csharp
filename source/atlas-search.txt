@@ -10,6 +10,7 @@ Atlas Search
 
 .. meta::
    :keywords: .NET, operators, aggregation, pipeline, atlas, code example
+   :description: Learn to use the `Search` builder for creating `$search` aggregation pipeline stages with the .NET/C# Driver in Atlas Search.
 
 .. contents:: On this page
    :local:
@@ -38,7 +39,7 @@ The examples in this guide use the following documents in a collection called
 ``guitars``:
 
 .. code-block:: json
-
+ 
    { "_id": 1, "make": "Fender", "description": "Classic guitars known for their versatility.", "establishedYear": 1946, "in_stock": true, "rating": 9 }
    { "_id": 2, "make": "Gibson", "description": "Classic guitars known for their rich, full tones.", "establishedYear": 1902, "in_stock": true, "rating": 8 }
    { "_id": 3, "make": "PRS", "description": "High-end guitars known for their quality.", "establishedYear": 1985, "in_stock": true, "rating": 9 }
@@ -48,18 +49,11 @@ The examples in this guide use the following documents in a collection called
 
 The following ``Guitar`` class models the documents in this collection.
 
-.. code-block:: csharp
-
-   public class Guitar
-   {
-       public int Id { get; set; }
-       public string Make { get; set; }
-       public List<string> Models { get; set; }
-       public int EstablishedYear { get; set; }
-       [BsonElement("in_stock")]
-       public bool InStock { get; set; }
-       public int? Rating { get; set; }
-   }
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-guitar-class
+   :end-before: // end-guitar-class
+   :language: csharp
+   :dedent:
 
 .. note::
 
@@ -80,11 +74,13 @@ categorizes data in a searchable format.
 To learn how to create an Atlas Search Index see the
 :atlas:`Create an Atlas Search Index </atlas-search/create-index>` Atlas guide.
 
-Atlas Search Operators
-----------------------
+.. _csharp-atlas-search-operators:
+
+Atlas Search Operators and Collectors
+-------------------------------------
 
 The ``Search`` class contains methods you can use to perform ``$search``
-operations. For a full list of available ``$search`` operators, see the :atlas:`Operators and Collectors
+operations. For a full list of available ``$search`` operators and collectors, see the :atlas:`Operators and Collectors
 </atlas-search/operators-and-collectors>` Atlas guide.
 
 Autocomplete
@@ -93,8 +89,8 @@ Autocomplete
 Use the ``Autocomplete()`` method to search for a word or phrase that contains a
 sequence of characters from an incomplete input string.
 
-The following example performs an autocomplete search on the ``guitars``
-collection using the string "Gib" in the ``make`` field.
+The following example performs an autocomplete query on the ``make``
+field for text that starts with the string ``"Gib"``.
 
 .. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
    :start-after: // start-autocomplete-search
@@ -102,9 +98,15 @@ collection using the string "Gib" in the ``make`` field.
    :language: csharp
    :dedent:
 
-.. note::
+.. note:: Index for Autocomplete Queries
+   
+   You must create an Atlas Search index that supports autocompletion
+   to successfully perform autocomplete queries. To learn more, see
+   :atlas:`How to Index Fields for Autocompletion </atlas-search/field-types/autocomplete-type/>`
+   in the Atlas documentation.
 
-   If the field you are searching on is indexed by a search index, you must pass the index name to the ``Autocomplete`` call. If a search index does not exist, the default index is used.
+   After you create the Atlas Search index, you must pass the index name to
+   the ``Autocomplete()`` method, as shown in the preceding code.
 
 The search returns the following document:
 
@@ -246,7 +248,42 @@ The search returns the following documents:
    { "_id" : 3, "make" : "PRS", "description" : "...", "establishedYear" : 1985, "in_stock" : true, "rating" : 9 }
    { "_id" : 5, "make" : "Ibanez", "description" : "...", "establishedYear" : 1957, "in_stock" : true, "rating" : 7 }
 
-To learn more about the ``exists`` operator, see the :atlas:`exists </atlas-search/exists>`
+
+To learn more about the ``exists`` operator, see the :atlas:`exists </atlas-search/exists>` 
+Atlas guide.
+
+Facet
+~~~~~
+
+Use the ``Facet()`` method to group results by values or ranges in the specified faceted fields 
+and return the count for each of those groups.
+
+You can use the ``Facet()`` method with both the ``$search`` and ``$searchMeta`` stages. MongoDB recommends using 
+facet with the ``$searchMeta`` stage to retrieve metadata results only for the query. 
+To retrieve metadata results and query results using the ``$search`` stage, you must use the 
+``$$SEARCH_META`` aggregation variable. To learn more about this variable, see the :atlas:`SEARCH_META Aggregation Variable </atlas-search/facet/#std-label-fts-facet-aggregation-variable>` Atlas guide.
+
+The following limitations apply:
+
+- You can run facet queries on a single field only. You can't run facet queries on groups of fields.
+- You can run facet queries over sharded collections on clusters running MongoDB v6.0 only.
+
+The following example searches the ``guitars`` collection for any documents in
+which the value of the ``in_stock`` field is ``true``. The query uses the ``Facet()`` method to process the input documents, with a maximum number of ``100`` facet categories to return in the results. The query returns the total count of documents in which the value of ``in_stock`` is ``true``.
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-facet-search
+   :end-before: // end-facet-search
+   :language: csharp
+   :dedent:
+
+The search returns the following result:
+
+.. code-block:: none
+
+   4
+
+To learn more about the ``facet`` collector, see the :atlas:`facet </atlas-search/facet>` 
 Atlas guide.
 
 GeoShape
@@ -496,7 +533,7 @@ Range
 ~~~~~
 
 Use the ``Range()`` method to search for documents in which the value of a
-specified field falls within a given numeric or date range.
+specified field falls within a given numeric, date, or string range.
 
 The following example searches the ``guitars`` collection for all documents with
 an ``establishedYear`` value greater than 1980 and less than 2020.
@@ -515,7 +552,33 @@ The search returns the following results:
    { "_id" : 4, "make" : "Kiesel", "description" : "Quality guitars made only for custom orders.", "establishedYear" : 2015, "in_stock" : false, "rating" : null }
    { "_id" : 6, "make" : "Strandberg", "description" : "Modern guitars known for their headless models.", "establishedYear" : 1982, "in_stock" : false, "rating" : null }
 
-To learn more about the ``range`` operator, see the :atlas:`range </atlas-search/range>`
+To search for documents in which the value of a specified field is within a
+range of strings, you must first create a :atlas:`token index
+</atlas-search/field-types/token-type/>` on the field. After you create the
+index, you can search for documents based on a range of strings as shown in the
+following example:
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-range-string
+   :end-before: // end-range-string
+   :language: csharp
+   :dedent:
+
+The preceding example searches for any documents in which the string value of the
+``make`` field is greater than or equal to ``"Fender"`` and less than or equal
+to ``"Kiesel"``. The driver compares the string values in :wikipedia:`lexicographic order
+<Lexicographic_order>`. 
+
+The search returns the following results:
+
+.. code-block:: json
+
+   { "_id" : 1, "make" : "Fender", "description" : "Classic guitars known for their versatility.", "establishedYear" : 1946, "in_stock" : true, "rating" : 9 }
+   { "_id" : 2, "make" : "Gibson", "description" : "Classic guitars known for their rich, full tones.", "establishedYear" : 1902, "in_stock" : true, "rating" : 8 }
+   { "_id" : 4, "make" : "Kiesel", "description" : "Quality guitars made only for custom orders.", "establishedYear" : 2015, "in_stock" : false, "rating" : null }
+   { "_id" : 5, "make" : "Ibanez", "description" : "Well-crafted guitars used by many professional guitarists.", "establishedYear" : 1957, "in_stock" : true, "rating" : 7 } 
+
+To learn more about the ``range`` operator, see the :atlas:`range </atlas-search/range>` 
 Atlas guide.
 
 Regex
@@ -682,3 +745,170 @@ The search returns the following document:
 
 To learn more about the ``wildcard`` operator, see the :atlas:`wildcard </atlas-search/wildcard>`
 Atlas guide.
+
+Search Multiple Fields
+----------------------
+
+The ``path`` parameter is used by the Atlas Search
+:atlas:`operators </atlas-search/query-syntax>` to specify the field or fields
+to be searched. To learn more about what the ``path`` parameter may contain, see the :atlas:`Construct a Query Path </atlas-search/path-construction>` guide.
+
+.. note::
+
+   Not all operators can use all the different types of paths. See the
+   documentation for each individual operator for details on what types 
+   of path it supports.
+
+To search multiple indexed fields, use the ``Multi()`` method and pass in your fields. Documents which match on any of the specified fields are included in the result set.
+
+The following example searches for the string ``classic`` in either the ``make`` or the ``description`` field.
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-multiple-field-search
+   :end-before: // end-multiple-field-search
+   :language: csharp
+   :dedent:
+
+The search returns the following documents:
+
+.. code-block:: json
+
+   { "_id" : 1, "make" : "Fender", "description" : "Classic guitars known for their versatility.", "establishedYear" : 1946, "in_stock" : true, "rating" : 9}
+   { "_id" : 2, "make" : "Gibson", "description" : "Classic guitars known for their rich, full tones.", "establishedYear" : 1902, "in_stock" : true, "rating" : 8}
+
+Score Documents
+---------------
+
+Every document returned by an Atlas Search query is assigned a score based on relevance, and the documents included in a result set are returned in order from highest score to lowest. To learn more about how scores are assigned, see the :atlas:`score </atlas-search/scoring>` Atlas guide. 
+
+The score assigned to a returned document is part of the document's metadata. You can include each returned document's score along with the result set by using a ``$project`` stage in your aggregation pipeline.
+
+The following example searches the ``guitars`` collection for documents in which the value of the ``make`` field contains exactly six letters and uses a ``$project`` stage to add a field named ``score`` to the returned documents.
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-score-search
+   :end-before: // end-score-search
+   :language: csharp
+   :dedent:
+
+The search returns the following documents:
+
+.. code-block:: json
+
+   { "_id" : 1, "make" : "Fender", "description" : "Classic guitars known for their versatility.", "establishedYear" : 0, "in_stock" : false, "rating" : null, "score" : 1.0 }
+   { "_id" : 4, "make" : "Kiesel", "description" : "Quality guitars made only for custom orders.", "establishedYear" : 0, "in_stock" : false, "rating" : null, "score" : 1.0 }
+   { "_id" : 5, "make" : "Ibanez", "description" : "Well-crafted guitars used by many professional guitarists.", "establishedYear" : 0, "in_stock" : false, "rating" : null, "score" : 1.0 }
+   { "_id" : 2, "make" : "Gibson", "description" : "Classic guitars known for their rich, full tones.", "establishedYear" : 0, "in_stock" : false, "rating" : null, "score" : 1.0 }
+
+Modify Atlas Search Behavior
+----------------------------
+
+You can modify the behavior of the ``Search()`` method by passing
+a ``SearchOptions`` object as a parameter.
+
+The ``SearchOptions`` class contains the following properties:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Property
+     - Description
+
+   * - ``CountOptions`` 
+     - | The options for counting the search results.
+
+       | **Data type**: `SearchCountOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Search.SearchCountOptions.html>`__
+       | **Default**: ``null``
+
+   * - ``Highlight`` 
+     - | The options for displaying search terms in their original context.
+
+       | **Data type**: `SearchHighlightOptions<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Search.SearchHighlightOptions-1.html>`__
+       | **Default**: ``null``
+
+   * - ``IndexName`` 
+     - | The index to use for the search.
+
+       | **Data type**: {+string-data-type+}
+       | **Default**: ``null``
+
+   * - ``ReturnStoredSource`` 
+     - | A flag that specifies whether to perform a full document lookup on
+         the database or to return only stored source fields directly from
+         Atlas Search.
+
+       | **Data type**: {+bool-data-type+}
+       | **Default**: ``false``
+
+   * - ``ScoreDetails`` 
+     - | A flag that specifies whether to return detailed information about the
+         score for each document in the results.
+
+       | **Data type**: {+bool-data-type+}
+       | **Default**: ``false``
+
+   * - ``SearchAfter`` 
+     - | The starting point for pagination. When set, the search retrieves documents
+         starting immediately after the specified reference point.
+
+       | **Data type**: {+string-data-type+}
+       | **Default**: ``null``
+
+   * - ``SearchBefore`` 
+     - | The end point for pagination. When set, the search retrieves documents
+         starting immediately before the specified reference point.
+
+       | **Data type**: {+string-data-type+}
+       | **Default**: ``null``
+
+   * - ``Sort`` 
+     - | The sorting criteria to apply to the results.
+
+       | **Data type**: `SortDefinition<TDocument> <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.SortDefinition-1.html>`__
+       | **Default**: ``null``
+
+   * - ``Tracking`` 
+     - | The options for tracking search terms.
+
+       | **Data type**: `SearchTrackingOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.Search.SearchTrackingOptions.html>`__
+       | **Default**: ``null``
+
+SearchAfter Example
+~~~~~~~~~~~~~~~~~~~
+
+The following example paginates the results of an Atlas Search
+operation by performing the following actions:
+
+- Defines a projection that uses the ``MetaSearchSequenceToken()``
+  builder method, which specifies a ``PaginationToken`` to contain
+  the point of reference
+
+- Creates a ``SearchOptions`` instance and sets the index and sort
+  criteria to use
+
+- Runs an initial search to find documents that have a ``description`` field value containing
+  the text ``"classic"``, applying the projection and options to the operation
+
+- Sets the ``SearchAfter`` property of the same ``SearchOptions`` instance to
+  instruct the next search to begin after the base search's first result
+
+- Runs another search operation that has the same matching criteria and applies
+  the search options to paginate the results
+
+.. literalinclude:: /includes/fundamentals/code-examples/atlas-search/AtlasSearchExamples.cs
+   :start-after: // start-pagination-options
+   :end-before: // end-pagination-options
+   :language: csharp
+   :dedent:
+
+The search returns the following document:
+
+.. code-block:: json
+
+   { "_id": 2, "make": "Gibson", "description": "Classic guitars known for their rich, full tones.", "establishedYear": 1902, "in_stock": true, "rating": 8 }
+
+.. tip::
+
+   To learn more about Atlas Search pagination, see :atlas:`Paginate the Results </atlas-search/paginate-results/>` 
+   in the Atlas documentation.

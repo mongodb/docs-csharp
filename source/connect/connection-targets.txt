@@ -19,7 +19,7 @@ Choose a Connection Target
 
 Overview
 --------
- 
+
 In this guide, you can learn how to use a connection string and ``MongoClient`` object
 to connect to different types of MongoDB deployments.
 
@@ -80,6 +80,10 @@ that contains three hosts:
    :language: csharp
    :start-after: // start-replica-set-connection-list
    :end-before: // end-replica-set-connection-list
+
+.. note:: Replica Set in Docker
+
+   .. sharedinclude:: dbx/docker-replica-set.rst
 
 If you aren't able to provide a full list of hosts in the replica set, you can 
 specify one or more of the hosts in the replica set and instruct {+driver-short+} to 

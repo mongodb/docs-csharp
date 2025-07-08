@@ -4,10 +4,10 @@ toc_landing_pages = [
     "/security/authentication",
     "/aggregation",
     "/aggregation/stages",
-    "/serialization"
+    "/serialization",
 ]
 name = "csharp"
-title = "C#/.NET"
+title = "C#/.NET Driver"
 
 intersphinx = [
     "https://www.mongodb.com/docs/manual/objects.inv",
@@ -29,8 +29,9 @@ language = "C#"
 mdb-server = "MongoDB Server"
 mongo-community = "MongoDB Community Edition"
 mongo-enterprise = "MongoDB Enterprise Edition"
-docs-branch = "master"                                                                                          # always set this to the docs branch (i.e. master, 1.7, 1.8, etc.)
-version-number = "3.1"
+# always set this to the docs branch (i.e. master, 1.7, 1.8, etc.)
+docs-branch = "master"
+version-number = "3.4"
 last-version-2-number = "2.30"
 version = "v{+version-number+}"
 example = "https://raw.githubusercontent.com/mongodb/docs-csharp/{+docs-branch+}/source/includes/code-examples"
@@ -42,6 +43,7 @@ string-data-type = "``string``"
 int-data-type = "``integer``"
 not-available = "N/A"
 analyzer = "MongoDB C# Analyzer"
+analyzer-short = "C# Analyzer"
 analyzer-short = "C# Analyzer"
 query-api = "MongoDB Query API"
 avs = "Atlas Vector Search"

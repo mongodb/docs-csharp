@@ -3,6 +3,9 @@
 ======================================
 LINQ Syntax for Aggregation Operations
 ======================================
+======================================
+LINQ Syntax for Aggregation Operations
+======================================
 
 .. contents:: On this page
    :local:

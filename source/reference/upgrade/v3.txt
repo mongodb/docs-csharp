@@ -9,7 +9,7 @@ Upgrade to Version 3.0
    :values: reference
 
 .. meta::
-   :keywords: update, breaking change, releases
+   :keywords: update, breaking change, releases, CSUUID
 
 .. contents:: On this page
    :local:
@@ -111,12 +111,19 @@ Version 3.0 Breaking Changes
   In version 3.0, ``GuidRepresentationMode.V3`` is the only supported mode. This change
   has the following effects on the driver:
   
-  - The ``BsonBinaryData(Guid)`` constructor has been removed. To construct a ``BsonBinaryData``
-    object from a GUID, use the ``BsonBinaryData.Create(Guid, GuidRepresentation)`` constructor.
-  - The ``BsonBinaryData.GuidRepresentation`` property has been removed. 
+  - The ``BsonBinaryData(Guid)`` constructor has been removed. To
+    construct a ``BsonBinaryData`` object from a GUID, use the
+    ``BsonBinaryData.Create(Guid, GuidRepresentation)`` constructor. To
+    view an example of creating a legacy GUID, see the :ref:`Construct
+    Legacy GUIDs <csharp-guid-legacy-construct>` note in the GUID
+    Serialization guide.
+  - The ``BsonBinaryData.GuidRepresentation`` property has been removed.
   - You can call the ``BsonBinaryData.ToGuid()`` method only on ``BsonBinaryData``
     objects of subtype 4. If the object has any other subtype, you must call the
-    ``BsonBinaryData.ToGuid(GuidRepresentation)`` method and specify the subtype. 
+    ``BsonBinaryData.ToGuid(GuidRepresentation)`` method and specify the subtype.
+  - GUID conversion by using the ``BsonTypeMapper`` class has been removed. To
+    convert ``GUID`` values to BSON, use the ``BsonBinaryData(<GUID>,
+    GuidRepresentation.Standard)`` constructor.
 
   The preceding changes affect your application only if you serialize and deserialize
   BSON documents directly. If you map your MongoDB documents only to :ref:`csharp-poco`,
@@ -245,3 +252,14 @@ Version 3.0 Breaking Changes
   - The driver seals the ``MongoClient``, ``MongoDatabase``, and ``MongoCollection`` classes.
     We recommend using the ``IMongoClient``, ``IMongoDatabase``, and ``IMongoCollection``
     interfaces directly.
+
+- The driver requires applications to explicitly configure how to serialize GUIDs
+  by using the ``GuidSerializer`` and ``ObjectSerializer`` classes. {+driver-short+}
+  users building new applications can implement a global ``GuidSerializer`` by registering
+  it. We recommend that users with older applications verify that all ``GUIDs`` are
+  serialized the same way when implementing a global ``GuidSerializer``. You can also
+  configure ``GUID`` serialization on a case-by-case basis without registering a global
+  ``GuidSerializer``.
+  
+  To learn more about GUID serialization, see the :ref:`csharp-guids`
+  guide.

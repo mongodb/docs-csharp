@@ -15,7 +15,7 @@ Connect to MongoDB
    :values: reference
  
 .. meta::
-   :description: Learn how to use the {+driver-short+} to connect to MongoDB.
+   :description: Connect to a MongoDB instance or replica set using the .NET/C# Driver by configuring a connection URI or `MongoClientSettings` for various deployment types.
    :keywords: client, ssl
 
 .. toctree::

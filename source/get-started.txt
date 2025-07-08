@@ -15,7 +15,7 @@ Get Started with the {+driver-short+}
    :values: tutorial
  
 .. meta::
-   :description: Learn how to create an app to connect to MongoDB deployment by using the .NET/C# driver.
+   :description: Connect your .NET application to a MongoDB Atlas cluster using the .NET/C# Driver, and run queries on sample data.
    :keywords: quick start, tutorial, basics
 
 Overview

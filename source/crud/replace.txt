@@ -109,8 +109,26 @@ corresponding code.
 
 .. important::
 
-   The values of ``_id`` fields are immutable. If your replacement document specifies 
-   a value for the ``_id`` field, it must match the ``_id`` value of the existing document.
+   The values of ``_id`` fields are immutable. If your replacement document
+   specifies a value for the ``_id`` field, it must match the ``_id`` value of
+   the existing document. 
+   
+   If your replacement document does not specify a value for the ``_id`` field,
+   you can add the ``[BsonIgnoreIfDefault]`` attribute to the ``_id`` field in
+   your Plain Old CLR/Class Object (POCO). Use ``[BsonIgnoreIfDefault]`` if the
+   ``_id`` field in your POCO is of the ``ObjectId`` type.
+   
+   The following example shows how to add this attribute:
+
+   .. code-block:: csharp
+
+      public class Restaurant
+      {
+          [BsonIgnoreIfDefault]
+          public ObjectId Id { get; set; }
+
+          // Other properties
+      }
 
 Customize the Replace Operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -164,6 +182,23 @@ The ``ReplaceOptions`` class contains the following properties:
        for more information.
 
        **Data Type:** ``bool``
+
+   * - ``Sort``
+     - Determines which document the operation replaces if the query
+       selects multiple documents, because the replace operation replaces
+       the first document in the sort order specified. To set this
+       option, you must instantiate an ``ReplaceOptions<T>`` instance
+       that uses a generic type that models your data, as shown in the
+       following code:
+
+       .. code-block:: csharp
+
+          var options = new ReplaceOptions<Restaurant>
+          {
+            Sort = Builders<Restaurant>.Sort.Ascending(r => r.Name)
+          };
+
+       **Data Type:** ``SortDefinition<T>``
 
    * - ``Let``
      - Gets or sets the let document. 
@@ -266,4 +301,5 @@ see the following API documentation:
 * `ReplaceOne() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOne.html>`__
 * `ReplaceOneAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOneAsync.html>`__
 * `ReplaceOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReplaceOptions.html>`__
-* `ReplaceOneResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReplaceOneResult.html>`__
+* `ReplaceOneResult
+  <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReplaceOneResult.html>`__

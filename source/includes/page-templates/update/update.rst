@@ -44,7 +44,7 @@ The |sync-method| and |async-method| methods accept the following parameters:
    * - ``options``
      - *Optional.* An instance of the ``UpdateOptions`` class that specifies the
        configuration for the update operation. The default value is ``null``. For a list
-       of available options, see :ref:`csharp-update-options`.
+       of available options, see |options-ref-link|.
 
        **Data Type:** `UpdateOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.UpdateOptions.html>`__
 
@@ -91,8 +91,7 @@ operation:
 Update Pipelines
 ~~~~~~~~~~~~~~~~
 
-If your application connects to {+mdb-server+} 4.2 or later, you can join
-a sequence of update operations into a single
+You can join a sequence of update operations into a single
 :manual:`aggregation pipeline. </core/aggregation-pipeline/>`
 
 To create an update pipeline, call the ``Builders.Update.Pipeline()`` method. This method
@@ -130,7 +129,7 @@ operation:
    :manual:`Updates with Aggregation Pipeline </tutorial/update-documents-with-aggregation-pipeline/>`
    in the {+mdb-server+} manual.
 
-.. _csharp-update-options:
+|options-ref|
 
 Configuration Options
 ---------------------
@@ -191,6 +190,23 @@ The ``UpdateOptions`` class contains the following properties:
        for more information.
 
        **Data Type:** ``bool``
+
+   * - ``Sort``
+     - Determines which document the operation updates if the query
+       selects multiple documents, because the update operation updates
+       the first document in the sort order specified. To set this
+       option, you must instantiate an ``UpdateOptions<T>`` instance
+       that uses a generic type that models your data, as shown in the
+       following code:
+
+       .. code-block:: csharp
+
+          var options = new UpdateOptions<Restaurant>
+          {
+            Sort = Builders<Restaurant>.Sort.Ascending(r => r.Name)
+          };
+
+       **Data Type:** ``SortDefinition<T>``
 
    * - ``Let``
      - Gets or sets the let document. 

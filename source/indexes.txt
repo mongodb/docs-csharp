@@ -18,6 +18,12 @@ Create and Manage Indexes
    :depth: 2
    :class: singlecol
 
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   Atlas Vector and Vector Search Indexes </indexes/search-indexes>
+
 Overview
 --------
 

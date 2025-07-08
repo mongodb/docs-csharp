@@ -22,4 +22,4 @@ CRUD Operations
    Store Large Files </crud/gridfs>
    Configure CRUD Operations </crud/configure>
    Geospatial Queries <crud/geo>
-   Tutorial: Create a RESTful API </fundamentals/crud/restful-api-tutorial>
+   Tutorial: Create a RESTful API </crud/restful-api-tutorial>

@@ -5,6 +5,7 @@ toc_landing_pages = [
     "/aggregation",
     "/aggregation/stages",
     "/serialization",
+    "/indexes",
 ]
 name = "csharp"
 title = "C#/.NET Driver"

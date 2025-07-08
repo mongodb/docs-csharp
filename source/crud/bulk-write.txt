@@ -908,6 +908,13 @@ A ``ClientBulkWriteException`` object contains the following properties:
        |
        | **Data Type:** `Exception <https://learn.microsoft.com/dotnet/api/system.exception>`__
 
+.. _csharp-bulk-write-collation:
+
+Collation
+---------
+
+.. include:: /includes/collation.rst
+
 Additional Information
 ----------------------
 

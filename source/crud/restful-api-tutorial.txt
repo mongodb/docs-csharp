@@ -372,6 +372,6 @@ To learn more about the operations discussed in this tutorial, see the following
 guides:
 
 - :ref:`csharp-insert-guide`
-- :ref:`csharp-retrieve`
+- :ref:`csharp-find`
 - :ref:`csharp-update-one`
 - :ref:`csharp-delete-guide`

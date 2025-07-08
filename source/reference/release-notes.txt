@@ -133,8 +133,7 @@ The 3.3 driver release includes the following new features:
 - Adds support for :manual:`$elemMatch </reference/operator/query/elemMatch/>`
   queries directly against values by providing an overload of the
   ``ElemMatch()`` method that takes only a filter parameter. To learn
-  more, see the :ref:`csharp-builders-array-operators` section of the
-  Builders guide.
+  more, see :ref:`csharp-update-one-arrays` and :ref:`csharp-update-many-arrays`.
 
 - Adds support for using the ``OfType<T>()`` method and ``is`` operator to check
   the type of a scalar discriminator.
